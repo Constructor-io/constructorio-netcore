@@ -1,34 +1,35 @@
-package io.constructor.client.models;
-
-import java.util.List;
-import java.util.Map;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Filter Facet ... uses Gson/Reflection to load data in
- */
-public class FilterFacet {
+ * Constructor.io Filter Facet
+ **/
+namespace Constructorio_NET
+{
+    public class 
+{
+    public class FilterFacet {
 
-  @SerializedName("display_name")
+  [JsonPropertyName("display_name")]
   private String displayName;
 
-  @SerializedName("name")
+  [JsonPropertyName("name")]
   private String name;
 
-  @SerializedName("status")
+  [JsonPropertyName("status")]
   private Map<String, Object> status;
 
-  @SerializedName("max")
+  [JsonPropertyName("max")]
   private Double max;
 
-  @SerializedName("min")
+  [JsonPropertyName("min")]
   private Double min;
 
-  @SerializedName("options")
+  [JsonPropertyName("options")]
   private List<FilterFacetOption> options;
 
-  @SerializedName("type")
+  [JsonPropertyName("type")]
   private String type;
 
   /**

@@ -1,27 +1,27 @@
-package io.constructor.client.models;
-
-import java.util.List;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Filter Group ... uses Gson/Reflection to load data in
- */
-public class FilterGroup {
+ * Constructor.io Filter Group
+ **/
+namespace Constructorio_NET
+{
+    public class FilterGroup {
 
-    @SerializedName("children")
+    [JsonPropertyName("children")]
     private List<FilterGroup> children;
 
-    @SerializedName("parents")
+    [JsonPropertyName("parents")]
     private List<FilterGroup> parents;
 
-    @SerializedName("count")
+    [JsonPropertyName("count")]
     private Integer count;
 
-    @SerializedName("display_name")
+    [JsonPropertyName("display_name")]
     private String displayName;
 
-    @SerializedName("group_id")
+    [JsonPropertyName("group_id")]
     private String groupId;
 
     /**

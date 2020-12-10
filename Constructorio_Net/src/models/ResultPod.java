@@ -1,30 +1,20 @@
-package io.constructor.client.models;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Pod ... uses Gson/Reflection to load data in
+ * Constructor.io Pod
  */
+*/
+namespace Constructorio_NET
+{
+    public class ResultPod {
 
-public class ResultPod {
+        [JsonPropertyName("display_name")]
+        public String displayName;
 
-  @SerializedName("display_name")
-  private String displayName;
+        [JsonPropertyName("id")]
+        public String id;
 
-  @SerializedName("id")
-  private String id;
-
-  /**
-   * @return the display name
-   */
-  public String getDisplayName() {
-    return displayName;
-  }
-
-  /**
-   * @return the values
-   */
-  public String getId() {
-    return id;
-  }
+    }
 }

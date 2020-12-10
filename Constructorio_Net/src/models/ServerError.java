@@ -1,19 +1,16 @@
-package io.constructor.client.models;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Server Error ... uses Gson/Reflection to load data in
- */
-public class ServerError {
+ * Constructor.io Server Error
+ **/
+namespace Constructorio_NET
+{
+    public class ServerError {
 
-  @SerializedName("message")
-  private String message;
+        [JsonPropertyName("message")]
+        public String message { get; set; }
 
-  /**
-   * @return the message
-   */
-  public String getMessage() {
-    return message;
-  }
+    }
 }

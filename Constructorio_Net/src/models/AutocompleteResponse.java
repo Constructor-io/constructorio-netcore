@@ -1,42 +1,22 @@
-package io.constructor.client.models;
-
-import java.util.List;
-import java.util.Map;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Autocomplete Response ... uses Gson/Reflection to load data in
+ * Constructor.io Autocomplete Response
  */
-public class AutocompleteResponse {
+namespace Constructorio_NET
+{
+    public class AutocompleteResponse
+    {
 
-    @SerializedName("sections")
-    private Map<String, List<Result>> sections;
+        [JsonPropertyName("sections")]
+        public Dictionary<String, List<Result>> Sections { get; set; }
 
-    @SerializedName("result_id")
-    private String resultId;
+        [JsonPropertyName("result_id")]
+        public String ResultId { get; set; }
 
-    @SerializedName("request")
-    private Map<String, Object> request;
-
-    /**
-     * @return the resultId
-     */
-    public String getResultId() {
-      return resultId;
-    }
-
-    /**
-     * @return the sections
-     */
-    public Map<String, List<Result>> getSections() {
-      return sections;
-    }
-
-    /**
-     * @return the request as understood by the server
-     */
-    public Map<String, Object> getRequest() {
-      return request;
+        [JsonPropertyName("request")]
+        public Dictionary<String, Object> Request { get; set; }
     }
 }

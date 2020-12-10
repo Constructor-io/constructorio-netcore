@@ -1,39 +1,22 @@
-package io.constructor.client.models;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Redirect Data ... uses Gson/Reflection to load data in
- */
-public class RedirectData {
+ * Constructor.io Redirect Data
+ */*/
+namespace Constructorio_NET
+{
+    public class RedirectData {
 
-  @SerializedName("url")
-  private String url;
+        [JsonPropertyName("url")]
+        public String url;
 
-  @SerializedName("rule_id")
-  private Integer ruleId;
+        [JsonPropertyName("rule_id")]
+        public Integer ruleId;
 
-  @SerializedName("match_id")
-  private Integer matchId;
+        [JsonPropertyName("match_id")]
+        public Integer matchId;
 
-  /**
-   * @return the url
-   */
-  public String getUrl() {
-    return url;
-  }
-
-  /**
-   * @return the ruleId
-   */
-  public Integer getRuleId() {
-    return ruleId;
-  }
-
-  /**
-   * @return the matchId
-   */
-  public Integer getMatchId() {
-    return matchId;
-  }
+    }
 }

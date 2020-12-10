@@ -1,51 +1,25 @@
-package io.constructor.client.models;
-
-import java.util.List;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Result ... uses Gson/Reflection to load data in
- */
-public class Result {
+ * Constructor.io Result
+ **/
+namespace Constructorio_NET
+{
+    public class Result {
 
-  @SerializedName("value")
-  private String value;
+        [JsonPropertyName("value")]
+        public String value;
 
-  @SerializedName("data")
-  private ResultData data;
+        [JsonPropertyName("data")]
+        public ResultData data;
 
-  @SerializedName("matched_terms")
-  private List<String> matchedTerms;
+        [JsonPropertyName("matched_terms")]
+        public List<String> matchedTerms;
 
-  @SerializedName("variations")
-  private List<Result> variations;
+        [JsonPropertyName("variations")]
+        public List<Result> variations;
 
-  /**
-   * @return the value
-   */
-  public String getValue() {
-    return value;
-  }
-
-  /**
-   * @return the data
-   */
-  public ResultData getData() {
-    return data;
-  }
-
-  /**
-   * @return the matchedTerms
-   */
-  public List<String> getMatchedTerms() {
-    return matchedTerms;
-  }
-
-  /**
-   * @return the variations
-   */
-  public List<Result> getVariations() {
-    return variations;
-  }
+    }
 }

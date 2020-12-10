@@ -1,50 +1,25 @@
-package io.constructor.client.models;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Sort Option ... uses Gson/Reflection to load data in
- */
-public class FilterSortOption {
+ * Constructor.io Sort Option
+ **/
+namespace Constructorio_NET
+{
+    public class FilterSortOption {
   
-  @SerializedName("display_name")
-  private String displayName;
+        [JsonPropertyName("display_name")]
+        public String displayName;
 
-  @SerializedName("sort_by")
-  private String sortBy;
+        [JsonPropertyName("sort_by")]
+        public String sortBy;
 
-  @SerializedName("sort_order")
-  private String sortOrder;
+        [JsonPropertyName("sort_order")]
+        public String sortOrder;
   
-  @SerializedName("status")
-  private String status;
+        [JsonPropertyName("status")]
+        public String status;
 
-  /**
-   * @return the display name
-   */
-  public String getDisplayName() {
-    return displayName;
-  }
-
-  /**
-   * @return the sort by
-   */
-  public String getSortBy() {
-    return sortBy;
-  }
-
-  /**
-   * @return the sort order
-   */
-  public String getSortOrder() {
-    return sortOrder;
-  }
-
-  /**
-   * @return the status
-   */
-  public String getStatus() {
-    return status;
-  }
-  
+    }  
 }

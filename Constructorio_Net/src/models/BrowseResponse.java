@@ -1,21 +1,21 @@
-package io.constructor.client.models;
-
-import java.util.Map;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Browse Response ... uses Gson/Reflection to load data in
+ * Constructor.io Browse Response
  */
-public class BrowseResponse {
+namespace Constructorio_NET
+{
+    public class BrowseResponse {
 
-    @SerializedName("result_id")
+    [JsonPropertyName("result_id")]
     private String resultId;
 
-    @SerializedName("response")
+    [JsonPropertyName("response")]
     private BrowseResponseInner response;
 
-    @SerializedName("request")
+    [JsonPropertyName("request")]
     private Map<String, Object> request;
 
     /**

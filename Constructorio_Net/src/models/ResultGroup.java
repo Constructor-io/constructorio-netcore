@@ -1,40 +1,23 @@
-package io.constructor.client.models;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Item Group ... uses Gson/Reflection to load data in
+ * Constructor.io Item Group
  */
+*/
+namespace Constructorio_NET
+{
+    public class ResultGroup {
 
-public class ResultGroup {
+        [JsonPropertyName("display_name")]
+        public String displayName;
 
-  @SerializedName("display_name")
-  private String displayName;
+        [JsonPropertyName("group_id")]
+        public String groupId;
 
-  @SerializedName("group_id")
-  private String groupId;
+        [JsonPropertyName("path")]
+        public String path;
 
-  @SerializedName("path")
-  private String path;
-
-  /**
-   * @return the displayName
-   */
-  public String getDisplayName() {
-    return displayName;
-  }
-
-  /**
-   * @return the groupId
-   */
-  public String getGroupId() {
-    return groupId;
-  }
-
-  /**
-   * @return the path
-   */
-  public String getPath() {
-    return path;
-  }
+    }
 }

@@ -1,41 +1,22 @@
-package io.constructor.client.models;
-
-import java.util.Map;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Recommendations Response ... uses Gson/Reflection to load data in
- */
-public class RecommendationsResponse {
+ * Constructor.io Recommendations Response
+ **/
+namespace Constructorio_NET
+{
+    public class RecommendationsResponse {
 
-    @SerializedName("result_id")
-    private String resultId;
+        [JsonPropertyName("result_id")]
+        public String resultId;
 
-    @SerializedName("response")
-    private RecommendationsResponseInner response;
+        [JsonPropertyName("response")]
+        public RecommendationsResponseInner response;
 
-    @SerializedName("request")
-    private Map<String, Object> request;
+        [JsonPropertyName("request")]
+        public Map<String, Object> request;
 
-    /**
-     * @return the resultId
-     */
-    public String getResultId() {
-      return resultId;
-    }
-
-    /**
-     * @return the response
-     */
-    public RecommendationsResponseInner getResponse() {
-      return response;
-    }
-
-    /**
-     * @return the request as understood by the server
-     */
-    public Map<String, Object> getRequest() {
-      return request;
     }
 }

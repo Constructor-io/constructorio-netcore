@@ -1,71 +1,31 @@
-package io.constructor.client.models;
-
-import java.util.List;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Search Response Inner ... uses Gson/Reflection to load data in
- */
-public class SearchResponseInner {
+ * Constructor.io Search Response Inner
+ **/
+namespace Constructorio_NET
+{
+    public class SearchResponseInner {
 
-    @SerializedName("facets")
-    private List<FilterFacet> facets;
+        [JsonPropertyName("facets")]
+        private List<FilterFacet> facets { get; set; }
 
-    @SerializedName("groups")
-    private List<FilterGroup> groups;
+        [JsonPropertyName("groups")]
+        private List<FilterGroup> groups { get; set; }
 
-    @SerializedName("results")
-    private List<Result> results;
+        [JsonPropertyName("results")]
+        private List<Result> results { get; set; }
 
-    @SerializedName("total_num_results")
-    private Integer totalNumberOfResults;
+        [JsonPropertyName("total_num_results")]
+        private Integer totalNumberOfResults { get; set; }
 
-    @SerializedName("sort_options")
-    private List<FilterSortOption> sortOptions;
+        [JsonPropertyName("sort_options")]
+        private List<FilterSortOption> { get; set; }
 
-    @SerializedName("redirect")
-    private Redirect redirect;
+        [JsonPropertyName("redirect")]
+        private Redirect redirect { get; set; }
 
-    /**
-     * @return the facets
-     */
-    public List<FilterFacet> getFacets() {
-      return facets;
-    }
-
-    /**
-     * @return the groups
-     */
-    public List<FilterGroup> getGroups() {
-      return groups;
-    }
-
-    /**
-     * @return the results
-     */
-    public List<Result> getResults() {
-      return results;
-    }
-
-    /**
-     * @return the totalNumberOfResults
-     */
-    public Integer getTotalNumberOfResults() {
-      return totalNumberOfResults;
-    }
-
-    /**
-     * @return the sort options
-     */
-    public List<FilterSortOption> getSortOptions() {
-      return sortOptions;
-    }
-
-    /**
-     * @return redirect data
-     */
-    public Redirect getRedirect() {
-      return redirect;
     }
 }

@@ -1,42 +1,22 @@
-package io.constructor.client.models;
-
-import java.util.List;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
  * Constructor.io Redirect ... uses Gson/Reflection to load data in
  */
+namespace Constructorio_NET
+{
+    public class Redirect {
 
-public class Redirect {
+        [JsonPropertyName("data")]
+        public RedirectData data;
 
-  @SerializedName("data")
-  private RedirectData data;
+        [JsonPropertyName("matched_terms")]
+        public List<String> matchedTerms;
 
-  @SerializedName("matched_terms")
-  private List<String> matchedTerms;
+        [JsonPropertyName("matched_user_segments")]
+        public List<String> matchedUserSegments;
 
-  @SerializedName("matched_user_segments")
-  private List<String> matchedUserSegments;
-
-  /**
-   * @return the data
-   */
-  public RedirectData getData() {
-    return data;
-  }
-
-  /**
-   * @return the matchedTerms
-   */
-  public List<String> getMatchedTerms() {
-    return matchedTerms;
-  }
-
-  /**
-   * @return the matchedUserSegments
-   */
-  public List<String> getMatchedUserSegments() {
-    return matchedUserSegments;
-  }
+    }
 }

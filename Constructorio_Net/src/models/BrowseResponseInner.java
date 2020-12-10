@@ -1,27 +1,27 @@
-package io.constructor.client.models;
-
-import java.util.List;
-
-import com.google.gson.annotations.SerializedName;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Browse Response Inner ... uses Gson/Reflection to load data in
- */
-public class BrowseResponseInner {
+ * Constructor.io Browse Response Inner
+ **/
+namespace Constructorio_NET
+{
+    public class BrowseResponseInner {
 
-    @SerializedName("facets")
+    [JsonPropertyName("facets")]
     List<FilterFacet> facets;
 
-    @SerializedName("groups")
+    [JsonPropertyName("groups")]
     private List<FilterGroup> groups;
 
-    @SerializedName("results")
+    [JsonPropertyName("results")]
     private List<Result> results;
 
-    @SerializedName("total_num_results")
+    [JsonPropertyName("total_num_results")]
     private Integer totalNumberOfResults;
 
-    @SerializedName("sort_options")
+    [JsonPropertyName("sort_options")]
     private List<FilterSortOption> sortOptions;
 
     /**
