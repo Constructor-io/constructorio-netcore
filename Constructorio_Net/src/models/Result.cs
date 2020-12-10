@@ -4,22 +4,22 @@ using System.Text.Json.Serialization;
 
 /**
  * Constructor.io Result
- **/
+ */
 namespace Constructorio_NET
 {
     public class Result {
 
         [JsonPropertyName("value")]
-        public String value;
+        public String Value;
 
         [JsonPropertyName("data")]
-        public ResultData data;
+        public ResultData Data;
 
         [JsonPropertyName("matched_terms")]
-        public List<String> matchedTerms;
+        public List<String> MatchedTerms;
 
         [JsonPropertyName("variations")]
-        public List<Result> variations;
+        public List<Result> Variations;
 
     }
 }

@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
  **/
 namespace Constructorio_NET
 {
-    public class FilterFacetOption {
+  public class FilterFacetOption {
 
   [JsonPropertyName("count")]
   private Integer count;

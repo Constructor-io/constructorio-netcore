@@ -5,19 +5,18 @@ using System.Text.Json.Serialization;
 /**
  * Constructor.io Item Group
  */
-*/
 namespace Constructorio_NET
 {
     public class ResultGroup {
 
         [JsonPropertyName("display_name")]
-        public String displayName;
+        public String DisplayName { get; set; }
 
         [JsonPropertyName("group_id")]
-        public String groupId;
+        public String GroupId { get; set; }
 
         [JsonPropertyName("path")]
-        public String path;
+        public String Path { get; set; }
 
     }
 }

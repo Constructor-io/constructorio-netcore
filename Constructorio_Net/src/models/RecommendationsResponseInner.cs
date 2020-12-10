@@ -4,19 +4,19 @@ using System.Text.Json.Serialization;
 
 /**
  * Constructor.io Recommendations Response Inner
- **/
+ */
 namespace Constructorio_NET
 {
     public class RecommendationsResponseInner {
 
         [JsonPropertyName("results")]
-        public List<Result> results;
+        public List<Result> Results { get; set; }
 
         [JsonPropertyName("total_num_results")]
-        public Integer totalNumberOfResults;
+        public Int16 TotalNumberOfResults { get; set; }
 
         [JsonPropertyName("pod")]
-        public ResultPod pod;
+        public ResultPod Pod { get; set; }
 
     }
 }

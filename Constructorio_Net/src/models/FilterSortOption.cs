@@ -4,22 +4,22 @@ using System.Text.Json.Serialization;
 
 /**
  * Constructor.io Sort Option
- **/
+ */
 namespace Constructorio_NET
 {
     public class FilterSortOption {
   
         [JsonPropertyName("display_name")]
-        public String displayName;
+        public String DisplayName { get; set; } 
 
         [JsonPropertyName("sort_by")]
-        public String sortBy;
+        public String SortBy { get; set; }
 
         [JsonPropertyName("sort_order")]
-        public String sortOrder;
-  
+        public String SortOrder { get; set; }
+
         [JsonPropertyName("status")]
-        public String status;
+        public String Status { get; set; }
 
     }  
 }
