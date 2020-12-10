@@ -19,7 +19,7 @@ namespace Constructorio_NET
         public List<Result> Results { get; set; }
 
         [JsonPropertyName("total_num_results")]
-        public Integer TotalNumberOfResults { get; set; }
+        public Int32 TotalNumberOfResults { get; set; }
 
         [JsonPropertyName("sort_options")]
         public List<FilterSortOption> SortOptions { get; set; }

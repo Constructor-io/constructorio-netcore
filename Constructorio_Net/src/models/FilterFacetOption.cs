@@ -10,7 +10,7 @@ namespace Constructorio_NET
     public class FilterFacetOption {
 
         [JsonPropertyName("count")]
-        public Integer Count { get; set; }
+        public Int32 Count { get; set; }
 
         [JsonPropertyName("data")]
         public Dictionary<String, Object> Data { get; set; }
