@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 /**
- * Constructor.io Redirect ... uses Gson/Reflection to load data in
+ * Constructor.io Redirect
  */
 namespace Constructorio_NET
 {
     public class Redirect {
 
         [JsonPropertyName("data")]
-        public RedirectData data;
+        public RedirectData Data { get; set; }
 
         [JsonPropertyName("matched_terms")]
-        public List<String> matchedTerms;
+        public List<String> MatchedTerms { get; set; }
 
         [JsonPropertyName("matched_user_segments")]
-        public List<String> matchedUserSegments;
+        public List<String> MatchedUserSegments { get; set; }
 
     }
 }

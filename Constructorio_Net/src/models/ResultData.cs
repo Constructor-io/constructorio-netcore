@@ -4,34 +4,34 @@ using System.Text.Json.Serialization;
 
 /**
  * Constructor.io Result Data
- **/
+ */
 namespace Constructorio_NET
 {
     public class ResultData {
 
         [JsonPropertyName("description")]
-        public String description;
+        public String Description { get; set; }
 
         [JsonPropertyName("id")]
-        public String id;
+        public String Id { get; set; }
 
         [JsonPropertyName("url")]
-        public String url;
+        public String Url { get; set; }
 
         [JsonPropertyName("image_url")]
-        public String imageUrl;
+        public String ImageUrl { get; set; }
 
         [JsonPropertyName("groups")]
-        public List<ResultGroup> groups;
+        public List<ResultGroup> Groups { get; set; }
 
         [JsonPropertyName("facets")]
-        public List<ResultFacet> facets;
+        public List<ResultFacet> Facets { get; set; }
 
         [JsonPropertyName("variation_id")]
-        public String variationId;
+        public String VariationId { get; set; }
 
         [JsonPropertyName("metadata")]
-        public Map<String, Object> metadata;
+        public Dictionary<String, Object> Metadata { get; set; }
 
     }
 }

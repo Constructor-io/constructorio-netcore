@@ -4,19 +4,19 @@ using System.Text.Json.Serialization;
 
 /**
  * Constructor.io Redirect Data
- */*/
+ */
 namespace Constructorio_NET
 {
     public class RedirectData {
 
         [JsonPropertyName("url")]
-        public String url;
+        public String Url;
 
         [JsonPropertyName("rule_id")]
-        public Integer ruleId;
+        public Int32 RuleId { get; set; }
 
         [JsonPropertyName("match_id")]
-        public Integer matchId;
+        public Int32 MatchId { get; set; }
 
     }
 }

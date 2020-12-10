@@ -4,28 +4,28 @@ using System.Text.Json.Serialization;
 
 /**
  * Constructor.io Search Response Inner
- **/
+ */
 namespace Constructorio_NET
 {
     public class SearchResponseInner {
 
         [JsonPropertyName("facets")]
-        private List<FilterFacet> facets { get; set; }
+        public List<FilterFacet> Facets { get; set; }
 
         [JsonPropertyName("groups")]
-        private List<FilterGroup> groups { get; set; }
+        public List<FilterGroup> Groups { get; set; }
 
         [JsonPropertyName("results")]
-        private List<Result> results { get; set; }
+        public List<Result> Results { get; set; }
 
         [JsonPropertyName("total_num_results")]
-        private Integer totalNumberOfResults { get; set; }
+        public Int32 TotalNumberOfResults { get; set; }
 
         [JsonPropertyName("sort_options")]
-        private List<FilterSortOption> { get; set; }
+        public List<FilterSortOption> SortOptions { get; set; }
 
         [JsonPropertyName("redirect")]
-        private Redirect redirect { get; set; }
+        public Redirect Redirect { get; set; }
 
     }
 }
