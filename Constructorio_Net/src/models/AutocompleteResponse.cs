@@ -7,8 +7,7 @@ using System.Text.Json.Serialization;
  */
 namespace Constructorio_NET
 {
-    public class AutocompleteResponse
-    {
+    public class AutocompleteResponse {
 
         [JsonPropertyName("sections")]
         public Dictionary<String, List<Result>> Sections { get; set; }
