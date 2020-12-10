@@ -16,7 +16,7 @@ namespace Constructorio_NET
         public List<FilterGroup> Parents { get; set; }
 
         [JsonPropertyName("count")]
-        public Integer Count { get; set; }
+        public Int32 Count { get; set; }
 
         [JsonPropertyName("display_name")]
         public String DisplayName { get; set; }
