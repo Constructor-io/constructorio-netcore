@@ -1,33 +1,32 @@
-package io.constructor.client;
-
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
+﻿using System;
+using System.Collections.Generic;
 
 /**
  * Constructor.io Item
  */
-public class ConstructorItem {
+public class ConstructorItem
+{
 
-    private String itemName;
-    private Integer suggestedScore;
-    private List<String> keywords;
-    private String url;
-    private String imageUrl;
-    private String id;
-    private String description;
-    private Map<String, String> facets;
-    private Map<String, String> metadata;
-    private List<String> groupIds;
+    private string itemName;
+    private int? suggestedScore;
+    private List<string> keywords;
+    private string url;
+    private string imageUrl;
+    private string id;
+    private string description;
+    private Dictionary<string, string> facets;
+    private Dictionary<string, string> metadata;
+    private List<string> groupIds;
 
     /**
      * Creates an autocomplete item.  Optional public fields are in the <a href="https://docs.constructor.io/rest-api.html#add-an-item">API documentation</a>
      *
      * @param itemName the name of the item that you are adding.
      */
-    public ConstructorItem(String itemName) throws IllegalArgumentException {
+    public ConstructorItem(string itemName)
+    {
         if (itemName == null) {
-            throw new IllegalArgumentException("itemName is required");
+            throw new ArgumentException("itemName is required");
         }
 
         this.itemName = itemName;
@@ -45,164 +44,186 @@ public class ConstructorItem {
     /**
      * Returns the HashMap form of an autocomplete item for converting to JSON
      */
-    public Map<String, Object> toMap() {
-        Map<String, Object> params = new HashMap<String, Object>();
+    public Dictionary<string, Object> toMap()
+    {
+        Dictionary<string, object> parameters = new Dictionary<string, object>();
 
-        if (itemName == null) {
-            throw new IllegalArgumentException("itemName is required");
+    if (itemName == null)
+    {
+        throw new ArgumentException("itemName is required");
         }
 
-        params.put("item_name", this.itemName);
-        params.put("suggested_score", this.suggestedScore);
-        params.put("keywords", this.keywords);
-        params.put("url", this.url);
-        params.put("image_url", this.imageUrl);
-        params.put("description", this.description);
-        params.put("id", this.id);
-        params.put("facets", this.facets);
-        params.put("metadata", this.metadata);
-        params.put("group_ids", this.groupIds);
-       
-        return params;
+        parameters.Add("item_name", this.itemName);
+        parameters.Add("suggested_score", this.suggestedScore);
+        parameters.Add("keywords", this.keywords);
+        parameters.Add("url", this.url);
+        parameters.Add("image_url", this.imageUrl);
+        parameters.Add("description", this.description);
+        parameters.Add("id", this.id);
+        parameters.Add("facets", this.facets);
+        parameters.Add("metadata", this.metadata);
+        parameters.Add("group_ids", this.groupIds);
+
+        return parameters;
     }
 
-    /**
-     * @return the itemName
-     */
-    public String getItemName() {
+/**
+ * @return the itemName
+ */
+public string getItemName()
+    {
         return itemName;
     }
- 
+
     /**
      * @param itemName the itemName to set
      */
-    public void setItemName(String itemName) {
+    public void setItemName(string itemName)
+    {
         this.itemName = itemName;
     }
-    
+
     /**
      * @return the suggestedScore
      */
-    public Integer getSuggestedScore() {
+    public int? getSuggestedScore()
+    {
         return suggestedScore;
     }
 
     /**
      * @param suggestedScore the suggestedScore to set
      */
-    public void setSuggestedScore(Integer suggestedScore) {
+    public void setSuggestedScore(int suggestedScore)
+    {
         this.suggestedScore = suggestedScore;
     }
 
     /**
      * @return the keywords
      */
-    public List<String> getKeywords() {
+    public List<string> getKeywords()
+    {
         return keywords;
     }
 
     /**
      * @param keywords the keywords to set
      */
-    public void setKeywords(List<String> keywords) {
+    public void setKeywords(List<string> keywords)
+    {
         this.keywords = keywords;
     }
 
     /**
      * @return the url
      */
-    public String getUrl() {
+    public string getUrl()
+    {
         return url;
     }
 
     /**
      * @param url the url to set
      */
-    public void setUrl(String url) {
+    public void setUrl(string url)
+    {
         this.url = url;
     }
 
     /**
      * @return the imageUrl
      */
-    public String getImageUrl() {
+    public string getImageUrl()
+    {
         return imageUrl;
     }
 
     /**
      * @param imageUrl the imageUrl to set
      */
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(string imageUrl)
+    {
         this.imageUrl = imageUrl;
     }
 
     /**
      * @return the description
      */
-    public String getDescription() {
+    public string getDescription()
+    {
         return description;
     }
 
     /**
      * @param description the description to set
      */
-    public void setDescription(String description) {
+    public void setDescription(string description)
+    {
         this.description = description;
     }
 
     /**
      * @return the id
      */
-    public String getId() {
+    public string getId()
+    {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(String id) {
+    public void setId(string id)
+    {
         this.id = id;
     }
 
     /**
      * @return the facets
      */
-    public Map<String, String> getFacets() {
+    public Dictionary<string, string> getFacets()
+    {
         return facets;
     }
-    
+
     /**
      * @param facets the facets to set
      */
-    public void setFacets(Map<String, String> facets) {
+    public void setFacets(Dictionary<string, string> facets)
+    {
         this.facets = facets;
     }
 
     /**
      * @return the metadata
      */
-    public Map<String, String> getMetadata() {
+    public Dictionary<string, string> getMetadata()
+    {
         return metadata;
     }
-    
+
     /**
      * @param metadata the metadata to set
      */
-    public void setMetadata(Map<String, String> metadata) {
+    public void setMetadata(Dictionary<string, string> metadata)
+    {
         this.metadata = metadata;
     }
 
     /**
      * @return the groupIds
      */
-    public List<String> getGroupIds() {
+    public List<string> getGroupIds()
+    {
         return groupIds;
     }
 
     /**
      * @param groupIds the groupIds to set
      */
-    public void setGroupIds(List<String> groupIds) {
+    public void setGroupIds(List<string> groupIds)
+    {
         this.groupIds = groupIds;
     }
 }
