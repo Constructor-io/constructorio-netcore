@@ -45,7 +45,7 @@ public class ConstructorIO
     public string apiKey;
     public string protocol;
     public string host;
-    public int port;
+    //public int port;
     public string version;
     public string constructorToken;
 
@@ -169,7 +169,7 @@ public class ConstructorIO
      * @return true if working
      * @throws ConstructorException if the request is invalid.
      */
-    public Boolean addItem(ConstructorItem item, string autocompleteSection)
+    public async Task<string> addItem(ConstructorItem item, string autocompleteSection)
     {
         try {
             var url = this.makeUrl(new List<string> { "v1", "item" }, null);
@@ -177,7 +177,7 @@ public class ConstructorIO
 
             data.Add("autocomplete_section", autocompleteSection);
 
-            var response = this.makePostRequest(url, data);
+            var response = await this.makePostRequest(url, data);
 
             getResponseBody(response);
 
@@ -297,30 +297,30 @@ public class ConstructorIO
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid.
      */
-    public Boolean removeItem(ConstructorItem item, string autocompleteSection)
-    {
-        try
-        {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
-            Map<string, Object> data = new HashMap<string, Object>();
-            data.put("item_name", item.getItemName());
-            data.put("autocomplete_section", autocompleteSection);
-            string parameter = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), parameter);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .delete(body)
-                .build();
+    //public Boolean removeItem(ConstructorItem item, string autocompleteSection)
+    //{
+    //    try
+    //    {
+    //        HttpUrl url = this.makeUrl(Arrays.asList("v1", "item"));
+    //        Map<string, Object> data = new HashMap<string, Object>();
+    //        data.put("item_name", item.getItemName());
+    //        data.put("autocomplete_section", autocompleteSection);
+    //        string parameter = new Gson().toJson(data);
+    //        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), parameter);
+    //        Request request = this.makeAuthorizedRequestBuilder()
+    //            .url(url)
+    //            .delete(body)
+    //            .build();
 
-            Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
-        }
-        catch (Exception exception)
-        {
-            throw new ConstructorException(exception);
-        }
-    }
+    //        Response response = client.newCall(request).execute();
+    //        getResponseBody(response);
+    //        return true;
+    //    }
+    //    catch (Exception exception)
+    //    {
+    //        throw new ConstructorException(exception);
+    //    }
+    //}
 
     /**
      * Removes multiple items from your autocomplete (limit of 1000 items)
@@ -330,35 +330,35 @@ public class ConstructorIO
      * @return true if successfully removed
      * @throws ConstructorException if the request is invalid
      */
-    public Boolean removeItemBatch(ConstructorItem[] items, string autocompleteSection)
-    {
-        try
-        {
-            HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
-            Map<string, Object> data = new HashMap<string, Object>();
-            List<Object> itemsAsJSON = new ArrayList<Object>();
-            for (ConstructorItem item : items)
-            {
-                itemsAsJSON.add(item.toMap());
-            }
-            data.put("items", itemsAsJSON);
-            data.put("autocomplete_section", autocompleteSection);
-            string parameter = new Gson().toJson(data);
-            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), parameter);
-            Request request = this.makeAuthorizedRequestBuilder()
-                .url(url)
-                .delete(body)
-                .build();
+    //public Boolean removeItemBatch(ConstructorItem[] items, string autocompleteSection)
+    //{
+    //    try
+    //    {
+    //        HttpUrl url = this.makeUrl(Arrays.asList("v1", "batch_items"));
+    //        Map<string, Object> data = new HashMap<string, Object>();
+    //        List<Object> itemsAsJSON = new ArrayList<Object>();
+    //        for (ConstructorItem item : items)
+    //        {
+    //            itemsAsJSON.add(item.toMap());
+    //        }
+    //        data.put("items", itemsAsJSON);
+    //        data.put("autocomplete_section", autocompleteSection);
+    //        string parameter = new Gson().toJson(data);
+    //        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), parameter);
+    //        Request request = this.makeAuthorizedRequestBuilder()
+    //            .url(url)
+    //            .delete(body)
+    //            .build();
 
-            Response response = client.newCall(request).execute();
-            getResponseBody(response);
-            return true;
-        }
-        catch (Exception exception)
-        {
-            throw new ConstructorException(exception);
-        }
-    }
+    //        Response response = client.newCall(request).execute();
+    //        getResponseBody(response);
+    //        return true;
+    //    }
+    //    catch (Exception exception)
+    //    {
+    //        throw new ConstructorException(exception);
+    //    }
+    //}
 
     /**
      * Modifies an item from your autocomplete.
@@ -390,25 +390,6 @@ public class ConstructorIO
         {
             throw new ConstructorException(exception);
         }
-
-        //try
-        //{
-        //    var additionalQueryParams = new Dictionary<string, string>() { { "force", "1" } };
-        //    var url = this.makeUrl(new List<string> { "v1", "item" }, additionalQueryParams);
-        //    var data = item.toMap();
-
-        //    data.Add("autocomplete_section", autocompleteSection);
-
-        //    var response = this.makePutRequest(url, data);
-
-        //    getResponseBody(response);
-
-        //    return true;
-        //}
-        //catch (Exception exception)
-        //{
-        //    throw new ConstructorException(exception);
-        //}
     }
 
     /**
@@ -424,10 +405,13 @@ public class ConstructorIO
      */
     //public AutocompleteResponse autocomplete(AutocompleteRequest req, UserInfo userInfo)
     //{
-    //    try {
+    //    try
+    //    {
     //        string json = autocompleteAsJSON(req, userInfo);
     //        return createAutocompleteResponse(json);
-    //    } catch (Exception exception) {
+    //    }
+    //    catch (Exception exception)
+    //    {
     //        throw new ConstructorException(exception);
     //    }
     //}
@@ -906,10 +890,10 @@ public class ConstructorIO
             uriBuilder.Path += "/" + paths;
         }
 
-        if (this.port != null)
-        {
-            uriBuilder.Port = this.port;
-        }
+        //if (this.port != null)
+        //{
+        //    uriBuilder.Port = this.port;
+        //}
 
         return uriBuilder.Uri;
     }
@@ -919,12 +903,12 @@ public class ConstructorIO
      *
      * @return Request Builder
      */
-    protected Builder makeAuthorizedRequestBuilder()
-    {
-        Builder builder = new Request.Builder();
-        builder.addHeader("Authorization", this.credentials);
-        return builder;
-    }
+    //protected Builder makeAuthorizedRequestBuilder()
+    //{
+    //    Builder builder = new Request.Builder();
+    //    builder.addHeader("Authorization", this.credentials);
+    //    return builder;
+    //}
 
     /**
      * Creates a builder for an end user request
@@ -961,7 +945,7 @@ public class ConstructorIO
         try {
             var body = response.Result;
 
-            if (response.isSuccessful())
+            if (response != null)
             {
                 //return body;
             }
@@ -970,6 +954,7 @@ public class ConstructorIO
                 //var error = new Gson().fromJson(body, ServerError.class);
                 //errorMessage = "[HTTP " + response.code() + "] " + error.getMessage();
             }
+            return "";
         } catch (Exception e) {
             //errorMessage = "[HTTP " + response.code() + "]";
             //finally

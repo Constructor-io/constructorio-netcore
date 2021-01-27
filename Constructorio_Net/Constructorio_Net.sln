@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constructorio_Net", "Constr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constructorio_Net.Tests", "Constructorio_Net.Tests\Constructorio_Net.Tests.csproj", "{D9EACDCC-C392-4475-AE1D-F46EEB92C62A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{182D272E-3ADE-46DE-BBC5-FCFFB0CAA912}"
+	ProjectSection(SolutionItems) = preProject
+		src\client\ConstructorItem.cs = src\client\ConstructorItem.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

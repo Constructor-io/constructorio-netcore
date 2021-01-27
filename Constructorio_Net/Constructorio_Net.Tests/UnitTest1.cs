@@ -10,9 +10,15 @@ namespace Constructorio_Net.Tests
         }
 
         [Test]
-        public void Test1()
+        public async void Test1()
         {
-            Assert.Pass();
+            ConstructorIO constructorIO = new ConstructorIO("", "", true, "", "");
+            ConstructorItem item = new ConstructorItem("Random Item Name");
+            item.setUrl("Random Url");
+            var response = await constructorIO.addItem(item, "Products");
+            var z = "Welcome Admin";
+            Assert.AreEqual("Welcome Admin.", z);
+            //Assert.Pass();
         }
     }
 }
