@@ -1,59 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
 
-/**
- * Constructor.io Autocomplete Request
- */
-public class AutocompleteRequest
+namespace Constructorio_Net
 {
 
-    private string query;
-    private Dictionary<string, int> resultsPerSection;
-
     /**
-     * Creates an autocomplete request
-     *
-     * @param query the term to return suggestions for
+     * Constructor.io Autocomplete Request
      */
-    public AutocompleteRequest(string query)
+    public class AutocompleteRequest
     {
-        if (query == null) {
-            throw new ArgumentException("query is required");
-        }
 
-    this.query = query;
-    this.resultsPerSection = new Dictionary<string, int>();
+        private string query;
+        private Dictionary<string, int> resultsPerSection;
+
+        /**
+         * Creates an autocomplete request
+         *
+         * @param query the term to return suggestions for
+         */
+        public AutocompleteRequest(string query)
+        {
+            if (query == null)
+            {
+                throw new ArgumentException("query is required");
+            }
+
+            this.query = query;
+            this.resultsPerSection = new Dictionary<string, int>();
         }
 
         /**
          * @param query the query to set
          */
         public void setQuery(string query)
-    {
-        this.query = query;
-    }
+        {
+            this.query = query;
+        }
 
-    /**
-     * @return the query
-     */
-    public string getQuery()
-    {
-        return query;
-    }
+        /**
+         * @return the query
+         */
+        public string getQuery()
+        {
+            return query;
+        }
 
-    /**
-     * @param resultsPerSection the resultsPerSection to set
-     */
-    public void setResultsPerSection(Dictionary<string, int> resultsPerSection)
-    {
-        this.resultsPerSection = resultsPerSection;
-    }
+        /**
+         * @param resultsPerSection the resultsPerSection to set
+         */
+        public void setResultsPerSection(Dictionary<string, int> resultsPerSection)
+        {
+            this.resultsPerSection = resultsPerSection;
+        }
 
-    /**
-     * @return the resultsPerSection
-     */
-    public Dictionary<string, int> getResultsPerSection()
-    {
-        return resultsPerSection;
+        /**
+         * @return the resultsPerSection
+         */
+        public Dictionary<string, int> getResultsPerSection()
+        {
+            return resultsPerSection;
+        }
     }
 }
