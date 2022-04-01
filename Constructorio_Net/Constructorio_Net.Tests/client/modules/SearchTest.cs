@@ -11,14 +11,14 @@ namespace Constructorio_NET.Tests
         {
         }
 
-        [Test]
-        public void Search()
-        {
-            string thing = "thing";
-            Console.WriteLine("dfsdf");
-            ConstructorIO constructorIO = new ConstructorIO("boinkaToken", "doinkaKey", true, null, null);
-            string result = constructorIO.search.getSearchResults();
-            Assert.AreEqual(result, thing, "api token should be set");
-        }
+        // [Test]
+        // public void Search()
+        // {
+        //     string thing = "thing";
+        //     Console.WriteLine("dfsdf");
+        //     ConstructorIO constructorIO = new ConstructorIO("boinkaToken", "doinkaKey", true, null, null);
+        //     string result = constructorIO.search.getSearchResults();
+        //     Assert.AreEqual(result, thing, "api token should be set");
+        // }
     }
 }

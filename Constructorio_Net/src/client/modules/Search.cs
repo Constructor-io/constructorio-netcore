@@ -1,14 +1,21 @@
 using System;
+using System.Collections;
 
 namespace Constructorio_NET
 {
 
   public class Search
   {
-    private string CreateSearchUrl(string term, parameters, userParameters, options)
+    private Hashtable options;
+    public Search(Hashtable options)
     {
-
+      this.options = options;
     }
+    // private string CreateSearchUrl(string term, parameters, userParameters, options)
+    // {
+    //   string url;
+    //   return url;
+    // }
 
     // public SearchResponse getSearchResults(string query)
     public string GetSearchResults(string query)

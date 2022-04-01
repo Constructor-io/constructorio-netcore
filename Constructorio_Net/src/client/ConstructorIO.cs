@@ -57,7 +57,7 @@ namespace Constructorio_NET
          * @param serviceUrl The serviceUrl of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the serviceUrl defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
          * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
          */
-        public ConstructorIO(Hashtable options, string apiToken, string apiKey, bool isHTTPS, string serviceUrl, string constructorToken)
+        public ConstructorIO(string apiToken, string apiKey, bool isHTTPS, string serviceUrl, string constructorToken)
         {
             this.apiToken = apiToken;
             this.apiKey = apiKey;
@@ -81,7 +81,7 @@ namespace Constructorio_NET
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(this.apiToken + ":");
             credentials = "Basic " + System.Convert.ToBase64String(plainTextBytes);
 
-            this.search = new Search(options);
+            // this.search = new Search();
         }
 
         /**

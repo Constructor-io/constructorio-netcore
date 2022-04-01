@@ -17,13 +17,13 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(constructorIO.apiToken, "boinkaToken", "api token should be set");
         }
 
-        [Test]
-        public void Search()
-        {
-            string thing = "thing";
-            ConstructorIO constructorIO = new ConstructorIO("boinkaToken", "doinkaKey", true, null, null);
-            string result = constructorIO.search.getSearchResults(thing);
-            Assert.AreEqual(result, thing, "api token should be set");
-        }
+        // [Test]
+        // public void Search()
+        // {
+        //     string thing = "thing";
+        //     ConstructorIO constructorIO = new ConstructorIO("boinkaToken", "doinkaKey", true, null, null);
+        //     string result = constructorIO.search.getSearchResults(thing);
+        //     Assert.AreEqual(result, thing, "api token should be set");
+        // }
     }
 }
