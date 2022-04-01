@@ -15,6 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Constructorio_Net.csproj" />
+    <ProjectReference Include="..\Constructorio_NET.csproj" />
   </ItemGroup>
 </Project>

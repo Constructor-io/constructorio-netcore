@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Constructorio_Net
+namespace Constructorio_NET
 {
     public class UserInfo
     {

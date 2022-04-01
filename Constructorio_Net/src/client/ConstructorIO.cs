@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Constructorio_Net
+namespace Constructorio_NET
 {
     /**
      * Constructor.io Client
@@ -41,10 +42,11 @@ namespace Constructorio_Net
         public string apiToken;
         public string apiKey;
         public string protocol;
-        public string host;
+        public string serviceUrl;
         public int port;
         public string version;
         public string constructorToken;
+        public Search search;
 
         /**
          * Creates a constructor.io Client.
@@ -52,18 +54,19 @@ namespace Constructorio_Net
          * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
          * @param apiKey API Key, used publically in your in-site javascript client.
          * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-         * @param host The host of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the host defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+         * @param serviceUrl The serviceUrl of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the serviceUrl defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
          * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
          */
-        public ConstructorIO(string apiToken, string apiKey, bool isHTTPS, string host, string constructorToken)
+        public ConstructorIO(Hashtable options, string apiToken, string apiKey, bool isHTTPS, string serviceUrl, string constructorToken)
         {
             this.apiToken = apiToken;
             this.apiKey = apiKey;
-            this.host = host;
+            this.serviceUrl = serviceUrl;
             version = this.getVersion();
-            if (host == null)
+
+            if (serviceUrl == null)
             {
-                this.host = "ac.cnstrc.com";
+                this.serviceUrl = "ac.cnstrc.com";
             }
             if (isHTTPS)
             {
@@ -73,9 +76,12 @@ namespace Constructorio_Net
             {
                 protocol = "http";
             }
+
             this.constructorToken = constructorToken;
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(this.apiToken + ":");
             credentials = "Basic " + System.Convert.ToBase64String(plainTextBytes);
+
+            this.search = new Search(options);
         }
 
         /**
@@ -525,8 +531,8 @@ namespace Constructorio_Net
          * @return a search response
          * @throws ConstructorException if the request is invalid.
          */
-        //public SearchResponse search(SearchRequest req, UserInfo userInfo)
-        //{
+        // public SearchResponse search(SearchRequest req, UserInfo userInfo)
+        // {
         //    try {
         //        Request request = createSearchRequest(req, userInfo);
         //        Response response = clientWithRetry.newCall(request).execute();
@@ -535,7 +541,7 @@ namespace Constructorio_Net
         //    } catch (Exception exception) {
         //        throw new ConstructorException(exception);
         //    }
-        //}
+        // }
 
         /**
          * Queries the search service.
@@ -872,7 +878,7 @@ namespace Constructorio_Net
             var uriBuilder = new UriBuilder();
 
             uriBuilder.Scheme = this.protocol;
-            uriBuilder.Host = this.host;
+            uriBuilder.Host = this.serviceUrl;
             uriBuilder.Query = "key=" + this.apiKey + "&c=" + this.version;
 
             if (queryParams != null && queryParams.Count != 0)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Constructorio_Net
+namespace Constructorio_NET
 {
 	public class ConstructorException : Exception
 	{
