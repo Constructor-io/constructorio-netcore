@@ -3,23 +3,31 @@ using System.Collections;
 
 namespace Constructorio_NET
 {
-
   public class Search
   {
-    private Hashtable options;
+    private Hashtable options; 
     public Search(Hashtable options)
     {
       this.options = options;
     }
-    // private string CreateSearchUrl(string term, parameters, userParameters, options)
-    // {
-    //   string url;
-    //   return url;
-    // }
+    private string CreateSearchUrl(string query, Hashtable parameters, Hashtable userParameters)
+    {
+      string url = "url";
+
+      return url;
+    }
 
     // public SearchResponse getSearchResults(string query)
-    public string GetSearchResults(string query)
+    /// <summary>
+    /// Retrieve search results from API
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="parameters"></param>
+    /// <param name="userParameters"></param>
+    /// <returns></returns>
+    public string GetSearchResults(string query, Hashtable parameters, Hashtable userParameters)
     {
+      string url = CreateSearchUrl(query, parameters, userParameters);
       // return new SearchResponse('dfddf', SearchResponseInner, ['sdads']);
       return query;
     }

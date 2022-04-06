@@ -6,6 +6,11 @@ namespace Constructorio_NET
 
   public class Helpers
   {
+    /// <summary>
+    /// Cleans params before applying them to a request url
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
     public static Hashtable CleanParams(Hashtable parameters)
     {
       Hashtable cleanedParams = new Hashtable();
