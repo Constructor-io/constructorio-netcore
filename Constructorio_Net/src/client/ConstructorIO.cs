@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿/**
+ * Constructor.io Client
+ */
 
 namespace Constructorio_NET
 {
-    /**
-     * Constructor.io Client
-     */
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+
     public class ConstructorIO
     {
-
         /**
          * the HTTP client used by all instances
          */
         //private static readonly HttpClient client = new HttpClient();
-
         private static HttpClient client = new HttpClient();
         //.build();
-
         /**
          * the HTTP client used by all instances (with retry, only for idempotent requests like GET)
          */
@@ -29,7 +27,6 @@ namespace Constructorio_NET
         //    .addInterceptor(new ConstructorInterceptor())
         //    .retryOnConnectionFailure(true)
         //    .build();
-
         /**
          * @return the HTTP client used by all instances
          */
@@ -39,13 +36,10 @@ namespace Constructorio_NET
         }
 
         private string credentials;
-        public string apiToken;
-        public string apiKey;
         public string protocol;
-        public string serviceUrl;
         public int port;
         public string version;
-        public string constructorToken;
+        private Hashtable options;
         public Search search;
 
         /**
@@ -57,40 +51,45 @@ namespace Constructorio_NET
          * @param serviceUrl The serviceUrl of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the serviceUrl defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
          * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
          */
-        public ConstructorIO(string apiToken, string apiKey, bool isHTTPS, string serviceUrl, string constructorToken)
+        public ConstructorIO(Hashtable options, string apiToken, string apiKey, string serviceUrl, string constructorToken)
         {
-            this.apiToken = apiToken;
-            this.apiKey = apiKey;
-            this.serviceUrl = serviceUrl;
+            this.options = new Hashtable();
+            this.options.Add("apiKey", apiKey);
+            this.options.Add("apiToken", apiToken);
+            this.options.Add("serviceUrl", serviceUrl);
+            this.options.Add("constructorToken", constructorToken);
             version = this.getVersion();
 
-            if (serviceUrl == null)
+            CheckAndSetKey("serviceUrl", options);
+            CheckAndSetKey("apiKey", options);
+            CheckAndSetKey("constructorToken", options);
+            CheckAndSetKey("apiToken", options);
+
+            // var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(this.apiToken + ":");
+            // credentials = "Basic " + System.Convert.ToBase64String(plainTextBytes);
+
+            this.search = new Search(options);
+        }
+
+        private void CheckAndSetKey(string key, Hashtable options)
+        {
+            if (!options.ContainsKey(key))
             {
-                this.serviceUrl = "ac.cnstrc.com";
-            }
-            if (isHTTPS)
-            {
-                protocol = "https";
+                this.options.Add(key, "ac.cnstrc.com");
             }
             else
             {
-                protocol = "http";
+                this.options.Add(key, options[key]);
             }
-
-            this.constructorToken = constructorToken;
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(this.apiToken + ":");
-            credentials = "Basic " + System.Convert.ToBase64String(plainTextBytes);
-
-            // this.search = new Search();
         }
 
         /**
          * Sets apiKey
          */
-        public void setApiKey(string apiKey)
-        {
-            this.apiKey = apiKey;
-        }
+        // public void setApiKey(string apiKey)
+        // {
+        //     this.apiKey = apiKey;
+        // }
 
         /**
          * Makes a Http GET request
@@ -878,8 +877,8 @@ namespace Constructorio_NET
             var uriBuilder = new UriBuilder();
 
             uriBuilder.Scheme = this.protocol;
-            uriBuilder.Host = this.serviceUrl;
-            uriBuilder.Query = "key=" + this.apiKey + "&c=" + this.version;
+            uriBuilder.Host = (string)this.options["serviceUrl"];
+            uriBuilder.Query = "key=" + this.options["apiKey"] + "&c=" + this.version;
 
             if (queryParams != null && queryParams.Count != 0)
             {
@@ -945,7 +944,7 @@ namespace Constructorio_NET
          */
         protected static string getResponseBody(Task<string> response)
         {
-            string errorMessage = "Unknown error";
+            // string errorMessage = "Unknown error";
             try
             {
                 var body = response.Result;
@@ -968,7 +967,7 @@ namespace Constructorio_NET
                 //{
                 //    response.close();
                 //}
-                throw new ConstructorException(errorMessage);
+                throw new ConstructorException(e);
             }
         }
 
