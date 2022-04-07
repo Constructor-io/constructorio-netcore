@@ -35,29 +35,32 @@ namespace Constructorio_NET
             return client;
         }
 
-        private string credentials;
         public string protocol;
         public int port;
         public string version;
         private Hashtable options;
         public Search search;
 
-        /**
-         * Creates a constructor.io Client.
-         *
-         * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-         * @param apiKey API Key, used publically in your in-site javascript client.
-         * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-         * @param serviceUrl The serviceUrl of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the serviceUrl defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
-         * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
-         */
-        public ConstructorIO(Hashtable options, string apiToken, string apiKey, string serviceUrl, string constructorToken)
+    /**
+     * Creates a constructor.io Client.
+     *
+     * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
+     * @param apiKey API Key, used publically in your in-site javascript client.
+     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
+     * @param serviceUrl The serviceUrl of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the serviceUrl defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
+     * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
+     */
+    /// <summary>
+    /// Creates a constructor.io instance
+    /// </summary>
+    /// <param name="options"></param>
+    /// <param name="apiToken"></param>
+    /// <param name="apiKey"></param>
+    /// <param name="serviceUrl"></param>
+    /// <param name="constructorToken"></param>
+    public ConstructorIO(Hashtable options)
         {
             this.options = new Hashtable();
-            this.options.Add("apiKey", apiKey);
-            this.options.Add("apiToken", apiToken);
-            this.options.Add("serviceUrl", serviceUrl);
-            this.options.Add("constructorToken", constructorToken);
             version = this.getVersion();
 
             CheckAndSetKey("serviceUrl", options);
@@ -75,7 +78,7 @@ namespace Constructorio_NET
         {
             if (!options.ContainsKey(key))
             {
-                this.options.Add(key, "ac.cnstrc.com");
+                this.options.Add(key, options[key]);
             }
             else
             {

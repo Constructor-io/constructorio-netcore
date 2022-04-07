@@ -4,9 +4,9 @@
       "src": [
         {
           "files": [
-            "Constructorio_NET.csproj"
+            "Constructorio_Net.csproj"
           ],
-          "src": "/Users/christophergee/Desktop/constructor/constructorio-netcore/Constructorio_NET"
+          "src": "/Users/christophergee/Desktop/constructor/constructorio-netcore/Constructorio_Net"
         }
       ],
       "dest": "api",

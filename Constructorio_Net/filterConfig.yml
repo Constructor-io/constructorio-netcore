@@ -1,0 +1,2 @@
+- exclude:
+      uidRegex: ^Constructorio_Net.Tests

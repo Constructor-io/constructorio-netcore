@@ -1,0 +1,546 @@
+{
+  "homepages": [],
+  "source_base_path": "/Users/christophergee/Desktop/constructor/constructorio-netcore/Constructorio_Net",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.AutocompleteRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.AutocompleteRequest.html",
+          "hash": "75OoLwoDJLCTXR+ZGFvWDHqD9CBInTr67/vnr3xTKqM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.AutocompleteResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.AutocompleteResponse.html",
+          "hash": "28pP8MpS3NN10l8QhRaeCarrJt6tRPQy4DBX0lalNqo="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.BrowseRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.BrowseRequest.html",
+          "hash": "87m0XaOV7mWVQilmJ0oI5TzvOE20aY3zlTsqv3yXz7c="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.BrowseResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.BrowseResponse.html",
+          "hash": "38aQQT7Y9hornqbZTLhXZlol50TQJiugSvGF9N0thS8="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.BrowseResponseInner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.BrowseResponseInner.html",
+          "hash": "Ep4CDhPSauCzQunOpYKHBNsTUtAWMZpJLSMSRsJD998="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.ConstructorException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.ConstructorException.html",
+          "hash": "rXC+9M+KSflOCDryF7NKPee3ioiWLsgVZutZ1cqtNrE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.ConstructorIO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.ConstructorIO.html",
+          "hash": "PS88hRn3VcPM5egFpqXWu9Cfg5PyojPXC95zK1h4d3g="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.ConstructorItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.ConstructorItem.html",
+          "hash": "IndC+K0evw0gPL/RZ8WBjHAaSu8LJd9on8D+kR7ef6Y="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.FilterFacet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.FilterFacet.html",
+          "hash": "Li5gAK5kliPp5WBzrw4zUiVVZB1+NY8vJNE9gw+YR+I="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.FilterFacetOption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.FilterFacetOption.html",
+          "hash": "hmzMahqW6hljCu7HFWVIeh3pVLakuIP1ieA4f2UTkk4="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.FilterGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.FilterGroup.html",
+          "hash": "DsEaWZVwuUx5/L7wcjAJq45z6kIxEPCqn0Lrqn+62xA="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.FilterSortOption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.FilterSortOption.html",
+          "hash": "O2FHWxr0/MEH9Q6g5kZUDdV9oEH9LNWh5h8pmdRSsf8="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Helpers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Helpers.html",
+          "hash": "4kAfyEfq+dEhOsi1afWI/My3JfvZZna26tF4gP3hAOc="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.NaturalLanguageSearchRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.NaturalLanguageSearchRequest.html",
+          "hash": "xIDMtFxAofKM9cZ1WUxcwxJinsy51lm/eCMhhB8GVzI="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.RecommendationsRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.RecommendationsRequest.html",
+          "hash": "Z9FkyAgi1BHjnHdEzC8bucMnMBCXq7ueHb4LEoAzZDk="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.RecommendationsResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.RecommendationsResponse.html",
+          "hash": "k0Onh+JjNwLRBQuXaQRs8vnJ8b4rg1wOH13nvPBwMPs="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.RecommendationsResponseInner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.RecommendationsResponseInner.html",
+          "hash": "vU6nr0hcIMWP3bYYPuywTO50n9KEQfB+22Fh2cP3YqE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Redirect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Redirect.html",
+          "hash": "ehPtTWj1RszKjKIi8GTSqALiMu/2b7eS4Q4h/Rye8EY="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.RedirectData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.RedirectData.html",
+          "hash": "6gzTnXbEKaoeOWvtcirkpshaLxoLB+Og/Vg7/QdILCI="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Result.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Result.html",
+          "hash": "Xg17mrA0jqS7wVGQGFyLMejBfp+sZ7vNMra2UEfniGU="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.ResultData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.ResultData.html",
+          "hash": "Aa2CU1PlCtNU1VnaXiNMdg2dmPJ/7gDmKb3IMTdpdng="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.ResultFacet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.ResultFacet.html",
+          "hash": "hXyXbDF8FaxYfQnWCx2Jsa5EFKi1XaHdNw66C3kNSuw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.ResultGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.ResultGroup.html",
+          "hash": "ZMggtkg+wlZWYFW9XDdbOe5h7LpFqhjHYXprnLPR3PQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.ResultPod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.ResultPod.html",
+          "hash": "Yo1Ifax2SdZpTDKaDic5Gp+tKAFXNX1o7qGBTqe0BH4="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Search.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Search.html",
+          "hash": "8QTrrEi99GLqFgYpMsZ5Wh9NeGLNYKo4wC1BtA9f6+E="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.SearchRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.SearchRequest.html",
+          "hash": "YAGJAC9yxPsoleJl/bM4hJn379+aNWFn1JJSoBCF7J8="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.SearchResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.SearchResponse.html",
+          "hash": "VshBL0lAnSacc6WAJhbTuPqz7n1zpQysNrk68X46esk="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.SearchResponseInner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.SearchResponseInner.html",
+          "hash": "rEoJjOtkUVoOFD0z4Uc6pvsLhLTUCJVNibdqpvK0xls="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.ServerError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.ServerError.html",
+          "hash": "AifZZZKPaSfWEYWDs2nF1pn2kG/CqvobE19sFxv2NRw="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Tests.ConstructorIO_BasicTest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Tests.ConstructorIO_BasicTest.html",
+          "hash": "cxGzhe8TBBCEkeT5xP6hfssbPTERphb5VtTrUEfjwQQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Tests.HelpersTest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Tests.HelpersTest.html",
+          "hash": "Crnq3TbX/FJ1V8M5ismn869xyCRsYIrg2VQKC1aqkOQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Tests.SearchTest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Tests.SearchTest.html",
+          "hash": "3hH/eQL8GSn8XGTySl22DuYJBG0EseXP+CMyq0sOgPM="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Tests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Tests.html",
+          "hash": "7tyg285+sDX5qEg2NpeErIXFaoNDqR5urknScPtz35c="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.UserInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.UserInfo.html",
+          "hash": "8pShvIVUqp2YgLTYHhT0V19gkwcOs5jF06JtCgXtrAQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.html",
+          "hash": "5bqpWBJa3lDu33ws17nWb4fVULRGMlC3uEPft9z3E+E="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "FPsDB36vGjdq5PDIDYrCVi1MFHqvibqNMOaRT4/En/U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "flFA/9h9WrPPalpQ5uMAPid/N3FmKiGk4//MpEoarLY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "m3gnoRI1OTiZlDvjUT9PvmGWfFNRqWz6JPqsyF2xGE0="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "BlPxk5mtl2kgfcZUgkEguqiSAR/EUyUTT4EdebwkQvs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "2v++rz7jih0uGPaw4d81SiBGJamAeOO+nlSpCr0XvlQ="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "s+UecGKJLe11K3w4+MJjx6QoiqktkO8teeQG06lk8L0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 2
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 35,
+          "skipped_file_count": 35
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

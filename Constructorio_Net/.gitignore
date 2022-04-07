@@ -403,3 +403,8 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+# docfx related files
+*.log\.txt
+
+*.\.vscode/
