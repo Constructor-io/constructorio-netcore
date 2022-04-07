@@ -350,6 +350,6 @@ MigrationBackup/
 .ionide/
 
 # docfx related files
-*.log\.txt
+log.txt
 
-*.\.vscode/
+*.vscode/
