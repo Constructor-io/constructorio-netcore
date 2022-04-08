@@ -12,6 +12,7 @@ namespace Constructorio_NET
     }
     private string CreateSearchUrl(string query, Hashtable parameters, Hashtable userParameters)
     {
+      Hashtable cleanedParams = Helpers.CleanParams(parameters);
       string url = "url";
 
       return url;
@@ -26,6 +27,7 @@ namespace Constructorio_NET
     /// <returns></returns>
     public string GetSearchResults(string query, Hashtable parameters, Hashtable userParameters)
     {
+
       string url = CreateSearchUrl(query, parameters, userParameters);
       // return new SearchResponse('dfddf', SearchResponseInner, ['sdads']);
       return query;

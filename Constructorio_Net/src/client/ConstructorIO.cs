@@ -63,6 +63,11 @@ namespace Constructorio_NET
             this.options = new Hashtable();
             version = this.getVersion();
 
+            if (!options.ContainsKey("apiKey"))
+            {
+                throw new ConstructorException("apiKey is required");
+            }
+
             CheckAndSetKey("serviceUrl", options);
             CheckAndSetKey("apiKey", options);
             CheckAndSetKey("constructorToken", options);
