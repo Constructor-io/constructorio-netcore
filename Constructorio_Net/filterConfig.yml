@@ -1,2 +1,3 @@
+apiRules:
 - exclude:
-      uidRegex: ^Constructorio_Net.Tests
+    uidRegex: ^Constructorio_NET\.Tests
