@@ -7,6 +7,38 @@ references:
   commentId: N:Constructorio_NET
   fullName: Constructorio_NET
   nameWithType: Constructorio_NET
+- uid: Constructorio_NET.Autocomplete
+  name: Autocomplete
+  href: api/Constructorio_NET.Autocomplete.html
+  commentId: T:Constructorio_NET.Autocomplete
+  fullName: Constructorio_NET.Autocomplete
+  nameWithType: Autocomplete
+- uid: Constructorio_NET.Autocomplete.#ctor(System.Collections.Hashtable)
+  name: Autocomplete(Hashtable)
+  href: api/Constructorio_NET.Autocomplete.html#Constructorio_NET_Autocomplete__ctor_System_Collections_Hashtable_
+  commentId: M:Constructorio_NET.Autocomplete.#ctor(System.Collections.Hashtable)
+  fullName: Constructorio_NET.Autocomplete.Autocomplete(System.Collections.Hashtable)
+  nameWithType: Autocomplete.Autocomplete(Hashtable)
+- uid: Constructorio_NET.Autocomplete.#ctor*
+  name: Autocomplete
+  href: api/Constructorio_NET.Autocomplete.html#Constructorio_NET_Autocomplete__ctor_
+  commentId: Overload:Constructorio_NET.Autocomplete.#ctor
+  isSpec: "True"
+  fullName: Constructorio_NET.Autocomplete.Autocomplete
+  nameWithType: Autocomplete.Autocomplete
+- uid: Constructorio_NET.Autocomplete.GetAutocompleteResults(System.String,System.Collections.Hashtable,System.Collections.Hashtable)
+  name: GetAutocompleteResults(String, Hashtable, Hashtable)
+  href: api/Constructorio_NET.Autocomplete.html#Constructorio_NET_Autocomplete_GetAutocompleteResults_System_String_System_Collections_Hashtable_System_Collections_Hashtable_
+  commentId: M:Constructorio_NET.Autocomplete.GetAutocompleteResults(System.String,System.Collections.Hashtable,System.Collections.Hashtable)
+  fullName: Constructorio_NET.Autocomplete.GetAutocompleteResults(System.String, System.Collections.Hashtable, System.Collections.Hashtable)
+  nameWithType: Autocomplete.GetAutocompleteResults(String, Hashtable, Hashtable)
+- uid: Constructorio_NET.Autocomplete.GetAutocompleteResults*
+  name: GetAutocompleteResults
+  href: api/Constructorio_NET.Autocomplete.html#Constructorio_NET_Autocomplete_GetAutocompleteResults_
+  commentId: Overload:Constructorio_NET.Autocomplete.GetAutocompleteResults
+  isSpec: "True"
+  fullName: Constructorio_NET.Autocomplete.GetAutocompleteResults
+  nameWithType: Autocomplete.GetAutocompleteResults
 - uid: Constructorio_NET.AutocompleteRequest
   name: AutocompleteRequest
   href: api/Constructorio_NET.AutocompleteRequest.html
@@ -126,6 +158,38 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.AutocompleteResponse.Sections
   nameWithType: AutocompleteResponse.Sections
+- uid: Constructorio_NET.Browse
+  name: Browse
+  href: api/Constructorio_NET.Browse.html
+  commentId: T:Constructorio_NET.Browse
+  fullName: Constructorio_NET.Browse
+  nameWithType: Browse
+- uid: Constructorio_NET.Browse.#ctor(System.Collections.Hashtable)
+  name: Browse(Hashtable)
+  href: api/Constructorio_NET.Browse.html#Constructorio_NET_Browse__ctor_System_Collections_Hashtable_
+  commentId: M:Constructorio_NET.Browse.#ctor(System.Collections.Hashtable)
+  fullName: Constructorio_NET.Browse.Browse(System.Collections.Hashtable)
+  nameWithType: Browse.Browse(Hashtable)
+- uid: Constructorio_NET.Browse.#ctor*
+  name: Browse
+  href: api/Constructorio_NET.Browse.html#Constructorio_NET_Browse__ctor_
+  commentId: Overload:Constructorio_NET.Browse.#ctor
+  isSpec: "True"
+  fullName: Constructorio_NET.Browse.Browse
+  nameWithType: Browse.Browse
+- uid: Constructorio_NET.Browse.GetBrowseResults(System.String,System.Collections.Hashtable,System.Collections.Hashtable)
+  name: GetBrowseResults(String, Hashtable, Hashtable)
+  href: api/Constructorio_NET.Browse.html#Constructorio_NET_Browse_GetBrowseResults_System_String_System_Collections_Hashtable_System_Collections_Hashtable_
+  commentId: M:Constructorio_NET.Browse.GetBrowseResults(System.String,System.Collections.Hashtable,System.Collections.Hashtable)
+  fullName: Constructorio_NET.Browse.GetBrowseResults(System.String, System.Collections.Hashtable, System.Collections.Hashtable)
+  nameWithType: Browse.GetBrowseResults(String, Hashtable, Hashtable)
+- uid: Constructorio_NET.Browse.GetBrowseResults*
+  name: GetBrowseResults
+  href: api/Constructorio_NET.Browse.html#Constructorio_NET_Browse_GetBrowseResults_
+  commentId: Overload:Constructorio_NET.Browse.GetBrowseResults
+  isSpec: "True"
+  fullName: Constructorio_NET.Browse.GetBrowseResults
+  nameWithType: Browse.GetBrowseResults
 - uid: Constructorio_NET.BrowseRequest
   name: BrowseRequest
   href: api/Constructorio_NET.BrowseRequest.html
@@ -485,6 +549,25 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.BrowseResponseInner.TotalNumberOfResults
   nameWithType: BrowseResponseInner.TotalNumberOfResults
+- uid: Constructorio_NET.Catalog
+  name: Catalog
+  href: api/Constructorio_NET.Catalog.html
+  commentId: T:Constructorio_NET.Catalog
+  fullName: Constructorio_NET.Catalog
+  nameWithType: Catalog
+- uid: Constructorio_NET.Catalog.#ctor(System.Collections.Hashtable)
+  name: Catalog(Hashtable)
+  href: api/Constructorio_NET.Catalog.html#Constructorio_NET_Catalog__ctor_System_Collections_Hashtable_
+  commentId: M:Constructorio_NET.Catalog.#ctor(System.Collections.Hashtable)
+  fullName: Constructorio_NET.Catalog.Catalog(System.Collections.Hashtable)
+  nameWithType: Catalog.Catalog(Hashtable)
+- uid: Constructorio_NET.Catalog.#ctor*
+  name: Catalog
+  href: api/Constructorio_NET.Catalog.html#Constructorio_NET_Catalog__ctor_
+  commentId: Overload:Constructorio_NET.Catalog.#ctor
+  isSpec: "True"
+  fullName: Constructorio_NET.Catalog.Catalog
+  nameWithType: Catalog.Catalog
 - uid: Constructorio_NET.ConstructorException
   name: ConstructorException
   href: api/Constructorio_NET.ConstructorException.html
@@ -529,6 +612,24 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.ConstructorIO.ConstructorIO
   nameWithType: ConstructorIO.ConstructorIO
+- uid: Constructorio_NET.ConstructorIO.autocomplete
+  name: autocomplete
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_autocomplete
+  commentId: F:Constructorio_NET.ConstructorIO.autocomplete
+  fullName: Constructorio_NET.ConstructorIO.autocomplete
+  nameWithType: ConstructorIO.autocomplete
+- uid: Constructorio_NET.ConstructorIO.browse
+  name: browse
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_browse
+  commentId: F:Constructorio_NET.ConstructorIO.browse
+  fullName: Constructorio_NET.ConstructorIO.browse
+  nameWithType: ConstructorIO.browse
+- uid: Constructorio_NET.ConstructorIO.catalog
+  name: catalog
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_catalog
+  commentId: F:Constructorio_NET.ConstructorIO.catalog
+  fullName: Constructorio_NET.ConstructorIO.catalog
+  nameWithType: ConstructorIO.catalog
 - uid: Constructorio_NET.ConstructorIO.getClient
   name: getClient()
   href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_getClient
@@ -599,6 +700,12 @@ references:
   commentId: F:Constructorio_NET.ConstructorIO.protocol
   fullName: Constructorio_NET.ConstructorIO.protocol
   nameWithType: ConstructorIO.protocol
+- uid: Constructorio_NET.ConstructorIO.recommendations
+  name: recommendations
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_recommendations
+  commentId: F:Constructorio_NET.ConstructorIO.recommendations
+  fullName: Constructorio_NET.ConstructorIO.recommendations
+  nameWithType: ConstructorIO.recommendations
 - uid: Constructorio_NET.ConstructorIO.search
   name: search
   href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_search
@@ -1367,6 +1474,38 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.NaturalLanguageSearchRequest.setSection
   nameWithType: NaturalLanguageSearchRequest.setSection
+- uid: Constructorio_NET.Recommendations
+  name: Recommendations
+  href: api/Constructorio_NET.Recommendations.html
+  commentId: T:Constructorio_NET.Recommendations
+  fullName: Constructorio_NET.Recommendations
+  nameWithType: Recommendations
+- uid: Constructorio_NET.Recommendations.#ctor(System.Collections.Hashtable)
+  name: Recommendations(Hashtable)
+  href: api/Constructorio_NET.Recommendations.html#Constructorio_NET_Recommendations__ctor_System_Collections_Hashtable_
+  commentId: M:Constructorio_NET.Recommendations.#ctor(System.Collections.Hashtable)
+  fullName: Constructorio_NET.Recommendations.Recommendations(System.Collections.Hashtable)
+  nameWithType: Recommendations.Recommendations(Hashtable)
+- uid: Constructorio_NET.Recommendations.#ctor*
+  name: Recommendations
+  href: api/Constructorio_NET.Recommendations.html#Constructorio_NET_Recommendations__ctor_
+  commentId: Overload:Constructorio_NET.Recommendations.#ctor
+  isSpec: "True"
+  fullName: Constructorio_NET.Recommendations.Recommendations
+  nameWithType: Recommendations.Recommendations
+- uid: Constructorio_NET.Recommendations.GetRecommendationsResults(System.String,System.Collections.Hashtable,System.Collections.Hashtable)
+  name: GetRecommendationsResults(String, Hashtable, Hashtable)
+  href: api/Constructorio_NET.Recommendations.html#Constructorio_NET_Recommendations_GetRecommendationsResults_System_String_System_Collections_Hashtable_System_Collections_Hashtable_
+  commentId: M:Constructorio_NET.Recommendations.GetRecommendationsResults(System.String,System.Collections.Hashtable,System.Collections.Hashtable)
+  fullName: Constructorio_NET.Recommendations.GetRecommendationsResults(System.String, System.Collections.Hashtable, System.Collections.Hashtable)
+  nameWithType: Recommendations.GetRecommendationsResults(String, Hashtable, Hashtable)
+- uid: Constructorio_NET.Recommendations.GetRecommendationsResults*
+  name: GetRecommendationsResults
+  href: api/Constructorio_NET.Recommendations.html#Constructorio_NET_Recommendations_GetRecommendationsResults_
+  commentId: Overload:Constructorio_NET.Recommendations.GetRecommendationsResults
+  isSpec: "True"
+  fullName: Constructorio_NET.Recommendations.GetRecommendationsResults
+  nameWithType: Recommendations.GetRecommendationsResults
 - uid: Constructorio_NET.RecommendationsRequest
   name: RecommendationsRequest
   href: api/Constructorio_NET.RecommendationsRequest.html

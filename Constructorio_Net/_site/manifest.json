@@ -5,6 +5,18 @@
   "files": [
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Autocomplete.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Autocomplete.html",
+          "hash": "PwibvMeYs29IV6EdSmKQUqppPFw3omvyEuJElz/0RiI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Constructorio_NET.AutocompleteRequest.yml",
       "output": {
         ".html": {
@@ -22,6 +34,18 @@
         ".html": {
           "relative_path": "api/Constructorio_NET.AutocompleteResponse.html",
           "hash": "28pP8MpS3NN10l8QhRaeCarrJt6tRPQy4DBX0lalNqo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Browse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Browse.html",
+          "hash": "yf1g2/4s91KBpAm95QQsM16hzhKoKkaqJPfgTs1SAZg="
         }
       },
       "is_incremental": false,
@@ -65,6 +89,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Catalog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Catalog.html",
+          "hash": "uu46reAfDWYzqqJlrNqOGyB2Iqsf/nGr4h5/hASNxgI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Constructorio_NET.ConstructorException.yml",
       "output": {
         ".html": {
@@ -81,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.ConstructorIO.html",
-          "hash": "PS88hRn3VcPM5egFpqXWu9Cfg5PyojPXC95zK1h4d3g="
+          "hash": "mS7LUq5+0oVfWWcXZDIJJ91IWC9mh3E95aDkBMVg/qo="
         }
       },
       "is_incremental": false,
@@ -153,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Helpers.html",
-          "hash": "4kAfyEfq+dEhOsi1afWI/My3JfvZZna26tF4gP3hAOc="
+          "hash": "52zEb+CRoPya001GccU6J4fmttjiVVCvM0ezX9VLZKE="
         }
       },
       "is_incremental": false,
@@ -166,6 +202,18 @@
         ".html": {
           "relative_path": "api/Constructorio_NET.NaturalLanguageSearchRequest.html",
           "hash": "xIDMtFxAofKM9cZ1WUxcwxJinsy51lm/eCMhhB8GVzI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Constructorio_NET.Recommendations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Constructorio_NET.Recommendations.html",
+          "hash": "NQ/4gXtQ3rxoY9sVTCskry3xXQJfX2hnd/xE6tbmC2s="
         }
       },
       "is_incremental": false,
@@ -297,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Search.html",
-          "hash": "8QTrrEi99GLqFgYpMsZ5Wh9NeGLNYKo4wC1BtA9f6+E="
+          "hash": "2GSDBXp2dQWpHC4/iRbQhYa40KnyLb0F4EnxK1AUYfA="
         }
       },
       "is_incremental": false,
@@ -369,7 +417,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.html",
-          "hash": "5bqpWBJa3lDu33ws17nWb4fVULRGMlC3uEPft9z3E+E="
+          "hash": "q6bdYphTuLkz4Yf5sglMgWIocV29U+YdkzqWWhyE/xM="
         }
       },
       "is_incremental": false,
@@ -393,7 +441,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "i7TmSvtG3XV5ddZrQ6ONnPqv4x0fbox7czk/kE5yyLs="
+          "hash": "12D6m/6XoedYe8td6QSdZFGGb+odHL2gfq4cOuplwZA="
         }
       },
       "is_incremental": false,
@@ -466,8 +514,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 31,
-          "skipped_file_count": 31
+          "total_file_count": 35,
+          "skipped_file_count": 27
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
