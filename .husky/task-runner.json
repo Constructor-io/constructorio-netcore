@@ -23,6 +23,12 @@
          "group": "coverage",
          "command": "dotnet",
          "args": [ "reportgenerator", "/p:CollectCoverage=true","-reports:./coverage/coverage.cobertura.xml", "-targetdir:./coverage/html", "-reporttypes:HTML" ]
+      },
+      {
+         "name": "dotnet-test-open-report",
+         "group": "coverage",
+         "command": "open",
+         "args": [ "./coverage/html/index.html" ]
       }
    ]
 }
