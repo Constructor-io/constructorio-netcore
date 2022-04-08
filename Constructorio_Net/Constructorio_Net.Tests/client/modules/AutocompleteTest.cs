@@ -4,7 +4,7 @@ using System;
 namespace Constructorio_NET.Tests
 {
     [TestFixture]
-    public class SearchTest
+    public class AutocompleteTest
     {
         [SetUp]
         public void Setup()

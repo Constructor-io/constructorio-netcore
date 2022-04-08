@@ -2,10 +2,14 @@ namespace Constructorio_NET
 {
   using System;
   using System.Collections;
+  using System.Net.Http;
   using System.Text.RegularExpressions;
+  using System.Threading.Tasks;
 
   public class Helpers
   {
+    private static HttpClient client = new HttpClient();
+
     /// <summary>
     /// Cleans params before applying them to a request url
     /// </summary>
@@ -30,6 +34,19 @@ namespace Constructorio_NET
       }
 
       return cleanedParams;
+    }
+
+    /// <summary>
+    /// Make a get request
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
+    private async Task<string> makeGetRequest(Uri url)
+    {
+      var response = await client.GetAsync(url);
+      var content = response.Content;
+      var result = await content.ReadAsStringAsync();
+      return result;
     }
   }
 }

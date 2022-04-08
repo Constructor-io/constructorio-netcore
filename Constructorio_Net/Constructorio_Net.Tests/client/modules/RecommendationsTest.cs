@@ -4,7 +4,7 @@ using System;
 namespace Constructorio_NET.Tests
 {
     [TestFixture]
-    public class SearchTest
+    public class RecommendationsTest
     {
         [SetUp]
         public void Setup()

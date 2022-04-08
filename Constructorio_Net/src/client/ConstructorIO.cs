@@ -54,10 +54,6 @@ namespace Constructorio_NET
     /// Creates a constructor.io instance
     /// </summary>
     /// <param name="options"></param>
-    /// <param name="apiToken"></param>
-    /// <param name="apiKey"></param>
-    /// <param name="serviceUrl"></param>
-    /// <param name="constructorToken"></param>
     public ConstructorIO(Hashtable options)
         {
             this.options = new Hashtable();
