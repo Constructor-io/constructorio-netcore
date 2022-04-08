@@ -39,6 +39,10 @@ namespace Constructorio_NET
         public int port;
         public string version;
         private Hashtable options;
+        public Autocomplete autocomplete;
+        public Browse browse;
+        public Catalog catalog;
+        public Recommendations recommendations;
         public Search search;
 
     /**
@@ -64,9 +68,10 @@ namespace Constructorio_NET
             CheckAndSetKey("constructorToken", options);
             CheckAndSetKey("apiToken", options);
 
-            // var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(this.apiToken + ":");
-            // credentials = "Basic " + System.Convert.ToBase64String(plainTextBytes);
-
+            this.autocomplete = new Autocomplete(options);
+            this.browse = new Browse(options);
+            this.catalog = new Catalog(options);
+            this.recommendations = new Recommendations(options);
             this.search = new Search(options);
         }
 
@@ -75,7 +80,7 @@ namespace Constructorio_NET
             if (!options.ContainsKey(key))
             {
                 this.options.Add(key, options[key]);
-            }
+            } 
             else
             {
                 this.options.Add(key, options[key]);

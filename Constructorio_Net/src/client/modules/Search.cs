@@ -17,7 +17,6 @@ namespace Constructorio_NET
       return url;
     }
 
-    // public SearchResponse getSearchResults(string query)
     /// <summary>
     /// Retrieve search results from API
     /// </summary>
