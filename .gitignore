@@ -353,3 +353,8 @@ MigrationBackup/
 log.txt
 
 *.vscode/
+
+# coverage reports
+coverage/
+
+.DS_Store

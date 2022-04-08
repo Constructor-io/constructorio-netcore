@@ -7,6 +7,12 @@
       "commands": [
         "husky"
       ]
+    },
+    "dotnet-reportgenerator-globaltool": {
+      "version": "5.1.4",
+      "commands": [
+        "reportgenerator"
+      ]
     }
   }
 }
