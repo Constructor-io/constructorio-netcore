@@ -1,0 +1,15 @@
+{
+   "tasks": [
+      {
+         "name": "dotnet-format-example",
+         "command": "dotnet",
+         "args": [ "dotnet-format", "--include", "${staged}" ],
+         "include": [ "**/*.cs", "**/*.vb" ]
+      },
+      {
+         "name": "dotnet-test",
+         "command": "dotnet",
+         "args": [ "test", "./Constructorio_Net" ]
+      }
+   ]
+}
