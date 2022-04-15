@@ -19,7 +19,7 @@
     <None Remove="Doxygen" />
     <None Remove="docfx" />
     <None Remove="EWSoftware.SHFB" />
-    <None Remove="Constructorio_Net.Tests\obj\Debug\netcoreapp3.1\Constructorio_NET.Tests.csproj.AssemblyReference.cache" />
-    <None Remove="Constructorio_Net.Tests\obj\Debug\netcoreapp3.1\Constructorio_NET.Tests.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Remove="Constructorio_NET.Tests\obj\Debug\netcoreapp3.1\Constructorio_NET.Tests.csproj.AssemblyReference.cache" />
+    <None Remove="Constructorio_NET.Tests\obj\Debug\netcoreapp3.1\Constructorio_NET.Tests.GeneratedMSBuildEditorConfig.editorconfig" />
   </ItemGroup>
 </Project>

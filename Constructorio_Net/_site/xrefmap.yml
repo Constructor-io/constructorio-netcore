@@ -612,24 +612,24 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.ConstructorIO.ConstructorIO
   nameWithType: ConstructorIO.ConstructorIO
-- uid: Constructorio_NET.ConstructorIO.autocomplete
-  name: autocomplete
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_autocomplete
-  commentId: F:Constructorio_NET.ConstructorIO.autocomplete
-  fullName: Constructorio_NET.ConstructorIO.autocomplete
-  nameWithType: ConstructorIO.autocomplete
-- uid: Constructorio_NET.ConstructorIO.browse
-  name: browse
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_browse
-  commentId: F:Constructorio_NET.ConstructorIO.browse
-  fullName: Constructorio_NET.ConstructorIO.browse
-  nameWithType: ConstructorIO.browse
-- uid: Constructorio_NET.ConstructorIO.catalog
-  name: catalog
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_catalog
-  commentId: F:Constructorio_NET.ConstructorIO.catalog
-  fullName: Constructorio_NET.ConstructorIO.catalog
-  nameWithType: ConstructorIO.catalog
+- uid: Constructorio_NET.ConstructorIO.Autocomplete
+  name: Autocomplete
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Autocomplete
+  commentId: F:Constructorio_NET.ConstructorIO.Autocomplete
+  fullName: Constructorio_NET.ConstructorIO.Autocomplete
+  nameWithType: ConstructorIO.Autocomplete
+- uid: Constructorio_NET.ConstructorIO.Browse
+  name: Browse
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Browse
+  commentId: F:Constructorio_NET.ConstructorIO.Browse
+  fullName: Constructorio_NET.ConstructorIO.Browse
+  nameWithType: ConstructorIO.Browse
+- uid: Constructorio_NET.ConstructorIO.Catalog
+  name: Catalog
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Catalog
+  commentId: F:Constructorio_NET.ConstructorIO.Catalog
+  fullName: Constructorio_NET.ConstructorIO.Catalog
+  nameWithType: ConstructorIO.Catalog
 - uid: Constructorio_NET.ConstructorIO.getClient
   name: getClient()
   href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_getClient
@@ -700,18 +700,18 @@ references:
   commentId: F:Constructorio_NET.ConstructorIO.protocol
   fullName: Constructorio_NET.ConstructorIO.protocol
   nameWithType: ConstructorIO.protocol
-- uid: Constructorio_NET.ConstructorIO.recommendations
-  name: recommendations
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_recommendations
-  commentId: F:Constructorio_NET.ConstructorIO.recommendations
-  fullName: Constructorio_NET.ConstructorIO.recommendations
-  nameWithType: ConstructorIO.recommendations
-- uid: Constructorio_NET.ConstructorIO.search
-  name: search
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_search
-  commentId: F:Constructorio_NET.ConstructorIO.search
-  fullName: Constructorio_NET.ConstructorIO.search
-  nameWithType: ConstructorIO.search
+- uid: Constructorio_NET.ConstructorIO.Recommendations
+  name: Recommendations
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Recommendations
+  commentId: F:Constructorio_NET.ConstructorIO.Recommendations
+  fullName: Constructorio_NET.ConstructorIO.Recommendations
+  nameWithType: ConstructorIO.Recommendations
+- uid: Constructorio_NET.ConstructorIO.Search
+  name: Search
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Search
+  commentId: F:Constructorio_NET.ConstructorIO.Search
+  fullName: Constructorio_NET.ConstructorIO.Search
+  nameWithType: ConstructorIO.Search
 - uid: Constructorio_NET.ConstructorIO.verify
   name: verify()
   href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_verify
@@ -725,12 +725,12 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.ConstructorIO.verify
   nameWithType: ConstructorIO.verify
-- uid: Constructorio_NET.ConstructorIO.version
-  name: version
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_version
-  commentId: F:Constructorio_NET.ConstructorIO.version
-  fullName: Constructorio_NET.ConstructorIO.version
-  nameWithType: ConstructorIO.version
+- uid: Constructorio_NET.ConstructorIO.Version
+  name: Version
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Version
+  commentId: F:Constructorio_NET.ConstructorIO.Version
+  fullName: Constructorio_NET.ConstructorIO.Version
+  nameWithType: ConstructorIO.Version
 - uid: Constructorio_NET.ConstructorItem
   name: ConstructorItem
   href: api/Constructorio_NET.ConstructorItem.html
