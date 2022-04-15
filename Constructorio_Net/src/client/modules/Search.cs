@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Threading.Tasks;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace Constructorio_NET
 {
@@ -12,8 +14,6 @@ namespace Constructorio_NET
     public Search(Hashtable options)
     {
       this.Options = options;
-      // this.ApiKey = (string)options["apiKey"];
-      // this.ServiceUrl = (string)options["serviceUrl"];
     }
     private string CreateSearchUrl(string query, Hashtable parameters, Hashtable userParameters)
     {
@@ -33,8 +33,6 @@ namespace Constructorio_NET
         // { "key", (string)this.Options["apiKey"] }
       };
 
-      Console.WriteLine(queryParams);
-
       NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
 
       // foreach (DictionaryEntry param in queryParams)
@@ -42,10 +40,8 @@ namespace Constructorio_NET
       //   queryString.Add((String)param.Key, (String)param.Value);
       // }
       List<string> paths = new List<string> { "search", HttpUtility.UrlEncode(query) };
-      // string url = $"{this.ServiceUrl}/search/{query}?{queryString}";
-      // string url = $"{serviceUrl}/search/{query}?{HttpUtility.UrlPathEncode(queryString)}";
 
-      return Helpers.makeUrl(this.Options, paths, queryParams);
+      return Helpers.MakeUrl(this.Options, paths, queryParams);
     }
 
     /// <summary>
@@ -56,10 +52,14 @@ namespace Constructorio_NET
     /// <param name="userParameters"></param>
     /// <returns></returns>
     public string GetSearchResults(string query, Hashtable parameters, Hashtable userParameters)
+    // / public Task<string> GetSearchResults(string query, Hashtable parameters, Hashtable userParameters)
     {
 
       string url = CreateSearchUrl(query, parameters, userParameters);
-      // return new SearchResponse('dfddf', SearchResponseInner, ['sdads']);
+      Task<string> task = Helpers.MakeGetRequest(url);
+      SearchResponse response = JsonConvert.DeserializeObject<SearchResponse>(task.Result);
+      // Console.WriteLine(response.Response.TotalNumResults);
+      // response.Response.Results.ForEach(i => Console.Write("{0}\t", i.Value));
       return url;
     }
   }

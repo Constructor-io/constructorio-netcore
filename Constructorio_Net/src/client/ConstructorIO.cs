@@ -100,9 +100,10 @@ namespace Constructorio_NET
         /**
          * Makes a Http GET request
          */
-        private async Task<string> makeGetRequest(Uri url)
+        private async Task<string> makeGetRequest(string url)
         {
-            var response = await client.GetAsync(url);
+
+            var response = await client.GetAsync(new Uri(url));
             var content = response.Content;
             var result = await content.ReadAsStringAsync();
             return result;
@@ -154,21 +155,21 @@ namespace Constructorio_NET
           * @return true if working.
           * @throws ConstructorException if the service is not working
           */
-        public bool verify()
-        {
-            try
-            {
-                var url = this.makeUrl(new List<string> { "v1", "verify" }, null);
-                var response = this.makeGetRequest(url);
+        // public bool verify()
+        // {
+        //     try
+        //     {
+        //         var url = this.makeUrl(new List<string> { "v1", "verify" }, null);
+        //         var response = this.makeGetRequest(url);
 
-                getResponseBody(response);
-                return true;
-            }
-            catch (Exception exception)
-            {
-                throw new ConstructorException(exception);
-            }
-        }
+        //         getResponseBody(response);
+        //         return true;
+        //     }
+        //     catch (Exception exception)
+        //     {
+        //         throw new ConstructorException(exception);
+        //     }
+        // }
 
         /**
          * Adds an item to your autocomplete.

@@ -17,6 +17,5 @@ namespace Constructorio_NET
 
         [JsonPropertyName("request")]
         public Dictionary<String, Object> Request { get; set; }
-
     }
 }

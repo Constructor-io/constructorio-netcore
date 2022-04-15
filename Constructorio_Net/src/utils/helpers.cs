@@ -46,7 +46,7 @@ namespace Constructorio_NET
     /// <param name="paths"></param>
     /// <param name="queryParams"></param>
     /// <returns>string</returns>
-    internal static string makeUrl(Hashtable options, List<String> paths, Dictionary<String, String> queryParams)
+    internal static string MakeUrl(Hashtable options, List<String> paths, Dictionary<String, String> queryParams)
     {
       NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
       string url = (string)options["serviceUrl"];
@@ -76,9 +76,16 @@ namespace Constructorio_NET
     /// </summary>
     /// <param name="url"></param>
     /// <returns></returns>
-    private async Task<string> makeGetRequest(Uri url)
+    // internal static async Task<string> MakeGetRequest(string url)
+    // {
+    //   var response = await client.GetAsync(new Uri(url));
+    //   var content = response.Content;
+    //   var result = await content.ReadAsStringAsync();
+    //   return result;
+    // }
+    internal static async Task<string> MakeGetRequest(string url)
     {
-      var response = await client.GetAsync(url);
+      var response = await client.GetAsync(new Uri(url));
       var content = response.Content;
       var result = await content.ReadAsStringAsync();
       return result;

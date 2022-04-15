@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Search Response Inner
@@ -8,24 +7,22 @@ using System.Text.Json.Serialization;
 namespace Constructorio_NET
 {
     public class SearchResponseInner {
-
-        [JsonPropertyName("facets")]
+        [JsonProperty("facets")]
         public List<FilterFacet> Facets { get; set; }
 
-        [JsonPropertyName("groups")]
+        [JsonProperty("groups")]
         public List<FilterGroup> Groups { get; set; }
 
-        [JsonPropertyName("results")]
+        [JsonProperty("results")]
         public List<Result> Results { get; set; }
 
-        [JsonPropertyName("total_num_results")]
-        public Int32 TotalNumberOfResults { get; set; }
+        [JsonProperty("total_num_results")]
+        public int TotalNumResults { get; set; }
 
-        [JsonPropertyName("sort_options")]
+        [JsonProperty("sort_options")]
         public List<FilterSortOption> SortOptions { get; set; }
 
-        [JsonPropertyName("redirect")]
+        [JsonProperty("redirect")]
         public Redirect Redirect { get; set; }
-
     }
 }
