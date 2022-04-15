@@ -37,13 +37,13 @@ namespace Constructorio_NET
 
         public string protocol;
         public int port;
-        public string version;
-        private Hashtable options;
-        public Autocomplete autocomplete;
-        public Browse browse;
-        public Catalog catalog;
-        public Recommendations recommendations;
-        public Search search;
+        public string Version;
+        private Hashtable Options;
+        public Autocomplete Autocomplete;
+        public Browse Browse;
+        public Catalog Catalog;
+        public Recommendations Recommendations;
+        public Search Search;
 
     /**
      * Creates a constructor.io Client.
@@ -60,36 +60,33 @@ namespace Constructorio_NET
     /// <param name="options"></param>
     public ConstructorIO(Hashtable options)
         {
-            this.options = new Hashtable();
-            version = this.getVersion();
+            this.Options = new Hashtable();
+            this.Options.Add("version", this.getVersion());
 
             if (!options.ContainsKey("apiKey"))
             {
                 throw new ConstructorException("apiKey is required");
             }
-
-            CheckAndSetKey("serviceUrl", options);
-            CheckAndSetKey("apiKey", options);
-            CheckAndSetKey("constructorToken", options);
-            CheckAndSetKey("apiToken", options);
-
-            this.autocomplete = new Autocomplete(options);
-            this.browse = new Browse(options);
-            this.catalog = new Catalog(options);
-            this.recommendations = new Recommendations(options);
-            this.search = new Search(options);
-        }
-
-        private void CheckAndSetKey(string key, Hashtable options)
-        {
-            if (!options.ContainsKey(key))
-            {
-                this.options.Add(key, options[key]);
-            } 
-            else
-            {
-                this.options.Add(key, options[key]);
+            else {
+                this.Options.Add("apiKey", options["apiKey"]);
             }
+
+            if (options.ContainsKey("constructorToken"))
+            {
+                this.Options.Add("constructorToken", options["constructorToken"]);
+            }
+            if (options.ContainsKey("apiToken"))
+            {
+                this.Options.Add("apiToken", options["apiToken"]);
+            }
+
+            string serviceUrl = options.ContainsKey("serviceUrl") ? (string)options["serviceUrl"] : "https://ac.cnstrc.com";
+            this.Options.Add("serviceUrl", serviceUrl);
+            this.Autocomplete = new Autocomplete(this.Options);
+            this.Browse = new Browse(this.Options);
+            this.Catalog = new Catalog(this.Options);
+            this.Recommendations = new Recommendations(this.Options);
+            this.Search = new Search(this.Options);
         }
 
         /**
@@ -886,8 +883,8 @@ namespace Constructorio_NET
             var uriBuilder = new UriBuilder();
 
             uriBuilder.Scheme = this.protocol;
-            uriBuilder.Host = (string)this.options["serviceUrl"];
-            uriBuilder.Query = "key=" + this.options["apiKey"] + "&c=" + this.version;
+            uriBuilder.Host = (string)this.Options["serviceUrl"];
+            uriBuilder.Query = "key=" + this.Options["apiKey"] + "&c=" + this.Version;
 
             if (queryParams != null && queryParams.Count != 0)
             {
@@ -987,7 +984,7 @@ namespace Constructorio_NET
          */
         protected string getVersion()
         {
-            return "ciojava-5.6.0";
+            return "cionet-5.6.0";
         }
 
     /**

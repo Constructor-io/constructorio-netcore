@@ -2,9 +2,12 @@ namespace Constructorio_NET
 {
   using System;
   using System.Collections;
+  using System.Collections.Generic;
+  using System.Collections.Specialized;
   using System.Net.Http;
   using System.Text.RegularExpressions;
   using System.Threading.Tasks;
+  using System.Web;
 
   public class Helpers
   {
@@ -34,6 +37,38 @@ namespace Constructorio_NET
       }
 
       return cleanedParams;
+    }
+
+    /// <summary>
+    /// Makes a URL to issue the requests with.
+    /// </summary>
+    /// <param name="options"></param>
+    /// <param name="paths"></param>
+    /// <param name="queryParams"></param>
+    /// <returns>string</returns>
+    internal static string makeUrl(Hashtable options, List<String> paths, Dictionary<String, String> queryParams)
+    {
+      NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
+      string url = (string)options["serviceUrl"];
+
+      foreach (var path in paths)
+      {
+        url += "/" + path;
+      }
+
+      url += "?key=" + options["apiKey"] + "&c=" + options["version"];
+
+      if (queryParams != null && queryParams.Count != 0)
+      {
+        foreach (var queryParam in queryParams)
+        {
+          queryString.Add((string)queryParam.Key, (string)queryParam.Value);
+        }
+
+        url += "&" + queryString.ToString();
+      }
+
+      return url;
     }
 
     /// <summary>
