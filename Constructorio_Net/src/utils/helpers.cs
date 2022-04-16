@@ -130,28 +130,6 @@ namespace Constructorio_NET
             url += $"&ef-{Uri.EscapeDataString(testCell.Key)}={Uri.EscapeDataString(testCell.Value)}";
           }
         }
-        // Add segments to query string
-        if (queryParams.Contains(SEGMENTS))
-        {
-          List<string> segments = (List<string>)queryParams[SEGMENTS]; 
-          queryParams.Remove(segments);
-
-          foreach (string segment in segments)
-          {
-            url += $"&{urlParamsMap[SEGMENTS]}={Uri.EscapeDataString(segment)}";
-          }
-        }
-        // Add hidden fields to query string
-        if (queryParams.Contains(HIDDENFIELDS))
-        {
-          List<string> hiddenFields = (List<string>)queryParams[HIDDENFIELDS]; 
-          queryParams.Remove(HIDDENFIELDS);
-
-          foreach (string hiddenField in hiddenFields)
-          {
-            url += $"&{urlParamsMap[HIDDENFIELDS]}={Uri.EscapeDataString(hiddenField)}";
-          }
-        }
         // Add format options to query string
         if (queryParams.Contains(FMTOPTIONS))
         {
@@ -177,6 +155,13 @@ namespace Constructorio_NET
           else if (valueDataType == typeof(int))
           {
             url += $"&{Uri.EscapeDataString(urlParamsMap[paramKey])}={Uri.EscapeDataString(queryParam.Value.ToString())}";
+          }
+          else if (valueDataType == typeof(List<string>))
+          {
+            foreach (string listValue in (List<string>)queryParam.Value)
+            {
+              url += $"&{urlParamsMap[paramKey]}={Uri.EscapeDataString(listValue)}";
+            }
           }
         }
 
