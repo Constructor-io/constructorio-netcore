@@ -48,24 +48,47 @@ namespace Constructorio_NET
     /// <returns>string</returns>
     protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams)
     {
-      string queryParamsString = "";
       string url = (string)options["serviceUrl"];
+      // string constants
+      string APIKEY= "apiKey";
+      string CLIENTID= "clientId";
+      string FILTERS = "filters";
+      string FMTOPTIONS = "fmtOptions";
+      string HIDDENFIELDS = "hiddenFields";
+      string SEGMENTS = "segments";
+      string SESSIONID = "sessionId";
+      string SECTION = "section";
+      string TESTCELLS = "testCells";
+      string USERID = "userId";
+      string VERSION= "version";
+
+      Dictionary<string, string> urlParamsMap = new Dictionary<string, string>()
+      {
+        { CLIENTID, "i" },
+        { SESSIONID, "s" },
+        { USERID, "ui" },
+        { SEGMENTS, "us" },
+        { FMTOPTIONS, "fmt_options" },
+        { SECTION, "section" },
+        { FILTERS, "filters" },
+        { HIDDENFIELDS, "hidden_field" },
+      };
 
       foreach (var path in paths)
       {
-        url += "/" + path;
+        url += "/" + HttpUtility.UrlEncode(path);
       }
 
-      url += "?key=" + options["apiKey"] + "&c=" + options["version"];
+      url += $"?key={options[APIKEY]}&c={options[VERSION]}";
 
       // Generate url params query string
       if (queryParams != null && queryParams.Count != 0)
       {
         // Add filters to query string
-        if (queryParams.Contains("filters"))
+        if (queryParams.Contains(FILTERS))
         {
-          Dictionary<string, List<string>> filters = (Dictionary<string, List<string>>)queryParams["filters"]; 
-          queryParams.Remove("filters");
+          Dictionary<string, List<string>> filters = (Dictionary<string, List<string>>)queryParams[FILTERS]; 
+          queryParams.Remove(FILTERS);
 
           foreach (var filter in filters)
           {
@@ -73,53 +96,48 @@ namespace Constructorio_NET
 
             foreach (string filterOption in (List<string>)filter.Value)
             {
-              queryParamsString += $"&filters{Uri.EscapeDataString("[" + filterGroup + "]")}={Uri.EscapeDataString(filterOption)}";
+              url += $"&{urlParamsMap[FILTERS]}{Uri.EscapeDataString("[" + filterGroup + "]")}={Uri.EscapeDataString(filterOption)}";
             }
           }
         }
         // Add test cells to query string
-        if (queryParams.Contains("testCells"))
+        if (queryParams.Contains(TESTCELLS))
         {
-          Hashtable testCells = (Hashtable)queryParams["testCells"]; 
-          queryParams.Remove("testCells");
+          Dictionary<string, string> testCells = (Dictionary<string, string>)queryParams[TESTCELLS]; 
+          queryParams.Remove(TESTCELLS);
 
-          foreach (DictionaryEntry testCell in testCells)
+          foreach (var testCell in testCells)
           {
-            string testCellName = (string)testCell.Key;
-
-            foreach (string testCellValue in (List<string>)testCell.Value)
-            {
-              queryParamsString += $"&ef-{Uri.EscapeDataString(testCellName)}={Uri.EscapeDataString(testCellValue)}";
-            }
+            url += $"&ef-{Uri.EscapeDataString(testCell.Key)}={Uri.EscapeDataString(testCell.Value)}";
           }
         }
         // Add segments to query string
-        if (queryParams.Contains("segments"))
+        if (queryParams.Contains(SEGMENTS))
         {
-          List<string> segments = (List<string>)queryParams["segments"]; 
-          queryParams.Remove("segments");
+          List<string> segments = (List<string>)queryParams[SEGMENTS]; 
+          queryParams.Remove(segments);
 
           foreach (string segment in segments)
           {
-            queryParamsString += $"&us={Uri.EscapeDataString(segment)}";
+            url += $"&{urlParamsMap[SEGMENTS]}={Uri.EscapeDataString(segment)}";
           }
         }
         // Add hidden fields to query string
-        if (queryParams.Contains("hiddenFields"))
+        if (queryParams.Contains(HIDDENFIELDS))
         {
-          List<string> hiddenFields = (List<string>)queryParams["hiddenFields"]; 
-          queryParams.Remove("hiddenFields");
+          List<string> hiddenFields = (List<string>)queryParams[HIDDENFIELDS]; 
+          queryParams.Remove(HIDDENFIELDS);
 
           foreach (string hiddenField in hiddenFields)
           {
-            queryParamsString += $"&hidden_field={Uri.EscapeDataString(hiddenField)}";
+            url += $"&{urlParamsMap[HIDDENFIELDS]}={Uri.EscapeDataString(hiddenField)}";
           }
         }
         // Add format options to query string
-        if (queryParams.Contains("fmtOptions"))
+        if (queryParams.Contains(FMTOPTIONS))
         {
-          Hashtable fmtOptions = (Hashtable)queryParams["fmtOptions"];
-          queryParams.Remove("fmtOptions");
+          Hashtable fmtOptions = (Hashtable)queryParams[FMTOPTIONS];
+          queryParams.Remove(FMTOPTIONS);
 
           foreach (DictionaryEntry fmtOption in fmtOptions)
           {
@@ -127,7 +145,7 @@ namespace Constructorio_NET
 
             foreach (string fmtOptionValue in (List<string>)fmtOption.Value)
             {
-              queryParamsString += $"&fmt_options{Uri.EscapeDataString("[" + fmtOptionName + "]")}={Uri.EscapeDataString(fmtOptionValue)}";
+              url += $"&{urlParamsMap[FMTOPTIONS]}{Uri.EscapeDataString("[" + fmtOptionName + "]")}={Uri.EscapeDataString(fmtOptionValue)}";
             }
           }
         }
@@ -135,22 +153,23 @@ namespace Constructorio_NET
         // Add remaining query params to query string
         foreach (DictionaryEntry queryParam in queryParams)
         {
-          if (queryParam.Value.GetType() == typeof(string))
+          string paramKey = (string)queryParam.Key;
+
+          if (queryParam.Value.GetType() == typeof(string) && urlParamsMap.ContainsKey(paramKey))
           {
-            queryParamsString += $"&{Uri.EscapeDataString((string)queryParam.Key)}={Uri.EscapeDataString((string)queryParam.Value)}";
+            url += $"&{Uri.EscapeDataString(urlParamsMap[paramKey])}={Uri.EscapeDataString((string)queryParam.Value)}";
           }
         }
 
         long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        queryParamsString += $"&_dt={time}";
-        url += queryParamsString;
+        url += $"&_dt={time}";
       }
 
       return url;
     }
 
     /// <summary>
-    /// Make a get request
+    /// Make a http get request
     /// </summary>
     /// <param name="url"></param>
     /// <returns>Task</returns>

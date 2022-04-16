@@ -72,7 +72,7 @@ namespace Constructorio_NET.Tests
       List<string> paths = new List<string> { "search", this.Query };
       Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
       {
-        { "Color", new List<string>() { "green" } }
+        { "Color", new List<string>() { "green", "blue" } }
       };
       Hashtable queryParams = new Hashtable()
       {
@@ -81,7 +81,27 @@ namespace Constructorio_NET.Tests
       };
 
       string url = Helpers.MakeUrl(this.Options, paths, queryParams);
-      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&filters%5BColor%5D=green&section=Search%20Suggestions&_dt=";
+      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&filters%5BColor%5D=green&filters%5BColor%5D=blue&section=Search%20Suggestions&_dt=";
+      bool regexMatched = Regex.Match(url, expectedUrl).Success;
+      Assert.That(regexMatched, "url should be properly formed");
+    }
+
+    [Test]
+    public void MakeUrlSearchWithAllQueryParams()
+    {
+      List<string> paths = new List<string> { "search", this.Query };
+      Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
+      {
+        { "Color", new List<string>() { "green", "blue" } }
+      };
+      Hashtable queryParams = new Hashtable()
+      {
+        { "section", "Search Suggestions" },
+        { "filters", filters }
+      };
+
+      string url = Helpers.MakeUrl(this.Options, paths, queryParams);
+      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&filters%5BColor%5D=green&filters%5BColor%5D=blue&section=Search%20Suggestions&_dt=";
       bool regexMatched = Regex.Match(url, expectedUrl).Success;
       Assert.That(regexMatched, "url should be properly formed");
     }

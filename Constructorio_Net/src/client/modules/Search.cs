@@ -36,7 +36,7 @@ namespace Constructorio_NET
 
       Hashtable cleanedParams = Helpers.CleanParams(parameters);
       Hashtable queryParams = new Hashtable();
-      List<string> paths = new List<string> { "search", HttpUtility.UrlEncode(query) };
+      List<string> paths = new List<string> { "search", query };
 
       foreach (DictionaryEntry param in parameters)
       {
