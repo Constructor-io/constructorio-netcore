@@ -10,6 +10,7 @@ namespace Constructorio_NET.Tests
   public class HelpersTest : Helpers
   {
       private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+      private Hashtable Options;
       private string Query = "item";
       private string ServiceUrl = "https://ac.cnstrc.com";
       private string Version = "cionet-5.6.0";
@@ -17,6 +18,12 @@ namespace Constructorio_NET.Tests
     [SetUp]
     public void Setup()
     {
+      this.Options = new Hashtable()
+      {
+        { "serviceUrl", this.ServiceUrl },
+        { "apiKey", this.ApiKey },
+        { "version", this.Version }
+      };
     }
 
     [Test]
@@ -47,25 +54,35 @@ namespace Constructorio_NET.Tests
     [Test]
     public void MakeUrlSearch()
     {
-      Hashtable options = new Hashtable()
-      {
-        { "serviceUrl", this.ServiceUrl },
-        { "apiKey", this.ApiKey },
-        { "version", this.Version }
-      };
-      List<string> paths = new List<string>
-      {
-        "search", this.Query
-      };
+      List<string> paths = new List<string> { "search", this.Query };
       Hashtable queryParams = new Hashtable()
       {
         { "section", "Search Suggestions" },
       };
 
-      string url = Helpers.MakeUrl(options, paths, queryParams);
-      Console.WriteLine(url);
-      string expectedUrl = $@"https://ac.cnstrc.com/search/{this.Query}?key={this.ApiKey}&c={this.Version}&section=Search%20Suggestions&_dt=";
-      bool regexMatched = Regex.Match(url, expectedUrl).Index >= 0;
+      string url = Helpers.MakeUrl(this.Options, paths, queryParams);
+      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&section=Search%20Suggestions&_dt=";
+      bool regexMatched = Regex.Match(url, expectedUrl).Success;
+      Assert.That(regexMatched, "url should be properly formed");
+    }
+
+    [Test]
+    public void MakeUrlSearchWithFilters()
+    {
+      List<string> paths = new List<string> { "search", this.Query };
+      Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
+      {
+        { "Color", new List<string>() { "green" } }
+      };
+      Hashtable queryParams = new Hashtable()
+      {
+        { "section", "Search Suggestions" },
+        { "filters", filters }
+      };
+
+      string url = Helpers.MakeUrl(this.Options, paths, queryParams);
+      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&filters%5BColor%5D=green&section=Search%20Suggestions&_dt=";
+      bool regexMatched = Regex.Match(url, expectedUrl).Success;
       Assert.That(regexMatched, "url should be properly formed");
     }
   }

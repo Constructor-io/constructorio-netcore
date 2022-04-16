@@ -64,10 +64,10 @@ namespace Constructorio_NET
         // Add filters to query string
         if (queryParams.Contains("filters"))
         {
-          Hashtable filters = (Hashtable)queryParams["filters"]; 
+          Dictionary<string, List<string>> filters = (Dictionary<string, List<string>>)queryParams["filters"]; 
           queryParams.Remove("filters");
 
-          foreach (DictionaryEntry filter in filters)
+          foreach (var filter in filters)
           {
             string filterGroup = (string)filter.Key;
 
@@ -142,7 +142,7 @@ namespace Constructorio_NET
         }
 
         long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        queryParamsString += $"_dt={time}";
+        queryParamsString += $"&_dt={time}";
         url += queryParamsString;
       }
 
