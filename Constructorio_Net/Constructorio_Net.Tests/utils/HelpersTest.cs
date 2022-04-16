@@ -1,8 +1,10 @@
 namespace Constructorio_NET.Tests
 {
-  using System.Collections;
   using NUnit.Framework;
+  using System;
+  using System.Collections;
   using System.Collections.Generic;
+  using System.Text.RegularExpressions;
 
   [TestFixture]
   public class HelpersTest : Helpers
@@ -55,14 +57,16 @@ namespace Constructorio_NET.Tests
       {
         "search", this.Query
       };
-      Dictionary<string, string> queryParams = new Dictionary<string, string>()
+      Hashtable queryParams = new Hashtable()
       {
         { "section", "Search Suggestions" },
       };
 
       string url = Helpers.MakeUrl(options, paths, queryParams);
-      string expectedUrl = $"https://ac.cnstrc.com/search/{this.Query}?key={this.ApiKey}&c={this.Version}&section=Search%20Suggestions";
-      Assert.AreEqual(expectedUrl, url, "url should be properly formed");
+      Console.WriteLine(url);
+      string expectedUrl = $@"https://ac.cnstrc.com/search/{this.Query}?key={this.ApiKey}&c={this.Version}&section=Search%20Suggestions&_dt=";
+      bool regexMatched = Regex.Match(url, expectedUrl).Index >= 0;
+      Assert.That(regexMatched, "url should be properly formed");
     }
   }
 }

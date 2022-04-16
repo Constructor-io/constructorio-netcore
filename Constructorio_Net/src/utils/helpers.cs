@@ -46,9 +46,9 @@ namespace Constructorio_NET
     /// <param name="paths"></param>
     /// <param name="queryParams"></param>
     /// <returns>string</returns>
-    protected static string MakeUrl(Hashtable options, List<String> paths, Dictionary<String, String> queryParams)
+    protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams)
     {
-      string queryString = "";
+      string queryParamsString = "";
       string url = (string)options["serviceUrl"];
 
       foreach (var path in paths)
@@ -58,14 +58,92 @@ namespace Constructorio_NET
 
       url += "?key=" + options["apiKey"] + "&c=" + options["version"];
 
+      // Generate url params query string
       if (queryParams != null && queryParams.Count != 0)
       {
-        foreach (var queryParam in queryParams)
+        // Add filters to query string
+        if (queryParams.Contains("filters"))
         {
-          queryString += $"&{Uri.EscapeDataString(queryParam.Key)}={Uri.EscapeDataString(queryParam.Value)}";
+          Hashtable filters = (Hashtable)queryParams["filters"]; 
+          queryParams.Remove("filters");
+
+          foreach (DictionaryEntry filter in filters)
+          {
+            string filterGroup = (string)filter.Key;
+
+            foreach (string filterOption in (List<string>)filter.Value)
+            {
+              queryParamsString += $"&filters{Uri.EscapeDataString("[" + filterGroup + "]")}={Uri.EscapeDataString(filterOption)}";
+            }
+          }
+        }
+        // Add test cells to query string
+        if (queryParams.Contains("testCells"))
+        {
+          Hashtable testCells = (Hashtable)queryParams["testCells"]; 
+          queryParams.Remove("testCells");
+
+          foreach (DictionaryEntry testCell in testCells)
+          {
+            string testCellName = (string)testCell.Key;
+
+            foreach (string testCellValue in (List<string>)testCell.Value)
+            {
+              queryParamsString += $"&ef-{Uri.EscapeDataString(testCellName)}={Uri.EscapeDataString(testCellValue)}";
+            }
+          }
+        }
+        // Add segments to query string
+        if (queryParams.Contains("segments"))
+        {
+          List<string> segments = (List<string>)queryParams["segments"]; 
+          queryParams.Remove("segments");
+
+          foreach (string segment in segments)
+          {
+            queryParamsString += $"&us={Uri.EscapeDataString(segment)}";
+          }
+        }
+        // Add hidden fields to query string
+        if (queryParams.Contains("hiddenFields"))
+        {
+          List<string> hiddenFields = (List<string>)queryParams["hiddenFields"]; 
+          queryParams.Remove("hiddenFields");
+
+          foreach (string hiddenField in hiddenFields)
+          {
+            queryParamsString += $"&hidden_field={Uri.EscapeDataString(hiddenField)}";
+          }
+        }
+        // Add format options to query string
+        if (queryParams.Contains("fmtOptions"))
+        {
+          Hashtable fmtOptions = (Hashtable)queryParams["fmtOptions"];
+          queryParams.Remove("fmtOptions");
+
+          foreach (DictionaryEntry fmtOption in fmtOptions)
+          {
+            string fmtOptionName = (string)fmtOption.Key;
+
+            foreach (string fmtOptionValue in (List<string>)fmtOption.Value)
+            {
+              queryParamsString += $"&fmt_options{Uri.EscapeDataString("[" + fmtOptionName + "]")}={Uri.EscapeDataString(fmtOptionValue)}";
+            }
+          }
         }
 
-        url += queryString;
+        // Add remaining query params to query string
+        foreach (DictionaryEntry queryParam in queryParams)
+        {
+          if (queryParam.Value.GetType() == typeof(string))
+          {
+            queryParamsString += $"&{Uri.EscapeDataString((string)queryParam.Key)}={Uri.EscapeDataString((string)queryParam.Value)}";
+          }
+        }
+
+        long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        queryParamsString += $"_dt={time}";
+        url += queryParamsString;
       }
 
       return url;

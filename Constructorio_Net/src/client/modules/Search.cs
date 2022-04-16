@@ -16,7 +16,7 @@ namespace Constructorio_NET
     }
     internal string CreateSearchUrl(string query, Hashtable parameters, Hashtable userParameters)
     {
-      string[] allowedParams = {
+      string[] allowedParameters = {
         "page",
         "resultsPerPage",
         "filters",
@@ -26,16 +26,30 @@ namespace Constructorio_NET
         "fmtOptions",
         "hiddenFields"
       };
+      string[] allowedUserParameters = {
+        "sessionId",
+        "clientId",
+        "userId",
+        "segments",
+        "testCells"
+      };
 
       Hashtable cleanedParams = Helpers.CleanParams(parameters);
-      Dictionary<string, string> queryParams = new Dictionary<string, string>();
+      Hashtable queryParams = new Hashtable();
       List<string> paths = new List<string> { "search", HttpUtility.UrlEncode(query) };
 
       foreach (DictionaryEntry param in parameters)
       {
-        if (allowedParams.Contains(param.Key) )
+        if (allowedParameters.Contains(param.Key) )
         {
-          queryParams.Add((string)param.Key, (string)param.Value);
+          queryParams.Add(param.Key, param.Value);
+        }
+      }
+      foreach (DictionaryEntry param in userParameters)
+      {
+        if (allowedParameters.Contains(param.Key) )
+        {
+          queryParams.Add(param.Key, param.Value);
         }
       }
 
