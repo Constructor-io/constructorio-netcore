@@ -67,6 +67,7 @@ namespace Constructorio_NET
     {
       string url = CreateSearchUrl(query, parameters, userParameters);
       Task<string> task = Helpers.MakeGetRequest(url);
+      // needs http error handling
 
       return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
     }

@@ -10,6 +10,8 @@ namespace Constructorio_NET.Tests
   public class HelpersTest : Helpers
   {
       private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+      private string ClientId = "r4nd-cl1ent-1d";
+      private int SessionId = 4;
       private Hashtable Options;
       private string Query = "item";
       private string ServiceUrl = "https://ac.cnstrc.com";
@@ -57,11 +59,13 @@ namespace Constructorio_NET.Tests
       List<string> paths = new List<string> { "search", this.Query };
       Hashtable queryParams = new Hashtable()
       {
+        { "clientId", ClientId },
+        { "sessionId", SessionId },
         { "section", "Search Suggestions" },
       };
 
       string url = Helpers.MakeUrl(this.Options, paths, queryParams);
-      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&section=Search%20Suggestions&_dt=";
+      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&i={this.ClientId}&s={this.SessionId}&section=Search%20Suggestions&_dt=";
       bool regexMatched = Regex.Match(url, expectedUrl).Success;
       Assert.That(regexMatched, "url should be properly formed");
     }

@@ -61,6 +61,10 @@ namespace Constructorio_NET
       string TESTCELLS = "testCells";
       string USERID = "userId";
       string VERSION= "version";
+      string PAGE = "page";
+      string RESULTSPERPAGE = "num_results_per_page";
+      string SORTBY = "sort_by";
+      string SORTORDER = "sort_order";
 
       Dictionary<string, string> urlParamsMap = new Dictionary<string, string>()
       {
@@ -72,6 +76,10 @@ namespace Constructorio_NET
         { SECTION, "section" },
         { FILTERS, "filters" },
         { HIDDENFIELDS, "hidden_field" },
+        { PAGE, "page" },
+        { RESULTSPERPAGE, "num_results_per_page" },
+        { SORTBY, "sort_by" },
+        { SORTORDER, "sort_order" },
       };
 
       foreach (var path in paths)
@@ -154,17 +162,23 @@ namespace Constructorio_NET
         foreach (DictionaryEntry queryParam in queryParams)
         {
           string paramKey = (string)queryParam.Key;
+          Type valueDataType = queryParam.Value.GetType();
 
-          if (queryParam.Value.GetType() == typeof(string) && urlParamsMap.ContainsKey(paramKey))
+          if (valueDataType == typeof(string) && urlParamsMap.ContainsKey(paramKey))
           {
             url += $"&{Uri.EscapeDataString(urlParamsMap[paramKey])}={Uri.EscapeDataString((string)queryParam.Value)}";
+          }
+          else if (valueDataType == typeof(int))
+          {
+            Console.WriteLine(urlParamsMap[paramKey]);
+            url += $"&{Uri.EscapeDataString(urlParamsMap[paramKey])}={Uri.EscapeDataString(queryParam.Value.ToString())}";
           }
         }
 
         long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         url += $"&_dt={time}";
       }
-
+      Console.WriteLine(url);
       return url;
     }
 
