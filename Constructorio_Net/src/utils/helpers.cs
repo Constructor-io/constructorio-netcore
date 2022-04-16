@@ -75,7 +75,7 @@ namespace Constructorio_NET
         { FMTOPTIONS, "fmt_options" },
         { SECTION, "section" },
         { FILTERS, "filters" },
-        { HIDDENFIELDS, "hidden_field" },
+        { HIDDENFIELDS, "hidden_fields" },
         { PAGE, "page" },
         { RESULTSPERPAGE, "num_results_per_page" },
         { SORTBY, "sort_by" },
@@ -89,9 +89,20 @@ namespace Constructorio_NET
 
       url += $"?key={options[APIKEY]}&c={options[VERSION]}";
 
+
       // Generate url params query string
       if (queryParams != null && queryParams.Count != 0)
       {
+        if (queryParams.Contains(CLIENTID))
+        {
+          url += $"&{urlParamsMap[CLIENTID]}={Uri.EscapeDataString((string)queryParams[CLIENTID])}";
+          queryParams.Remove(CLIENTID);
+        }
+        if (queryParams.Contains(SESSIONID))
+        {
+          url += $"&{urlParamsMap[SESSIONID]}={Uri.EscapeDataString(queryParams[SESSIONID].ToString())}";
+          queryParams.Remove(SESSIONID);
+        }
         // Add filters to query string
         if (queryParams.Contains(FILTERS))
         {
@@ -149,12 +160,7 @@ namespace Constructorio_NET
 
           foreach (DictionaryEntry fmtOption in fmtOptions)
           {
-            string fmtOptionName = (string)fmtOption.Key;
-
-            foreach (string fmtOptionValue in (List<string>)fmtOption.Value)
-            {
-              url += $"&{urlParamsMap[FMTOPTIONS]}{Uri.EscapeDataString("[" + fmtOptionName + "]")}={Uri.EscapeDataString(fmtOptionValue)}";
-            }
+            url += $"&{urlParamsMap[FMTOPTIONS]}{Uri.EscapeDataString("[" + fmtOption.Key + "]")}={Uri.EscapeDataString((string)fmtOption.Value)}";
           }
         }
 
@@ -170,7 +176,6 @@ namespace Constructorio_NET
           }
           else if (valueDataType == typeof(int))
           {
-            Console.WriteLine(urlParamsMap[paramKey]);
             url += $"&{Uri.EscapeDataString(urlParamsMap[paramKey])}={Uri.EscapeDataString(queryParam.Value.ToString())}";
           }
         }
@@ -179,6 +184,7 @@ namespace Constructorio_NET
         url += $"&_dt={time}";
       }
       Console.WriteLine(url);
+
       return url;
     }
 

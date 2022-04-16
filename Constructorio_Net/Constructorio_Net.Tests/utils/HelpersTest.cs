@@ -91,21 +91,77 @@ namespace Constructorio_NET.Tests
     }
 
     [Test]
-    public void MakeUrlSearchWithAllQueryParams()
+    public void MakeUrlSearchWithTestCells()
     {
       List<string> paths = new List<string> { "search", this.Query };
-      Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
+      Dictionary<string, string> testCells = new Dictionary<string, string>()
       {
-        { "Color", new List<string>() { "green", "blue" } }
+        { "test1", "testCellA" },
+        { "test2", "testCellB" }
       };
       Hashtable queryParams = new Hashtable()
       {
         { "section", "Search Suggestions" },
-        { "filters", filters }
+        { "testCells", testCells }
       };
 
       string url = Helpers.MakeUrl(this.Options, paths, queryParams);
-      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&filters%5BColor%5D=green&filters%5BColor%5D=blue&section=Search%20Suggestions&_dt=";
+      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&ef-test1=testCellA&ef-test2=testCellB&section=Search%20Suggestions&_dt=";
+      bool regexMatched = Regex.Match(url, expectedUrl).Success;
+      Assert.That(regexMatched, "url should be properly formed");
+    }
+
+    [Test]
+    public void MakeUrlSearchWithSegments()
+    {
+      List<string> paths = new List<string> { "search", this.Query };
+      List<string> segments = new List<string>() { "mobile-web", "under-30" };
+      Hashtable queryParams = new Hashtable()
+      {
+        { "section", "Search Suggestions" },
+        { "segments", segments }
+      };
+
+      string url = Helpers.MakeUrl(this.Options, paths, queryParams);
+      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&us=mobile-web&us=under-30&section=Search%20Suggestions&_dt=";
+      bool regexMatched = Regex.Match(url, expectedUrl).Success;
+      Assert.That(regexMatched, "url should be properly formed");
+    }
+
+    [Test]
+    public void MakeUrlSearchWithHiddenFields()
+    {
+      List<string> paths = new List<string> { "search", this.Query };
+      List<string> hiddenFields = new List<string>() { "inventory", "margin" };
+      Hashtable queryParams = new Hashtable()
+      {
+        { "section", "Search Suggestions" },
+        { "hiddenFields", hiddenFields }
+      };
+
+      string url = Helpers.MakeUrl(this.Options, paths, queryParams);
+      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&hidden_fields=inventory&hidden_fields=margin&section=Search%20Suggestions&_dt=";
+      bool regexMatched = Regex.Match(url, expectedUrl).Success;
+      Assert.That(regexMatched, "url should be properly formed");
+    }
+
+    [Test]
+    public void MakeUrlSearchWithFmtOptions()
+    {
+      List<string> paths = new List<string> { "search", this.Query };
+      Hashtable fmtOptions = new Hashtable()
+      {
+        { "groups_max_depth", "3" },
+        { "groups_start", "current" }
+      };
+      Hashtable queryParams = new Hashtable()
+      {
+        { "section", "Search Suggestions" },
+        { "fmtOptions", fmtOptions }
+      };
+
+      string url = Helpers.MakeUrl(this.Options, paths, queryParams);
+      string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&fmt_options%5Bgroups_start%5D=current&fmt_options%5Bgroups_max_depth%5D=3&section=Search%20Suggestions&_dt=";
       bool regexMatched = Regex.Match(url, expectedUrl).Success;
       Assert.That(regexMatched, "url should be properly formed");
     }
