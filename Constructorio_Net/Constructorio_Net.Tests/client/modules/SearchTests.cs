@@ -7,6 +7,9 @@ namespace Constructorio_NET.Tests
     [TestFixture]
     public class SearchTest
     {
+        private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private string Query = "item";
+
         [SetUp]
         public void Setup()
         {
@@ -17,10 +20,13 @@ namespace Constructorio_NET.Tests
         {
             Hashtable parameters = new Hashtable()
             {
-               { "apiKey", "ZqXaOfXuBWD4s3XzCI1q" }
+               { "apiKey", this.ApiKey }
             };
             ConstructorIO constructorio = new ConstructorIO(parameters);
-            Console.WriteLine(constructorio.Search.GetSearchResults("item", new Hashtable(), new Hashtable()));
+            SearchResponse res = constructorio.Search.GetSearchResults(this.Query, new Hashtable(), new Hashtable());
+            Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
+            Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
+            Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
         }
     }
 }
