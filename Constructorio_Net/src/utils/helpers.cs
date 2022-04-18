@@ -62,7 +62,7 @@ namespace Constructorio_NET
       string USERID = "userId";
       string VERSION= "version";
       string PAGE = "page";
-      string RESULTSPERPAGE = "num_results_per_page";
+      string RESULTSPERPAGE = "resultsPerPage";
       string SORTBY = "sort_by";
       string SORTORDER = "sort_order";
 
@@ -133,12 +133,12 @@ namespace Constructorio_NET
         // Add format options to query string
         if (queryParams.Contains(FMTOPTIONS))
         {
-          Hashtable fmtOptions = (Hashtable)queryParams[FMTOPTIONS];
+          Dictionary<string, string> fmtOptions = (Dictionary<string, string>)queryParams[FMTOPTIONS];
           queryParams.Remove(FMTOPTIONS);
 
-          foreach (DictionaryEntry fmtOption in fmtOptions)
+          foreach (var fmtOption in fmtOptions)
           {
-            url += $"&{urlParamsMap[FMTOPTIONS]}{Uri.EscapeDataString("[" + fmtOption.Key + "]")}={Uri.EscapeDataString((string)fmtOption.Value)}";
+            url += $"&{urlParamsMap[FMTOPTIONS]}{Uri.EscapeDataString("[" + fmtOption.Key + "]")}={Uri.EscapeDataString(fmtOption.Value)}";
           }
         }
 
@@ -168,8 +168,8 @@ namespace Constructorio_NET
         long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         url += $"&_dt={time}";
       }
-      Console.WriteLine(url);
 
+      Console.WriteLine(url);
       return url;
     }
 

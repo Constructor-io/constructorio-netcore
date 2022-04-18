@@ -1,8 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Newtonsoft.Json;
 
 namespace Constructorio_NET
@@ -40,14 +40,14 @@ namespace Constructorio_NET
 
       foreach (DictionaryEntry param in parameters)
       {
-        if (allowedParameters.Contains(param.Key) )
+        if (allowedParameters.Contains(param.Key))
         {
           queryParams.Add(param.Key, param.Value);
         }
       }
       foreach (DictionaryEntry param in userParameters)
       {
-        if (allowedParameters.Contains(param.Key) )
+        if (allowedParameters.Contains(param.Key))
         {
           queryParams.Add(param.Key, param.Value);
         }
@@ -70,6 +70,20 @@ namespace Constructorio_NET
       // needs http error handling
 
       return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
+    }
+
+    public void GetSearchResultsFromRequest(SearchRequest request)
+    {
+      request.Section = "Search";
+      var searchRequest = new SearchRequest("quer");
+      searchRequest.Section = "Products";
+      searchRequest.ClientId = "r4nd-asd";
+      Hashtable table = searchRequest.getParameters();
+      // string url = CreateSearchUrl(query, parameters, userParameters);
+      // Task<string> task = Helpers.MakeGetRequest(url);
+      // needs http error handling
+
+      // return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
     }
   }
 }
