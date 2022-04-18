@@ -14,44 +14,11 @@ namespace Constructorio_NET
     {
       this.Options = options;
     }
-    internal string CreateSearchUrl(string query, Hashtable parameters, Hashtable userParameters)
+    internal string CreateSearchUrl(SearchRequest req)
     {
-      string[] allowedParameters = {
-        "page",
-        "resultsPerPage",
-        "filters",
-        "sortBy",
-        "sortOrder",
-        "section",
-        "fmtOptions",
-        "hiddenFields"
-      };
-      string[] allowedUserParameters = {
-        "sessionId",
-        "clientId",
-        "userId",
-        "segments",
-        "testCells"
-      };
-
-      Hashtable cleanedParams = Helpers.CleanParams(parameters);
-      Hashtable queryParams = new Hashtable();
-      List<string> paths = new List<string> { "search", query };
-
-      foreach (DictionaryEntry param in parameters)
-      {
-        if (allowedParameters.Contains(param.Key))
-        {
-          queryParams.Add(param.Key, param.Value);
-        }
-      }
-      foreach (DictionaryEntry param in userParameters)
-      {
-        if (allowedParameters.Contains(param.Key))
-        {
-          queryParams.Add(param.Key, param.Value);
-        }
-      }
+      // Hashtable cleanedParams = Helpers.CleanParams(parameters);
+      Hashtable queryParams = req.getParameters();
+      List<string> paths = new List<string> { "search", req.Query };
 
       return Helpers.MakeUrl(this.Options, paths, queryParams);
     }
@@ -60,30 +27,14 @@ namespace Constructorio_NET
     /// Retrieve search results from API
     /// </summary>
     /// <param name="query"></param>
-    /// <param name="parameters"></param>
-    /// <param name="userParameters"></param>
     /// <returns></returns>
-    public SearchResponse GetSearchResults(string query, Hashtable parameters, Hashtable userParameters)
+    public SearchResponse GetSearchResults(SearchRequest req)
     {
-      string url = CreateSearchUrl(query, parameters, userParameters);
+      string url = CreateSearchUrl(req);
       Task<string> task = Helpers.MakeGetRequest(url);
       // needs http error handling
 
       return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
-    }
-
-    public void GetSearchResultsFromRequest(SearchRequest request)
-    {
-      request.Section = "Search";
-      var searchRequest = new SearchRequest("quer");
-      searchRequest.Section = "Products";
-      searchRequest.ClientId = "r4nd-asd";
-      Hashtable table = searchRequest.getParameters();
-      // string url = CreateSearchUrl(query, parameters, userParameters);
-      // Task<string> task = Helpers.MakeGetRequest(url);
-      // needs http error handling
-
-      // return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
     }
   }
 }

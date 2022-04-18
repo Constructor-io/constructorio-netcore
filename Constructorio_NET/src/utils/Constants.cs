@@ -16,7 +16,7 @@ namespace Constructorio_NET
         internal const string VERSION = "version";
         internal const string PAGE = "page";
         internal const string RESULTS_PER_PAGE = "resultsPerPage";
-        internal const string SORT_BY = "sort_by";
-        internal const string SORT_ORDER = "sort_order";
+        internal const string SORT_BY = "sortBy";
+        internal const string SORT_ORDER = "sortOrder";
     }
 }

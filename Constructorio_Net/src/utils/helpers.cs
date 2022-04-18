@@ -49,37 +49,20 @@ namespace Constructorio_NET
     protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams)
     {
       string url = (string)options["serviceUrl"];
-      // string constants
-      string APIKEY= "apiKey";
-      string CLIENTID= "clientId";
-      string FILTERS = "filters";
-      string FMTOPTIONS = "fmtOptions";
-      string HIDDENFIELDS = "hiddenFields";
-      string SEGMENTS = "segments";
-      string SESSIONID = "sessionId";
-      string SECTION = "section";
-      string TESTCELLS = "testCells";
-      string USERID = "userId";
-      string VERSION= "version";
-      string PAGE = "page";
-      string RESULTSPERPAGE = "resultsPerPage";
-      string SORTBY = "sort_by";
-      string SORTORDER = "sort_order";
-
       Dictionary<string, string> urlParamsMap = new Dictionary<string, string>()
       {
-        { CLIENTID, "i" },
-        { SESSIONID, "s" },
-        { USERID, "ui" },
-        { SEGMENTS, "us" },
-        { FMTOPTIONS, "fmt_options" },
-        { SECTION, "section" },
-        { FILTERS, "filters" },
-        { HIDDENFIELDS, "hidden_fields" },
-        { PAGE, "page" },
-        { RESULTSPERPAGE, "num_results_per_page" },
-        { SORTBY, "sort_by" },
-        { SORTORDER, "sort_order" },
+        { Constants.CLIENT_ID, "i" },
+        { Constants.SESSION_ID, "s" },
+        { Constants.USER_ID, "ui" },
+        { Constants.SEGMENTS, "us" },
+        { Constants.FMT_OPTIONS, "fmt_options" },
+        { Constants.SECTION, "section" },
+        { Constants.FILTERS, "filters" },
+        { Constants.HIDDEN_FIELDS, "hidden_fields" },
+        { Constants.PAGE, "page" },
+        { Constants.RESULTS_PER_PAGE, "num_results_per_page" },
+        { Constants.SORT_BY, "sort_by" },
+        { Constants.SORT_ORDER, "sort_order" },
       };
 
       foreach (var path in paths)
@@ -87,27 +70,27 @@ namespace Constructorio_NET
         url += "/" + HttpUtility.UrlEncode(path);
       }
 
-      url += $"?key={options[APIKEY]}&c={options[VERSION]}";
+      url += $"?key={options[Constants.API_KEY]}&c={options[Constants.VERSION]}";
 
 
       // Generate url params query string
       if (queryParams != null && queryParams.Count != 0)
       {
-        if (queryParams.Contains(CLIENTID))
+        if (queryParams.Contains(Constants.CLIENT_ID))
         {
-          url += $"&{urlParamsMap[CLIENTID]}={Uri.EscapeDataString((string)queryParams[CLIENTID])}";
-          queryParams.Remove(CLIENTID);
+          url += $"&{urlParamsMap[Constants.CLIENT_ID]}={Uri.EscapeDataString((string)queryParams[Constants.CLIENT_ID])}";
+          queryParams.Remove(Constants.CLIENT_ID);
         }
-        if (queryParams.Contains(SESSIONID))
+        if (queryParams.Contains(Constants.SESSION_ID))
         {
-          url += $"&{urlParamsMap[SESSIONID]}={Uri.EscapeDataString(queryParams[SESSIONID].ToString())}";
-          queryParams.Remove(SESSIONID);
+          url += $"&{urlParamsMap[Constants.SESSION_ID]}={Uri.EscapeDataString(queryParams[Constants.SESSION_ID].ToString())}";
+          queryParams.Remove(Constants.SESSION_ID);
         }
         // Add filters to query string
-        if (queryParams.Contains(FILTERS))
+        if (queryParams.Contains(Constants.FILTERS))
         {
-          Dictionary<string, List<string>> filters = (Dictionary<string, List<string>>)queryParams[FILTERS]; 
-          queryParams.Remove(FILTERS);
+          Dictionary<string, List<string>> filters = (Dictionary<string, List<string>>)queryParams[Constants.FILTERS]; 
+          queryParams.Remove(Constants.FILTERS);
 
           foreach (var filter in filters)
           {
@@ -115,15 +98,15 @@ namespace Constructorio_NET
 
             foreach (string filterOption in (List<string>)filter.Value)
             {
-              url += $"&{urlParamsMap[FILTERS]}{Uri.EscapeDataString("[" + filterGroup + "]")}={Uri.EscapeDataString(filterOption)}";
+              url += $"&{urlParamsMap[Constants.FILTERS]}{Uri.EscapeDataString("[" + filterGroup + "]")}={Uri.EscapeDataString(filterOption)}";
             }
           }
         }
         // Add test cells to query string
-        if (queryParams.Contains(TESTCELLS))
+        if (queryParams.Contains(Constants.TEST_CELLS))
         {
-          Dictionary<string, string> testCells = (Dictionary<string, string>)queryParams[TESTCELLS]; 
-          queryParams.Remove(TESTCELLS);
+          Dictionary<string, string> testCells = (Dictionary<string, string>)queryParams[Constants.TEST_CELLS]; 
+          queryParams.Remove(Constants.TEST_CELLS);
 
           foreach (var testCell in testCells)
           {
@@ -131,14 +114,14 @@ namespace Constructorio_NET
           }
         }
         // Add format options to query string
-        if (queryParams.Contains(FMTOPTIONS))
+        if (queryParams.Contains(Constants.FMT_OPTIONS))
         {
-          Dictionary<string, string> fmtOptions = (Dictionary<string, string>)queryParams[FMTOPTIONS];
-          queryParams.Remove(FMTOPTIONS);
+          Dictionary<string, string> fmtOptions = (Dictionary<string, string>)queryParams[Constants.FMT_OPTIONS];
+          queryParams.Remove(Constants.FMT_OPTIONS);
 
           foreach (var fmtOption in fmtOptions)
           {
-            url += $"&{urlParamsMap[FMTOPTIONS]}{Uri.EscapeDataString("[" + fmtOption.Key + "]")}={Uri.EscapeDataString(fmtOption.Value)}";
+            url += $"&{urlParamsMap[Constants.FMT_OPTIONS]}{Uri.EscapeDataString("[" + fmtOption.Key + "]")}={Uri.EscapeDataString(fmtOption.Value)}";
           }
         }
 

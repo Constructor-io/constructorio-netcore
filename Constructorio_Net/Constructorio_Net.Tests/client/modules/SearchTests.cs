@@ -32,8 +32,9 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetSearchResults()
         {
+            SearchRequest req = new SearchRequest(this.Query);
             ConstructorIO constructorio = new ConstructorIO(this.Options);
-            SearchResponse res = constructorio.Search.GetSearchResults(this.Query, new Hashtable(), this.UserParameters);
+            SearchResponse res = constructorio.Search.GetSearchResults(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
@@ -51,8 +52,10 @@ namespace Constructorio_NET.Tests
                { "filters", filters } 
             };
 
+            SearchRequest req = new SearchRequest(this.Query);
+            req.Filters = filters;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
-            SearchResponse res = constructorio.Search.GetSearchResults(this.Query, parameters, this.UserParameters);
+            SearchResponse res = constructorio.Search.GetSearchResults(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
@@ -66,24 +69,14 @@ namespace Constructorio_NET.Tests
                { "page", 3 },
                { "resultsPerPage", 1 }
             };
+            SearchRequest req = new SearchRequest(this.Query);
+            req.Page = 3;
+            req.ResultsPerPage = 1;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
-            SearchResponse res = constructorio.Search.GetSearchResults(this.Query, parameters, this.UserParameters);
-            Assert.AreEqual((Int64)res.Request["page"], 3, "total number of results expected to be 1");
+            SearchResponse res = constructorio.Search.GetSearchResults(req);
+            Assert.AreEqual(3, (Int64)res.Request["page"], "total number of results expected to be 1");
             Assert.Greater(res.Response.TotalNumResults, 1, "total number of results expected to be 1");
-            Assert.AreEqual(res.Response.Results.Count, 1, "length of results expected to be equal to 1");
-        }
-
-        [Test]
-        public void GetSearchResultsFromRequest()
-        {
-            Hashtable parameters = new Hashtable()
-            {
-               { "page", 3 },
-               { "resultsPerPage", 1 }
-            };
-            SearchRequest request = new SearchRequest("thing");
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
-            constructorio.Search.GetSearchResultsFromRequest(request);
+            Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
         }
     }
 }

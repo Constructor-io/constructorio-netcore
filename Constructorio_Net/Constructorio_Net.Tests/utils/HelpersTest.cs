@@ -145,7 +145,7 @@ namespace Constructorio_NET.Tests
     public void MakeUrlSearchWithFmtOptions()
     {
       List<string> paths = new List<string> { "search", this.Query };
-      Hashtable fmtOptions = new Hashtable()
+      Dictionary<string, string> fmtOptions = new Dictionary<string, string>()
       {
         { "groups_max_depth", "3" },
         { "groups_start", "current" }

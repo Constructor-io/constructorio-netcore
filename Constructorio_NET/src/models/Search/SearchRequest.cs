@@ -14,7 +14,7 @@ namespace Constructorio_NET
         public Dictionary<string, string> FmtOptions { get; set; }
         public List<string> HiddenFields { get; set; }
         public int Page { get; set; }
-        private string Query { get; set;}
+        public string Query { get; set;}
         public int ResultsPerPage { get; set; }
         public string Section { get; set; }
         public List<string> Segments { get; set; }
@@ -34,6 +34,8 @@ namespace Constructorio_NET
             {
                 throw new ArgumentException("query is required");
             }
+
+            this.Query = query;
         }
         public Hashtable getParameters()
         {
