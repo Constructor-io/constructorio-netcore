@@ -163,7 +163,6 @@ namespace Constructorio_NET
     /// <returns>Task</returns>
     internal static async Task<string> MakeGetRequest(string url, Dictionary<string, string> requestHeaders)
     {
-      string result;
       HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, url);
 
       foreach (var header in requestHeaders)
@@ -171,16 +170,9 @@ namespace Constructorio_NET
         httpRequest.Headers.Add((string)header.Key, (string)header.Value);
       }
 
-      try
-      {
-        var response = await client.SendAsync(httpRequest);
-        HttpContent content = response.Content;
-        result = await content.ReadAsStringAsync();
-      }
-      catch (HttpRequestException e)
-      {
-        throw new ConstructorException(e);
-      }
+      var response = await client.SendAsync(httpRequest);
+      HttpContent content = response.Content;
+      string result = await content.ReadAsStringAsync();
 
       return result;
     }

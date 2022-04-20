@@ -34,19 +34,19 @@ namespace Constructorio_NET
     public SearchResponse GetSearchResults(SearchRequest searchRequest)
     {
       string url;
+      Task<string> task;
       Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
       try
       {
         url = CreateSearchUrl(searchRequest);
         requestHeaders = searchRequest.GetRequestHeaders();
+        task = Helpers.MakeGetRequest(url, requestHeaders);
       }
       catch (Exception e)
       {
         throw new ConstructorException(e);
       }
-
-      Task<string> task = Helpers.MakeGetRequest(url, requestHeaders);
 
       if (task.Result != null)
       {
