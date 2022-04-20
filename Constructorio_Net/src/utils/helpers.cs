@@ -10,10 +10,22 @@ namespace Constructorio_NET
   using System.Web;
   using Newtonsoft.Json;
 
-
   public class Helpers
   {
     private static HttpClient client = new HttpClient();
+
+    /// <summary>
+    /// Method in order to modify a string to ensure proper url encoding
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns>Url encoded string</returns>
+    protected static string OurEscapeDataString(string str)
+    {
+      string encodedString = Regex.Replace(str, @"\s", " ");
+      encodedString = Uri.EscapeDataString(encodedString);
+
+      return encodedString;
+    }
 
     /// <summary>
     /// Cleans params before applying them to a request url
@@ -28,9 +40,10 @@ namespace Constructorio_NET
       {
         if (param.Value.GetType() == typeof(string))
         {
-          string encodedParam = Uri.UnescapeDataString(Uri.EscapeDataString(param.Value.ToString()));
-          encodedParam = Regex.Replace(encodedParam, @"\s", " ");
-          cleanedParams.Add(param.Key, encodedParam);
+          string encodedParam = OurEscapeDataString(param.Value.ToString());
+          string cleanedParam = Uri.UnescapeDataString(encodedParam);
+
+          cleanedParams.Add(param.Key, cleanedParam);
         }
         else
         {
@@ -79,12 +92,12 @@ namespace Constructorio_NET
       {
         if (queryParams.Contains(Constants.CLIENT_ID))
         {
-          url += $"&{urlParamsMap[Constants.CLIENT_ID]}={Uri.EscapeDataString((string)queryParams[Constants.CLIENT_ID])}";
+          url += $"&{urlParamsMap[Constants.CLIENT_ID]}={OurEscapeDataString((string)queryParams[Constants.CLIENT_ID])}";
           queryParams.Remove(Constants.CLIENT_ID);
         }
         if (queryParams.Contains(Constants.SESSION_ID))
         {
-          url += $"&{urlParamsMap[Constants.SESSION_ID]}={Uri.EscapeDataString(queryParams[Constants.SESSION_ID].ToString())}";
+          url += $"&{urlParamsMap[Constants.SESSION_ID]}={OurEscapeDataString(queryParams[Constants.SESSION_ID].ToString())}";
           queryParams.Remove(Constants.SESSION_ID);
         }
         // Add filters to query string
@@ -99,7 +112,7 @@ namespace Constructorio_NET
 
             foreach (string filterOption in (List<string>)filter.Value)
             {
-              url += $"&{urlParamsMap[Constants.FILTERS]}{Uri.EscapeDataString("[" + filterGroup + "]")}={Uri.EscapeDataString(filterOption)}";
+              url += $"&{urlParamsMap[Constants.FILTERS]}{OurEscapeDataString("[" + filterGroup + "]")}={OurEscapeDataString(filterOption)}";
             }
           }
         }
@@ -111,7 +124,7 @@ namespace Constructorio_NET
 
           foreach (var testCell in testCells)
           {
-            url += $"&ef-{Uri.EscapeDataString(testCell.Key)}={Uri.EscapeDataString(testCell.Value)}";
+            url += $"&ef-{OurEscapeDataString(testCell.Key)}={OurEscapeDataString(testCell.Value)}";
           }
         }
         // Add format options to query string
@@ -122,7 +135,7 @@ namespace Constructorio_NET
 
           foreach (var fmtOption in fmtOptions)
           {
-            url += $"&{urlParamsMap[Constants.FMT_OPTIONS]}{Uri.EscapeDataString("[" + fmtOption.Key + "]")}={Uri.EscapeDataString(fmtOption.Value)}";
+            url += $"&{urlParamsMap[Constants.FMT_OPTIONS]}{OurEscapeDataString("[" + fmtOption.Key + "]")}={OurEscapeDataString(fmtOption.Value)}";
           }
         }
 
@@ -134,17 +147,17 @@ namespace Constructorio_NET
 
           if (valueDataType == typeof(string) && urlParamsMap.ContainsKey(paramKey))
           {
-            url += $"&{Uri.EscapeDataString(urlParamsMap[paramKey])}={Uri.EscapeDataString((string)queryParam.Value)}";
+            url += $"&{OurEscapeDataString(urlParamsMap[paramKey])}={OurEscapeDataString((string)queryParam.Value)}";
           }
           else if (valueDataType == typeof(int))
           {
-            url += $"&{Uri.EscapeDataString(urlParamsMap[paramKey])}={Uri.EscapeDataString(queryParam.Value.ToString())}";
+            url += $"&{OurEscapeDataString(urlParamsMap[paramKey])}={OurEscapeDataString(queryParam.Value.ToString())}";
           }
           else if (valueDataType == typeof(List<string>))
           {
             foreach (string listValue in (List<string>)queryParam.Value)
             {
-              url += $"&{urlParamsMap[paramKey]}={Uri.EscapeDataString(listValue)}";
+              url += $"&{urlParamsMap[paramKey]}={OurEscapeDataString(listValue)}";
             }
           }
         }

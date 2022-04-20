@@ -40,6 +40,7 @@ namespace Constructorio_NET
 
             this.Query = query;
         }
+
         public Hashtable GetUrlParameters()
         {
             Hashtable parameters = new Hashtable();

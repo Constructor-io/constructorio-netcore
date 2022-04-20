@@ -54,6 +54,15 @@ namespace Constructorio_NET.Tests
     }
 
     [Test]
+    public void OurEscapeDataString()
+    {
+      string str = "boink doink yoink";
+      string expectedString = "boink%20doink%20yoink";
+      string encodedString = Helpers.OurEscapeDataString(str);
+      Assert.AreEqual(expectedString, encodedString, "should encode non breaking space");
+    }
+
+    [Test]
     public void MakeUrlSearch()
     {
       List<string> paths = new List<string> { "search", this.Query };

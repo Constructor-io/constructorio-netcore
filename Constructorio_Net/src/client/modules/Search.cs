@@ -12,7 +12,7 @@ namespace Constructorio_NET
     private Hashtable Options;
 
     /// <summary>
-    /// Interface to search related API calls
+    /// Interface for search related API calls
     /// </summary>
     internal Search(Hashtable options)
     {
@@ -20,7 +20,6 @@ namespace Constructorio_NET
     }
     internal string CreateSearchUrl(SearchRequest req)
     {
-      // Hashtable cleanedParams = Helpers.CleanParams(parameters);
       Hashtable queryParams = req.GetUrlParameters();
       List<string> paths = new List<string> { "search", req.Query };
 
