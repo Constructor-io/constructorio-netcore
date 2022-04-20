@@ -1344,6 +1344,19 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.Helpers.MakeUrl
   nameWithType: Helpers.MakeUrl
+- uid: Constructorio_NET.Helpers.OurEscapeDataString(System.String)
+  name: OurEscapeDataString(String)
+  href: api/Constructorio_NET.Helpers.html#Constructorio_NET_Helpers_OurEscapeDataString_System_String_
+  commentId: M:Constructorio_NET.Helpers.OurEscapeDataString(System.String)
+  fullName: Constructorio_NET.Helpers.OurEscapeDataString(System.String)
+  nameWithType: Helpers.OurEscapeDataString(String)
+- uid: Constructorio_NET.Helpers.OurEscapeDataString*
+  name: OurEscapeDataString
+  href: api/Constructorio_NET.Helpers.html#Constructorio_NET_Helpers_OurEscapeDataString_
+  commentId: Overload:Constructorio_NET.Helpers.OurEscapeDataString
+  isSpec: "True"
+  fullName: Constructorio_NET.Helpers.OurEscapeDataString
+  nameWithType: Helpers.OurEscapeDataString
 - uid: Constructorio_NET.NaturalLanguageSearchRequest
   name: NaturalLanguageSearchRequest
   href: api/Constructorio_NET.NaturalLanguageSearchRequest.html
@@ -2124,19 +2137,32 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.SearchRequest.FmtOptions
   nameWithType: SearchRequest.FmtOptions
-- uid: Constructorio_NET.SearchRequest.getParameters
-  name: getParameters()
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getParameters
-  commentId: M:Constructorio_NET.SearchRequest.getParameters
-  fullName: Constructorio_NET.SearchRequest.getParameters()
-  nameWithType: SearchRequest.getParameters()
-- uid: Constructorio_NET.SearchRequest.getParameters*
-  name: getParameters
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getParameters_
-  commentId: Overload:Constructorio_NET.SearchRequest.getParameters
+- uid: Constructorio_NET.SearchRequest.GetRequestHeaders
+  name: GetRequestHeaders()
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_GetRequestHeaders
+  commentId: M:Constructorio_NET.SearchRequest.GetRequestHeaders
+  fullName: Constructorio_NET.SearchRequest.GetRequestHeaders()
+  nameWithType: SearchRequest.GetRequestHeaders()
+- uid: Constructorio_NET.SearchRequest.GetRequestHeaders*
+  name: GetRequestHeaders
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_GetRequestHeaders_
+  commentId: Overload:Constructorio_NET.SearchRequest.GetRequestHeaders
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.getParameters
-  nameWithType: SearchRequest.getParameters
+  fullName: Constructorio_NET.SearchRequest.GetRequestHeaders
+  nameWithType: SearchRequest.GetRequestHeaders
+- uid: Constructorio_NET.SearchRequest.GetUrlParameters
+  name: GetUrlParameters()
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_GetUrlParameters
+  commentId: M:Constructorio_NET.SearchRequest.GetUrlParameters
+  fullName: Constructorio_NET.SearchRequest.GetUrlParameters()
+  nameWithType: SearchRequest.GetUrlParameters()
+- uid: Constructorio_NET.SearchRequest.GetUrlParameters*
+  name: GetUrlParameters
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_GetUrlParameters_
+  commentId: Overload:Constructorio_NET.SearchRequest.GetUrlParameters
+  isSpec: "True"
+  fullName: Constructorio_NET.SearchRequest.GetUrlParameters
+  nameWithType: SearchRequest.GetUrlParameters
 - uid: Constructorio_NET.SearchRequest.HiddenFields
   name: HiddenFields
   href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_HiddenFields
@@ -2202,6 +2228,19 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.SearchRequest.Section
   nameWithType: SearchRequest.Section
+- uid: Constructorio_NET.SearchRequest.SecurityToken
+  name: SecurityToken
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_SecurityToken
+  commentId: P:Constructorio_NET.SearchRequest.SecurityToken
+  fullName: Constructorio_NET.SearchRequest.SecurityToken
+  nameWithType: SearchRequest.SecurityToken
+- uid: Constructorio_NET.SearchRequest.SecurityToken*
+  name: SecurityToken
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_SecurityToken_
+  commentId: Overload:Constructorio_NET.SearchRequest.SecurityToken
+  isSpec: "True"
+  fullName: Constructorio_NET.SearchRequest.SecurityToken
+  nameWithType: SearchRequest.SecurityToken
 - uid: Constructorio_NET.SearchRequest.Segments
   name: Segments
   href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Segments
@@ -2267,6 +2306,19 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.SearchRequest.TestCells
   nameWithType: SearchRequest.TestCells
+- uid: Constructorio_NET.SearchRequest.UserAgent
+  name: UserAgent
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserAgent
+  commentId: P:Constructorio_NET.SearchRequest.UserAgent
+  fullName: Constructorio_NET.SearchRequest.UserAgent
+  nameWithType: SearchRequest.UserAgent
+- uid: Constructorio_NET.SearchRequest.UserAgent*
+  name: UserAgent
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserAgent_
+  commentId: Overload:Constructorio_NET.SearchRequest.UserAgent
+  isSpec: "True"
+  fullName: Constructorio_NET.SearchRequest.UserAgent
+  nameWithType: SearchRequest.UserAgent
 - uid: Constructorio_NET.SearchRequest.UserId
   name: UserId
   href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserId
@@ -2280,6 +2332,19 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.SearchRequest.UserId
   nameWithType: SearchRequest.UserId
+- uid: Constructorio_NET.SearchRequest.UserIp
+  name: UserIp
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserIp
+  commentId: P:Constructorio_NET.SearchRequest.UserIp
+  fullName: Constructorio_NET.SearchRequest.UserIp
+  nameWithType: SearchRequest.UserIp
+- uid: Constructorio_NET.SearchRequest.UserIp*
+  name: UserIp
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserIp_
+  commentId: Overload:Constructorio_NET.SearchRequest.UserIp
+  isSpec: "True"
+  fullName: Constructorio_NET.SearchRequest.UserIp
+  nameWithType: SearchRequest.UserIp
 - uid: Constructorio_NET.SearchResponse
   name: SearchResponse
   href: api/Constructorio_NET.SearchResponse.html

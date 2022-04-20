@@ -172,6 +172,7 @@ namespace Constructorio_NET
     /// <summary>
     /// Make a http request
     /// </summary>
+    /// <param name="httpMethod">HTTP request method</param>
     /// <param name="url">Url for the request</param>
     /// <param name="requestHeaders">Additional headers to send with the request</param>
     /// <param name="requestBody">Key values pairs used for the POST body</param>
