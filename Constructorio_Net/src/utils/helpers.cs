@@ -3,11 +3,13 @@ namespace Constructorio_NET
   using System;
   using System.Collections;
   using System.Collections.Generic;
-  using System.Collections.Specialized;
   using System.Net.Http;
+  using System.Text;
   using System.Text.RegularExpressions;
   using System.Threading.Tasks;
   using System.Web;
+  using Newtonsoft.Json;
+
 
   public class Helpers
   {
@@ -151,28 +153,34 @@ namespace Constructorio_NET
         url += $"&_dt={time}";
       }
 
-      Console.WriteLine(url);
       return url;
     }
 
     /// <summary>
-    /// Make a http get request
+    /// Make a http request
     /// </summary>
-    /// <param name="url"></param>
-    /// <param name="requestHeaders"></param>
+    /// <param name="url">Url for the request</param>
+    /// <param name="requestHeaders">Additional headers to send with the request</param>
+    /// <param name="requestBody">Key values pairs used for the POST body</param>
     /// <returns>Task</returns>
-    internal static async Task<string> MakeGetRequest(string url, Dictionary<string, string> requestHeaders)
+    internal static async Task<string> MakeHttpRequest(HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, Hashtable requestBody = null)
     {
-      HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, url);
+      HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
 
       foreach (var header in requestHeaders)
       {
         httpRequest.Headers.Add((string)header.Key, (string)header.Value);
       }
 
-      var response = await client.SendAsync(httpRequest);
-      HttpContent content = response.Content;
-      string result = await content.ReadAsStringAsync();
+      if (requestBody != null)
+      {
+        StringContent reqContent = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
+        httpRequest.Content = reqContent;
+      }
+
+      HttpResponseMessage response = await client.SendAsync(httpRequest);
+      HttpContent resContent = response.Content;
+      string result = await resContent.ReadAsStringAsync();
 
       return result;
     }

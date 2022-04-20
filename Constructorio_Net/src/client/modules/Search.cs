@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -41,7 +42,7 @@ namespace Constructorio_NET
       {
         url = CreateSearchUrl(searchRequest);
         requestHeaders = searchRequest.GetRequestHeaders();
-        task = Helpers.MakeGetRequest(url, requestHeaders);
+        task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
       }
       catch (Exception e)
       {
