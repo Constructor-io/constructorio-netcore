@@ -72,7 +72,6 @@ namespace Constructorio_NET
 
       url += $"?key={options[Constants.API_KEY]}&c={options[Constants.VERSION]}";
 
-
       // Generate url params query string
       if (queryParams != null && queryParams.Count != 0)
       {
@@ -160,12 +159,29 @@ namespace Constructorio_NET
     /// Make a http get request
     /// </summary>
     /// <param name="url"></param>
+    /// <param name="requestHeaders"></param>
     /// <returns>Task</returns>
-    internal static async Task<string> MakeGetRequest(string url)
+    internal static async Task<string> MakeGetRequest(string url, Dictionary<string, string> requestHeaders)
     {
-      var response = await client.GetAsync(new Uri(url));
-      var content = response.Content;
-      var result = await content.ReadAsStringAsync();
+      string result;
+      HttpRequestMessage httpRequest = new HttpRequestMessage(HttpMethod.Get, url);
+
+      foreach (var header in requestHeaders)
+      {
+        httpRequest.Headers.Add((string)header.Key, (string)header.Value);
+      }
+
+      try
+      {
+        var response = await client.SendAsync(httpRequest);
+        HttpContent content = response.Content;
+        result = await content.ReadAsStringAsync();
+      }
+      catch (HttpRequestException e)
+      {
+        throw new ConstructorException(e);
+      }
+
       return result;
     }
   }

@@ -9,14 +9,18 @@ namespace Constructorio_NET
   public class Search : Helpers
   {
     private Hashtable Options;
-    public Search(Hashtable options)
+
+    /// <summary>
+    /// Interface to search related API calls
+    /// </summary>
+    internal Search(Hashtable options)
     {
       this.Options = options;
     }
     internal string CreateSearchUrl(SearchRequest req)
     {
       // Hashtable cleanedParams = Helpers.CleanParams(parameters);
-      Hashtable queryParams = req.getParameters();
+      Hashtable queryParams = req.GetUrlParameters();
       List<string> paths = new List<string> { "search", req.Query };
 
       return Helpers.MakeUrl(this.Options, paths, queryParams);
@@ -25,15 +29,31 @@ namespace Constructorio_NET
     /// <summary>
     /// Retrieve search results from API
     /// </summary>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    public SearchResponse GetSearchResults(SearchRequest req)
+    /// <param name="searchRequest">Constructorio's request object</param>
+    /// <returns>Constructorio's response object</returns>
+    public SearchResponse GetSearchResults(SearchRequest searchRequest)
     {
-      string url = CreateSearchUrl(req);
-      Task<string> task = Helpers.MakeGetRequest(url);
-      // needs http error handling
+      string url;
+      Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
-      return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
+      try
+      {
+        url = CreateSearchUrl(searchRequest);
+        requestHeaders = searchRequest.GetRequestHeaders();
+      }
+      catch (Exception e)
+      {
+        throw new ConstructorException(e);
+      }
+
+      Task<string> task = Helpers.MakeGetRequest(url, requestHeaders);
+
+      if (task.Result != null)
+      {
+        return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
+      }
+
+      throw new ConstructorException("GetSearchResults response data is malformed");
     }
   }
 }

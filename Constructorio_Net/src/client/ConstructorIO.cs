@@ -1,8 +1,4 @@
-﻿/**
- * Constructor.io Client
- */
-
-namespace Constructorio_NET
+﻿namespace Constructorio_NET
 {
     using System;
     using System.Collections;
@@ -45,30 +41,22 @@ namespace Constructorio_NET
         public Recommendations Recommendations;
         public Search Search;
 
-    /**
-     * Creates a constructor.io Client.
-     *
-     * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-     * @param apiKey API Key, used publically in your in-site javascript client.
-     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param serviceUrl The serviceUrl of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the serviceUrl defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
-     * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
-     */
-    /// <summary>
-    /// Creates a constructor.io instance
-    /// </summary>
-    /// <param name="options"></param>
-    public ConstructorIO(Hashtable options)
+        /// <summary>
+        /// Creates a constructor.io instance
+        /// </summary>
+        /// <param name="options"></param>
+        public ConstructorIO(Hashtable options)
         {
             this.Options = new Hashtable();
             this.Options.Add("version", this.getVersion());
 
-            if (!options.ContainsKey("apiKey"))
+            if (options.ContainsKey("apiKey"))
+            {
+                this.Options.Add("apiKey", options["apiKey"]);
+            }
+            else 
             {
                 throw new ConstructorException("apiKey is required");
-            }
-            else {
-                this.Options.Add("apiKey", options["apiKey"]);
             }
 
             if (options.ContainsKey("constructorToken"))
@@ -872,41 +860,6 @@ namespace Constructorio_NET
         //        throw new ConstructorException(exception);
         //    }
         //}
-
-        /**
-         * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
-         *
-         * @param path endpoint of the autocomplete service.
-         * @return the created URL. Now you can use it to issue requests and things!
-         */
-        protected Uri makeUrl(List<String> paths, Dictionary<String, String> queryParams)
-        {
-            var uriBuilder = new UriBuilder();
-
-            uriBuilder.Scheme = this.protocol;
-            uriBuilder.Host = (string)this.Options["serviceUrl"];
-            uriBuilder.Query = "key=" + this.Options["apiKey"] + "&c=" + this.Version;
-
-            if (queryParams != null && queryParams.Count != 0)
-            {
-                foreach (var queryParam in queryParams)
-                {
-                    uriBuilder.Query += "&" + queryParam.Key + "=" + queryParam.Value;
-                }
-            }
-
-            foreach (var path in paths)
-            {
-                uriBuilder.Path += "/" + paths;
-            }
-
-            //if (this.port != null)
-            //{
-            //    uriBuilder.Port = this.port;
-            //}
-
-            return uriBuilder.Uri;
-        }
 
         /**
          * Creates a builder for an authorized request

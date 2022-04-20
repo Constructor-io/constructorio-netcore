@@ -17,12 +17,15 @@ namespace Constructorio_NET
         public string Query { get; set;}
         public int ResultsPerPage { get; set; }
         public string Section { get; set; }
+        public string SecurityToken { get; set; }
         public List<string> Segments { get; set; }
         public int SessionId { get; set; }
         public string SortBy { get; set; }
         public string SortOrder { get; set; }
         public Dictionary<string, string> TestCells { get; set; }
+        public string UserAgent { get; set; }
         public string UserId { get; set; }
+        public string UserIp { get; set; }
 
         /// <summary>
         /// Creates a search request
@@ -37,7 +40,7 @@ namespace Constructorio_NET
 
             this.Query = query;
         }
-        public Hashtable getParameters()
+        public Hashtable GetUrlParameters()
         {
             Hashtable parameters = new Hashtable();
 
@@ -95,6 +98,26 @@ namespace Constructorio_NET
             }
 
             return parameters;
+        }
+
+        public Dictionary<string, string> GetRequestHeaders()
+        {
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+
+            if (this.UserIp != null)
+            {
+                requestHeaders.Add(Constants.USER_IP, this.UserIp);
+            }
+            if (this.UserAgent != null)
+            {
+                requestHeaders.Add(Constants.USER_AGENT, this.UserAgent);
+            }
+            if (this.SecurityToken != null)
+            {
+                requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);
+            }
+
+            return requestHeaders;
         }
     }
 }
