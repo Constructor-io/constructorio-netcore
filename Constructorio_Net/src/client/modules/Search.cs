@@ -1,34 +1,59 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Constructorio_NET
 {
-  public class Search
+  public class Search : Helpers
   {
-    private Hashtable options; 
-    public Search(Hashtable options)
-    {
-      this.options = options;
-    }
-    private string CreateSearchUrl(string query, Hashtable parameters, Hashtable userParameters)
-    {
-      string url = "url";
+    private Hashtable Options;
 
-      return url;
+    /// <summary>
+    /// Interface for search related API calls
+    /// </summary>
+    internal Search(Hashtable options)
+    {
+      this.Options = options;
+    }
+    internal string CreateSearchUrl(SearchRequest req)
+    {
+      Hashtable queryParams = req.GetUrlParameters();
+      List<string> paths = new List<string> { "search", req.Query };
+
+      return Helpers.MakeUrl(this.Options, paths, queryParams);
     }
 
     /// <summary>
     /// Retrieve search results from API
     /// </summary>
-    /// <param name="query"></param>
-    /// <param name="parameters"></param>
-    /// <param name="userParameters"></param>
-    /// <returns></returns>
-    public string GetSearchResults(string query, Hashtable parameters, Hashtable userParameters)
+    /// <param name="searchRequest">Constructorio's request object</param>
+    /// <returns>Constructorio's response object</returns>
+    public SearchResponse GetSearchResults(SearchRequest searchRequest)
     {
-      string url = CreateSearchUrl(query, parameters, userParameters);
-      // return new SearchResponse('dfddf', SearchResponseInner, ['sdads']);
-      return query;
+      string url;
+      Task<string> task;
+      Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+
+      try
+      {
+        url = CreateSearchUrl(searchRequest);
+        requestHeaders = searchRequest.GetRequestHeaders();
+        task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+      }
+      catch (Exception e)
+      {
+        throw new ConstructorException(e);
+      }
+
+      if (task.Result != null)
+      {
+        return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
+      }
+
+      throw new ConstructorException("GetSearchResults response data is malformed");
     }
   }
 }

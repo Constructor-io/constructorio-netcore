@@ -10,13 +10,13 @@
          "name": "dotnet-test",
          "group": "prepush",
          "command": "dotnet",
-         "args": [ "test", "./Constructorio_Net" ]
+         "args": [ "test", "./Constructorio_NET" ]
       },
       {
          "name": "dotnet-test",
          "group": "coverage",
          "command": "dotnet",
-         "args": [ "test", "/p:CollectCoverage=true","/p:CoverletOutputFormat=cobertura", "/p:CoverletOutput=\"../../coverage/\"", "./Constructorio_Net" ]
+         "args": [ "test", "/p:CollectCoverage=true","/p:CoverletOutputFormat=cobertura", "/p:CoverletOutput=\"../../coverage/\"", "./Constructorio_NET" ]
       },
       {
          "name": "dotnet-test-report",

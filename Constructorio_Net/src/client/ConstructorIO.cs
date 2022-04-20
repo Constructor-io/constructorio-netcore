@@ -1,8 +1,4 @@
-﻿/**
- * Constructor.io Client
- */
-
-namespace Constructorio_NET
+﻿namespace Constructorio_NET
 {
     using System;
     using System.Collections;
@@ -37,54 +33,48 @@ namespace Constructorio_NET
 
         public string protocol;
         public int port;
-        public string version;
-        private Hashtable options;
-        public Autocomplete autocomplete;
-        public Browse browse;
-        public Catalog catalog;
-        public Recommendations recommendations;
-        public Search search;
+        public string Version;
+        private Hashtable Options;
+        public Autocomplete Autocomplete;
+        public Browse Browse;
+        public Catalog Catalog;
+        public Recommendations Recommendations;
+        public Search Search;
 
-    /**
-     * Creates a constructor.io Client.
-     *
-     * @param apiToken API Token, gotten from your <a href="https://constructor.io/dashboard">Constructor.io Dashboard</a>, and kept secret.
-     * @param apiKey API Key, used publically in your in-site javascript client.
-     * @param isHTTPS true to use HTTPS, false to use HTTP. It is highly recommended that you use HTTPS.
-     * @param serviceUrl The serviceUrl of the autocomplete service that you are using. It is recommended that you let this value be null, in which case the serviceUrl defaults to the Constructor.io autocomplete servic at ac.cnstrc.com.
-     * @param constructorToken The token provided by Constructor to identify your company's traffic if proxying requests for results
-     */
-    /// <summary>
-    /// Creates a constructor.io instance
-    /// </summary>
-    /// <param name="options"></param>
-    public ConstructorIO(Hashtable options)
+        /// <summary>
+        /// Creates a constructor.io instance
+        /// </summary>
+        /// <param name="options"></param>
+        public ConstructorIO(Hashtable options)
         {
-            this.options = new Hashtable();
-            version = this.getVersion();
+            this.Options = new Hashtable();
+            this.Options.Add("version", this.getVersion());
 
-            CheckAndSetKey("serviceUrl", options);
-            CheckAndSetKey("apiKey", options);
-            CheckAndSetKey("constructorToken", options);
-            CheckAndSetKey("apiToken", options);
-
-            this.autocomplete = new Autocomplete(options);
-            this.browse = new Browse(options);
-            this.catalog = new Catalog(options);
-            this.recommendations = new Recommendations(options);
-            this.search = new Search(options);
-        }
-
-        private void CheckAndSetKey(string key, Hashtable options)
-        {
-            if (!options.ContainsKey(key))
+            if (options.ContainsKey("apiKey"))
             {
-                this.options.Add(key, options[key]);
-            } 
-            else
-            {
-                this.options.Add(key, options[key]);
+                this.Options.Add("apiKey", options["apiKey"]);
             }
+            else 
+            {
+                throw new ConstructorException("apiKey is required");
+            }
+
+            if (options.ContainsKey("constructorToken"))
+            {
+                this.Options.Add("constructorToken", options["constructorToken"]);
+            }
+            if (options.ContainsKey("apiToken"))
+            {
+                this.Options.Add("apiToken", options["apiToken"]);
+            }
+
+            string serviceUrl = options.ContainsKey("serviceUrl") ? (string)options["serviceUrl"] : "https://ac.cnstrc.com";
+            this.Options.Add("serviceUrl", serviceUrl);
+            this.Autocomplete = new Autocomplete(this.Options);
+            this.Browse = new Browse(this.Options);
+            this.Catalog = new Catalog(this.Options);
+            this.Recommendations = new Recommendations(this.Options);
+            this.Search = new Search(this.Options);
         }
 
         /**
@@ -98,9 +88,10 @@ namespace Constructorio_NET
         /**
          * Makes a Http GET request
          */
-        private async Task<string> makeGetRequest(Uri url)
+        private async Task<string> makeGetRequest(string url)
         {
-            var response = await client.GetAsync(url);
+
+            var response = await client.GetAsync(new Uri(url));
             var content = response.Content;
             var result = await content.ReadAsStringAsync();
             return result;
@@ -152,21 +143,21 @@ namespace Constructorio_NET
           * @return true if working.
           * @throws ConstructorException if the service is not working
           */
-        public bool verify()
-        {
-            try
-            {
-                var url = this.makeUrl(new List<string> { "v1", "verify" }, null);
-                var response = this.makeGetRequest(url);
+        // public bool verify()
+        // {
+        //     try
+        //     {
+        //         var url = this.makeUrl(new List<string> { "v1", "verify" }, null);
+        //         var response = this.makeGetRequest(url);
 
-                getResponseBody(response);
-                return true;
-            }
-            catch (Exception exception)
-            {
-                throw new ConstructorException(exception);
-            }
-        }
+        //         getResponseBody(response);
+        //         return true;
+        //     }
+        //     catch (Exception exception)
+        //     {
+        //         throw new ConstructorException(exception);
+        //     }
+        // }
 
         /**
          * Adds an item to your autocomplete.
@@ -871,41 +862,6 @@ namespace Constructorio_NET
         //}
 
         /**
-         * Makes a URL to issue the requests to.  Note that the URL will automagically have the apiKey embedded.
-         *
-         * @param path endpoint of the autocomplete service.
-         * @return the created URL. Now you can use it to issue requests and things!
-         */
-        protected Uri makeUrl(List<String> paths, Dictionary<String, String> queryParams)
-        {
-            var uriBuilder = new UriBuilder();
-
-            uriBuilder.Scheme = this.protocol;
-            uriBuilder.Host = (string)this.options["serviceUrl"];
-            uriBuilder.Query = "key=" + this.options["apiKey"] + "&c=" + this.version;
-
-            if (queryParams != null && queryParams.Count != 0)
-            {
-                foreach (var queryParam in queryParams)
-                {
-                    uriBuilder.Query += "&" + queryParam.Key + "=" + queryParam.Value;
-                }
-            }
-
-            foreach (var path in paths)
-            {
-                uriBuilder.Path += "/" + paths;
-            }
-
-            //if (this.port != null)
-            //{
-            //    uriBuilder.Port = this.port;
-            //}
-
-            return uriBuilder.Uri;
-        }
-
-        /**
          * Creates a builder for an authorized request
          *
          * @return Request Builder
@@ -982,7 +938,7 @@ namespace Constructorio_NET
          */
         protected string getVersion()
         {
-            return "ciojava-5.6.0";
+            return "cionet-5.6.0";
         }
 
     /**

@@ -568,6 +568,12 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.Catalog.Catalog
   nameWithType: Catalog.Catalog
+- uid: Constructorio_NET.Constants
+  name: Constants
+  href: api/Constructorio_NET.Constants.html
+  commentId: T:Constructorio_NET.Constants
+  fullName: Constructorio_NET.Constants
+  nameWithType: Constants
 - uid: Constructorio_NET.ConstructorException
   name: ConstructorException
   href: api/Constructorio_NET.ConstructorException.html
@@ -612,24 +618,24 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.ConstructorIO.ConstructorIO
   nameWithType: ConstructorIO.ConstructorIO
-- uid: Constructorio_NET.ConstructorIO.autocomplete
-  name: autocomplete
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_autocomplete
-  commentId: F:Constructorio_NET.ConstructorIO.autocomplete
-  fullName: Constructorio_NET.ConstructorIO.autocomplete
-  nameWithType: ConstructorIO.autocomplete
-- uid: Constructorio_NET.ConstructorIO.browse
-  name: browse
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_browse
-  commentId: F:Constructorio_NET.ConstructorIO.browse
-  fullName: Constructorio_NET.ConstructorIO.browse
-  nameWithType: ConstructorIO.browse
-- uid: Constructorio_NET.ConstructorIO.catalog
-  name: catalog
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_catalog
-  commentId: F:Constructorio_NET.ConstructorIO.catalog
-  fullName: Constructorio_NET.ConstructorIO.catalog
-  nameWithType: ConstructorIO.catalog
+- uid: Constructorio_NET.ConstructorIO.Autocomplete
+  name: Autocomplete
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Autocomplete
+  commentId: F:Constructorio_NET.ConstructorIO.Autocomplete
+  fullName: Constructorio_NET.ConstructorIO.Autocomplete
+  nameWithType: ConstructorIO.Autocomplete
+- uid: Constructorio_NET.ConstructorIO.Browse
+  name: Browse
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Browse
+  commentId: F:Constructorio_NET.ConstructorIO.Browse
+  fullName: Constructorio_NET.ConstructorIO.Browse
+  nameWithType: ConstructorIO.Browse
+- uid: Constructorio_NET.ConstructorIO.Catalog
+  name: Catalog
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Catalog
+  commentId: F:Constructorio_NET.ConstructorIO.Catalog
+  fullName: Constructorio_NET.ConstructorIO.Catalog
+  nameWithType: ConstructorIO.Catalog
 - uid: Constructorio_NET.ConstructorIO.getClient
   name: getClient()
   href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_getClient
@@ -672,22 +678,6 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.ConstructorIO.getVersion
   nameWithType: ConstructorIO.getVersion
-- uid: Constructorio_NET.ConstructorIO.makeUrl(System.Collections.Generic.List{System.String},System.Collections.Generic.Dictionary{System.String,System.String})
-  name: makeUrl(List<String>, Dictionary<String, String>)
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_makeUrl_System_Collections_Generic_List_System_String__System_Collections_Generic_Dictionary_System_String_System_String__
-  commentId: M:Constructorio_NET.ConstructorIO.makeUrl(System.Collections.Generic.List{System.String},System.Collections.Generic.Dictionary{System.String,System.String})
-  name.vb: makeUrl(List(Of String), Dictionary(Of String, String))
-  fullName: Constructorio_NET.ConstructorIO.makeUrl(System.Collections.Generic.List<System.String>, System.Collections.Generic.Dictionary<System.String, System.String>)
-  fullName.vb: Constructorio_NET.ConstructorIO.makeUrl(System.Collections.Generic.List(Of System.String), System.Collections.Generic.Dictionary(Of System.String, System.String))
-  nameWithType: ConstructorIO.makeUrl(List<String>, Dictionary<String, String>)
-  nameWithType.vb: ConstructorIO.makeUrl(List(Of String), Dictionary(Of String, String))
-- uid: Constructorio_NET.ConstructorIO.makeUrl*
-  name: makeUrl
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_makeUrl_
-  commentId: Overload:Constructorio_NET.ConstructorIO.makeUrl
-  isSpec: "True"
-  fullName: Constructorio_NET.ConstructorIO.makeUrl
-  nameWithType: ConstructorIO.makeUrl
 - uid: Constructorio_NET.ConstructorIO.port
   name: port
   href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_port
@@ -700,37 +690,24 @@ references:
   commentId: F:Constructorio_NET.ConstructorIO.protocol
   fullName: Constructorio_NET.ConstructorIO.protocol
   nameWithType: ConstructorIO.protocol
-- uid: Constructorio_NET.ConstructorIO.recommendations
-  name: recommendations
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_recommendations
-  commentId: F:Constructorio_NET.ConstructorIO.recommendations
-  fullName: Constructorio_NET.ConstructorIO.recommendations
-  nameWithType: ConstructorIO.recommendations
-- uid: Constructorio_NET.ConstructorIO.search
-  name: search
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_search
-  commentId: F:Constructorio_NET.ConstructorIO.search
-  fullName: Constructorio_NET.ConstructorIO.search
-  nameWithType: ConstructorIO.search
-- uid: Constructorio_NET.ConstructorIO.verify
-  name: verify()
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_verify
-  commentId: M:Constructorio_NET.ConstructorIO.verify
-  fullName: Constructorio_NET.ConstructorIO.verify()
-  nameWithType: ConstructorIO.verify()
-- uid: Constructorio_NET.ConstructorIO.verify*
-  name: verify
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_verify_
-  commentId: Overload:Constructorio_NET.ConstructorIO.verify
-  isSpec: "True"
-  fullName: Constructorio_NET.ConstructorIO.verify
-  nameWithType: ConstructorIO.verify
-- uid: Constructorio_NET.ConstructorIO.version
-  name: version
-  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_version
-  commentId: F:Constructorio_NET.ConstructorIO.version
-  fullName: Constructorio_NET.ConstructorIO.version
-  nameWithType: ConstructorIO.version
+- uid: Constructorio_NET.ConstructorIO.Recommendations
+  name: Recommendations
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Recommendations
+  commentId: F:Constructorio_NET.ConstructorIO.Recommendations
+  fullName: Constructorio_NET.ConstructorIO.Recommendations
+  nameWithType: ConstructorIO.Recommendations
+- uid: Constructorio_NET.ConstructorIO.Search
+  name: Search
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Search
+  commentId: F:Constructorio_NET.ConstructorIO.Search
+  fullName: Constructorio_NET.ConstructorIO.Search
+  nameWithType: ConstructorIO.Search
+- uid: Constructorio_NET.ConstructorIO.Version
+  name: Version
+  href: api/Constructorio_NET.ConstructorIO.html#Constructorio_NET_ConstructorIO_Version
+  commentId: F:Constructorio_NET.ConstructorIO.Version
+  fullName: Constructorio_NET.ConstructorIO.Version
+  nameWithType: ConstructorIO.Version
 - uid: Constructorio_NET.ConstructorItem
   name: ConstructorItem
   href: api/Constructorio_NET.ConstructorItem.html
@@ -1351,6 +1328,35 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.Helpers.CleanParams
   nameWithType: Helpers.CleanParams
+- uid: Constructorio_NET.Helpers.MakeUrl(System.Collections.Hashtable,System.Collections.Generic.List{System.String},System.Collections.Hashtable)
+  name: MakeUrl(Hashtable, List<String>, Hashtable)
+  href: api/Constructorio_NET.Helpers.html#Constructorio_NET_Helpers_MakeUrl_System_Collections_Hashtable_System_Collections_Generic_List_System_String__System_Collections_Hashtable_
+  commentId: M:Constructorio_NET.Helpers.MakeUrl(System.Collections.Hashtable,System.Collections.Generic.List{System.String},System.Collections.Hashtable)
+  name.vb: MakeUrl(Hashtable, List(Of String), Hashtable)
+  fullName: Constructorio_NET.Helpers.MakeUrl(System.Collections.Hashtable, System.Collections.Generic.List<System.String>, System.Collections.Hashtable)
+  fullName.vb: Constructorio_NET.Helpers.MakeUrl(System.Collections.Hashtable, System.Collections.Generic.List(Of System.String), System.Collections.Hashtable)
+  nameWithType: Helpers.MakeUrl(Hashtable, List<String>, Hashtable)
+  nameWithType.vb: Helpers.MakeUrl(Hashtable, List(Of String), Hashtable)
+- uid: Constructorio_NET.Helpers.MakeUrl*
+  name: MakeUrl
+  href: api/Constructorio_NET.Helpers.html#Constructorio_NET_Helpers_MakeUrl_
+  commentId: Overload:Constructorio_NET.Helpers.MakeUrl
+  isSpec: "True"
+  fullName: Constructorio_NET.Helpers.MakeUrl
+  nameWithType: Helpers.MakeUrl
+- uid: Constructorio_NET.Helpers.OurEscapeDataString(System.String)
+  name: OurEscapeDataString(String)
+  href: api/Constructorio_NET.Helpers.html#Constructorio_NET_Helpers_OurEscapeDataString_System_String_
+  commentId: M:Constructorio_NET.Helpers.OurEscapeDataString(System.String)
+  fullName: Constructorio_NET.Helpers.OurEscapeDataString(System.String)
+  nameWithType: Helpers.OurEscapeDataString(String)
+- uid: Constructorio_NET.Helpers.OurEscapeDataString*
+  name: OurEscapeDataString
+  href: api/Constructorio_NET.Helpers.html#Constructorio_NET_Helpers_OurEscapeDataString_
+  commentId: Overload:Constructorio_NET.Helpers.OurEscapeDataString
+  isSpec: "True"
+  fullName: Constructorio_NET.Helpers.OurEscapeDataString
+  nameWithType: Helpers.OurEscapeDataString
 - uid: Constructorio_NET.NaturalLanguageSearchRequest
   name: NaturalLanguageSearchRequest
   href: api/Constructorio_NET.NaturalLanguageSearchRequest.html
@@ -2060,25 +2066,12 @@ references:
   commentId: T:Constructorio_NET.Search
   fullName: Constructorio_NET.Search
   nameWithType: Search
-- uid: Constructorio_NET.Search.#ctor(System.Collections.Hashtable)
-  name: Search(Hashtable)
-  href: api/Constructorio_NET.Search.html#Constructorio_NET_Search__ctor_System_Collections_Hashtable_
-  commentId: M:Constructorio_NET.Search.#ctor(System.Collections.Hashtable)
-  fullName: Constructorio_NET.Search.Search(System.Collections.Hashtable)
-  nameWithType: Search.Search(Hashtable)
-- uid: Constructorio_NET.Search.#ctor*
-  name: Search
-  href: api/Constructorio_NET.Search.html#Constructorio_NET_Search__ctor_
-  commentId: Overload:Constructorio_NET.Search.#ctor
-  isSpec: "True"
-  fullName: Constructorio_NET.Search.Search
-  nameWithType: Search.Search
-- uid: Constructorio_NET.Search.GetSearchResults(System.String,System.Collections.Hashtable,System.Collections.Hashtable)
-  name: GetSearchResults(String, Hashtable, Hashtable)
-  href: api/Constructorio_NET.Search.html#Constructorio_NET_Search_GetSearchResults_System_String_System_Collections_Hashtable_System_Collections_Hashtable_
-  commentId: M:Constructorio_NET.Search.GetSearchResults(System.String,System.Collections.Hashtable,System.Collections.Hashtable)
-  fullName: Constructorio_NET.Search.GetSearchResults(System.String, System.Collections.Hashtable, System.Collections.Hashtable)
-  nameWithType: Search.GetSearchResults(String, Hashtable, Hashtable)
+- uid: Constructorio_NET.Search.GetSearchResults(Constructorio_NET.SearchRequest)
+  name: GetSearchResults(SearchRequest)
+  href: api/Constructorio_NET.Search.html#Constructorio_NET_Search_GetSearchResults_Constructorio_NET_SearchRequest_
+  commentId: M:Constructorio_NET.Search.GetSearchResults(Constructorio_NET.SearchRequest)
+  fullName: Constructorio_NET.Search.GetSearchResults(Constructorio_NET.SearchRequest)
+  nameWithType: Search.GetSearchResults(SearchRequest)
 - uid: Constructorio_NET.Search.GetSearchResults*
   name: GetSearchResults
   href: api/Constructorio_NET.Search.html#Constructorio_NET_Search_GetSearchResults_
@@ -2105,243 +2098,253 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.SearchRequest.SearchRequest
   nameWithType: SearchRequest.SearchRequest
-- uid: Constructorio_NET.SearchRequest.getCollectionId
-  name: getCollectionId()
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getCollectionId
-  commentId: M:Constructorio_NET.SearchRequest.getCollectionId
-  fullName: Constructorio_NET.SearchRequest.getCollectionId()
-  nameWithType: SearchRequest.getCollectionId()
-- uid: Constructorio_NET.SearchRequest.getCollectionId*
-  name: getCollectionId
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getCollectionId_
-  commentId: Overload:Constructorio_NET.SearchRequest.getCollectionId
+- uid: Constructorio_NET.SearchRequest.ClientId
+  name: ClientId
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_ClientId
+  commentId: P:Constructorio_NET.SearchRequest.ClientId
+  fullName: Constructorio_NET.SearchRequest.ClientId
+  nameWithType: SearchRequest.ClientId
+- uid: Constructorio_NET.SearchRequest.ClientId*
+  name: ClientId
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_ClientId_
+  commentId: Overload:Constructorio_NET.SearchRequest.ClientId
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.getCollectionId
-  nameWithType: SearchRequest.getCollectionId
-- uid: Constructorio_NET.SearchRequest.getFacets
-  name: getFacets()
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getFacets
-  commentId: M:Constructorio_NET.SearchRequest.getFacets
-  fullName: Constructorio_NET.SearchRequest.getFacets()
-  nameWithType: SearchRequest.getFacets()
-- uid: Constructorio_NET.SearchRequest.getFacets*
-  name: getFacets
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getFacets_
-  commentId: Overload:Constructorio_NET.SearchRequest.getFacets
+  fullName: Constructorio_NET.SearchRequest.ClientId
+  nameWithType: SearchRequest.ClientId
+- uid: Constructorio_NET.SearchRequest.Filters
+  name: Filters
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Filters
+  commentId: P:Constructorio_NET.SearchRequest.Filters
+  fullName: Constructorio_NET.SearchRequest.Filters
+  nameWithType: SearchRequest.Filters
+- uid: Constructorio_NET.SearchRequest.Filters*
+  name: Filters
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Filters_
+  commentId: Overload:Constructorio_NET.SearchRequest.Filters
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.getFacets
-  nameWithType: SearchRequest.getFacets
-- uid: Constructorio_NET.SearchRequest.getGroupId
-  name: getGroupId()
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getGroupId
-  commentId: M:Constructorio_NET.SearchRequest.getGroupId
-  fullName: Constructorio_NET.SearchRequest.getGroupId()
-  nameWithType: SearchRequest.getGroupId()
-- uid: Constructorio_NET.SearchRequest.getGroupId*
-  name: getGroupId
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getGroupId_
-  commentId: Overload:Constructorio_NET.SearchRequest.getGroupId
+  fullName: Constructorio_NET.SearchRequest.Filters
+  nameWithType: SearchRequest.Filters
+- uid: Constructorio_NET.SearchRequest.FmtOptions
+  name: FmtOptions
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_FmtOptions
+  commentId: P:Constructorio_NET.SearchRequest.FmtOptions
+  fullName: Constructorio_NET.SearchRequest.FmtOptions
+  nameWithType: SearchRequest.FmtOptions
+- uid: Constructorio_NET.SearchRequest.FmtOptions*
+  name: FmtOptions
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_FmtOptions_
+  commentId: Overload:Constructorio_NET.SearchRequest.FmtOptions
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.getGroupId
-  nameWithType: SearchRequest.getGroupId
-- uid: Constructorio_NET.SearchRequest.getPage
-  name: getPage()
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getPage
-  commentId: M:Constructorio_NET.SearchRequest.getPage
-  fullName: Constructorio_NET.SearchRequest.getPage()
-  nameWithType: SearchRequest.getPage()
-- uid: Constructorio_NET.SearchRequest.getPage*
-  name: getPage
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getPage_
-  commentId: Overload:Constructorio_NET.SearchRequest.getPage
+  fullName: Constructorio_NET.SearchRequest.FmtOptions
+  nameWithType: SearchRequest.FmtOptions
+- uid: Constructorio_NET.SearchRequest.GetRequestHeaders
+  name: GetRequestHeaders()
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_GetRequestHeaders
+  commentId: M:Constructorio_NET.SearchRequest.GetRequestHeaders
+  fullName: Constructorio_NET.SearchRequest.GetRequestHeaders()
+  nameWithType: SearchRequest.GetRequestHeaders()
+- uid: Constructorio_NET.SearchRequest.GetRequestHeaders*
+  name: GetRequestHeaders
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_GetRequestHeaders_
+  commentId: Overload:Constructorio_NET.SearchRequest.GetRequestHeaders
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.getPage
-  nameWithType: SearchRequest.getPage
-- uid: Constructorio_NET.SearchRequest.getQuery
-  name: getQuery()
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getQuery
-  commentId: M:Constructorio_NET.SearchRequest.getQuery
-  fullName: Constructorio_NET.SearchRequest.getQuery()
-  nameWithType: SearchRequest.getQuery()
-- uid: Constructorio_NET.SearchRequest.getQuery*
-  name: getQuery
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getQuery_
-  commentId: Overload:Constructorio_NET.SearchRequest.getQuery
+  fullName: Constructorio_NET.SearchRequest.GetRequestHeaders
+  nameWithType: SearchRequest.GetRequestHeaders
+- uid: Constructorio_NET.SearchRequest.GetUrlParameters
+  name: GetUrlParameters()
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_GetUrlParameters
+  commentId: M:Constructorio_NET.SearchRequest.GetUrlParameters
+  fullName: Constructorio_NET.SearchRequest.GetUrlParameters()
+  nameWithType: SearchRequest.GetUrlParameters()
+- uid: Constructorio_NET.SearchRequest.GetUrlParameters*
+  name: GetUrlParameters
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_GetUrlParameters_
+  commentId: Overload:Constructorio_NET.SearchRequest.GetUrlParameters
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.getQuery
-  nameWithType: SearchRequest.getQuery
-- uid: Constructorio_NET.SearchRequest.getResultsPerPage
-  name: getResultsPerPage()
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getResultsPerPage
-  commentId: M:Constructorio_NET.SearchRequest.getResultsPerPage
-  fullName: Constructorio_NET.SearchRequest.getResultsPerPage()
-  nameWithType: SearchRequest.getResultsPerPage()
-- uid: Constructorio_NET.SearchRequest.getResultsPerPage*
-  name: getResultsPerPage
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getResultsPerPage_
-  commentId: Overload:Constructorio_NET.SearchRequest.getResultsPerPage
+  fullName: Constructorio_NET.SearchRequest.GetUrlParameters
+  nameWithType: SearchRequest.GetUrlParameters
+- uid: Constructorio_NET.SearchRequest.HiddenFields
+  name: HiddenFields
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_HiddenFields
+  commentId: P:Constructorio_NET.SearchRequest.HiddenFields
+  fullName: Constructorio_NET.SearchRequest.HiddenFields
+  nameWithType: SearchRequest.HiddenFields
+- uid: Constructorio_NET.SearchRequest.HiddenFields*
+  name: HiddenFields
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_HiddenFields_
+  commentId: Overload:Constructorio_NET.SearchRequest.HiddenFields
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.getResultsPerPage
-  nameWithType: SearchRequest.getResultsPerPage
-- uid: Constructorio_NET.SearchRequest.getSection
-  name: getSection()
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getSection
-  commentId: M:Constructorio_NET.SearchRequest.getSection
-  fullName: Constructorio_NET.SearchRequest.getSection()
-  nameWithType: SearchRequest.getSection()
-- uid: Constructorio_NET.SearchRequest.getSection*
-  name: getSection
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getSection_
-  commentId: Overload:Constructorio_NET.SearchRequest.getSection
+  fullName: Constructorio_NET.SearchRequest.HiddenFields
+  nameWithType: SearchRequest.HiddenFields
+- uid: Constructorio_NET.SearchRequest.Page
+  name: Page
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Page
+  commentId: P:Constructorio_NET.SearchRequest.Page
+  fullName: Constructorio_NET.SearchRequest.Page
+  nameWithType: SearchRequest.Page
+- uid: Constructorio_NET.SearchRequest.Page*
+  name: Page
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Page_
+  commentId: Overload:Constructorio_NET.SearchRequest.Page
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.getSection
-  nameWithType: SearchRequest.getSection
-- uid: Constructorio_NET.SearchRequest.getSortAscending
-  name: getSortAscending()
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getSortAscending
-  commentId: M:Constructorio_NET.SearchRequest.getSortAscending
-  fullName: Constructorio_NET.SearchRequest.getSortAscending()
-  nameWithType: SearchRequest.getSortAscending()
-- uid: Constructorio_NET.SearchRequest.getSortAscending*
-  name: getSortAscending
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getSortAscending_
-  commentId: Overload:Constructorio_NET.SearchRequest.getSortAscending
+  fullName: Constructorio_NET.SearchRequest.Page
+  nameWithType: SearchRequest.Page
+- uid: Constructorio_NET.SearchRequest.Query
+  name: Query
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Query
+  commentId: P:Constructorio_NET.SearchRequest.Query
+  fullName: Constructorio_NET.SearchRequest.Query
+  nameWithType: SearchRequest.Query
+- uid: Constructorio_NET.SearchRequest.Query*
+  name: Query
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Query_
+  commentId: Overload:Constructorio_NET.SearchRequest.Query
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.getSortAscending
-  nameWithType: SearchRequest.getSortAscending
-- uid: Constructorio_NET.SearchRequest.getSortBy
-  name: getSortBy()
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getSortBy
-  commentId: M:Constructorio_NET.SearchRequest.getSortBy
-  fullName: Constructorio_NET.SearchRequest.getSortBy()
-  nameWithType: SearchRequest.getSortBy()
-- uid: Constructorio_NET.SearchRequest.getSortBy*
-  name: getSortBy
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_getSortBy_
-  commentId: Overload:Constructorio_NET.SearchRequest.getSortBy
+  fullName: Constructorio_NET.SearchRequest.Query
+  nameWithType: SearchRequest.Query
+- uid: Constructorio_NET.SearchRequest.ResultsPerPage
+  name: ResultsPerPage
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_ResultsPerPage
+  commentId: P:Constructorio_NET.SearchRequest.ResultsPerPage
+  fullName: Constructorio_NET.SearchRequest.ResultsPerPage
+  nameWithType: SearchRequest.ResultsPerPage
+- uid: Constructorio_NET.SearchRequest.ResultsPerPage*
+  name: ResultsPerPage
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_ResultsPerPage_
+  commentId: Overload:Constructorio_NET.SearchRequest.ResultsPerPage
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.getSortBy
-  nameWithType: SearchRequest.getSortBy
-- uid: Constructorio_NET.SearchRequest.setCollectionId(System.String)
-  name: setCollectionId(String)
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setCollectionId_System_String_
-  commentId: M:Constructorio_NET.SearchRequest.setCollectionId(System.String)
-  fullName: Constructorio_NET.SearchRequest.setCollectionId(System.String)
-  nameWithType: SearchRequest.setCollectionId(String)
-- uid: Constructorio_NET.SearchRequest.setCollectionId*
-  name: setCollectionId
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setCollectionId_
-  commentId: Overload:Constructorio_NET.SearchRequest.setCollectionId
+  fullName: Constructorio_NET.SearchRequest.ResultsPerPage
+  nameWithType: SearchRequest.ResultsPerPage
+- uid: Constructorio_NET.SearchRequest.Section
+  name: Section
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Section
+  commentId: P:Constructorio_NET.SearchRequest.Section
+  fullName: Constructorio_NET.SearchRequest.Section
+  nameWithType: SearchRequest.Section
+- uid: Constructorio_NET.SearchRequest.Section*
+  name: Section
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Section_
+  commentId: Overload:Constructorio_NET.SearchRequest.Section
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.setCollectionId
-  nameWithType: SearchRequest.setCollectionId
-- uid: Constructorio_NET.SearchRequest.setFacets(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}})
-  name: setFacets(Dictionary<String, List<String>>)
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setFacets_System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_List_System_String___
-  commentId: M:Constructorio_NET.SearchRequest.setFacets(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}})
-  name.vb: setFacets(Dictionary(Of String, List(Of String)))
-  fullName: Constructorio_NET.SearchRequest.setFacets(System.Collections.Generic.Dictionary<System.String, System.Collections.Generic.List<System.String>>)
-  fullName.vb: Constructorio_NET.SearchRequest.setFacets(System.Collections.Generic.Dictionary(Of System.String, System.Collections.Generic.List(Of System.String)))
-  nameWithType: SearchRequest.setFacets(Dictionary<String, List<String>>)
-  nameWithType.vb: SearchRequest.setFacets(Dictionary(Of String, List(Of String)))
-- uid: Constructorio_NET.SearchRequest.setFacets*
-  name: setFacets
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setFacets_
-  commentId: Overload:Constructorio_NET.SearchRequest.setFacets
+  fullName: Constructorio_NET.SearchRequest.Section
+  nameWithType: SearchRequest.Section
+- uid: Constructorio_NET.SearchRequest.SecurityToken
+  name: SecurityToken
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_SecurityToken
+  commentId: P:Constructorio_NET.SearchRequest.SecurityToken
+  fullName: Constructorio_NET.SearchRequest.SecurityToken
+  nameWithType: SearchRequest.SecurityToken
+- uid: Constructorio_NET.SearchRequest.SecurityToken*
+  name: SecurityToken
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_SecurityToken_
+  commentId: Overload:Constructorio_NET.SearchRequest.SecurityToken
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.setFacets
-  nameWithType: SearchRequest.setFacets
-- uid: Constructorio_NET.SearchRequest.setGroupId(System.String)
-  name: setGroupId(String)
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setGroupId_System_String_
-  commentId: M:Constructorio_NET.SearchRequest.setGroupId(System.String)
-  fullName: Constructorio_NET.SearchRequest.setGroupId(System.String)
-  nameWithType: SearchRequest.setGroupId(String)
-- uid: Constructorio_NET.SearchRequest.setGroupId*
-  name: setGroupId
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setGroupId_
-  commentId: Overload:Constructorio_NET.SearchRequest.setGroupId
+  fullName: Constructorio_NET.SearchRequest.SecurityToken
+  nameWithType: SearchRequest.SecurityToken
+- uid: Constructorio_NET.SearchRequest.Segments
+  name: Segments
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Segments
+  commentId: P:Constructorio_NET.SearchRequest.Segments
+  fullName: Constructorio_NET.SearchRequest.Segments
+  nameWithType: SearchRequest.Segments
+- uid: Constructorio_NET.SearchRequest.Segments*
+  name: Segments
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_Segments_
+  commentId: Overload:Constructorio_NET.SearchRequest.Segments
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.setGroupId
-  nameWithType: SearchRequest.setGroupId
-- uid: Constructorio_NET.SearchRequest.setPage(System.Int32)
-  name: setPage(Int32)
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setPage_System_Int32_
-  commentId: M:Constructorio_NET.SearchRequest.setPage(System.Int32)
-  fullName: Constructorio_NET.SearchRequest.setPage(System.Int32)
-  nameWithType: SearchRequest.setPage(Int32)
-- uid: Constructorio_NET.SearchRequest.setPage*
-  name: setPage
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setPage_
-  commentId: Overload:Constructorio_NET.SearchRequest.setPage
+  fullName: Constructorio_NET.SearchRequest.Segments
+  nameWithType: SearchRequest.Segments
+- uid: Constructorio_NET.SearchRequest.SessionId
+  name: SessionId
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_SessionId
+  commentId: P:Constructorio_NET.SearchRequest.SessionId
+  fullName: Constructorio_NET.SearchRequest.SessionId
+  nameWithType: SearchRequest.SessionId
+- uid: Constructorio_NET.SearchRequest.SessionId*
+  name: SessionId
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_SessionId_
+  commentId: Overload:Constructorio_NET.SearchRequest.SessionId
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.setPage
-  nameWithType: SearchRequest.setPage
-- uid: Constructorio_NET.SearchRequest.setQuery(System.String)
-  name: setQuery(String)
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setQuery_System_String_
-  commentId: M:Constructorio_NET.SearchRequest.setQuery(System.String)
-  fullName: Constructorio_NET.SearchRequest.setQuery(System.String)
-  nameWithType: SearchRequest.setQuery(String)
-- uid: Constructorio_NET.SearchRequest.setQuery*
-  name: setQuery
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setQuery_
-  commentId: Overload:Constructorio_NET.SearchRequest.setQuery
+  fullName: Constructorio_NET.SearchRequest.SessionId
+  nameWithType: SearchRequest.SessionId
+- uid: Constructorio_NET.SearchRequest.SortBy
+  name: SortBy
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_SortBy
+  commentId: P:Constructorio_NET.SearchRequest.SortBy
+  fullName: Constructorio_NET.SearchRequest.SortBy
+  nameWithType: SearchRequest.SortBy
+- uid: Constructorio_NET.SearchRequest.SortBy*
+  name: SortBy
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_SortBy_
+  commentId: Overload:Constructorio_NET.SearchRequest.SortBy
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.setQuery
-  nameWithType: SearchRequest.setQuery
-- uid: Constructorio_NET.SearchRequest.setResultsPerPage(System.Int32)
-  name: setResultsPerPage(Int32)
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setResultsPerPage_System_Int32_
-  commentId: M:Constructorio_NET.SearchRequest.setResultsPerPage(System.Int32)
-  fullName: Constructorio_NET.SearchRequest.setResultsPerPage(System.Int32)
-  nameWithType: SearchRequest.setResultsPerPage(Int32)
-- uid: Constructorio_NET.SearchRequest.setResultsPerPage*
-  name: setResultsPerPage
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setResultsPerPage_
-  commentId: Overload:Constructorio_NET.SearchRequest.setResultsPerPage
+  fullName: Constructorio_NET.SearchRequest.SortBy
+  nameWithType: SearchRequest.SortBy
+- uid: Constructorio_NET.SearchRequest.SortOrder
+  name: SortOrder
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_SortOrder
+  commentId: P:Constructorio_NET.SearchRequest.SortOrder
+  fullName: Constructorio_NET.SearchRequest.SortOrder
+  nameWithType: SearchRequest.SortOrder
+- uid: Constructorio_NET.SearchRequest.SortOrder*
+  name: SortOrder
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_SortOrder_
+  commentId: Overload:Constructorio_NET.SearchRequest.SortOrder
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.setResultsPerPage
-  nameWithType: SearchRequest.setResultsPerPage
-- uid: Constructorio_NET.SearchRequest.setSection(System.String)
-  name: setSection(String)
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setSection_System_String_
-  commentId: M:Constructorio_NET.SearchRequest.setSection(System.String)
-  fullName: Constructorio_NET.SearchRequest.setSection(System.String)
-  nameWithType: SearchRequest.setSection(String)
-- uid: Constructorio_NET.SearchRequest.setSection*
-  name: setSection
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setSection_
-  commentId: Overload:Constructorio_NET.SearchRequest.setSection
+  fullName: Constructorio_NET.SearchRequest.SortOrder
+  nameWithType: SearchRequest.SortOrder
+- uid: Constructorio_NET.SearchRequest.TestCells
+  name: TestCells
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_TestCells
+  commentId: P:Constructorio_NET.SearchRequest.TestCells
+  fullName: Constructorio_NET.SearchRequest.TestCells
+  nameWithType: SearchRequest.TestCells
+- uid: Constructorio_NET.SearchRequest.TestCells*
+  name: TestCells
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_TestCells_
+  commentId: Overload:Constructorio_NET.SearchRequest.TestCells
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.setSection
-  nameWithType: SearchRequest.setSection
-- uid: Constructorio_NET.SearchRequest.setSortAscending(System.Boolean)
-  name: setSortAscending(Boolean)
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setSortAscending_System_Boolean_
-  commentId: M:Constructorio_NET.SearchRequest.setSortAscending(System.Boolean)
-  fullName: Constructorio_NET.SearchRequest.setSortAscending(System.Boolean)
-  nameWithType: SearchRequest.setSortAscending(Boolean)
-- uid: Constructorio_NET.SearchRequest.setSortAscending*
-  name: setSortAscending
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setSortAscending_
-  commentId: Overload:Constructorio_NET.SearchRequest.setSortAscending
+  fullName: Constructorio_NET.SearchRequest.TestCells
+  nameWithType: SearchRequest.TestCells
+- uid: Constructorio_NET.SearchRequest.UserAgent
+  name: UserAgent
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserAgent
+  commentId: P:Constructorio_NET.SearchRequest.UserAgent
+  fullName: Constructorio_NET.SearchRequest.UserAgent
+  nameWithType: SearchRequest.UserAgent
+- uid: Constructorio_NET.SearchRequest.UserAgent*
+  name: UserAgent
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserAgent_
+  commentId: Overload:Constructorio_NET.SearchRequest.UserAgent
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.setSortAscending
-  nameWithType: SearchRequest.setSortAscending
-- uid: Constructorio_NET.SearchRequest.setSortBy(System.String)
-  name: setSortBy(String)
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setSortBy_System_String_
-  commentId: M:Constructorio_NET.SearchRequest.setSortBy(System.String)
-  fullName: Constructorio_NET.SearchRequest.setSortBy(System.String)
-  nameWithType: SearchRequest.setSortBy(String)
-- uid: Constructorio_NET.SearchRequest.setSortBy*
-  name: setSortBy
-  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_setSortBy_
-  commentId: Overload:Constructorio_NET.SearchRequest.setSortBy
+  fullName: Constructorio_NET.SearchRequest.UserAgent
+  nameWithType: SearchRequest.UserAgent
+- uid: Constructorio_NET.SearchRequest.UserId
+  name: UserId
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserId
+  commentId: P:Constructorio_NET.SearchRequest.UserId
+  fullName: Constructorio_NET.SearchRequest.UserId
+  nameWithType: SearchRequest.UserId
+- uid: Constructorio_NET.SearchRequest.UserId*
+  name: UserId
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserId_
+  commentId: Overload:Constructorio_NET.SearchRequest.UserId
   isSpec: "True"
-  fullName: Constructorio_NET.SearchRequest.setSortBy
-  nameWithType: SearchRequest.setSortBy
+  fullName: Constructorio_NET.SearchRequest.UserId
+  nameWithType: SearchRequest.UserId
+- uid: Constructorio_NET.SearchRequest.UserIp
+  name: UserIp
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserIp
+  commentId: P:Constructorio_NET.SearchRequest.UserIp
+  fullName: Constructorio_NET.SearchRequest.UserIp
+  nameWithType: SearchRequest.UserIp
+- uid: Constructorio_NET.SearchRequest.UserIp*
+  name: UserIp
+  href: api/Constructorio_NET.SearchRequest.html#Constructorio_NET_SearchRequest_UserIp_
+  commentId: Overload:Constructorio_NET.SearchRequest.UserIp
+  isSpec: "True"
+  fullName: Constructorio_NET.SearchRequest.UserIp
+  nameWithType: SearchRequest.UserIp
 - uid: Constructorio_NET.SearchResponse
   name: SearchResponse
   href: api/Constructorio_NET.SearchResponse.html
@@ -2458,19 +2461,19 @@ references:
   isSpec: "True"
   fullName: Constructorio_NET.SearchResponseInner.SortOptions
   nameWithType: SearchResponseInner.SortOptions
-- uid: Constructorio_NET.SearchResponseInner.TotalNumberOfResults
-  name: TotalNumberOfResults
-  href: api/Constructorio_NET.SearchResponseInner.html#Constructorio_NET_SearchResponseInner_TotalNumberOfResults
-  commentId: P:Constructorio_NET.SearchResponseInner.TotalNumberOfResults
-  fullName: Constructorio_NET.SearchResponseInner.TotalNumberOfResults
-  nameWithType: SearchResponseInner.TotalNumberOfResults
-- uid: Constructorio_NET.SearchResponseInner.TotalNumberOfResults*
-  name: TotalNumberOfResults
-  href: api/Constructorio_NET.SearchResponseInner.html#Constructorio_NET_SearchResponseInner_TotalNumberOfResults_
-  commentId: Overload:Constructorio_NET.SearchResponseInner.TotalNumberOfResults
+- uid: Constructorio_NET.SearchResponseInner.TotalNumResults
+  name: TotalNumResults
+  href: api/Constructorio_NET.SearchResponseInner.html#Constructorio_NET_SearchResponseInner_TotalNumResults
+  commentId: P:Constructorio_NET.SearchResponseInner.TotalNumResults
+  fullName: Constructorio_NET.SearchResponseInner.TotalNumResults
+  nameWithType: SearchResponseInner.TotalNumResults
+- uid: Constructorio_NET.SearchResponseInner.TotalNumResults*
+  name: TotalNumResults
+  href: api/Constructorio_NET.SearchResponseInner.html#Constructorio_NET_SearchResponseInner_TotalNumResults_
+  commentId: Overload:Constructorio_NET.SearchResponseInner.TotalNumResults
   isSpec: "True"
-  fullName: Constructorio_NET.SearchResponseInner.TotalNumberOfResults
-  nameWithType: SearchResponseInner.TotalNumberOfResults
+  fullName: Constructorio_NET.SearchResponseInner.TotalNumResults
+  nameWithType: SearchResponseInner.TotalNumResults
 - uid: Constructorio_NET.ServerError
   name: ServerError
   href: api/Constructorio_NET.ServerError.html

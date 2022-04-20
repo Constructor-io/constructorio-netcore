@@ -2,20 +2,37 @@ namespace Constructorio_NET
 {
   using System;
   using System.Collections;
+  using System.Collections.Generic;
   using System.Net.Http;
+  using System.Text;
   using System.Text.RegularExpressions;
   using System.Threading.Tasks;
+  using System.Web;
+  using Newtonsoft.Json;
 
   public class Helpers
   {
     private static HttpClient client = new HttpClient();
 
     /// <summary>
+    /// Method in order to modify a string to ensure proper url encoding
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns>Url encoded string</returns>
+    protected static string OurEscapeDataString(string str)
+    {
+      string encodedString = Regex.Replace(str, @"\s", " ");
+      encodedString = Uri.EscapeDataString(encodedString);
+
+      return encodedString;
+    }
+
+    /// <summary>
     /// Cleans params before applying them to a request url
     /// </summary>
     /// <param name="parameters"></param>
     /// <returns></returns>
-    public static Hashtable CleanParams(Hashtable parameters)
+    protected static Hashtable CleanParams(Hashtable parameters)
     {
       Hashtable cleanedParams = new Hashtable();
 
@@ -23,9 +40,10 @@ namespace Constructorio_NET
       {
         if (param.Value.GetType() == typeof(string))
         {
-          string encodedParam = Uri.UnescapeDataString(Uri.EscapeDataString(param.Value.ToString()));
-          encodedParam = Regex.Replace(encodedParam, @"\s", " ");
-          cleanedParams.Add(param.Key, encodedParam);
+          string encodedParam = OurEscapeDataString(param.Value.ToString());
+          string cleanedParam = Uri.UnescapeDataString(encodedParam);
+
+          cleanedParams.Add(param.Key, cleanedParam);
         }
         else
         {
@@ -37,15 +55,147 @@ namespace Constructorio_NET
     }
 
     /// <summary>
-    /// Make a get request
+    /// Makes a URL to issue the requests with.
     /// </summary>
-    /// <param name="url"></param>
-    /// <returns></returns>
-    private async Task<string> makeGetRequest(Uri url)
+    /// <param name="options"></param>
+    /// <param name="paths"></param>
+    /// <param name="queryParams"></param>
+    /// <returns>string</returns>
+    protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams)
     {
-      var response = await client.GetAsync(url);
-      var content = response.Content;
-      var result = await content.ReadAsStringAsync();
+      string url = (string)options["serviceUrl"];
+      Dictionary<string, string> urlParamsMap = new Dictionary<string, string>()
+      {
+        { Constants.CLIENT_ID, "i" },
+        { Constants.SESSION_ID, "s" },
+        { Constants.USER_ID, "ui" },
+        { Constants.SEGMENTS, "us" },
+        { Constants.FMT_OPTIONS, "fmt_options" },
+        { Constants.SECTION, "section" },
+        { Constants.FILTERS, "filters" },
+        { Constants.HIDDEN_FIELDS, "hidden_fields" },
+        { Constants.PAGE, "page" },
+        { Constants.RESULTS_PER_PAGE, "num_results_per_page" },
+        { Constants.SORT_BY, "sort_by" },
+        { Constants.SORT_ORDER, "sort_order" },
+      };
+
+      foreach (var path in paths)
+      {
+        url += "/" + HttpUtility.UrlEncode(path);
+      }
+
+      url += $"?key={options[Constants.API_KEY]}&c={options[Constants.VERSION]}";
+
+      // Generate url params query string
+      if (queryParams != null && queryParams.Count != 0)
+      {
+        if (queryParams.Contains(Constants.CLIENT_ID))
+        {
+          url += $"&{urlParamsMap[Constants.CLIENT_ID]}={OurEscapeDataString((string)queryParams[Constants.CLIENT_ID])}";
+          queryParams.Remove(Constants.CLIENT_ID);
+        }
+        if (queryParams.Contains(Constants.SESSION_ID))
+        {
+          url += $"&{urlParamsMap[Constants.SESSION_ID]}={OurEscapeDataString(queryParams[Constants.SESSION_ID].ToString())}";
+          queryParams.Remove(Constants.SESSION_ID);
+        }
+        // Add filters to query string
+        if (queryParams.Contains(Constants.FILTERS))
+        {
+          Dictionary<string, List<string>> filters = (Dictionary<string, List<string>>)queryParams[Constants.FILTERS]; 
+          queryParams.Remove(Constants.FILTERS);
+
+          foreach (var filter in filters)
+          {
+            string filterGroup = (string)filter.Key;
+
+            foreach (string filterOption in (List<string>)filter.Value)
+            {
+              url += $"&{urlParamsMap[Constants.FILTERS]}{OurEscapeDataString("[" + filterGroup + "]")}={OurEscapeDataString(filterOption)}";
+            }
+          }
+        }
+        // Add test cells to query string
+        if (queryParams.Contains(Constants.TEST_CELLS))
+        {
+          Dictionary<string, string> testCells = (Dictionary<string, string>)queryParams[Constants.TEST_CELLS]; 
+          queryParams.Remove(Constants.TEST_CELLS);
+
+          foreach (var testCell in testCells)
+          {
+            url += $"&ef-{OurEscapeDataString(testCell.Key)}={OurEscapeDataString(testCell.Value)}";
+          }
+        }
+        // Add format options to query string
+        if (queryParams.Contains(Constants.FMT_OPTIONS))
+        {
+          Dictionary<string, string> fmtOptions = (Dictionary<string, string>)queryParams[Constants.FMT_OPTIONS];
+          queryParams.Remove(Constants.FMT_OPTIONS);
+
+          foreach (var fmtOption in fmtOptions)
+          {
+            url += $"&{urlParamsMap[Constants.FMT_OPTIONS]}{OurEscapeDataString("[" + fmtOption.Key + "]")}={OurEscapeDataString(fmtOption.Value)}";
+          }
+        }
+
+        // Add remaining query params to query string
+        foreach (DictionaryEntry queryParam in queryParams)
+        {
+          string paramKey = (string)queryParam.Key;
+          Type valueDataType = queryParam.Value.GetType();
+
+          if (valueDataType == typeof(string) && urlParamsMap.ContainsKey(paramKey))
+          {
+            url += $"&{OurEscapeDataString(urlParamsMap[paramKey])}={OurEscapeDataString((string)queryParam.Value)}";
+          }
+          else if (valueDataType == typeof(int))
+          {
+            url += $"&{OurEscapeDataString(urlParamsMap[paramKey])}={OurEscapeDataString(queryParam.Value.ToString())}";
+          }
+          else if (valueDataType == typeof(List<string>))
+          {
+            foreach (string listValue in (List<string>)queryParam.Value)
+            {
+              url += $"&{urlParamsMap[paramKey]}={OurEscapeDataString(listValue)}";
+            }
+          }
+        }
+
+        long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        url += $"&_dt={time}";
+      }
+
+      return url;
+    }
+
+    /// <summary>
+    /// Make a http request
+    /// </summary>
+    /// <param name="httpMethod">HTTP request method</param>
+    /// <param name="url">Url for the request</param>
+    /// <param name="requestHeaders">Additional headers to send with the request</param>
+    /// <param name="requestBody">Key values pairs used for the POST body</param>
+    /// <returns>Task</returns>
+    internal static async Task<string> MakeHttpRequest(HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, Hashtable requestBody = null)
+    {
+      HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
+
+      foreach (var header in requestHeaders)
+      {
+        httpRequest.Headers.Add((string)header.Key, (string)header.Value);
+      }
+
+      if (requestBody != null)
+      {
+        StringContent reqContent = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
+        httpRequest.Content = reqContent;
+      }
+
+      HttpResponseMessage response = await client.SendAsync(httpRequest);
+      HttpContent resContent = response.Content;
+      string result = await resContent.ReadAsStringAsync();
+
       return result;
     }
   }

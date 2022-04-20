@@ -79,6 +79,7 @@
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">Helpers</span></div>
+      <div class="level2"><a class="xref" href="Constructorio_NET.Search.html">Search</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -105,7 +106,7 @@
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Constructorio_NET.html">Constructorio_NET</a></h6>
-  <h6><strong>Assembly</strong>: Constructorio_Net.dll</h6>
+  <h6><strong>Assembly</strong>: Constructorio_NET.dll</h6>
   <h5 id="Constructorio_NET_Helpers_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class Helpers</code></pre>
@@ -114,10 +115,10 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/noch/initial-version/apiSpec/new?filename=Constructorio_NET_Helpers_CleanParams_System_Collections_Hashtable_.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers.CleanParams(System.Collections.Hashtable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-960-net-sdk-create-search-endpoints/apiSpec/new?filename=Constructorio_NET_Helpers_CleanParams_System_Collections_Hashtable_.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers.CleanParams(System.Collections.Hashtable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/noch/initial-version/Constructorio_Net/src/utils/helpers.cs/#L18">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-960-net-sdk-create-search-endpoints/Constructorio_NET/src/utils/helpers.cs/#L35">View Source</a>
   </span>
   <a id="Constructorio_NET_Helpers_CleanParams_" data-uid="Constructorio_NET.Helpers.CleanParams*"></a>
   <h4 id="Constructorio_NET_Helpers_CleanParams_System_Collections_Hashtable_" data-uid="Constructorio_NET.Helpers.CleanParams(System.Collections.Hashtable)">CleanParams(Hashtable)</h4>
@@ -126,7 +127,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Hashtable CleanParams(Hashtable parameters)</code></pre>
+    <pre><code class="lang-csharp hljs">protected static Hashtable CleanParams(Hashtable parameters)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -160,6 +161,114 @@
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-960-net-sdk-create-search-endpoints/apiSpec/new?filename=Constructorio_NET_Helpers_MakeUrl_System_Collections_Hashtable_System_Collections_Generic_List_System_String__System_Collections_Hashtable_.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers.MakeUrl(System.Collections.Hashtable%2CSystem.Collections.Generic.List%7BSystem.String%7D%2CSystem.Collections.Hashtable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-960-net-sdk-create-search-endpoints/Constructorio_NET/src/utils/helpers.cs/#L64">View Source</a>
+  </span>
+  <a id="Constructorio_NET_Helpers_MakeUrl_" data-uid="Constructorio_NET.Helpers.MakeUrl*"></a>
+  <h4 id="Constructorio_NET_Helpers_MakeUrl_System_Collections_Hashtable_System_Collections_Generic_List_System_String__System_Collections_Hashtable_" data-uid="Constructorio_NET.Helpers.MakeUrl(System.Collections.Hashtable,System.Collections.Generic.List{System.String},System.Collections.Hashtable)">MakeUrl(Hashtable, List&lt;String&gt;, Hashtable)</h4>
+  <div class="markdown level1 summary"><p>Makes a URL to issue the requests with.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static string MakeUrl(Hashtable options, List&lt;string&gt; paths, Hashtable queryParams)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Hashtable</span></td>
+        <td><span class="parametername">options</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">paths</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Hashtable</span></td>
+        <td><span class="parametername">queryParams</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>string</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-960-net-sdk-create-search-endpoints/apiSpec/new?filename=Constructorio_NET_Helpers_OurEscapeDataString_System_String_.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers.OurEscapeDataString(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-960-net-sdk-create-search-endpoints/Constructorio_NET/src/utils/helpers.cs/#L22">View Source</a>
+  </span>
+  <a id="Constructorio_NET_Helpers_OurEscapeDataString_" data-uid="Constructorio_NET.Helpers.OurEscapeDataString*"></a>
+  <h4 id="Constructorio_NET_Helpers_OurEscapeDataString_System_String_" data-uid="Constructorio_NET.Helpers.OurEscapeDataString(System.String)">OurEscapeDataString(String)</h4>
+  <div class="markdown level1 summary"><p>Method in order to modify a string to ensure proper url encoding</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static string OurEscapeDataString(string str)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">str</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>Url encoded string</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           
@@ -168,10 +277,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Constructor-io/constructorio-netcore/new/noch/initial-version/apiSpec/new?filename=Constructorio_NET_Helpers.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-960-net-sdk-create-search-endpoints/apiSpec/new?filename=Constructorio_NET_Helpers.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/noch/initial-version/Constructorio_Net/src/utils/helpers.cs/#L9" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-960-net-sdk-create-search-endpoints/Constructorio_NET/src/utils/helpers.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
