@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Result
@@ -9,17 +9,17 @@ namespace Constructorio_NET
 {
     public class Result {
 
-        [JsonPropertyName("value")]
-        public String Value;
+        [JsonProperty("value")]
+        public String Value { get; set; }
 
-        [JsonPropertyName("data")]
-        public ResultData Data;
+        [JsonProperty("data")]
+        public ResultData Data { get; set; }
 
-        [JsonPropertyName("matched_terms")]
-        public List<String> MatchedTerms;
+        [JsonProperty("matched_terms")]
+        public List<String> MatchedTerms { get; set; }
 
-        [JsonPropertyName("variations")]
-        public List<Result> Variations;
+        [JsonProperty("variations")]
+        public List<Result> Variations{ get; set; }
 
     }
 }
