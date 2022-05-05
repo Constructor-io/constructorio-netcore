@@ -36,6 +36,7 @@ namespace Constructorio_NET.Tests
             req.ItemId = new List<String> { "power_drill"};
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
+
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
         }
@@ -47,6 +48,7 @@ namespace Constructorio_NET.Tests
             req.ItemId = new List<String> { "power_drill", "drill" };
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
+
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
         }
@@ -59,9 +61,27 @@ namespace Constructorio_NET.Tests
             req.NumResults = 5;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
+
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
             Assert.AreEqual(res.Request["num_results"], 5, "Num Results is set");
+        }
+
+        [Test]
+        public void GetRecommendationsResultsShouldReturnAResultProvidedUserInfo()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1");
+            req.ItemId = new List<String> { "power_drill", "drill" };
+            req.UserInfo = new UserInfo(4, ClientId);
+            req.UserInfo.setUserId("123");
+            req.UserInfo.setUserSegments(new List<String>());
+            req.UserInfo.getUserSegments().Add("vs");
+            req.UserInfo.getUserSegments().Add("pink");
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
         }
     }
 }

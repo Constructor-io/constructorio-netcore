@@ -74,7 +74,6 @@ namespace Constructorio_NET.Tests
       };
 
       string url = Helpers.MakeUrl(this.Options, paths, queryParams);
-      Console.WriteLine(url);
       string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&i={this.ClientId}&s={this.SessionId}&section=Search%20Suggestions&_dt=";
       bool regexMatched = Regex.Match(url, expectedUrl).Success;
       Assert.That(regexMatched, "url should be properly formed");

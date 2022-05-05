@@ -40,7 +40,6 @@ namespace Constructorio_NET
             try
             {
                 url = CreateRecommendationsUrl(recommendationsRequest);
-                Console.WriteLine(url);
                 requestHeaders = recommendationsRequest.GetRequestHeaders();
                 task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
