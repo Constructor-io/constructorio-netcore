@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System;
+
 namespace Constructorio_NET
 {
     public class UserInfo
@@ -68,8 +68,7 @@ namespace Constructorio_NET
 
         public void setClientId(string clientId)
         {
-            if (((clientId == null)
-                        || string.IsNullOrEmpty(this.clientId.Trim())))
+            if (string.IsNullOrEmpty(clientId))
             {
                 throw new System.ArgumentException("Client ID cannot be null or an empty string.");
             }
@@ -82,8 +81,7 @@ namespace Constructorio_NET
 
         public void setUserId(string userId)
         {
-            if (((userId == null)
-                        || string.IsNullOrEmpty(this.userId.Trim())))
+            if (string.IsNullOrEmpty(userId))
             {
                 throw new System.ArgumentException("User ID cannot be an empty string.");
             }
@@ -109,8 +107,7 @@ namespace Constructorio_NET
 
         public void setForwardedFor(string forwardedFor)
         {
-            if (((forwardedFor == null)
-                        || string.IsNullOrEmpty(this.forwardedFor.Trim())))
+            if (string.IsNullOrEmpty(forwardedFor))
             {
                 throw new System.ArgumentException("Forwarded for cannot be null or an empty string.");
             }
@@ -123,7 +120,7 @@ namespace Constructorio_NET
 
         public void setUserAgent(string userAgent)
         {
-            if ((userAgent == null))
+            if (string.IsNullOrEmpty(userAgent))
             {
                 throw new System.ArgumentException("User agent cannot be null.");
             }
