@@ -48,7 +48,7 @@
         public ConstructorIO(Hashtable options)
         {
             this.Options = new Hashtable();
-            this.Options.Add("version", this.getVersion());
+            this.Options.Add(Constants.VERSION, this.getVersion());
 
             if (options.ContainsKey(Constants.API_KEY))
             {
