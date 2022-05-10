@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Constructorio_NET
 {
-    public class Constants
+    public static class Constants
     {
         public const string API_KEY = "key";
         public const string SERVICE_URL = "service_url";
@@ -22,5 +22,6 @@ namespace Constructorio_NET
         public const string SORT_ORDER = "sort_order";
         public const string USER_AGENT = "User-Agent";
         public const string USER_IP = "X-Forwarded-For";
+        public const string VARIATIONS_MAP = "variations_map";
     }
 }
