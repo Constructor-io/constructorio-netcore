@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Autocomplete Response
@@ -9,13 +9,13 @@ namespace Constructorio_NET
 {
     public class AutocompleteResponse {
 
-        [JsonPropertyName("sections")]
+        [JsonProperty("sections")]
         public Dictionary<String, List<Result>> Sections { get; set; }
 
-        [JsonPropertyName("result_id")]
+        [JsonProperty("result_id")]
         public String ResultId { get; set; }
 
-        [JsonPropertyName("request")]
+        [JsonProperty("request")]
         public Dictionary<String, Object> Request { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Filter Group
@@ -9,19 +9,19 @@ namespace Constructorio_NET
 {
     public class FilterGroup {
 
-        [JsonPropertyName("children")]
+        [JsonProperty("children")]
         public List<FilterGroup> Children { get; set; }
 
-        [JsonPropertyName("parents")]
+        [JsonProperty("parents")]
         public List<FilterGroup> Parents { get; set; }
 
-        [JsonPropertyName("count")]
+        [JsonProperty("count")]
         public Int32 Count { get; set; }
 
-        [JsonPropertyName("display_name")]
+        [JsonProperty("display_name")]
         public String DisplayName { get; set; }
 
-        [JsonPropertyName("group_id")]
+        [JsonProperty("group_id")]
         public String GroupId { get; set; }
 
     }

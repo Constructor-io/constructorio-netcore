@@ -48,11 +48,11 @@
         public ConstructorIO(Hashtable options)
         {
             this.Options = new Hashtable();
-            this.Options.Add("version", this.getVersion());
+            this.Options.Add(Constants.VERSION, this.getVersion());
 
-            if (options.ContainsKey("apiKey"))
+            if (options.ContainsKey(Constants.API_KEY))
             {
-                this.Options.Add("apiKey", options["apiKey"]);
+                this.Options.Add(Constants.API_KEY, options[Constants.API_KEY]);
             }
             else 
             {
@@ -68,8 +68,8 @@
                 this.Options.Add("apiToken", options["apiToken"]);
             }
 
-            string serviceUrl = options.ContainsKey("serviceUrl") ? (string)options["serviceUrl"] : "https://ac.cnstrc.com";
-            this.Options.Add("serviceUrl", serviceUrl);
+            string serviceUrl = options.ContainsKey(Constants.SERVICE_URL) ? (string)options[Constants.SERVICE_URL] : "https://ac.cnstrc.com";
+            this.Options.Add(Constants.SERVICE_URL, serviceUrl);
             this.Autocomplete = new Autocomplete(this.Options);
             this.Browse = new Browse(this.Options);
             this.Catalog = new Catalog(this.Options);

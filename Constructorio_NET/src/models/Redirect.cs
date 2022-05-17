@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Redirect
@@ -9,13 +9,13 @@ namespace Constructorio_NET
 {
     public class Redirect {
 
-        [JsonPropertyName("data")]
+        [JsonProperty("data")]
         public RedirectData Data { get; set; }
 
-        [JsonPropertyName("matched_terms")]
+        [JsonProperty("matched_terms")]
         public List<String> MatchedTerms { get; set; }
 
-        [JsonPropertyName("matched_user_segments")]
+        [JsonProperty("matched_user_segments")]
         public List<String> MatchedUserSegments { get; set; }
 
     }

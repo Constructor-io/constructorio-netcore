@@ -1,5 +1,5 @@
 using System;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Server Error
@@ -8,7 +8,7 @@ namespace Constructorio_NET
 {
     public class ServerError {
 
-        [JsonPropertyName("message")]
+        [JsonProperty("message")]
         public String Message { get; set; }
 
     }

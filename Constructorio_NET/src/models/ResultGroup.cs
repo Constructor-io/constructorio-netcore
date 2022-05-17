@@ -1,5 +1,5 @@
 using System;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Item Group
@@ -8,13 +8,13 @@ namespace Constructorio_NET
 {
     public class ResultGroup {
 
-        [JsonPropertyName("display_name")]
+        [JsonProperty("display_name")]
         public String DisplayName { get; set; }
 
-        [JsonPropertyName("group_id")]
+        [JsonProperty("group_id")]
         public String GroupId { get; set; }
 
-        [JsonPropertyName("path")]
+        [JsonProperty("path")]
         public String Path { get; set; }
 
     }

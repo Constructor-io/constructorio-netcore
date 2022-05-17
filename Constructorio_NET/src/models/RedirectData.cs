@@ -1,5 +1,5 @@
 using System;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Redirect Data
@@ -8,13 +8,13 @@ namespace Constructorio_NET
 {
     public class RedirectData {
 
-        [JsonPropertyName("url")]
+        [JsonProperty("url")]
         public String Url;
 
-        [JsonPropertyName("rule_id")]
+        [JsonProperty("rule_id")]
         public Int32 RuleId { get; set; }
 
-        [JsonPropertyName("match_id")]
+        [JsonProperty("match_id")]
         public Int32 MatchId { get; set; }
 
     }

@@ -1,5 +1,5 @@
 using System;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Sort Option
@@ -8,16 +8,16 @@ namespace Constructorio_NET
 {
     public class FilterSortOption {
   
-        [JsonPropertyName("display_name")]
+        [JsonProperty("display_name")]
         public String DisplayName { get; set; } 
 
-        [JsonPropertyName("sort_by")]
+        [JsonProperty("sort_by")]
         public String SortBy { get; set; }
 
-        [JsonPropertyName("sort_order")]
+        [JsonProperty("sort_order")]
         public String SortOrder { get; set; }
 
-        [JsonPropertyName("status")]
+        [JsonProperty("status")]
         public String Status { get; set; }
 
     }  

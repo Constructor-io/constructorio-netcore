@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Result Data
@@ -9,28 +9,28 @@ namespace Constructorio_NET
 {
     public class ResultData {
 
-        [JsonPropertyName("description")]
+        [JsonProperty("description")]
         public String Description { get; set; }
 
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public String Id { get; set; }
 
-        [JsonPropertyName("url")]
+        [JsonProperty("url")]
         public String Url { get; set; }
 
-        [JsonPropertyName("image_url")]
+        [JsonProperty("image_url")]
         public String ImageUrl { get; set; }
 
-        [JsonPropertyName("groups")]
+        [JsonProperty("groups")]
         public List<ResultGroup> Groups { get; set; }
 
-        [JsonPropertyName("facets")]
+        [JsonProperty("facets")]
         public List<ResultFacet> Facets { get; set; }
 
-        [JsonPropertyName("variation_id")]
+        [JsonProperty("variation_id")]
         public String VariationId { get; set; }
 
-        [JsonPropertyName("metadata")]
+        [JsonExtensionData]
         public Dictionary<String, Object> Metadata { get; set; }
 
     }

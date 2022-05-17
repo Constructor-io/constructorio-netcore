@@ -64,22 +64,7 @@ namespace Constructorio_NET
     /// <returns>string</returns>
     protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams)
     {
-      string url = (string)options["serviceUrl"];
-      Dictionary<string, string> urlParamsMap = new Dictionary<string, string>()
-      {
-        { Constants.CLIENT_ID, "i" },
-        { Constants.SESSION_ID, "s" },
-        { Constants.USER_ID, "ui" },
-        { Constants.SEGMENTS, "us" },
-        { Constants.FMT_OPTIONS, "fmt_options" },
-        { Constants.SECTION, "section" },
-        { Constants.FILTERS, "filters" },
-        { Constants.HIDDEN_FIELDS, "hidden_fields" },
-        { Constants.PAGE, "page" },
-        { Constants.RESULTS_PER_PAGE, "num_results_per_page" },
-        { Constants.SORT_BY, "sort_by" },
-        { Constants.SORT_ORDER, "sort_order" },
-      };
+      string url = (string)options[Constants.SERVICE_URL];
 
       foreach (var path in paths)
       {
@@ -93,12 +78,12 @@ namespace Constructorio_NET
       {
         if (queryParams.Contains(Constants.CLIENT_ID))
         {
-          url += $"&{urlParamsMap[Constants.CLIENT_ID]}={OurEscapeDataString((string)queryParams[Constants.CLIENT_ID])}";
+          url += $"&{Constants.CLIENT_ID}={OurEscapeDataString((string)queryParams[Constants.CLIENT_ID])}";
           queryParams.Remove(Constants.CLIENT_ID);
         }
         if (queryParams.Contains(Constants.SESSION_ID))
         {
-          url += $"&{urlParamsMap[Constants.SESSION_ID]}={OurEscapeDataString(queryParams[Constants.SESSION_ID].ToString())}";
+          url += $"&{Constants.SESSION_ID}={OurEscapeDataString(queryParams[Constants.SESSION_ID].ToString())}";
           queryParams.Remove(Constants.SESSION_ID);
         }
         // Add filters to query string
@@ -113,7 +98,7 @@ namespace Constructorio_NET
 
             foreach (string filterOption in (List<string>)filter.Value)
             {
-              url += $"&{urlParamsMap[Constants.FILTERS]}{OurEscapeDataString("[" + filterGroup + "]")}={OurEscapeDataString(filterOption)}";
+              url += $"&{Constants.FILTERS}{OurEscapeDataString("[" + filterGroup + "]")}={OurEscapeDataString(filterOption)}";
             }
           }
         }
@@ -136,7 +121,7 @@ namespace Constructorio_NET
 
           foreach (var fmtOption in fmtOptions)
           {
-            url += $"&{urlParamsMap[Constants.FMT_OPTIONS]}{OurEscapeDataString("[" + fmtOption.Key + "]")}={OurEscapeDataString(fmtOption.Value)}";
+            url += $"&{Constants.FMT_OPTIONS}{OurEscapeDataString("[" + fmtOption.Key + "]")}={OurEscapeDataString(fmtOption.Value)}";
           }
         }
 
@@ -146,19 +131,19 @@ namespace Constructorio_NET
           string paramKey = (string)queryParam.Key;
           Type valueDataType = queryParam.Value.GetType();
 
-          if (valueDataType == typeof(string) && urlParamsMap.ContainsKey(paramKey))
+          if (valueDataType == typeof(string))
           {
-            url += $"&{OurEscapeDataString(urlParamsMap[paramKey])}={OurEscapeDataString((string)queryParam.Value)}";
+            url += $"&{OurEscapeDataString(paramKey)}={OurEscapeDataString((string)queryParam.Value)}";
           }
           else if (valueDataType == typeof(int))
           {
-            url += $"&{OurEscapeDataString(urlParamsMap[paramKey])}={OurEscapeDataString(queryParam.Value.ToString())}";
+            url += $"&{OurEscapeDataString(paramKey)}={OurEscapeDataString(queryParam.Value.ToString())}";
           }
           else if (valueDataType == typeof(List<string>))
           {
             foreach (string listValue in (List<string>)queryParam.Value)
             {
-              url += $"&{urlParamsMap[paramKey]}={OurEscapeDataString(listValue)}";
+              url += $"&{paramKey}={OurEscapeDataString(listValue)}";
             }
           }
         }
