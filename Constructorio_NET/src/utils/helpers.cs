@@ -9,6 +9,7 @@ namespace Constructorio_NET
   using System.Threading.Tasks;
   using System.Web;
   using Newtonsoft.Json;
+  using System.IO;
 
   public class Helpers
   {
@@ -176,8 +177,9 @@ namespace Constructorio_NET
     /// <param name="url">Url for the request</param>
     /// <param name="requestHeaders">Additional headers to send with the request</param>
     /// <param name="requestBody">Key values pairs used for the POST body</param>
+    /// <param name="stream">Key values pairs used for the POST body</param>
     /// <returns>Task</returns>
-    internal static async Task<string> MakeHttpRequest(HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, Hashtable requestBody = null)
+    internal static async Task<string> MakeHttpRequest(HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, Hashtable requestBody, StreamContent stream)
     {
       HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
 
@@ -191,6 +193,8 @@ namespace Constructorio_NET
         StringContent reqContent = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
         httpRequest.Content = reqContent;
       }
+
+      new MultipartFormDataContent().Add(stream, "items", "items.csv");
 
       HttpResponseMessage response = await client.SendAsync(httpRequest);
       HttpContent resContent = response.Content;

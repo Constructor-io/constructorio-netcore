@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class SearchRequest
+    <title>Class CatalogRequest
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class SearchRequest
+    <meta name="title" content="Class CatalogRequest
    ">
     <meta name="generator" content="docfx 2.59.1.0">
     
@@ -68,17 +68,17 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Constructorio_NET.SearchRequest">
+            <article class="content wrap" id="_content" data-uid="Constructorio_NET.CatalogRequest">
   
   
-  <h1 id="Constructorio_NET_SearchRequest" data-uid="Constructorio_NET.SearchRequest" class="text-break">Class SearchRequest
+  <h1 id="Constructorio_NET_CatalogRequest" data-uid="Constructorio_NET.CatalogRequest" class="text-break">Class CatalogRequest
   </h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">SearchRequest</span></div>
+    <div class="level1"><span class="xref">CatalogRequest</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -106,27 +106,27 @@
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Constructorio_NET.html">Constructorio_NET</a></h6>
   <h6><strong>Assembly</strong>: Constructorio_Net.dll</h6>
-  <h5 id="Constructorio_NET_SearchRequest_syntax">Syntax</h5>
+  <h5 id="Constructorio_NET_CatalogRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SearchRequest</code></pre>
+    <pre><code class="lang-csharp hljs">public class CatalogRequest</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest__ctor_System_String_.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest__ctor_System_Collections_Generic_Dictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.%23ctor(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L85">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L35">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest__ctor_" data-uid="Constructorio_NET.SearchRequest.#ctor*"></a>
-  <h4 id="Constructorio_NET_SearchRequest__ctor_System_String_" data-uid="Constructorio_NET.SearchRequest.#ctor(System.String)">SearchRequest(String)</h4>
-  <div class="markdown level1 summary"><p>Creates a search request</p>
+  <a id="Constructorio_NET_CatalogRequest__ctor_" data-uid="Constructorio_NET.CatalogRequest.#ctor*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest__ctor_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="Constructorio_NET.CatalogRequest.#ctor(System.Collections.Generic.Dictionary{System.String,System.String})">CatalogRequest(Dictionary&lt;String, String&gt;)</h4>
+  <div class="markdown level1 summary"><p>Creates a catalog request</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SearchRequest(string query)</code></pre>
+    <pre><code class="lang-csharp hljs">public CatalogRequest(Dictionary&lt;string, string&gt; files)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -139,10 +139,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">query</span></td>
-        <td><p>The term used to query against</p>
-</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">files</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -150,13 +149,13 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_ClientId.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.ClientId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_ClientId.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.ClientId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L15">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L13">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_ClientId_" data-uid="Constructorio_NET.SearchRequest.ClientId*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_ClientId" data-uid="Constructorio_NET.SearchRequest.ClientId">ClientId</h4>
+  <a id="Constructorio_NET_CatalogRequest_ClientId_" data-uid="Constructorio_NET.CatalogRequest.ClientId*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_ClientId" data-uid="Constructorio_NET.CatalogRequest.ClientId">ClientId</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -174,20 +173,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>Client ID, utilized to personalize results</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_Filters.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.Filters%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_Filters.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.Filters%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L19">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L14">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_Filters_" data-uid="Constructorio_NET.SearchRequest.Filters*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_Filters" data-uid="Constructorio_NET.SearchRequest.Filters">Filters</h4>
+  <a id="Constructorio_NET_CatalogRequest_Filters_" data-uid="Constructorio_NET.CatalogRequest.Filters*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_Filters" data-uid="Constructorio_NET.CatalogRequest.Filters">Filters</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -205,20 +203,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
-        <td><p>Filters used to refine results</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_FmtOptions.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.FmtOptions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_FmtOptions.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.FmtOptions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L23">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L15">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_FmtOptions_" data-uid="Constructorio_NET.SearchRequest.FmtOptions*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_FmtOptions" data-uid="Constructorio_NET.SearchRequest.FmtOptions">FmtOptions</h4>
+  <a id="Constructorio_NET_CatalogRequest_FmtOptions_" data-uid="Constructorio_NET.CatalogRequest.FmtOptions*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_FmtOptions" data-uid="Constructorio_NET.CatalogRequest.FmtOptions">FmtOptions</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -236,20 +233,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
-        <td><p>The format options used to refine result groups</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_HiddenFields.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.HiddenFields%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_HiddenFields.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.HiddenFields%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L27">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L16">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_HiddenFields_" data-uid="Constructorio_NET.SearchRequest.HiddenFields*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_HiddenFields" data-uid="Constructorio_NET.SearchRequest.HiddenFields">HiddenFields</h4>
+  <a id="Constructorio_NET_CatalogRequest_HiddenFields_" data-uid="Constructorio_NET.CatalogRequest.HiddenFields*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_HiddenFields" data-uid="Constructorio_NET.CatalogRequest.HiddenFields">HiddenFields</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -267,20 +263,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.String</span>&gt;</td>
-        <td><p>Hidden metadata fields to return</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_Page.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.Page%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_Page.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.Page%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L31">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L17">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_Page_" data-uid="Constructorio_NET.SearchRequest.Page*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_Page" data-uid="Constructorio_NET.SearchRequest.Page">Page</h4>
+  <a id="Constructorio_NET_CatalogRequest_Page_" data-uid="Constructorio_NET.CatalogRequest.Page*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_Page" data-uid="Constructorio_NET.CatalogRequest.Page">Page</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -298,20 +293,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>The page number of the results</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_Query.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.Query%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_Query.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.Query%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L35">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L18">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_Query_" data-uid="Constructorio_NET.SearchRequest.Query*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_Query" data-uid="Constructorio_NET.SearchRequest.Query">Query</h4>
+  <a id="Constructorio_NET_CatalogRequest_Query_" data-uid="Constructorio_NET.CatalogRequest.Query*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_Query" data-uid="Constructorio_NET.CatalogRequest.Query">Query</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -329,20 +323,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>The term to search for</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_ResultsPerPage.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.ResultsPerPage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_ResultsPerPage.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.ResultsPerPage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L39">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L19">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_ResultsPerPage_" data-uid="Constructorio_NET.SearchRequest.ResultsPerPage*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_ResultsPerPage" data-uid="Constructorio_NET.SearchRequest.ResultsPerPage">ResultsPerPage</h4>
+  <a id="Constructorio_NET_CatalogRequest_ResultsPerPage_" data-uid="Constructorio_NET.CatalogRequest.ResultsPerPage*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_ResultsPerPage" data-uid="Constructorio_NET.CatalogRequest.ResultsPerPage">ResultsPerPage</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -360,20 +353,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>The number of results per page to return</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_Section.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.Section%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_Section.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.Section%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L43">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L20">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_Section_" data-uid="Constructorio_NET.SearchRequest.Section*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_Section" data-uid="Constructorio_NET.SearchRequest.Section">Section</h4>
+  <a id="Constructorio_NET_CatalogRequest_Section_" data-uid="Constructorio_NET.CatalogRequest.Section*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_Section" data-uid="Constructorio_NET.CatalogRequest.Section">Section</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -391,20 +383,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>The section name for results</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_SecurityToken.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.SecurityToken%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_SecurityToken.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.SecurityToken%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L47">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L21">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_SecurityToken_" data-uid="Constructorio_NET.SearchRequest.SecurityToken*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_SecurityToken" data-uid="Constructorio_NET.SearchRequest.SecurityToken">SecurityToken</h4>
+  <a id="Constructorio_NET_CatalogRequest_SecurityToken_" data-uid="Constructorio_NET.CatalogRequest.SecurityToken*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_SecurityToken" data-uid="Constructorio_NET.CatalogRequest.SecurityToken">SecurityToken</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -422,20 +413,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>Constructor security token</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_Segments.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.Segments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_Segments.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.Segments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L51">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L22">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_Segments_" data-uid="Constructorio_NET.SearchRequest.Segments*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_Segments" data-uid="Constructorio_NET.SearchRequest.Segments">Segments</h4>
+  <a id="Constructorio_NET_CatalogRequest_Segments_" data-uid="Constructorio_NET.CatalogRequest.Segments*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_Segments" data-uid="Constructorio_NET.CatalogRequest.Segments">Segments</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -453,20 +443,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.String</span>&gt;</td>
-        <td><p>User segments</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_SessionId.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.SessionId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_SessionId.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.SessionId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L55">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L23">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_SessionId_" data-uid="Constructorio_NET.SearchRequest.SessionId*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_SessionId" data-uid="Constructorio_NET.SearchRequest.SessionId">SessionId</h4>
+  <a id="Constructorio_NET_CatalogRequest_SessionId_" data-uid="Constructorio_NET.CatalogRequest.SessionId*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_SessionId" data-uid="Constructorio_NET.CatalogRequest.SessionId">SessionId</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -484,20 +473,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>Session ID, utilized to personalize results</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_SortBy.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.SortBy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_SortBy.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.SortBy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L59">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L24">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_SortBy_" data-uid="Constructorio_NET.SearchRequest.SortBy*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_SortBy" data-uid="Constructorio_NET.SearchRequest.SortBy">SortBy</h4>
+  <a id="Constructorio_NET_CatalogRequest_SortBy_" data-uid="Constructorio_NET.CatalogRequest.SortBy*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_SortBy" data-uid="Constructorio_NET.CatalogRequest.SortBy">SortBy</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -515,20 +503,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>The sort method for results</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_SortOrder.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.SortOrder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_SortOrder.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.SortOrder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L63">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L25">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_SortOrder_" data-uid="Constructorio_NET.SearchRequest.SortOrder*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_SortOrder" data-uid="Constructorio_NET.SearchRequest.SortOrder">SortOrder</h4>
+  <a id="Constructorio_NET_CatalogRequest_SortOrder_" data-uid="Constructorio_NET.CatalogRequest.SortOrder*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_SortOrder" data-uid="Constructorio_NET.CatalogRequest.SortOrder">SortOrder</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -546,20 +533,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>The sort order for results</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_TestCells.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.TestCells%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_TestCells.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.TestCells%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L67">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L26">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_TestCells_" data-uid="Constructorio_NET.SearchRequest.TestCells*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_TestCells" data-uid="Constructorio_NET.SearchRequest.TestCells">TestCells</h4>
+  <a id="Constructorio_NET_CatalogRequest_TestCells_" data-uid="Constructorio_NET.CatalogRequest.TestCells*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_TestCells" data-uid="Constructorio_NET.CatalogRequest.TestCells">TestCells</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -577,20 +563,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
-        <td><p>User test cells</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_UserAgent.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.UserAgent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_UserAgent.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.UserAgent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L71">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L27">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_UserAgent_" data-uid="Constructorio_NET.SearchRequest.UserAgent*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_UserAgent" data-uid="Constructorio_NET.SearchRequest.UserAgent">UserAgent</h4>
+  <a id="Constructorio_NET_CatalogRequest_UserAgent_" data-uid="Constructorio_NET.CatalogRequest.UserAgent*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_UserAgent" data-uid="Constructorio_NET.CatalogRequest.UserAgent">UserAgent</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -608,20 +593,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>Origin user agent, from client</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_UserId.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.UserId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_UserId.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.UserId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L75">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L28">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_UserId_" data-uid="Constructorio_NET.SearchRequest.UserId*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_UserId" data-uid="Constructorio_NET.SearchRequest.UserId">UserId</h4>
+  <a id="Constructorio_NET_CatalogRequest_UserId_" data-uid="Constructorio_NET.CatalogRequest.UserId*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_UserId" data-uid="Constructorio_NET.CatalogRequest.UserId">UserId</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -639,20 +623,19 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>User ID, utilized to personalize results</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_UserIp.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.UserIp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_UserIp.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.UserIp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L79">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L29">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_UserIp_" data-uid="Constructorio_NET.SearchRequest.UserIp*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_UserIp" data-uid="Constructorio_NET.SearchRequest.UserIp">UserIp</h4>
+  <a id="Constructorio_NET_CatalogRequest_UserIp_" data-uid="Constructorio_NET.CatalogRequest.UserIp*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_UserIp" data-uid="Constructorio_NET.CatalogRequest.UserIp">UserIp</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -670,8 +653,7 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>Origin user IP, from client</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -679,13 +661,13 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_GetRequestHeaders.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.GetRequestHeaders%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_GetRequestHeaders.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.GetRequestHeaders%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L155">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L106">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_GetRequestHeaders_" data-uid="Constructorio_NET.SearchRequest.GetRequestHeaders*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_GetRequestHeaders" data-uid="Constructorio_NET.SearchRequest.GetRequestHeaders">GetRequestHeaders()</h4>
+  <a id="Constructorio_NET_CatalogRequest_GetRequestHeaders_" data-uid="Constructorio_NET.CatalogRequest.GetRequestHeaders*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_GetRequestHeaders" data-uid="Constructorio_NET.CatalogRequest.GetRequestHeaders">GetRequestHeaders()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -709,13 +691,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest_GetUrlParameters.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest.GetUrlParameters%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest_GetUrlParameters.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest.GetUrlParameters%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L95">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L46">View Source</a>
   </span>
-  <a id="Constructorio_NET_SearchRequest_GetUrlParameters_" data-uid="Constructorio_NET.SearchRequest.GetUrlParameters*"></a>
-  <h4 id="Constructorio_NET_SearchRequest_GetUrlParameters" data-uid="Constructorio_NET.SearchRequest.GetUrlParameters">GetUrlParameters()</h4>
+  <a id="Constructorio_NET_CatalogRequest_GetUrlParameters_" data-uid="Constructorio_NET.CatalogRequest.GetUrlParameters*"></a>
+  <h4 id="Constructorio_NET_CatalogRequest_GetUrlParameters" data-uid="Constructorio_NET.CatalogRequest.GetUrlParameters">GetUrlParameters()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -745,10 +727,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_SearchRequest.md&amp;value=---%0Auid%3A%20Constructorio_NET.SearchRequest%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_CatalogRequest.md&amp;value=---%0Auid%3A%20Constructorio_NET.CatalogRequest%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Search/SearchRequest.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/models/Catalog/CatalogRequest.cs/#L11" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
