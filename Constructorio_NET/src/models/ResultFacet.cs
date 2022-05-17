@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Item Facet
@@ -9,11 +9,10 @@ namespace Constructorio_NET
 {
     public class ResultFacet {
 
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public String Name { get; set; }
 
-        [JsonPropertyName("values")]
+        [JsonProperty("values")]
         public List<String> Values { get; set; }
-
     }
 }

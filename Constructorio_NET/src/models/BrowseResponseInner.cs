@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Browse Response Inner
@@ -9,19 +9,19 @@ namespace Constructorio_NET
 {
     public class BrowseResponseInner {
 
-        [JsonPropertyName("facets")]
+        [JsonProperty("facets")]
         List<FilterFacet> Facets { get; set; }
 
-        [JsonPropertyName("groups")]
+        [JsonProperty("groups")]
         public List<FilterGroup> Groups { get; set; }
 
-        [JsonPropertyName("results")]
+        [JsonProperty("results")]
         public List<Result> Results { get; set; }
 
-        [JsonPropertyName("total_num_results")]
+        [JsonProperty("total_num_results")]
         public Int32 TotalNumberOfResults { get; set; }
 
-        [JsonPropertyName("sort_options")]
+        [JsonProperty("sort_options")]
         public List<FilterSortOption> SortOptions { get; set; }
 
     }

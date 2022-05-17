@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Filter Facet
@@ -9,25 +9,25 @@ namespace Constructorio_NET
 {
     public class FilterFacet {
 
-        [JsonPropertyName("display_name")]
+        [JsonProperty("display_name")]
         public String DisplayName { get; set; }
 
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public String Name { get; set; }
 
-        [JsonPropertyName("status")]
+        [JsonProperty("status")]
         public Dictionary<String, Object> Status { get; set; }
 
-        [JsonPropertyName("max")]
+        [JsonProperty("max")]
         public Double Max { get; set; }
 
-        [JsonPropertyName("min")]
+        [JsonProperty("min")]
         public Double Min { get; set; }
 
-        [JsonPropertyName("options")]
+        [JsonProperty("options")]
         public List<FilterFacetOption> Options { get; set; }
 
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public String Type { get; set; }
 
     }

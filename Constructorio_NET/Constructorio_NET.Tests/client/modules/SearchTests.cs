@@ -20,12 +20,12 @@ namespace Constructorio_NET.Tests
         {
             this.Options = new Hashtable()
             {
-               { "apiKey", this.ApiKey }
+               { Constants.API_KEY, this.ApiKey }
             };
             this.UserParameters = new Hashtable()
             {
-                { "clientId", ClientId },
-                { "sessionId", SessionId }
+                { Constants.CLIENT_ID, ClientId },
+                { Constants.SESSION_ID, SessionId }
             };
         }
 
@@ -47,11 +47,6 @@ namespace Constructorio_NET.Tests
             {
                 { "Color", new List<string>() { "green", "blue" } }
             };
-            Hashtable parameters = new Hashtable()
-            {
-               { "filters", filters } 
-            };
-
             SearchRequest req = new SearchRequest(this.Query);
             req.Filters = filters;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
@@ -64,11 +59,6 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetSearchResultsWithResultParams()
         {
-            Hashtable parameters = new Hashtable()
-            {
-               { "page", 3 },
-               { "resultsPerPage", 1 }
-            };
             SearchRequest req = new SearchRequest(this.Query);
             req.Page = 3;
             req.ResultsPerPage = 1;

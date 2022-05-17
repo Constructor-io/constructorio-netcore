@@ -1,5 +1,5 @@
 using System;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Pod
@@ -8,10 +8,10 @@ namespace Constructorio_NET
 {
     public class ResultPod {
 
-        [JsonPropertyName("display_name")]
+        [JsonProperty("display_name")]
         public String DisplayName { get; set; }
 
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public String Id { get; set; }
 
     }
