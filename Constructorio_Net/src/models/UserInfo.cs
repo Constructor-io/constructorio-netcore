@@ -55,7 +55,7 @@ namespace Constructorio_NET
 
         public void setSessionId(int sessionId)
         {
-            if ((this.sessionId <= 0))
+            if ((sessionId <= 0))
             {
                 throw new System.ArgumentException("Session ID cannot be less than or equal to 0.");
             }
@@ -68,8 +68,7 @@ namespace Constructorio_NET
 
         public void setClientId(string clientId)
         {
-            if (((this.clientId == null)
-                        || string.IsNullOrEmpty(this.clientId.Trim())))
+            if (string.IsNullOrEmpty(clientId))
             {
                 throw new System.ArgumentException("Client ID cannot be null or an empty string.");
             }
@@ -82,8 +81,7 @@ namespace Constructorio_NET
 
         public void setUserId(string userId)
         {
-            if (((this.userId == null)
-                        || string.IsNullOrEmpty(this.userId.Trim())))
+            if (string.IsNullOrEmpty(userId))
             {
                 throw new System.ArgumentException("User ID cannot be an empty string.");
             }
@@ -96,7 +94,7 @@ namespace Constructorio_NET
 
         public void setUserSegments(List<string> userSegments)
         {
-            if ((this.userSegments == null))
+            if ((userSegments == null))
             {
                 throw new System.ArgumentException("User segments cannot be null.");
             }
@@ -109,8 +107,7 @@ namespace Constructorio_NET
 
         public void setForwardedFor(string forwardedFor)
         {
-            if (((this.forwardedFor == null)
-                        || string.IsNullOrEmpty(this.forwardedFor.Trim())))
+            if (string.IsNullOrEmpty(forwardedFor))
             {
                 throw new System.ArgumentException("Forwarded for cannot be null or an empty string.");
             }
@@ -123,7 +120,7 @@ namespace Constructorio_NET
 
         public void setUserAgent(string userAgent)
         {
-            if ((this.userAgent == null))
+            if (string.IsNullOrEmpty(userAgent))
             {
                 throw new System.ArgumentException("User agent cannot be null.");
             }

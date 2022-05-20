@@ -22,9 +22,9 @@ namespace Constructorio_NET.Tests
     {
       this.Options = new Hashtable()
       {
-        { "serviceUrl", this.ServiceUrl },
-        { "apiKey", this.ApiKey },
-        { "version", this.Version }
+        { Constants.SERVICE_URL, this.ServiceUrl },
+        { Constants.API_KEY, this.ApiKey },
+        { Constants.VERSION, this.Version }
       };
     }
 
@@ -68,9 +68,9 @@ namespace Constructorio_NET.Tests
       List<string> paths = new List<string> { "search", this.Query };
       Hashtable queryParams = new Hashtable()
       {
-        { "clientId", ClientId },
-        { "sessionId", SessionId },
-        { "section", "Search Suggestions" },
+        { Constants.CLIENT_ID, ClientId },
+        { Constants.SESSION_ID, SessionId },
+        { Constants.SECTION, "Search Suggestions" },
       };
 
       string url = Helpers.MakeUrl(this.Options, paths, queryParams);
@@ -89,7 +89,7 @@ namespace Constructorio_NET.Tests
       };
       Hashtable queryParams = new Hashtable()
       {
-        { "filters", filters }
+        { Constants.FILTERS, filters }
       };
 
       string url = Helpers.MakeUrl(this.Options, paths, queryParams);
@@ -109,7 +109,7 @@ namespace Constructorio_NET.Tests
       };
       Hashtable queryParams = new Hashtable()
       {
-        { "testCells", testCells }
+        { Constants.TEST_CELLS, testCells }
       };
 
       string url = Helpers.MakeUrl(this.Options, paths, queryParams);
@@ -125,7 +125,7 @@ namespace Constructorio_NET.Tests
       List<string> segments = new List<string>() { "mobile-web", "under-30" };
       Hashtable queryParams = new Hashtable()
       {
-        { "segments", segments }
+        { Constants.SEGMENTS, segments }
       };
 
       string url = Helpers.MakeUrl(this.Options, paths, queryParams);
@@ -141,7 +141,7 @@ namespace Constructorio_NET.Tests
       List<string> hiddenFields = new List<string>() { "inventory", "margin" };
       Hashtable queryParams = new Hashtable()
       {
-        { "hiddenFields", hiddenFields }
+        { Constants.HIDDEN_FIELDS, hiddenFields }
       };
 
       string url = Helpers.MakeUrl(this.Options, paths, queryParams);
@@ -161,8 +161,8 @@ namespace Constructorio_NET.Tests
       };
       Hashtable queryParams = new Hashtable()
       {
-        { "section", "Search Suggestions" },
-        { "fmtOptions", fmtOptions }
+        { Constants.SECTION, "Search Suggestions" },
+        { Constants.FMT_OPTIONS, fmtOptions }
       };
 
       string url = Helpers.MakeUrl(this.Options, paths, queryParams);
