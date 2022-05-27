@@ -1,33 +1,59 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Constructorio_NET
 {
-  public class Autocomplete
-  {
-    private Hashtable options;
-    public Autocomplete(Hashtable options)
+    public class Autocomplete : Helpers
     {
-      this.options = options;
-    }
-    private string CreateAutocompleteUrl(string query, Hashtable parameters, Hashtable userParameters)
-    {
-      string url = "url";
+        private Hashtable Options;
 
-      return url;
-    }
+        /// <summary>
+        /// Interface for autocomplete related API calls
+        /// </summary>
+        internal Autocomplete(Hashtable options)
+        {
+            this.Options = options;
+        }
+        internal string CreateAutocompleteUrl(AutocompleteRequest req)
+        {
+            Hashtable queryParams = req.GetUrlParameters();
+            List<string> paths = new List<string> { "autocomplete" , req.Query };
 
-    /// <summary>
-    /// Retrieve autocomplete results from API
-    /// </summary>
-    /// <param name="query"></param>
-    /// <param name="parameters"></param>
-    /// <param name="userParameters"></param>
-    /// <returns></returns>
-    public string GetAutocompleteResults(string podId, Hashtable parameters, Hashtable userParameters)
-    {
-      string url = CreateAutocompleteUrl(podId, parameters, userParameters);
-      return podId;
+            return Helpers.MakeUrl(this.Options, paths, queryParams);
+        }
+
+        /// <summary>
+        /// Retrieve Autocomplete results from API
+        /// </summary>
+        /// <param name="AutocompleteRequest">Constructorio's request object</param>
+        /// <returns>Constructorio's response object</returns>
+        public AutocompleteResponse GetAutocompleteResults(AutocompleteRequest recommendationsRequest)
+        {
+            string url;
+            Task<string> task;
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+
+            try
+            {
+                url = CreateAutocompleteUrl(recommendationsRequest);
+                requestHeaders = recommendationsRequest.GetRequestHeaders();
+                task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (task.Result != null)
+            {
+                return JsonConvert.DeserializeObject<AutocompleteResponse>(task.Result);
+            }
+
+            throw new ConstructorException("GetAutocompleteResults response data is malformed");
+        }
     }
-  }
 }
