@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Constructorio_NET
 {
     /**
-     * Constructor.io Browse Facet Optiohns Request
+     * Constructor.io Browse Facet Options Request
      */
     public class BrowseFacetOptionsRequest
     {
@@ -20,6 +20,7 @@ namespace Constructorio_NET
         /// <summary>
         /// Creates a browse facet options request
         /// </summary>
+        /// <param name="facetName"></param>
         public BrowseFacetOptionsRequest(string facetName)
         {
             FmtOptions = new Dictionary<string, string>();

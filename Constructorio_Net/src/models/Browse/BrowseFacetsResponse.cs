@@ -9,6 +9,9 @@ namespace Constructorio_NET
 {
     public class BrowseFacetsResponse
     {
+        [JsonProperty("result_id")]
+        public String ResultId { get; set; }
+
         [JsonProperty("response")]
         public BrowseFacetsResponseInner Response { get; set; }
 
