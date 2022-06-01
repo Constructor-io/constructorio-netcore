@@ -11,9 +11,9 @@ namespace Constructorio_NET.Tests
         private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
         private string ClientId = "r4nd-cl1ent-1d";
         private Hashtable Options = new Hashtable();
-        private string Query = "item";
         private int SessionId = 4;
         private Hashtable UserParameters = new Hashtable();
+        private UserInfo userInfo = null;
         private string filterName = "Color";
         private string filterValue = "Blue";
 
@@ -29,6 +29,7 @@ namespace Constructorio_NET.Tests
                 { Constants.CLIENT_ID, ClientId },
                 { Constants.SESSION_ID, SessionId }
             };
+            this.userInfo = new UserInfo(ClientId, SessionId);
         }
 
         [Test]
@@ -40,6 +41,20 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
+        }
+
+        [Test]
+        public void GetBrowseResultsWithUserInfo()
+        {
+            BrowseRequest req = new BrowseRequest(filterName, filterValue);
+            req.UserInfo = this.userInfo;
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            BrowseResponse res = constructorio.Browse.GetBrowseResults(req);
+            Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
+            Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
+            Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
 
         [Test]
@@ -56,6 +71,7 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
 
         [Test]
@@ -68,6 +84,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(1, (Int64)res.Request["num_results_per_page"], "Expect request to include page parameter");
             Assert.AreEqual(res.Response.TotalNumResults, 1, "total number of results expected to be 1");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
     }
 
@@ -80,6 +97,7 @@ namespace Constructorio_NET.Tests
         private string Query = "item";
         private int SessionId = 4;
         private Hashtable UserParameters = new Hashtable();
+        private UserInfo userInfo = null;
         private string filterName = "Color";
         private string filterValue = "Blue";
         private List<string> itemIds = new List<string>() { "10001", "10002" };
@@ -96,6 +114,7 @@ namespace Constructorio_NET.Tests
                 { Constants.CLIENT_ID, ClientId },
                 { Constants.SESSION_ID, SessionId }
             };
+            this.userInfo = new UserInfo(ClientId, SessionId);
         }
 
         [Test]
@@ -107,6 +126,20 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
+        }
+
+        [Test]
+        public void GetBrowseItemsResultsWithUserInfo()
+        {
+            BrowseItemsRequest req = new BrowseItemsRequest(itemIds);
+            req.UserInfo = this.userInfo;
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            BrowseResponse res = constructorio.Browse.GetBrowseItemsResult(req);
+            Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
+            Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
+            Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
 
         [Test]
@@ -123,6 +156,7 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
 
         [Test]
@@ -135,6 +169,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(1, (Int64)res.Request["num_results_per_page"], "Expect request to include page parameter");
             Assert.AreEqual(res.Response.TotalNumResults, 2, "total number of results expected to be 2");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
     }
 
@@ -174,6 +209,7 @@ namespace Constructorio_NET.Tests
             BrowseFacetsResponse res = constructorio.Browse.GetBrowseFacetsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
 
         [Test]
@@ -185,6 +221,7 @@ namespace Constructorio_NET.Tests
             BrowseFacetsResponse res = constructorio.Browse.GetBrowseFacetsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.AreEqual(res.Response.Facets.Count, 1, "length of facets expected to be equal to 1");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
 
         [Test]
@@ -197,6 +234,7 @@ namespace Constructorio_NET.Tests
             BrowseFacetsResponse res = constructorio.Browse.GetBrowseFacetsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
     }
 
@@ -234,6 +272,7 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseFacetOptionsResponse res = constructorio.Browse.GetBrowseFacetOptionsResult(req);
             Assert.AreEqual(res.Response.Facets.Count, 1, "length of facets expected to be equal to 1");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
 
         [Test]
@@ -245,6 +284,7 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseFacetOptionsResponse res = constructorio.Browse.GetBrowseFacetOptionsResult(req);
             Assert.GreaterOrEqual(res.Response.Facets.Count, 1, "length of facets expected to be equal to 1");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
         }
     }
 }

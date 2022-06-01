@@ -41,7 +41,6 @@ namespace Constructorio_NET
             {
                 url = CreateBrowseUrl(browseRequest);
                 requestHeaders = browseRequest.GetRequestHeaders();
-                
                 task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)
