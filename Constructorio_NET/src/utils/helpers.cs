@@ -41,14 +41,14 @@ namespace Constructorio_NET
       {
         if (param.Value.GetType() == typeof(string))
         {
-          string encodedParam = OurEscapeDataString(param.Value.ToString());
-          string cleanedParam = Uri.UnescapeDataString(encodedParam);
+            string encodedParam = OurEscapeDataString(param.Value.ToString());
+            string cleanedParam = Uri.UnescapeDataString(encodedParam);
 
-          cleanedParams.Add(param.Key, cleanedParam);
+            cleanedParams.Add(param.Key, cleanedParam);
         }
         else
         {
-          cleanedParams.Add(param.Key, param.Value);
+            cleanedParams.Add(param.Key, param.Value);
         }
       }
 
@@ -64,96 +64,108 @@ namespace Constructorio_NET
     /// <returns>string</returns>
     protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams)
     {
-      string url = (string)options[Constants.SERVICE_URL];
+        string url = (string)options[Constants.SERVICE_URL];
 
-      foreach (var path in paths)
-      {
-        url += "/" + HttpUtility.UrlEncode(path);
-      }
-
-      url += $"?key={options[Constants.API_KEY]}&c={options[Constants.VERSION]}";
-
-      // Generate url params query string
-      if (queryParams != null && queryParams.Count != 0)
-      {
-        if (queryParams.Contains(Constants.CLIENT_ID))
+        foreach (var path in paths)
         {
-          url += $"&{Constants.CLIENT_ID}={OurEscapeDataString((string)queryParams[Constants.CLIENT_ID])}";
-          queryParams.Remove(Constants.CLIENT_ID);
+            url += "/" + HttpUtility.UrlEncode(path);
         }
-        if (queryParams.Contains(Constants.SESSION_ID))
-        {
-          url += $"&{Constants.SESSION_ID}={OurEscapeDataString(queryParams[Constants.SESSION_ID].ToString())}";
-          queryParams.Remove(Constants.SESSION_ID);
-        }
-        // Add filters to query string
-        if (queryParams.Contains(Constants.FILTERS))
-        {
-          Dictionary<string, List<string>> filters = (Dictionary<string, List<string>>)queryParams[Constants.FILTERS]; 
-          queryParams.Remove(Constants.FILTERS);
 
-          foreach (var filter in filters)
-          {
-            string filterGroup = (string)filter.Key;
+        url += $"?key={options[Constants.API_KEY]}&c={options[Constants.VERSION]}";
 
-            foreach (string filterOption in (List<string>)filter.Value)
+        // Generate url params query string
+        if (queryParams != null && queryParams.Count != 0)
+        {
+            if (queryParams.Contains(Constants.CLIENT_ID))
             {
-              url += $"&{Constants.FILTERS}{OurEscapeDataString("[" + filterGroup + "]")}={OurEscapeDataString(filterOption)}";
+                url += $"&{Constants.CLIENT_ID}={OurEscapeDataString((string)queryParams[Constants.CLIENT_ID])}";
+                queryParams.Remove(Constants.CLIENT_ID);
             }
-          }
-        }
-        // Add test cells to query string
-        if (queryParams.Contains(Constants.TEST_CELLS))
-        {
-          Dictionary<string, string> testCells = (Dictionary<string, string>)queryParams[Constants.TEST_CELLS]; 
-          queryParams.Remove(Constants.TEST_CELLS);
-
-          foreach (var testCell in testCells)
-          {
-            url += $"&ef-{OurEscapeDataString(testCell.Key)}={OurEscapeDataString(testCell.Value)}";
-          }
-        }
-        // Add format options to query string
-        if (queryParams.Contains(Constants.FMT_OPTIONS))
-        {
-          Dictionary<string, string> fmtOptions = (Dictionary<string, string>)queryParams[Constants.FMT_OPTIONS];
-          queryParams.Remove(Constants.FMT_OPTIONS);
-
-          foreach (var fmtOption in fmtOptions)
-          {
-            url += $"&{Constants.FMT_OPTIONS}{OurEscapeDataString("[" + fmtOption.Key + "]")}={OurEscapeDataString(fmtOption.Value)}";
-          }
-        }
-
-        // Add remaining query params to query string
-        foreach (DictionaryEntry queryParam in queryParams)
-        {
-          string paramKey = (string)queryParam.Key;
-          Type valueDataType = queryParam.Value.GetType();
-
-          if (valueDataType == typeof(string))
-          {
-            url += $"&{OurEscapeDataString(paramKey)}={OurEscapeDataString((string)queryParam.Value)}";
-          }
-          else if (valueDataType == typeof(int))
-          {
-            url += $"&{OurEscapeDataString(paramKey)}={OurEscapeDataString(queryParam.Value.ToString())}";
-          }
-          else if (valueDataType == typeof(List<string>))
-          {
-            foreach (string listValue in (List<string>)queryParam.Value)
+            if (queryParams.Contains(Constants.SESSION_ID))
             {
-              url += $"&{paramKey}={OurEscapeDataString(listValue)}";
+                url += $"&{Constants.SESSION_ID}={OurEscapeDataString(queryParams[Constants.SESSION_ID].ToString())}";
+                queryParams.Remove(Constants.SESSION_ID);
             }
-          }
+            // Add filters to query string
+            if (queryParams.Contains(Constants.FILTERS))
+            {
+                Dictionary<string, List<string>> filters = (Dictionary<string, List<string>>)queryParams[Constants.FILTERS];
+                queryParams.Remove(Constants.FILTERS);
+
+                foreach (var filter in filters)
+                {
+                    string filterGroup = (string)filter.Key;
+
+                    foreach (string filterOption in (List<string>)filter.Value)
+                    {
+                        url += $"&{Constants.FILTERS}{OurEscapeDataString("[" + filterGroup + "]")}={OurEscapeDataString(filterOption)}";
+                    }
+                }
+            }
+            // Add test cells to query string
+            if (queryParams.Contains(Constants.TEST_CELLS))
+            {
+                Dictionary<string, string> testCells = (Dictionary<string, string>)queryParams[Constants.TEST_CELLS];
+                queryParams.Remove(Constants.TEST_CELLS);
+
+                foreach (var testCell in testCells)
+                {
+                    url += $"&ef-{OurEscapeDataString(testCell.Key)}={OurEscapeDataString(testCell.Value)}";
+                }
+            }
+            // Add format options to query string
+            if (queryParams.Contains(Constants.FMT_OPTIONS))
+            {
+                Dictionary<string, string> fmtOptions = (Dictionary<string, string>)queryParams[Constants.FMT_OPTIONS];
+                queryParams.Remove(Constants.FMT_OPTIONS);
+
+                foreach (var fmtOption in fmtOptions)
+                {
+                    url += $"&{Constants.FMT_OPTIONS}{OurEscapeDataString("[" + fmtOption.Key + "]")}={OurEscapeDataString(fmtOption.Value)}";
+                }
+            }
+
+            // Add hidden fields as fmt_options
+            if (queryParams.Contains(Constants.HIDDEN_FIELDS))
+            {
+                List<string> hiddenFields = (List<string>)queryParams[Constants.HIDDEN_FIELDS];
+                queryParams.Remove(Constants.HIDDEN_FIELDS);
+
+                foreach (var hiddenField in hiddenFields)
+                {
+                    url += $"&{Constants.FMT_OPTIONS}{OurEscapeDataString("[" + Constants.HIDDEN_FIELDS + "]")}={OurEscapeDataString(hiddenField)}";
+                }
+            }
+
+            // Add remaining query params to query string
+            foreach (DictionaryEntry queryParam in queryParams)
+            {
+              string paramKey = (string)queryParam.Key;
+              Type valueDataType = queryParam.Value.GetType();
+
+              if (valueDataType == typeof(string))
+              {
+                  url += $"&{OurEscapeDataString(paramKey)}={OurEscapeDataString((string)queryParam.Value)}";
+              }
+              else if (valueDataType == typeof(int))
+              {
+                  url += $"&{OurEscapeDataString(paramKey)}={OurEscapeDataString(queryParam.Value.ToString())}";
+              }
+              else if (valueDataType == typeof(List<string>))
+              {
+                foreach (string listValue in (List<string>)queryParam.Value)
+                {
+                    url += $"&{paramKey}={OurEscapeDataString(listValue)}";
+                }
+              }
+            }
+
+          long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+          url += $"&_dt={time}";
         }
 
-        long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        url += $"&_dt={time}";
+        return url;
       }
-
-      return url;
-    }
 
     /// <summary>
     /// Make a http request
@@ -173,13 +185,13 @@ namespace Constructorio_NET
         httpRequest.Headers.Add((string)header.Key, (string)header.Value);
       }
 
+      new MultipartFormDataContent().Add(stream, "items", "items.csv");
+
       if (requestBody != null)
       {
         StringContent reqContent = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
         httpRequest.Content = reqContent;
       }
-
-      new MultipartFormDataContent().Add(stream, "items", "items.csv");
 
       HttpResponseMessage response = await client.SendAsync(httpRequest);
       HttpContent resContent = response.Content;
