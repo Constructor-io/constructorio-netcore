@@ -176,7 +176,7 @@ namespace Constructorio_NET
     /// <param name="requestBody">Key values pairs used for the POST body</param>
     /// <param name="stream">Key values pairs used for the POST body</param>
     /// <returns>Task</returns>
-    internal static async Task<string> MakeHttpRequest(HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, Hashtable requestBody, StreamContent stream)
+    internal static async Task<string> MakeHttpRequest(HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, Hashtable requestBody = null, Dictionary<string, StreamContent> files = null)
     {
       HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
 
@@ -185,7 +185,7 @@ namespace Constructorio_NET
         httpRequest.Headers.Add((string)header.Key, (string)header.Value);
       }
 
-      new MultipartFormDataContent().Add(stream, "items", "items.csv");
+      new MultipartFormDataContent().Add(files["items"], "items", "items.csv");
 
       if (requestBody != null)
       {

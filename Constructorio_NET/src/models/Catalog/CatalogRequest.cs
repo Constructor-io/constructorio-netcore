@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 
 namespace Constructorio_NET
 {
@@ -13,7 +14,7 @@ namespace Constructorio_NET
         /// <value>
         /// Collection of files to upload
         /// </value>
-        public Dictionary<string, string> Files { get; set; }
+        public Dictionary<string, StreamContent> Files { get; set; }
         /// <value>
         /// The name of the section 
         /// </value>
@@ -32,7 +33,7 @@ namespace Constructorio_NET
         /// Creates a catalog request
         /// </summary>
         /// <param name="query"></param>
-        public CatalogRequest(Dictionary<string, string> files)
+        public CatalogRequest(Dictionary<string, StreamContent> files)
         // public CatalogRequest(Dictionary<string, FileStream> files)
         {
             // foreach (var file in files)
@@ -55,10 +56,11 @@ namespace Constructorio_NET
         {
             Hashtable parameters = new Hashtable();
 
-            if (this.Section != null)
+            if (this.Section == null)
             {
-                parameters.Add(Constants.SECTION, this.Section);
+                this.Section = "Products";
             }
+            parameters.Add(Constants.SECTION, this.Section);
 
             return parameters;
         }

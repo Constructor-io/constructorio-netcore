@@ -24,7 +24,7 @@ namespace Constructorio_NET.Tests
         {
             this.Options = new Hashtable()
             {
-                { "apiKey", this.ApiKey }
+                { Constants.API_KEY, this.ApiKey }
             };
             this.UserParameters = new Hashtable()
             {
@@ -33,18 +33,20 @@ namespace Constructorio_NET.Tests
             };
         }
 
-        // [Test]
-        // public void GetSearchResults()
-        // {
-        //     StreamContent stream = new StreamContent(File.OpenRead("../../../items.csv"));
-        //     stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+        [Test]
+        public void UploadCatalog()
+        {
+            StreamContent stream = new StreamContent(File.OpenRead("./../../../resources/items.csv"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
 
-        //     Dictionary<string, string> files = new Dictionary<string, string>() {
-        //         { "items", "../../../items.csv" }
-        //     };
-        //     ConstructorIO constructorio = new ConstructorIO(this.Options);
-        //     CatalogRequest req = new CatalogRequest(files);
-        //     string res = constructorio.Catalog.CreateCatalogUrl(req);
-        // }
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>() {
+                { "items", stream }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            CatalogRequest req = new CatalogRequest(files);
+            string url = constructorio.Catalog.CreateCatalogUrl(req);
+            Console.WriteLine(url);
+            // constructorio.Catalog.ReplaceCatalog(req);
+        }
     }
 }
