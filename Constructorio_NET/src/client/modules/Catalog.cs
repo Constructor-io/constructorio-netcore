@@ -70,19 +70,23 @@ namespace Constructorio_NET
 
     public string CreateCatalogUrl(CatalogRequest req)
     {
-      string filePath = "../../../items.csv";
       // Hashtable queryParams = req.GetUrlParameters();
       List<string> paths = new List<string> { "v1", "catalog" };
       // Stream stream = File.OpenRead(url);
       // byte[] buffer = ReadToEnd(stream);
       Hashtable queryParams = req.GetUrlParameters();
       Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
-      string url = Helpers.MakeUrl(this.Options, paths, queryParams);
+      Hashtable omittedQueryParams = new Hashtable()
+      {
+        { "dt", true },
+        { "c", true },
+      };
+      string url = Helpers.MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
       Task<string> task = Helpers.MakeHttpRequest(HttpMethod.Post, url, requestHeaders, null, req.Files);
       return url;
     }
 
-    public void ReplaceCatalog(CatalogRequest catalogRequest)
+    public void UpdateCatalog(CatalogRequest catalogRequest)
     {
       string url;
       Task<string> task;
@@ -92,6 +96,8 @@ namespace Constructorio_NET
       {
         url = CreateCatalogUrl(catalogRequest);
         requestHeaders = catalogRequest.GetRequestHeaders();
+        string encodedToken = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes($"{this.Options["apiToken"]}:"));
+        requestHeaders.Add("Authorization", $"Basic {encodedToken}");
         task = Helpers.MakeHttpRequest(new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
       }
       catch (Exception e)
@@ -105,7 +111,7 @@ namespace Constructorio_NET
         // return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
       }
 
-      // throw new ConstructorException("ReplaceCatalog response data is malformed");
+      throw new ConstructorException("UpdateCatalog response data is malformed");
       // catalogRequest.
       // File.Create("url");
       // Helpers.MakeHttpRequest();

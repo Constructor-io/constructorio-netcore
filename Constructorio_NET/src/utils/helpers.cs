@@ -62,7 +62,7 @@ namespace Constructorio_NET
     /// <param name="paths"></param>
     /// <param name="queryParams"></param>
     /// <returns>string</returns>
-    protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams)
+    protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams, Hashtable omittedQueryParams = null)
     {
         string url = (string)options[Constants.SERVICE_URL];
 
@@ -71,7 +71,12 @@ namespace Constructorio_NET
             url += "/" + HttpUtility.UrlEncode(path);
         }
 
-        url += $"?key={options[Constants.API_KEY]}&c={options[Constants.VERSION]}";
+        url += $"?key={options[Constants.API_KEY]}";
+
+        if (omittedQueryParams == null || omittedQueryParams["c"] == null)
+        {
+          url += $"&c={options[Constants.VERSION]}";
+        }
 
         // Generate url params query string
         if (queryParams != null && queryParams.Count != 0)
@@ -161,7 +166,11 @@ namespace Constructorio_NET
             }
 
           long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-          url += $"&_dt={time}";
+
+          if (omittedQueryParams == null || omittedQueryParams["dt"] == null)
+          {
+            url += $"&_dt={time}";
+          }
         }
 
         return url;
@@ -185,9 +194,13 @@ namespace Constructorio_NET
         httpRequest.Headers.Add((string)header.Key, (string)header.Value);
       }
 
-      new MultipartFormDataContent().Add(files["items"], "items", "items.csv");
-
-      if (requestBody != null)
+      if (files != null)
+      {
+        var formData = new MultipartFormDataContent();
+        formData.Add(files["items"], "items", "items.csv");
+        httpRequest.Content = formData;
+      }
+      else if (requestBody != null)
       {
         StringContent reqContent = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
         httpRequest.Content = reqContent;
