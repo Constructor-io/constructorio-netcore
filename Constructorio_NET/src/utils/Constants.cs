@@ -23,5 +23,7 @@ namespace Constructorio_NET
         public const string USER_AGENT = "User-Agent";
         public const string USER_IP = "X-Forwarded-For";
         public const string VARIATIONS_MAP = "variations_map";
+        public const string FORCE = "force";
+        public const string NOTIFICATION_EMAIL = "notification_email";
     }
 }

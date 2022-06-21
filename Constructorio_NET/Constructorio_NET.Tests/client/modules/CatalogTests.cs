@@ -25,6 +25,7 @@ namespace Constructorio_NET.Tests
             this.Options = new Hashtable()
             {
                 { Constants.API_KEY, this.ApiKey },
+                { "apiToken", "95bk4jJxsYMFYbXs9B4V6CW8gUEQCh" },
             };
             this.UserParameters = new Hashtable()
             {
@@ -38,7 +39,6 @@ namespace Constructorio_NET.Tests
         {
             StreamContent stream = new StreamContent(File.OpenRead("./../../../resources/items.csv"));
             stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
-
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
                 { "items", stream }

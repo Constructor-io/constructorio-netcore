@@ -197,7 +197,17 @@ namespace Constructorio_NET
       if (files != null)
       {
         var formData = new MultipartFormDataContent();
-        formData.Add(files["items"], "items", "items.csv");
+
+        if (files.ContainsKey("items")) {
+          formData.Add(files["items"], "items", "items.csv");
+        }
+        if (files.ContainsKey("variations")) {
+          formData.Add(files["variations"], "variations", "variations.csv");
+        }
+        if (files.ContainsKey("item_groups")) {
+          formData.Add(files["item_groups"], "item_groups", "item_groups.csv");
+        }
+
         httpRequest.Content = formData;
       }
       else if (requestBody != null)
@@ -211,6 +221,23 @@ namespace Constructorio_NET
       string result = await resContent.ReadAsStringAsync();
 
       return result;
+    }
+
+    /// <summary>
+    /// Create and add authorization headers
+    /// </summary>
+    /// <param name="options">Main options object</param>
+    /// <param name="requestHeaders">Headers to send with the request</param>
+    /// <returns></returns>
+    internal static void CreateAuthHeaders(Hashtable options, Dictionary<string, string> requestHeaders)
+    {
+      if (options["apiToken"] == null)
+      {
+        throw new ConstructorException("apiToken was not found");
+      }
+
+      string encodedToken = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes($"{options["apiToken"]}:"));
+      requestHeaders.Add("Authorization", $"Basic {encodedToken}");
     }
   }
 }
