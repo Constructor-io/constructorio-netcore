@@ -357,4 +357,10 @@ log.txt
 # coverage reports
 coverage/
 
+# csv catalog files
+Constructorio_NET/Constructorio_NET.Tests/resources/csv/
+
+# local config
+.config/local.json
+
 .DS_Store

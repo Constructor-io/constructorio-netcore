@@ -1,7 +1,9 @@
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Constructorio_NET.Tests
 {
@@ -16,13 +18,18 @@ namespace Constructorio_NET.Tests
         private UserInfo userInfo = null;
         private string filterName = "Color";
         private string filterValue = "Blue";
+        private List<string> itemIds = new List<string>() { "10001", "10002" };
 
         [SetUp]
         public void Setup()
         {
+            JObject json = JObject.Parse(File.ReadAllText("./../../../../../.config/local.json"));
+            string testApiToken = json.SelectToken("TEST_API_TOKEN").Value<string>();
+
             this.Options = new Hashtable()
             {
-               { Constants.API_KEY, this.ApiKey }
+               { Constants.API_KEY, this.ApiKey },
+               { Constants.API_TOKEN, testApiToken }
             };
             this.UserParameters = new Hashtable()
             {
@@ -86,36 +93,6 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "result_id exists");
         }
-    }
-
-    [TestFixture]
-    public class BrowseItemsTest
-    {
-        private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
-        private string ClientId = "r4nd-cl1ent-1d";
-        private Hashtable Options = new Hashtable();
-        private string Query = "item";
-        private int SessionId = 4;
-        private Hashtable UserParameters = new Hashtable();
-        private UserInfo userInfo = null;
-        private string filterName = "Color";
-        private string filterValue = "Blue";
-        private List<string> itemIds = new List<string>() { "10001", "10002" };
-
-        [SetUp]
-        public void Setup()
-        {
-            this.Options = new Hashtable()
-            {
-               { Constants.API_KEY, this.ApiKey }
-            };
-            this.UserParameters = new Hashtable()
-            {
-                { Constants.CLIENT_ID, ClientId },
-                { Constants.SESSION_ID, SessionId }
-            };
-            this.userInfo = new UserInfo(ClientId, SessionId);
-        }
 
         [Test]
         public void GetBrowseItemsResults()
@@ -171,35 +148,6 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "result_id exists");
         }
-    }
-
-    [TestFixture]
-    public class BrowseFacetsTest
-    {
-        private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
-        private string ClientId = "r4nd-cl1ent-1d";
-        private Hashtable Options = new Hashtable();
-        private string Query = "item";
-        private int SessionId = 4;
-        private Hashtable UserParameters = new Hashtable();
-        private string filterName = "Color";
-        private string filterValue = "Blue";
-        private List<string> itemIds = new List<string>() { "10001", "10002" };
-
-        [SetUp]
-        public void Setup()
-        {
-            this.Options = new Hashtable()
-            {
-               { Constants.API_KEY, this.ApiKey },
-               { Constants.API_TOKEN, "tok_kKJsGqB1ARqjK4fv" },
-            };
-            this.UserParameters = new Hashtable()
-            {
-                { Constants.CLIENT_ID, ClientId },
-                { Constants.SESSION_ID, SessionId }
-            };
-        }
 
         [Test]
         public void GetBrowseFacetsResults()
@@ -236,34 +184,6 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
             Assert.IsNotNull(res.ResultId, "result_id exists");
         }
-    }
-
-    [TestFixture]
-    public class BrowseFacetOptionsTest
-    {
-        private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
-        private string ClientId = "r4nd-cl1ent-1d";
-        private Hashtable Options = new Hashtable();
-        private string Query = "item";
-        private int SessionId = 4;
-        private Hashtable UserParameters = new Hashtable();
-        private string filterName = "Color";
-        private List<string> itemIds = new List<string>() { "10001", "10002" };
-
-        [SetUp]
-        public void Setup()
-        {
-            this.Options = new Hashtable()
-            {
-               { Constants.API_KEY, this.ApiKey },
-               { Constants.API_TOKEN, "tok_kKJsGqB1ARqjK4fv" },
-            };
-            this.UserParameters = new Hashtable()
-            {
-                { Constants.CLIENT_ID, ClientId },
-                { Constants.SESSION_ID, SessionId }
-            };
-        }
 
         [Test]
         public void GetBrowseFacetOptionsResults()
@@ -276,7 +196,7 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseFacetsWithFmtOptionParams()
+        public void GetBrowseFacetOptionsWithFmtOptionParams()
         {
             BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(filterName);
             req.showHiddenFacets = true;
