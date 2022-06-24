@@ -79,6 +79,10 @@
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">Helpers</span></div>
+      <div class="level2"><a class="xref" href="Constructorio_NET.Autocomplete.html">Autocomplete</a></div>
+      <div class="level2"><a class="xref" href="Constructorio_NET.Browse.html">Browse</a></div>
+      <div class="level2"><a class="xref" href="Constructorio_NET.Catalog.html">Catalog</a></div>
+      <div class="level2"><a class="xref" href="Constructorio_NET.Recommendations.html">Recommendations</a></div>
       <div class="level2"><a class="xref" href="Constructorio_NET.Search.html">Search</a></div>
   </div>
   <div class="inheritedMembers">
@@ -106,7 +110,7 @@
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Constructorio_NET.html">Constructorio_NET</a></h6>
-  <h6><strong>Assembly</strong>: Constructorio_Net.dll</h6>
+  <h6><strong>Assembly</strong>: Constructorio_NET.dll</h6>
   <h5 id="Constructorio_NET_Helpers_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class Helpers</code></pre>
@@ -118,7 +122,7 @@
     <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_Helpers_CleanParams_System_Collections_Hashtable_.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers.CleanParams(System.Collections.Hashtable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/utils/helpers.cs/#L35">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/utils/helpers.cs/#L36">View Source</a>
   </span>
   <a id="Constructorio_NET_Helpers_CleanParams_" data-uid="Constructorio_NET.Helpers.CleanParams*"></a>
   <h4 id="Constructorio_NET_Helpers_CleanParams_System_Collections_Hashtable_" data-uid="Constructorio_NET.Helpers.CleanParams(System.Collections.Hashtable)">CleanParams(Hashtable)</h4>
@@ -163,19 +167,92 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_Helpers_MakeUrl_System_Collections_Hashtable_System_Collections_Generic_List_System_String__System_Collections_Hashtable_.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers.MakeUrl(System.Collections.Hashtable%2CSystem.Collections.Generic.List%7BSystem.String%7D%2CSystem.Collections.Hashtable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_Helpers_MakeHttpRequest_System_Net_Http_HttpMethod_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Hashtable_System_Collections_Generic_Dictionary_System_String_System_Net_Http_StreamContent__.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers.MakeHttpRequest(System.Net.Http.HttpMethod%2CSystem.String%2CSystem.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D%2CSystem.Collections.Hashtable%2CSystem.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Net.Http.StreamContent%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/utils/helpers.cs/#L64">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/utils/helpers.cs/#L188">View Source</a>
+  </span>
+  <a id="Constructorio_NET_Helpers_MakeHttpRequest_" data-uid="Constructorio_NET.Helpers.MakeHttpRequest*"></a>
+  <h4 id="Constructorio_NET_Helpers_MakeHttpRequest_System_Net_Http_HttpMethod_System_String_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Hashtable_System_Collections_Generic_Dictionary_System_String_System_Net_Http_StreamContent__" data-uid="Constructorio_NET.Helpers.MakeHttpRequest(System.Net.Http.HttpMethod,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Hashtable,System.Collections.Generic.Dictionary{System.String,System.Net.Http.StreamContent})">MakeHttpRequest(HttpMethod, String, Dictionary&lt;String, String&gt;, Hashtable, Dictionary&lt;String, StreamContent&gt;)</h4>
+  <div class="markdown level1 summary"><p>Make a http request</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static async Task&lt;string&gt; MakeHttpRequest(HttpMethod httpMethod, string url, Dictionary&lt;string, string&gt; requestHeaders, Hashtable requestBody = null, Dictionary&lt;string, StreamContent&gt; files = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Net.Http.HttpMethod</span></td>
+        <td><span class="parametername">httpMethod</span></td>
+        <td><p>HTTP request method</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">url</span></td>
+        <td><p>Url for the request</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">requestHeaders</span></td>
+        <td><p>Additional headers to send with the request</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Hashtable</span></td>
+        <td><span class="parametername">requestBody</span></td>
+        <td><p>Key values pairs used for the POST body</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Net.Http.StreamContent</span>&gt;</td>
+        <td><span class="parametername">files</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>Task</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_Helpers_MakeUrl_System_Collections_Hashtable_System_Collections_Generic_List_System_String__System_Collections_Hashtable_System_Collections_Generic_Dictionary_System_String_System_Boolean__.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers.MakeUrl(System.Collections.Hashtable%2CSystem.Collections.Generic.List%7BSystem.String%7D%2CSystem.Collections.Hashtable%2CSystem.Collections.Generic.Dictionary%7BSystem.String%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/utils/helpers.cs/#L65">View Source</a>
   </span>
   <a id="Constructorio_NET_Helpers_MakeUrl_" data-uid="Constructorio_NET.Helpers.MakeUrl*"></a>
-  <h4 id="Constructorio_NET_Helpers_MakeUrl_System_Collections_Hashtable_System_Collections_Generic_List_System_String__System_Collections_Hashtable_" data-uid="Constructorio_NET.Helpers.MakeUrl(System.Collections.Hashtable,System.Collections.Generic.List{System.String},System.Collections.Hashtable)">MakeUrl(Hashtable, List&lt;String&gt;, Hashtable)</h4>
+  <h4 id="Constructorio_NET_Helpers_MakeUrl_System_Collections_Hashtable_System_Collections_Generic_List_System_String__System_Collections_Hashtable_System_Collections_Generic_Dictionary_System_String_System_Boolean__" data-uid="Constructorio_NET.Helpers.MakeUrl(System.Collections.Hashtable,System.Collections.Generic.List{System.String},System.Collections.Hashtable,System.Collections.Generic.Dictionary{System.String,System.Boolean})">MakeUrl(Hashtable, List&lt;String&gt;, Hashtable, Dictionary&lt;String, Boolean&gt;)</h4>
   <div class="markdown level1 summary"><p>Makes a URL to issue the requests with.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected static string MakeUrl(Hashtable options, List&lt;string&gt; paths, Hashtable queryParams)</code></pre>
+    <pre><code class="lang-csharp hljs">protected static string MakeUrl(Hashtable options, List&lt;string&gt; paths, Hashtable queryParams, Dictionary&lt;string, bool&gt; omittedQueryParams = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -202,6 +279,11 @@
         <td><span class="parametername">queryParams</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="parametername">omittedQueryParams</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <h5 class="returns">Returns</h5>
@@ -225,7 +307,7 @@
     <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_Helpers_OurEscapeDataString_System_String_.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers.OurEscapeDataString(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/utils/helpers.cs/#L22">View Source</a>
+    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/utils/helpers.cs/#L23">View Source</a>
   </span>
   <a id="Constructorio_NET_Helpers_OurEscapeDataString_" data-uid="Constructorio_NET.Helpers.OurEscapeDataString*"></a>
   <h4 id="Constructorio_NET_Helpers_OurEscapeDataString_System_String_" data-uid="Constructorio_NET.Helpers.OurEscapeDataString(System.String)">OurEscapeDataString(String)</h4>
@@ -280,7 +362,7 @@
                     <a href="https://github.com/Constructor-io/constructorio-netcore/new/csl-1011-net-sdk-create-catalog-endpoints/apiSpec/new?filename=Constructorio_NET_Helpers.md&amp;value=---%0Auid%3A%20Constructorio_NET.Helpers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/utils/helpers.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Constructor-io/constructorio-netcore/blob/csl-1011-net-sdk-create-catalog-endpoints/Constructorio_NET/src/utils/helpers.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -38,7 +38,8 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-        }
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+    }
 
         [Test]
         public void GetSearchResultsWithFilters()
@@ -54,6 +55,7 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -67,6 +69,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(3, (Int64)res.Request["page"], "total number of results expected to be 1");
             Assert.Greater(res.Response.TotalNumResults, 1, "total number of results expected to be 1");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
     }
 }

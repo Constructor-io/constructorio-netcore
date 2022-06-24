@@ -22,8 +22,8 @@ namespace Constructorio_NET.Tests
         [SetUp]
         public void Setup()
         {
-            var myJObject = JObject.Parse(File.ReadAllText("./../../../../../.config/local.json"));
-            string testApiToken = myJObject.SelectToken("TEST_API_TOKEN").Value<string>();
+            JObject json = JObject.Parse(File.ReadAllText("./../../../../../.config/local.json"));
+            string testApiToken = json.SelectToken("TEST_API_TOKEN").Value<string>();
 
             this.Options = new Hashtable()
             {
@@ -33,50 +33,160 @@ namespace Constructorio_NET.Tests
             this.UserParameters = new Hashtable()
             {
                 { "clientId", ClientId },
-                { "sessionId", SessionId }
+                { "sessionId", SessionId },
             };
         }
 
         [Test]
-        public void ReplaceCatalog()
+        public void ReplaceCatalogWithItems()
+        {
+            StreamContent itemsStream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
+            itemsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "items", itemsStream },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            CatalogRequest req = new CatalogRequest(files);
+            CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public void ReplaceCatalogWithVariations()
+        {
+            StreamContent variationsStream = new StreamContent(File.OpenRead("./../../../resources/csv/variations.csv"));
+            variationsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "variations", variationsStream },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            CatalogRequest req = new CatalogRequest(files);
+            CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public void ReplaceCatalogWithItemGroups()
+        {
+            StreamContent itemGroupsStream = new StreamContent(File.OpenRead("./../../../resources/csv/item_groups.csv"));
+            itemGroupsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "item_groups", itemGroupsStream },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            CatalogRequest req = new CatalogRequest(files);
+            CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public void ReplaceCatalogWithNoFiles()
+        {
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>();
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            Assert.Throws<ConstructorException>(() => new CatalogRequest(files));
+        }
+
+        [Test]
+        public void UpdateCatalogWithItems()
         {
             StreamContent stream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
             stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "items", stream }
+                { "items", stream },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             CatalogRequest req = new CatalogRequest(files);
-            constructorio.Catalog.ReplaceCatalog(req);
+            CatalogResponse res = constructorio.Catalog.UpdateCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
 
         [Test]
-        public void UpdateCatalog()
+        public void UpdateCatalogWithVariations()
+        {
+            StreamContent stream = new StreamContent(File.OpenRead("./../../../resources/csv/variations.csv"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "variations", stream },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            CatalogRequest req = new CatalogRequest(files);
+            CatalogResponse res = constructorio.Catalog.UpdateCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public void UpdateCatalogWithItemGroups()
+        {
+            StreamContent stream = new StreamContent(File.OpenRead("./../../../resources/csv/item_groups.csv"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "item_groups", stream },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            CatalogRequest req = new CatalogRequest(files);
+            CatalogResponse res = constructorio.Catalog.UpdateCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public void PatchCatalogWithItems()
         {
             StreamContent stream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
             stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "items", stream }
+                { "items", stream },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             CatalogRequest req = new CatalogRequest(files);
-            constructorio.Catalog.UpdateCatalog(req);
+            CatalogResponse res = constructorio.Catalog.PatchCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
 
         [Test]
-        public void PatchCatalog()
+        public void PatchCatalogWithVariations()
         {
-            StreamContent stream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
+            StreamContent stream = new StreamContent(File.OpenRead("./../../../resources/csv/variations.csv"));
             stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "items", stream }
+                { "variations", stream },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             CatalogRequest req = new CatalogRequest(files);
-            constructorio.Catalog.PatchCatalog(req);
+            CatalogResponse res = constructorio.Catalog.PatchCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public void PatchCatalogWithItemGroups()
+        {
+            StreamContent stream = new StreamContent(File.OpenRead("./../../../resources/csv/item_groups.csv"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "item_groups", stream },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            CatalogRequest req = new CatalogRequest(files);
+            CatalogResponse res = constructorio.Catalog.PatchCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
     }
 }

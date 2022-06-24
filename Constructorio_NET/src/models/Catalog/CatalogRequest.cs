@@ -33,9 +33,10 @@ namespace Constructorio_NET
         /// <param name="files"></param>
         public CatalogRequest(Dictionary<string, StreamContent> files)
         {
+            if (files == null) throw new ArgumentNullException("files is required");
             if (!files.ContainsKey("items") && !files.ContainsKey("variations") && !files.ContainsKey("item_groups"))
             {
-                throw new ArgumentException("Files should contain at least one of 'items', 'variations', 'item_groups' file(s)");
+                throw new ConstructorException("Files should contain at least one of 'items', 'variations', 'item_groups' file(s)");
             }
 
             this.Files = files;

@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 /**
- * Constructor.io Catalog Response
+ * Constructor.io Task Response
  */
 namespace Constructorio_NET
 {
-    public class CatalogResponse {
+  public class CatalogResponse
+  {
+    [JsonProperty("task_id")]
+    public Int32 TaskId { get; set; }
 
-        [JsonPropertyName("result_id")]
-        public String ResultId { get; set; }
-
-        [JsonPropertyName("request")]
-        public Dictionary<String, Object> Request { get; set; }
-    }
+    [JsonProperty("task_status_path")]
+    public string TaskStatusPath { get; set; }
+  }
 }
