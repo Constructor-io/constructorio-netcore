@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 namespace Constructorio_NET
 {
     public class BrowseResponse {
-
         [JsonProperty("result_id")]
         public String ResultId { get; set; }
 
@@ -17,6 +16,5 @@ namespace Constructorio_NET
 
         [JsonProperty("request")]
         public Dictionary<String, Object> Request { get; set; }
-
     }
 }

@@ -8,7 +8,8 @@ using Newtonsoft.Json;
 namespace Constructorio_NET
 {
     public class BrowseResponseInner {
-
+        [JsonProperty("collection")]
+        public CollectionResponse Collection { get; set; }
         [JsonProperty("facets")]
         public List<FilterFacet> Facets { get; set; }
 
@@ -23,7 +24,5 @@ namespace Constructorio_NET
 
         [JsonProperty("sort_options")]
         public List<FilterSortOption> SortOptions { get; set; }
-
     }
-
 }

@@ -15,10 +15,11 @@ namespace Constructorio_NET.Tests
         private Hashtable Options = new Hashtable();
         private int SessionId = 4;
         private Hashtable UserParameters = new Hashtable();
-        private UserInfo userInfo = null;
-        private string filterName = "Color";
-        private string filterValue = "Blue";
-        private List<string> itemIds = new List<string>() { "10001", "10002" };
+        private UserInfo UserInfo = null;
+        private string FilterName = "Color";
+        private string FilterValue = "Blue";
+        private string CollectionId = "test";
+        private List<string> ItemIds = new List<string>() { "10001", "10002" };
 
         [SetUp]
         public void Setup()
@@ -36,13 +37,13 @@ namespace Constructorio_NET.Tests
                 { Constants.CLIENT_ID, ClientId },
                 { Constants.SESSION_ID, SessionId }
             };
-            this.userInfo = new UserInfo(ClientId, SessionId);
+            this.UserInfo = new UserInfo(ClientId, SessionId);
         }
 
         [Test]
         public void GetBrowseResults()
         {
-            BrowseRequest req = new BrowseRequest(filterName, filterValue);
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseResponse res = constructorio.Browse.GetBrowseResults(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
@@ -54,8 +55,8 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetBrowseResultsWithUserInfo()
         {
-            BrowseRequest req = new BrowseRequest(filterName, filterValue);
-            req.UserInfo = this.userInfo;
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
+            req.UserInfo = this.UserInfo;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseResponse res = constructorio.Browse.GetBrowseResults(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
@@ -71,7 +72,7 @@ namespace Constructorio_NET.Tests
             {
                 { "Brand", new List<string>() { "XYZ" } }
             };
-            BrowseRequest req = new BrowseRequest(filterName, filterValue);
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
             req.Filters = filters;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseResponse res = constructorio.Browse.GetBrowseResults(req);
@@ -84,7 +85,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetBrowseResultsWithResultParams()
         {
-            BrowseRequest req = new BrowseRequest(filterName, filterValue);
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
             req.ResultsPerPage = 1;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseResponse res = constructorio.Browse.GetBrowseResults(req);
@@ -95,9 +96,23 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetBrowseResultsWithCollection()
+        {
+            BrowseRequest req = new BrowseRequest("collection_id", this.CollectionId);
+            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            BrowseResponse res = constructorio.Browse.GetBrowseResults(req);
+            Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
+            Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
+            Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.AreEqual(res.Response.Collection.DisplayName, this.CollectionId, "display name should match");
+            Assert.AreEqual(res.Response.Collection.Id, this.CollectionId, "id should match");
+            Assert.IsNotNull(res.ResultId, "result_id exists");
+        }
+
+        [Test]
         public void GetBrowseItemsResults()
         {
-            BrowseItemsRequest req = new BrowseItemsRequest(itemIds);
+            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds);
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseResponse res = constructorio.Browse.GetBrowseItemsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
@@ -109,8 +124,8 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetBrowseItemsResultsWithUserInfo()
         {
-            BrowseItemsRequest req = new BrowseItemsRequest(itemIds);
-            req.UserInfo = this.userInfo;
+            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds);
+            req.UserInfo = this.UserInfo;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseResponse res = constructorio.Browse.GetBrowseItemsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
@@ -126,7 +141,7 @@ namespace Constructorio_NET.Tests
             {
                 { "Brand", new List<string>() { "XYZ" } }
             };
-            BrowseItemsRequest req = new BrowseItemsRequest(itemIds);
+            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds);
             req.Filters = filters;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseResponse res = constructorio.Browse.GetBrowseItemsResult(req);
@@ -139,7 +154,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetBrowseItemsResultsWithResultParams()
         {
-            BrowseItemsRequest req = new BrowseItemsRequest(itemIds);
+            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds);
             req.ResultsPerPage = 1;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseResponse res = constructorio.Browse.GetBrowseItemsResult(req);
@@ -188,7 +203,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetBrowseFacetOptionsResults()
         {
-            BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(filterName);
+            BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(this.FilterName);
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseFacetOptionsResponse res = constructorio.Browse.GetBrowseFacetOptionsResult(req);
             Assert.AreEqual(res.Response.Facets.Count, 1, "length of facets expected to be equal to 1");
@@ -198,7 +213,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetBrowseFacetOptionsWithFmtOptionParams()
         {
-            BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(filterName);
+            BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(this.FilterName);
             req.showHiddenFacets = true;
             req.showProtectedFacets = true;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
