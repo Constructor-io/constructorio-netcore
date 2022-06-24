@@ -62,7 +62,7 @@ namespace Constructorio_NET
     /// <param name="paths"></param>
     /// <param name="queryParams"></param>
     /// <returns>string</returns>
-    protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams, Hashtable omittedQueryParams = null)
+    protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams, Dictionary<string, bool> omittedQueryParams = null)
     {
         string url = (string)options[Constants.SERVICE_URL];
 
@@ -73,7 +73,7 @@ namespace Constructorio_NET
 
         url += $"?key={options[Constants.API_KEY]}";
 
-        if (omittedQueryParams == null || omittedQueryParams["c"] == null)
+        if (omittedQueryParams == null || omittedQueryParams.ContainsKey("c"))
         {
           url += $"&c={options[Constants.VERSION]}";
         }
@@ -167,7 +167,7 @@ namespace Constructorio_NET
 
           long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
-          if (omittedQueryParams == null || omittedQueryParams["dt"] == null)
+          if (omittedQueryParams == null || !omittedQueryParams.ContainsKey("_dt"))
           {
             url += $"&_dt={time}";
           }
@@ -229,9 +229,9 @@ namespace Constructorio_NET
     /// <param name="options">Main options object</param>
     /// <param name="requestHeaders">Headers to send with the request</param>
     /// <returns></returns>
-    internal static void CreateAuthHeaders(Hashtable options, Dictionary<string, string> requestHeaders)
+    internal static void AddAuthHeaders(Hashtable options, Dictionary<string, string> requestHeaders)
     {
-      if (options["apiToken"] == null)
+      if (!options.ContainsKey(Constants.API_TOKEN))
       {
         throw new ConstructorException("apiToken was not found");
       }

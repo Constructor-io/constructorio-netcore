@@ -21,9 +21,9 @@ namespace Constructorio_NET
       List<string> paths = new List<string> { "v1", "catalog" };
       Hashtable queryParams = req.GetUrlParameters();
       Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
-      Hashtable omittedQueryParams = new Hashtable()
+      Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
       {
-        { "dt", true },
+        { "_dt", true },
         { "c", true },
       };
       string url = Helpers.MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
@@ -41,7 +41,7 @@ namespace Constructorio_NET
       {
         url = CreateCatalogUrl(catalogRequest);
         requestHeaders = catalogRequest.GetRequestHeaders();
-        Helpers.CreateAuthHeaders(this.Options, requestHeaders);
+        Helpers.AddAuthHeaders(this.Options, requestHeaders);
         task = Helpers.MakeHttpRequest(new HttpMethod("PUT"), url, requestHeaders, null, catalogRequest.Files);
       }
       catch (Exception e)
@@ -67,7 +67,7 @@ namespace Constructorio_NET
       {
         url = CreateCatalogUrl(catalogRequest);
         requestHeaders = catalogRequest.GetRequestHeaders();
-        Helpers.CreateAuthHeaders(this.Options, requestHeaders);
+        Helpers.AddAuthHeaders(this.Options, requestHeaders);
         task = Helpers.MakeHttpRequest(new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
       }
       catch (Exception e)
@@ -94,7 +94,7 @@ namespace Constructorio_NET
         url = CreateCatalogUrl(catalogRequest);
         url += "&patch_delta=true";
         requestHeaders = catalogRequest.GetRequestHeaders();
-        Helpers.CreateAuthHeaders(this.Options, requestHeaders);
+        Helpers.AddAuthHeaders(this.Options, requestHeaders);
         task = Helpers.MakeHttpRequest(new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
       }
       catch (Exception e)

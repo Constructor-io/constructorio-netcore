@@ -8,9 +8,10 @@ using Newtonsoft.Json;
 namespace Constructorio_NET
 {
     public class BrowseResponseInner {
-
+        [JsonProperty("collection")]
+        public CollectionResponse Collection { get; set; }
         [JsonProperty("facets")]
-        List<FilterFacet> Facets { get; set; }
+        public List<FilterFacet> Facets { get; set; }
 
         [JsonProperty("groups")]
         public List<FilterGroup> Groups { get; set; }
@@ -19,11 +20,9 @@ namespace Constructorio_NET
         public List<Result> Results { get; set; }
 
         [JsonProperty("total_num_results")]
-        public Int32 TotalNumberOfResults { get; set; }
+        public Int32 TotalNumResults { get; set; }
 
         [JsonProperty("sort_options")]
         public List<FilterSortOption> SortOptions { get; set; }
-
     }
-
 }

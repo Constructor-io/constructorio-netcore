@@ -72,7 +72,7 @@ namespace Constructorio_NET.Tests
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
             req.ItemId = new List<String> { "power_drill", "drill" };
-            req.UserInfo = new UserInfo(4, ClientId);
+            req.UserInfo = new UserInfo(ClientId, SessionId);
             req.UserInfo.setUserId("123");
             req.UserInfo.setUserSegments(new List<String>());
             req.UserInfo.getUserSegments().Add("vs");

@@ -17,7 +17,7 @@ namespace Constructorio_NET
 
         private string userAgent;
 
-        public UserInfo(int sessionId, string clientId)
+        public UserInfo(string clientId, int sessionId)
         {
             this.setSessionId(sessionId);
             this.setClientId(clientId);
