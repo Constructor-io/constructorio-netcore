@@ -31,7 +31,7 @@ namespace Constructorio_NET
       return url;
     }
 
-    public void ReplaceCatalog(CatalogRequest catalogRequest)
+    public TaskResponse ReplaceCatalog(CatalogRequest catalogRequest)
     {
       string url;
       Task<string> task;
@@ -51,13 +51,13 @@ namespace Constructorio_NET
 
       if (task.Result != null)
       {
-        // return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
+        return JsonConvert.DeserializeObject<TaskResponse>(task.Result);
       }
 
       throw new ConstructorException("ReplaceCatalog response data is malformed");
     }
 
-    public void UpdateCatalog(CatalogRequest catalogRequest)
+    public TaskResponse UpdateCatalog(CatalogRequest catalogRequest)
     {
       string url;
       Task<string> task;
@@ -77,13 +77,13 @@ namespace Constructorio_NET
 
       if (task.Result != null)
       {
-        // return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
+        return JsonConvert.DeserializeObject<TaskResponse>(task.Result);
       }
 
       throw new ConstructorException("UpdateCatalog response data is malformed");
     }
 
-    public void PatchCatalog(CatalogRequest catalogRequest)
+    public TaskResponse PatchCatalog(CatalogRequest catalogRequest)
     {
       string url;
       Task<string> task;
@@ -104,7 +104,7 @@ namespace Constructorio_NET
 
       if (task.Result != null)
       {
-        // return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
+        return JsonConvert.DeserializeObject<TaskResponse>(task.Result);
       }
 
       throw new ConstructorException("PatchCatalog response data is malformed");

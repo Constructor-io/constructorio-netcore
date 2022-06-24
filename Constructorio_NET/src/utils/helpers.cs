@@ -73,7 +73,7 @@ namespace Constructorio_NET
 
         url += $"?key={options[Constants.API_KEY]}";
 
-        if (omittedQueryParams == null || omittedQueryParams.ContainsKey("c"))
+        if (omittedQueryParams == null || !omittedQueryParams.ContainsKey("c"))
         {
           url += $"&c={options[Constants.VERSION]}";
         }
