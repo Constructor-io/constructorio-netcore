@@ -5,23 +5,11 @@
   "files": [
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.AggregationTypes.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.AggregationTypes.html",
-          "hash": "kPKIl5Cvfjazuf9Vk8zHKDJnO5NIlwL9sFsggD/lSUQ="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Constructorio_NET.Autocomplete.yml",
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Autocomplete.html",
-          "hash": "/L0puNiolva6C0OhyLJiDrz/cVfO7P6WJ5LoJe4IptM="
+          "hash": "ijBBLpcm+waVY5Axz1k2Y5zfNmMNvZ2yRduZK9S2BIo="
         }
       },
       "is_incremental": false,
@@ -33,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.AutocompleteRequest.html",
-          "hash": "ZbgQEFqr3RV5PhW1b18dsFDJn8W0KYM0V++W1lBBrbk="
+          "hash": "Vfwf/7c1sUBC9JMq7cAYueICyNHTf0msfbUyyrKFDk4="
         }
       },
       "is_incremental": false,
@@ -45,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.AutocompleteResponse.html",
-          "hash": "2MMWOmfhF2Ik77reZsWW2qbs6O2xSWYYGUgt4UilQKI="
+          "hash": "WhUoLrt1emzXvbLi7W59TtQqgF7wuknv6YOkU9jMRnA="
         }
       },
       "is_incremental": false,
@@ -57,91 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Browse.html",
-          "hash": "6dHLwrtWbA0Brq8jf27lYbTKG6e5c0Ra4yrO3nvjfF4="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.BrowseFacetOptionsRequest.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.BrowseFacetOptionsRequest.html",
-          "hash": "QI5ID2AUIDZNfnBFYIzMumz7kw9b7G832uUabcPdqAc="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.BrowseFacetOptionsResponse.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.BrowseFacetOptionsResponse.html",
-          "hash": "UhyhEeb62R94Q42rbML71trfKrcwjW5Ou1PM1Nxto/0="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.BrowseFacetOptionsResponseInner.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.BrowseFacetOptionsResponseInner.html",
-          "hash": "GnajLsMoyek5a8tbGGpKM87V/FwagyDBM6G2VdK5bIk="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.BrowseFacetsRequest.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.BrowseFacetsRequest.html",
-          "hash": "ibZ5omzTTUL+7S3ieoAA+p4aE0eZTvlr2g0tK5AtOUc="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.BrowseFacetsResponse.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.BrowseFacetsResponse.html",
-          "hash": "3pROYmz72Crl+2DptTM0AvgkERYMbRYeO95ONBiyULc="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.BrowseFacetsResponseInner.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.BrowseFacetsResponseInner.html",
-          "hash": "F9TQNOSW0zxATrX6plI8KUzV3jlnzrhVKHp1X7mMDlQ="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.BrowseItemsRequest.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.BrowseItemsRequest.html",
-          "hash": "YZt5Vzg20Yr6jum8W6x4NVbqKcbeMB4pXtTy1NbsUBk="
+          "hash": "yr29UxhW8kcBMb/xY0/Q+wk7b4xQ/xDE06jgM1Hwpxg="
         }
       },
       "is_incremental": false,
@@ -153,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.BrowseRequest.html",
-          "hash": "sRxF52tp8Q3mXx4qhdbWGlR7kYOsFkHmWtL959ed+Js="
+          "hash": "ND1RdoeuvPpGNfEms+ywrY9plvfmp5+yT/r1pqr/i6c="
         }
       },
       "is_incremental": false,
@@ -165,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.BrowseResponse.html",
-          "hash": "/yhiO50lTW//CLYOQgz1LgpnoTQ+CAgNvzs8FxxgGKM="
+          "hash": "wYkzv9K2iUBS2fd1BIa7eSsIOxYugZx227D7vTUDKxA="
         }
       },
       "is_incremental": false,
@@ -177,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.BrowseResponseInner.html",
-          "hash": "qbLBvHYScChAGl5LRqrDM2wc0Oq6pC2tCu6xyUv2dOw="
+          "hash": "nrCgkFpe31+bEFCOFX86qk2/p6RVELllTi9KlkumMg8="
         }
       },
       "is_incremental": false,
@@ -189,43 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Catalog.html",
-          "hash": "c/7kMxdGmuiJHYccFDG6xvx0Xf500QObZHnWCLCO9N4="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.CatalogRequest.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.CatalogRequest.html",
-          "hash": "aDYU5SaKkIUvMjZSW0YAHqxa4aU+uJ5kdu2wUGeBkTc="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.CatalogResponse.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.CatalogResponse.html",
-          "hash": "pVSa113nR3hMUj7Pi1gqWoy3L5OE1reHNe+RtrokVX0="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.CollectionResponse.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.CollectionResponse.html",
-          "hash": "Uk6cOBUgq1hEvpnZStXYrJESxAuE4f32hQIiJkVqVlI="
+          "hash": "IRzwNGJiCfjWntSI1Sa6VbFyOlG6fVJw+0fovsRmtlM="
         }
       },
       "is_incremental": false,
@@ -237,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Constants.html",
-          "hash": "TXLaHRJyYOW0Ovhh0r/VHOBXequoOXCXS4QbiZr2VNE="
+          "hash": "hj0KxFmEQ8yqxW5BptZYrQJMYWAXovMRNgTCas22OwM="
         }
       },
       "is_incremental": false,
@@ -249,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.ConstructorException.html",
-          "hash": "+0bLI26vfY7asRKCWJi7durG6TWvpkiWjy5BMrh1CUY="
+          "hash": "8XiHCsh9PL0lKgaxTrWHTuuHVytqChEANTuDua2w7S4="
         }
       },
       "is_incremental": false,
@@ -261,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.ConstructorIO.html",
-          "hash": "HVz48fv9AQmrJfvwG0KArYprU84HcIysWjmx9cE0hjk="
+          "hash": "xcVKMK2FIJfF+Gp7F8cn+o0GT6xqR+omE9cwoEnrGdI="
         }
       },
       "is_incremental": false,
@@ -273,19 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.ConstructorItem.html",
-          "hash": "bN9IWdMXJet27/spB4Ou+1QU19oCZGqWASq5tWi0CpE="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.DTypes.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.DTypes.html",
-          "hash": "cETDuaD7JA4kqngpYsJV5s2WcqOr78B29KejrBmGUSQ="
+          "hash": "jAO5XQ6P8iEG+euOU+0VDuuZ0qLbEWRAFMOqEsA66qc="
         }
       },
       "is_incremental": false,
@@ -297,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.FilterFacet.html",
-          "hash": "um+3ilGbk+7o9L5AmpxU+EIylolxzaYJzZQD2ttbFOs="
+          "hash": "SDGNuuKkvb2IDROqM7uU7QzuSxr6CTbcp0Wrqv4k/7w="
         }
       },
       "is_incremental": false,
@@ -309,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.FilterFacetOption.html",
-          "hash": "90xZ+E+X/5eZQ1YK1a3g71F0VMo5C4B4DJWZSG5X5+o="
+          "hash": "q42uUmzBgxmtMgNaf/SYzsz6eMGqRhJiZ+oJdSIjvyE="
         }
       },
       "is_incremental": false,
@@ -321,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.FilterGroup.html",
-          "hash": "DUX28Tb1j4JWKJP1iZ5nIhDLsqsZvpuV0oBRd4IudJs="
+          "hash": "aHr3PPHtyvhg83PHtUXwsaLIxlYZWnBPzKDOOroh/3c="
         }
       },
       "is_incremental": false,
@@ -333,19 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.FilterSortOption.html",
-          "hash": "GwwL+3VbMozWIWmP3WU9syX+2exTrZn47SYeMGyENU8="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.Group.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.Group.html",
-          "hash": "eGqaAvMHn2OF8McEE6NEobbmvAOaJhhRDJ3ZOhJrdRI="
+          "hash": "CppjK7dzSqjt+6TcdQHKYd7HSVQ9snCFmF6fBrlbv0A="
         }
       },
       "is_incremental": false,
@@ -357,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Helpers.html",
-          "hash": "i23zUsZY1W8uHfxjR1d7l0OFGoo5YEC2ESB++ewLGF0="
+          "hash": "pEoUQ/xpXZ7EC/s5zpG7QqmHbJnK4+tMxTuXHfz7obc="
         }
       },
       "is_incremental": false,
@@ -369,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.NaturalLanguageSearchRequest.html",
-          "hash": "0c1ZaGdlHrKNbd35WDNb2KOvE83AotuSEpHWhBMj9GM="
+          "hash": "OjslpdcxGInBBc0XyZxDTPNcnWyxsZzUIyIHbD78HPE="
         }
       },
       "is_incremental": false,
@@ -381,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Recommendations.html",
-          "hash": "KkvqGMNG0YTVQWny1yjWoAdvXo7eJipbHmW6HRHmBqQ="
+          "hash": "ce4I3NSBPibBPbSxWp+fNNoZ8nFlqY7gwiV1r23yRxA="
         }
       },
       "is_incremental": false,
@@ -393,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.RecommendationsRequest.html",
-          "hash": "IqcXpwv2EZZwTvVbnTiXTtvd4QWipSNvCHRxqqS4Pts="
+          "hash": "dIwdug73iaAjDtIiiM0O96P0zhGlMqGItseMSt2QAqU="
         }
       },
       "is_incremental": false,
@@ -405,7 +249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.RecommendationsResponse.html",
-          "hash": "lvcAQ8BGQyCM2HgHoC5VOIvcQl1ni45Ij3gWKdO6PL0="
+          "hash": "qhpWZywS2mPlQVBGvgRhDV20lG7qVcUswRSVYB3a2fA="
         }
       },
       "is_incremental": false,
@@ -417,7 +261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.RecommendationsResponseInner.html",
-          "hash": "WBtX6A/acCxQhhyhMq2CTjdUEHLZHYRp7NWLbyGfBD8="
+          "hash": "L6plWvb/kXRDUIW6Gan2lR551ajj6J9NfSDsNRLNvSI="
         }
       },
       "is_incremental": false,
@@ -429,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Redirect.html",
-          "hash": "Ngmi9HUxcvp2FW+5TRouyQctMDuxJflf5Fc58sGLTlo="
+          "hash": "iwTpIOgFkgnkaGP8pkTZHTkMsqrrsxDKo4wN5WGXUzU="
         }
       },
       "is_incremental": false,
@@ -441,7 +285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.RedirectData.html",
-          "hash": "YDlmb96wJE+6aBIofDlvv7e9dZajm8nOPRwmKYxpqOg="
+          "hash": "CpFoi7i/HqB7qp9Af3v01HK+D/Qqr7vQJcocZwM5UmU="
         }
       },
       "is_incremental": false,
@@ -453,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Result.html",
-          "hash": "dBUlTOXN06xn5CYMf431JjTplTa5zZSJ5LiGRje4Q3w="
+          "hash": "N5WEGbHofzrjP6N0If9D5+gxUfVVzErqP1XT3j1AQiM="
         }
       },
       "is_incremental": false,
@@ -465,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.ResultData.html",
-          "hash": "LlIZLjoCJmdchYyevd4XqdWwBB12SDRf822nEsnqOAA="
+          "hash": "JjHRhijlgQqYUfweOXyxReAYVZktq4Txd8aZSthSfg4="
         }
       },
       "is_incremental": false,
@@ -477,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.ResultFacet.html",
-          "hash": "oSSBBDZCddKSF1QQ6IRaweMXpr5OAwkADOHvOV8xDJU="
+          "hash": "igdxlPBEzLYcYwrMzVjApLTrRgP9ReEmO+U1Gnyonq4="
         }
       },
       "is_incremental": false,
@@ -489,7 +333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.ResultGroup.html",
-          "hash": "9GaxrNf7d+R64BDW2W9At9kKox7Vuzp4843gXQzBUVk="
+          "hash": "ywxOfaRjknsgySMuh/cX2IuHmHdIJYgm7OWvaCiETCY="
         }
       },
       "is_incremental": false,
@@ -501,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.ResultPod.html",
-          "hash": "vYX/F8crge7DWmTXWDBQ3TQmzeVfIolvuKTpMrKVUW4="
+          "hash": "4KIjhMBSgQTScm5JLlF3MuU2LRPySTvedFshnfmy20c="
         }
       },
       "is_incremental": false,
@@ -513,7 +357,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.Search.html",
-          "hash": "q8FITxBMstzsXjrWHeuTiEv6ddktdSLCPCSbjS3pIKo="
+          "hash": "j4/b4CUIpN+Uu5jL4OEk3pAzZPbpSOUmJ7mgp++61vM="
         }
       },
       "is_incremental": false,
@@ -525,7 +369,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.SearchRequest.html",
-          "hash": "TvOXWHXhzNYlMkXZU0HfxiWxXRb9deC0t11biL14G58="
+          "hash": "3L1/6pC5QjnzOKs73cAfQxETFqgvE0hJuGfOZW+Om3A="
         }
       },
       "is_incremental": false,
@@ -537,7 +381,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.SearchResponse.html",
-          "hash": "fE7PkvK5wb2fN8rZRnfmIzYXEEw5iDry/53nxUbaqek="
+          "hash": "DnYA9J562QzB1oe2S6iUxprV0v1gKV/Pi6taNK+dm0s="
         }
       },
       "is_incremental": false,
@@ -549,7 +393,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.SearchResponseInner.html",
-          "hash": "1YimbG30qVsHgglnHmX6hia12x76+ceB520lMVpTX4A="
+          "hash": "jGnbJ8M6Av1spF2JEkcIduxsyeb3bGOuUtMWuboWvNk="
         }
       },
       "is_incremental": false,
@@ -561,19 +405,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.ServerError.html",
-          "hash": "oKZinqPv9oDGcPqJk1lXlIX//KF/VhvgXJglSbofrvw="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.TasksResponse.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.TasksResponse.html",
-          "hash": "7WIbZzcL80iu2eyOwPvW0cWIvZJkVhDMqCM8SF9Uouk="
+          "hash": "9XQo0mEKQi/LmfggPA3DAVE73t2BjiqjRkdOdHgaDzQ="
         }
       },
       "is_incremental": false,
@@ -585,31 +417,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.UserInfo.html",
-          "hash": "XAt0lpV90OUuoMpVJZdDdcJWDJHrwX5s1BZdKbBy758="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.Value.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.Value.html",
-          "hash": "rugh97N00lsEha3Q2bUJjublYQh9AZc4gziPxU+6LME="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Constructorio_NET.VariationsMap.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Constructorio_NET.VariationsMap.html",
-          "hash": "iFTpjzntfQ6Y3mv9GGYfEG6UEWFT/gY7+b1+lbeBcZo="
+          "hash": "37s16EyTyCzxaHu7H/nQelh/GFIuOr+9siM4zCf3kBc="
         }
       },
       "is_incremental": false,
@@ -621,7 +429,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Constructorio_NET.html",
-          "hash": "zzjbGPf5dAVX5ONmYwxov+oNji76I1hsA/DtjqOwtqI="
+          "hash": "dGRN/K6LuKg4+jsTj0vyBZ2TUtl1dZ6eL1JZi89jxyo="
         }
       },
       "is_incremental": false,
@@ -636,7 +444,7 @@
           "hash": "aCPRYLK32LNL+Cu6temy8edYf6c7SZrRNAe6yCCJs7w="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -645,7 +453,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "ksjU2nwNOSjGtT2D8xJu0DOvwJozsmtVI4DuhaVezxw="
+          "hash": "n0gq6sQ9Hy/3uU79XkcO0KY7E85BlKeovDYPzlGIoFg="
         }
       },
       "is_incremental": false,
@@ -718,8 +526,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 52,
-          "skipped_file_count": 49
+          "total_file_count": 36,
+          "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
