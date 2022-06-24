@@ -1,22 +1,21 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
 /**
- * Constructor.io Browse Response
+ * Constructor.io Browse Facets Response
  */
 namespace Constructorio_NET
 {
-    public class BrowseResponse {
-
+    public class BrowseFacetsResponse
+    {
         [JsonProperty("result_id")]
         public String ResultId { get; set; }
 
         [JsonProperty("response")]
-        public BrowseResponseInner Response { get; set; }
+        public BrowseFacetsResponseInner Response { get; set; }
 
         [JsonProperty("request")]
         public Dictionary<String, Object> Request { get; set; }
-
     }
 }

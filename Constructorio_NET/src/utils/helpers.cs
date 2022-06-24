@@ -61,7 +61,7 @@ namespace Constructorio_NET
         /// <param name="paths"></param>
         /// <param name="queryParams"></param>
         /// <returns>string</returns>
-        protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams)
+        protected static string MakeUrl(Hashtable options, List<String> paths, Hashtable queryParams, bool sendDt = true)
         {
             string url = (string)options[Constants.SERVICE_URL];
 
@@ -158,12 +158,24 @@ namespace Constructorio_NET
                         }
                     }
                 }
+            }
 
+            if (sendDt)
+            {
                 long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 url += $"&_dt={time}";
             }
 
             return url;
+        }
+
+        protected static void addAuthorizationHeaders(Hashtable options, Dictionary<string, string> headers)
+        {
+            if (options.ContainsKey(Constants.API_TOKEN))
+            {
+                byte[] textBytes = Encoding.UTF8.GetBytes((string)options[Constants.API_TOKEN] + ":");
+                headers.Add("Authorization", "Basic " + Convert.ToBase64String(textBytes));
+            }
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ namespace Constructorio_NET
     public static class Constants
     {
         public const string API_KEY = "key";
+        public const string API_TOKEN = "apiToken";
         public const string SERVICE_URL = "service_url";
         public const string CLIENT_ID = "i";
         public const string FILTERS = "filters";
@@ -23,5 +24,9 @@ namespace Constructorio_NET
         public const string USER_AGENT = "User-Agent";
         public const string USER_IP = "X-Forwarded-For";
         public const string VARIATIONS_MAP = "variations_map";
+        public const string ITEM_IDS = "ids";
+        public const string SHOW_HIDDEN_FACETS = "show_hidden_facets";
+        public const string SHOW_PROTECTED_FACETS = "show_protected_facets";
+        public const string FACET_NAME = "facet_name";
     }
 }
