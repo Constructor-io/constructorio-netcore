@@ -27,7 +27,6 @@ namespace Constructorio_NET
         { "c", true },
       };
       string url = Helpers.MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
-      Task<string> task = Helpers.MakeHttpRequest(HttpMethod.Post, url, requestHeaders, null, req.Files);
       return url;
     }
 
