@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Constructorio_NET", ".\src\Constructorio_NET\Constructorio_NET.csproj", "{2730DFD3-3AEB-44E6-A341-699665B8F68C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Constructorio_NET", ".\Constructorio_NET\Constructorio_NET.csproj", "{2730DFD3-3AEB-44E6-A341-699665B8F68C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constructorio_NET.Tests", ".\src\Constructorio_NET.Tests\Constructorio_NET.Tests.csproj", "{9CF1BB83-2989-41C7-ABD2-8A3CF487DC5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constructorio_NET.Tests", ".\Constructorio_NET.Tests\Constructorio_NET.Tests.csproj", "{9CF1BB83-2989-41C7-ABD2-8A3CF487DC5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
