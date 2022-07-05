@@ -16,7 +16,7 @@
          "name": "dotnet-test",
          "group": "coverage",
          "command": "dotnet",
-         "args": [ "test", "/p:CollectCoverage=true","/p:CoverletOutputFormat=cobertura", "/p:CoverletOutput=\"../../coverage/\"", "./Constructorio_NET" ]
+         "args": [ "test", "/p:CollectCoverage=true","/p:CoverletOutputFormat=cobertura", "/p:CoverletOutput=\"../../coverage/\"", "./" ]
       },
       {
          "name": "dotnet-test-report",
