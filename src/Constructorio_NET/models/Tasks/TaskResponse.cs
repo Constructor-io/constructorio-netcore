@@ -35,6 +35,6 @@ namespace Constructorio_NET.Models
         public string Protocol { get; set; }
 
         [JsonProperty("result")]
-        public Dictionary<String, Object> Result { get; set; }
+        public Dictionary<string, Object> Result { get; set; }
     }
 }

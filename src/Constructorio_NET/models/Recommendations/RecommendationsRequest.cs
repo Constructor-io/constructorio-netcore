@@ -12,7 +12,7 @@ namespace Constructorio_NET.Models
     {
         public string PodId { get; set; }
         public int NumResults { get; set; }
-        public List<String> ItemId { get; set; }
+        public List<string> ItemId { get; set; }
         public Dictionary<string, List<string>> Filters { get; set; }
         public string Section { get; set; }
         public string SecurityToken { get; set; }

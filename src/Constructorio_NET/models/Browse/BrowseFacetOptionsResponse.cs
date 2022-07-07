@@ -10,12 +10,12 @@ namespace Constructorio_NET.Models
     public class BrowseFacetOptionsResponse
     {
         [JsonProperty("result_id")]
-        public String ResultId { get; set; }
+        public string ResultId { get; set; }
 
         [JsonProperty("response")]
         public BrowseFacetOptionsResponseInner Response { get; set; }
 
         [JsonProperty("request")]
-        public Dictionary<String, Object> Request { get; set; }
+        public Dictionary<string, Object> Request { get; set; }
     }
 }

@@ -8,22 +8,19 @@ using Newtonsoft.Json;
 namespace Constructorio_NET.Models
 {
     public class FilterFacetOption {
-
         [JsonProperty("count")]
-        public Int32 Count { get; set; }
+        public int Count { get; set; }
 
         [JsonProperty("data")]
-        public Dictionary<String, Object> Data { get; set; }
+        public Dictionary<string, object> Data { get; set; }
 
         [JsonProperty("display_name")]
-        public String DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
         [JsonProperty("status")]
-        public String Status { get; set; }
+        public string Status { get; set; }
 
         [JsonProperty("value")]
-        public String Value { get; set; }
-
+        public string Value { get; set; }
     }
-
 }

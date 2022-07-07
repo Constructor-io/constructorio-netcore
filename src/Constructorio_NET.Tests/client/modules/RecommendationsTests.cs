@@ -34,7 +34,7 @@ namespace Constructorio_NET.Tests
         public void GetRecommendationsResults()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
-            req.ItemId = new List<String> { "power_drill"};
+            req.ItemId = new List<string> { "power_drill"};
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
 
@@ -46,7 +46,7 @@ namespace Constructorio_NET.Tests
         public void GetRecommendationsResultsShouldReturnAResultWithMultipleItemIds()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
-            req.ItemId = new List<String> { "power_drill", "drill" };
+            req.ItemId = new List<string> { "power_drill", "drill" };
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
 
@@ -58,7 +58,7 @@ namespace Constructorio_NET.Tests
         public void GetRecommendationsResultsShouldReturnAResultWithNumResults()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
-            req.ItemId = new List<String> { "power_drill", "drill" };
+            req.ItemId = new List<string> { "power_drill", "drill" };
             req.NumResults = 5;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
@@ -72,10 +72,10 @@ namespace Constructorio_NET.Tests
         public void GetRecommendationsResultsShouldReturnAResultProvidedUserInfo()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
-            req.ItemId = new List<String> { "power_drill", "drill" };
+            req.ItemId = new List<string> { "power_drill", "drill" };
             req.UserInfo = new UserInfo(ClientId, SessionId);
             req.UserInfo.setUserId("123");
-            req.UserInfo.setUserSegments(new List<String>());
+            req.UserInfo.setUserSegments(new List<string>());
             req.UserInfo.getUserSegments().Add("vs");
             req.UserInfo.getUserSegments().Add("pink");
             ConstructorIO constructorio = new ConstructorIO(this.Options);

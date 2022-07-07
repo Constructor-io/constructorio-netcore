@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Utils;
-using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
@@ -32,18 +31,21 @@ namespace Constructorio_NET.Models
         {
             Hashtable parameters = new Hashtable();
 
-            if (!String.IsNullOrEmpty(this.FacetName))
+            if (!string.IsNullOrEmpty(this.FacetName))
             {
                 parameters.Add(Constants.FACET_NAME, this.FacetName);
             }
-            if (this.showHiddenFacets != false)
+
+            if (this.showHiddenFacets)
             {
                 this.FmtOptions.Add(Constants.SHOW_HIDDEN_FACETS, this.showHiddenFacets.ToString());
             }
-            if (this.showProtectedFacets != false)
+
+            if (this.showProtectedFacets)
             {
                 this.FmtOptions.Add(Constants.SHOW_PROTECTED_FACETS, this.showProtectedFacets.ToString());
             }
+
             if (this.FmtOptions != null && this.FmtOptions.Count != 0)
             {
                 parameters.Add(Constants.FMT_OPTIONS, this.FmtOptions);
@@ -62,11 +64,13 @@ namespace Constructorio_NET.Models
                 {
                     requestHeaders.Add(Constants.USER_IP, this.UserInfo.getForwardedFor());
                 }
+
                 if (this.UserInfo.getUserAgent() != null)
                 {
                     requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.getUserAgent());
                 }
             }
+
             if (this.SecurityToken != null)
             {
                 requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);

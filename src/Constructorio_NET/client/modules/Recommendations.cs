@@ -11,25 +11,28 @@ namespace Constructorio_NET
 {
     public class Recommendations : Helpers
     {
-        private Hashtable Options;
+        private readonly Hashtable Options;
 
         /// <summary>
-        /// Interface for recommendations related API calls
+        /// Initializes a new instance of the <see cref="Recommendations"/> class.
+        /// Interface for recommendations related API calls.
         /// </summary>
+        /// <param name="options">Hashtable of options from Constructorio instantiation.</param>
         internal Recommendations(Hashtable options)
         {
             this.Options = options;
         }
+
         internal string CreateRecommendationsUrl(RecommendationsRequest req)
         {
             Hashtable queryParams = req.GetUrlParameters();
             List<string> paths = new List<string> { "recommendations", "v1", "pods", req.PodId };
 
-            return Helpers.MakeUrl(this.Options, paths, queryParams);
+            return MakeUrl(this.Options, paths, queryParams);
         }
 
         /// <summary>
-        /// Retrieve recommendations results from API
+        /// Retrieve recommendations results from API.
         /// </summary>
         /// <param name="recommendationsRequest">Constructorio's request object</param>
         /// <returns>Constructorio's response object</returns>
@@ -43,7 +46,7 @@ namespace Constructorio_NET
             {
                 url = CreateRecommendationsUrl(recommendationsRequest);
                 requestHeaders = recommendationsRequest.GetRequestHeaders();
-                task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+                task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)
             {

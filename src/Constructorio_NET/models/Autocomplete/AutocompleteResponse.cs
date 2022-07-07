@@ -10,12 +10,12 @@ namespace Constructorio_NET.Models
     public class AutocompleteResponse {
 
         [JsonProperty("sections")]
-        public Dictionary<String, List<Result>> Sections { get; set; }
+        public Dictionary<string, List<Result>> Sections { get; set; }
 
         [JsonProperty("result_id")]
-        public String ResultId { get; set; }
+        public string ResultId { get; set; }
 
         [JsonProperty("request")]
-        public Dictionary<String, Object> Request { get; set; }
+        public Dictionary<string, Object> Request { get; set; }
     }
 }

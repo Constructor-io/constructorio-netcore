@@ -11,7 +11,13 @@ namespace Constructorio_NET
 {
     public class Tasks : Helpers
     {
-        private Hashtable Options;
+        private readonly Hashtable Options;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tasks"/> class.
+        /// Interface for tasks related API calls.
+        /// </summary>
+        /// <param name="options">Hashtable of options from Constructorio instantiation.</param>
         public Tasks(Hashtable options)
         {
             this.Options = options;
@@ -21,13 +27,12 @@ namespace Constructorio_NET
         {
             List<string> paths = new List<string> { "v1", "tasks" };
             Hashtable queryParams = req.GetUrlParameters();
-            Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
                 { "_dt", true },
                 { "c", true },
             };
-            string url = Helpers.MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
             return url;
         }
 
@@ -35,14 +40,13 @@ namespace Constructorio_NET
         {
             string url;
             Task<string> task;
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
             try
             {
                 url = CreateAllTasksUrl(allTasksRequest);
-                requestHeaders = allTasksRequest.GetRequestHeaders();
-                Helpers.AddAuthHeaders(this.Options, requestHeaders);
-                task = Helpers.MakeHttpRequest(new HttpMethod("GET"), url, requestHeaders);
+                Dictionary<string, string> requestHeaders = allTasksRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                task = MakeHttpRequest(new HttpMethod("GET"), url, requestHeaders);
             }
             catch (Exception e)
             {
@@ -61,13 +65,8 @@ namespace Constructorio_NET
         {
             List<string> paths = new List<string> { "v1", "tasks", $"{req.TaskId}" };
             Hashtable queryParams = req.GetUrlParameters();
-            Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
-            //      Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            //{
-            //  { "_dt", true },
-            //  { "c", true },
-            //};
-            string url = Helpers.MakeUrl(this.Options, paths, queryParams);
+            string url = MakeUrl(this.Options, paths, queryParams);
+
             return url;
         }
 
@@ -75,14 +74,13 @@ namespace Constructorio_NET
         {
             string url;
             Task<string> task;
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
             try
             {
                 url = CreateTaskUrl(taskRequest);
-                requestHeaders = taskRequest.GetRequestHeaders();
-                Helpers.AddAuthHeaders(this.Options, requestHeaders);
-                task = Helpers.MakeHttpRequest(new HttpMethod("GET"), url, requestHeaders);
+                Dictionary<string, string> requestHeaders = taskRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                task = MakeHttpRequest(new HttpMethod("GET"), url, requestHeaders);
             }
             catch (Exception e)
             {

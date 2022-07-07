@@ -19,10 +19,10 @@ namespace Constructorio_NET.Models
         public Int32 Count { get; set; }
 
         [JsonProperty("display_name")]
-        public String DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
         [JsonProperty("group_id")]
-        public String GroupId { get; set; }
+        public string GroupId { get; set; }
 
     }
 }

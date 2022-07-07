@@ -9,13 +9,13 @@ namespace Constructorio_NET.Models
     public class ResultGroup {
 
         [JsonProperty("display_name")]
-        public String DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
         [JsonProperty("group_id")]
-        public String GroupId { get; set; }
+        public string GroupId { get; set; }
 
         [JsonProperty("path")]
-        public String Path { get; set; }
+        public string Path { get; set; }
 
     }
 }

@@ -25,7 +25,7 @@ namespace Constructorio_NET
             Hashtable queryParams = req.GetUrlParameters();
             List<string> paths = new List<string> { "search", req.Query };
 
-            return Helpers.MakeUrl(this.Options, paths, queryParams);
+            return MakeUrl(this.Options, paths, queryParams);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Constructorio_NET
             {
                 url = CreateSearchUrl(searchRequest);
                 requestHeaders = searchRequest.GetRequestHeaders();
-                task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+                task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)
             {

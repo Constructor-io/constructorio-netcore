@@ -9,7 +9,7 @@ namespace Constructorio_NET.Models
     public class RedirectData {
 
         [JsonProperty("url")]
-        public String Url;
+        public string Url;
 
         [JsonProperty("rule_id")]
         public Int32 RuleId { get; set; }

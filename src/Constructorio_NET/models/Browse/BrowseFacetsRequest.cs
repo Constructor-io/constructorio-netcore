@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Utils;
-using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
@@ -35,18 +34,22 @@ namespace Constructorio_NET.Models
             {
                 parameters.Add(Constants.PAGE, this.Page);
             }
+
             if (this.ResultsPerPage != 0)
             {
                 parameters.Add(Constants.RESULTS_PER_PAGE, this.ResultsPerPage);
             }
+
             if (this.showHiddenFacets != false)
             {
                 this.FmtOptions.Add(Constants.SHOW_HIDDEN_FACETS, this.showHiddenFacets.ToString());
             }
+
             if (this.showProtectedFacets != false)
             {
                 this.FmtOptions.Add(Constants.SHOW_PROTECTED_FACETS, this.showProtectedFacets.ToString());
             }
+
             if (this.FmtOptions != null && this.FmtOptions.Count != 0)
             {
                 parameters.Add(Constants.FMT_OPTIONS, this.FmtOptions);
@@ -65,6 +68,7 @@ namespace Constructorio_NET.Models
                 {
                     requestHeaders.Add(Constants.USER_IP, this.UserInfo.getForwardedFor());
                 }
+
                 if (this.UserInfo.getUserAgent() != null)
                 {
                     requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.getUserAgent());
