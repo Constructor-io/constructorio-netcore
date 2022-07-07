@@ -1,14 +1,14 @@
-﻿namespace Constructorio_NET
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using Constructorio_NET.Utils;
-    using Constructorio_NET.Models;
-    using Newtonsoft.Json;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Constructorio_NET.Utils;
+using Constructorio_NET.Models;
+using Newtonsoft.Json;
 
+namespace Constructorio_NET
+{
     public class Browse : Helpers
     {
         private Hashtable Options;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Constructorio_NET.Utils
+﻿namespace Constructorio_NET.Utils
 {
     public static class Constants
     {

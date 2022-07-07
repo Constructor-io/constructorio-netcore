@@ -1,11 +1,11 @@
+using Constructorio_NET.Utils;
+using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
 namespace Constructorio_NET.Tests
 {
-    using Constructorio_NET.Utils;
-    using NUnit.Framework;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Text.RegularExpressions;
-
     [TestFixture]
     public class HelpersTest : Helpers
     {
