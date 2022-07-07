@@ -7,8 +7,8 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class Result {
-
+    public class Result
+    {
         [JsonProperty("value")]
         public string Value { get; set; }
 
@@ -19,7 +19,6 @@ namespace Constructorio_NET.Models
         public List<string> MatchedTerms { get; set; }
 
         [JsonProperty("variations")]
-        public List<Result> Variations{ get; set; }
-
+        public List<Result> Variations { get; set; }
     }
 }

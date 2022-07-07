@@ -6,10 +6,9 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class ServerError {
-
+    public class ServerError
+    {
         [JsonProperty("message")]
         public string Message { get; set; }
-
     }
 }

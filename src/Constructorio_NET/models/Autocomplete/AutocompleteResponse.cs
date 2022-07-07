@@ -7,8 +7,8 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class AutocompleteResponse {
-
+    public class AutocompleteResponse
+    {
         [JsonProperty("sections")]
         public Dictionary<string, List<Result>> Sections { get; set; }
 
@@ -16,6 +16,6 @@ namespace Constructorio_NET.Models
         public string ResultId { get; set; }
 
         [JsonProperty("request")]
-        public Dictionary<string, Object> Request { get; set; }
+        public Dictionary<string, object> Request { get; set; }
     }
 }

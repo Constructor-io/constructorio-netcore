@@ -1,26 +1,23 @@
-using Constructorio_NET.Models;
-using Constructorio_NET.Utils;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
-using System.Threading.Tasks;
+using Constructorio_NET.Models;
+using Constructorio_NET.Utils;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
 {
     [TestFixture]
     public class CatalogTest
     {
-        private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
-        private string ClientId = "r4nd-cl1ent-1d";
+        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ClientId = "r4nd-cl1ent-1d";
+        private readonly int SessionId = 4;
         private Hashtable Options = new Hashtable();
-        private int SessionId = 4;
-        private Hashtable UserParameters = new Hashtable();
         private StreamContent itemsStream;
         private StreamContent variationsStream;
         private StreamContent itemGroupsStream;
@@ -43,11 +40,6 @@ namespace Constructorio_NET.Tests
                 { Constants.API_KEY, this.ApiKey },
                 { "apiToken", testApiToken },
             };
-            this.UserParameters = new Hashtable()
-            {
-                { "clientId", ClientId },
-                { "sessionId", SessionId },
-            };
         }
 
         [SetUp]
@@ -56,7 +48,8 @@ namespace Constructorio_NET.Tests
             Thread.Sleep(1000);
         }
 
-        [Test, Order(1)]
+        [Test]
+        [Order(1)]
         public void ReplaceCatalogWithItems()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
@@ -102,7 +95,6 @@ namespace Constructorio_NET.Tests
         public void ReplaceCatalogWithNoFiles()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>();
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
             Assert.Throws<ConstructorException>(() => new CatalogRequest(files));
         }
 

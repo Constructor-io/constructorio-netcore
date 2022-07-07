@@ -6,13 +6,12 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class ResultPod {
-
+    public class ResultPod
+    {
         [JsonProperty("display_name")]
         public string DisplayName { get; set; }
 
         [JsonProperty("id")]
         public string Id { get; set; }
-
     }
 }

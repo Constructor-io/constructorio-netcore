@@ -15,7 +15,6 @@ namespace Constructorio_NET.Tests
         private Hashtable Options = new Hashtable();
         private string Query = "item";
         private int SessionId = 4;
-        private Hashtable UserParameters = new Hashtable();
 
         [SetUp]
         public void Setup()
@@ -23,11 +22,6 @@ namespace Constructorio_NET.Tests
             this.Options = new Hashtable()
             {
                { Constants.API_KEY, this.ApiKey }
-            };
-            this.UserParameters = new Hashtable()
-            {
-                { Constants.CLIENT_ID, ClientId },
-                { Constants.SESSION_ID, SessionId }
             };
         }
 

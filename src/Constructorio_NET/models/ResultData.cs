@@ -7,8 +7,8 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class ResultData {
-
+    public class ResultData
+    {
         [JsonProperty("description")]
         public string Description { get; set; }
 
@@ -31,7 +31,6 @@ namespace Constructorio_NET.Models
         public string VariationId { get; set; }
 
         [JsonExtensionData]
-        public Dictionary<string, Object> Metadata { get; set; }
-
+        public Dictionary<string, object> Metadata { get; set; }
     }
 }

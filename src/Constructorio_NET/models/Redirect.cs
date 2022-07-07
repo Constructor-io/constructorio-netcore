@@ -7,8 +7,8 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class Redirect {
-
+    public class Redirect
+    {
         [JsonProperty("data")]
         public RedirectData Data { get; set; }
 
@@ -17,6 +17,5 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("matched_user_segments")]
         public List<string> MatchedUserSegments { get; set; }
-
     }
 }

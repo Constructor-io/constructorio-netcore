@@ -6,8 +6,8 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class ResultGroup {
-
+    public class ResultGroup
+    {
         [JsonProperty("display_name")]
         public string DisplayName { get; set; }
 
@@ -16,6 +16,5 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("path")]
         public string Path { get; set; }
-
     }
 }

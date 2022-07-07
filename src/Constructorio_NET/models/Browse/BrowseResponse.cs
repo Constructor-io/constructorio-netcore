@@ -7,7 +7,8 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class BrowseResponse {
+    public class BrowseResponse
+    {
         [JsonProperty("result_id")]
         public string ResultId { get; set; }
 

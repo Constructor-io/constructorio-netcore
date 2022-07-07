@@ -6,7 +6,8 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class SearchResponseInner {
+    public class SearchResponseInner
+    {
         [JsonProperty("facets")]
         public List<FilterFacet> Facets { get; set; }
 

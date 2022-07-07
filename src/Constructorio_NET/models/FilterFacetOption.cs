@@ -7,7 +7,8 @@ using Newtonsoft.Json;
  **/
 namespace Constructorio_NET.Models
 {
-    public class FilterFacetOption {
+    public class FilterFacetOption
+    {
         [JsonProperty("count")]
         public int Count { get; set; }
 

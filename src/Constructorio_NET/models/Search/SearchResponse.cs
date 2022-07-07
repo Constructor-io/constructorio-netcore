@@ -7,8 +7,8 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class SearchResponse {
-
+    public class SearchResponse
+    {
         [JsonProperty("result_id")]
         public string ResultId { get; set; }
 
@@ -16,6 +16,6 @@ namespace Constructorio_NET.Models
         public SearchResponseInner Response { get; set; }
 
         [JsonProperty("request")]
-        public Dictionary<string, Object> Request { get; set; }
+        public Dictionary<string, object> Request { get; set; }
     }
 }

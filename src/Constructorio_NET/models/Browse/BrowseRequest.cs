@@ -48,24 +48,24 @@ namespace Constructorio_NET.Models
             Hashtable parameters = new Hashtable();
             if (this.UserInfo != null)
             {
-                if (this.UserInfo.getUserId() != null)
+                if (this.UserInfo.GetUserId() != null)
                 {
-                    parameters.Add(Constants.USER_ID, this.UserInfo.getUserId());
+                    parameters.Add(Constants.USER_ID, this.UserInfo.GetUserId());
                 }
 
-                if (this.UserInfo.getClientId() != null)
+                if (this.UserInfo.GetClientId() != null)
                 {
-                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.getClientId());
+                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.GetClientId());
                 }
 
-                if (this.UserInfo.getSessionId() != 0)
+                if (this.UserInfo.GetSessionId() != 0)
                 {
-                    parameters.Add(Constants.SESSION_ID, this.UserInfo.getSessionId());
+                    parameters.Add(Constants.SESSION_ID, this.UserInfo.GetSessionId());
                 }
 
-                if (this.UserInfo.getUserSegments() != null)
+                if (this.UserInfo.GetUserSegments() != null)
                 {
-                    parameters.Add(Constants.SEGMENTS, this.UserInfo.getUserSegments());
+                    parameters.Add(Constants.SEGMENTS, this.UserInfo.GetUserSegments());
                 }
             }
 
@@ -129,14 +129,14 @@ namespace Constructorio_NET.Models
 
             if (this.UserInfo != null)
             {
-                if (this.UserInfo.getForwardedFor() != null)
+                if (this.UserInfo.GetForwardedFor() != null)
                 {
-                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.getForwardedFor());
+                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.GetForwardedFor());
                 }
 
-                if (this.UserInfo.getUserAgent() != null)
+                if (this.UserInfo.GetUserAgent() != null)
                 {
-                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.getUserAgent());
+                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
                 }
             }
 

@@ -37,9 +37,9 @@ namespace Constructorio_NET.Tests
         {
             AutocompleteRequest req = new AutocompleteRequest("item1");
             req.VariationMap = new VariationsMap();
-            req.VariationMap.addGroupByRule("url", "data.url");
-            req.VariationMap.addValueRule("variation_id", AggregationTypes.First, "data.variation_id");
-            req.VariationMap.addValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+            req.VariationMap.AddGroupByRule("url", "data.url");
+            req.VariationMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+            req.VariationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             AutocompleteResponse res = constructorio.Autocomplete.GetAutocompleteResults(req);
             res.Request.TryGetValue("variations_map", out object reqVariationsMap);

@@ -14,7 +14,6 @@ namespace Constructorio_NET.Tests
         private string ClientId = "r4nd-cl1ent-1d";
         private Hashtable Options = new Hashtable();
         private int SessionId = 4;
-        private Hashtable UserParameters = new Hashtable();
 
         [SetUp]
         public void Setup()
@@ -22,11 +21,6 @@ namespace Constructorio_NET.Tests
             this.Options = new Hashtable()
             {
                { Constants.API_KEY, this.ApiKey }
-            };
-            this.UserParameters = new Hashtable()
-            {
-                { "clientId", ClientId },
-                { "sessionId", SessionId }
             };
         }
 
@@ -74,10 +68,10 @@ namespace Constructorio_NET.Tests
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
             req.ItemId = new List<string> { "power_drill", "drill" };
             req.UserInfo = new UserInfo(ClientId, SessionId);
-            req.UserInfo.setUserId("123");
-            req.UserInfo.setUserSegments(new List<string>());
-            req.UserInfo.getUserSegments().Add("vs");
-            req.UserInfo.getUserSegments().Add("pink");
+            req.UserInfo.SetUserId("123");
+            req.UserInfo.SetUserSegments(new List<string>());
+            req.UserInfo.GetUserSegments().Add("vs");
+            req.UserInfo.GetUserSegments().Add("pink");
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
 

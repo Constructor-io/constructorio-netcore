@@ -7,21 +7,8 @@ namespace Constructorio_NET
 {
     public class ConstructorIO
     {
-        /**
-         * the HTTP client used by all instances
-         */
-        private static HttpClient client = new HttpClient();
-        /**
-         * @return the HTTP client used by all instances
-         */
-        protected static HttpClient getClient()
-        {
-            return client;
-        }
-
         public string protocol;
         public int port;
-        public string Version;
         private Hashtable Options;
         public Autocomplete Autocomplete;
         public Browse Browse;
@@ -29,6 +16,7 @@ namespace Constructorio_NET
         public Recommendations Recommendations;
         public Search Search;
         public Tasks Tasks;
+        private readonly string Version = "cionet-1.0.0";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorIO"/> class.
@@ -37,8 +25,10 @@ namespace Constructorio_NET
         /// <param name="options">Hashtable of options to pass to modules.</param>
         public ConstructorIO(Hashtable options)
         {
-            this.Options = new Hashtable();
-            this.Options.Add(Constants.VERSION, this.getVersion());
+            this.Options = new Hashtable
+            {
+                { Constants.VERSION, this.Version }
+            };
 
             if (options.ContainsKey(Constants.API_KEY))
             {
@@ -67,16 +57,6 @@ namespace Constructorio_NET
             this.Recommendations = new Recommendations(this.Options);
             this.Search = new Search(this.Options);
             this.Tasks = new Tasks(this.Options);
-        }
-
-        /**
-         * Grabs the version number (hard coded ATM)
-         *
-         * @return version number
-         */
-        protected string getVersion()
-        {
-            return "cionet-5.6.0";
         }
     }
 }

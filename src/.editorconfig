@@ -90,3 +90,9 @@ dotnet_diagnostic.SA1503.severity = None
 
 # The name of a field in C# does not begin with a lower-case letter
 dotnet_diagnostic.SA1306.severity = None
+
+# A field name in C# contains an underscore
+dotnet_diagnostic.SA1310.severity = None
+
+# Simplify new expression
+dotnet_diagnostic.IDE0090.severity = None

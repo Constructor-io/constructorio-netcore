@@ -6,10 +6,10 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class FilterSortOption {
-  
+    public class FilterSortOption
+    {
         [JsonProperty("display_name")]
-        public string DisplayName { get; set; } 
+        public string DisplayName { get; set; }
 
         [JsonProperty("sort_by")]
         public string SortBy { get; set; }
@@ -19,6 +19,5 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("status")]
         public string Status { get; set; }
-
-    }  
+    }
 }

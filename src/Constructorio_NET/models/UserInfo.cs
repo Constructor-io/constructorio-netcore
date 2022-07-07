@@ -4,7 +4,6 @@ namespace Constructorio_NET.Models
 {
     public class UserInfo
     {
-
         private int sessionId;
 
         private string clientId;
@@ -19,43 +18,43 @@ namespace Constructorio_NET.Models
 
         public UserInfo(string clientId, int sessionId)
         {
-            this.setSessionId(sessionId);
-            this.setClientId(clientId);
+            this.SetSessionId(sessionId);
+            this.SetClientId(clientId);
         }
 
-        public string getClientId()
+        public string GetClientId()
         {
             return this.clientId;
         }
 
-        public int getSessionId()
+        public int GetSessionId()
         {
             return this.sessionId;
         }
 
-        public string getUserId()
+        public string GetUserId()
         {
             return this.userId;
         }
 
-        public List<string> getUserSegments()
+        public List<string> GetUserSegments()
         {
             return this.userSegments;
         }
 
-        public string getForwardedFor()
+        public string GetForwardedFor()
         {
             return this.forwardedFor;
         }
 
-        public string getUserAgent()
+        public string GetUserAgent()
         {
             return this.userAgent;
         }
 
-        public void setSessionId(int sessionId)
+        public void SetSessionId(int sessionId)
         {
-            if ((sessionId <= 0))
+            if (sessionId <= 0)
             {
                 throw new System.ArgumentException("Session ID cannot be less than or equal to 0.");
             }
@@ -63,10 +62,9 @@ namespace Constructorio_NET.Models
             {
                 this.sessionId = sessionId;
             }
-
         }
 
-        public void setClientId(string clientId)
+        public void SetClientId(string clientId)
         {
             if (string.IsNullOrEmpty(clientId))
             {
@@ -76,10 +74,9 @@ namespace Constructorio_NET.Models
             {
                 this.clientId = clientId;
             }
-
         }
 
-        public void setUserId(string userId)
+        public void SetUserId(string userId)
         {
             if (string.IsNullOrEmpty(userId))
             {
@@ -89,12 +86,11 @@ namespace Constructorio_NET.Models
             {
                 this.userId = userId;
             }
-
         }
 
-        public void setUserSegments(List<string> userSegments)
+        public void SetUserSegments(List<string> userSegments)
         {
-            if ((userSegments == null))
+            if (userSegments == null)
             {
                 throw new System.ArgumentException("User segments cannot be null.");
             }
@@ -102,10 +98,9 @@ namespace Constructorio_NET.Models
             {
                 this.userSegments = userSegments;
             }
-
         }
 
-        public void setForwardedFor(string forwardedFor)
+        public void SetForwardedFor(string forwardedFor)
         {
             if (string.IsNullOrEmpty(forwardedFor))
             {
@@ -115,10 +110,9 @@ namespace Constructorio_NET.Models
             {
                 this.forwardedFor = forwardedFor;
             }
-
         }
 
-        public void setUserAgent(string userAgent)
+        public void SetUserAgent(string userAgent)
         {
             if (string.IsNullOrEmpty(userAgent))
             {
@@ -128,7 +122,6 @@ namespace Constructorio_NET.Models
             {
                 this.userAgent = userAgent;
             }
-
         }
     }
 }

@@ -16,6 +16,6 @@ namespace Constructorio_NET.Models
         public BrowseFacetsResponseInner Response { get; set; }
 
         [JsonProperty("request")]
-        public Dictionary<string, Object> Request { get; set; }
+        public Dictionary<string, object> Request { get; set; }
     }
 }

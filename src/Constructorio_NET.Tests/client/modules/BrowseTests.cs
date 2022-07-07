@@ -16,7 +16,6 @@ namespace Constructorio_NET.Tests
         private string ClientId = "r4nd-cl1ent-1d";
         private Hashtable Options = new Hashtable();
         private int SessionId = 4;
-        private Hashtable UserParameters = new Hashtable();
         private UserInfo UserInfo = null;
         private string FilterName = "Color";
         private string FilterValue = "Blue";
@@ -33,11 +32,6 @@ namespace Constructorio_NET.Tests
             {
                { Constants.API_KEY, this.ApiKey },
                { Constants.API_TOKEN, testApiToken }
-            };
-            this.UserParameters = new Hashtable()
-            {
-                { Constants.CLIENT_ID, ClientId },
-                { Constants.SESSION_ID, SessionId }
             };
             this.UserInfo = new UserInfo(ClientId, SessionId);
         }
@@ -193,8 +187,8 @@ namespace Constructorio_NET.Tests
         public void GetBrowseFacetsWithFmtOptionParams()
         {
             BrowseFacetsRequest req = new BrowseFacetsRequest();
-            req.showHiddenFacets = true;
-            req.showProtectedFacets = true;
+            req.ShowHiddenFacets = true;
+            req.ShowProtectedFacets = true;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseFacetsResponse res = constructorio.Browse.GetBrowseFacetsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
@@ -216,8 +210,8 @@ namespace Constructorio_NET.Tests
         public void GetBrowseFacetOptionsWithFmtOptionParams()
         {
             BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(this.FilterName);
-            req.showHiddenFacets = true;
-            req.showProtectedFacets = true;
+            req.ShowHiddenFacets = true;
+            req.ShowProtectedFacets = true;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseFacetOptionsResponse res = constructorio.Browse.GetBrowseFacetOptionsResult(req);
             Assert.GreaterOrEqual(res.Response.Facets.Count, 1, "length of facets expected to be equal to 1");
