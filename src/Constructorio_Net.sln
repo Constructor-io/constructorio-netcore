@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Constructorio_NET", ".\Constructorio_NET\Constructorio_NET.csproj", "{2730DFD3-3AEB-44E6-A341-699665B8F68C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constructorio_NET.Tests", ".\Constructorio_NET.Tests\Constructorio_NET.Tests.csproj", "{9CF1BB83-2989-41C7-ABD2-8A3CF487DC5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2730DFD3-3AEB-44E6-A341-699665B8F68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2730DFD3-3AEB-44E6-A341-699665B8F68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2730DFD3-3AEB-44E6-A341-699665B8F68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2730DFD3-3AEB-44E6-A341-699665B8F68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF1BB83-2989-41C7-ABD2-8A3CF487DC5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF1BB83-2989-41C7-ABD2-8A3CF487DC5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF1BB83-2989-41C7-ABD2-8A3CF487DC5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF1BB83-2989-41C7-ABD2-8A3CF487DC5B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7440BB3A-3DE3-4173-AEA7-A49DFF79E40F}
+	EndGlobalSection
+EndGlobal
