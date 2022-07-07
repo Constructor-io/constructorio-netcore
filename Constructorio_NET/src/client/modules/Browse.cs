@@ -98,8 +98,12 @@ namespace Constructorio_NET
         {
             Hashtable queryParams = req.GetUrlParameters();
             List<string> paths = new List<string> { "browse", "facets" };
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            {
+                { "_dt", true },
+            };
 
-            return Helpers.MakeUrl(this.Options, paths, queryParams, false);
+            return Helpers.MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
         }
 
         /// <summary>
@@ -117,7 +121,7 @@ namespace Constructorio_NET
             {
                 url = CreateBrowseFacetsUrl(browseFacetsRequest);
                 requestHeaders = browseFacetsRequest.GetRequestHeaders();
-                Helpers.addAuthorizationHeaders(Options, requestHeaders);
+                Helpers.AddAuthHeaders(this.Options, requestHeaders);
                 task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)
@@ -137,8 +141,12 @@ namespace Constructorio_NET
         {
             Hashtable queryParams = req.GetUrlParameters();
             List<string> paths = new List<string> { "browse", "facet_options"};
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            {
+                { "_dt", true },
+            };
 
-            return Helpers.MakeUrl(this.Options, paths, queryParams, false);
+            return Helpers.MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
         }
 
         /// <summary>
@@ -156,7 +164,7 @@ namespace Constructorio_NET
             {
                 url = CreateBrowseFacetOptionsUrl(browseFacetOptionsRequest);
                 requestHeaders = browseFacetOptionsRequest.GetRequestHeaders();
-                Helpers.addAuthorizationHeaders(Options, requestHeaders);
+                Helpers.AddAuthHeaders(this.Options, requestHeaders);
                 task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)

@@ -63,9 +63,9 @@
             {
                 this.Options.Add("constructorToken", options["constructorToken"]);
             }
-            if (options.ContainsKey("apiToken"))
+            if (options.ContainsKey(Constants.API_TOKEN))
             {
-                this.Options.Add("apiToken", options["apiToken"]);
+                this.Options.Add(Constants.API_TOKEN, options[Constants.API_TOKEN]);
             }
 
             string serviceUrl = options.ContainsKey(Constants.SERVICE_URL) ? (string)options[Constants.SERVICE_URL] : "https://ac.cnstrc.com";

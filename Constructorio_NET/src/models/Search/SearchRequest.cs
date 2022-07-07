@@ -9,28 +9,79 @@ namespace Constructorio_NET
      */
     public class SearchRequest
     {
+        /// <value>
+        /// Client ID, utilized to personalize results
+        /// </value>
         public string ClientId { get; set; }
+        /// <value>
+        /// Filters used to refine results
+        /// </value>
         public Dictionary<string, List<string>> Filters { get; set; }
+        /// <value>
+        /// The format options used to refine result groups
+        /// </value>
         public Dictionary<string, string> FmtOptions { get; set; }
+        /// <value>
+        /// Hidden metadata fields to return
+        /// </value>
         public List<string> HiddenFields { get; set; }
+        /// <value>
+        /// The page number of the results
+        /// </value>
         public int Page { get; set; }
-        public string Query { get; set;}
+        /// <value>
+        /// The term to search for
+        /// </value>
+        public string Query { get; set; }
+        /// <value>
+        /// The number of results per page to return
+        /// </value>
         public int ResultsPerPage { get; set; }
+        /// <value>
+        /// The name of the section 
+        /// </value>
         public string Section { get; set; }
+        /// <value>
+        /// Constructor security token
+        /// </value>
         public string SecurityToken { get; set; }
+        /// <value>
+        /// User segments
+        /// </value>
         public List<string> Segments { get; set; }
+        /// <value>
+        /// Session ID, utilized to personalize results
+        /// </value>
         public int SessionId { get; set; }
+        /// <value>
+        /// The sort method for results
+        /// </value>
         public string SortBy { get; set; }
+        /// <value>
+        /// The sort order for results
+        /// </value>
         public string SortOrder { get; set; }
+        /// <value>
+        /// User test cells
+        /// </value>
         public Dictionary<string, string> TestCells { get; set; }
+        /// <value>
+        /// Origin user agent, from client
+        /// </value>
         public string UserAgent { get; set; }
+        /// <value>
+        /// User ID, utilized to personalize results
+        /// </value>
         public string UserId { get; set; }
+        /// <value>
+        /// Origin user IP, from client
+        /// </value>
         public string UserIp { get; set; }
 
         /// <summary>
         /// Creates a search request
         /// </summary>
-        /// <param name="query"></param>
+        /// <param name="query">The term used to query against</param>
         public SearchRequest(string query)
         {
             if (query == null)

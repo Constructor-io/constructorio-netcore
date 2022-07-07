@@ -49,7 +49,7 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(1, (Int64)res.Request["num_results_per_page"], "Expect request to include page parameter");
             Assert.AreEqual(res.Response.TotalNumResults, 1, "total number of results expected to be 1");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
             Assert.AreEqual(res.Response.Collection.DisplayName, this.CollectionId, "display name should match");
             Assert.AreEqual(res.Response.Collection.Id, this.CollectionId, "id should match");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -118,7 +118,7 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -131,7 +131,7 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -161,7 +161,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(1, (Int64)res.Request["num_results_per_page"], "Expect request to include page parameter");
             Assert.AreEqual(res.Response.TotalNumResults, 2, "total number of results expected to be 2");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -172,7 +172,7 @@ namespace Constructorio_NET.Tests
             BrowseFacetsResponse res = constructorio.Browse.GetBrowseFacetsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -184,7 +184,7 @@ namespace Constructorio_NET.Tests
             BrowseFacetsResponse res = constructorio.Browse.GetBrowseFacetsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.AreEqual(res.Response.Facets.Count, 1, "length of facets expected to be equal to 1");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -197,7 +197,7 @@ namespace Constructorio_NET.Tests
             BrowseFacetsResponse res = constructorio.Browse.GetBrowseFacetsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -207,7 +207,7 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseFacetOptionsResponse res = constructorio.Browse.GetBrowseFacetOptionsResult(req);
             Assert.AreEqual(res.Response.Facets.Count, 1, "length of facets expected to be equal to 1");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
@@ -219,7 +219,7 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             BrowseFacetOptionsResponse res = constructorio.Browse.GetBrowseFacetOptionsResult(req);
             Assert.GreaterOrEqual(res.Response.Facets.Count, 1, "length of facets expected to be equal to 1");
-            Assert.IsNotNull(res.ResultId, "result_id exists");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
     }
 }
