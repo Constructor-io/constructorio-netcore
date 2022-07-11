@@ -5,79 +5,79 @@ using Constructorio_NET.Utils;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Search Request
-     */
+    /// <summary
+    /// Constructor.io Search Request Class.
+    /// </summary
     public class SearchRequest
     {
-        /// <value>
-        /// Client ID, utilized to personalize results.
-        /// </value>
+        /// <summary>
+        /// Gets or sets client ID, utilized to personalize results.
+        /// </summary>
         public string ClientId { get; set; }
 
-        /// <value>
-        /// Filters used to refine results.
-        /// </value>
+        /// <summary>
+        /// Gets or sets filters used to refine results.
+        /// </summary>
         public Dictionary<string, List<string>> Filters { get; set; }
 
-        /// <value>
-        /// The format options used to refine result groups.
-        /// </value>
+        /// <summary>
+        /// Gets or sets the format options used to refine result groups.
+        /// </summary>
         public Dictionary<string, string> FmtOptions { get; set; }
 
-        /// <value>
-        /// Hidden metadata fields to return.
-        /// </value>
+        /// <summary>
+        /// Gets or sets hidden metadata fields to return.
+        /// </summary>
         public List<string> HiddenFields { get; set; }
 
-        /// <value>
-        /// The page number of the results.
-        /// </value>
+        /// <summary>
+        /// Gets or sets the page number of the results.
+        /// </summary>
         public int Page { get; set; }
 
-        /// <value>
-        /// The term to search for.
-        /// </value>
+        /// <summary>
+        /// Gets or sets the term to search for.
+        /// </summary>
         public string Query { get; set; }
 
-        /// <value>
-        /// The number of results per page to return.
-        /// </value>
+        /// <summary>
+        /// Gets or sets the number of results per page to return.
+        /// </summary>
         public int ResultsPerPage { get; set; }
 
-        /// <value>
-        /// The name of the section.
-        /// </value>
+        /// <summary>
+        /// Gets or sets the name of the section.
+        /// </summary>
         public string Section { get; set; }
 
-        /// <value>
-        /// Constructor security token.
-        /// </value>
+        /// <summary>
+        /// Gets or sets constructor security token.
+        /// </summary>
         public string SecurityToken { get; set; }
 
-        /// <value>
-        /// User segments.
-        /// </value>
+        /// <summary>
+        /// Gets or sets user segments.
+        /// </summary>
         public List<string> Segments { get; set; }
 
-        /// <value>
-        /// Session ID, utilized to personalize results.
-        /// </value>
+        /// <summary>
+        /// Gets or sets session ID, utilized to personalize results.
+        /// </summary>
         public int SessionId { get; set; }
 
-        /// <value>
-        /// The sort method for results.
-        /// </value>
+        /// <summary>
+        /// Gets or sets the sort method for results.
+        /// </summary>
         public string SortBy { get; set; }
 
-        /// <value>
-        /// The sort order for results.
-        /// </value>
+        /// <summary>
+        /// Gets or sets the sort order for results.
+        /// </summary>
         public string SortOrder { get; set; }
 
-        /// <value>
-        /// User test cells.
-        /// </value>
+        /// <summary>
+        /// Gets or sets user test cells.
+        /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
 
         /// <summary>
@@ -86,19 +86,19 @@ namespace Constructorio_NET.Models
         public UserInfo UserInfo { get; set; }
 
         /// <summary>
-        /// Creates a search request
+        /// Initializes a new instance of the <see cref="SearchRequest"/> class.
+        /// Creates an search request.
         /// </summary>
-        /// <param name="query">The term used to query against</param>
+        /// <param name="query">Query to use for the request.</param>
         public SearchRequest(string query)
         {
-            if (query == null)
-            {
-                throw new ArgumentException("query is required");
-            }
-
-            this.Query = query;
+            this.Query = query ?? throw new ArgumentException("query is required");
         }
 
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
         public Hashtable GetUrlParameters()
         {
             Hashtable parameters = new Hashtable();
@@ -189,6 +189,10 @@ namespace Constructorio_NET.Models
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Hashtable of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
         Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

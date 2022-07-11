@@ -25,10 +25,10 @@ namespace Constructorio_NET
 
         internal string CreateAutocompleteUrl(AutocompleteRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable requestParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "autocomplete", req.Query };
 
-            return MakeUrl(this.Options, paths, queryParams);
+            return MakeUrl(this.Options, paths, requestParams);
         }
 
         /// <summary>

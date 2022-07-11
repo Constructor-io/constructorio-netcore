@@ -5,9 +5,9 @@ using Constructorio_NET.Utils;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Recommendation Request
-     */
+    /// <summary
+    /// Constructor.io Recommendations Request Class.
+    /// </summary
     public class RecommendationsRequest
     {
         public string PodId { get; set; }
@@ -20,10 +20,11 @@ namespace Constructorio_NET.Models
         public UserInfo UserInfo { get; set; }
 
         /// <summary>
-        /// Creates a recommendation request
+        /// Initializes a new instance of the <see cref="RecommendationsRequest"/> class.
+        /// Creates an recommendations request.
         /// </summary>
-        /// <param name="PodId"></param>
-        public RecommendationsRequest(string PodId)
+        /// <param name="podId">Pod id to use for the request.</param>
+        public RecommendationsRequest(string podId)
         {
             if (PodId == null)
             {
@@ -33,6 +34,10 @@ namespace Constructorio_NET.Models
             this.PodId = PodId;
         }
 
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
         public Hashtable GetUrlParameters()
         {
             Hashtable parameters = new Hashtable();
@@ -87,6 +92,10 @@ namespace Constructorio_NET.Models
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Hashtable of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

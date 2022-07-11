@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Browse Request
-     */
+    /// <summary
+    /// Constructor.io Browse Request Class.
+    /// </summary
     public class BrowseRequest
     {
         public string FilterName { get; set; }
@@ -28,10 +28,10 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BrowseRequest"/> class.
-        /// Creates a browse request.
+        /// Creates an browse request.
         /// </summary>
-        /// <param name="filterName"></param>
-        /// <param name="filterValue"></param>
+        /// <param name="filterName">filter name to use for the request.</param>
+        /// <param name="filterValue">filter value to use for the request.</param>
         public BrowseRequest(string filterName, string filterValue)
         {
             if (filterName == null || filterValue == null)
@@ -43,6 +43,10 @@ namespace Constructorio_NET.Models
             this.FilterValue = filterValue;
         }
 
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
         public Hashtable GetUrlParameters()
         {
             Hashtable parameters = new Hashtable();
@@ -123,6 +127,10 @@ namespace Constructorio_NET.Models
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Hashtable of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

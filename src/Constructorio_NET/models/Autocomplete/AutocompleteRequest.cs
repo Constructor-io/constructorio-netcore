@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Autocomplete Request
-     */
+    /// <summary
+    /// Constructor.io Autocomplete Request Class.
+    /// </summary
     public class AutocompleteRequest
     {
         public string Query { get; set; }
@@ -21,20 +21,25 @@ namespace Constructorio_NET.Models
         public VariationsMap VariationMap { get; set; }
 
         /// <summary>
-        /// Creates a autocomplete request
+        /// Initializes a new instance of the <see cref="AutocompleteRequest"/> class.
+        /// Creates an autocomplete request.
         /// </summary>
-        /// <param name="Query"></param>
-        public AutocompleteRequest(string Query)
+        /// <param name="query">Query to use for the request.</param>
+        public AutocompleteRequest(string query)
         {
-            if (Query == null)
+            if (query == null)
             {
-                throw new ArgumentException("Query is required");
+                throw new ArgumentException("query is required");
             }
 
-            this.Query = Query;
+            this.Query = query;
         }
 
-        public Hashtable GetUrlParameters()
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
             if (this.UserInfo != null)
@@ -94,6 +99,10 @@ namespace Constructorio_NET.Models
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Hashtable of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
