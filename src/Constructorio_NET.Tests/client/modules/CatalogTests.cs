@@ -15,8 +15,6 @@ namespace Constructorio_NET.Tests
     public class CatalogTest
     {
         private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
-        private readonly string ClientId = "r4nd-cl1ent-1d";
-        private readonly int SessionId = 4;
         private Hashtable Options = new Hashtable();
         private StreamContent itemsStream;
         private StreamContent variationsStream;

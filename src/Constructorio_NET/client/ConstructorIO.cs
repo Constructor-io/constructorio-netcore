@@ -7,15 +7,14 @@ namespace Constructorio_NET
 {
     public class ConstructorIO
     {
-        public string protocol;
-        public int port;
-        private Hashtable Options;
-        public Autocomplete Autocomplete;
-        public Browse Browse;
-        public Catalog Catalog;
-        public Recommendations Recommendations;
-        public Search Search;
-        public Tasks Tasks;
+        public int Port { get; set; }
+        public string Protocol { get; set; }
+        public Autocomplete Autocomplete { get; }
+        public Browse Browse { get; }
+        public Catalog Catalog { get; }
+        public Recommendations Recommendations { get; }
+        public Search Search { get; }
+        public Tasks Tasks { get; }
         private readonly string Version = "cionet-1.0.0";
 
         /// <summary>
@@ -25,14 +24,14 @@ namespace Constructorio_NET
         /// <param name="options">Hashtable of options to pass to modules.</param>
         public ConstructorIO(Hashtable options)
         {
-            this.Options = new Hashtable
+            Hashtable fullOptions = new Hashtable
             {
                 { Constants.VERSION, this.Version }
             };
 
             if (options.ContainsKey(Constants.API_KEY))
             {
-                this.Options.Add(Constants.API_KEY, options[Constants.API_KEY]);
+                fullOptions.Add(Constants.API_KEY, options[Constants.API_KEY]);
             }
             else
             {
@@ -41,22 +40,22 @@ namespace Constructorio_NET
 
             if (options.ContainsKey("constructorToken"))
             {
-                this.Options.Add("constructorToken", options["constructorToken"]);
+                fullOptions.Add("constructorToken", options["constructorToken"]);
             }
 
             if (options.ContainsKey(Constants.API_TOKEN))
             {
-                this.Options.Add(Constants.API_TOKEN, options[Constants.API_TOKEN]);
+                fullOptions.Add(Constants.API_TOKEN, options[Constants.API_TOKEN]);
             }
 
             string serviceUrl = options.ContainsKey(Constants.SERVICE_URL) ? (string)options[Constants.SERVICE_URL] : "https://ac.cnstrc.com";
-            this.Options.Add(Constants.SERVICE_URL, serviceUrl);
-            this.Autocomplete = new Autocomplete(this.Options);
-            this.Browse = new Browse(this.Options);
-            this.Catalog = new Catalog(this.Options);
-            this.Recommendations = new Recommendations(this.Options);
-            this.Search = new Search(this.Options);
-            this.Tasks = new Tasks(this.Options);
+            fullOptions.Add(Constants.SERVICE_URL, serviceUrl);
+            this.Autocomplete = new Autocomplete(fullOptions);
+            this.Browse = new Browse(fullOptions);
+            this.Catalog = new Catalog(fullOptions);
+            this.Recommendations = new Recommendations(fullOptions);
+            this.Search = new Search(fullOptions);
+            this.Tasks = new Tasks(fullOptions);
         }
     }
 }

@@ -11,89 +11,79 @@ namespace Constructorio_NET.Models
     public class SearchRequest
     {
         /// <value>
-        /// Client ID, utilized to personalize results
+        /// Client ID, utilized to personalize results.
         /// </value>
         public string ClientId { get; set; }
 
         /// <value>
-        /// Filters used to refine results
+        /// Filters used to refine results.
         /// </value>
         public Dictionary<string, List<string>> Filters { get; set; }
 
         /// <value>
-        /// The format options used to refine result groups
+        /// The format options used to refine result groups.
         /// </value>
         public Dictionary<string, string> FmtOptions { get; set; }
 
         /// <value>
-        /// Hidden metadata fields to return
+        /// Hidden metadata fields to return.
         /// </value>
         public List<string> HiddenFields { get; set; }
 
         /// <value>
-        /// The page number of the results
+        /// The page number of the results.
         /// </value>
         public int Page { get; set; }
 
         /// <value>
-        /// The term to search for
+        /// The term to search for.
         /// </value>
         public string Query { get; set; }
 
         /// <value>
-        /// The number of results per page to return
+        /// The number of results per page to return.
         /// </value>
         public int ResultsPerPage { get; set; }
 
         /// <value>
-        /// The name of the section 
+        /// The name of the section.
         /// </value>
         public string Section { get; set; }
 
         /// <value>
-        /// Constructor security token
+        /// Constructor security token.
         /// </value>
         public string SecurityToken { get; set; }
 
         /// <value>
-        /// User segments
+        /// User segments.
         /// </value>
         public List<string> Segments { get; set; }
 
         /// <value>
-        /// Session ID, utilized to personalize results
+        /// Session ID, utilized to personalize results.
         /// </value>
         public int SessionId { get; set; }
 
         /// <value>
-        /// The sort method for results
+        /// The sort method for results.
         /// </value>
         public string SortBy { get; set; }
 
         /// <value>
-        /// The sort order for results
+        /// The sort order for results.
         /// </value>
         public string SortOrder { get; set; }
 
         /// <value>
-        /// User test cells
+        /// User test cells.
         /// </value>
         public Dictionary<string, string> TestCells { get; set; }
 
-        /// <value>
-        /// Origin user agent, from client
-        /// </value>
-        public string UserAgent { get; set; }
-
-        /// <value>
-        /// User ID, utilized to personalize results
-        /// </value>
-        public string UserId { get; set; }
-
-        /// <value>
-        /// Origin user IP, from client
-        /// </value>
-        public string UserIp { get; set; }
+        /// <summary>
+        /// Gets or sets collection of user related data.
+        /// </summary>
+        public UserInfo UserInfo { get; set; }
 
         /// <summary>
         /// Creates a search request
@@ -112,6 +102,29 @@ namespace Constructorio_NET.Models
         public Hashtable GetUrlParameters()
         {
             Hashtable parameters = new Hashtable();
+
+            if (this.UserInfo != null)
+            {
+                if (this.UserInfo.GetUserId() != null)
+                {
+                    parameters.Add(Constants.USER_ID, this.UserInfo.GetUserId());
+                }
+
+                if (this.UserInfo.GetClientId() != null)
+                {
+                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.GetClientId());
+                }
+
+                if (this.UserInfo.GetSessionId() != 0)
+                {
+                    parameters.Add(Constants.SESSION_ID, this.UserInfo.GetSessionId());
+                }
+
+                if (this.UserInfo.GetUserSegments() != null)
+                {
+                    parameters.Add(Constants.SEGMENTS, this.UserInfo.GetUserSegments());
+                }
+            }
 
             if (this.ClientId != null)
             {
@@ -173,34 +186,32 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
 
-            if (this.UserId != null)
-            {
-                parameters.Add(Constants.USER_ID, this.UserId);
-            }
-
             return parameters;
         }
 
         public Dictionary<string, string> GetRequestHeaders()
         {
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+        Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
-            if (this.UserIp != null)
+        if (this.UserInfo != null)
+        {
+            if (this.UserInfo.GetForwardedFor() != null)
             {
-                requestHeaders.Add(Constants.USER_IP, this.UserIp);
+                requestHeaders.Add(Constants.USER_IP, this.UserInfo.GetForwardedFor());
             }
 
-            if (this.UserAgent != null)
+            if (this.UserInfo.GetUserAgent() != null)
             {
-                requestHeaders.Add(Constants.USER_AGENT, this.UserAgent);
+                requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
             }
+        }
 
-            if (this.SecurityToken != null)
-            {
-                requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);
-            }
+        if (this.SecurityToken != null)
+        {
+            requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);
+        }
 
-            return requestHeaders;
+        return requestHeaders;
         }
     }
 }

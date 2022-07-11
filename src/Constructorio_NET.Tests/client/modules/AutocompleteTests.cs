@@ -1,17 +1,20 @@
-using Constructorio_NET.Models;
-using Constructorio_NET.Utils;
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Constructorio_NET.Models;
+using Constructorio_NET.Utils;
+using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
 {
     [TestFixture]
     public class AutocompleteTest
     {
-        private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ClientId = "r4nd-cl1ent-1d";
+        private readonly int SessionId = 4;
         private Hashtable Options = new Hashtable();
+        private UserInfo UserInfo;
 
         [SetUp]
         public void Setup()
@@ -20,12 +23,14 @@ namespace Constructorio_NET.Tests
             {
                { Constants.API_KEY, this.ApiKey }
             };
+            this.UserInfo = new UserInfo(this.ClientId, this.SessionId);
         }
 
         [Test]
         public void GetAutocompleteResults()
         {
             AutocompleteRequest req = new AutocompleteRequest("item");
+            req.UserInfo = this.UserInfo;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             AutocompleteResponse res = constructorio.Autocomplete.GetAutocompleteResults(req);
 
@@ -36,6 +41,7 @@ namespace Constructorio_NET.Tests
         public void GetAutocompleteResultsShouldReturnResultWithVariationMap()
         {
             AutocompleteRequest req = new AutocompleteRequest("item1");
+            req.UserInfo = this.UserInfo;
             req.VariationMap = new VariationsMap();
             req.VariationMap.AddGroupByRule("url", "data.url");
             req.VariationMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
@@ -52,12 +58,13 @@ namespace Constructorio_NET.Tests
         public void GetAutocompleteResultsShouldReturnResultWithSearchSuggestionOnly()
         {
             AutocompleteRequest req = new AutocompleteRequest("jacket");
+            req.UserInfo = this.UserInfo;
             req.ResultsPerSection = new Dictionary<string, int> { { "Search Suggestions", 10 } };
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             AutocompleteResponse res = constructorio.Autocomplete.GetAutocompleteResults(req);
 
             Assert.NotNull(res.ResultId, "Result id exists");
-            Assert.AreEqual(res.Sections["Products"].Count, 0, "Products don't exist");
+            Assert.AreEqual(0, res.Sections["Products"].Count, "Products don't exist");
             Assert.GreaterOrEqual(res.Sections["Search Suggestions"].Count, 4, "Search Suggestsions Exist");
         }
 
@@ -65,6 +72,7 @@ namespace Constructorio_NET.Tests
         public void GetAutocompleteResultsShouldReturnResultWithHiddenFields()
         {
             AutocompleteRequest req = new AutocompleteRequest("item1");
+            req.UserInfo = this.UserInfo;
             req.HiddenFields = new List<string> { "testField" };
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             AutocompleteResponse res = constructorio.Autocomplete.GetAutocompleteResults(req);
@@ -77,6 +85,7 @@ namespace Constructorio_NET.Tests
         public void GetAutocompleteResultsShouldReturnResultWithMultipleFilters()
         {
             AutocompleteRequest req = new AutocompleteRequest("item");
+            req.UserInfo = this.UserInfo;
             req.Filters = new Dictionary<string, List<string>>();
             req.Filters.Add("group_id", new List<string> { "All" });
             req.Filters.Add("Brand", new List<string> { "XYZ" });

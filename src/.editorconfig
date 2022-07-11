@@ -96,3 +96,6 @@ dotnet_diagnostic.SA1310.severity = None
 
 # Simplify new expression
 dotnet_diagnostic.IDE0090.severity = None
+
+# URIs should not be hardcoded
+dotnet_diagnostic.S1075.severity = None

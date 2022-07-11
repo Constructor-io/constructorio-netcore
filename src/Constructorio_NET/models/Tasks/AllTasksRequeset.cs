@@ -39,6 +39,7 @@ namespace Constructorio_NET.Models
             {
                 parameters.Add(Constants.PAGE, this.Page);
             }
+
             if (this.ResultsPerPage != 0)
             {
                 parameters.Add(Constants.RESULTS_PER_PAGE, this.ResultsPerPage);

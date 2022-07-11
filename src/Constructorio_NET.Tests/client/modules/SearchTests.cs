@@ -1,20 +1,21 @@
-using Constructorio_NET.Models;
-using Constructorio_NET.Utils;
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Constructorio_NET.Models;
+using Constructorio_NET.Utils;
+using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
 {
     [TestFixture]
     public class SearchTest
     {
-        private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
-        private string ClientId = "r4nd-cl1ent-1d";
+        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ClientId = "r4nd-cl1ent-1d";
+        private readonly int SessionId = 4;
+        private readonly string Query = "item";
+        private UserInfo UserInfo;
         private Hashtable Options = new Hashtable();
-        private string Query = "item";
-        private int SessionId = 4;
 
         [SetUp]
         public void Setup()
@@ -23,6 +24,7 @@ namespace Constructorio_NET.Tests
             {
                { Constants.API_KEY, this.ApiKey }
             };
+            this.UserInfo = new UserInfo(this.ClientId, this.SessionId);
         }
 
         [Test]
@@ -31,6 +33,7 @@ namespace Constructorio_NET.Tests
             SearchRequest req = new SearchRequest(this.Query);
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             SearchResponse res = constructorio.Search.GetSearchResults(req);
+            req.UserInfo = this.UserInfo;
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
@@ -46,6 +49,7 @@ namespace Constructorio_NET.Tests
             };
             SearchRequest req = new SearchRequest(this.Query);
             req.Filters = filters;
+            req.UserInfo = this.UserInfo;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             SearchResponse res = constructorio.Search.GetSearchResults(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
@@ -58,11 +62,12 @@ namespace Constructorio_NET.Tests
         public void GetSearchResultsWithResultParams()
         {
             SearchRequest req = new SearchRequest(this.Query);
+            req.UserInfo = this.UserInfo;
             req.Page = 3;
             req.ResultsPerPage = 1;
             ConstructorIO constructorio = new ConstructorIO(this.Options);
             SearchResponse res = constructorio.Search.GetSearchResults(req);
-            Assert.AreEqual(3, (Int64)res.Request["page"], "total number of results expected to be 1");
+            Assert.AreEqual(3, (long)res.Request["page"], "total number of results expected to be 1");
             Assert.Greater(res.Response.TotalNumResults, 1, "total number of results expected to be 1");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");

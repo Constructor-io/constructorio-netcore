@@ -1,6 +1,4 @@
-﻿using NUnit.Framework;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,13 +7,15 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
 {
     [TestFixture]
     public class TasksTest
     {
-        private string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
         private Hashtable Options = new Hashtable();
         private int TaskId;
 
