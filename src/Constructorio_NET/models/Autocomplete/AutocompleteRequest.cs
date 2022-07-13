@@ -11,13 +11,44 @@ namespace Constructorio_NET.Models
     /// </summary
     public class AutocompleteRequest
     {
+        /// <summary>
+        /// Gets or sets the query used to refine results.
+        /// </summary>
         public string Query { get; set; }
+
+        /// <summary>
+        /// Gets or sets how to many results to return and what sections.
+        /// </summary>
         public Dictionary<string, int> ResultsPerSection { get; set; }
+
+        /// <summary>
+        /// Gets or sets filters used to refine results.
+        /// </summary>
         public Dictionary<string, List<string>> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets hidden metadata fields to return.
+        /// </summary>
         public List<string> HiddenFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets constructor security token.
+        /// </summary>
         public string SecurityToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets user test cells.
+        /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
+
+        /// <summary>
+        /// Gets or sets collection of user related data.
+        /// </summary>
         public UserInfo UserInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets how to return variation data.
+        /// </summary>
         public VariationsMap VariationMap { get; set; }
 
         /// <summary>

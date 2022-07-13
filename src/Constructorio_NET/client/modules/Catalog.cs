@@ -7,7 +7,7 @@ using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
 using Newtonsoft.Json;
 
-namespace Constructorio_NET
+namespace Constructorio_NET.Modules
 {
     public class Catalog : Helpers
     {
@@ -26,7 +26,7 @@ namespace Constructorio_NET
         internal string CreateCatalogUrl(CatalogRequest req)
         {
             List<string> paths = new List<string> { "v1", "catalog" };
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
                 { "_dt", true },

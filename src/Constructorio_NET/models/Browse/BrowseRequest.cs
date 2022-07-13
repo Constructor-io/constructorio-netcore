@@ -11,19 +11,74 @@ namespace Constructorio_NET.Models
     /// </summary
     public class BrowseRequest
     {
+        /// <summary>
+        /// Gets or sets the filter name used to refine results.
+        /// </summary>
         public string FilterName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the filter value used to refine results.
+        /// </summary>
         public string FilterValue { get; set; }
-        public Dictionary<string, List<string>> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets the format options used to refine result groups.
+        /// </summary>
         public Dictionary<string, string> FmtOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets hidden metadata fields to return.
+        /// </summary>
         public List<string> HiddenFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page number of the results.
+        /// </summary>
         public int Page { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of results per page to return.
+        /// </summary>
         public int ResultsPerPage { get; set; }
-        public string Section { get; set; }
-        public string SecurityToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sort method for results.
+        /// </summary>
         public string SortBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sort order for results.
+        /// </summary>
         public string SortOrder { get; set; }
+
+        /// <summary>
+        /// Gets or sets filters used to refine results.
+        /// </summary>
+        public Dictionary<string, List<string>> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the section.
+        /// </summary>
+        public string Section { get; set; }
+
+        /// <summary>
+        /// Gets or sets constructor security token.
+        /// </summary>
+        public string SecurityToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets user test cells.
+        /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
+
+        /// <summary>
+        /// Gets or sets collection of user related data.
+        /// </summary>
         public UserInfo UserInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets how to return variation data.
+        /// </summary>
         public VariationsMap VariationMap { get; set; }
 
         /// <summary>
@@ -47,7 +102,7 @@ namespace Constructorio_NET.Models
         /// Get request parameters.
         /// </summary>
         /// <returns>Hashtable of request parameters.</returns>
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
             if (this.UserInfo != null)

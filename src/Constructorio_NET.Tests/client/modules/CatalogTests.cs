@@ -1,11 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using Constructorio_NET.Models;
-using Constructorio_NET.Utils;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -15,7 +13,7 @@ namespace Constructorio_NET.Tests
     public class CatalogTest
     {
         private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
-        private Hashtable Options = new Hashtable();
+        private ConstructorioConfig Config;
         private StreamContent itemsStream;
         private StreamContent variationsStream;
         private StreamContent itemGroupsStream;
@@ -33,11 +31,8 @@ namespace Constructorio_NET.Tests
             itemGroupsStream = new StreamContent(File.OpenRead("./../../../resources/csv/item_groups.csv"));
             itemGroupsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
 
-            this.Options = new Hashtable()
-            {
-                { Constants.API_KEY, this.ApiKey },
-                { "apiToken", testApiToken },
-            };
+            this.Config = new ConstructorioConfig(this.ApiKey);
+            this.Config.ApiToken = testApiToken;
         }
 
         [SetUp]
@@ -54,7 +49,7 @@ namespace Constructorio_NET.Tests
             {
                 { "items", itemsStream },
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
             CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
@@ -68,7 +63,7 @@ namespace Constructorio_NET.Tests
             {
                 { "variations", variationsStream },
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
             CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
@@ -82,7 +77,7 @@ namespace Constructorio_NET.Tests
             {
                 { "item_groups", itemGroupsStream },
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
             CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
@@ -103,7 +98,7 @@ namespace Constructorio_NET.Tests
             {
                 { "items", itemsStream },
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
             CatalogResponse res = constructorio.Catalog.UpdateCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
@@ -117,7 +112,7 @@ namespace Constructorio_NET.Tests
             {
                 { "variations", variationsStream },
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
             CatalogResponse res = constructorio.Catalog.UpdateCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
@@ -131,7 +126,7 @@ namespace Constructorio_NET.Tests
             {
                 { "item_groups", itemGroupsStream },
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
             CatalogResponse res = constructorio.Catalog.UpdateCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
@@ -145,7 +140,7 @@ namespace Constructorio_NET.Tests
             {
                 { "items", itemsStream },
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
             CatalogResponse res = constructorio.Catalog.PatchCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
@@ -159,7 +154,7 @@ namespace Constructorio_NET.Tests
             {
                 { "variations", variationsStream },
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
             CatalogResponse res = constructorio.Catalog.PatchCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
@@ -173,7 +168,7 @@ namespace Constructorio_NET.Tests
             {
                 { "item_groups", itemGroupsStream },
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
             CatalogResponse res = constructorio.Catalog.PatchCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");

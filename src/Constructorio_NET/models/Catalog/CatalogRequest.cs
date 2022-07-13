@@ -47,7 +47,7 @@ namespace Constructorio_NET.Models
             this.Files = files;
         }
 
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
 

@@ -7,7 +7,7 @@ using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
 using Newtonsoft.Json;
 
-namespace Constructorio_NET
+namespace Constructorio_NET.Modules
 {
     public class Recommendations : Helpers
     {
@@ -25,7 +25,7 @@ namespace Constructorio_NET
 
         internal string CreateRecommendationsUrl(RecommendationsRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "recommendations", "v1", "pods", req.PodId };
 
             return MakeUrl(this.Options, paths, queryParams);

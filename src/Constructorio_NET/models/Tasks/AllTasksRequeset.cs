@@ -31,7 +31,7 @@ namespace Constructorio_NET.Models
             this.Page = Page;
         }
 
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
 

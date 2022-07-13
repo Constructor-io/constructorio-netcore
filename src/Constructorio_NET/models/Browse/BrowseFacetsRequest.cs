@@ -26,7 +26,7 @@ namespace Constructorio_NET.Models
             FmtOptions = new Dictionary<string, string>();
         }
 
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
 

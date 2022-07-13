@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Utils;
+using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
@@ -11,9 +12,9 @@ namespace Constructorio_NET.Models
     public class SearchRequest
     {
         /// <summary>
-        /// Gets or sets client ID, utilized to personalize results.
+        /// Gets or sets the query used to refine results.
         /// </summary>
-        public string ClientId { get; set; }
+        public string Query { get; set; }
 
         /// <summary>
         /// Gets or sets filters used to refine results.
@@ -36,34 +37,9 @@ namespace Constructorio_NET.Models
         public int Page { get; set; }
 
         /// <summary>
-        /// Gets or sets the term to search for.
-        /// </summary>
-        public string Query { get; set; }
-
-        /// <summary>
         /// Gets or sets the number of results per page to return.
         /// </summary>
         public int ResultsPerPage { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the section.
-        /// </summary>
-        public string Section { get; set; }
-
-        /// <summary>
-        /// Gets or sets constructor security token.
-        /// </summary>
-        public string SecurityToken { get; set; }
-
-        /// <summary>
-        /// Gets or sets user segments.
-        /// </summary>
-        public List<string> Segments { get; set; }
-
-        /// <summary>
-        /// Gets or sets session ID, utilized to personalize results.
-        /// </summary>
-        public int SessionId { get; set; }
 
         /// <summary>
         /// Gets or sets the sort method for results.
@@ -76,6 +52,16 @@ namespace Constructorio_NET.Models
         public string SortOrder { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the section.
+        /// </summary>
+        public string Section { get; set; }
+
+        /// <summary>
+        /// Gets or sets constructor security token.
+        /// </summary>
+        public string SecurityToken { get; set; }
+
+        /// <summary>
         /// Gets or sets user test cells.
         /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
@@ -84,6 +70,11 @@ namespace Constructorio_NET.Models
         /// Gets or sets collection of user related data.
         /// </summary>
         public UserInfo UserInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets how to return variation data.
+        /// </summary>
+        public VariationsMap VariationMap { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchRequest"/> class.
@@ -99,7 +90,7 @@ namespace Constructorio_NET.Models
         /// Get request parameters.
         /// </summary>
         /// <returns>Hashtable of request parameters.</returns>
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
 
@@ -124,11 +115,6 @@ namespace Constructorio_NET.Models
                 {
                     parameters.Add(Constants.SEGMENTS, this.UserInfo.GetUserSegments());
                 }
-            }
-
-            if (this.ClientId != null)
-            {
-                parameters.Add(Constants.CLIENT_ID, this.ClientId);
             }
 
             if (this.Filters != null)
@@ -161,16 +147,6 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.SECTION, this.Section);
             }
 
-            if (this.Segments != null)
-            {
-                parameters.Add(Constants.SEGMENTS, this.Segments);
-            }
-
-            if (this.SessionId != 0)
-            {
-                parameters.Add(Constants.SESSION_ID, this.SessionId);
-            }
-
             if (this.SortBy != null)
             {
                 parameters.Add(Constants.SORT_BY, this.SortBy);
@@ -184,6 +160,12 @@ namespace Constructorio_NET.Models
             if (this.TestCells != null)
             {
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
+            }
+
+            if (this.VariationMap != null && this.VariationMap.GroupBy.Count > 0 && this.VariationMap.Values.Count > 0)
+            {
+                string serializedJson = JsonConvert.SerializeObject(this.VariationMap);
+                parameters.Add(Constants.VARIATIONS_MAP, serializedJson);
             }
 
             return parameters;

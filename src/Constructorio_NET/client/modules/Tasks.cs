@@ -7,7 +7,7 @@ using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
 using Newtonsoft.Json;
 
-namespace Constructorio_NET
+namespace Constructorio_NET.Modules
 {
     public class Tasks : Helpers
     {
@@ -26,7 +26,7 @@ namespace Constructorio_NET
         public string CreateAllTasksUrl(AllTasksRequest req)
         {
             List<string> paths = new List<string> { "v1", "tasks" };
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
                 { "_dt", true },
@@ -64,7 +64,7 @@ namespace Constructorio_NET
         public string CreateTaskUrl(TaskRequest req)
         {
             List<string> paths = new List<string> { "v1", "tasks", $"{req.TaskId}" };
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             string url = MakeUrl(this.Options, paths, queryParams);
 
             return url;

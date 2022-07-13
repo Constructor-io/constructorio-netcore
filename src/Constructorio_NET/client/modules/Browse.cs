@@ -7,7 +7,7 @@ using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
 using Newtonsoft.Json;
 
-namespace Constructorio_NET
+namespace Constructorio_NET.Modules
 {
     public class Browse : Helpers
     {
@@ -25,7 +25,7 @@ namespace Constructorio_NET
 
         internal string CreateBrowseUrl(BrowseRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "browse", req.FilterName, req.FilterValue };
 
             return MakeUrl(this.Options, paths, queryParams);
@@ -62,7 +62,7 @@ namespace Constructorio_NET
 
         internal string CreateBrowseItemsUrl(BrowseItemsRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "browse", "items" };
 
             return MakeUrl(this.Options, paths, queryParams);
@@ -99,7 +99,7 @@ namespace Constructorio_NET
 
         internal string CreateBrowseFacetsUrl(BrowseFacetsRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "browse", "facets" };
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
@@ -141,7 +141,7 @@ namespace Constructorio_NET
 
         internal string CreateBrowseFacetOptionsUrl(BrowseFacetOptionsRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "browse", "facet_options" };
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {

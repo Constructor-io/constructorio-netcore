@@ -8,4 +8,4 @@ Setup VS Code
 For code coverage:
 - if initial setup:
   - dotnet husky install
-- dotnet husky run -g coverage && open coverage/html/index.html
+- dotnet husky run -g coverage

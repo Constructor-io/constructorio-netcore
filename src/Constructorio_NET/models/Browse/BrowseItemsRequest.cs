@@ -39,7 +39,7 @@ namespace Constructorio_NET.Models
             this.ItemIds = itemIds;
         }
 
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
 

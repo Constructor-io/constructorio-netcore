@@ -21,7 +21,7 @@ namespace Constructorio_NET.Models
             this.TaskId = TaskId;
         }
 
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
             return parameters;

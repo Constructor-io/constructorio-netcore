@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Models;
@@ -12,16 +13,13 @@ namespace Constructorio_NET.Tests
         private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
-        private Hashtable Options = new Hashtable();
+        private ConstructorioConfig Config;
         private UserInfo UserInfo;
 
         [SetUp]
         public void Setup()
         {
-            this.Options = new Hashtable()
-            {
-               { Constants.API_KEY, this.ApiKey }
-            };
+            this.Config = new ConstructorioConfig(this.ApiKey);
             this.UserInfo = new UserInfo(ClientId, SessionId);
         }
 
@@ -31,7 +29,7 @@ namespace Constructorio_NET.Tests
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
             req.UserInfo = this.UserInfo;
             req.ItemId = new List<string> { "power_drill" };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
@@ -44,7 +42,7 @@ namespace Constructorio_NET.Tests
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
             req.UserInfo = this.UserInfo;
             req.ItemId = new List<string> { "power_drill", "drill" };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
@@ -58,7 +56,7 @@ namespace Constructorio_NET.Tests
             req.UserInfo = this.UserInfo;
             req.ItemId = new List<string> { "power_drill", "drill" };
             req.NumResults = 5;
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
@@ -70,14 +68,13 @@ namespace Constructorio_NET.Tests
         public void GetRecommendationsResultsShouldReturnAResultProvidedUserInfo()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
-            req.UserInfo = this.UserInfo;
             req.ItemId = new List<string> { "power_drill", "drill" };
             req.UserInfo = new UserInfo(ClientId, SessionId);
             req.UserInfo.SetUserId("123");
             req.UserInfo.SetUserSegments(new List<string>());
             req.UserInfo.GetUserSegments().Add("vs");
             req.UserInfo.GetUserSegments().Add("pink");
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using Constructorio_NET.Models;
-using Constructorio_NET.Utils;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -16,7 +13,7 @@ namespace Constructorio_NET.Tests
     public class TasksTest
     {
         private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
-        private Hashtable Options = new Hashtable();
+        private ConstructorioConfig Config;
         private int TaskId;
 
         [OneTimeSetUp]
@@ -25,11 +22,8 @@ namespace Constructorio_NET.Tests
             JObject json = JObject.Parse(File.ReadAllText("./../../../../../.config/local.json"));
             string testApiToken = json.SelectToken("TEST_API_TOKEN").Value<string>();
 
-            this.Options = new Hashtable()
-            {
-               { Constants.API_KEY, this.ApiKey },
-               { Constants.API_TOKEN, testApiToken }
-            };
+            this.Config = new ConstructorioConfig(this.ApiKey);
+            this.Config.ApiToken = testApiToken;
 
             StreamContent itemsStream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
             itemsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
@@ -37,7 +31,7 @@ namespace Constructorio_NET.Tests
             {
                 { "items", itemsStream },
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
             CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
             this.TaskId = res.TaskId;
@@ -47,7 +41,7 @@ namespace Constructorio_NET.Tests
         public void GetTaskShouldReturnResult()
         {
             TaskRequest req = new TaskRequest(this.TaskId);
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             TaskResponse res = constructorio.Tasks.GetTask(req);
 
             Assert.NotNull(res.Status, "Status exists");
@@ -61,7 +55,7 @@ namespace Constructorio_NET.Tests
         public void GetAllTasksShouldReturnResult()
         {
             AllTasksRequest req = new AllTasksRequest();
-            ConstructorIO constructorio = new ConstructorIO(this.Options);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             AllTasksResponse res = constructorio.Tasks.GetAllTasks(req);
 
             Assert.NotNull(res.StatusCounts, "Status Counts exists");

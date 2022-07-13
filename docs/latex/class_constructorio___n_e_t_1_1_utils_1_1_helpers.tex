@@ -1,0 +1,116 @@
+\hypertarget{class_constructorio___n_e_t_1_1_utils_1_1_helpers}{}\doxysection{Constructorio\+\_\+\+NET.\+Utils.\+Helpers Class Reference}
+\label{class_constructorio___n_e_t_1_1_utils_1_1_helpers}\index{Constructorio\_NET.Utils.Helpers@{Constructorio\_NET.Utils.Helpers}}
+Inheritance diagram for Constructorio\+\_\+\+NET.\+Utils.\+Helpers\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.804598cm]{class_constructorio___n_e_t_1_1_utils_1_1_helpers}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static async Task$<$ string $>$ \mbox{\hyperlink{class_constructorio___n_e_t_1_1_utils_1_1_helpers_ace62db9d00e09b1ef72137cd14c1c8fd}{Make\+Http\+Request}} (Http\+Method http\+Method, string url, Dictionary$<$ string, string $>$ request\+Headers, Hashtable request\+Body=null, Dictionary$<$ string, Stream\+Content $>$ files=null)
+\begin{DoxyCompactList}\small\item\em Makes a http request. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static string \mbox{\hyperlink{class_constructorio___n_e_t_1_1_utils_1_1_helpers_a9903a8102bf6def4fca1a34e5b76dd75}{Our\+Escape\+Data\+String}} (string str)
+\begin{DoxyCompactList}\small\item\em Method in order to modify a string to ensure proper url encoding. \end{DoxyCompactList}\item 
+static Hashtable \mbox{\hyperlink{class_constructorio___n_e_t_1_1_utils_1_1_helpers_a4c970aa25a03a7e118839d4c175f7ccb}{Clean\+Params}} (Hashtable parameters)
+\begin{DoxyCompactList}\small\item\em Cleans params before applying them to a request url. \end{DoxyCompactList}\item 
+static string \mbox{\hyperlink{class_constructorio___n_e_t_1_1_utils_1_1_helpers_a00e110490f7d95fd842eaba636eec0ce}{Make\+Url}} (Hashtable options, List$<$ string $>$ paths, Hashtable query\+Params, Dictionary$<$ string, bool $>$ omitted\+Query\+Params=null)
+\begin{DoxyCompactList}\small\item\em Makes a URL to issue requests with. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_constructorio___n_e_t_1_1_utils_1_1_helpers_a4c970aa25a03a7e118839d4c175f7ccb}\label{class_constructorio___n_e_t_1_1_utils_1_1_helpers_a4c970aa25a03a7e118839d4c175f7ccb}} 
+\index{Constructorio\_NET.Utils.Helpers@{Constructorio\_NET.Utils.Helpers}!CleanParams@{CleanParams}}
+\index{CleanParams@{CleanParams}!Constructorio\_NET.Utils.Helpers@{Constructorio\_NET.Utils.Helpers}}
+\doxysubsubsection{\texorpdfstring{CleanParams()}{CleanParams()}}
+{\footnotesize\ttfamily static Hashtable Constructorio\+\_\+\+NET.\+Utils.\+Helpers.\+Clean\+Params (\begin{DoxyParamCaption}\item[{Hashtable}]{parameters }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Cleans params before applying them to a request url. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parameters} & Parameters to be cleaned.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Hashtable of cleaned parameters.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_constructorio___n_e_t_1_1_utils_1_1_helpers_ace62db9d00e09b1ef72137cd14c1c8fd}\label{class_constructorio___n_e_t_1_1_utils_1_1_helpers_ace62db9d00e09b1ef72137cd14c1c8fd}} 
+\index{Constructorio\_NET.Utils.Helpers@{Constructorio\_NET.Utils.Helpers}!MakeHttpRequest@{MakeHttpRequest}}
+\index{MakeHttpRequest@{MakeHttpRequest}!Constructorio\_NET.Utils.Helpers@{Constructorio\_NET.Utils.Helpers}}
+\doxysubsubsection{\texorpdfstring{MakeHttpRequest()}{MakeHttpRequest()}}
+{\footnotesize\ttfamily static async Task$<$ string $>$ Constructorio\+\_\+\+NET.\+Utils.\+Helpers.\+Make\+Http\+Request (\begin{DoxyParamCaption}\item[{Http\+Method}]{http\+Method,  }\item[{string}]{url,  }\item[{Dictionary$<$ string, string $>$}]{request\+Headers,  }\item[{Hashtable}]{request\+Body = {\ttfamily null},  }\item[{Dictionary$<$ string, Stream\+Content $>$}]{files = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Makes a http request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em http\+Method} & HTTP request method.\\
+\hline
+{\em url} & Url for the request.\\
+\hline
+{\em request\+Headers} & Additional headers to send with the request.\\
+\hline
+{\em request\+Body} & Key values pairs used for the POST body.\\
+\hline
+{\em files} & Dictionary of streamcontent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Task.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_constructorio___n_e_t_1_1_utils_1_1_helpers_a00e110490f7d95fd842eaba636eec0ce}\label{class_constructorio___n_e_t_1_1_utils_1_1_helpers_a00e110490f7d95fd842eaba636eec0ce}} 
+\index{Constructorio\_NET.Utils.Helpers@{Constructorio\_NET.Utils.Helpers}!MakeUrl@{MakeUrl}}
+\index{MakeUrl@{MakeUrl}!Constructorio\_NET.Utils.Helpers@{Constructorio\_NET.Utils.Helpers}}
+\doxysubsubsection{\texorpdfstring{MakeUrl()}{MakeUrl()}}
+{\footnotesize\ttfamily static string Constructorio\+\_\+\+NET.\+Utils.\+Helpers.\+Make\+Url (\begin{DoxyParamCaption}\item[{Hashtable}]{options,  }\item[{List$<$ string $>$}]{paths,  }\item[{Hashtable}]{query\+Params,  }\item[{Dictionary$<$ string, bool $>$}]{omitted\+Query\+Params = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Makes a URL to issue requests with. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & Hashtable of options from Constructorio instantiation.\\
+\hline
+{\em paths} & List of url paths.\\
+\hline
+{\em query\+Params} & Hashtable of query params.\\
+\hline
+{\em omitted\+Query\+Params} & Dictionary of query params to omit.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_constructorio___n_e_t_1_1_utils_1_1_helpers_a9903a8102bf6def4fca1a34e5b76dd75}\label{class_constructorio___n_e_t_1_1_utils_1_1_helpers_a9903a8102bf6def4fca1a34e5b76dd75}} 
+\index{Constructorio\_NET.Utils.Helpers@{Constructorio\_NET.Utils.Helpers}!OurEscapeDataString@{OurEscapeDataString}}
+\index{OurEscapeDataString@{OurEscapeDataString}!Constructorio\_NET.Utils.Helpers@{Constructorio\_NET.Utils.Helpers}}
+\doxysubsubsection{\texorpdfstring{OurEscapeDataString()}{OurEscapeDataString()}}
+{\footnotesize\ttfamily static string Constructorio\+\_\+\+NET.\+Utils.\+Helpers.\+Our\+Escape\+Data\+String (\begin{DoxyParamCaption}\item[{string}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Method in order to modify a string to ensure proper url encoding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to be encoded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Url encoded string.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Constructorio\+\_\+\+NET/utils/helpers.\+cs\end{DoxyCompactItemize}

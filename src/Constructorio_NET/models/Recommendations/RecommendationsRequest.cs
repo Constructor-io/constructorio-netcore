@@ -10,13 +10,44 @@ namespace Constructorio_NET.Models
     /// </summary
     public class RecommendationsRequest
     {
+        /// <summary>
+        /// Gets or sets pod id.
+        /// </summary>
         public string PodId { get; set; }
+
+        /// <summary>
+        /// Gets or sets number of results to return.
+        /// </summary>
         public int NumResults { get; set; }
+
+        /// <summary>
+        /// Gets or sets item id.
+        /// </summary>
         public List<string> ItemId { get; set; }
+
+        /// <summary>
+        /// Gets or sets filters used to refine results.
+        /// </summary>
         public Dictionary<string, List<string>> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the section.
+        /// </summary>
         public string Section { get; set; }
+
+        /// <summary>
+        /// Gets or sets constructor security token.
+        /// </summary>
         public string SecurityToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets user test cells.
+        /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
+
+        /// <summary>
+        /// Gets or sets collection of user related data.
+        /// </summary>
         public UserInfo UserInfo { get; set; }
 
         /// <summary>
@@ -26,19 +57,19 @@ namespace Constructorio_NET.Models
         /// <param name="podId">Pod id to use for the request.</param>
         public RecommendationsRequest(string podId)
         {
-            if (PodId == null)
+            if (podId == null)
             {
                 throw new ArgumentException("PodId is required");
             }
 
-            this.PodId = PodId;
+            this.PodId = podId;
         }
 
         /// <summary>
         /// Get request parameters.
         /// </summary>
         /// <returns>Hashtable of request parameters.</returns>
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
             if (this.UserInfo != null)

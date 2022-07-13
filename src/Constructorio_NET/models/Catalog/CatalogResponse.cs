@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Task Response
  */
-namespace Constructorio_NET
+namespace Constructorio_NET.Models
 {
   public class CatalogResponse
   {

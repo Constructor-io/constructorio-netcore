@@ -27,7 +27,7 @@ namespace Constructorio_NET.Models
             this.FacetName = facetName;
         }
 
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
 
