@@ -28,7 +28,7 @@
          "name": "dotnet-test-open-report",
          "group": "coverage",
          "command": "open",
-         "args": [ "../coverage/html/index.html" ]
+         "args": [ "../constructorio-netcore/coverage/html/index.html" ]
       }
    ]
 }

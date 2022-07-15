@@ -67,5 +67,17 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
+
+        [Test]
+        public void GetSearchResultsWithRedirect()
+        {
+            SearchRequest req = new SearchRequest("constructor");
+            req.UserInfo = this.UserInfo;
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = constructorio.Search.GetSearchResults(req);
+            Assert.IsNotNull(res.Response.Redirect, "Redirect should exist");
+            Assert.IsNotNull(res.Response.Redirect.Data.Url, "Url should exist");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
     }
 }
