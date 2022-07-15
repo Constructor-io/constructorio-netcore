@@ -34,8 +34,8 @@ namespace Constructorio_NET.Modules
         /// <summary>
         /// Retrieve recommendations results from API.
         /// </summary>
-        /// <param name="recommendationsRequest">Constructorio's request object</param>
-        /// <returns>Constructorio's response object</returns>
+        /// <param name="recommendationsRequest">Constructorio's recommendations request object.</param>
+        /// <returns>Constructorio's recommendations response object.</returns>
         public RecommendationsResponse GetRecommendationsResults(RecommendationsRequest recommendationsRequest)
         {
             string url;

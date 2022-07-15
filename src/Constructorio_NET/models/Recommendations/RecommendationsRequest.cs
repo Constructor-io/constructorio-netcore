@@ -5,9 +5,9 @@ using Constructorio_NET.Utils;
 
 namespace Constructorio_NET.Models
 {
-    /// <summary
+    /// <summary>
     /// Constructor.io Recommendations Request Class.
-    /// </summary
+    /// </summary>
     public class RecommendationsRequest
     {
         /// <summary>
@@ -52,7 +52,7 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RecommendationsRequest"/> class.
-        /// Creates an recommendations request.
+        /// Creates a recommendations request.
         /// </summary>
         /// <param name="podId">Pod id to use for the request.</param>
         public RecommendationsRequest(string podId)

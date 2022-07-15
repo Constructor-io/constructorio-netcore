@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /// <summary
+    /// <summary>
     /// Constructor.io Browse Request Class.
-    /// </summary
+    /// </summary>
     public class BrowseRequest
     {
         /// <summary>
@@ -83,7 +83,7 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BrowseRequest"/> class.
-        /// Creates an browse request.
+        /// Creates a browse request.
         /// </summary>
         /// <param name="filterName">filter name to use for the request.</param>
         /// <param name="filterValue">filter value to use for the request.</param>

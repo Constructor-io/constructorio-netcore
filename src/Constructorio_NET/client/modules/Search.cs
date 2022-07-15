@@ -34,8 +34,8 @@ namespace Constructorio_NET.Modules
         /// <summary>
         /// Retrieve search results from API.
         /// </summary>
-        /// <param name="searchRequest">Constructorio's request object.</param>
-        /// <returns>Constructorio's response object.</returns>
+        /// <param name="searchRequest">Constructorio's search request object.</param>
+        /// <returns>Constructorio's search response object.</returns>
         public SearchResponse GetSearchResults(SearchRequest searchRequest)
         {
             string url;

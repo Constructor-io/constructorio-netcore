@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /// <summary
+    /// <summary>
     /// Constructor.io Search Request Class.
-    /// </summary
+    /// </summary>
     public class SearchRequest
     {
         /// <summary>
@@ -32,7 +32,7 @@ namespace Constructorio_NET.Models
         public List<string> HiddenFields { get; set; }
 
         /// <summary>
-        /// Gets or sets the page number of the results.
+        /// Gets or sets the page number of the results to return.
         /// </summary>
         public int Page { get; set; }
 
@@ -78,7 +78,7 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchRequest"/> class.
-        /// Creates an search request.
+        /// Creates a search request.
         /// </summary>
         /// <param name="query">Query to use for the request.</param>
         public SearchRequest(string query)

@@ -1,8 +1,0 @@
-var searchData=
-[
-  ['value_0',['Value',['../class_constructorio___n_e_t_1_1_models_1_1_filter_facet_option.html#acf588321f0f8033dda8dc89f00bcb99a',1,'Constructorio_NET.Models.FilterFacetOption.Value()'],['../class_constructorio___n_e_t_1_1_models_1_1_result.html#a8ddb10071d7a73715cc2e60d25b0bd88',1,'Constructorio_NET.Models.Result.Value()']]],
-  ['values_1',['Values',['../class_constructorio___n_e_t_1_1_models_1_1_result_facet.html#a94a737bc80ad1feba38a78e064ad9a2f',1,'Constructorio_NET.Models.ResultFacet.Values()'],['../class_constructorio___n_e_t_1_1_models_1_1_variations_map.html#a59934ec51310b72b8bbb67e7a5c358d5',1,'Constructorio_NET.Models.VariationsMap.Values()']]],
-  ['variationid_2',['VariationId',['../class_constructorio___n_e_t_1_1_models_1_1_result_data.html#ab6a9966a10f8b0061da609dad79a9c0e',1,'Constructorio_NET::Models::ResultData']]],
-  ['variationmap_3',['VariationMap',['../class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#af10541c1bdcaf8f386f97d5704d0ecf8',1,'Constructorio_NET.Models.AutocompleteRequest.VariationMap()'],['../class_constructorio___n_e_t_1_1_models_1_1_browse_items_request.html#a21dedf752960b763d17b750b36edb54c',1,'Constructorio_NET.Models.BrowseItemsRequest.VariationMap()'],['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a9d49c41a3c8be6eedd2ab670d35e4324',1,'Constructorio_NET.Models.BrowseRequest.VariationMap()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a63c31a456cd5e8da9c186aed66b6646f',1,'Constructorio_NET.Models.SearchRequest.VariationMap()']]],
-  ['variations_4',['Variations',['../class_constructorio___n_e_t_1_1_models_1_1_result.html#aa3dd339384eab428d283f0816bd43275',1,'Constructorio_NET::Models::Result']]]
-];

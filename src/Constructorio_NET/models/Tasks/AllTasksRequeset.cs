@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io All Tasks Request
-     */
+    /// <summary>
+    /// Constructor.io All Tasks Request Class.
+    /// </summary>
     public class AllTasksRequest
     {
         public int ResultsPerPage { get; set; }
@@ -16,21 +16,31 @@ namespace Constructorio_NET.Models
         public int Page { get; set; }
 
         /// <summary>
-        /// Creates a all tasks request
+        /// Initializes a new instance of the <see cref="AllTasksRequest"/> class.
+        /// Creates an all tasks request.
         /// </summary>
-        /// <param name="TaskId"></param>
         public AllTasksRequest()
         {
             this.ResultsPerPage = 20;
             this.Page = 1;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AllTasksRequest"/> class.
+        /// Creates an all tasks request.
+        /// </summary>
+        /// <param name="ResultsPerPage">Number of results per page to return.</param>
+        /// <param name="Page">Page number of the results to return.</param>
         public AllTasksRequest(int ResultsPerPage, int Page)
         {
             this.ResultsPerPage = ResultsPerPage;
             this.Page = Page;
         }
 
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
         public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
@@ -48,6 +58,10 @@ namespace Constructorio_NET.Models
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Hashtable of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

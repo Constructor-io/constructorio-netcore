@@ -34,8 +34,8 @@ namespace Constructorio_NET.Modules
         /// <summary>
         /// Retrieve browse results from API.
         /// </summary>
-        /// <param name="browseRequest">Constructorio's request object.</param>
-        /// <returns>Constructorio's response object.</returns>
+        /// <param name="browseRequest">Constructorio's browse request object.</param>
+        /// <returns>Constructorio's browse response object.</returns>
         public BrowseResponse GetBrowseResults(BrowseRequest browseRequest)
         {
             string url;
@@ -71,8 +71,8 @@ namespace Constructorio_NET.Modules
         /// <summary>
         /// Retrieve browse items result from API.
         /// </summary>
-        /// <param name="browseItemsRequest">Constructorio's request object.</param>
-        /// <returns>Constructorio's response object.</returns>
+        /// <param name="browseItemsRequest">Constructorio's browse request object.</param>
+        /// <returns>Constructorio's browse response object.</returns>
         public BrowseResponse GetBrowseItemsResult(BrowseItemsRequest browseItemsRequest)
         {
             string url;
@@ -112,8 +112,8 @@ namespace Constructorio_NET.Modules
         /// <summary>
         /// Retrieve browse facets result from API.
         /// </summary>
-        /// <param name="browseFacetsRequest">Constructorio's request object.</param>
-        /// <returns>Constructorio's response object.</returns>
+        /// <param name="browseFacetsRequest">Constructorio's browse request object.</param>
+        /// <returns>Constructorio's browse facets response object.</returns>
         public BrowseFacetsResponse GetBrowseFacetsResult(BrowseFacetsRequest browseFacetsRequest)
         {
             string url;
@@ -154,8 +154,8 @@ namespace Constructorio_NET.Modules
         /// <summary>
         /// Retrieve browse facet options result from API.
         /// </summary>
-        /// <param name="browseFacetOptionsRequest">Constructorio's request object.</param>
-        /// <returns>Constructorio's response object.</returns>
+        /// <param name="browseFacetOptionsRequest">Constructorio's browse request object.</param>
+        /// <returns>Constructorio's browse facet options response object.</returns>
         public BrowseFacetOptionsResponse GetBrowseFacetOptionsResult(BrowseFacetOptionsRequest browseFacetOptionsRequest)
         {
             string url;

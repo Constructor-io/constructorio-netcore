@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /// <summary
+    /// <summary>
     /// Constructor.io Autocomplete Request Class.
-    /// </summary
+    /// </summary>
     public class AutocompleteRequest
     {
         /// <summary>

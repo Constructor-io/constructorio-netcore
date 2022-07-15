@@ -1,8 +1,5 @@
 ﻿using System;
 
-/**
- * Constructor.io ConstructorioConfig
- **/
 namespace Constructorio_NET.Models
 {
     public class ConstructorioConfig

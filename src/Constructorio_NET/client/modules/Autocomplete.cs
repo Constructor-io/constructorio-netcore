@@ -34,17 +34,17 @@ namespace Constructorio_NET.Modules
         /// <summary>
         /// Retrieve Autocomplete results from API.
         /// </summary>
-        /// <param name="autocompleteReq">Constructorio's Autocomplete request object.</param>
-        /// <returns>Constructorio's Autocomplete response object.</returns>
-        public AutocompleteResponse GetAutocompleteResults(AutocompleteRequest autocompleteReq)
+        /// <param name="autocompleteRequest">Constructorio's autocomplete request object.</param>
+        /// <returns>Constructorio's autocomplete response object.</returns>
+        public AutocompleteResponse GetAutocompleteResults(AutocompleteRequest autocompleteRequest)
         {
             string url;
             Task<string> task;
 
             try
             {
-                url = CreateAutocompleteUrl(autocompleteReq);
-                Dictionary<string, string> requestHeaders = autocompleteReq.GetRequestHeaders();
+                url = CreateAutocompleteUrl(autocompleteRequest);
+                Dictionary<string, string> requestHeaders = autocompleteRequest.GetRequestHeaders();
                 task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)
