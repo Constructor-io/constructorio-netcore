@@ -28,7 +28,7 @@ namespace Constructorio_NET.Tests
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
             req.UserInfo = this.UserInfo;
-            req.ItemId = new List<string> { "power_drill" };
+            req.ItemIds = new List<string> { "power_drill" };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
 
@@ -41,7 +41,7 @@ namespace Constructorio_NET.Tests
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
             req.UserInfo = this.UserInfo;
-            req.ItemId = new List<string> { "power_drill", "drill" };
+            req.ItemIds = new List<string> { "power_drill", "drill" };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
 
@@ -54,7 +54,7 @@ namespace Constructorio_NET.Tests
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
             req.UserInfo = this.UserInfo;
-            req.ItemId = new List<string> { "power_drill", "drill" };
+            req.ItemIds = new List<string> { "power_drill", "drill" };
             req.NumResults = 5;
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
@@ -68,7 +68,7 @@ namespace Constructorio_NET.Tests
         public void GetRecommendationsResultsShouldReturnAResultProvidedUserInfo()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1");
-            req.ItemId = new List<string> { "power_drill", "drill" };
+            req.ItemIds = new List<string> { "power_drill", "drill" };
             req.UserInfo = new UserInfo(ClientId, SessionId);
             req.UserInfo.SetUserId("123");
             req.UserInfo.SetUserSegments(new List<string>());

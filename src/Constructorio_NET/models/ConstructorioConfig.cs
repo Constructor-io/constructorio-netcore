@@ -39,6 +39,22 @@ namespace Constructorio_NET.Models
             this.ApiKey = apiKey;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConstructorioConfig"/> class.
+        /// Collection of values to pass to modules.
+        /// </summary>
+        /// <param name="apiKey">Api key used to direct requests.</param>
+        /// <param name="apiToken">Api token used to authorize requests.</param>
+        public ConstructorioConfig(string apiKey, string apiToken)
+        {
+            if (apiKey == null)
+            {
+                throw new ArgumentException("apiKey is required");
+            }
+
+            this.ApiKey = apiKey;
+        }
+
         public bool Contains(string field)
         {
             return typeof(ConstructorioConfig).GetProperty(field) != null;

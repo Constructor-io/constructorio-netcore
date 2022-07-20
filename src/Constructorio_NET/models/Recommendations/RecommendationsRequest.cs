@@ -23,7 +23,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets item id.
         /// </summary>
-        public List<string> ItemId { get; set; }
+        public List<string> ItemIds { get; set; }
 
         /// <summary>
         /// Gets or sets filters used to refine results.
@@ -115,9 +115,9 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
 
-            if (this.ItemId.Count != 0)
+            if (this.ItemIds.Count != 0)
             {
-                parameters.Add("item_id", this.ItemId);
+                parameters.Add("item_id", this.ItemIds);
             }
 
             return parameters;
