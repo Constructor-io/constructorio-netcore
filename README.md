@@ -12,7 +12,7 @@ A .NET Core REST client for the Constructor.io API
 <!-- 2. Retrieve your autocomplete token and key.  You can find this at your [Constructor.io dashboard](https://constructor.io/dashboard).
 3. Create a new instance of the client. -->
 
-```java
+```csharp
 ConstructorioConfig config = new ConstructorioConfig("apiKey", "apiToken");
 ConstructorIO constructorio = new ConstructorIO(config);
 ```
@@ -20,7 +20,7 @@ ConstructorIO constructorio = new ConstructorIO(config);
 # Uploading a Catalog
 To upload your product catalog, you will need to create a `CatalogRequest`.  In this request, you can specify the files you want to upload (items, variations, and item groups) and the section you want to send the upload.  You can also set a notification e-mail to be alerted when a file ingestion fails.
 
-```java
+```csharp
 // Create a files dictionary and add the relevant files
 StreamContent itemsStream = new StreamContent(File.OpenRead("./catalog/items.csv"));
 itemsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
@@ -54,7 +54,7 @@ CatalogResponse response = constructorio.Catalog.ReplaceCatalog(request);
 
 To retrieve autocomplete results, you will need to create an `AutocompleteRequest`. In this request you can specify the number of results you want per autocomplete section.  If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
-```java
+```csharp
 // Create an AutocompleteRequest with the term to request results for
 AutocompleteRequest request = new AutocompleteRequest("rain coat");
 
@@ -84,7 +84,7 @@ AutocompleteResponse response = constructorio.Autocomplete.GetAutocompleteResult
 
 To retrieve search results, you will need to create a `SearchRequest`. In this request you can specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
-```java
+```csharp
 // Create a SearchRequest with the term to request results for
 SearchRequest request = new SearchRequest("peanut butter");
 
@@ -123,7 +123,7 @@ SearchResponse res = constructorio.Search.GetSearchResults(request);
 
 To retrieve browse results, you will need to create a `BrowseRequest`. When creating the `BrowseRequest` the filter name can be one of `collection_id`, `group_id`, or a facet name (i.e. Brand). In this request, you can also specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
-```java
+```csharp
 // Create a BrowseRequest with the filter name and filter value to request results for
 BrowseRequest request = new BrowseRequest("group_id", "8193");
 
@@ -162,7 +162,7 @@ BrowseResponse response = constructor.browse(request);
 
 To retrieve browse results for a supplied list of item ID's, you will need to create a `BrowseItemsRequest`. When creating the `BrowseItemsRequest` the `itemIds` parameter will be a list of item ID's. In this request, you can also specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
-```java
+```csharp
 // Create a BrowseItemsRequest with the filter name and filter value to request results for
 BrowseItemsRequest request = new BrowseItemsRequest(Arrays.asList("t-shirt-xxl"));
 
@@ -194,7 +194,7 @@ BrowseResponse response = constructor.browseItems(request, userInfo);
 
 To retrieve recommendation results, you will need to create a `RecommendationsRequest`. In this request, you can also specify the number of results you want and the items (given the ids) that you want to retrieve recommendations for. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
 
-```java
+```csharp
 // Create a RecommendationsRequest with the pod id to request results for
 RecommendationsRequest request = new RecommendationsRequest("pdp_complementary_items");
 
@@ -221,7 +221,7 @@ RecommendationsResponse response = constructor.recommendations(request, userInfo
 
 To retrieve all tasks, you will need to create a `AllTasksRequest`. In this request you can also specify the page and number of results per page. The page and number of results per page will default to 1 and 20 respectively.
 
-```java
+```csharp
 // Create a AllTasksRequest to request results for
 AllTasksRequest request = new AllTasksRequest();
 
@@ -237,7 +237,7 @@ AllTasksResponse response = constructor.Tasks.GetAllTasks(request);
 
 To retrieve a specific task with a task_id, you will need to create a `TaskRequest`.
 
-```java
+```csharp
 // Create a TaskRequest with the task_id to retrieve
 TaskRequest request = new TaskRequest("12345");
 

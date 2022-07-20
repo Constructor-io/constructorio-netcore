@@ -52,6 +52,7 @@ namespace Constructorio_NET.Models
                 throw new ArgumentException("apiKey is required");
             }
 
+            this.ApiToken = apiToken;
             this.ApiKey = apiKey;
         }
 
