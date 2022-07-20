@@ -5,12 +5,12 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Task Response
  */
-namespace Constructorio_NET
+namespace Constructorio_NET.Models
 {
   public class CatalogResponse
   {
     [JsonProperty("task_id")]
-    public Int32 TaskId { get; set; }
+    public int TaskId { get; set; }
 
     [JsonProperty("task_status_path")]
     public string TaskStatusPath { get; set; }

@@ -49,7 +49,7 @@ namespace Constructorio_NET.Models
             DType = DTypes.Array;
         }
 
-        public void addGroupByRule(string name, string field)
+        public void AddGroupByRule(string name, string field)
         {
             if (this.GroupBy != null)
             {
@@ -61,7 +61,7 @@ namespace Constructorio_NET.Models
             }
         }
 
-        public void addValueRule(string name, string aggregation, string field)
+        public void AddValueRule(string name, string aggregation, string field)
         {
             if (this.Values != null)
             {

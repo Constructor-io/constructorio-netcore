@@ -3,36 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Constructorio_NET.Utils;
 using Constructorio_NET.Models;
+using Constructorio_NET.Utils;
 using Newtonsoft.Json;
 
-namespace Constructorio_NET
+namespace Constructorio_NET.Modules
 {
     public class Search : Helpers
     {
-        private Hashtable Options;
+        private readonly Hashtable Options;
 
         /// <summary>
-        /// Interface for search related API calls
+        /// Initializes a new instance of the <see cref="Search"/> class.
+        /// Interface for search related API calls.
         /// </summary>
+        /// <param name="options">Hashtable of options from Constructorio instantiation.</param>
         internal Search(Hashtable options)
         {
             this.Options = options;
         }
+
         internal string CreateSearchUrl(SearchRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "search", req.Query };
 
-            return Helpers.MakeUrl(this.Options, paths, queryParams);
+            return MakeUrl(this.Options, paths, queryParams);
         }
 
         /// <summary>
-        /// Retrieve search results from API
+        /// Retrieve search results from API.
         /// </summary>
-        /// <param name="searchRequest">Constructorio's request object</param>
-        /// <returns>Constructorio's response object</returns>
+        /// <param name="searchRequest">Constructorio's search request object.</param>
+        /// <returns>Constructorio's search response object.</returns>
         public SearchResponse GetSearchResults(SearchRequest searchRequest)
         {
             string url;
@@ -43,7 +46,7 @@ namespace Constructorio_NET
             {
                 url = CreateSearchUrl(searchRequest);
                 requestHeaders = searchRequest.GetRequestHeaders();
-                task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+                task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)
             {

@@ -7,29 +7,27 @@ using Newtonsoft.Json;
  **/
 namespace Constructorio_NET.Models
 {
-    public class FilterFacet {
-
+    public class FilterFacet
+    {
         [JsonProperty("display_name")]
-        public String DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
         [JsonProperty("name")]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("status")]
-        public Dictionary<String, Object> Status { get; set; }
+        public Dictionary<string, object> Status { get; set; }
 
         [JsonProperty("max")]
-        public Double Max { get; set; }
+        public double Max { get; set; }
 
         [JsonProperty("min")]
-        public Double Min { get; set; }
+        public double Min { get; set; }
 
         [JsonProperty("options")]
         public List<FilterFacetOption> Options { get; set; }
 
         [JsonProperty("type")]
-        public String Type { get; set; }
-
+        public string Type { get; set; }
     }
-
 }

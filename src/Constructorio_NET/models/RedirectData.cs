@@ -6,16 +6,15 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class RedirectData {
-
+    public class RedirectData
+    {
         [JsonProperty("url")]
-        public String Url;
+        public string Url { get; set; }
 
         [JsonProperty("rule_id")]
-        public Int32 RuleId { get; set; }
+        public int RuleId { get; set; }
 
         [JsonProperty("match_id")]
-        public Int32 MatchId { get; set; }
-
+        public int MatchId { get; set; }
     }
 }

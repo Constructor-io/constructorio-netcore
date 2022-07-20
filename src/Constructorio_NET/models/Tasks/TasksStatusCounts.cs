@@ -9,7 +9,6 @@ namespace Constructorio_NET.Models
 {
     public class TasksStatusCounts
     {
-
         [JsonProperty("QUEUED")]
         public int Queued { get; set; }
 

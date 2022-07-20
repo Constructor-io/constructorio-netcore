@@ -6,68 +6,112 @@ using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Autocomplete Request
-     */
+    /// <summary>
+    /// Constructor.io Autocomplete Request Class.
+    /// </summary>
     public class AutocompleteRequest
     {
+        /// <summary>
+        /// Gets or sets the query used to refine results.
+        /// </summary>
         public string Query { get; set; }
+
+        /// <summary>
+        /// Gets or sets how to many results to return and what sections.
+        /// </summary>
         public Dictionary<string, int> ResultsPerSection { get; set; }
+
+        /// <summary>
+        /// Gets or sets filters used to refine results.
+        /// </summary>
         public Dictionary<string, List<string>> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets hidden metadata fields to return.
+        /// </summary>
         public List<string> HiddenFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets constructor security token.
+        /// </summary>
         public string SecurityToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets user test cells.
+        /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
+
+        /// <summary>
+        /// Gets or sets collection of user related data.
+        /// </summary>
         public UserInfo UserInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets how to return variation data.
+        /// </summary>
         public VariationsMap VariationMap { get; set; }
 
         /// <summary>
-        /// Creates a autocomplete request
+        /// Initializes a new instance of the <see cref="AutocompleteRequest"/> class.
+        /// Creates an autocomplete request.
         /// </summary>
-        /// <param name="Query"></param>
-        public AutocompleteRequest(string Query)
+        /// <param name="query">Query to use for the request.</param>
+        public AutocompleteRequest(string query)
         {
-            if (Query == null)
+            if (query == null)
             {
-                throw new ArgumentException("Query is required");
+                throw new ArgumentException("query is required");
             }
-            this.Query = Query;
+
+            this.Query = query;
         }
 
-        public Hashtable GetUrlParameters()
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
             if (this.UserInfo != null)
             {
-                if (this.UserInfo.getUserId() != null)
+                if (this.UserInfo.GetUserId() != null)
                 {
-                    parameters.Add(Constants.USER_ID, this.UserInfo.getUserId());
+                    parameters.Add(Constants.USER_ID, this.UserInfo.GetUserId());
                 }
-                if (this.UserInfo.getClientId() != null)
+
+                if (this.UserInfo.GetClientId() != null)
                 {
-                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.getClientId());
+                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.GetClientId());
                 }
-                if (this.UserInfo.getSessionId() != 0)
+
+                if (this.UserInfo.GetSessionId() != 0)
                 {
-                    parameters.Add(Constants.SESSION_ID, this.UserInfo.getSessionId());
+                    parameters.Add(Constants.SESSION_ID, this.UserInfo.GetSessionId());
                 }
-                if (this.UserInfo.getUserSegments() != null)
+
+                if (this.UserInfo.GetUserSegments() != null)
                 {
-                    parameters.Add(Constants.SEGMENTS, this.UserInfo.getUserSegments());
+                    parameters.Add(Constants.SEGMENTS, this.UserInfo.GetUserSegments());
                 }
             }
+
             if (this.Filters != null)
             {
                 parameters.Add(Constants.FILTERS, this.Filters);
             }
+
             if (this.TestCells != null)
             {
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
+
             if (this.VariationMap != null && this.VariationMap.GroupBy.Count > 0 && this.VariationMap.Values.Count > 0)
             {
                 string serializedJson = JsonConvert.SerializeObject(this.VariationMap);
                 parameters.Add(Constants.VARIATIONS_MAP, serializedJson);
             }
+
             if (this.ResultsPerSection != null)
             {
                 foreach (KeyValuePair<string, int> keyValue in this.ResultsPerSection)
@@ -77,28 +121,36 @@ namespace Constructorio_NET.Models
                     parameters.Add("num_results_" + section, numResults);
                 }
             }
+
             if (this.HiddenFields != null)
             {
                 parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
             }
+
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Hashtable of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
             if (this.UserInfo != null)
             {
-                if (this.UserInfo.getForwardedFor() != null)
+                if (this.UserInfo.GetForwardedFor() != null)
                 {
-                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.getForwardedFor());
+                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.GetForwardedFor());
                 }
-                if (this.UserInfo.getUserAgent() != null)
+
+                if (this.UserInfo.GetUserAgent() != null)
                 {
-                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.getUserAgent());
+                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
                 }
             }
+
             if (this.SecurityToken != null)
             {
                 requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);

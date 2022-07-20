@@ -7,109 +7,126 @@ using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
 using Newtonsoft.Json;
 
-namespace Constructorio_NET
+namespace Constructorio_NET.Modules
 {
-  public class Catalog : Helpers
-  {
-    private Hashtable Options;
-    public Catalog(Hashtable options)
+    public class Catalog : Helpers
     {
-      this.Options = options;
-    }
+        private readonly Hashtable Options;
 
-    public string CreateCatalogUrl(CatalogRequest req)
-    {
-      List<string> paths = new List<string> { "v1", "catalog" };
-      Hashtable queryParams = req.GetUrlParameters();
-      Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
-      Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-      {
-        { "_dt", true },
-        { "c", true },
-      };
-      string url = Helpers.MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
-      return url;
-    }
-
-    public CatalogResponse ReplaceCatalog(CatalogRequest catalogRequest)
-    {
-      string url;
-      Task<string> task;
-      Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
-
-      try
-      {
-        url = CreateCatalogUrl(catalogRequest);
-        requestHeaders = catalogRequest.GetRequestHeaders();
-        Helpers.AddAuthHeaders(this.Options, requestHeaders);
-        task = Helpers.MakeHttpRequest(new HttpMethod("PUT"), url, requestHeaders, null, catalogRequest.Files);
-      }
-      catch (Exception e)
-      {
-        throw new ConstructorException(e);
-      }
-
-      if (task.Result != null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Catalog"/> class.
+        /// Interface for catalog related API calls.
+        /// </summary>
+        /// <param name="options">Hashtable of options from Constructorio instantiation.</param>
+        public Catalog(Hashtable options)
         {
-            return JsonConvert.DeserializeObject<CatalogResponse>(task.Result);
+            this.Options = options;
         }
 
-
-        throw new ConstructorException("ReplaceCatalog response data is malformed");
-    }
-
-    public CatalogResponse UpdateCatalog(CatalogRequest catalogRequest)
-    {
-      string url;
-      Task<string> task;
-      Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
-
-      try
-      {
-        url = CreateCatalogUrl(catalogRequest);
-        requestHeaders = catalogRequest.GetRequestHeaders();
-        Helpers.AddAuthHeaders(this.Options, requestHeaders);
-        task = Helpers.MakeHttpRequest(new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
-      }
-      catch (Exception e)
-      {
-        throw new ConstructorException(e);
-      }
-
-        if (task.Result != null)
+        internal string CreateCatalogUrl(CatalogRequest req)
         {
-            return JsonConvert.DeserializeObject<CatalogResponse>(task.Result);
+            List<string> paths = new List<string> { "v1", "catalog" };
+            Hashtable queryParams = req.GetRequestParameters();
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            {
+                { "_dt", true },
+                { "c", true },
+            };
+            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+
+            return url;
         }
 
-        throw new ConstructorException("UpdateCatalog response data is malformed");
+        /// <summary>
+        /// Send full catalog files to replace the current catalog.
+        /// </summary>
+        /// <param name="catalogRequest">Constructorio's catalog request object.</param>
+        /// <returns>Constructorio's catalog response object.</returns>
+        public CatalogResponse ReplaceCatalog(CatalogRequest catalogRequest)
+        {
+            string url;
+            Task<string> task;
+
+            try
+            {
+                url = CreateCatalogUrl(catalogRequest);
+                Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                task = MakeHttpRequest(new HttpMethod("PUT"), url, requestHeaders, null, catalogRequest.Files);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (task.Result != null)
+            {
+                return JsonConvert.DeserializeObject<CatalogResponse>(task.Result);
+            }
+
+            throw new ConstructorException("ReplaceCatalog response data is malformed");
+        }
+
+        /// <summary>
+        /// Send full catalog files to update the current catalog.
+        /// </summary>
+        /// <param name="catalogRequest">Constructorio's catalog request object.</param>
+        /// <returns>Constructorio's catalog response object.</returns>
+        public CatalogResponse UpdateCatalog(CatalogRequest catalogRequest)
+        {
+            string url;
+            Task<string> task;
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+
+            try
+            {
+                url = CreateCatalogUrl(catalogRequest);
+                requestHeaders = catalogRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                task = MakeHttpRequest(new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (task.Result != null)
+            {
+                return JsonConvert.DeserializeObject<CatalogResponse>(task.Result);
+            }
+
+            throw new ConstructorException("UpdateCatalog response data is malformed");
+        }
+
+        /// <summary>
+        /// Send full catalog files to patch update the current catalog.
+        /// </summary>
+        /// <param name="catalogRequest">Constructorio's catalog request object.</param>
+        /// <returns>Constructorio's catalog response object.</returns>
+        public CatalogResponse PatchCatalog(CatalogRequest catalogRequest)
+        {
+            string url;
+            Task<string> task;
+
+            try
+            {
+                url = CreateCatalogUrl(catalogRequest);
+                url += "&patch_delta=true";
+                Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                task = MakeHttpRequest(new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (task.Result != null)
+            {
+                return JsonConvert.DeserializeObject<CatalogResponse>(task.Result);
+            }
+
+            throw new ConstructorException("PatchCatalog response data is malformed");
+        }
     }
-
-    public CatalogResponse PatchCatalog(CatalogRequest catalogRequest)
-    {
-      string url;
-      Task<string> task;
-      Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
-
-      try
-      {
-        url = CreateCatalogUrl(catalogRequest);
-        url += "&patch_delta=true";
-        requestHeaders = catalogRequest.GetRequestHeaders();
-        Helpers.AddAuthHeaders(this.Options, requestHeaders);
-        task = Helpers.MakeHttpRequest(new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
-      }
-      catch (Exception e)
-      {
-        throw new ConstructorException(e);
-      }
-
-
-    if (task.Result != null)
-    {
-        return JsonConvert.DeserializeObject<CatalogResponse>(task.Result);
-    }
-
-    throw new ConstructorException("PatchCatalog response data is malformed");
-    }
-  }
 }

@@ -7,19 +7,19 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class ResultData {
-
+    public class ResultData
+    {
         [JsonProperty("description")]
-        public String Description { get; set; }
+        public string Description { get; set; }
 
         [JsonProperty("id")]
-        public String Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("url")]
-        public String Url { get; set; }
+        public string Url { get; set; }
 
         [JsonProperty("image_url")]
-        public String ImageUrl { get; set; }
+        public string ImageUrl { get; set; }
 
         [JsonProperty("groups")]
         public List<ResultGroup> Groups { get; set; }
@@ -28,10 +28,9 @@ namespace Constructorio_NET.Models
         public List<ResultFacet> Facets { get; set; }
 
         [JsonProperty("variation_id")]
-        public String VariationId { get; set; }
+        public string VariationId { get; set; }
 
         [JsonExtensionData]
-        public Dictionary<String, Object> Metadata { get; set; }
-
+        public Dictionary<string, object> Metadata { get; set; }
     }
 }

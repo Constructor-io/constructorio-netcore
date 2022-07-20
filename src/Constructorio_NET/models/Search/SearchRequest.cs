@@ -1,176 +1,203 @@
-﻿using Constructorio_NET.Utils;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Constructorio_NET.Utils;
+using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Search Request
-     */
+    /// <summary>
+    /// Constructor.io Search Request Class.
+    /// </summary>
     public class SearchRequest
     {
-        /// <value>
-        /// Client ID, utilized to personalize results
-        /// </value>
-        public string ClientId { get; set; }
-        /// <value>
-        /// Filters used to refine results
-        /// </value>
-        public Dictionary<string, List<string>> Filters { get; set; }
-        /// <value>
-        /// The format options used to refine result groups
-        /// </value>
-        public Dictionary<string, string> FmtOptions { get; set; }
-        /// <value>
-        /// Hidden metadata fields to return
-        /// </value>
-        public List<string> HiddenFields { get; set; }
-        /// <value>
-        /// The page number of the results
-        /// </value>
-        public int Page { get; set; }
-        /// <value>
-        /// The term to search for
-        /// </value>
+        /// <summary>
+        /// Gets or sets the query used to refine results.
+        /// </summary>
         public string Query { get; set; }
-        /// <value>
-        /// The number of results per page to return
-        /// </value>
-        public int ResultsPerPage { get; set; }
-        /// <value>
-        /// The name of the section 
-        /// </value>
-        public string Section { get; set; }
-        /// <value>
-        /// Constructor security token
-        /// </value>
-        public string SecurityToken { get; set; }
-        /// <value>
-        /// User segments
-        /// </value>
-        public List<string> Segments { get; set; }
-        /// <value>
-        /// Session ID, utilized to personalize results
-        /// </value>
-        public int SessionId { get; set; }
-        /// <value>
-        /// The sort method for results
-        /// </value>
-        public string SortBy { get; set; }
-        /// <value>
-        /// The sort order for results
-        /// </value>
-        public string SortOrder { get; set; }
-        /// <value>
-        /// User test cells
-        /// </value>
-        public Dictionary<string, string> TestCells { get; set; }
-        /// <value>
-        /// Origin user agent, from client
-        /// </value>
-        public string UserAgent { get; set; }
-        /// <value>
-        /// User ID, utilized to personalize results
-        /// </value>
-        public string UserId { get; set; }
-        /// <value>
-        /// Origin user IP, from client
-        /// </value>
-        public string UserIp { get; set; }
 
         /// <summary>
-        /// Creates a search request
+        /// Gets or sets filters used to refine results.
         /// </summary>
-        /// <param name="query">The term used to query against</param>
+        public Dictionary<string, List<string>> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets the format options used to refine result groups.
+        /// </summary>
+        public Dictionary<string, string> FmtOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets hidden metadata fields to return.
+        /// </summary>
+        public List<string> HiddenFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page number of the results to return.
+        /// </summary>
+        public int Page { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of results per page to return.
+        /// </summary>
+        public int ResultsPerPage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sort method for results.
+        /// </summary>
+        public string SortBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sort order for results.
+        /// </summary>
+        public string SortOrder { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the section.
+        /// </summary>
+        public string Section { get; set; }
+
+        /// <summary>
+        /// Gets or sets constructor security token.
+        /// </summary>
+        public string SecurityToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets user test cells.
+        /// </summary>
+        public Dictionary<string, string> TestCells { get; set; }
+
+        /// <summary>
+        /// Gets or sets collection of user related data.
+        /// </summary>
+        public UserInfo UserInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets how to return variation data.
+        /// </summary>
+        public VariationsMap VariationMap { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SearchRequest"/> class.
+        /// Creates a search request.
+        /// </summary>
+        /// <param name="query">Query to use for the request.</param>
         public SearchRequest(string query)
         {
-            if (query == null)
-            {
-                throw new ArgumentException("query is required");
-            }
-
-            this.Query = query;
+            this.Query = query ?? throw new ArgumentException("query is required");
         }
 
-        public Hashtable GetUrlParameters()
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
 
-            if (this.ClientId != null)
+            if (this.UserInfo != null)
             {
-                parameters.Add(Constants.CLIENT_ID, this.ClientId);
+                if (this.UserInfo.GetUserId() != null)
+                {
+                    parameters.Add(Constants.USER_ID, this.UserInfo.GetUserId());
+                }
+
+                if (this.UserInfo.GetClientId() != null)
+                {
+                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.GetClientId());
+                }
+
+                if (this.UserInfo.GetSessionId() != 0)
+                {
+                    parameters.Add(Constants.SESSION_ID, this.UserInfo.GetSessionId());
+                }
+
+                if (this.UserInfo.GetUserSegments() != null)
+                {
+                    parameters.Add(Constants.SEGMENTS, this.UserInfo.GetUserSegments());
+                }
             }
+
             if (this.Filters != null)
             {
                 parameters.Add(Constants.FILTERS, this.Filters);
             }
+
             if (this.FmtOptions != null)
             {
                 parameters.Add(Constants.FMT_OPTIONS, this.FmtOptions);
             }
+
             if (this.HiddenFields != null)
             {
                 parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
             }
+
             if (this.Page != 0)
             {
                 parameters.Add(Constants.PAGE, this.Page);
             }
+
             if (this.ResultsPerPage != 0)
             {
                 parameters.Add(Constants.RESULTS_PER_PAGE, this.ResultsPerPage);
             }
+
             if (this.Section != null)
             {
                 parameters.Add(Constants.SECTION, this.Section);
             }
-            if (this.Segments != null)
-            {
-                parameters.Add(Constants.SEGMENTS, this.Segments);
-            }
-            if (this.SessionId != 0)
-            {
-                parameters.Add(Constants.SESSION_ID, this.SessionId);
-            }
+
             if (this.SortBy != null)
             {
                 parameters.Add(Constants.SORT_BY, this.SortBy);
             }
+
             if (this.SortOrder != null)
             {
                 parameters.Add(Constants.SORT_ORDER, this.SortOrder);
             }
+
             if (this.TestCells != null)
             {
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
-            if (this.UserId != null)
+
+            if (this.VariationMap != null && this.VariationMap.GroupBy.Count > 0 && this.VariationMap.Values.Count > 0)
             {
-                parameters.Add(Constants.USER_ID, this.UserId);
+                string serializedJson = JsonConvert.SerializeObject(this.VariationMap);
+                parameters.Add(Constants.VARIATIONS_MAP, serializedJson);
             }
 
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Hashtable of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+        Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
-            if (this.UserIp != null)
+        if (this.UserInfo != null)
+        {
+            if (this.UserInfo.GetForwardedFor() != null)
             {
-                requestHeaders.Add(Constants.USER_IP, this.UserIp);
-            }
-            if (this.UserAgent != null)
-            {
-                requestHeaders.Add(Constants.USER_AGENT, this.UserAgent);
-            }
-            if (this.SecurityToken != null)
-            {
-                requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);
+                requestHeaders.Add(Constants.USER_IP, this.UserInfo.GetForwardedFor());
             }
 
-            return requestHeaders;
+            if (this.UserInfo.GetUserAgent() != null)
+            {
+                requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
+            }
+        }
+
+        if (this.SecurityToken != null)
+        {
+            requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);
+        }
+
+        return requestHeaders;
         }
     }
 }

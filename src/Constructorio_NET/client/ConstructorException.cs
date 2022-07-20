@@ -2,16 +2,14 @@
 
 namespace Constructorio_NET
 {
-	public class ConstructorException : Exception
-	{
-		public ConstructorException(string msg) : base(msg)
-		{
+    public class ConstructorException : Exception
+    {
+        public ConstructorException(string msg) : base(msg)
+        {
+        }
 
-		}
-
-		public ConstructorException(Exception e)
-		{
-
-		}
-	}
+        public ConstructorException(Exception e)
+        {
+        }
+    }
 }

@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Utils;
-using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
@@ -12,8 +11,8 @@ namespace Constructorio_NET.Models
     public class BrowseFacetOptionsRequest
     {
         public string FacetName { get; set; }
-        public bool showHiddenFacets { get; set; }
-        public bool showProtectedFacets { get; set; }
+        public bool ShowHiddenFacets { get; set; }
+        public bool ShowProtectedFacets { get; set; }
         public string SecurityToken { get; set; }
         public UserInfo UserInfo { get; set; }
         private Dictionary<string, string> FmtOptions { get; set; }
@@ -28,22 +27,25 @@ namespace Constructorio_NET.Models
             this.FacetName = facetName;
         }
 
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
 
-            if (!String.IsNullOrEmpty(this.FacetName))
+            if (!string.IsNullOrEmpty(this.FacetName))
             {
                 parameters.Add(Constants.FACET_NAME, this.FacetName);
             }
-            if (this.showHiddenFacets != false)
+
+            if (this.ShowHiddenFacets)
             {
-                this.FmtOptions.Add(Constants.SHOW_HIDDEN_FACETS, this.showHiddenFacets.ToString());
+                this.FmtOptions.Add(Constants.SHOW_HIDDEN_FACETS, this.ShowHiddenFacets.ToString());
             }
-            if (this.showProtectedFacets != false)
+
+            if (this.ShowProtectedFacets)
             {
-                this.FmtOptions.Add(Constants.SHOW_PROTECTED_FACETS, this.showProtectedFacets.ToString());
+                this.FmtOptions.Add(Constants.SHOW_PROTECTED_FACETS, this.ShowProtectedFacets.ToString());
             }
+
             if (this.FmtOptions != null && this.FmtOptions.Count != 0)
             {
                 parameters.Add(Constants.FMT_OPTIONS, this.FmtOptions);
@@ -58,15 +60,17 @@ namespace Constructorio_NET.Models
 
             if (this.UserInfo != null)
             {
-                if (this.UserInfo.getForwardedFor() != null)
+                if (this.UserInfo.GetForwardedFor() != null)
                 {
-                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.getForwardedFor());
+                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.GetForwardedFor());
                 }
-                if (this.UserInfo.getUserAgent() != null)
+
+                if (this.UserInfo.GetUserAgent() != null)
                 {
-                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.getUserAgent());
+                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
                 }
             }
+
             if (this.SecurityToken != null)
             {
                 requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);

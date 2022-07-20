@@ -6,31 +6,87 @@ using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Browse Request
-     */
+    /// <summary>
+    /// Constructor.io Browse Request Class.
+    /// </summary>
     public class BrowseRequest
     {
-        public string filterName { get; set; }
-        public string filterValue { get; set; }
-        public Dictionary<string, List<string>> Filters { get; set; }
+        /// <summary>
+        /// Gets or sets the filter name used to refine results.
+        /// </summary>
+        public string FilterName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the filter value used to refine results.
+        /// </summary>
+        public string FilterValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets the format options used to refine result groups.
+        /// </summary>
         public Dictionary<string, string> FmtOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets hidden metadata fields to return.
+        /// </summary>
         public List<string> HiddenFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page number of the results.
+        /// </summary>
         public int Page { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of results per page to return.
+        /// </summary>
         public int ResultsPerPage { get; set; }
-        public string Section { get; set; }
-        public string SecurityToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sort method for results.
+        /// </summary>
         public string SortBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the sort order for results.
+        /// </summary>
         public string SortOrder { get; set; }
+
+        /// <summary>
+        /// Gets or sets filters used to refine results.
+        /// </summary>
+        public Dictionary<string, List<string>> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the section.
+        /// </summary>
+        public string Section { get; set; }
+
+        /// <summary>
+        /// Gets or sets constructor security token.
+        /// </summary>
+        public string SecurityToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets user test cells.
+        /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
+
+        /// <summary>
+        /// Gets or sets collection of user related data.
+        /// </summary>
         public UserInfo UserInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets how to return variation data.
+        /// </summary>
         public VariationsMap VariationMap { get; set; }
 
         /// <summary>
-        /// Creates a browse request
+        /// Initializes a new instance of the <see cref="BrowseRequest"/> class.
+        /// Creates a browse request.
         /// </summary>
-        /// <param name="filterName"></param>
-        /// <param name="filterValue"></param>
+        /// <param name="filterName">filter name to use for the request.</param>
+        /// <param name="filterValue">filter value to use for the request.</param>
         public BrowseRequest(string filterName, string filterValue)
         {
             if (filterName == null || filterValue == null)
@@ -38,68 +94,85 @@ namespace Constructorio_NET.Models
                 throw new ArgumentException("filterName and filterValue are required parameters");
             }
 
-            this.filterName = filterName;
-            this.filterValue = filterValue;
+            this.FilterName = filterName;
+            this.FilterValue = filterValue;
         }
 
-        public Hashtable GetUrlParameters()
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
             if (this.UserInfo != null)
             {
-                if (this.UserInfo.getUserId() != null)
+                if (this.UserInfo.GetUserId() != null)
                 {
-                    parameters.Add(Constants.USER_ID, this.UserInfo.getUserId());
+                    parameters.Add(Constants.USER_ID, this.UserInfo.GetUserId());
                 }
-                if (this.UserInfo.getClientId() != null)
+
+                if (this.UserInfo.GetClientId() != null)
                 {
-                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.getClientId());
+                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.GetClientId());
                 }
-                if (this.UserInfo.getSessionId() != 0)
+
+                if (this.UserInfo.GetSessionId() != 0)
                 {
-                    parameters.Add(Constants.SESSION_ID, this.UserInfo.getSessionId());
+                    parameters.Add(Constants.SESSION_ID, this.UserInfo.GetSessionId());
                 }
-                if (this.UserInfo.getUserSegments() != null)
+
+                if (this.UserInfo.GetUserSegments() != null)
                 {
-                    parameters.Add(Constants.SEGMENTS, this.UserInfo.getUserSegments());
+                    parameters.Add(Constants.SEGMENTS, this.UserInfo.GetUserSegments());
                 }
             }
+
             if (this.Filters != null)
             {
                 parameters.Add(Constants.FILTERS, this.Filters);
             }
+
             if (this.FmtOptions != null)
             {
                 parameters.Add(Constants.FMT_OPTIONS, this.FmtOptions);
             }
+
             if (this.HiddenFields != null)
             {
                 parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
             }
+
             if (this.Page != 0)
             {
                 parameters.Add(Constants.PAGE, this.Page);
             }
+
             if (this.ResultsPerPage != 0)
             {
                 parameters.Add(Constants.RESULTS_PER_PAGE, this.ResultsPerPage);
             }
+
             if (this.Section != null)
             {
                 parameters.Add(Constants.SECTION, this.Section);
             }
+
             if (this.SortBy != null)
             {
                 parameters.Add(Constants.SORT_BY, this.SortBy);
             }
+
             if (this.SortOrder != null)
             {
                 parameters.Add(Constants.SORT_ORDER, this.SortOrder);
             }
+
             if (this.TestCells != null)
             {
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
+
             if (this.VariationMap != null && this.VariationMap.GroupBy.Count > 0 && this.VariationMap.Values.Count > 0)
             {
                 string serializedJson = JsonConvert.SerializeObject(this.VariationMap);
@@ -109,21 +182,27 @@ namespace Constructorio_NET.Models
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Hashtable of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
             if (this.UserInfo != null)
             {
-                if (this.UserInfo.getForwardedFor() != null)
+                if (this.UserInfo.GetForwardedFor() != null)
                 {
-                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.getForwardedFor());
+                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.GetForwardedFor());
                 }
-                if (this.UserInfo.getUserAgent() != null)
+
+                if (this.UserInfo.GetUserAgent() != null)
                 {
-                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.getUserAgent());
+                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
                 }
             }
+
             if (this.SecurityToken != null)
             {
                 requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);

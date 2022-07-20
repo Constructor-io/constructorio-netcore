@@ -39,68 +39,83 @@ namespace Constructorio_NET.Models
             this.ItemIds = itemIds;
         }
 
-        public Hashtable GetUrlParameters()
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
+
             if (this.UserInfo != null)
             {
-                if (this.UserInfo.getUserId() != null)
+                if (this.UserInfo.GetUserId() != null)
                 {
-                    parameters.Add(Constants.USER_ID, this.UserInfo.getUserId());
+                    parameters.Add(Constants.USER_ID, this.UserInfo.GetUserId());
                 }
-                if (this.UserInfo.getClientId() != null)
+
+                if (this.UserInfo.GetClientId() != null)
                 {
-                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.getClientId());
+                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.GetClientId());
                 }
-                if (this.UserInfo.getSessionId() != 0)
+
+                if (this.UserInfo.GetSessionId() != 0)
                 {
-                    parameters.Add(Constants.SESSION_ID, this.UserInfo.getSessionId());
+                    parameters.Add(Constants.SESSION_ID, this.UserInfo.GetSessionId());
                 }
-                if (this.UserInfo.getUserSegments() != null)
+
+                if (this.UserInfo.GetUserSegments() != null)
                 {
-                    parameters.Add(Constants.SEGMENTS, this.UserInfo.getUserSegments());
+                    parameters.Add(Constants.SEGMENTS, this.UserInfo.GetUserSegments());
                 }
             }
+
             if (this.ItemIds != null)
             {
                 parameters.Add(Constants.ITEM_IDS, this.ItemIds);
             }
+
             if (this.Filters != null)
             {
                 parameters.Add(Constants.FILTERS, this.Filters);
             }
+
             if (this.FmtOptions != null)
             {
                 parameters.Add(Constants.FMT_OPTIONS, this.FmtOptions);
             }
+
             if (this.HiddenFields != null)
             {
                 parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
             }
+
             if (this.Page != 0)
             {
                 parameters.Add(Constants.PAGE, this.Page);
             }
+
             if (this.ResultsPerPage != 0)
             {
                 parameters.Add(Constants.RESULTS_PER_PAGE, this.ResultsPerPage);
             }
+
             if (this.Section != null)
             {
                 parameters.Add(Constants.SECTION, this.Section);
             }
+
             if (this.SortBy != null)
             {
                 parameters.Add(Constants.SORT_BY, this.SortBy);
             }
+
             if (this.SortOrder != null)
             {
                 parameters.Add(Constants.SORT_ORDER, this.SortOrder);
             }
+
             if (this.TestCells != null)
             {
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
+
             if (this.VariationMap != null && this.VariationMap.GroupBy.Count > 0 && this.VariationMap.Values.Count > 0)
             {
                 string serializedJson = JsonConvert.SerializeObject(this.VariationMap);
@@ -116,15 +131,17 @@ namespace Constructorio_NET.Models
 
             if (this.UserInfo != null)
             {
-                if (this.UserInfo.getForwardedFor() != null)
+                if (this.UserInfo.GetForwardedFor() != null)
                 {
-                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.getForwardedFor());
+                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.GetForwardedFor());
                 }
-                if (this.UserInfo.getUserAgent() != null)
+
+                if (this.UserInfo.GetUserAgent() != null)
                 {
-                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.getUserAgent());
+                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
                 }
             }
+
             if (this.SecurityToken != null)
             {
                 requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);

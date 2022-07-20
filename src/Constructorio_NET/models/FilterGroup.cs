@@ -7,8 +7,8 @@ using Newtonsoft.Json;
  **/
 namespace Constructorio_NET.Models
 {
-    public class FilterGroup {
-
+    public class FilterGroup
+    {
         [JsonProperty("children")]
         public List<FilterGroup> Children { get; set; }
 
@@ -16,13 +16,12 @@ namespace Constructorio_NET.Models
         public List<FilterGroup> Parents { get; set; }
 
         [JsonProperty("count")]
-        public Int32 Count { get; set; }
+        public int Count { get; set; }
 
         [JsonProperty("display_name")]
-        public String DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
         [JsonProperty("group_id")]
-        public String GroupId { get; set; }
-
+        public string GroupId { get; set; }
     }
 }

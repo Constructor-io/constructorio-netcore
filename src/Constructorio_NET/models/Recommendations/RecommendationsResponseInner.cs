@@ -7,16 +7,15 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class RecommendationsResponseInner {
-
+    public class RecommendationsResponseInner
+    {
         [JsonProperty("results")]
         public List<Result> Results { get; set; }
 
         [JsonProperty("total_num_results")]
-        public Int16 TotalNumberOfResults { get; set; }
+        public int TotalNumberOfResults { get; set; }
 
         [JsonProperty("pod")]
         public ResultPod Pod { get; set; }
-
     }
 }

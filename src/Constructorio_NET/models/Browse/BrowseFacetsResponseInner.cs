@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace Constructorio_NET.Models
 {
     public class BrowseFacetsResponseInner
-    { 
+    {
         [JsonProperty("facets")]
         public List<FilterFacet> Facets { get; set; }
 

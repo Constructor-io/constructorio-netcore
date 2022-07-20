@@ -9,7 +9,6 @@ namespace Constructorio_NET.Models
 {
     public class TaskResponse
     {
-
         [JsonProperty("id")]
         public int Id { get; set; }
 
@@ -21,7 +20,7 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("submission_time")]
         public string SubmissionTime { get; set; }
-        
+
         [JsonProperty("start_time")]
         public string StartTime { get; set; }
 
@@ -35,6 +34,6 @@ namespace Constructorio_NET.Models
         public string Protocol { get; set; }
 
         [JsonProperty("result")]
-        public Dictionary<String, Object> Result { get; set; }
+        public Dictionary<string, object> Result { get; set; }
     }
 }

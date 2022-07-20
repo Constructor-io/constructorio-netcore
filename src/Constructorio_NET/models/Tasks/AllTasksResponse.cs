@@ -9,7 +9,6 @@ namespace Constructorio_NET.Models
 {
     public class AllTasksResponse
     {
-
         [JsonProperty("total_count")]
         public int TotalCount { get; set; }
 

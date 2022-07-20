@@ -5,28 +5,37 @@ using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Task Request
-     */
+    /// <summary>
+    /// Constructor.io Task Request Class.
+    /// </summary>
     public class TaskRequest
     {
         public int TaskId { get; set; }
 
         /// <summary>
-        /// Creates a task request
+        /// Initializes a new instance of the <see cref="TaskRequest"/> class.
+        /// Creates a task request.
         /// </summary>
-        /// <param name="TaskId"></param>
-        public TaskRequest(int TaskId)
+        /// <param name="taskId">Task id to use for the request.</param>
+        public TaskRequest(int taskId)
         {
-            this.TaskId = TaskId;
+            this.TaskId = taskId;
         }
 
-        public Hashtable GetUrlParameters()
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
+        public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Hashtable of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

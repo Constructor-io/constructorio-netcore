@@ -1,15 +1,15 @@
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 /**
  * Constructor.io Collection
  */
 namespace Constructorio_NET.Models
 {
-    public class CollectionResponse {
+    public class CollectionResponse
+    {
         [JsonProperty("data")]
-        public Dictionary<string, Object> Data { get; set; }
+        public Dictionary<string, object> Data { get; set; }
 
         [JsonProperty("display_name")]
         public string DisplayName { get; set; }

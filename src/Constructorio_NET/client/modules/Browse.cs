@@ -3,47 +3,49 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Constructorio_NET.Utils;
 using Constructorio_NET.Models;
+using Constructorio_NET.Utils;
 using Newtonsoft.Json;
 
-namespace Constructorio_NET
+namespace Constructorio_NET.Modules
 {
     public class Browse : Helpers
     {
-        private Hashtable Options;
+        private readonly Hashtable Options;
 
         /// <summary>
-        /// Interface for browse related API calls
+        /// Initializes a new instance of the <see cref="Browse"/> class.
+        /// Interface for browse related API calls.
         /// </summary>
+        /// <param name="options">Hashtable of options from Constructorio instantiation.</param>
         internal Browse(Hashtable options)
         {
             this.Options = options;
         }
+
         internal string CreateBrowseUrl(BrowseRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
-            List<string> paths = new List<string> { "browse", req.filterName, req.filterValue };
+            Hashtable queryParams = req.GetRequestParameters();
+            List<string> paths = new List<string> { "browse", req.FilterName, req.FilterValue };
 
-            return Helpers.MakeUrl(this.Options, paths, queryParams);
+            return MakeUrl(this.Options, paths, queryParams);
         }
 
         /// <summary>
-        /// Retrieve browse results from API
+        /// Retrieve browse results from API.
         /// </summary>
-        /// <param name="browseRequest">Constructorio's request object</param>
-        /// <returns>Constructorio's response object</returns>
+        /// <param name="browseRequest">Constructorio's browse request object.</param>
+        /// <returns>Constructorio's browse response object.</returns>
         public BrowseResponse GetBrowseResults(BrowseRequest browseRequest)
         {
             string url;
             Task<string> task;
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
             try
             {
                 url = CreateBrowseUrl(browseRequest);
-                requestHeaders = browseRequest.GetRequestHeaders();
-                task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+                Dictionary<string, string> requestHeaders = browseRequest.GetRequestHeaders();
+                task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)
             {
@@ -60,28 +62,27 @@ namespace Constructorio_NET
 
         internal string CreateBrowseItemsUrl(BrowseItemsRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "browse", "items" };
 
-            return Helpers.MakeUrl(this.Options, paths, queryParams);
+            return MakeUrl(this.Options, paths, queryParams);
         }
 
         /// <summary>
-        /// Retrieve browse items result from API
+        /// Retrieve browse items result from API.
         /// </summary>
-        /// <param name="browseItemsRequest">Constructorio's request object</param>
-        /// <returns>Constructorio's response object</returns>
+        /// <param name="browseItemsRequest">Constructorio's browse request object.</param>
+        /// <returns>Constructorio's browse response object.</returns>
         public BrowseResponse GetBrowseItemsResult(BrowseItemsRequest browseItemsRequest)
         {
             string url;
             Task<string> task;
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
             try
             {
                 url = CreateBrowseItemsUrl(browseItemsRequest);
-                requestHeaders = browseItemsRequest.GetRequestHeaders();
-                task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+                Dictionary<string, string> requestHeaders = browseItemsRequest.GetRequestHeaders();
+                task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)
             {
@@ -98,33 +99,32 @@ namespace Constructorio_NET
 
         internal string CreateBrowseFacetsUrl(BrowseFacetsRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "browse", "facets" };
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
                 { "_dt", true },
             };
 
-            return Helpers.MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            return MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
         }
 
         /// <summary>
-        /// Retrieve browse facets result from API
+        /// Retrieve browse facets result from API.
         /// </summary>
-        /// <param name="browseFacetsRequest">Constructorio's request object</param>
-        /// <returns>Constructorio's response object</returns>
+        /// <param name="browseFacetsRequest">Constructorio's browse request object.</param>
+        /// <returns>Constructorio's browse facets response object.</returns>
         public BrowseFacetsResponse GetBrowseFacetsResult(BrowseFacetsRequest browseFacetsRequest)
         {
             string url;
             Task<string> task;
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
             try
             {
                 url = CreateBrowseFacetsUrl(browseFacetsRequest);
-                requestHeaders = browseFacetsRequest.GetRequestHeaders();
-                Helpers.AddAuthHeaders(this.Options, requestHeaders);
-                task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+                Dictionary<string, string> requestHeaders = browseFacetsRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)
             {
@@ -141,33 +141,32 @@ namespace Constructorio_NET
 
         internal string CreateBrowseFacetOptionsUrl(BrowseFacetOptionsRequest req)
         {
-            Hashtable queryParams = req.GetUrlParameters();
+            Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "browse", "facet_options" };
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
                 { "_dt", true },
             };
 
-            return Helpers.MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            return MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
         }
 
         /// <summary>
-        /// Retrieve browse facet options result from API
+        /// Retrieve browse facet options result from API.
         /// </summary>
-        /// <param name="browseFacetOptionsRequest">Constructorio's request object</param>
-        /// <returns>Constructorio's response object</returns>
+        /// <param name="browseFacetOptionsRequest">Constructorio's browse request object.</param>
+        /// <returns>Constructorio's browse facet options response object.</returns>
         public BrowseFacetOptionsResponse GetBrowseFacetOptionsResult(BrowseFacetOptionsRequest browseFacetOptionsRequest)
         {
             string url;
             Task<string> task;
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
             try
             {
                 url = CreateBrowseFacetOptionsUrl(browseFacetOptionsRequest);
-                requestHeaders = browseFacetOptionsRequest.GetRequestHeaders();
-                Helpers.AddAuthHeaders(this.Options, requestHeaders);
-                task = Helpers.MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+                Dictionary<string, string> requestHeaders = browseFacetOptionsRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
             }
             catch (Exception e)
             {

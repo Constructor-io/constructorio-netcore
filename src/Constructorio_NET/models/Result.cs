@@ -7,19 +7,18 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class Result {
-
+    public class Result
+    {
         [JsonProperty("value")]
-        public String Value { get; set; }
+        public string Value { get; set; }
 
         [JsonProperty("data")]
         public ResultData Data { get; set; }
 
         [JsonProperty("matched_terms")]
-        public List<String> MatchedTerms { get; set; }
+        public List<string> MatchedTerms { get; set; }
 
         [JsonProperty("variations")]
-        public List<Result> Variations{ get; set; }
-
+        public List<Result> Variations { get; set; }
     }
 }

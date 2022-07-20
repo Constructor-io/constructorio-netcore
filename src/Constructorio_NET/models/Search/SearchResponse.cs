@@ -7,15 +7,15 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class SearchResponse {
-
+    public class SearchResponse
+    {
         [JsonProperty("result_id")]
-        public String ResultId { get; set; }
+        public string ResultId { get; set; }
 
         [JsonProperty("response")]
         public SearchResponseInner Response { get; set; }
 
         [JsonProperty("request")]
-        public Dictionary<String, Object> Request { get; set; }
+        public Dictionary<string, object> Request { get; set; }
     }
 }

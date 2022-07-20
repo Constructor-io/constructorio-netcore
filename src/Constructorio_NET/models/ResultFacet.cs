@@ -7,12 +7,12 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class ResultFacet {
-
+    public class ResultFacet
+    {
         [JsonProperty("name")]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("values")]
-        public List<String> Values { get; set; }
+        public List<string> Values { get; set; }
     }
 }
