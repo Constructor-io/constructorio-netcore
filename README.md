@@ -9,16 +9,16 @@ A .NET Core REST client for the Constructor.io API
 
 # Installation
 
-<!-- 2. Retrieve your autocomplete token and key.  You can find this at your [Constructor.io dashboard](https://constructor.io/dashboard).
-3. Create a new instance of the client. -->
-
+1. Follow the directions at [nuget](https://www.nuget.org/packages/constructor.io/) to add the client to your project.
+2. Retrieve your autocomplete token and key.  You can find this at your [Constructor.io dashboard](https://constructor.io/dashboard).
+3. Create a new instance of the client.
 ```csharp
-dotnet add package constructor.io --version
 ConstructorioConfig config = new ConstructorioConfig("apiKey", "apiToken");
 ConstructorIO constructorio = new ConstructorIO(config);
 ```
 
 # Uploading a Catalog
+
 To upload your product catalog, you will need to create a `CatalogRequest`.  In this request, you can specify the files you want to upload (items, variations, and item groups) and the section you want to send the upload.  You can also set a notification e-mail to be alerted when a file ingestion fails.
 
 ```csharp

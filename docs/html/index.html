@@ -71,9 +71,14 @@ Constructor-IO Netcore Client</h1>
 <p ><a href="http://constructor.io/">Constructor.io</a> provides search as a service that optimizes results using artificial intelligence (including natural language processing, re-ranking to optimize for conversions, and user personalization).</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Installation</h1>
-<div class="fragment"><div class="line">ConstructorioConfig config = <span class="keyword">new</span> ConstructorioConfig(<span class="stringliteral">&quot;apiKey&quot;</span>, <span class="stringliteral">&quot;apiToken&quot;</span>);</div>
+<ol type="1">
+<li>Follow the directions at <a href="https://www.nuget.org/packages/constructor.io/">nuget</a> to add the client to your project.</li>
+<li>Retrieve your autocomplete token and key. You can find this at your <a href="https://constructor.io/dashboard">Constructor.io dashboard</a>.</li>
+<li>Create a new instance of the client. <div class="fragment"><div class="line">ConstructorioConfig config = <span class="keyword">new</span> ConstructorioConfig(<span class="stringliteral">&quot;apiKey&quot;</span>, <span class="stringliteral">&quot;apiToken&quot;</span>);</div>
 <div class="line">ConstructorIO constructorio = <span class="keyword">new</span> ConstructorIO(config);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
+</div><!-- fragment --></li>
+</ol>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Uploading a Catalog</h1>
 <p >To upload your product catalog, you will need to create a <code>CatalogRequest</code>. In this request, you can specify the files you want to upload (items, variations, and item groups) and the section you want to send the upload. You can also set a notification e-mail to be alerted when a file ingestion fails.</p>
 <div class="fragment"><div class="line"><span class="comment">// Create a files dictionary and add the relevant files</span></div>

@@ -3,12 +3,17 @@
 A .NET Core REST client for the Constructor.\+io API\hypertarget{index_autotoc_md1}{}\doxysection{Constructor-\/\+IO Netcore Client}\label{index_autotoc_md1}
 \href{http://constructor.io/}{\texttt{ Constructor.\+io}} provides search as a service that optimizes results using artificial intelligence (including natural language processing, re-\/ranking to optimize for conversions, and user personalization).\hypertarget{index_autotoc_md2}{}\doxysection{Installation}\label{index_autotoc_md2}
 
+\begin{DoxyEnumerate}
+\item Follow the directions at \href{https://www.nuget.org/packages/constructor.io/}{\texttt{ nuget}} to add the client to your project.
+\item Retrieve your autocomplete token and key. You can find this at your \href{https://constructor.io/dashboard}{\texttt{ Constructor.\+io dashboard}}.
+\item Create a new instance of the client. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{ConstructorioConfig config = \textcolor{keyword}{new} ConstructorioConfig(\textcolor{stringliteral}{"{}apiKey"{}}, \textcolor{stringliteral}{"{}apiToken"{}});}
 \DoxyCodeLine{ConstructorIO constructorio = \textcolor{keyword}{new} ConstructorIO(config);}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md3}{}\doxysection{Uploading a Catalog}\label{index_autotoc_md3}
+
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md3}{}\doxysection{Uploading a Catalog}\label{index_autotoc_md3}
 To upload your product catalog, you will need to create a {\ttfamily Catalog\+Request}. In this request, you can specify the files you want to upload (items, variations, and item groups) and the section you want to send the upload. You can also set a notification e-\/mail to be alerted when a file ingestion fails.
 
 
