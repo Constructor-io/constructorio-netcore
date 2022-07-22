@@ -13,6 +13,7 @@ A .NET Core REST client for the Constructor.io API
 3. Create a new instance of the client. -->
 
 ```csharp
+dotnet add package constructor.io --version
 ConstructorioConfig config = new ConstructorioConfig("apiKey", "apiToken");
 ConstructorIO constructorio = new ConstructorIO(config);
 ```
