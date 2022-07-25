@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using Constructorio_NET.Models;
 using Newtonsoft.Json;
 
 namespace Constructorio_NET.Utils
@@ -234,7 +235,8 @@ namespace Constructorio_NET.Utils
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {result}");
+                ServerError error = JsonConvert.DeserializeObject<ServerError>(result);
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
             }
 
             return result;

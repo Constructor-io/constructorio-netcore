@@ -41,6 +41,15 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetTaskWithInvalidApiTokenShouldError()
+        {
+            TaskRequest req = new TaskRequest(this.TaskId);
+            ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig(this.ApiKey) { ApiToken = "invalidToken" });
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Tasks.GetTask(req));
+            Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
+        }
+
+        [Test]
         public async Task GetTaskShouldReturnResult()
         {
             TaskRequest req = new TaskRequest(this.TaskId);
@@ -52,6 +61,15 @@ namespace Constructorio_NET.Tests
             Assert.NotNull(res.SubmissionTime, "Submission Time exists");
             Assert.NotNull(res.Status, "Status exists");
             Assert.AreEqual(res.Id, this.TaskId, "Id is same as provided Task Id");
+        }
+
+        [Test]
+        public void GetAllTaskWithInvalidApiTokenShouldError()
+        {
+            AllTasksRequest req = new AllTasksRequest();
+            ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig(this.ApiKey) { ApiToken = "invalidToken" });
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Tasks.GetAllTasks(req));
+            Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
         }
 
         [Test]

@@ -35,6 +35,15 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetBrowseResultsWithInvalidApiKeyShouldError()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
+            ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig("invalidKey"));
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Browse.GetBrowseResults(req));
+            Assert.IsTrue(ex.Message == "Http[400]: We have no record of this key. You can find your key at app.constructor.io/dashboard.", "Correct Error is Returned");
+        }
+
+        [Test]
         public async Task GetBrowseResults()
         {
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);

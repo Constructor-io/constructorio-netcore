@@ -23,6 +23,19 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetRecommendationsWithInvalidApiKeyShouldError()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" }
+            };
+            ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig("invalidKey"));
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Recommendations.GetRecommendationsResults(req));
+            Assert.IsTrue(ex.Message == "Http[400]: We have no record of this key. You can find your key at app.constructor.io/dashboard.", "Correct Error is Returned");
+        }
+
+        [Test]
         public async Task GetRecommendationsResults()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1")

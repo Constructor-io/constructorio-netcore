@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -45,7 +46,19 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        [Order(1)]
+        public void ReplaceCatalogWithInvalidApiTokenShouldError()
+        {
+            var files = new Dictionary<string, StreamContent>()
+            {
+                { "items", itemsStream },
+            };
+            var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey) { ApiToken = "invalidKey" });
+            var req = new CatalogRequest(files);
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.ReplaceCatalog(req));
+            Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
+        }
+
+        [Test]
         public async Task ReplaceCatalogWithItems()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
@@ -95,6 +108,19 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void UpdateCatalogWithInvalidApiTokenShouldError()
+        {
+            var files = new Dictionary<string, StreamContent>()
+            {
+                { "items", itemsStream },
+            };
+            var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey) { ApiToken = "invalidKey" });
+            var req = new CatalogRequest(files);
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.UpdateCatalog(req));
+            Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
+        }
+
+        [Test]
         public async Task UpdateCatalogWithItems()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
@@ -134,6 +160,19 @@ namespace Constructorio_NET.Tests
             CatalogResponse res = await constructorio.Catalog.UpdateCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public void PatchCatalogWithInvalidApiTokenShouldError()
+        {
+            var files = new Dictionary<string, StreamContent>()
+            {
+                { "items", itemsStream },
+            };
+            var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey) { ApiToken = "invalidKey" });
+            var req = new CatalogRequest(files);
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.PatchCatalog(req));
+            Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
         }
 
         [Test]

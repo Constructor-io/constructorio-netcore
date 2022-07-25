@@ -24,6 +24,18 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetSearchResultsWithInvalidApiKeyShouldError()
+        {
+            SearchRequest req = new SearchRequest(this.Query)
+            {
+                UserInfo = this.UserInfo
+            };
+            ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig("invalidKey"));
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Search.GetSearchResults(req));
+            Assert.IsTrue(ex.Message == "Http[400]: We have no record of this key. You can find your key at app.constructor.io/dashboard.", "Correct Error is Returned");
+        }
+
+        [Test]
         public async Task GetSearchResults()
         {
             SearchRequest req = new SearchRequest(this.Query)

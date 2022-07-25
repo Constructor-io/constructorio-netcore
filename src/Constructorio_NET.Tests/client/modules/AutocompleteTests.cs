@@ -23,6 +23,18 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetAutocompleteResultsWithInvalidApiKeyShouldError()
+        {
+            AutocompleteRequest req = new AutocompleteRequest("item")
+            {
+                UserInfo = UserInfo
+            };
+            ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig("invalidKey"));
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Autocomplete.GetAutocompleteResults(req));
+            Assert.IsTrue(ex.Message == "Http[400]: We have no record of this key. You can find your key at app.constructor.io/dashboard.", "Correct Error is Returned");
+        }
+
+        [Test]
         public async Task GetAutocompleteResults()
         {
             AutocompleteRequest req = new AutocompleteRequest("item")
