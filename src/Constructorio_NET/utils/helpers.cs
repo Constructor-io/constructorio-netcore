@@ -232,6 +232,11 @@ namespace Constructorio_NET.Utils
             HttpContent resContent = response.Content;
             string result = await resContent.ReadAsStringAsync();
 
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {result}");
+            }
+
             return result;
         }
 

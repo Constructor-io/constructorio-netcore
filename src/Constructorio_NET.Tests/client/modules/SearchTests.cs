@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using NUnit.Framework;
 
@@ -23,12 +24,14 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetSearchResults()
+        public async Task GetSearchResults()
         {
-            SearchRequest req = new SearchRequest(this.Query);
-            req.UserInfo = this.UserInfo;
+            SearchRequest req = new SearchRequest(this.Query)
+            {
+                UserInfo = this.UserInfo
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            SearchResponse res = constructorio.Search.GetSearchResults(req);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
@@ -36,17 +39,19 @@ namespace Constructorio_NET.Tests
     }
 
         [Test]
-        public void GetSearchResultsWithFilters()
+        public async Task GetSearchResultsWithFilters()
         {
             Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
             {
                 { "Color", new List<string>() { "green", "blue" } }
             };
-            SearchRequest req = new SearchRequest(this.Query);
-            req.UserInfo = this.UserInfo;
-            req.Filters = filters;
+            SearchRequest req = new SearchRequest(this.Query)
+            {
+                UserInfo = this.UserInfo,
+                Filters = filters
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            SearchResponse res = constructorio.Search.GetSearchResults(req);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
@@ -54,14 +59,16 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetSearchResultsWithResultParams()
+        public async Task GetSearchResultsWithResultParams()
         {
-            SearchRequest req = new SearchRequest(this.Query);
-            req.UserInfo = this.UserInfo;
-            req.Page = 3;
-            req.ResultsPerPage = 1;
+            SearchRequest req = new SearchRequest(this.Query)
+            {
+                UserInfo = this.UserInfo,
+                Page = 3,
+                ResultsPerPage = 1
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            SearchResponse res = constructorio.Search.GetSearchResults(req);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
             Assert.AreEqual(3, (long)res.Request["page"], "total number of results expected to be 1");
             Assert.Greater(res.Response.TotalNumResults, 1, "total number of results expected to be 1");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
@@ -69,12 +76,14 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetSearchResultsWithRedirect()
+        public async Task GetSearchResultsWithRedirect()
         {
-            SearchRequest req = new SearchRequest("constructor");
-            req.UserInfo = this.UserInfo;
+            SearchRequest req = new SearchRequest("constructor")
+            {
+                UserInfo = this.UserInfo
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            SearchResponse res = constructorio.Search.GetSearchResults(req);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
             Assert.IsNotNull(res.Response.Redirect, "Redirect should exist");
             Assert.IsNotNull(res.Response.Redirect.Data.Url, "Url should exist");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");

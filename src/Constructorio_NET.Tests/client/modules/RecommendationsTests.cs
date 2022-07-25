@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Constructorio_NET.Models;
-using Constructorio_NET.Utils;
 using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
@@ -24,40 +23,46 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetRecommendationsResults()
+        public async Task GetRecommendationsResults()
         {
-            RecommendationsRequest req = new RecommendationsRequest("item_page_1");
-            req.UserInfo = this.UserInfo;
-            req.ItemIds = new List<string> { "power_drill" };
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" }
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
         }
 
         [Test]
-        public void GetRecommendationsResultsShouldReturnAResultWithMultipleItemIds()
+        public async Task GetRecommendationsResultsShouldReturnAResultWithMultipleItemIds()
         {
-            RecommendationsRequest req = new RecommendationsRequest("item_page_1");
-            req.UserInfo = this.UserInfo;
-            req.ItemIds = new List<string> { "power_drill", "drill" };
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill", "drill" }
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
         }
 
         [Test]
-        public void GetRecommendationsResultsShouldReturnAResultWithNumResults()
+        public async Task GetRecommendationsResultsShouldReturnAResultWithNumResults()
         {
-            RecommendationsRequest req = new RecommendationsRequest("item_page_1");
-            req.UserInfo = this.UserInfo;
-            req.ItemIds = new List<string> { "power_drill", "drill" };
-            req.NumResults = 5;
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill", "drill" },
+                NumResults = 5
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
@@ -65,17 +70,19 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetRecommendationsResultsShouldReturnAResultProvidedUserInfo()
+        public async Task GetRecommendationsResultsShouldReturnAResultProvidedUserInfo()
         {
-            RecommendationsRequest req = new RecommendationsRequest("item_page_1");
-            req.ItemIds = new List<string> { "power_drill", "drill" };
-            req.UserInfo = new UserInfo(ClientId, SessionId);
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                ItemIds = new List<string> { "power_drill", "drill" },
+                UserInfo = new UserInfo(ClientId, SessionId)
+            };
             req.UserInfo.SetUserId("123");
             req.UserInfo.SetUserSegments(new List<string>());
             req.UserInfo.GetUserSegments().Add("vs");
             req.UserInfo.GetUserSegments().Add("pink");
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            RecommendationsResponse res = constructorio.Recommendations.GetRecommendationsResults(req);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");

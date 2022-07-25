@@ -36,26 +36,19 @@ namespace Constructorio_NET.Modules
             return url;
         }
 
-        public AllTasksResponse GetAllTasks(AllTasksRequest allTasksRequest)
+        public async Task<AllTasksResponse> GetAllTasks(AllTasksRequest allTasksRequest)
         {
             string url;
-            Task<string> task;
+            string result;
 
-            try
-            {
-                url = CreateAllTasksUrl(allTasksRequest);
-                Dictionary<string, string> requestHeaders = allTasksRequest.GetRequestHeaders();
-                AddAuthHeaders(this.Options, requestHeaders);
-                task = MakeHttpRequest(new HttpMethod("GET"), url, requestHeaders);
-            }
-            catch (Exception e)
-            {
-                throw new ConstructorException(e);
-            }
+            url = CreateAllTasksUrl(allTasksRequest);
+            Dictionary<string, string> requestHeaders = allTasksRequest.GetRequestHeaders();
+            AddAuthHeaders(this.Options, requestHeaders);
+            result = await MakeHttpRequest(new HttpMethod("GET"), url, requestHeaders);
 
-            if (task.Result != null)
+            if (result != null)
             {
-                return JsonConvert.DeserializeObject<AllTasksResponse>(task.Result);
+                return JsonConvert.DeserializeObject<AllTasksResponse>(result);
             }
 
             throw new ConstructorException("All Tasks response data is malformed");
@@ -70,26 +63,19 @@ namespace Constructorio_NET.Modules
             return url;
         }
 
-        public TaskResponse GetTask(TaskRequest taskRequest)
+        public async Task<TaskResponse> GetTask(TaskRequest taskRequest)
         {
             string url;
-            Task<string> task;
+            string result;
 
-            try
-            {
-                url = CreateTaskUrl(taskRequest);
-                Dictionary<string, string> requestHeaders = taskRequest.GetRequestHeaders();
-                AddAuthHeaders(this.Options, requestHeaders);
-                task = MakeHttpRequest(new HttpMethod("GET"), url, requestHeaders);
-            }
-            catch (Exception e)
-            {
-                throw new ConstructorException(e);
-            }
+            url = CreateTaskUrl(taskRequest);
+            Dictionary<string, string> requestHeaders = taskRequest.GetRequestHeaders();
+            AddAuthHeaders(this.Options, requestHeaders);
+            result = await MakeHttpRequest(new HttpMethod("GET"), url, requestHeaders);
 
-            if (task.Result != null)
+            if (result != null)
             {
-                return JsonConvert.DeserializeObject<TaskResponse>(task.Result);
+                return JsonConvert.DeserializeObject<TaskResponse>(result);
             }
 
             throw new ConstructorException("Task response data is malformed");

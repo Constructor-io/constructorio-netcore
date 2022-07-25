@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -26,17 +27,19 @@ namespace Constructorio_NET.Tests
             JObject json = JObject.Parse(File.ReadAllText("./../../../../../.config/local.json"));
             string testApiToken = json.SelectToken("TEST_API_TOKEN").Value<string>();
 
-            this.Config = new ConstructorioConfig(this.ApiKey);
-            this.Config.ApiToken = testApiToken;
+            this.Config = new ConstructorioConfig(this.ApiKey)
+            {
+                ApiToken = testApiToken
+            };
             this.UserInfo = new UserInfo(ClientId, SessionId);
         }
 
         [Test]
-        public void GetBrowseResults()
+        public async Task GetBrowseResults()
         {
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseResponse res = constructorio.Browse.GetBrowseResults(req);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
@@ -44,17 +47,19 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseResultsWithFilters()
+        public async Task GetBrowseResultsWithFilters()
         {
             Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
             {
                 { "Brand", new List<string>() { "XYZ" } }
             };
-            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
-            req.UserInfo = this.UserInfo;
-            req.Filters = filters;
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = this.UserInfo,
+                Filters = filters
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseResponse res = constructorio.Browse.GetBrowseResults(req);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
@@ -62,13 +67,15 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseResultsWithResultParams()
+        public async Task GetBrowseResultsWithResultParams()
         {
-            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
-            req.UserInfo = this.UserInfo;
-            req.ResultsPerPage = 1;
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = this.UserInfo,
+                ResultsPerPage = 1
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseResponse res = constructorio.Browse.GetBrowseResults(req);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
             Assert.AreEqual(1, (long)res.Request["num_results_per_page"], "Expect request to include page parameter");
             Assert.AreEqual(1, res.Response.TotalNumResults, "total number of results expected to be 1");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
@@ -76,12 +83,14 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseResultsWithCollection()
+        public async Task GetBrowseResultsWithCollection()
         {
-            BrowseRequest req = new BrowseRequest("collection_id", this.CollectionId);
-            req.UserInfo = this.UserInfo;
+            BrowseRequest req = new BrowseRequest("collection_id", this.CollectionId)
+            {
+                UserInfo = this.UserInfo
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseResponse res = constructorio.Browse.GetBrowseResults(req);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
@@ -91,12 +100,14 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseItemsResults()
+        public async Task GetBrowseItemsResults()
         {
-            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds);
-            req.UserInfo = this.UserInfo;
+            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds)
+            {
+                UserInfo = this.UserInfo
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseResponse res = constructorio.Browse.GetBrowseItemsResult(req);
+            BrowseResponse res = await constructorio.Browse.GetBrowseItemsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
@@ -104,17 +115,19 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseItemsResultsWithFilters()
+        public async Task GetBrowseItemsResultsWithFilters()
         {
             Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
             {
                 { "Brand", new List<string>() { "XYZ" } }
             };
-            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds);
-            req.UserInfo = this.UserInfo;
-            req.Filters = filters;
+            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds)
+            {
+                UserInfo = this.UserInfo,
+                Filters = filters
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseResponse res = constructorio.Browse.GetBrowseItemsResult(req);
+            BrowseResponse res = await constructorio.Browse.GetBrowseItemsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
@@ -122,13 +135,15 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseItemsResultsWithResultParams()
+        public async Task GetBrowseItemsResultsWithResultParams()
         {
-            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds);
-            req.UserInfo = this.UserInfo;
-            req.ResultsPerPage = 1;
+            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds)
+            {
+                UserInfo = this.UserInfo,
+                ResultsPerPage = 1
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseResponse res = constructorio.Browse.GetBrowseItemsResult(req);
+            BrowseResponse res = await constructorio.Browse.GetBrowseItemsResult(req);
             Assert.AreEqual(1, (long)res.Request["num_results_per_page"], "Expect request to include page parameter");
             Assert.AreEqual(2, res.Response.TotalNumResults, "total number of results expected to be 2");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
@@ -136,64 +151,74 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseFacetsResults()
+        public async Task GetBrowseFacetsResults()
         {
-            BrowseFacetsRequest req = new BrowseFacetsRequest();
-            req.UserInfo = this.UserInfo;
+            BrowseFacetsRequest req = new BrowseFacetsRequest
+            {
+                UserInfo = this.UserInfo
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseFacetsResponse res = constructorio.Browse.GetBrowseFacetsResult(req);
+            BrowseFacetsResponse res = await constructorio.Browse.GetBrowseFacetsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
-        public void GetBrowseFacetsWithResultParams()
+        public async Task GetBrowseFacetsWithResultParams()
         {
-            BrowseFacetsRequest req = new BrowseFacetsRequest();
-            req.UserInfo = this.UserInfo;
-            req.ResultsPerPage = 1;
+            BrowseFacetsRequest req = new BrowseFacetsRequest
+            {
+                UserInfo = this.UserInfo,
+                ResultsPerPage = 1
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseFacetsResponse res = constructorio.Browse.GetBrowseFacetsResult(req);
+            BrowseFacetsResponse res = await constructorio.Browse.GetBrowseFacetsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.AreEqual(1, res.Response.Facets.Count, "length of facets expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
-        public void GetBrowseFacetsWithFmtOptionParams()
+        public async Task GetBrowseFacetsWithFmtOptionParams()
         {
-            BrowseFacetsRequest req = new BrowseFacetsRequest();
-            req.UserInfo = this.UserInfo;
-            req.ShowHiddenFacets = true;
-            req.ShowProtectedFacets = true;
+            BrowseFacetsRequest req = new BrowseFacetsRequest
+            {
+                UserInfo = this.UserInfo,
+                ShowHiddenFacets = true,
+                ShowProtectedFacets = true
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseFacetsResponse res = constructorio.Browse.GetBrowseFacetsResult(req);
+            BrowseFacetsResponse res = await constructorio.Browse.GetBrowseFacetsResult(req);
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
-        public void GetBrowseFacetOptionsResults()
+        public async Task GetBrowseFacetOptionsResults()
         {
-            BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(this.FilterName);
-            req.UserInfo = this.UserInfo;
+            BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(this.FilterName)
+            {
+                UserInfo = this.UserInfo
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseFacetOptionsResponse res = constructorio.Browse.GetBrowseFacetOptionsResult(req);
+            BrowseFacetOptionsResponse res = await constructorio.Browse.GetBrowseFacetOptionsResult(req);
             Assert.AreEqual(1, res.Response.Facets.Count, "length of facets expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
-        public void GetBrowseFacetOptionsWithFmtOptionParams()
+        public async Task GetBrowseFacetOptionsWithFmtOptionParams()
         {
-            BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(this.FilterName);
-            req.UserInfo = this.UserInfo;
-            req.ShowHiddenFacets = true;
-            req.ShowProtectedFacets = true;
+            BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(this.FilterName)
+            {
+                UserInfo = this.UserInfo,
+                ShowHiddenFacets = true,
+                ShowProtectedFacets = true
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            BrowseFacetOptionsResponse res = constructorio.Browse.GetBrowseFacetOptionsResult(req);
+            BrowseFacetOptionsResponse res = await constructorio.Browse.GetBrowseFacetOptionsResult(req);
             Assert.GreaterOrEqual(res.Response.Facets.Count, 1, "length of facets expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }

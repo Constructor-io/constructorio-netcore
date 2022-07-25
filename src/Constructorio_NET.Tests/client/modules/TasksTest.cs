@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -17,13 +18,15 @@ namespace Constructorio_NET.Tests
         private int TaskId;
 
         [OneTimeSetUp]
-        public void Setup()
+        public async Task Setup()
         {
             JObject json = JObject.Parse(File.ReadAllText("./../../../../../.config/local.json"));
             string testApiToken = json.SelectToken("TEST_API_TOKEN").Value<string>();
 
-            this.Config = new ConstructorioConfig(this.ApiKey);
-            this.Config.ApiToken = testApiToken;
+            this.Config = new ConstructorioConfig(this.ApiKey)
+            {
+                ApiToken = testApiToken
+            };
 
             StreamContent itemsStream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
             itemsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
@@ -33,16 +36,16 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
-            CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
+            CatalogResponse res = await constructorio.Catalog.ReplaceCatalog(req);
             this.TaskId = res.TaskId;
         }
 
         [Test]
-        public void GetTaskShouldReturnResult()
+        public async Task GetTaskShouldReturnResult()
         {
             TaskRequest req = new TaskRequest(this.TaskId);
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            TaskResponse res = constructorio.Tasks.GetTask(req);
+            TaskResponse res = await constructorio.Tasks.GetTask(req);
 
             Assert.NotNull(res.Status, "Status exists");
             Assert.NotNull(res.Type, "Type exists");
@@ -52,11 +55,11 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetAllTasksShouldReturnResult()
+        public async Task GetAllTasksShouldReturnResult()
         {
             AllTasksRequest req = new AllTasksRequest();
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            AllTasksResponse res = constructorio.Tasks.GetAllTasks(req);
+            AllTasksResponse res = await constructorio.Tasks.GetAllTasks(req);
 
             Assert.NotNull(res.StatusCounts, "Status Counts exists");
             Assert.GreaterOrEqual(res.TotalCount, 1, "At least 1 task exists");
