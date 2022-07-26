@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using Constructorio_NET.Models;
 using Newtonsoft.Json;
 
 namespace Constructorio_NET.Utils
@@ -231,6 +232,12 @@ namespace Constructorio_NET.Utils
             HttpResponseMessage response = await Client.SendAsync(httpRequest);
             HttpContent resContent = response.Content;
             string result = await resContent.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                ServerError error = JsonConvert.DeserializeObject<ServerError>(result);
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
+            }
 
             return result;
         }

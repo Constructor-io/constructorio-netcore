@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using NUnit.Framework;
 
@@ -22,27 +23,43 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetAutocompleteResults()
+        public void GetAutocompleteResultsWithInvalidApiKeyShouldError()
         {
-            AutocompleteRequest req = new AutocompleteRequest("item");
-            req.UserInfo = UserInfo;
+            AutocompleteRequest req = new AutocompleteRequest("item")
+            {
+                UserInfo = UserInfo
+            };
+            ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig("invalidKey"));
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Autocomplete.GetAutocompleteResults(req));
+            Assert.IsTrue(ex.Message == "Http[400]: We have no record of this key. You can find your key at app.constructor.io/dashboard.", "Correct Error is Returned");
+        }
+
+        [Test]
+        public async Task GetAutocompleteResults()
+        {
+            AutocompleteRequest req = new AutocompleteRequest("item")
+            {
+                UserInfo = UserInfo
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            AutocompleteResponse res = constructorio.Autocomplete.GetAutocompleteResults(req);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
 
             Assert.NotNull(res.ResultId, "Result id exists");
         }
 
         [Test]
-        public void GetAutocompleteResultsShouldReturnResultWithVariationMap()
+        public async Task GetAutocompleteResultsShouldReturnResultWithVariationMap()
         {
-            AutocompleteRequest req = new AutocompleteRequest("item1");
-            req.UserInfo = UserInfo;
-            req.VariationMap = new VariationsMap();
+            AutocompleteRequest req = new AutocompleteRequest("item1")
+            {
+                UserInfo = UserInfo,
+                VariationMap = new VariationsMap()
+            };
             req.VariationMap.AddGroupByRule("url", "data.url");
             req.VariationMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
             req.VariationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            AutocompleteResponse res = constructorio.Autocomplete.GetAutocompleteResults(req);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
             res.Request.TryGetValue("variations_map", out object reqVariationsMap);
 
             Assert.NotNull(res.ResultId, "Result id exists");
@@ -50,13 +67,15 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetAutocompleteResultsShouldReturnResultWithSearchSuggestionOnly()
+        public async Task GetAutocompleteResultsShouldReturnResultWithSearchSuggestionOnly()
         {
-            AutocompleteRequest req = new AutocompleteRequest("jacket");
-            req.UserInfo = UserInfo;
-            req.ResultsPerSection = new Dictionary<string, int> { { "Search Suggestions", 10 } };
+            AutocompleteRequest req = new AutocompleteRequest("jacket")
+            {
+                UserInfo = UserInfo,
+                ResultsPerSection = new Dictionary<string, int> { { "Search Suggestions", 10 } }
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            AutocompleteResponse res = constructorio.Autocomplete.GetAutocompleteResults(req);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
 
             Assert.NotNull(res.ResultId, "Result id exists");
             Assert.AreEqual(0, res.Sections["Products"].Count, "Products don't exist");
@@ -64,28 +83,32 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetAutocompleteResultsShouldReturnResultWithHiddenFields()
+        public async Task GetAutocompleteResultsShouldReturnResultWithHiddenFields()
         {
-            AutocompleteRequest req = new AutocompleteRequest("item1");
-            req.UserInfo = UserInfo;
-            req.HiddenFields = new List<string> { "testField" };
+            AutocompleteRequest req = new AutocompleteRequest("item1")
+            {
+                UserInfo = UserInfo,
+                HiddenFields = new List<string> { "testField" }
+            };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            AutocompleteResponse res = constructorio.Autocomplete.GetAutocompleteResults(req);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
 
             Assert.NotNull(res.ResultId, "Result id exists");
             Assert.GreaterOrEqual(res.Sections["Products"].Count, 5, "Results exist");
         }
 
         [Test]
-        public void GetAutocompleteResultsShouldReturnResultWithMultipleFilters()
+        public async Task GetAutocompleteResultsShouldReturnResultWithMultipleFilters()
         {
-            AutocompleteRequest req = new AutocompleteRequest("item");
-            req.UserInfo = UserInfo;
-            req.Filters = new Dictionary<string, List<string>>();
+            AutocompleteRequest req = new AutocompleteRequest("item")
+            {
+                UserInfo = UserInfo,
+                Filters = new Dictionary<string, List<string>>()
+            };
             req.Filters.Add("group_id", new List<string> { "All" });
             req.Filters.Add("Brand", new List<string> { "XYZ" });
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            AutocompleteResponse res = constructorio.Autocomplete.GetAutocompleteResults(req);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
 
             Assert.NotNull(res.ResultId, "Result id exists");
             Assert.GreaterOrEqual(res.Sections["Products"].Count, 1, "Results exist");
