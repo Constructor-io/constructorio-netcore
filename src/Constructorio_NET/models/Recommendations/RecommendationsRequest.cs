@@ -67,6 +67,7 @@ namespace Constructorio_NET.Models
         public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
+
             if (this.UserInfo != null)
             {
                 if (this.UserInfo.GetUserId() != null)
@@ -110,7 +111,7 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
 
-            if (this.ItemIds.Count != 0)
+            if (this.ItemIds != null && this.ItemIds.Count != 0)
             {
                 parameters.Add("item_id", this.ItemIds);
             }

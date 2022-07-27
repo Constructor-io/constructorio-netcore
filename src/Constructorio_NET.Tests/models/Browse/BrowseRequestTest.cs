@@ -54,7 +54,7 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseResultsWithInvalidFilters()
+        public void BrowseRequestWithInvalidFilters()
         {
             Assert.Throws<ArgumentException>(() => new BrowseRequest(null, null));
         }

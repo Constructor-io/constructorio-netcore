@@ -53,7 +53,7 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseItemsResultsWithInvalidItemId()
+        public void BrowseItemsRequestWithInvalidItemId()
         {
             Assert.Throws<ArgumentException>(() => new BrowseItemsRequest(null));
         }

@@ -23,14 +23,18 @@ namespace Constructorio_NET.Tests
         private readonly string SortOrder = "Ascending";
         private readonly string UserId = "user1";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
+        private readonly string IP = "1,2,3";
+        private readonly string OS = "Mac";
         private UserInfo UserInfo;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Setup()
         {
             this.UserInfo = new UserInfo(ClientId, SessionId);
             this.UserInfo.SetUserId(this.UserId);
             this.UserInfo.SetUserSegments(this.UserSegments);
+            this.UserInfo.SetUserAgent(this.OS);
+            this.UserInfo.SetForwardedFor(this.IP);
         }
 
         [Test]
@@ -59,7 +63,20 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void GetBrowseItemsResultsWithInvalidQuery()
+        public void GetRequestHeaders()
+        {
+            SearchRequest req = new SearchRequest(this.Query)
+            {
+                UserInfo = this.UserInfo,
+            };
+
+            Dictionary<string, string> requestParameters = req.GetRequestHeaders();
+            Assert.AreEqual(this.OS, requestParameters[Constants.USER_AGENT]);
+            Assert.AreEqual(this.IP, requestParameters[Constants.USER_IP]);
+        }
+
+        [Test]
+        public void SearchRequestWithInvalidQuery()
         {
             Assert.Throws<ArgumentException>(() => new SearchRequest(null));
         }

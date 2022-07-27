@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Models;
@@ -8,15 +8,13 @@ using NUnit.Framework;
 namespace Constructorio_NET.Tests
 {
     [TestFixture]
-    public class AutocompleteRequestTest
+    public class RecommendationsRequestTest
     {
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
-        private readonly string Query = "item";
-        private readonly Dictionary<string, List<string>> Filters = new Dictionary<string, List<string>>()
-        {
-            { "Color", new List<string>() { "green", "blue" } }
-        };
+        private readonly string Pod = "Pod1";
+        private readonly string Section = "Search Suggestions";
+        private readonly int NumResults = 5;
         private readonly string UserId = "user1";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
         private readonly string IP = "1,2,3";
@@ -36,10 +34,11 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetRequestParameters()
         {
-            AutocompleteRequest req = new AutocompleteRequest(this.Query)
+            RecommendationsRequest req = new RecommendationsRequest(this.Pod)
             {
                 UserInfo = this.UserInfo,
-                Filters = this.Filters,
+                NumResults = this.NumResults,
+                Section = this.Section,
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -47,13 +46,14 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.SessionId, requestParameters[Constants.SESSION_ID]);
             Assert.AreEqual(this.UserId, requestParameters[Constants.USER_ID]);
             Assert.AreEqual(this.UserSegments, requestParameters[Constants.USER_SEGMENTS]);
-            Assert.AreEqual(this.Filters, requestParameters[Constants.FILTERS]);
+            Assert.AreEqual(this.Section, requestParameters[Constants.SECTION]);
+            Assert.AreEqual(this.NumResults, requestParameters["num_results"]);
         }
 
         [Test]
         public void GetRequestHeaders()
         {
-            AutocompleteRequest req = new AutocompleteRequest(this.Query)
+            RecommendationsRequest req = new RecommendationsRequest(this.Pod)
             {
                 UserInfo = this.UserInfo,
             };
@@ -64,9 +64,9 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void AutocompleteRequestWithInvalidQuery()
+        public void RecommendationsRequestWithInvalidPod()
         {
-            Assert.Throws<ArgumentException>(() => new AutocompleteRequest(null));
+            Assert.Throws<ArgumentException>(() => new RecommendationsRequest(null));
         }
     }
 }
