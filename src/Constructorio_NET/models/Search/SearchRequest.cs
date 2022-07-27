@@ -113,7 +113,7 @@ namespace Constructorio_NET.Models
 
                 if (this.UserInfo.GetUserSegments() != null)
                 {
-                    parameters.Add(Constants.SEGMENTS, this.UserInfo.GetUserSegments());
+                    parameters.Add(Constants.USER_SEGMENTS, this.UserInfo.GetUserSegments());
                 }
             }
 

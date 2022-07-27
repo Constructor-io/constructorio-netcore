@@ -125,7 +125,7 @@ namespace Constructorio_NET.Tests
             List<string> segments = new List<string>() { "mobile-web", "under-30" };
             Hashtable queryParams = new Hashtable()
             {
-                { Constants.SEGMENTS, segments }
+                { Constants.USER_SEGMENTS, segments }
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);

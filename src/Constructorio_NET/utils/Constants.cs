@@ -18,7 +18,7 @@
         public const string SECURITY_TOKEN = "x-cnstrc-token";
         public const string SHOW_HIDDEN_FACETS = "show_hidden_facets";
         public const string SHOW_PROTECTED_FACETS = "show_protected_facets";
-        public const string SEGMENTS = "us";
+        public const string USER_SEGMENTS = "us";
         public const string SECTION = "section";
         public const string SERVICE_URL = "serviceUrl";
         public const string SESSION_ID = "s";
