@@ -8,21 +8,24 @@ using NUnit.Framework;
 namespace Constructorio_NET.Tests
 {
     [TestFixture]
-    public class BrowseRequestTest
+    public class SearchRequestTest
     {
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
-        private readonly string UserId = "user1";
+        private readonly string Query = "item";
+        private readonly Dictionary<string, List<string>> Filters = new Dictionary<string, List<string>>()
+        {
+            { "Color", new List<string>() { "green", "blue" } }
+        };
         private readonly int Page = 2;
-        private readonly string FilterName = "Color";
-        private readonly string FilterValue = "Blue";
         private readonly string Section = "Search Suggestions";
         private readonly string SortBy = "Price";
         private readonly string SortOrder = "Ascending";
+        private readonly string UserId = "user1";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
         private UserInfo UserInfo;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void Setup()
         {
             this.UserInfo = new UserInfo(ClientId, SessionId);
@@ -33,13 +36,14 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetRequestParameters()
         {
-            BrowseRequest req = new BrowseRequest(FilterName, FilterValue)
+            SearchRequest req = new SearchRequest(this.Query)
             {
                 UserInfo = this.UserInfo,
                 Page = this.Page,
                 Section = this.Section,
                 SortBy = this.SortBy,
                 SortOrder = SortOrder,
+                Filters = this.Filters,
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -51,12 +55,13 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.Section, requestParameters[Constants.SECTION]);
             Assert.AreEqual(this.SortBy, requestParameters[Constants.SORT_BY]);
             Assert.AreEqual(this.SortOrder, requestParameters[Constants.SORT_ORDER]);
+            Assert.AreEqual(this.Filters, requestParameters[Constants.FILTERS]);
         }
 
         [Test]
-        public void GetBrowseResultsWithInvalidFilters()
+        public void GetBrowseItemsResultsWithInvalidQuery()
         {
-            Assert.Throws<ArgumentException>(() => new BrowseRequest(null, null));
+            Assert.Throws<ArgumentException>(() => new SearchRequest(null));
         }
     }
 }

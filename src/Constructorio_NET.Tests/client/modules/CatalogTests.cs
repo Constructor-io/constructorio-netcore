@@ -33,10 +33,7 @@ namespace Constructorio_NET.Tests
             itemGroupsStream = new StreamContent(File.OpenRead("./../../../resources/csv/item_groups.csv"));
             itemGroupsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
 
-            this.Config = new ConstructorioConfig(this.ApiKey)
-            {
-                ApiToken = testApiToken
-            };
+            this.Config = new ConstructorioConfig(this.ApiKey, testApiToken);
         }
 
         [SetUp]
@@ -52,7 +49,7 @@ namespace Constructorio_NET.Tests
             {
                 { "items", itemsStream },
             };
-            var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey) { ApiToken = "invalidKey" });
+            var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey, "invalidKey"));
             var req = new CatalogRequest(files);
             var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.ReplaceCatalog(req));
             Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
@@ -114,7 +111,7 @@ namespace Constructorio_NET.Tests
             {
                 { "items", itemsStream },
             };
-            var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey) { ApiToken = "invalidKey" });
+            var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey, "invalidKey"));
             var req = new CatalogRequest(files);
             var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.UpdateCatalog(req));
             Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");

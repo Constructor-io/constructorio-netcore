@@ -52,7 +52,7 @@ namespace Constructorio_NET.Modules
                 url = CreateCatalogUrl(catalogRequest);
                 Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(new HttpMethod("PUT"), url, requestHeaders, null, catalogRequest.Files);
+                result = await MakeHttpRequest(this.Options, new HttpMethod("PUT"), url, requestHeaders, null, catalogRequest.Files);
             }
             catch (Exception e)
             {
@@ -83,7 +83,7 @@ namespace Constructorio_NET.Modules
                 url = CreateCatalogUrl(catalogRequest);
                 requestHeaders = catalogRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
+                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
             }
             catch (Exception e)
             {
@@ -111,7 +111,7 @@ namespace Constructorio_NET.Modules
             url += "&patch_delta=true";
             Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest(new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
+            result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
 
             if (result != null)
             {

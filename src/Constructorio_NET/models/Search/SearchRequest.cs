@@ -57,11 +57,6 @@ namespace Constructorio_NET.Models
         public string Section { get; set; }
 
         /// <summary>
-        /// Gets or sets constructor security token.
-        /// </summary>
-        public string SecurityToken { get; set; }
-
-        /// <summary>
         /// Gets or sets user test cells.
         /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
@@ -177,27 +172,22 @@ namespace Constructorio_NET.Models
         /// <returns>Hashtable of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
-        Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
-        if (this.UserInfo != null)
-        {
-            if (this.UserInfo.GetForwardedFor() != null)
+            if (this.UserInfo != null)
             {
-                requestHeaders.Add(Constants.USER_IP, this.UserInfo.GetForwardedFor());
+                if (this.UserInfo.GetForwardedFor() != null)
+                {
+                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.GetForwardedFor());
+                }
+
+                if (this.UserInfo.GetUserAgent() != null)
+                {
+                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
+                }
             }
 
-            if (this.UserInfo.GetUserAgent() != null)
-            {
-                requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
-            }
-        }
-
-        if (this.SecurityToken != null)
-        {
-            requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);
-        }
-
-        return requestHeaders;
+            return requestHeaders;
         }
     }
 }

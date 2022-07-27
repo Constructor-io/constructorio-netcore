@@ -62,11 +62,6 @@ namespace Constructorio_NET.Models
         public string Section { get; set; }
 
         /// <summary>
-        /// Gets or sets constructor security token.
-        /// </summary>
-        public string SecurityToken { get; set; }
-
-        /// <summary>
         /// Gets or sets user test cells.
         /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
@@ -201,11 +196,6 @@ namespace Constructorio_NET.Models
                 {
                     requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
                 }
-            }
-
-            if (this.SecurityToken != null)
-            {
-                requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);
             }
 
             return requestHeaders;

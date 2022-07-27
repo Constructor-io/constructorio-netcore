@@ -43,7 +43,7 @@ namespace Constructorio_NET.Modules
 
             url = CreateBrowseUrl(browseRequest);
             Dictionary<string, string> requestHeaders = browseRequest.GetRequestHeaders();
-            result = await MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
 
             if (result != null)
             {
@@ -73,7 +73,7 @@ namespace Constructorio_NET.Modules
 
             url = CreateBrowseItemsUrl(browseItemsRequest);
             Dictionary<string, string> requestHeaders = browseItemsRequest.GetRequestHeaders();
-            result = await MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
 
             if (result != null)
             {
@@ -108,7 +108,7 @@ namespace Constructorio_NET.Modules
             url = CreateBrowseFacetsUrl(browseFacetsRequest);
             Dictionary<string, string> requestHeaders = browseFacetsRequest.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
 
             if (result != null)
             {
@@ -143,7 +143,7 @@ namespace Constructorio_NET.Modules
             url = CreateBrowseFacetOptionsUrl(browseFacetOptionsRequest);
             Dictionary<string, string> requestHeaders = browseFacetOptionsRequest.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
 
             if (result != null)
             {
