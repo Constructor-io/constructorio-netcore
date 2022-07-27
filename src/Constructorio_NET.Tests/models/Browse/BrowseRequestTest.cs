@@ -16,7 +16,6 @@ namespace Constructorio_NET.Tests
     private readonly int Page = 2;
     private readonly string FilterName = "Color";
     private readonly string FilterValue = "Blue";
-    private readonly string CollectionId = "test";
     private readonly string Section = "Search Suggestions";
     private readonly string SortBy = "Price";
     private readonly string SortOrder = "Ascending";
