@@ -36,25 +36,18 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="autocompleteRequest">Constructorio's autocomplete request object.</param>
         /// <returns>Constructorio's autocomplete response object.</returns>
-        public AutocompleteResponse GetAutocompleteResults(AutocompleteRequest autocompleteRequest)
+        public async Task<AutocompleteResponse> GetAutocompleteResults(AutocompleteRequest autocompleteRequest)
         {
             string url;
-            Task<string> task;
+            string result;
 
-            try
-            {
-                url = CreateAutocompleteUrl(autocompleteRequest);
-                Dictionary<string, string> requestHeaders = autocompleteRequest.GetRequestHeaders();
-                task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
-            }
-            catch (Exception e)
-            {
-                throw new ConstructorException(e);
-            }
+            url = CreateAutocompleteUrl(autocompleteRequest);
+            Dictionary<string, string> requestHeaders = autocompleteRequest.GetRequestHeaders();
+            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
 
-            if (task.Result != null)
+            if (result != null)
             {
-                return JsonConvert.DeserializeObject<AutocompleteResponse>(task.Result);
+                return JsonConvert.DeserializeObject<AutocompleteResponse>(result);
             }
 
             throw new ConstructorException("GetAutocompleteResults response data is malformed");

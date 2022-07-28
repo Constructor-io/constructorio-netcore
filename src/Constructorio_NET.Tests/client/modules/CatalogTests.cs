@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
+using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -31,8 +33,7 @@ namespace Constructorio_NET.Tests
             itemGroupsStream = new StreamContent(File.OpenRead("./../../../resources/csv/item_groups.csv"));
             itemGroupsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
 
-            this.Config = new ConstructorioConfig(this.ApiKey);
-            this.Config.ApiToken = testApiToken;
+            this.Config = new ConstructorioConfig(this.ApiKey, testApiToken);
         }
 
         [SetUp]
@@ -42,8 +43,20 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        [Order(1)]
-        public void ReplaceCatalogWithItems()
+        public void ReplaceCatalogWithInvalidApiTokenShouldError()
+        {
+            var files = new Dictionary<string, StreamContent>()
+            {
+                { "items", itemsStream },
+            };
+            var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey, "invalidKey"));
+            var req = new CatalogRequest(files);
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.ReplaceCatalog(req));
+            Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
+        }
+
+        [Test]
+        public async Task ReplaceCatalogWithItems()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
@@ -51,13 +64,13 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
-            CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
+            CatalogResponse res = await constructorio.Catalog.ReplaceCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
 
         [Test]
-        public void ReplaceCatalogWithVariations()
+        public async Task ReplaceCatalogWithVariations()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
@@ -65,13 +78,13 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
-            CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
+            CatalogResponse res = await constructorio.Catalog.ReplaceCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
 
         [Test]
-        public void ReplaceCatalogWithItemGroups()
+        public async Task ReplaceCatalogWithItemGroups()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
@@ -79,7 +92,7 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
-            CatalogResponse res = constructorio.Catalog.ReplaceCatalog(req);
+            CatalogResponse res = await constructorio.Catalog.ReplaceCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
@@ -92,7 +105,20 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void UpdateCatalogWithItems()
+        public void UpdateCatalogWithInvalidApiTokenShouldError()
+        {
+            var files = new Dictionary<string, StreamContent>()
+            {
+                { "items", itemsStream },
+            };
+            var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey, "invalidKey"));
+            var req = new CatalogRequest(files);
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.UpdateCatalog(req));
+            Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
+        }
+
+        [Test]
+        public async Task UpdateCatalogWithItems()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
@@ -100,13 +126,13 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
-            CatalogResponse res = constructorio.Catalog.UpdateCatalog(req);
+            CatalogResponse res = await constructorio.Catalog.UpdateCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
 
         [Test]
-        public void UpdateCatalogWithVariations()
+        public async Task UpdateCatalogWithVariations()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
@@ -114,13 +140,13 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
-            CatalogResponse res = constructorio.Catalog.UpdateCatalog(req);
+            CatalogResponse res = await constructorio.Catalog.UpdateCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
 
         [Test]
-        public void UpdateCatalogWithItemGroups()
+        public async Task UpdateCatalogWithItemGroups()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
@@ -128,13 +154,26 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
-            CatalogResponse res = constructorio.Catalog.UpdateCatalog(req);
+            CatalogResponse res = await constructorio.Catalog.UpdateCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
 
         [Test]
-        public void PatchCatalogWithItems()
+        public void PatchCatalogWithInvalidApiTokenShouldError()
+        {
+            var files = new Dictionary<string, StreamContent>()
+            {
+                { "items", itemsStream },
+            };
+            var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey) { ApiToken = "invalidKey" });
+            var req = new CatalogRequest(files);
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.PatchCatalog(req));
+            Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
+        }
+
+        [Test]
+        public async Task PatchCatalogWithItems()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
@@ -142,13 +181,13 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
-            CatalogResponse res = constructorio.Catalog.PatchCatalog(req);
+            CatalogResponse res = await constructorio.Catalog.PatchCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
 
         [Test]
-        public void PatchCatalogWithVariations()
+        public async Task PatchCatalogWithVariations()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
@@ -156,13 +195,13 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
-            CatalogResponse res = constructorio.Catalog.PatchCatalog(req);
+            CatalogResponse res = await constructorio.Catalog.PatchCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
 
         [Test]
-        public void PatchCatalogWithItemGroups()
+        public async Task PatchCatalogWithItemGroups()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
@@ -170,7 +209,7 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
-            CatalogResponse res = constructorio.Catalog.PatchCatalog(req);
+            CatalogResponse res = await constructorio.Catalog.PatchCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }

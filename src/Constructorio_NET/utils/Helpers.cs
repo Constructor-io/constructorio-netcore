@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using Constructorio_NET.Models;
 using Newtonsoft.Json;
 
 namespace Constructorio_NET.Utils
@@ -183,22 +184,28 @@ namespace Constructorio_NET.Utils
             return url.ToString();
     }
 
-        /// <summary>
-        /// Makes a http request.
-        /// </summary>
-        /// <param name="httpMethod">HTTP request method.</param>
-        /// <param name="url">Url for the request.</param>
-        /// <param name="requestHeaders">Additional headers to send with the request.</param>
-        /// <param name="requestBody">Key values pairs used for the POST body.</param>
-        /// <param name="files">Dictionary of streamcontent.</param>
-        /// <returns>Task.</returns>
-        public static async Task<string> MakeHttpRequest(HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, Hashtable requestBody = null, Dictionary<string, StreamContent> files = null)
+    /// <summary>
+    /// Makes a http request.
+    /// </summary>
+    /// <param name="options">Hashtable of options from Constructorio instantiation.</param>
+    /// <param name="httpMethod">HTTP request method.</param>
+    /// <param name="url">Url for the request.</param>
+    /// <param name="requestHeaders">Additional headers to send with the request.</param>
+    /// <param name="requestBody">Key values pairs used for the POST body.</param>
+    /// <param name="files">Dictionary of streamcontent.</param>
+    /// <returns>Task.</returns>
+        public static async Task<string> MakeHttpRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, Hashtable requestBody = null, Dictionary<string, StreamContent> files = null)
         {
             HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
 
             foreach (var header in requestHeaders)
             {
                 httpRequest.Headers.Add(header.Key, header.Value);
+            }
+
+            if (options.ContainsKey(Constants.CONSTRUCTOR_TOKEN))
+            {
+                httpRequest.Headers.Add(Constants.SECURITY_TOKEN, (string)options[Constants.CONSTRUCTOR_TOKEN]);
             }
 
             if (files != null)
@@ -232,6 +239,12 @@ namespace Constructorio_NET.Utils
             HttpContent resContent = response.Content;
             string result = await resContent.ReadAsStringAsync();
 
+            if (!response.IsSuccessStatusCode)
+            {
+                ServerError error = JsonConvert.DeserializeObject<ServerError>(result);
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
+            }
+
             return result;
         }
 
@@ -247,7 +260,7 @@ namespace Constructorio_NET.Utils
                 throw new ConstructorException("apiToken was not found");
             }
 
-            string encodedToken = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes($"{options["apiToken"]}:"));
+            string encodedToken = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes($"{options[Constants.API_TOKEN]}:"));
             requestHeaders.Add("Authorization", $"Basic {encodedToken}");
         }
     }

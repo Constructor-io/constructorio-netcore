@@ -14,7 +14,6 @@ namespace Constructorio_NET.Models
         public int ResultsPerPage { get; set; }
         public bool ShowHiddenFacets { get; set; }
         public bool ShowProtectedFacets { get; set; }
-        public string SecurityToken { get; set; }
         public UserInfo UserInfo { get; set; }
         private Dictionary<string, string> FmtOptions { get; set; }
 
@@ -73,11 +72,6 @@ namespace Constructorio_NET.Models
                 {
                     requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
                 }
-            }
-
-            if (this.SecurityToken != null)
-            {
-                requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);
             }
 
             return requestHeaders;

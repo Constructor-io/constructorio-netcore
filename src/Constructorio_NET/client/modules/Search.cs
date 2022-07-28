@@ -36,26 +36,19 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="searchRequest">Constructorio's search request object.</param>
         /// <returns>Constructorio's search response object.</returns>
-        public SearchResponse GetSearchResults(SearchRequest searchRequest)
+        public async Task<SearchResponse> GetSearchResults(SearchRequest searchRequest)
         {
             string url;
-            Task<string> task;
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            string result;
+            Dictionary<string, string> requestHeaders;
 
-            try
-            {
-                url = CreateSearchUrl(searchRequest);
-                requestHeaders = searchRequest.GetRequestHeaders();
-                task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
-            }
-            catch (Exception e)
-            {
-                throw new ConstructorException(e);
-            }
+            url = CreateSearchUrl(searchRequest);
+            requestHeaders = searchRequest.GetRequestHeaders();
+            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
 
-            if (task.Result != null)
+            if (result != null)
             {
-                return JsonConvert.DeserializeObject<SearchResponse>(task.Result);
+                return JsonConvert.DeserializeObject<SearchResponse>(result);
             }
 
             throw new ConstructorException("GetSearchResults response data is malformed");

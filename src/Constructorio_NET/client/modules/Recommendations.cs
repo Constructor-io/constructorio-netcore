@@ -36,26 +36,19 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="recommendationsRequest">Constructorio's recommendations request object.</param>
         /// <returns>Constructorio's recommendations response object.</returns>
-        public RecommendationsResponse GetRecommendationsResults(RecommendationsRequest recommendationsRequest)
+        public async Task<RecommendationsResponse> GetRecommendationsResults(RecommendationsRequest recommendationsRequest)
         {
             string url;
-            Task<string> task;
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            string result;
+            Dictionary<string, string> requestHeaders;
 
-            try
-            {
-                url = CreateRecommendationsUrl(recommendationsRequest);
-                requestHeaders = recommendationsRequest.GetRequestHeaders();
-                task = MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
-            }
-            catch (Exception e)
-            {
-                throw new ConstructorException(e);
-            }
+            url = CreateRecommendationsUrl(recommendationsRequest);
+            requestHeaders = recommendationsRequest.GetRequestHeaders();
+            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
 
-            if (task.Result != null)
+            if (result != null)
             {
-                return JsonConvert.DeserializeObject<RecommendationsResponse>(task.Result);
+                return JsonConvert.DeserializeObject<RecommendationsResponse>(result);
             }
 
             throw new ConstructorException("GetRecommendationsResults response data is malformed");

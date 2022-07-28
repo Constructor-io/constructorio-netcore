@@ -23,37 +23,37 @@ namespace Constructorio_NET
         /// <param name="config">Collection of values to pass to modules.</param>
         public ConstructorIO(ConstructorioConfig config)
         {
-            Hashtable fullOptions = new Hashtable
+            Hashtable options = new Hashtable
             {
                 { Constants.VERSION, this.Version }
             };
 
             if (config.Contains("ApiKey"))
             {
-                fullOptions.Add(Constants.API_KEY, config.ApiKey);
+                options.Add(Constants.API_KEY, config.ApiKey);
             }
 
             if (config.Contains("ConstructorToken"))
             {
-                fullOptions.Add(Constants.CONSTRUCTOR_TOKEN, config.ConstructorToken);
+                options.Add(Constants.CONSTRUCTOR_TOKEN, config.ConstructorToken);
             }
 
             if (config.Contains("ApiToken"))
             {
-                fullOptions.Add(Constants.API_TOKEN, config.ApiToken);
+                options.Add(Constants.API_TOKEN, config.ApiToken);
             }
 
             if (config.Contains("ServiceUrl"))
             {
-                fullOptions.Add(Constants.SERVICE_URL, config.ServiceUrl);
+                options.Add(Constants.SERVICE_URL, config.ServiceUrl);
             }
 
-            this.Autocomplete = new Autocomplete(fullOptions);
-            this.Browse = new Browse(fullOptions);
-            this.Catalog = new Catalog(fullOptions);
-            this.Recommendations = new Recommendations(fullOptions);
-            this.Search = new Search(fullOptions);
-            this.Tasks = new Tasks(fullOptions);
+            this.Autocomplete = new Autocomplete(options);
+            this.Browse = new Browse(options);
+            this.Catalog = new Catalog(options);
+            this.Recommendations = new Recommendations(options);
+            this.Search = new Search(options);
+            this.Tasks = new Tasks(options);
         }
     }
 }

@@ -36,11 +36,6 @@ namespace Constructorio_NET.Models
         public string Section { get; set; }
 
         /// <summary>
-        /// Gets or sets constructor security token.
-        /// </summary>
-        public string SecurityToken { get; set; }
-
-        /// <summary>
         /// Gets or sets user test cells.
         /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
@@ -72,6 +67,7 @@ namespace Constructorio_NET.Models
         public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
+
             if (this.UserInfo != null)
             {
                 if (this.UserInfo.GetUserId() != null)
@@ -91,7 +87,7 @@ namespace Constructorio_NET.Models
 
                 if (this.UserInfo.GetUserSegments() != null)
                 {
-                    parameters.Add(Constants.SEGMENTS, this.UserInfo.GetUserSegments());
+                    parameters.Add(Constants.USER_SEGMENTS, this.UserInfo.GetUserSegments());
                 }
             }
 
@@ -115,7 +111,7 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
 
-            if (this.ItemIds.Count != 0)
+            if (this.ItemIds != null && this.ItemIds.Count != 0)
             {
                 parameters.Add("item_id", this.ItemIds);
             }
@@ -142,11 +138,6 @@ namespace Constructorio_NET.Models
                 {
                     requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
                 }
-            }
-
-            if (this.SecurityToken != null)
-            {
-                requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);
             }
 
             return requestHeaders;
