@@ -71,9 +71,9 @@ namespace Constructorio_NET.Tests
                 UserInfo = this.UserInfo,
             };
 
-            Dictionary<string, string> requestParameters = req.GetRequestHeaders();
-            Assert.AreEqual(this.OS, requestParameters[Constants.USER_AGENT]);
-            Assert.AreEqual(this.IP, requestParameters[Constants.USER_IP]);
+            Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
+            Assert.AreEqual(this.OS, requestHeaders[Constants.USER_AGENT]);
+            Assert.AreEqual(this.IP, requestHeaders[Constants.USER_IP]);
         }
 
         [Test]
