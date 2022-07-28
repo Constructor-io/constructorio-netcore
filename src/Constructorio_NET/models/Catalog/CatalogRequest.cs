@@ -19,7 +19,7 @@ namespace Constructorio_NET.Models
         /// <value>
         /// Process the catalog even if it will invalidate a large number of existing items.
         /// </value>
-        public string Force { get; set; }
+        public bool Force { get; set; }
 
         /// <value>
         /// An email address to receive an email notification if the task fails.
@@ -37,7 +37,7 @@ namespace Constructorio_NET.Models
         /// <param name="files"></param>
         public CatalogRequest(Dictionary<string, StreamContent> files)
         {
-            if (files == null) throw new ArgumentNullException("files");
+            if (files == null) throw new ArgumentException("files");
 
             if (!files.ContainsKey("items") && !files.ContainsKey("variations") && !files.ContainsKey("item_groups"))
             {
@@ -51,7 +51,7 @@ namespace Constructorio_NET.Models
         {
             Hashtable parameters = new Hashtable();
 
-            if (this.Force != null)
+            if (this.Force)
             {
                 parameters.Add(Constants.FORCE, this.Force);
             }

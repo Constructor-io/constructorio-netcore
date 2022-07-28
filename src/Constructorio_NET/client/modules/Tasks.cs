@@ -44,7 +44,7 @@ namespace Constructorio_NET.Modules
             url = CreateAllTasksUrl(allTasksRequest);
             Dictionary<string, string> requestHeaders = allTasksRequest.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest(new HttpMethod("GET"), url, requestHeaders);
+            result = await MakeHttpRequest(this.Options, new HttpMethod("GET"), url, requestHeaders);
 
             if (result != null)
             {
@@ -71,7 +71,7 @@ namespace Constructorio_NET.Modules
             url = CreateTaskUrl(taskRequest);
             Dictionary<string, string> requestHeaders = taskRequest.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest(new HttpMethod("GET"), url, requestHeaders);
+            result = await MakeHttpRequest(this.Options, new HttpMethod("GET"), url, requestHeaders);
 
             if (result != null)
             {

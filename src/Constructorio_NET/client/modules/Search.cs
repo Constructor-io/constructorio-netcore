@@ -44,7 +44,7 @@ namespace Constructorio_NET.Modules
 
             url = CreateSearchUrl(searchRequest);
             requestHeaders = searchRequest.GetRequestHeaders();
-            result = await MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
 
             if (result != null)
             {

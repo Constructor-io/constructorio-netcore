@@ -43,7 +43,7 @@ namespace Constructorio_NET.Modules
 
             url = CreateAutocompleteUrl(autocompleteRequest);
             Dictionary<string, string> requestHeaders = autocompleteRequest.GetRequestHeaders();
-            result = await MakeHttpRequest(HttpMethod.Get, url, requestHeaders);
+            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
 
             if (result != null)
             {

@@ -18,7 +18,6 @@ namespace Constructorio_NET.Models
         public int Page { get; set; }
         public int ResultsPerPage { get; set; }
         public string Section { get; set; }
-        public string SecurityToken { get; set; }
         public string SortBy { get; set; }
         public string SortOrder { get; set; }
         public Dictionary<string, string> TestCells { get; set; }
@@ -62,7 +61,7 @@ namespace Constructorio_NET.Models
 
                 if (this.UserInfo.GetUserSegments() != null)
                 {
-                    parameters.Add(Constants.SEGMENTS, this.UserInfo.GetUserSegments());
+                    parameters.Add(Constants.USER_SEGMENTS, this.UserInfo.GetUserSegments());
                 }
             }
 
@@ -140,11 +139,6 @@ namespace Constructorio_NET.Models
                 {
                     requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
                 }
-            }
-
-            if (this.SecurityToken != null)
-            {
-                requestHeaders.Add(Constants.SECURITY_TOKEN, this.SecurityToken);
             }
 
             return requestHeaders;

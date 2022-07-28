@@ -67,6 +67,8 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.Response.Facets[0].Max);
+            Assert.IsNotNull(res.Response.Facets[0].Min);
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
