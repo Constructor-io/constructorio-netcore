@@ -14,53 +14,67 @@ namespace Constructorio_NET.Tests
         private readonly int SessionId = 4;
         private readonly string ServiceUrl = "https://ac.cnstrc.com";
         private readonly string Version = "cionet-5.6.0";
-        private Hashtable Options;
+        private UserInfo UserInfo;
 
         [SetUp]
         public void Setup()
         {
-            this.Options = new Hashtable()
-            {
-                { Constants.SERVICE_URL, this.ServiceUrl },
-                { Constants.API_KEY, this.ApiKey },
-                { Constants.VERSION, this.Version }
-            };
+            this.UserInfo = new UserInfo(ClientId, SessionId);
         }
 
         [Test]
         public void SetClientIdAndSessionIdOnInstantiation()
         {
-            UserInfo userInfo = new UserInfo(ClientId, SessionId);
-
-            Assert.AreEqual(ClientId, userInfo.GetClientId(), "ClientId should be equal");
-            Assert.AreEqual(SessionId, userInfo.GetSessionId(), "SessionId should be equal");
+            Assert.AreEqual(ClientId, this.UserInfo.GetClientId(), "ClientId should be equal");
+            Assert.AreEqual(SessionId, this.UserInfo.GetSessionId(), "SessionId should be equal");
         }
 
         [Test]
         public void SetClientIdAndSessionIdAfterInstantiation()
         {
-            UserInfo userInfo = new UserInfo(ClientId, SessionId);
             string diffClientId = "diffClientId";
             int diffSessionId = 1;
-            userInfo.SetClientId(diffClientId);
-            userInfo.SetSessionId(diffSessionId);
+            this.UserInfo.SetClientId(diffClientId);
+            this.UserInfo.SetSessionId(diffSessionId);
 
-            Assert.AreEqual(diffClientId, userInfo.GetClientId(), "ClientId should be equal");
-            Assert.AreEqual(diffSessionId, userInfo.GetSessionId(), "SessionId should be equal");
+            Assert.AreEqual(diffClientId, this.UserInfo.GetClientId(), "ClientId should be equal");
+            Assert.AreEqual(diffSessionId, this.UserInfo.GetSessionId(), "SessionId should be equal");
         }
 
         [Test]
         public void SetClientIdWithInvalidClientId()
         {
-            UserInfo userInfo = new UserInfo(ClientId, SessionId);
-            Assert.Throws<ArgumentException>(() => userInfo.SetClientId(null));
+            Assert.Throws<ArgumentException>(() => this.UserInfo.SetClientId(null));
         }
 
         [Test]
-        public void SetClientIdWithInvalidSessionId()
+        public void SetSessionIdWithInvalidSessionId()
         {
-            UserInfo userInfo = new UserInfo(ClientId, SessionId);
-            Assert.Throws<ArgumentException>(() => userInfo.SetSessionId(0));
+            Assert.Throws<ArgumentException>(() => this.UserInfo.SetSessionId(0));
+        }
+
+        [Test]
+        public void SetUserIdWithInvalidUserId()
+        {
+            Assert.Throws<ArgumentException>(() => this.UserInfo.SetUserId(null));
+        }
+
+        [Test]
+        public void SetUserSegmentsWithInvalidUserSegments()
+        {
+            Assert.Throws<ArgumentException>(() => this.UserInfo.SetUserSegments(null));
+        }
+
+        [Test]
+        public void SetForwardedForWithInvalidForwardedFor()
+        {
+            Assert.Throws<ArgumentException>(() => this.UserInfo.SetForwardedFor(null));
+        }
+
+        [Test]
+        public void SetUserAgentWithInvalidUserAgent()
+        {
+            Assert.Throws<ArgumentException>(() => this.UserInfo.SetUserAgent(null));
         }
     }
 }

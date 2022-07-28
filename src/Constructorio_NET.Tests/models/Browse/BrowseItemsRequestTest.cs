@@ -19,6 +19,12 @@ namespace Constructorio_NET.Tests
         private readonly string SortOrder = "Ascending";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
         private readonly List<string> ItemIds = new List<string>() { "10001", "10002" };
+        private readonly Dictionary<string, string> TestCells = new Dictionary<string, string>()
+        {
+            { "test1", "original" },
+        };
+        private readonly string IP = "1,2,3";
+        private readonly string OS = "Mac";
         private UserInfo UserInfo;
 
         [OneTimeSetUp]
@@ -27,6 +33,8 @@ namespace Constructorio_NET.Tests
             this.UserInfo = new UserInfo(ClientId, SessionId);
             this.UserInfo.SetUserId(this.UserId);
             this.UserInfo.SetUserSegments(this.UserSegments);
+            this.UserInfo.SetUserAgent(this.OS);
+            this.UserInfo.SetForwardedFor(this.IP);
         }
 
         [Test]
@@ -39,6 +47,7 @@ namespace Constructorio_NET.Tests
                 Section = this.Section,
                 SortBy = this.SortBy,
                 SortOrder = SortOrder,
+                TestCells = this.TestCells,
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -50,6 +59,20 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.Section, requestParameters[Constants.SECTION]);
             Assert.AreEqual(this.SortBy, requestParameters[Constants.SORT_BY]);
             Assert.AreEqual(this.SortOrder, requestParameters[Constants.SORT_ORDER]);
+            Assert.AreEqual(this.TestCells, requestParameters[Constants.TEST_CELLS]);
+    }
+
+        [Test]
+        public void GetRequestHeaders()
+        {
+            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds)
+            {
+                UserInfo = this.UserInfo,
+            };
+
+            Dictionary<string, string> requestParameters = req.GetRequestHeaders();
+            Assert.AreEqual(this.OS, requestParameters[Constants.USER_AGENT]);
+            Assert.AreEqual(this.IP, requestParameters[Constants.USER_IP]);
         }
 
         [Test]

@@ -15,7 +15,7 @@ namespace Constructorio_NET.Tests
     {
         private readonly string Section = "Search Suggestions";
         private readonly string NotificationEmail = "mail@mail.mail";
-        private readonly bool Force = false;
+        private readonly bool Force = true;
         private StreamContent itemsStream;
         private Dictionary<string, StreamContent> Files;
 

@@ -17,6 +17,10 @@ namespace Constructorio_NET.Tests
         private readonly int NumResults = 5;
         private readonly string UserId = "user1";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
+        private readonly Dictionary<string, string> TestCells = new Dictionary<string, string>()
+        {
+            { "test1", "original" },
+        };
         private readonly string IP = "1,2,3";
         private readonly string OS = "Mac";
         private UserInfo UserInfo;
@@ -39,6 +43,7 @@ namespace Constructorio_NET.Tests
                 UserInfo = this.UserInfo,
                 NumResults = this.NumResults,
                 Section = this.Section,
+                TestCells = this.TestCells,
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -48,6 +53,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.UserSegments, requestParameters[Constants.USER_SEGMENTS]);
             Assert.AreEqual(this.Section, requestParameters[Constants.SECTION]);
             Assert.AreEqual(this.NumResults, requestParameters["num_results"]);
+            Assert.AreEqual(this.TestCells, requestParameters[Constants.TEST_CELLS]);
         }
 
         [Test]

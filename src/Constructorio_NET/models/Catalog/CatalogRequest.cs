@@ -19,7 +19,7 @@ namespace Constructorio_NET.Models
         /// <value>
         /// Process the catalog even if it will invalidate a large number of existing items.
         /// </value>
-        public bool? Force { get; set; }
+        public bool Force { get; set; }
 
         /// <value>
         /// An email address to receive an email notification if the task fails.
@@ -51,7 +51,7 @@ namespace Constructorio_NET.Models
         {
             Hashtable parameters = new Hashtable();
 
-            if (this.Force != null)
+            if (this.Force)
             {
                 parameters.Add(Constants.FORCE, this.Force);
             }

@@ -20,6 +20,12 @@ namespace Constructorio_NET.Tests
         private readonly string SortBy = "Price";
         private readonly string SortOrder = "Ascending";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
+        private readonly Dictionary<string, string> TestCells = new Dictionary<string, string>()
+        {
+            { "test1", "original" },
+        };
+        private readonly string IP = "1,2,3";
+        private readonly string OS = "Mac";
         private UserInfo UserInfo;
 
         [OneTimeSetUp]
@@ -28,18 +34,21 @@ namespace Constructorio_NET.Tests
             this.UserInfo = new UserInfo(ClientId, SessionId);
             this.UserInfo.SetUserId(this.UserId);
             this.UserInfo.SetUserSegments(this.UserSegments);
+            this.UserInfo.SetUserAgent(this.OS);
+            this.UserInfo.SetForwardedFor(this.IP);
         }
 
         [Test]
         public void GetRequestParameters()
         {
-            BrowseRequest req = new BrowseRequest(FilterName, FilterValue)
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
             {
                 UserInfo = this.UserInfo,
                 Page = this.Page,
                 Section = this.Section,
                 SortBy = this.SortBy,
                 SortOrder = SortOrder,
+                TestCells = this.TestCells,
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -51,6 +60,20 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.Section, requestParameters[Constants.SECTION]);
             Assert.AreEqual(this.SortBy, requestParameters[Constants.SORT_BY]);
             Assert.AreEqual(this.SortOrder, requestParameters[Constants.SORT_ORDER]);
+            Assert.AreEqual(this.TestCells, requestParameters[Constants.TEST_CELLS]);
+    }
+
+        [Test]
+        public void GetRequestHeaders()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = this.UserInfo,
+            };
+
+            Dictionary<string, string> requestParameters = req.GetRequestHeaders();
+            Assert.AreEqual(this.OS, requestParameters[Constants.USER_AGENT]);
+            Assert.AreEqual(this.IP, requestParameters[Constants.USER_IP]);
         }
 
         [Test]
