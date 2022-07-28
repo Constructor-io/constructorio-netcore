@@ -9,11 +9,8 @@ namespace Constructorio_NET.Tests
     [TestFixture]
     public class UserInfoTest : Helpers
     {
-        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
-        private readonly string ServiceUrl = "https://ac.cnstrc.com";
-        private readonly string Version = "cionet-5.6.0";
         private UserInfo UserInfo;
 
         [SetUp]
