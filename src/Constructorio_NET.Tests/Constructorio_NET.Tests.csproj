@@ -20,10 +20,4 @@
     <ProjectReference Include="..\Constructorio_NET\Constructorio_NET.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="models\Recommendations\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="models\Recommendations\" />
-  </ItemGroup>
 </Project>
