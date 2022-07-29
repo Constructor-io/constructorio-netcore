@@ -1,11 +1,8 @@
-# constructorio-client-netcore
-A .NET Core REST client for the Constructor.io API
-
-
 # Constructor-IO Netcore Client
 
 [Constructor.io](http://constructor.io/) provides search as a service that optimizes results using artificial intelligence (including natural language processing, re-ranking to optimize for conversions, and user personalization).
 
+Full API documentation is available on [Github Pages](https://constructor-io.github.io/constructorio-netcore/)
 
 # Installation
 
