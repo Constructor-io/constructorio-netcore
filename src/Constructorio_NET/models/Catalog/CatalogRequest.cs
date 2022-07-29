@@ -6,35 +6,35 @@ using Constructorio_NET.Utils;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Catalog Request
-     */
+    /// <summary>
+    /// Constructor.io Catalog Request Class.
+    /// </summary>
     public class CatalogRequest
     {
-        /// <value>
-        /// Collection of files to upload.
-        /// </value>
+        /// <summary>
+        /// Gets or sets collection of files to upload.
+        /// </summary>
         public Dictionary<string, StreamContent> Files { get; set; }
 
-        /// <value>
-        /// Process the catalog even if it will invalidate a large number of existing items.
-        /// </value>
+        /// <summary>
+        /// Gets or sets a value indicating whether process the catalog even if it will invalidate a large number of existing items.
+        /// </summary>
         public bool Force { get; set; }
 
-        /// <value>
-        /// An email address to receive an email notification if the task fails.
-        /// </value>
+        /// <summary>
+        /// Gets or sets an email address to receive an email notification if the task fails.
+        /// </summary>
         public string NotificationEmail { get; set; }
 
-        /// <value>
-        /// The name of the section.
-        /// </value>
+        /// <summary>
+        /// Gets or sets the name of the section.
+        /// </summary>
         public string Section { get; set; }
 
         /// <summary>
-        /// Creates a catalog request
+        /// Initializes a new instance of the <see cref="CatalogRequest"/> class.
         /// </summary>
-        /// <param name="files"></param>
+        /// <param name="files">Dictionary of stream content to for the request.</param>
         public CatalogRequest(Dictionary<string, StreamContent> files)
         {
             if (files == null) throw new ArgumentException("files");
@@ -47,6 +47,10 @@ namespace Constructorio_NET.Models
             this.Files = files;
         }
 
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
         public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
@@ -71,6 +75,10 @@ namespace Constructorio_NET.Models
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Dictionary of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

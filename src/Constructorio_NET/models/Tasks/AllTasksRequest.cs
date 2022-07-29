@@ -16,7 +16,6 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AllTasksRequest"/> class.
-        /// Creates an all tasks request.
         /// </summary>
         public AllTasksRequest()
         {
@@ -26,7 +25,6 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AllTasksRequest"/> class.
-        /// Creates an all tasks request.
         /// </summary>
         /// <param name="ResultsPerPage">Number of results per page to return.</param>
         /// <param name="Page">Page number of the results to return.</param>
@@ -60,7 +58,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Get request headers.
         /// </summary>
-        /// <returns>Hashtable of request headers.</returns>
+        /// <returns>Dictionary of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

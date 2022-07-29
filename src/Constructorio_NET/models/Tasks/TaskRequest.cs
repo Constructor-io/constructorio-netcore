@@ -14,7 +14,6 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskRequest"/> class.
-        /// Creates a task request.
         /// </summary>
         /// <param name="taskId">Task id to use for the request.</param>
         public TaskRequest(int taskId)
@@ -35,7 +34,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Get request headers.
         /// </summary>
-        /// <returns>Hashtable of request headers.</returns>
+        /// <returns>Dictionary of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

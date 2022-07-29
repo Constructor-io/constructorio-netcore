@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Browse Items Request
-     */
+    /// <summary>
+    /// Constructor.io Browse Items Request Class.
+    /// </summary>
     public class BrowseItemsRequest
     {
         public List<string> ItemIds { get; set; }
@@ -25,9 +25,9 @@ namespace Constructorio_NET.Models
         public VariationsMap VariationMap { get; set; }
 
         /// <summary>
-        /// Creates a browse items request
+        /// Initializes a new instance of the <see cref="BrowseItemsRequest"/> class.
         /// </summary>
-        /// <param name="itemIds"></param>
+        /// <param name="itemIds">List of item IDs to use for the request.</param>
         public BrowseItemsRequest(List<string> itemIds)
         {
             if (itemIds == null || itemIds.Count == 0)
@@ -38,6 +38,10 @@ namespace Constructorio_NET.Models
             this.ItemIds = itemIds;
         }
 
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
         public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
@@ -124,6 +128,10 @@ namespace Constructorio_NET.Models
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Dictionary of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

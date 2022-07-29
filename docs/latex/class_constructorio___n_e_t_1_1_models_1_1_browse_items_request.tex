@@ -1,16 +1,19 @@
 \hypertarget{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request}{}\doxysection{Constructorio\+\_\+\+NET.\+Models.\+Browse\+Items\+Request Class Reference}
 \label{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request}\index{Constructorio\_NET.Models.BrowseItemsRequest@{Constructorio\_NET.Models.BrowseItemsRequest}}
+
+
+Constructor.\+io Browse Items Request Class.  
+
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_a4d501eca9cc9c68698d8e11b6d460ee7}{Browse\+Items\+Request}} (List$<$ string $>$ item\+Ids)
-\begin{DoxyCompactList}\small\item\em Creates a browse items request \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_aa9d33175358b7516474df7486d09a3a8}\label{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_aa9d33175358b7516474df7486d09a3a8}} 
-Hashtable {\bfseries Get\+Request\+Parameters} ()
-\item 
-\mbox{\Hypertarget{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_a8a2b4968d1c31f94c9f7d7c19f8d74bf}\label{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_a8a2b4968d1c31f94c9f7d7c19f8d74bf}} 
-Dictionary$<$ string, string $>$ {\bfseries Get\+Request\+Headers} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request}{Browse\+Items\+Request}} class. \end{DoxyCompactList}\item 
+Hashtable \mbox{\hyperlink{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_aa9d33175358b7516474df7486d09a3a8}{Get\+Request\+Parameters}} ()
+\begin{DoxyCompactList}\small\item\em Get request parameters. \end{DoxyCompactList}\item 
+Dictionary$<$ string, string $>$ \mbox{\hyperlink{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_a8a2b4968d1c31f94c9f7d7c19f8d74bf}{Get\+Request\+Headers}} ()
+\begin{DoxyCompactList}\small\item\em Get request headers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,9 +38,6 @@ int {\bfseries Results\+Per\+Page}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbo
 \mbox{\Hypertarget{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_ad732011cb7e9abcfef96a02fba943d63}\label{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_ad732011cb7e9abcfef96a02fba943d63}} 
 string {\bfseries Section}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \item 
-\mbox{\Hypertarget{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_a07f80bbaf91d2a75da61c3c0c4a92e63}\label{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_a07f80bbaf91d2a75da61c3c0c4a92e63}} 
-string {\bfseries Security\+Token}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\item 
 \mbox{\Hypertarget{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_abac88a52fc9050ccde3ec068b24c860c}\label{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_abac88a52fc9050ccde3ec068b24c860c}} 
 string {\bfseries Sort\+By}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
 \item 
@@ -56,7 +56,7 @@ Dictionary$<$ string, string $>$ {\bfseries Test\+Cells}\hspace{0.3cm}{\ttfamily
 
 
 \doxysubsection{Detailed Description}
-Constructor.\+io Browse Items Request 
+Constructor.\+io Browse Items Request Class. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_a4d501eca9cc9c68698d8e11b6d460ee7}\label{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_a4d501eca9cc9c68698d8e11b6d460ee7}} 
@@ -67,15 +67,44 @@ Constructor.\+io Browse Items Request
 
 
 
-Creates a browse items request 
+Initializes a new instance of the \mbox{\hyperlink{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request}{Browse\+Items\+Request}} class. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em item\+Ids} & \\
+{\em item\+Ids} & List of item IDs to use for the request.\\
 \hline
 \end{DoxyParams}
 
 
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_a8a2b4968d1c31f94c9f7d7c19f8d74bf}\label{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_a8a2b4968d1c31f94c9f7d7c19f8d74bf}} 
+\index{Constructorio\_NET.Models.BrowseItemsRequest@{Constructorio\_NET.Models.BrowseItemsRequest}!GetRequestHeaders@{GetRequestHeaders}}
+\index{GetRequestHeaders@{GetRequestHeaders}!Constructorio\_NET.Models.BrowseItemsRequest@{Constructorio\_NET.Models.BrowseItemsRequest}}
+\doxysubsubsection{\texorpdfstring{GetRequestHeaders()}{GetRequestHeaders()}}
+{\footnotesize\ttfamily Dictionary$<$ string, string $>$ Constructorio\+\_\+\+NET.\+Models.\+Browse\+Items\+Request.\+Get\+Request\+Headers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get request headers. 
+
+\begin{DoxyReturn}{Returns}
+Dictionary of request headers.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_aa9d33175358b7516474df7486d09a3a8}\label{class_constructorio___n_e_t_1_1_models_1_1_browse_items_request_aa9d33175358b7516474df7486d09a3a8}} 
+\index{Constructorio\_NET.Models.BrowseItemsRequest@{Constructorio\_NET.Models.BrowseItemsRequest}!GetRequestParameters@{GetRequestParameters}}
+\index{GetRequestParameters@{GetRequestParameters}!Constructorio\_NET.Models.BrowseItemsRequest@{Constructorio\_NET.Models.BrowseItemsRequest}}
+\doxysubsubsection{\texorpdfstring{GetRequestParameters()}{GetRequestParameters()}}
+{\footnotesize\ttfamily Hashtable Constructorio\+\_\+\+NET.\+Models.\+Browse\+Items\+Request.\+Get\+Request\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get request parameters. 
+
+\begin{DoxyReturn}{Returns}
+Hashtable of request parameters.
+\end{DoxyReturn}
+
+
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/\+Constructorio\+\_\+\+NET/models/\+Browse/Browse\+Items\+Request.\+cs\end{DoxyCompactItemize}
+constructor/constructorio-\/netcore/src/\+Constructorio\+\_\+\+NET/models/\+Browse/Browse\+Items\+Request.\+cs\end{DoxyCompactItemize}
