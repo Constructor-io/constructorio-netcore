@@ -231,7 +231,7 @@ request.ResultsPerPage = 10;
 AllTasksResponse response = await constructorio.Tasks.GetAllTasks(request);
 ```
 
-# Retrieving Task with task_id
+# Retrieving Task with Task ID
 
 To retrieve a specific task with a task_id, you will need to create a `TaskRequest`.
 
