@@ -5,9 +5,9 @@ using Constructorio_NET.Utils;
 
 namespace Constructorio_NET.Models
 {
-    /**
-     * Constructor.io Browse Facets Request
-     */
+    /// <summary>
+    /// Constructor.io Browse Facets Request Class.
+    /// </summary>
     public class BrowseFacetsRequest
     {
         public int Page { get; set; }
@@ -18,13 +18,17 @@ namespace Constructorio_NET.Models
         private Dictionary<string, string> FmtOptions { get; set; }
 
         /// <summary>
-        /// Creates a browse facets request
+        /// Initializes a new instance of the <see cref="BrowseFacetsRequest"/> class.
         /// </summary>
         public BrowseFacetsRequest()
         {
             FmtOptions = new Dictionary<string, string>();
         }
 
+        /// <summary>
+        /// Get request parameters.
+        /// </summary>
+        /// <returns>Hashtable of request parameters.</returns>
         public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
@@ -57,6 +61,10 @@ namespace Constructorio_NET.Models
             return parameters;
         }
 
+        /// <summary>
+        /// Get request headers.
+        /// </summary>
+        /// <returns>Dictionary of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

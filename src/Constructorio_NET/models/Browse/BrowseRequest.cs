@@ -78,7 +78,6 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BrowseRequest"/> class.
-        /// Creates a browse request.
         /// </summary>
         /// <param name="filterName">filter name to use for the request.</param>
         /// <param name="filterValue">filter value to use for the request.</param>
@@ -180,7 +179,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Get request headers.
         /// </summary>
-        /// <returns>Hashtable of request headers.</returns>
+        /// <returns>Dictionary of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
