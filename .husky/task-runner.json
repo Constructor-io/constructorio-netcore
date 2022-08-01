@@ -1,0 +1,34 @@
+{
+   "tasks": [
+      {
+         "name": "dotnet-format-example",
+         "command": "dotnet",
+         "args": [ "dotnet-format", "--include", "${staged}" ],
+         "include": [ "**/*.cs", "**/*.vb" ]
+      },
+      {
+         "name": "dotnet-test",
+         "group": "prepush",
+         "command": "dotnet",
+         "args": [ "test", "./src" ]
+      },
+      {
+         "name": "dotnet-test",
+         "group": "coverage",
+         "command": "dotnet",
+         "args": [ "test", "/p:CollectCoverage=true","/p:CoverletOutputFormat=cobertura", "/p:CoverletOutput=\"../../coverage/\"", "./src" ]
+      },
+      {
+         "name": "dotnet-test-report",
+         "group": "coverage",
+         "command": "dotnet",
+         "args": [ "reportgenerator", "/p:CollectCoverage=true","-reports:./coverage/coverage.cobertura.xml", "-targetdir:./coverage/html", "-reporttypes:HTML" ]
+      },
+      {
+         "name": "dotnet-test-open-report",
+         "group": "coverage",
+         "command": "open",
+         "args": [ "../constructorio-netcore/coverage/html/index.html" ]
+      }
+   ]
+}

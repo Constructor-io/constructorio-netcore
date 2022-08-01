@@ -348,3 +348,19 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# docfx related files
+log.txt
+
+*.vscode/
+
+# coverage reports
+coverage/
+
+# csv catalog files
+Constructorio_NET/Constructorio_NET.Tests/resources/csv/*
+
+# local config
+.config/local.json
+
+.DS_Store

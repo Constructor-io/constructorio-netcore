@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "husky": {
+      "version": "0.4.2",
+      "commands": [
+        "husky"
+      ]
+    },
+    "dotnet-reportgenerator-globaltool": {
+      "version": "5.1.4",
+      "commands": [
+        "reportgenerator"
+      ]
+    }
+  }
+}
