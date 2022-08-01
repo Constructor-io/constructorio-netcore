@@ -6,6 +6,9 @@ using Constructorio_NET.Utils;
 
 namespace Constructorio_NET
 {
+    /// <summary>
+    /// Constructor.io .NET Client.
+    /// </summary>
     public class ConstructorIO
     {
         private readonly string Version = "cionet-1.0.0";
@@ -18,7 +21,6 @@ namespace Constructorio_NET
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorIO"/> class.
-        /// Creates a constructor.io instance.
         /// </summary>
         /// <param name="config">Collection of values to pass to modules.</param>
         public ConstructorIO(ConstructorioConfig config)

@@ -2,6 +2,9 @@
 
 namespace Constructorio_NET.Models
 {
+    /// <summary>
+    /// Constructor.io Client Config Class.
+    /// </summary>
     public class ConstructorioConfig
     {
         /// <summary>
@@ -26,7 +29,6 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorioConfig"/> class.
-        /// Collection of values to pass to modules.
         /// </summary>
         /// <param name="apiKey">Api key used to direct requests.</param>
         public ConstructorioConfig(string apiKey)
@@ -41,7 +43,6 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorioConfig"/> class.
-        /// Collection of values to pass to modules.
         /// </summary>
         /// <param name="apiKey">Api key used to direct requests.</param>
         /// <param name="apiToken">Api token used to authorize requests.</param>
