@@ -5,6 +5,7 @@
 	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 	<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 	<ReleaseVersion>1.0.0</ReleaseVersion>
+  <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
