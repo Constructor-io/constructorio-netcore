@@ -45,7 +45,7 @@ request.NotificationEmail = "integration@company.com";
 request.Force = true;
 
 // Send a request to replace the catalog (sync)
-CatalogResponse response = constructorio.Catalog.ReplaceCatalog(request);
+CatalogResponse response = await constructorio.Catalog.ReplaceCatalog(request);
 ```
 
 # Retrieving Autocomplete Results
@@ -75,7 +75,7 @@ variationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivat
 request.VariationMap = variationsMap;
 
 // Request results as an object
-AutocompleteResponse response = constructorio.Autocomplete.GetAutocompleteResults(request);
+AutocompleteResponse response = await constructorio.Autocomplete.GetAutocompleteResults(request);
 ```
 
 # Retrieving Search Results
@@ -114,7 +114,7 @@ variationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivat
 request.VariationMap = variationsMap;
 
 // Request results as an object
-SearchResponse res = constructorio.Search.GetSearchResults(request);
+SearchResponse response = await constructorio.Search.GetSearchResults(request);
 ```
 
 # Retrieving Browse Results
@@ -153,7 +153,7 @@ variationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivat
 request.VariationMap = variationsMap;
 
 // Request results as an object
-BrowseResponse response = constructor.browse(request);
+BrowseResponse response = await constructorio.Browse.GetBrowseResults(request);
 ```
 
 # Retrieving Browse Results for Item ID's
@@ -185,7 +185,7 @@ UserInfo userInfo = new UserInfo("device-id-1123123", 5);
 request.UserInfo = userInfo;
 
 // Request results as an object
-BrowseResponse response = constructor.browseItems(request, userInfo);
+BrowseResponse response = await constructorio.Browse.GetBrowseItemsResults(request);
 ```
 
 # Retrieving Recommendation Results
@@ -212,7 +212,7 @@ variationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivat
 request.VariationMap = variationsMap;
 
 // Request results as an object
-RecommendationsResponse response = constructor.recommendations(request, userInfo);
+RecommendationsResponse response = await constructorio.Recommendations.GetRecommendationsResults(request);
 ```
 
 # Retrieving All Tasks
@@ -228,7 +228,7 @@ request.Page = 2;
 request.ResultsPerPage = 10;
 
 //Request all tasks as an object
-AllTasksResponse response = constructor.Tasks.GetAllTasks(request);
+AllTasksResponse response = await constructorio.Tasks.GetAllTasks(request);
 ```
 
 # Retrieving Task with task_id
@@ -240,7 +240,7 @@ To retrieve a specific task with a task_id, you will need to create a `TaskReque
 TaskRequest request = new TaskRequest("12345");
 
 //Request task as an object
-Task response = constructor.Task.GetTask(request);
+Task response = await constructorio.Tasks.GetTask(request);
 ```
 
 # Development

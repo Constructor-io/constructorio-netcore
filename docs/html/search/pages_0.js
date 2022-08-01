@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['constructorio_2dclient_2dnetcore_0',['constructorio-client-netcore',['../index.html',1,'']]]
+  ['constructor_2dio_20netcore_20client_0',['Constructor-IO Netcore Client',['../index.html',1,'']]]
 ];

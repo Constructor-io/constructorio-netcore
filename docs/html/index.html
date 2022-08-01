@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Constructorio .NET: constructorio-client-netcore</title>
+<title>Constructorio .NET: Constructor-IO Netcore Client</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,14 +62,12 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">constructorio-client-netcore </div></div>
+  <div class="headertitle"><div class="title">Constructor-IO Netcore Client </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_constructor_constructorio_netcore_README"></a>A .NET Core REST client for the Constructor.io API</p>
+<div class="textblock"><p ><a class="anchor" id="md_constructor_constructorio_netcore_README"></a> <a href="http://constructor.io/">Constructor.io</a> provides search as a service that optimizes results using artificial intelligence (including natural language processing, re-ranking to optimize for conversions, and user personalization).</p>
+<p >Full API documentation is available on <a href="https://constructor-io.github.io/constructorio-netcore/">Github Pages</a></p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-Constructor-IO Netcore Client</h1>
-<p ><a href="http://constructor.io/">Constructor.io</a> provides search as a service that optimizes results using artificial intelligence (including natural language processing, re-ranking to optimize for conversions, and user personalization).</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
 Installation</h1>
 <ol type="1">
 <li>Follow the directions at <a href="https://www.nuget.org/packages/constructor.io/">nuget</a> to add the client to your project.</li>
@@ -78,7 +76,7 @@ Installation</h1>
 <div class="line">ConstructorIO constructorio = <span class="keyword">new</span> ConstructorIO(config);</div>
 </div><!-- fragment --></li>
 </ol>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md2"></a>
 Uploading a Catalog</h1>
 <p >To upload your product catalog, you will need to create a <code>CatalogRequest</code>. In this request, you can specify the files you want to upload (items, variations, and item groups) and the section you want to send the upload. You can also set a notification e-mail to be alerted when a file ingestion fails.</p>
 <div class="fragment"><div class="line"><span class="comment">// Create a files dictionary and add the relevant files</span></div>
@@ -107,8 +105,8 @@ Uploading a Catalog</h1>
 <div class="line">request.Force = <span class="keyword">true</span>;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Send a request to replace the catalog (sync)</span></div>
-<div class="line">CatalogResponse response = constructorio.Catalog.ReplaceCatalog(request);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
+<div class="line">CatalogResponse response = await constructorio.Catalog.ReplaceCatalog(request);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
 Retrieving Autocomplete Results</h1>
 <p >To retrieve autocomplete results, you will need to create an <code>AutocompleteRequest</code>. In this request you can specify the number of results you want per autocomplete section. If the results are for a specific user, you can also create a <code>UserInfo</code> object, which will allow you to retrieve personalized results.</p>
 <div class="fragment"><div class="line"><span class="comment">// Create an AutocompleteRequest with the term to request results for</span></div>
@@ -133,8 +131,8 @@ Retrieving Autocomplete Results</h1>
 <div class="line">request.VariationMap = variationsMap;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
-<div class="line">AutocompleteResponse response = constructorio.Autocomplete.GetAutocompleteResults(request);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
+<div class="line">AutocompleteResponse response = await constructorio.Autocomplete.GetAutocompleteResults(request);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
 Retrieving Search Results</h1>
 <p >To retrieve search results, you will need to create a <code>SearchRequest</code>. In this request you can specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a <code>UserInfo</code> object, which will allow you to retrieve personalized results.</p>
 <div class="fragment"><div class="line"><span class="comment">// Create a SearchRequest with the term to request results for</span></div>
@@ -168,8 +166,8 @@ Retrieving Search Results</h1>
 <div class="line">request.VariationMap = variationsMap;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
-<div class="line">SearchResponse res = constructorio.Search.GetSearchResults(request);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
+<div class="line">SearchResponse response = await constructorio.Search.GetSearchResults(request);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
 Retrieving Browse Results</h1>
 <p >To retrieve browse results, you will need to create a <code>BrowseRequest</code>. When creating the <code>BrowseRequest</code> the filter name can be one of <code>collection_id</code>, <code>group_id</code>, or a facet name (i.e. Brand). In this request, you can also specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a <code>UserInfo</code> object, which will allow you to retrieve personalized results.</p>
 <div class="fragment"><div class="line"><span class="comment">// Create a BrowseRequest with the filter name and filter value to request results for</span></div>
@@ -203,8 +201,8 @@ Retrieving Browse Results</h1>
 <div class="line">request.VariationMap = variationsMap;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
-<div class="line">BrowseResponse response = constructor.browse(request);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
+<div class="line">BrowseResponse response = await constructorio.Browse.GetBrowseResults(request);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
 Retrieving Browse Results for Item ID's</h1>
 <p >To retrieve browse results for a supplied list of item ID's, you will need to create a <code>BrowseItemsRequest</code>. When creating the <code>BrowseItemsRequest</code> the <code>itemIds</code> parameter will be a list of item ID's. In this request, you can also specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a <code>UserInfo</code> object, which will allow you to retrieve personalized results.</p>
 <div class="fragment"><div class="line"><span class="comment">// Create a BrowseItemsRequest with the filter name and filter value to request results for</span></div>
@@ -231,8 +229,8 @@ Retrieving Browse Results for Item ID's</h1>
 <div class="line">request.UserInfo = userInfo;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
-<div class="line">BrowseResponse response = constructor.browseItems(request, userInfo);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
+<div class="line">BrowseResponse response = await constructorio.Browse.GetBrowseItemsResults(request);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
 Retrieving Recommendation Results</h1>
 <p >To retrieve recommendation results, you will need to create a <code>RecommendationsRequest</code>. In this request, you can also specify the number of results you want and the items (given the ids) that you want to retrieve recommendations for. If the results are for a specific user, you can also create a <code>UserInfo</code> object, which will allow you to retrieve personalized results.</p>
 <div class="fragment"><div class="line"><span class="comment">// Create a RecommendationsRequest with the pod id to request results for</span></div>
@@ -254,8 +252,8 @@ Retrieving Recommendation Results</h1>
 <div class="line">request.VariationMap = variationsMap;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
-<div class="line">RecommendationsResponse response = constructor.recommendations(request, userInfo);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
+<div class="line">RecommendationsResponse response = await constructorio.Recommendations.GetRecommendationsResults(request);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
 Retrieving All Tasks</h1>
 <p >To retrieve all tasks, you will need to create a <code>AllTasksRequest</code>. In this request you can also specify the page and number of results per page. The page and number of results per page will default to 1 and 20 respectively.</p>
 <div class="fragment"><div class="line"><span class="comment">// Create a AllTasksRequest to request results for</span></div>
@@ -266,24 +264,24 @@ Retrieving All Tasks</h1>
 <div class="line">request.ResultsPerPage = 10;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">//Request all tasks as an object</span></div>
-<div class="line">AllTasksResponse response = constructor.Tasks.GetAllTasks(request);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
+<div class="line">AllTasksResponse response = await constructorio.Tasks.GetAllTasks(request);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md9"></a>
 Retrieving Task with task_id</h1>
 <p >To retrieve a specific task with a task_id, you will need to create a <code>TaskRequest</code>.</p>
 <div class="fragment"><div class="line"><span class="comment">// Create a TaskRequest with the task_id to retrieve</span></div>
 <div class="line">TaskRequest request = <span class="keyword">new</span> TaskRequest(<span class="stringliteral">&quot;12345&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">//Request task as an object</span></div>
-<div class="line">Task response = constructor.Task.GetTask(request);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md11"></a>
+<div class="line">Task response = await constructorio.Tasks.GetTask(request);</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
 Development</h1>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 Using VS Code</h2>
 <ul>
 <li>Download ".NET Core Test Explorer" Extension</li>
 <li>In settings =&gt; .NET Core Test Explorer =&gt; Test Project Path: Constructorio_NET/Constructorio_NET.Tests</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 For code coverage:</h2>
 <ul>
 <li>if initial setup:<ul>
@@ -292,7 +290,7 @@ For code coverage:</h2>
 </li>
 <li>dotnet husky run -g coverage</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Documentation</h2>
 <ul>
 <li>Documentation generated by <a href="https://doxygen.nl/download.html">Doxygen</a> for Mac OS X 10.14 and later </li>
