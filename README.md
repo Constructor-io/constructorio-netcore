@@ -8,8 +8,8 @@ Full API documentation is available on [Github Pages](https://constructor-io.git
 
 # Installation
 
-1. Follow the directions at [nuget](https://www.nuget.org/packages/constructor.io/) to add the client to your project.
-2. Retrieve your autocomplete token and key.  You can find this at your [Constructor.io dashboard](https://constructor.io/dashboard).
+1. Follow the directions at [Nuget](https://www.nuget.org/packages/constructor.io/) to add the package to your project.
+2. Retrieve your API token and key.  You can find this at your [Constructor.io dashboard](https://constructor.io/dashboard).
 3. Create a new instance of the client.
 ```csharp
 ConstructorioConfig config = new ConstructorioConfig("apiKey", "apiToken");
