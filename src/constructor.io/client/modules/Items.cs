@@ -17,7 +17,7 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Items"/> class.
-        /// Interface for catalog related API calls.
+        /// Interface for item/variation related API calls.
         /// </summary>
         /// <param name="options">Hashtable of options from Constructorio instantiation.</param>
         public Items(Hashtable options)
@@ -25,7 +25,7 @@ namespace Constructorio_NET.Modules
             this.Options = options;
         }
 
-        internal string CreateItemsUrl(string section, bool force = false, string notificationEmail = null, Dictionary<string, bool> omittedQueryParams = null)
+        internal string CreateItemsUrl(string section, bool force = false, string notificationEmail = null)
         {
             List<string> paths = new List<string> { "v2", "items" };
             Hashtable queryParams = new Hashtable();
@@ -44,12 +44,17 @@ namespace Constructorio_NET.Modules
                 queryParams.Add("notification_email", notificationEmail);
             }
 
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            {
+                { "_dt", true },
+                { "c", true },
+            };
             string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
 
             return url;
         }
 
-        internal string CreateVariationsUrl(string section, bool force = false, string notificationEmail = null, Dictionary<string, bool> omittedQueryParams = null)
+        internal string CreateVariationsUrl(string section, bool force = false, string notificationEmail = null)
         {
             List<string> paths = new List<string> { "v2", "variations" };
             Hashtable queryParams = new Hashtable();
@@ -68,6 +73,11 @@ namespace Constructorio_NET.Modules
                 queryParams.Add("notification_email", notificationEmail);
             }
 
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            {
+                { "_dt", true },
+                { "c", true },
+            };
             string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
 
             return url;
@@ -102,7 +112,7 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Send full catalog files to replace the current catalog.
+        /// Creates or replaces items in a section.
         /// </summary>
         /// <param name="items">List of ConstructorItems to upload.</param>
         /// <param name="section">Section to upload items to.</param>
@@ -132,7 +142,7 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Send full catalog files to replace the current catalog.
+        /// Creates or Replaces variations in a section.
         /// </summary>
         /// <param name="variations">List of ConstructorItems to upload.</param>
         /// <param name="section">Section to upload items to.</param>
@@ -162,7 +172,7 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Send full catalog files to replace the current catalog.
+        /// Updates items in a section.
         /// </summary>
         /// <param name="items">List of ConstructorItems to upload.</param>
         /// <param name="section">Section to upload items to.</param>
@@ -192,10 +202,10 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Send full catalog files to replace the current catalog.
+        /// Updates variations in a section.
         /// </summary>
         /// <param name="Variations">List of ConstructorVariations to update.</param>
-        /// <param name="section">Section to upload items to.</param>
+        /// <param name="section">Section to upload variations to.</param>
         /// <param name="force">Boolean to indicate whether or not to use force sync.</param>
         /// <param name="notificationEmail">Email to send failure notifications to.</param>
         /// <returns>Constructorio's catalog response object.</returns>
@@ -222,7 +232,7 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Send full catalog files to replace the current catalog.
+        /// Deletes items from section using itemIds.
         /// </summary>
         /// <param name="items">List of ConstructorItems with only Item Id.</param>
         /// <param name="section">Section to upload items to.</param>
@@ -251,7 +261,7 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Send full catalog files to replace the current catalog.
+        /// Deletes variations from a section.
         /// </summary>
         /// <param name="variations">List of ConstructorItems with only Item Id.</param>
         /// <param name="section">Section to upload items to.</param>
@@ -280,10 +290,10 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Send full catalog files to replace the current catalog.
+        /// Retrieves items or specific items.
         /// </summary>
         /// <param name="req">The Items request object.</param>
-        /// <returns>Constructorio's catalog response object.</returns>
+        /// <returns>Constructorio's Items response object.</returns>
         public async Task<ItemsResponse> RetrieveItems(ItemsRequest req)
         {
             string url;
@@ -304,9 +314,9 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Send full catalog files to replace the current catalog.
+        /// Retrieves variations or specific variations.
         /// </summary>
-        /// <param name="rq">Variations request object</param>
+        /// <param name="req">Variations request object</param>
         /// <returns>Constructorio's catalog response object.</returns>
         public async Task<VariationsResponse> RetrieveVariations(VariationsRequest req)
         {
