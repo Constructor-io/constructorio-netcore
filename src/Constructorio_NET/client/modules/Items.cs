@@ -303,7 +303,6 @@ namespace Constructorio_NET.Modules
 
             if (result != null)
             {
-                Console.WriteLine(result);
                 JsonSerializerSettings settings = new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace };
                 return JsonConvert.DeserializeObject<ItemsResponse>(result, settings);
             }
@@ -327,7 +326,6 @@ namespace Constructorio_NET.Modules
 
             if (result != null)
             {
-                Console.WriteLine(result);
                 JsonSerializerSettings settings = new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace };
                 return JsonConvert.DeserializeObject<VariationsResponse>(result, settings);
             }
