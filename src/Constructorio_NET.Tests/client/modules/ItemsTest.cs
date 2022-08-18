@@ -97,7 +97,7 @@ namespace Constructorio_NET.Tests
             var constructorio = new ConstructorIO(this.Config);
             ItemsRequest request = new ItemsRequest();
             ItemsResponse result = await constructorio.Items.RetrieveItems(request);
-            Assert.IsTrue(int.Parse(result.TotalCount) > 0);
+            Assert.IsTrue(result.TotalCount > 0);
             Assert.IsTrue(result.Items.Count > 0);
         }
 
@@ -108,7 +108,7 @@ namespace Constructorio_NET.Tests
             ItemsRequest request = new ItemsRequest();
             request.Ids = new List<string>() { "10001" };
             ItemsResponse result = await constructorio.Items.RetrieveItems(request);
-            Assert.IsTrue(int.Parse(result.TotalCount) == 1);
+            Assert.IsTrue(result.TotalCount == 1);
             Assert.IsTrue(result.Items.Count == 1);
         }
 
@@ -119,7 +119,7 @@ namespace Constructorio_NET.Tests
             ItemsRequest request = new ItemsRequest();
             request.Ids = new List<string>() { "10001", "10002" };
             ItemsResponse result = await constructorio.Items.RetrieveItems(request);
-            Assert.IsTrue(int.Parse(result.TotalCount) == 2);
+            Assert.IsTrue(result.TotalCount == 2);
             Assert.IsTrue(result.Items.Count == 2);
         }
 
@@ -188,30 +188,38 @@ namespace Constructorio_NET.Tests
             var constructorio = new ConstructorIO(this.Config);
             VariationsRequest request = new VariationsRequest();
             VariationsResponse result = await constructorio.Items.RetrieveVariations(request);
-            Assert.IsTrue(int.Parse(result.TotalCount) > 0);
+
+
+            Assert.IsTrue(result.TotalCount > 0);
             Assert.IsTrue(result.Variations.Count > 0);
+            Assert.IsTrue(!string.IsNullOrEmpty(result.Variations[0].Name));
+            Assert.IsTrue(!string.IsNullOrEmpty(result.Variations[0].ItemId));
+            Assert.IsTrue(!string.IsNullOrEmpty(result.Variations[0].Url));
+            Assert.IsTrue(!string.IsNullOrEmpty(result.Variations[0].Id));
+            Assert.IsTrue(result.Variations[0].Data.Count > 0);
+            Assert.IsTrue(result.Variations[0].Facets.Count > 0);
         }
 
         [Test]
         public async Task RetrieveVariationsWithAnIdShouldReturnValidItems()
         {
             var constructorio = new ConstructorIO(this.Config);
-            ItemsRequest request = new ItemsRequest();
-            request.Ids = new List<string>() { "10001" };
-            ItemsResponse result = await constructorio.Items.RetrieveItems(request);
-            Assert.IsTrue(int.Parse(result.TotalCount) == 1);
-            Assert.IsTrue(result.Items.Count == 1);
+            VariationsRequest request = new VariationsRequest();
+            request.Ids = new List<string>() { "20001" };
+            VariationsResponse result = await constructorio.Items.RetrieveVariations(request);
+            Assert.IsTrue(result.TotalCount == 1);
+            Assert.IsTrue(result.Variations.Count == 1);
         }
 
         [Test]
         public async Task RetrieveVariationsWithMultipleIdsShouldReturnValidItems()
         {
             var constructorio = new ConstructorIO(this.Config);
-            ItemsRequest request = new ItemsRequest();
-            request.Ids = new List<string>() { "10001", "10002" };
-            ItemsResponse result = await constructorio.Items.RetrieveItems(request);
-            Assert.IsTrue(int.Parse(result.TotalCount) == 2);
-            Assert.IsTrue(result.Items.Count == 2);
+            VariationsRequest request = new VariationsRequest();
+            request.Ids = new List<string>() { "20001", "M0E20000000E2ZJ" };
+            VariationsResponse result = await constructorio.Items.RetrieveVariations(request);
+            Assert.IsTrue(result.TotalCount >= 2);
+            Assert.IsTrue(result.Variations.Count >= 2);
         }
     }
 }
