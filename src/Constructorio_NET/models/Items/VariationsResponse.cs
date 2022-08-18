@@ -14,6 +14,6 @@ namespace Constructorio_NET.Models
         public List<ConstructorVariation> Variations { get; set; }
 
         [JsonProperty("total_count")]
-        public string TotalCount { get; set; }
+        public int TotalCount { get; set; }
     }
 }

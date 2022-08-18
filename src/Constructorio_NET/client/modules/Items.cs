@@ -88,7 +88,6 @@ namespace Constructorio_NET.Modules
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
                 { "_dt", true },
-                { "c", true },
             };
             string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
 
@@ -102,10 +101,8 @@ namespace Constructorio_NET.Modules
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
                 { "_dt", true },
-                { "c", true },
             };
             string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
-
             return url;
         }
 
