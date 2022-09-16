@@ -189,7 +189,6 @@ namespace Constructorio_NET.Tests
             VariationsRequest request = new VariationsRequest();
             VariationsResponse result = await constructorio.Items.RetrieveVariations(request);
 
-
             Assert.IsTrue(result.TotalCount > 0);
             Assert.IsTrue(result.Variations.Count > 0);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Variations[0].Name));
