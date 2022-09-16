@@ -61,7 +61,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.SortBy, requestParameters[Constants.SORT_BY]);
             Assert.AreEqual(this.SortOrder, requestParameters[Constants.SORT_ORDER]);
             Assert.AreEqual(this.TestCells, requestParameters[Constants.TEST_CELLS]);
-        }
+    }
 
         [Test]
         public void GetRequestHeaders()
