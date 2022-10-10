@@ -18,7 +18,6 @@ namespace Constructorio_NET
         public Recommendations Recommendations { get; }
         public Search Search { get; }
         public Tasks Tasks { get; }
-
         public Items Items { get; }
 
         /// <summary>
