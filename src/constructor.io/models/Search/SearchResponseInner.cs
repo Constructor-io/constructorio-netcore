@@ -25,5 +25,8 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("redirect")]
         public Redirect Redirect { get; set; }
+
+        [JsonProperty("refined_content")]
+        public List<RefinedContent> RefinedContent { get; set; }
     }
 }
