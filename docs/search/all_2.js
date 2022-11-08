@@ -5,7 +5,7 @@ var searchData=
   ['catalogresponse_2',['CatalogResponse',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_response.html',1,'Constructorio_NET::Models']]],
   ['cleanparams_3',['CleanParams',['../class_constructorio___n_e_t_1_1_utils_1_1_helpers.html#a4c970aa25a03a7e118839d4c175f7ccb',1,'Constructorio_NET::Utils::Helpers']]],
   ['collectionresponse_4',['CollectionResponse',['../class_constructorio___n_e_t_1_1_models_1_1_collection_response.html',1,'Constructorio_NET::Models']]],
-  ['constructor_2dio_20netcore_20client_5',['Constructor-IO Netcore Client',['../index.html',1,'']]],
+  ['constructor_2eio_20netcore_20client_5',['Constructor.io Netcore Client',['../index.html',1,'']]],
   ['constructorexception_6',['ConstructorException',['../class_constructorio___n_e_t_1_1_constructor_exception.html',1,'Constructorio_NET']]],
   ['constructorio_7',['ConstructorIO',['../class_constructorio___n_e_t_1_1_constructor_i_o.html#a39b57a3f810ad70c47ea89122dcb5229',1,'Constructorio_NET.ConstructorIO.ConstructorIO()'],['../class_constructorio___n_e_t_1_1_constructor_i_o.html',1,'Constructorio_NET.ConstructorIO']]],
   ['constructorio_5fnet_8',['Constructorio_NET',['../namespace_constructorio___n_e_t.html',1,'']]],
