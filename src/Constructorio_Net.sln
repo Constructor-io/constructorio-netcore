@@ -45,6 +45,6 @@ Global
 		$5.inheritsSet = null
 		$5.scope = text/csv
 		$0.StandardHeader = $6
-		version = 2.1.1
+		version = 2.1.2
 	EndGlobalSection
 EndGlobal
