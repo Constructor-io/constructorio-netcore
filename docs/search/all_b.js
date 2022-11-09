@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['query_0',['Query',['../class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a9e23b6b584b9dd0e403ce20599f8cd93',1,'Constructorio_NET.Models.AutocompleteRequest.Query()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a84ca1a7c8d6b79b4eabac594f9ae5fc0',1,'Constructorio_NET.Models.SearchRequest.Query()']]]
+  ['page_0',['Page',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a437b2630dcb401c03debf6432f82b854',1,'Constructorio_NET.Models.BrowseRequest.Page()'],['../class_constructorio___n_e_t_1_1_models_1_1_items_request.html#a49c15ab3b658471a42623aa794692c2e',1,'Constructorio_NET.Models.ItemsRequest.Page()'],['../class_constructorio___n_e_t_1_1_models_1_1_variations_request.html#a43d38a44df17f0f60050f97b8f66be26',1,'Constructorio_NET.Models.VariationsRequest.Page()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#af7bbb2a12e42216d50f3bec5aeeae394',1,'Constructorio_NET.Models.SearchRequest.Page()']]],
+  ['patchcatalog_1',['PatchCatalog',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#ae7daa644217a881408e9cd73040e6f6c',1,'Constructorio_NET::Modules::Catalog']]],
+  ['podid_2',['PodId',['../class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ac9938932455b7719213e358aca996add',1,'Constructorio_NET::Models::RecommendationsRequest']]]
 ];

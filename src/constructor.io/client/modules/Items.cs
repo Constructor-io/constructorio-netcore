@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
-using Constructorio_NET.Models.Items;
 using Constructorio_NET.Utils;
 using Newtonsoft.Json;
 

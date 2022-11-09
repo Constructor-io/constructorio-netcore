@@ -10,8 +10,12 @@ var searchData=
   ['constructorio_7',['ConstructorIO',['../class_constructorio___n_e_t_1_1_constructor_i_o.html#a39b57a3f810ad70c47ea89122dcb5229',1,'Constructorio_NET.ConstructorIO.ConstructorIO()'],['../class_constructorio___n_e_t_1_1_constructor_i_o.html',1,'Constructorio_NET.ConstructorIO']]],
   ['constructorio_5fnet_8',['Constructorio_NET',['../namespace_constructorio___n_e_t.html',1,'']]],
   ['constructorioconfig_9',['ConstructorioConfig',['../class_constructorio___n_e_t_1_1_models_1_1_constructorio_config.html',1,'Constructorio_NET.Models.ConstructorioConfig'],['../class_constructorio___n_e_t_1_1_models_1_1_constructorio_config.html#ac95146fbcaabef2fbd26856028bc2657',1,'Constructorio_NET.Models.ConstructorioConfig.ConstructorioConfig(string apiKey)'],['../class_constructorio___n_e_t_1_1_models_1_1_constructorio_config.html#acb5bd1f1e59c2b469c64df6b42d743e1',1,'Constructorio_NET.Models.ConstructorioConfig.ConstructorioConfig(string apiKey, string apiToken)']]],
-  ['constructortoken_10',['ConstructorToken',['../class_constructorio___n_e_t_1_1_models_1_1_constructorio_config.html#a545114ad1f0ded67f56988ce2471d1ae',1,'Constructorio_NET::Models::ConstructorioConfig']]],
-  ['models_11',['Models',['../namespace_constructorio___n_e_t_1_1_models.html',1,'Constructorio_NET']]],
-  ['modules_12',['Modules',['../namespace_constructorio___n_e_t_1_1_modules.html',1,'Constructorio_NET']]],
-  ['utils_13',['Utils',['../namespace_constructorio___n_e_t_1_1_utils.html',1,'Constructorio_NET']]]
+  ['constructoritem_10',['ConstructorItem',['../class_constructorio___n_e_t_1_1_models_1_1_constructor_item.html',1,'Constructorio_NET::Models']]],
+  ['constructortoken_11',['ConstructorToken',['../class_constructorio___n_e_t_1_1_models_1_1_constructorio_config.html#a545114ad1f0ded67f56988ce2471d1ae',1,'Constructorio_NET::Models::ConstructorioConfig']]],
+  ['constructorvariation_12',['ConstructorVariation',['../class_constructorio___n_e_t_1_1_models_1_1_constructor_variation.html',1,'Constructorio_NET::Models']]],
+  ['createorreplaceitems_13',['CreateOrReplaceItems',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#a19d0106d3cb355b45a42f331d789a8e3',1,'Constructorio_NET::Modules::Items']]],
+  ['createorreplacevariations_14',['CreateOrReplaceVariations',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#a27f94b19e3035de80a86754923500cef',1,'Constructorio_NET::Modules::Items']]],
+  ['models_15',['Models',['../namespace_constructorio___n_e_t_1_1_models.html',1,'Constructorio_NET']]],
+  ['modules_16',['Modules',['../namespace_constructorio___n_e_t_1_1_modules.html',1,'Constructorio_NET']]],
+  ['utils_17',['Utils',['../namespace_constructorio___n_e_t_1_1_utils.html',1,'Constructorio_NET']]]
 ];

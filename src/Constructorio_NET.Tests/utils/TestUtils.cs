@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
-using Constructorio_NET.Models.Items;
 using Newtonsoft.Json.Linq;
 
 namespace Constructorio_NET.Tests

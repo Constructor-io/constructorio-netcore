@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['value_0',['Value',['../class_constructorio___n_e_t_1_1_models_1_1_value.html',1,'Constructorio_NET::Models']]],
-  ['variationmap_1',['VariationMap',['../class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#af10541c1bdcaf8f386f97d5704d0ecf8',1,'Constructorio_NET.Models.AutocompleteRequest.VariationMap()'],['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a9d49c41a3c8be6eedd2ab670d35e4324',1,'Constructorio_NET.Models.BrowseRequest.VariationMap()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a63c31a456cd5e8da9c186aed66b6646f',1,'Constructorio_NET.Models.SearchRequest.VariationMap()']]],
-  ['variationsmap_2',['VariationsMap',['../class_constructorio___n_e_t_1_1_models_1_1_variations_map.html',1,'Constructorio_NET::Models']]]
+  ['updatecatalog_0',['UpdateCatalog',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a329d4d835a5274f4e71157bae0b8e854',1,'Constructorio_NET::Modules::Catalog']]],
+  ['updateitems_1',['UpdateItems',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#a5ede98f14bfd881a6b891b4967bbc939',1,'Constructorio_NET::Modules::Items']]],
+  ['updatevariations_2',['UpdateVariations',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#a02fb6f8663d5645e4d9db06f55eb99ed',1,'Constructorio_NET::Modules::Items']]],
+  ['userinfo_3',['UserInfo',['../class_constructorio___n_e_t_1_1_models_1_1_user_info.html',1,'Constructorio_NET.Models.UserInfo'],['../class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a399786ed6e4a73e593950662fb1c1176',1,'Constructorio_NET.Models.AutocompleteRequest.UserInfo()'],['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a86057564623e3e1290a79ce1e7ab37f4',1,'Constructorio_NET.Models.BrowseRequest.UserInfo()'],['../class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ae5540a4f5777a59b3ad7a51e89a6d4a5',1,'Constructorio_NET.Models.RecommendationsRequest.UserInfo()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a7414d320804fb1622d5b19512613e32d',1,'Constructorio_NET.Models.SearchRequest.UserInfo()']]]
 ];

@@ -5,7 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Constructorio_NET.Models.Items
+namespace Constructorio_NET.Models
 {
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class ConstructorItem
