@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Recommendations Response Inner
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Recommendations
 {
     public class RecommendationsResponseInner
     {

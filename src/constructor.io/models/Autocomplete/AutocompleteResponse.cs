@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Autocomplete Response
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Autocomplete
 {
     public class AutocompleteResponse
     {

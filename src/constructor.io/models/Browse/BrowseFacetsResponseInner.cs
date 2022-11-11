@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 
 /**
  * Constructor.io Browse Facets Response Inner
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Browse
 {
     public class BrowseFacetsResponseInner
     {

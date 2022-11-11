@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
-using Newtonsoft.Json;
+using Constructorio_NET.Models.Items;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 

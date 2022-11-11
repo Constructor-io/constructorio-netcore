@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Browse Facet Options Response Inner
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Browse
 {
     public class BrowseFacetOptionsResponseInner
     {

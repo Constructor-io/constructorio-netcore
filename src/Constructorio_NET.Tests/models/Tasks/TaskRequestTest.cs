@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Constructorio_NET.Models;
-using Constructorio_NET.Utils;
+using Constructorio_NET.Models.Tasks;
 using NUnit.Framework;
 
 namespace Constructorio_NET.Tests

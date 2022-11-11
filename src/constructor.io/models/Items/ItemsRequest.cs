@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http;
 using Constructorio_NET.Utils;
 
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Items
 {
     /// <summary>
     /// Constructor.io Items Request Class.

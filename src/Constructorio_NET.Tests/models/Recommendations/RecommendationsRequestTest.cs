@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Models;
+using Constructorio_NET.Models.Recommendations;
 using Constructorio_NET.Utils;
 using NUnit.Framework;
 

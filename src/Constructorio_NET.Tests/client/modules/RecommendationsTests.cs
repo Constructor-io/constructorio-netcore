@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
+using Constructorio_NET.Models.Recommendations;
 using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
