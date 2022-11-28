@@ -25,7 +25,7 @@ namespace Constructorio_NET.Tests
 
             this.Config = new ConstructorioConfig(this.ApiKey)
             {
-                ApiToken = testApiToken
+                ApiToken = testApiToken,
             };
 
             StreamContent itemsStream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
@@ -76,6 +76,55 @@ namespace Constructorio_NET.Tests
         public async Task GetAllTasksShouldReturnResult()
         {
             AllTasksRequest req = new AllTasksRequest();
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            AllTasksResponse res = await constructorio.Tasks.GetAllTasks(req);
+
+            Assert.NotNull(res.StatusCounts, "Status Counts exists");
+            Assert.GreaterOrEqual(res.TotalCount, 1, "At least 1 task exists");
+            Assert.GreaterOrEqual(res.Tasks.Count, 1, "At least 1 task exists");
+        }
+
+        [Test]
+        public async Task GetAllTasksShouldReturnResultWithStatus()
+        {
+            AllTasksRequest req = new AllTasksRequest()
+            {
+                Status = "DONE",
+            };
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            AllTasksResponse res = await constructorio.Tasks.GetAllTasks(req);
+
+            Assert.NotNull(res.StatusCounts, "Status Counts exists");
+            Assert.GreaterOrEqual(res.TotalCount, 1, "At least 1 task exists");
+            Assert.GreaterOrEqual(res.Tasks.Count, 1, "At least 1 task exists");
+        }
+
+        [Test]
+        public async Task GetAllTasksShouldReturnResultWithType()
+        {
+            AllTasksRequest req = new AllTasksRequest()
+            {
+                Type = "ingestion",
+            };
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            AllTasksResponse res = await constructorio.Tasks.GetAllTasks(req);
+
+            Assert.NotNull(res.StatusCounts, "Status Counts exists");
+            Assert.GreaterOrEqual(res.TotalCount, 1, "At least 1 task exists");
+            Assert.GreaterOrEqual(res.Tasks.Count, 1, "At least 1 task exists");
+        }
+
+        [Test]
+        public async Task GetAllTasksShouldReturnResultWithStartAndEndDate()
+        {
+            AllTasksRequest req = new AllTasksRequest()
+            {
+                EndDate = DateTime.Now.ToString("yyyy-MM-dd"),
+                StartDate = DateTime.Now.AddMonths(-1).ToString("yyy-MM-dd"),
+            };
+
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             AllTasksResponse res = await constructorio.Tasks.GetAllTasks(req);
 

@@ -30,5 +30,9 @@
         public const string USER_ID = "ui";
         public const string USER_IP = "X-Forwarded-For";
         public const string VARIATIONS_MAP = "variations_map";
+        public const string START_DATE = "start_date";
+        public const string END_DATE = "end_date";
+        public const string STATUS = "status";
+        public const string TYPE = "type";
     }
 }
