@@ -13,6 +13,10 @@ namespace Constructorio_NET.Models
         public int ResultsPerPage { get; set; }
 
         public int Page { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string Status { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AllTasksRequest"/> class.
@@ -50,6 +54,26 @@ namespace Constructorio_NET.Models
             if (this.ResultsPerPage != 0)
             {
                 parameters.Add(Constants.RESULTS_PER_PAGE, this.ResultsPerPage);
+            }
+
+            if (!string.IsNullOrEmpty(StartDate))
+            {
+                parameters.Add(Constants.START_DATE, this.StartDate);
+            }
+
+            if (!string.IsNullOrEmpty(EndDate))
+            {
+                parameters.Add(Constants.END_DATE, this.EndDate);
+            }
+
+            if (!string.IsNullOrEmpty(Status))
+            {
+                parameters.Add(Constants.STATUS, this.Status);
+            }
+
+            if (!string.IsNullOrEmpty(Type))
+            {
+                parameters.Add(Constants.TYPE, this.Type);
             }
 
             return parameters;
