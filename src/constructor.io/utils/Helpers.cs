@@ -73,7 +73,7 @@ namespace Constructorio_NET.Utils
 
             foreach (var path in paths)
             {
-                url.Append($"/{HttpUtility.UrlEncode(path)}");
+                url.Append($"/{HttpUtility.UrlPathEncode(path)}");
             }
 
             url.Append($"?{Constants.API_KEY}={options[Constants.API_KEY]}");
