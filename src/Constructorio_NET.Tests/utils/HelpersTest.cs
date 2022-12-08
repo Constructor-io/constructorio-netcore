@@ -99,6 +99,25 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void MakeUrlShouldEncodeSpaceProperly()
+        {
+            List<string> paths = new List<string> { "search space", this.Query };
+            Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
+            {
+                { "Color", new List<string>() { "green shirt", "blue" } }
+            };
+            Hashtable queryParams = new Hashtable()
+            {
+                { Constants.FILTERS, filters }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search%20space\/{this.Query}\?key={this.ApiKey}&c={this.Version}&filters%5BColor%5D=green%20shirt&filters%5BColor%5D=blue&_dt=";
+            bool regexMatched = Regex.Match(url, expectedUrl).Success;
+            Assert.That(regexMatched, "url should be properly formed");
+        }
+
+        [Test]
         public void MakeUrlSearchWithTestCells()
         {
             List<string> paths = new List<string> { "search", this.Query };
