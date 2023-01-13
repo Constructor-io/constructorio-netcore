@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using static System.Net.WebRequestMethods;
 
 namespace Constructorio_NET.Tests
 {
@@ -23,14 +25,14 @@ namespace Constructorio_NET.Tests
         [OneTimeSetUp]
         public void Setup()
         {
-            JObject json = JObject.Parse(File.ReadAllText("./../../../../../.config/local.json"));
+            JObject json = JObject.Parse(System.IO.File.ReadAllText("./../../../../../.config/local.json"));
             string testApiToken = json.SelectToken("TEST_API_TOKEN").Value<string>();
 
-            itemsStream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
+            itemsStream = new StreamContent(System.IO.File.OpenRead("./../../../resources/csv/items.csv"));
             itemsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
-            variationsStream = new StreamContent(File.OpenRead("./../../../resources/csv/variations.csv"));
+            variationsStream = new StreamContent(System.IO.File.OpenRead("./../../../resources/csv/variations.csv"));
             variationsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
-            itemGroupsStream = new StreamContent(File.OpenRead("./../../../resources/csv/item_groups.csv"));
+            itemGroupsStream = new StreamContent(System.IO.File.OpenRead("./../../../resources/csv/item_groups.csv"));
             itemGroupsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
 
             this.Config = new ConstructorioConfig(this.ApiKey, testApiToken);
@@ -212,6 +214,14 @@ namespace Constructorio_NET.Tests
             CatalogResponse res = await constructorio.Catalog.PatchCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public void AddItemGroups()
+        {
+            ConstructorItemGroup itemGroup = new ConstructorItemGroup();
+            var ex = Assert.Throws<ConstructorException>(() => itemGroup.Data = "data");
+            Assert.IsTrue(ex.Message == "Data is not valid JSON", "Correct Error is Returned");
         }
     }
 }

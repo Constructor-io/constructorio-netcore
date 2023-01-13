@@ -37,6 +37,20 @@ namespace Constructorio_NET.Modules
             return url;
         }
 
+        internal string CreateItemGroupsUrl(CatalogRequest req)
+        {
+            List<string> paths = new List<string> { "item_groups" };
+            Hashtable queryParams = req.GetRequestParameters();
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            {
+                { "_dt", true },
+                { "c", true },
+            };
+            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+
+            return url;
+        }
+
         /// <summary>
         /// Send full catalog files to replace the current catalog.
         /// </summary>
