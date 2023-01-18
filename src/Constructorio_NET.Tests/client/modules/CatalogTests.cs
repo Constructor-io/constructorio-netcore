@@ -217,7 +217,7 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void AddItemGroups()
+        public void AddItemGroupsWithInvalidJSONData()
         {
             ConstructorItemGroup itemGroup = new ConstructorItemGroup();
             var ex = Assert.Throws<ConstructorException>(() => itemGroup.Data = "data");

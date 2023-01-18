@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -15,6 +16,9 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("parent_id")]
         public string ParentId { get; set; }
+
+        [JsonProperty("children")]
+        public List<ConstructorItemGroup> Children { get; set; }
 
         [JsonProperty("data")]
         private string _Data;
