@@ -40,7 +40,6 @@ namespace Constructorio_NET.Tests
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
             ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig("invalidKey"));
             var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Browse.GetBrowseResults(req));
-            Console.WriteLine(ex.Message);
             Assert.IsTrue(ex.Message == "Http[400]: You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration.", "Correct Error is Returned");
         }
 
