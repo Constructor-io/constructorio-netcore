@@ -290,12 +290,14 @@ namespace Constructorio_NET.Tests
         [Test]
         public async Task GetItemGroupWithGroupId()
         {
-            ItemGroupsRequest req = new ItemGroupsRequest("itemGroup1");
+            ItemGroupsRequest req = new ItemGroupsRequest(itemGroup1.Id);
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             await constructorio.Catalog.AddItemGroup(new ItemGroupsRequest(new List<ConstructorItemGroup> { itemGroup1 }));
             ItemGroupsGetResponse res = await constructorio.Catalog.GetItemGroup(req);
             Assert.IsTrue(res.TotalCount > 0, "Total Count should exist");
             Assert.IsNotEmpty(res.ItemGroups, "Item groups should be returned");
+            Assert.IsTrue(res.ItemGroups[0].Id == itemGroup1.Id);
+            Assert.IsTrue(res.ItemGroups[0].Name == itemGroup1.Name);
         }
 
         [Test]
