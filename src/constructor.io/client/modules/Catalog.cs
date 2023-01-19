@@ -318,14 +318,22 @@ namespace Constructorio_NET.Modules
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
         /// <param name="itemGroupsRequest.ItemGroupId">If blank, will retrieve all item groups.</param>
         /// <returns>Constructorio's item group response object.</returns>
-        public async Task<ItemGroupsResponse> GetItemGroup(ItemGroupsRequest itemGroupsRequest)
+        public async Task<ItemGroupsGetResponse> GetItemGroup(ItemGroupsRequest itemGroupsRequest)
         {
             string url;
             string result;
 
             try
             {
-                url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroupsRequest.ItemGroupId });
+                if (itemGroupsRequest.ItemGroupId != null)
+                {
+                    url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroupsRequest.ItemGroupId });
+                }
+                else
+                {
+                    url = CreateItemGroupsUrl(itemGroupsRequest);
+                }
+
                 Hashtable requestBody = new Hashtable();
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
@@ -338,7 +346,7 @@ namespace Constructorio_NET.Modules
 
             if (result != null)
             {
-                return JsonConvert.DeserializeObject<ItemGroupsResponse>(result);
+                return JsonConvert.DeserializeObject<ItemGroupsGetResponse>(result);
             }
 
             throw new ConstructorException("GetItemGroup response data is malformed");

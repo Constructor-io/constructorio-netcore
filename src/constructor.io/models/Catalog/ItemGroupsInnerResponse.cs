@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 /**
@@ -17,8 +16,5 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("updated")]
         public int Updated { get; set; }
-
-        [JsonProperty("deleted")]
-        public int Deleted { get; set; }
     }
 }
