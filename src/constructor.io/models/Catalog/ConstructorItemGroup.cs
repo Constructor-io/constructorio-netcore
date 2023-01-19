@@ -21,28 +21,7 @@ namespace Constructorio_NET.Models
         public List<ConstructorItemGroup> Children { get; set; }
 
         [JsonProperty("data")]
-        private string _Data;
-
-        public string Data
-        {
-            get
-            {
-                return _Data;
-            }
-
-            set
-            {
-                try
-                {
-                    JObject.Parse(value);
-                    _Data = value;
-                }
-                catch
-                {
-                    throw new ConstructorException("Data is not valid JSON");
-                }
-            }
-        }
+        public JObject Data { get; set; }
 
         public ConstructorItemGroup()
         {
@@ -54,6 +33,13 @@ namespace Constructorio_NET.Models
             this.Name = Name;
         }
 
+        public ConstructorItemGroup(string Id, string Name, JObject Data)
+        {
+            this.Id = Id;
+            this.Name = Name;
+            this.Data = Data;
+        }
+
         public ConstructorItemGroup(string ParentId, string Id, string Name)
         {
             this.ParentId = ParentId;
@@ -61,7 +47,7 @@ namespace Constructorio_NET.Models
             this.Name = Name;
         }
 
-        public ConstructorItemGroup(string ParentId, string Id, string Name, string Data)
+        public ConstructorItemGroup(string ParentId, string Id, string Name, JObject Data)
         {
             this.ParentId = ParentId;
             this.Id = Id;

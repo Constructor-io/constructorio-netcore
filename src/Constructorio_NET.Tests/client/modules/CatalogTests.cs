@@ -17,6 +17,7 @@ namespace Constructorio_NET.Tests
     public class CatalogTest
     {
         private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly ConstructorItemGroup itemGroup = new ConstructorItemGroup("itemGroup1", "Item Group 1", JObject.Parse("{\"name\":\"value\"}"));
         private ConstructorioConfig Config;
         private StreamContent itemsStream;
         private StreamContent variationsStream;
@@ -217,11 +218,16 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void AddItemGroupsWithInvalidJSONData()
+        public async Task AddItemGroup()
         {
-            ConstructorItemGroup itemGroup = new ConstructorItemGroup();
-            var ex = Assert.Throws<ConstructorException>(() => itemGroup.Data = "data");
-            Assert.IsTrue(ex.Message == "Data is not valid JSON", "Correct Error is Returned");
+            ItemGroupsRequest req = new ItemGroupsRequest(new List<ConstructorItemGroup> { itemGroup } );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            ConstructorItemGroup res = await constructorio.Catalog.AddItemGroup(req);
+            Console.WriteLine(res);
+            Assert.IsTrue(res.Id == itemGroup.Id, "Id should match");
+            Assert.IsTrue(res.Name == itemGroup.Name, "Name should match");
+            Assert.IsTrue(res.ParentId == itemGroup.ParentId, "ParentId should match");
+            Assert.IsTrue(res.Data.ToString() == itemGroup.Data.ToString(), "Data should match");
         }
     }
 }

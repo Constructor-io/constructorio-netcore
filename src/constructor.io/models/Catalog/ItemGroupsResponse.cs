@@ -11,5 +11,8 @@ namespace Constructorio_NET.Models
     {
         [JsonProperty("item_groups")]
         public ItemGroupsInnerResponse ItemGroups { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 }

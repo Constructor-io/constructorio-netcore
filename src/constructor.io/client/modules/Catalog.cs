@@ -149,7 +149,171 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Retrieves item group(s) for a given key in a tree structure
+        /// Add item group to a catalog.
+        /// </summary>
+        /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
+        /// <param name="itemGroupsRequest.ItemGroups">Will add the first item group.</param>
+        /// <returns>Constructorio's item group.</returns>
+        public async Task<ConstructorItemGroup> AddItemGroup(ItemGroupsRequest itemGroupsRequest)
+        {
+            string url;
+            string result;
+
+            try
+            {
+                ConstructorItemGroup itemGroup = itemGroupsRequest.ItemGroups[0];
+                url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroup.Id });
+                Hashtable requestBody = new Hashtable();
+
+                if (itemGroup.Name != null)
+                {
+                    requestBody.Add("name", itemGroup.Name);
+                }
+
+                if (itemGroup.ParentId != null)
+                {
+                    requestBody.Add("parent_id", itemGroup.ParentId);
+                }
+
+                if (itemGroup.Data != null)
+                {
+                    requestBody.Add("data", itemGroup.Data);
+                }
+
+                Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                result = await MakeHttpRequest(this.Options, new HttpMethod("PUT"), url, requestHeaders, requestBody);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<ConstructorItemGroup>(result);
+            }
+
+            throw new ConstructorException("AddItemGroup response data is malformed");
+        }
+
+        /// <summary>
+        /// Update item group in a catalog.
+        /// </summary>
+        /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
+        /// <param name="itemGroupsRequest.ItemGroups">Will update the first item group.</param>
+        /// <returns>Constructorio's item group.</returns>
+        public async Task<ConstructorItemGroup> UpdateItemGroup(ItemGroupsRequest itemGroupsRequest)
+        {
+            string url;
+            string result;
+
+            try
+            {
+                ConstructorItemGroup itemGroup = itemGroupsRequest.ItemGroups[0];
+                url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroup.Id });
+                Hashtable requestBody = new Hashtable();
+
+                if (itemGroup.Name != null)
+                {
+                    requestBody.Add("name", itemGroup.Name);
+                }
+
+                if (itemGroup.ParentId != null)
+                {
+                    requestBody.Add("parent_id", itemGroup.ParentId);
+                }
+
+                if (itemGroup.Data != null)
+                {
+                    requestBody.Add("data", itemGroup.Data);
+                }
+
+                Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                result = await MakeHttpRequest(this.Options, new HttpMethod("PUT"), url, requestHeaders, requestBody);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<ConstructorItemGroup>(result);
+            }
+
+            throw new ConstructorException("UpdateItemGroup response data is malformed");
+        }
+
+        /// <summary>
+        /// Add item group(s) to a catalog (limit of 1,000).
+        /// </summary>
+        /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
+        /// <param name="itemGroupsRequest.ItemGroups">List of item groups to be added.</param>
+        /// <returns>Constructorio's item group response object.</returns>
+        public async Task<ItemGroupsResponse> AddItemGroups(ItemGroupsRequest itemGroupsRequest)
+        {
+            string url;
+            string result;
+
+            try
+            {
+                url = CreateItemGroupsUrl(itemGroupsRequest);
+                Hashtable requestBody = new Hashtable();
+                requestBody.Add("item_groups", itemGroupsRequest.ItemGroups);
+                Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                result = await MakeHttpRequest(this.Options, new HttpMethod("POST"), url, requestHeaders, requestBody);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<ItemGroupsResponse>(result);
+            }
+
+            throw new ConstructorException("AddItemGroups response data is malformed");
+        }
+
+        /// <summary>
+        /// Update item group(s) in a catalog (limit of 1,000).
+        /// </summary>
+        /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
+        /// <param name="itemGroupsRequest.ItemGroups">List of item groups to be updated.</param>
+        /// <returns>Constructorio's item group response object.</returns>
+        public async Task<ItemGroupsResponse> UpdateItemGroups(ItemGroupsRequest itemGroupsRequest)
+        {
+            string url;
+            string result;
+
+            try
+            {
+                url = CreateItemGroupsUrl(itemGroupsRequest);
+                Hashtable requestBody = new Hashtable();
+                requestBody.Add("item_groups", itemGroupsRequest.ItemGroups);
+                Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, requestBody);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<ItemGroupsResponse>(result);
+            }
+
+            throw new ConstructorException("UpdateItemGroups response data is malformed");
+        }
+
+        /// <summary>
+        /// Retrieves item group(s) in a tree structure
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
         /// <param name="itemGroupsRequest.ItemGroupId">If blank, will retrieve all item groups.</param>
@@ -181,44 +345,11 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Add item group(s) to a catalog (limit of 1,000).
-        /// </summary>
-        /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
-        /// <param name="itemGroupsRequest.ItemGroups">List of item groups to be added.</param>
-        /// <returns>Constructorio's item group response object.</returns>
-        public async Task<ItemGroupsResponse> AddItemGroups(ItemGroupsRequest itemGroupsRequest)
-        {
-            string url;
-            string result;
-
-            try
-            {
-                url = CreateItemGroupsUrl(itemGroupsRequest);
-                Hashtable requestBody = new Hashtable();
-                requestBody.Add("item_groups", itemGroupsRequest.ItemGroups);
-                Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
-                AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PUT"), url, requestHeaders, requestBody);
-            }
-            catch (Exception e)
-            {
-                throw new ConstructorException(e);
-            }
-
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<ItemGroupsResponse>(result);
-            }
-
-            throw new ConstructorException("AddItemGroups response data is malformed");
-        }
-
-        /// <summary>
         /// Delete all item groups.
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
-        /// <returns>Constructorio's item group response object.</returns>
-        public async Task<ItemGroupsResponse> DeleteItemGroups(ItemGroupsRequest itemGroupsRequest)
+        /// <returns>Constructorio's confirmation message.</returns>
+        public async Task<string> DeleteItemGroups(ItemGroupsRequest itemGroupsRequest)
         {
             string url;
             string result;
@@ -237,7 +368,7 @@ namespace Constructorio_NET.Modules
 
             if (result != null)
             {
-                return JsonConvert.DeserializeObject<ItemGroupsResponse>(result);
+                return JsonConvert.DeserializeObject<ItemGroupsResponse>(result).Message;
             }
 
             throw new ConstructorException("DeleteItemGroups response data is malformed");
