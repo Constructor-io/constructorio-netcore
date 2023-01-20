@@ -152,7 +152,6 @@ namespace Constructorio_NET.Modules
         /// Add item group to a catalog.
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
-        /// <param name="itemGroupsRequest.ItemGroups">Will add the first item group.</param>
         /// <returns>Constructorio's item group.</returns>
         public async Task<ConstructorItemGroup> AddItemGroup(ItemGroupsRequest itemGroupsRequest)
         {
@@ -201,7 +200,6 @@ namespace Constructorio_NET.Modules
         /// Update item group in a catalog.
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
-        /// <param name="itemGroupsRequest.ItemGroups">Will update the first item group.</param>
         /// <returns>Constructorio's item group.</returns>
         public async Task<ConstructorItemGroup> UpdateItemGroup(ItemGroupsRequest itemGroupsRequest)
         {
@@ -250,7 +248,6 @@ namespace Constructorio_NET.Modules
         /// Add item group(s) to a catalog (limit of 1,000).
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
-        /// <param name="itemGroupsRequest.ItemGroups">List of item groups to be added.</param>
         /// <returns>Constructorio's item group response object.</returns>
         public async Task<ItemGroupsResponse> AddItemGroups(ItemGroupsRequest itemGroupsRequest)
         {
@@ -260,8 +257,10 @@ namespace Constructorio_NET.Modules
             try
             {
                 url = CreateItemGroupsUrl(itemGroupsRequest);
-                Hashtable requestBody = new Hashtable();
-                requestBody.Add("item_groups", itemGroupsRequest.ItemGroups);
+                Hashtable requestBody = new Hashtable
+                {
+                    { "item_groups", itemGroupsRequest.ItemGroups }
+                };
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
                 result = await MakeHttpRequest(this.Options, new HttpMethod("POST"), url, requestHeaders, requestBody);
@@ -283,7 +282,6 @@ namespace Constructorio_NET.Modules
         /// Update item group(s) in a catalog (limit of 1,000).
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
-        /// <param name="itemGroupsRequest.ItemGroups">List of item groups to be updated.</param>
         /// <returns>Constructorio's item group response object.</returns>
         public async Task<ItemGroupsResponse> UpdateItemGroups(ItemGroupsRequest itemGroupsRequest)
         {
@@ -293,8 +291,10 @@ namespace Constructorio_NET.Modules
             try
             {
                 url = CreateItemGroupsUrl(itemGroupsRequest);
-                Hashtable requestBody = new Hashtable();
-                requestBody.Add("item_groups", itemGroupsRequest.ItemGroups);
+                Hashtable requestBody = new Hashtable
+                {
+                    { "item_groups", itemGroupsRequest.ItemGroups }
+                };
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
                 result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, requestBody);
@@ -313,10 +313,9 @@ namespace Constructorio_NET.Modules
         }
 
         /// <summary>
-        /// Retrieves item group(s) in a tree structure
+        /// Retrieves item group(s) in a tree structure.
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
-        /// <param name="itemGroupsRequest.ItemGroupId">If blank, will retrieve all item groups.</param>
         /// <returns>Constructorio's item group response object.</returns>
         public async Task<ItemGroupsGetResponse> GetItemGroup(ItemGroupsRequest itemGroupsRequest)
         {
