@@ -6,7 +6,7 @@ using Constructorio_NET.Utils;
 namespace Constructorio_NET.Models
 {
     /// <summary>
-    /// Constructor.io Items Request Class.
+    /// Constructor.io Items Groups Request Class.
     /// </summary>
     public class ItemGroupsRequest
     {
@@ -16,7 +16,7 @@ namespace Constructorio_NET.Models
         public string Section { get; set; }
 
         /// <summary>
-        /// Gets or sets a item group Id to request.
+        /// Gets or sets a item group id to request.
         /// </summary>
         public string ItemGroupId { get; set; }
 
