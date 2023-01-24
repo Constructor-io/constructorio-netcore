@@ -243,6 +243,19 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task RetrieveSearchabilitiesWithNameShouldReturnResult()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RetrieveSearchabilitiesRequest req = new RetrieveSearchabilitiesRequest
+            {
+                Name = "groups",
+            };
+            SearchabilitiesResponse res = await constructorio.Catalog.RetrieveSearchabilities(req);
+            Assert.IsTrue(res.TotalCount == 1, "Total Count should exist");
+            Assert.IsNotNull(res.Searchabilities.Count == 1, "Searchabilities should exist");
+        }
+
+        [Test]
         public async Task RetrieveSearchabilitiesWithOffsetShouldReturnResult()
         {
             ConstructorIO constructorio = new ConstructorIO(this.Config);
