@@ -149,7 +149,6 @@ namespace Constructorio_NET.Modules
             throw new ConstructorException("PatchCatalog response data is malformed");
         }
 
-
         /// <summary>
         /// Add item group to a catalog.
         /// </summary>
@@ -192,7 +191,6 @@ namespace Constructorio_NET.Modules
 
             if (result != null)
             {
-
                 return JsonConvert.DeserializeObject<ConstructorItemGroup>(result);
             }
 
@@ -378,12 +376,12 @@ namespace Constructorio_NET.Modules
 
             if (result != null)
             {
-
                 return JsonConvert.DeserializeObject<ItemGroupsResponse>(result).Message;
             }
 
             throw new ConstructorException("DeleteItemGroups response data is malformed");
         }
+
         // Facets
         internal string CreateFacetUrl([Optional] string section, [Optional] string facetGroup, [Optional] Hashtable queryParams)
         {
