@@ -154,7 +154,7 @@ namespace Constructorio_NET.Modules
         /// Retrieves searchabilities with options for filtering, paginating.
         /// </summary>
         /// <param name="retrieveSearchabilitiesRequest">Constructorio's retrieve searchabilities request object.</param>
-        /// <returns>Constructorio's catalog response object.</returns>
+        /// <returns>Constructorio's Searchability response object.</returns>
         public async Task<SearchabilitiesResponse> RetrieveSearchabilities(RetrieveSearchabilitiesRequest retrieveSearchabilitiesRequest)
         {
             string url;
@@ -183,8 +183,8 @@ namespace Constructorio_NET.Modules
         /// <summary>
         /// Send single or multiple searchabilities to create or modify.
         /// </summary>
-        /// <param name="patchSearchabilitiesRequest">Constructorio's retrieve searchabilities request object.</param>
-        /// <returns>Constructorio's catalog response object.</returns>
+        /// <param name="patchSearchabilitiesRequest">Constructorio's patch searchabilities request object.</param>
+        /// <returns>Constructorio's Searchability response object.</returns>
         public async Task<SearchabilitiesResponse> PatchSearchabilities(PatchSearchabilitiesRequest patchSearchabilitiesRequest)
         {
             string url;
