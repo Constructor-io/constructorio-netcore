@@ -167,7 +167,6 @@ namespace Constructorio_NET.Modules
             try
             {
                 url = CreateRetrieveSearchabilitiesUrl(retrieveSearchabilitiesRequest);
-                Console.Write(url);
                 Dictionary<string, string> requestHeaders = retrieveSearchabilitiesRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
                 result = await MakeHttpRequest(this.Options, new HttpMethod("GET"), url, requestHeaders, null, null);
@@ -204,7 +203,6 @@ namespace Constructorio_NET.Modules
                 url = CreatePatchSearchabilitiesUrl(patchSearchabilitiesRequest);
                 Dictionary<string, string> requestHeaders = patchSearchabilitiesRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                Console.Write(url);
                 result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, postbody, null);
             }
             catch (Exception e)
