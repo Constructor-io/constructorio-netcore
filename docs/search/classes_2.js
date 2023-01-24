@@ -8,5 +8,6 @@ var searchData=
   ['constructorio_5',['ConstructorIO',['../class_constructorio___n_e_t_1_1_constructor_i_o.html',1,'Constructorio_NET']]],
   ['constructorioconfig_6',['ConstructorioConfig',['../class_constructorio___n_e_t_1_1_models_1_1_constructorio_config.html',1,'Constructorio_NET::Models']]],
   ['constructoritem_7',['ConstructorItem',['../class_constructorio___n_e_t_1_1_models_1_1_constructor_item.html',1,'Constructorio_NET::Models']]],
-  ['constructorvariation_8',['ConstructorVariation',['../class_constructorio___n_e_t_1_1_models_1_1_constructor_variation.html',1,'Constructorio_NET::Models']]]
+  ['constructoritemgroup_8',['ConstructorItemGroup',['../class_constructorio___n_e_t_1_1_models_1_1_constructor_item_group.html',1,'Constructorio_NET::Models']]],
+  ['constructorvariation_9',['ConstructorVariation',['../class_constructorio___n_e_t_1_1_models_1_1_constructor_variation.html',1,'Constructorio_NET::Models']]]
 ];
