@@ -172,6 +172,10 @@ namespace Constructorio_NET.Utils
                             url.Append($"&{paramKey}={OurEscapeDataString(listValue)}");
                         }
                     }
+                    else if (valueDataType == typeof(bool))
+                    {
+                        url.Append($"&{OurEscapeDataString(paramKey)}={OurEscapeDataString(queryParam.Value.ToString())}");
+                    }
                 }
 
                 if (omittedQueryParams == null || !omittedQueryParams.ContainsKey("_dt"))

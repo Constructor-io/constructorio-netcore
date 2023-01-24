@@ -213,5 +213,88 @@ namespace Constructorio_NET.Tests
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
         }
+
+        [Test]
+        public async Task RetrieveSearchabilitiesShouldReturnResult()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RetrieveSearchabilitiesRequest req = new RetrieveSearchabilitiesRequest();
+            SearchabilitiesResponse res = await constructorio.Catalog.RetrieveSearchabilities(req);
+            Assert.IsNotNull(res.TotalCount, "Total Count should exist");
+            Assert.IsNotNull(res.Searchabilities, "Searchabilities should exist");
+        }
+
+        [Test]
+        public async Task RetrieveSearchabilitiesWithOptionalParamsShouldReturnResult()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RetrieveSearchabilitiesRequest req = new RetrieveSearchabilitiesRequest
+            {
+                Filters = new Dictionary<string, string> { { "name", "groups" } },
+                Page = 1,
+                NumResultsPerPage = 1,
+                SortOrder = "descending",
+                SortBy = "name",
+                Searchable = true
+            };
+            SearchabilitiesResponse res = await constructorio.Catalog.RetrieveSearchabilities(req);
+            Assert.IsTrue(res.TotalCount == 1, "Total Count should exist");
+            Assert.IsNotNull(res.Searchabilities.Count == 1, "Searchabilities should exist");
+        }
+
+        [Test]
+        public async Task RetrieveSearchabilitiesWithOffsetShouldReturnResult()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RetrieveSearchabilitiesRequest req = new RetrieveSearchabilitiesRequest
+            {
+                Filters = new Dictionary<string, string> { { "name", "groups" } },
+                Offset = 5,
+                NumResultsPerPage = 1,
+                SortOrder = "descending",
+                SortBy = "name",
+                Searchable = true
+            };
+            SearchabilitiesResponse res = await constructorio.Catalog.RetrieveSearchabilities(req);
+            Assert.IsTrue(res.TotalCount > 0, "Total Count should exist");
+            Assert.IsNotNull(res.Searchabilities.Count > 0, "Searchabilities should exist");
+        }
+
+        [Test]
+        public async Task PatchSearchabilitiesWithSingleSearchabilityShouldReturnResult()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            List<Searchability> searchabilities = new List<Searchability>
+            {
+                new Searchability() { Name = "testSearchability", ExactSearchable = true }
+            };
+            PatchSearchabilitiesRequest req = new PatchSearchabilitiesRequest(searchabilities);
+            SearchabilitiesResponse res = await constructorio.Catalog.PatchSearchabilities(req);
+            Assert.IsNotNull(res.TotalCount, "Total Count should exist");
+            Assert.IsNotNull(res.Searchabilities, "Searchabilities should exist");
+            Assert.IsTrue(res.Searchabilities[0].Name == searchabilities[0].Name, "Searchabilities match");
+        }
+
+        [Test]
+        public async Task PatchSearchabilitiesWithMultipleSearchabilitiesShouldReturnResult()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            List<Searchability> searchabilities = new List<Searchability>
+            {
+                new Searchability() { Name = "testSearchability", ExactSearchable = true, Hidden = false, FuzzySearchable = false, Displayable = true },
+                new Searchability() { Name = "testSearchability2", Hidden = true }
+            };
+            PatchSearchabilitiesRequest req = new PatchSearchabilitiesRequest(searchabilities);
+            SearchabilitiesResponse res = await constructorio.Catalog.PatchSearchabilities(req);
+            Assert.IsNotNull(res.TotalCount, "Total Count should exist");
+            Assert.IsNotNull(res.Searchabilities, "Searchabilities should exist");
+            Assert.IsTrue(res.Searchabilities[0].Name == searchabilities[0].Name, "All Searchabilities match");
+            Assert.IsTrue(res.Searchabilities[1].Name == searchabilities[1].Name, "All Searchabilities match");
+            Assert.IsTrue(res.Searchabilities[1].Hidden == true, "Searchability field is set");
+            Assert.IsTrue(res.Searchabilities[0].Hidden == false, "Searchability field is set");
+            Assert.IsTrue(res.Searchabilities[0].FuzzySearchable == false, "Searchability field is set");
+            Assert.IsTrue(res.Searchabilities[0].ExactSearchable == true, "Searchability field is set");
+            Assert.IsTrue(res.Searchabilities[0].Displayable == true, "Searchability field is set");
+        }
     }
 }
