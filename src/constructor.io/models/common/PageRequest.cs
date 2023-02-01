@@ -6,7 +6,7 @@ namespace Constructorio_NET.Models
     /// <summary>
     /// Constructor.io Pagination Request Class
     /// </summary>
-    public class PageRequest
+    public class PaginationOptions
     {
         public int? Page { get; set; }
         public int? Offset { get; set; }

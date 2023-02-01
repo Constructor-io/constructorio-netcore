@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
@@ -383,7 +382,7 @@ namespace Constructorio_NET.Modules
         }
 
         // Facets
-        internal string CreateFacetUrl([Optional] string section, [Optional] string facetGroup, [Optional] Hashtable queryParams)
+        internal string CreateFacetUrl(string section = "Products", string facetGroup = null, Hashtable queryParams = null)
         {
             List<string> paths = new List<string> { "v1", "facets" };
             if (facetGroup != null)
@@ -418,7 +417,7 @@ namespace Constructorio_NET.Modules
         /// <param name="facet">New Facet Configuration to be created.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// <returns>Facet object representing the facet created.</returns>
-        public async Task<Facet> CreateFacetConfig(Facet facet, [Optional] string section)
+        public async Task<Facet> CreateFacetConfig(Facet facet, string section = "Products")
         {
             string url = CreateFacetUrl(section);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -445,15 +444,15 @@ namespace Constructorio_NET.Modules
         /// <summary>
         /// Gets all facets in a particular section.
         /// </summary>
-        /// <param name="pageRequest">PageRequest object for pagination.</param>
+        /// <param name="paginationOptions">PaginationOptions object for pagination.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// <returns>List of Facets in a given section.</returns>
-        public async Task<FacetGetAllResponse> GetAllFacetConfigs([Optional] PageRequest pageRequest, [Optional] string section)
+        public async Task<FacetGetAllResponse> GetAllFacetConfigs(PaginationOptions paginationOptions = null, string section = "Products")
         {
             string url;
-            if (pageRequest != null)
+            if (paginationOptions != null)
             {
-                url = CreateFacetUrl(section, queryParams: pageRequest.GetQueryParameters());
+                url = CreateFacetUrl(section, queryParams: paginationOptions.GetQueryParameters());
             }
             else
             {
@@ -486,7 +485,7 @@ namespace Constructorio_NET.Modules
         /// <param name="facetName">Name of the facet.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<Facet> GetFacetConfig(string facetName, [Optional] string section)
+        public async Task<Facet> GetFacetConfig(string facetName, string section = "Products")
         {
             string url = CreateFacetUrl(section, facetName);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -515,7 +514,7 @@ namespace Constructorio_NET.Modules
         /// <param name="facetFieldsList">List of facets fields to be updated.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<List<Facet>> BatchPartiallyUpdateFacetConfigs(List<Facet> facetFieldsList, [Optional] string section)
+        public async Task<List<Facet>> BatchPartiallyUpdateFacetConfigs(List<Facet> facetFieldsList, string section = "Products")
         {
             string url = CreateFacetUrl(section);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -544,7 +543,7 @@ namespace Constructorio_NET.Modules
         /// <param name="facetFields">Facets fields to be updated.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<Facet> PartiallyUpdateFacetConfig(Facet facetFields, [Optional] string section)
+        public async Task<Facet> PartiallyUpdateFacetConfig(Facet facetFields, string section = "Products")
         {
             string url = CreateFacetUrl(section, facetFields.Name);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -573,7 +572,7 @@ namespace Constructorio_NET.Modules
         /// <param name="facet">New Facet Configuration to be created.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<Facet> UpdateFacetConfig(Facet facet, [Optional] string section)
+        public async Task<Facet> UpdateFacetConfig(Facet facet, string section = "Products")
         {
             string url = CreateFacetUrl(section, facet.Name);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -603,7 +602,7 @@ namespace Constructorio_NET.Modules
         /// <param name="facetName">Name of the facet configuration/facet group.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// <returns>Facet object representing the facet configuration deleted</returns>
-        public async Task<Facet> DeleteFacetConfig(string facetName, [Optional] string section)
+        public async Task<Facet> DeleteFacetConfig(string facetName, string section = "Products")
         {
             string url = CreateFacetUrl(section, facetName);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -628,7 +627,7 @@ namespace Constructorio_NET.Modules
         }
 
         // Facet Options
-        internal string CreateFacetOptionsUrl([Optional] string section, string facetGroupName, [Optional] string facetOptionValue, [Optional] Hashtable queryParams)
+        internal string CreateFacetOptionsUrl(string facetGroupName, string section = "Products", string facetOptionValue = null, Hashtable queryParams = null)
         {
             List<string> paths = new List<string> { "v1", "facets", facetGroupName, "options" };
 
@@ -664,9 +663,9 @@ namespace Constructorio_NET.Modules
         /// <param name="facetGroupName">Facet Group where the Facet Option should be created.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<FacetOption> CreateFacetOption(FacetOption facetOption, string facetGroupName, [Optional] string section)
+        public async Task<FacetOption> CreateFacetOption(FacetOption facetOption, string facetGroupName, string section = "Products")
         {
-            string url = CreateFacetOptionsUrl(section, facetGroupName);
+            string url = CreateFacetOptionsUrl(facetGroupName, section);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
@@ -691,19 +690,19 @@ namespace Constructorio_NET.Modules
         /// <summary>
         /// Gets all Facet Options in a facet group.
         /// <param name="facetGroupName">Facet Group to retrieve the Facet Options from.</param>
-        /// <param name="pageRequest">PageRequest object for pagination.</param>
+        /// <param name="paginationOptions">PaginationOptions object for pagination.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<FacetOptionsGetAllResponse> GetAllFacetOptions(string facetGroupName, [Optional] PageRequest pageRequest, [Optional] string section)
+        public async Task<FacetOptionsGetAllResponse> GetAllFacetOptions(string facetGroupName, PaginationOptions paginationOptions = null, string section = "Products")
         {
             string url;
-            if (pageRequest != null)
+            if (paginationOptions != null)
             {
-                url = CreateFacetOptionsUrl(section, facetGroupName, queryParams: pageRequest.GetQueryParameters());
+                url = CreateFacetOptionsUrl(facetGroupName, section, queryParams: paginationOptions.GetQueryParameters());
             }
             else
             {
-                url = CreateFacetOptionsUrl(section, facetGroupName);
+                url = CreateFacetOptionsUrl(facetGroupName, section);
             }
 
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -733,10 +732,10 @@ namespace Constructorio_NET.Modules
         /// <param name="facetGroupName">Facet Group where the Facet Option resides.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<FacetOption> GetFacetOption(string facetOptionValue, string facetGroupName, [Optional] string section)
+        public async Task<FacetOption> GetFacetOption(string facetOptionValue, string facetGroupName, string section = "Products")
         {
             string url;
-            url = CreateFacetOptionsUrl(section, facetGroupName, facetOptionValue);
+            url = CreateFacetOptionsUrl(facetGroupName, section, facetOptionValue);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
@@ -764,10 +763,10 @@ namespace Constructorio_NET.Modules
         /// <param name="facetGroupName">Facet Group where the Facet Options reside.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<List<FacetOption>> BatchCreateOrUpdateFacetOptions(List<FacetOption> facetOptions, string facetGroupName, [Optional] string section)
+        public async Task<List<FacetOption>> BatchCreateOrUpdateFacetOptions(List<FacetOption> facetOptions, string facetGroupName, string section = "Products")
         {
             string url;
-            url = CreateFacetOptionsUrl(section, facetGroupName);
+            url = CreateFacetOptionsUrl(facetGroupName, section);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
@@ -795,10 +794,10 @@ namespace Constructorio_NET.Modules
         /// <param name="facetGroupName">Facet Group where the Facet Option resides.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<FacetOption> ReplaceFacetOption(FacetOption facetOption, string facetGroupName, [Optional] string section)
+        public async Task<FacetOption> ReplaceFacetOption(FacetOption facetOption, string facetGroupName, string section = "Products")
         {
             string url;
-            url = CreateFacetOptionsUrl(section, facetGroupName, facetOption.Value);
+            url = CreateFacetOptionsUrl(facetGroupName, section, facetOption.Value);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
@@ -826,10 +825,10 @@ namespace Constructorio_NET.Modules
         /// <param name="facetGroupName">Facet Group where the Facet Option resides.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<FacetOption> PartiallyUpdateFacetOption(FacetOption facetOption, string facetGroupName, [Optional] string section)
+        public async Task<FacetOption> PartiallyUpdateFacetOption(FacetOption facetOption, string facetGroupName, string section = "Products")
         {
             string url;
-            url = CreateFacetOptionsUrl(section, facetGroupName, facetOption.Value);
+            url = CreateFacetOptionsUrl(facetGroupName, section, facetOption.Value);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
@@ -857,9 +856,9 @@ namespace Constructorio_NET.Modules
         /// <param name="facetGroupName">Facet Group where the Facet Option resides.</param>
         /// <param name="section">Section in which the facet is defined.</param>
         /// </summary>
-        public async Task<FacetOption> DeleteFacetOption(string facetOptionValue, string facetGroupName, [Optional] string section)
+        public async Task<FacetOption> DeleteFacetOption(string facetOptionValue, string facetGroupName, string section = "Products")
         {
-            string url = CreateFacetOptionsUrl(section, facetGroupName, facetOptionValue);
+            string url = CreateFacetOptionsUrl(facetGroupName, section, facetOptionValue);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 

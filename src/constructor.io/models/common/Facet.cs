@@ -27,7 +27,7 @@ namespace Constructorio_NET.Models
     /// Default criterion to sort facet options in a facet group. Overriden by `position` attribute in facet options.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter), typeof(SnakeCaseNamingStrategy))]
-    public enum FacetSortOrderBy
+    public enum FacetSortOrder
     {
         /// <summary>
         /// Default sort order.
@@ -144,7 +144,7 @@ namespace Constructorio_NET.Models
         /// Default criterion to sort this facet group. Overridden by `Position` attribute on facet options.
         /// Defaults to `relevance`.
         /// </summary>
-        public FacetSortOrderBy? SortOrder { get; set; }
+        public FacetSortOrder? SortOrder { get; set; }
 
         /// <summary>
         /// Sort direction for `SortOrderBy`.

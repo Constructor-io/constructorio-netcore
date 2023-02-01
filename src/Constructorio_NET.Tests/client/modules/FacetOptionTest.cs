@@ -69,9 +69,9 @@ namespace Constructorio_NET.Tests
             FacetOption facetOption = CreateRandomFacetOption();
 
             FacetOption facetOptionCreated = await constructorio.Catalog.CreateFacetOption(facetOption, this.facetGroupName);
-            Assert.AreEqual(facetOption.Value, facetOptionCreated.Value, "Facet Option created with incorrect value");
-            Assert.AreEqual(facetOption.DisplayName, facetOptionCreated.DisplayName, "Facet Option created with incorrect display name");
-            Assert.AreEqual(facetOption.Hidden, facetOptionCreated.Hidden, "Facet Option created with incorrect hidden attribute");
+            Assert.AreEqual(facetOption.Value, facetOptionCreated.Value, "Facet Option created with incorrect Value");
+            Assert.AreEqual(facetOption.DisplayName, facetOptionCreated.DisplayName, "Facet Option created with incorrect Display Name");
+            Assert.AreEqual(facetOption.Hidden, facetOptionCreated.Hidden, "Facet Option created with incorrect Hidden attribute");
         }
 
         [Test]
@@ -83,9 +83,9 @@ namespace Constructorio_NET.Tests
             await constructorio.Catalog.CreateFacetOption(facetOption, this.facetGroupName);
 
             FacetOption facetOptionDeleted = await constructorio.Catalog.DeleteFacetOption(facetOption.Value, this.facetGroupName);
-            Assert.AreEqual(facetOption.Value, facetOptionDeleted.Value, "Facet Option created with incorrect value");
-            Assert.AreEqual(facetOption.DisplayName, facetOptionDeleted.DisplayName, "Facet Option created with incorrect display name");
-            Assert.AreEqual(facetOption.Hidden, facetOptionDeleted.Hidden, "Facet Option created with incorrect hidden attribute");
+            Assert.AreEqual(facetOption.Value, facetOptionDeleted.Value, "Facet Option created with incorrect Value");
+            Assert.AreEqual(facetOption.DisplayName, facetOptionDeleted.DisplayName, "Facet Option created with incorrect Display Name");
+            Assert.AreEqual(facetOption.Hidden, facetOptionDeleted.Hidden, "Facet Option created with incorrect Hidden attribute");
 
             CreatedFacetOptions.RemoveAt(CreatedFacetOptions.Count - 1);
         }
@@ -99,7 +99,7 @@ namespace Constructorio_NET.Tests
 
             FacetOptionsGetAllResponse facetOptionsResponse = await constructorio.Catalog.GetAllFacetOptions(this.facetGroupName);
 
-            Assert.IsTrue(facetOptionsResponse.FacetOptions.Count > 0, "No facets fetched");
+            Assert.IsTrue(facetOptionsResponse.FacetOptions.Count > 0, "No Facet Options fetched");
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace Constructorio_NET.Tests
                 await constructorio.Catalog.CreateFacetOption(facetOption, this.facetGroupName);
             }
 
-            PageRequest pagination = new PageRequest();
+            PaginationOptions pagination = new PaginationOptions();
             pagination.NumResultsPerPage = 2;
             pagination.Offset = 2;
             FacetGetAllResponse facetResponse = await constructorio.Catalog.GetAllFacetConfigs(pagination);
@@ -137,8 +137,8 @@ namespace Constructorio_NET.Tests
             FacetOption facetOption0 = createdFacets.Find((f) => f.Value == newFacetOptions[0].Value);
             FacetOption facetOption1 = createdFacets.Find((f) => f.Value == newFacetOptions[1].Value);
 
-            Assert.AreEqual(newFacetOptions[0].DisplayName, facetOption0.DisplayName, "Created Facet has incorrect Display Name");
-            Assert.AreEqual(newFacetOptions[1].DisplayName, facetOption1.DisplayName, "Created Facet has incorrect Display Name");
+            Assert.AreEqual(newFacetOptions[0].DisplayName, facetOption0.DisplayName, "Created Facet Option has incorrect Display Name");
+            Assert.AreEqual(newFacetOptions[1].DisplayName, facetOption1.DisplayName, "Created Facet Option has incorrect Display Name");
         }
 
         [Test]
@@ -170,12 +170,12 @@ namespace Constructorio_NET.Tests
             FacetOption facetOption0 = updatedFacets.Find((f) => f.Value == newFacetOptions[0].Value);
             FacetOption facetOption1 = updatedFacets.Find((f) => f.Value == newFacetOptions[1].Value);
 
-            Assert.AreEqual("0", facetOption0.DisplayName, "Updated Facet has incorrectly updated Display Name");
-            Assert.AreEqual(1, facetOption0.Position, "Updated Facet incorrectly updated Position");
-            Assert.AreEqual(data, facetOption0.Data, "Updated Facet incorrectly updated Data");
-            Assert.AreEqual("1", facetOption1.DisplayName, "Updated Facet has incorrectly updated Display Name");
-            Assert.AreEqual(null, facetOption1.Position, "Updated Facet has incorrectly updated Position");
-            Assert.AreEqual(new System.Collections.Hashtable(), facetOption1.Data, "Updated Facet has incorrectly updated Data");
+            Assert.AreEqual("0", facetOption0.DisplayName, "Updated Facet Option has incorrectly updated Display Name");
+            Assert.AreEqual(1, facetOption0.Position, "Updated Facet Option incorrectly updated Position");
+            Assert.AreEqual(data, facetOption0.Data, "Updated Facet Option incorrectly updated Data");
+            Assert.AreEqual("1", facetOption1.DisplayName, "Updated Facet Option has incorrectly updated Display Name");
+            Assert.AreEqual(null, facetOption1.Position, "Updated Facet Option has incorrectly updated Position");
+            Assert.AreEqual(new System.Collections.Hashtable(), facetOption1.Data, "Updated Facet Option has incorrectly updated Data");
         }
 
         [Test]
@@ -187,9 +187,9 @@ namespace Constructorio_NET.Tests
 
             FacetOption fetchedFacetOption = await constructorio.Catalog.GetFacetOption(facetOption.Value, this.facetGroupName);
 
-            Assert.AreEqual(facetOption.DisplayName, fetchedFacetOption.DisplayName, "Fetched facet has different Display Name");
-            Assert.AreEqual(facetOption.Value, fetchedFacetOption.Value, "Fetched facet option has different Value");
-            Assert.AreEqual(facetOption.Hidden, fetchedFacetOption.Hidden, "Fetched facet option has different Hidden value");
+            Assert.AreEqual(facetOption.DisplayName, fetchedFacetOption.DisplayName, "Fetched Facet Option has different Display Name");
+            Assert.AreEqual(facetOption.Value, fetchedFacetOption.Value, "Fetched Facet Option has different Value");
+            Assert.AreEqual(facetOption.Hidden, fetchedFacetOption.Hidden, "Fetched Facet Option has different Hidden value");
         }
 
         [Test]
@@ -207,11 +207,10 @@ namespace Constructorio_NET.Tests
 
             FacetOption replacedFacetOption = await constructorio.Catalog.ReplaceFacetOption(facetOption, this.facetGroupName);
 
-            Assert.AreEqual(facetOption.Value, replacedFacetOption.Value, "Replaced facet option has non-updated Value");
-            Assert.AreEqual(facetOption.DisplayName, replacedFacetOption.DisplayName, "Replaced facet option has non-updated Display Name");
-            Assert.AreEqual(facetOption.Position, replacedFacetOption.Position, "Replaced facet option has non-updated Position");
-            Assert.AreEqual(facetOption.Hidden, replacedFacetOption.Hidden, "Replaced facet option has non-updated Hidden field");
-            Assert.AreEqual(facetOption.Data, replacedFacetOption.Data, "Replaced facet option has non-updated Data field");
+            Assert.AreEqual(facetOption.DisplayName, replacedFacetOption.DisplayName, "Replaced Facet Option Display Name was not updated");
+            Assert.AreEqual(facetOption.Position, replacedFacetOption.Position, "Replaced Facet Option Position was not updated");
+            Assert.AreEqual(facetOption.Hidden, replacedFacetOption.Hidden, "Replaced Facet Option Hidden was not updated");
+            Assert.AreEqual(facetOption.Data, replacedFacetOption.Data, "Replaced Facet Option Data was not updated");
         }
 
         [Test]
@@ -228,11 +227,11 @@ namespace Constructorio_NET.Tests
 
             FacetOption replacedFacetOption = await constructorio.Catalog.ReplaceFacetOption(facetOption, this.facetGroupName);
 
-            Assert.AreEqual(facetOption.Value, replacedFacetOption.Value, "Replaced facet option has incorrect Value");
-            Assert.AreEqual(null, replacedFacetOption.DisplayName, "Replaced facet option has non-default Display Name");
-            Assert.AreEqual(null, replacedFacetOption.Position, "Replaced facet option has non-default Position");
-            Assert.AreEqual(false, replacedFacetOption.Hidden, "Replaced facet option has non-default Hidden field");
-            Assert.AreEqual(null, replacedFacetOption.Data, "Replaced facet option has non-default Data field");
+            Assert.AreEqual(facetOption.Value, replacedFacetOption.Value, "Replaced Facet Option has incorrect Value");
+            Assert.AreEqual(null, replacedFacetOption.DisplayName, "Replaced Facet Option has non-default Display Name");
+            Assert.AreEqual(null, replacedFacetOption.Position, "Replaced Facet Option has non-default Position");
+            Assert.AreEqual(false, replacedFacetOption.Hidden, "Replaced Facet Option has non-default Hidden field");
+            Assert.AreEqual(null, replacedFacetOption.Data, "Replaced Facet Option has non-default Data field");
         }
 
         [Test]
@@ -255,10 +254,10 @@ namespace Constructorio_NET.Tests
 
             FacetOption updatedFacetOption = await constructorio.Catalog.PartiallyUpdateFacetOption(facetOption, this.facetGroupName);
 
-            Assert.AreEqual(facetOption.DisplayName, updatedFacetOption.DisplayName, "Non-updated Display Name");
-            Assert.AreEqual(2, updatedFacetOption.Position, "Position should not have been updated.");
-            Assert.AreEqual(false, updatedFacetOption.Hidden, "Hidden field should not have been updated.");
-            Assert.AreEqual(data, updatedFacetOption.Data, "Data field should not have been updated.");
+            Assert.AreEqual(facetOption.DisplayName, updatedFacetOption.DisplayName, "Display Name should have been updated");
+            Assert.AreEqual(2, updatedFacetOption.Position, "Position should not have been updated");
+            Assert.AreEqual(false, updatedFacetOption.Hidden, "Hidden field should not have been updated");
+            Assert.AreEqual(data, updatedFacetOption.Data, "Data field should not have been updated");
         }
     }
 }

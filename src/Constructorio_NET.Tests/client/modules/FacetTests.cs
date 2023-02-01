@@ -137,7 +137,7 @@ namespace Constructorio_NET.Tests
         public async Task GetAllFacetConfigsWithPagination()
         {
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            PageRequest pagination = new PageRequest();
+            PaginationOptions pagination = new PaginationOptions();
             pagination.NumResultsPerPage = 2;
             pagination.Offset = 2;
             FacetGetAllResponse facetResponse = await constructorio.Catalog.GetAllFacetConfigs(pagination);
