@@ -207,8 +207,7 @@ namespace Constructorio_NET.Models
         public int? Position { get; set; }
         public bool ShouldSerializePosition()
         {
-            if (Position == null) return false;
-            if (Position == -1) Position = null;
+            if (Position == -1) return false;
             return true;
         }
 
@@ -246,6 +245,7 @@ namespace Constructorio_NET.Models
         {
             this.Name = name;
             this.Type = type;
+            this.Position = -1;
         }
     }
 }

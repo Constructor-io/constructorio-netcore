@@ -177,7 +177,7 @@ namespace Constructorio_NET.Tests
             newFacets[1].Position = 2;
             newFacets[2].Type = FacetType.Range;
             newFacets[2].RangeFormat = FacetRangeFormat.Boundaries;
-            newFacets[2].Position = -1;
+            newFacets[2].Position = null;
             newFacets[2].RangeInclusive = FacetRangeInclusive.Null;
 
             List<Facet> changedFacets = await constructorio.Catalog.BatchPartiallyUpdateFacetConfigs(newFacets);
@@ -222,7 +222,7 @@ namespace Constructorio_NET.Tests
             await constructorio.Catalog.CreateFacetConfig(facet);
 
             facet.DisplayName = "changed";
-            facet.Position = -1;
+            facet.Position = null;
             facet.RangeInclusive = FacetRangeInclusive.Null;
 
             Facet changedFacet = await constructorio.Catalog.PartiallyUpdateFacetConfig(facet);

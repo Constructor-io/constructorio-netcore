@@ -4,7 +4,7 @@ using Constructorio_NET.Utils;
 namespace Constructorio_NET.Models
 {
     /// <summary>
-    /// Constructor.io Pagination Request Class
+    /// Constructor.io PPaginationOptions Class
     /// </summary>
     public class PaginationOptions
     {
