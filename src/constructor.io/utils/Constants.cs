@@ -34,5 +34,6 @@
         public const string END_DATE = "end_date";
         public const string STATUS = "status";
         public const string TYPE = "type";
+        public const string OFFSET = "offset";
     }
 }
