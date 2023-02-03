@@ -105,13 +105,150 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a826404d61bed8b3e6fe10a688d27c40b"><td class="memItemLeft" align="right" valign="top">async Task&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a826404d61bed8b3e6fe10a688d27c40b">DeleteItemGroups</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_item_groups_request.html">ItemGroupsRequest</a> itemGroupsRequest)</td></tr>
 <tr class="memdesc:a826404d61bed8b3e6fe10a688d27c40b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete all item groups.  <a href="class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a826404d61bed8b3e6fe10a688d27c40b">More...</a><br /></td></tr>
 <tr class="separator:a826404d61bed8b3e6fe10a688d27c40b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1969368e6384db8e50a91fb152a82556"><td class="memItemLeft" align="right" valign="top">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a1969368e6384db8e50a91fb152a82556">CreateFacetConfig</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> facet, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:a1969368e6384db8e50a91fb152a82556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Facet Configuration.  <a href="class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a1969368e6384db8e50a91fb152a82556">More...</a><br /></td></tr>
+<tr class="separator:a1969368e6384db8e50a91fb152a82556"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06f9864fda5db0297bc927f37cbb3e75"><td class="memItemLeft" align="right" valign="top">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_get_all_response.html">FacetGetAllResponse</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a06f9864fda5db0297bc927f37cbb3e75">GetAllFacetConfigs</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_pagination_options.html">PaginationOptions</a> paginationOptions=null, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:a06f9864fda5db0297bc927f37cbb3e75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all facets in a particular section.  <a href="class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a06f9864fda5db0297bc927f37cbb3e75">More...</a><br /></td></tr>
+<tr class="separator:a06f9864fda5db0297bc927f37cbb3e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fb7cc4f644ac70c2cee8eea9b9e46fd"><td class="memItemLeft" align="right" valign="top"><a id="a9fb7cc4f644ac70c2cee8eea9b9e46fd" name="a9fb7cc4f644ac70c2cee8eea9b9e46fd"></a>
+async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetFacetConfig</b> (string facetName, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:a9fb7cc4f644ac70c2cee8eea9b9e46fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a facet given the facet name and section. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetName</td><td>Name of the facet.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:a9fb7cc4f644ac70c2cee8eea9b9e46fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a326a4415a096e96fcca54f76872cbdd5"><td class="memItemLeft" align="right" valign="top"><a id="a326a4415a096e96fcca54f76872cbdd5" name="a326a4415a096e96fcca54f76872cbdd5"></a>
+async Task&lt; List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>BatchPartiallyUpdateFacetConfigs</b> (List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> &gt; facetFieldsList, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:a326a4415a096e96fcca54f76872cbdd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partially updates a list of facet configurations. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetFieldsList</td><td>List of facets fields to be updated.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:a326a4415a096e96fcca54f76872cbdd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a277370c62f81aeb611f0afcc8720dade"><td class="memItemLeft" align="right" valign="top"><a id="a277370c62f81aeb611f0afcc8720dade" name="a277370c62f81aeb611f0afcc8720dade"></a>
+async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PartiallyUpdateFacetConfig</b> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> facetFields, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:a277370c62f81aeb611f0afcc8720dade"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partially updates a specifc facet configuration by facet name. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetFields</td><td>Facets fields to be updated.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:a277370c62f81aeb611f0afcc8720dade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfc6edc4301772322ce6080500af322b"><td class="memItemLeft" align="right" valign="top"><a id="abfc6edc4301772322ce6080500af322b" name="abfc6edc4301772322ce6080500af322b"></a>
+async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateFacetConfig</b> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> facet, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:abfc6edc4301772322ce6080500af322b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace an existing facet configuration by facet name. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facet</td><td>New Facet Configuration to be created.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:abfc6edc4301772322ce6080500af322b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaa25e0e00586896106df6e2dacb83ac"><td class="memItemLeft" align="right" valign="top">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#adaa25e0e00586896106df6e2dacb83ac">DeleteFacetConfig</a> (string facetName, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:adaa25e0e00586896106df6e2dacb83ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes a Facet Configuration.  <a href="class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#adaa25e0e00586896106df6e2dacb83ac">More...</a><br /></td></tr>
+<tr class="separator:adaa25e0e00586896106df6e2dacb83ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a494f96d9ef444bc64a991dfd042ece73"><td class="memItemLeft" align="right" valign="top"><a id="a494f96d9ef444bc64a991dfd042ece73" name="a494f96d9ef444bc64a991dfd042ece73"></a>
+async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_option.html">FacetOption</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>CreateFacetOption</b> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_option.html">FacetOption</a> facetOption, string facetGroupName, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:a494f96d9ef444bc64a991dfd042ece73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Facet Option given a facet group name. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetOption</td><td>New Facet Option to be created.</td></tr>
+    <tr><td class="paramname">facetGroupName</td><td>Facet Group where the Facet Option should be created.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:a494f96d9ef444bc64a991dfd042ece73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5004191c128093b8314919e93a403776"><td class="memItemLeft" align="right" valign="top"><a id="a5004191c128093b8314919e93a403776" name="a5004191c128093b8314919e93a403776"></a>
+async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_options_get_all_response.html">FacetOptionsGetAllResponse</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetAllFacetOptions</b> (string facetGroupName, <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_pagination_options.html">PaginationOptions</a> paginationOptions=null, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:a5004191c128093b8314919e93a403776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all Facet Options in a facet group. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetGroupName</td><td>Facet Group to retrieve the Facet Options from.</td></tr>
+    <tr><td class="paramname">paginationOptions</td><td>PaginationOptions object for pagination.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:a5004191c128093b8314919e93a403776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa67f90bebb8d318404e874a2ccc45cbb"><td class="memItemLeft" align="right" valign="top"><a id="aa67f90bebb8d318404e874a2ccc45cbb" name="aa67f90bebb8d318404e874a2ccc45cbb"></a>
+async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_option.html">FacetOption</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetFacetOption</b> (string facetOptionValue, string facetGroupName, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:aa67f90bebb8d318404e874a2ccc45cbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a specific Facet Option given the facet option value and facet group. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetOptionValue</td><td>Facet Option value to identify the Facet Option to be retrieved.</td></tr>
+    <tr><td class="paramname">facetGroupName</td><td>Facet Group where the Facet Option resides.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:aa67f90bebb8d318404e874a2ccc45cbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaf8397ffb4ed3af8bb19a6a886a3bcc"><td class="memItemLeft" align="right" valign="top"><a id="afaf8397ffb4ed3af8bb19a6a886a3bcc" name="afaf8397ffb4ed3af8bb19a6a886a3bcc"></a>
+async Task&lt; List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_option.html">FacetOption</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>BatchCreateOrUpdateFacetOptions</b> (List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_option.html">FacetOption</a> &gt; facetOptions, string facetGroupName, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:afaf8397ffb4ed3af8bb19a6a886a3bcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the Facet Options if they don't exists, or partially updates them if they do. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetOptions</td><td>List of Facet Options to be created or partially updated.</td></tr>
+    <tr><td class="paramname">facetGroupName</td><td>Facet Group where the Facet Options reside.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:afaf8397ffb4ed3af8bb19a6a886a3bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70158ddc0656b2f0f48aba8c200d3cdc"><td class="memItemLeft" align="right" valign="top"><a id="a70158ddc0656b2f0f48aba8c200d3cdc" name="a70158ddc0656b2f0f48aba8c200d3cdc"></a>
+async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_option.html">FacetOption</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ReplaceFacetOption</b> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_option.html">FacetOption</a> facetOption, string facetGroupName, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:a70158ddc0656b2f0f48aba8c200d3cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces an existing Facet Option with a new one. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetOption</td><td>New Facet Option.</td></tr>
+    <tr><td class="paramname">facetGroupName</td><td>Facet Group where the Facet Option resides.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:a70158ddc0656b2f0f48aba8c200d3cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf9147cbd514e34ac13c02806a65f624"><td class="memItemLeft" align="right" valign="top"><a id="acf9147cbd514e34ac13c02806a65f624" name="acf9147cbd514e34ac13c02806a65f624"></a>
+async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_option.html">FacetOption</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PartiallyUpdateFacetOption</b> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_option.html">FacetOption</a> facetOption, string facetGroupName, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:acf9147cbd514e34ac13c02806a65f624"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partially updates an existing Facet Option. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetOption</td><td>Facet Option values for partial updating.</td></tr>
+    <tr><td class="paramname">facetGroupName</td><td>Facet Group where the Facet Option resides.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:acf9147cbd514e34ac13c02806a65f624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3d4014682f2de088e19dc1df7757af5"><td class="memItemLeft" align="right" valign="top"><a id="aa3d4014682f2de088e19dc1df7757af5" name="aa3d4014682f2de088e19dc1df7757af5"></a>
+async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_option.html">FacetOption</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>DeleteFacetOption</b> (string facetOptionValue, string facetGroupName, string section=&quot;Products&quot;)</td></tr>
+<tr class="memdesc:aa3d4014682f2de088e19dc1df7757af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes a particular Facet Option given the Facet Option Value and Facet Group. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetOptionValue</td><td>Facet Option value to identify the Facet Option to be deleted.</td></tr>
+    <tr><td class="paramname">facetGroupName</td><td>Facet Group where the Facet Option resides.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<br /></td></tr>
+<tr class="separator:aa3d4014682f2de088e19dc1df7757af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_constructorio___n_e_t_1_1_utils_1_1_helpers.html">Constructorio_NET.Utils.Helpers</a></td></tr>
-<tr class="memitem:acc2a0ee67bffc90765d946f9d1bdaf14 inherit pub_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers"><td class="memItemLeft" align="right" valign="top">static async Task&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constructorio___n_e_t_1_1_utils_1_1_helpers.html#acc2a0ee67bffc90765d946f9d1bdaf14">MakeHttpRequest</a> (Hashtable options, HttpMethod httpMethod, string url, Dictionary&lt; string, string &gt; requestHeaders, Hashtable requestBody=null, Dictionary&lt; string, StreamContent &gt; files=null)</td></tr>
-<tr class="memdesc:acc2a0ee67bffc90765d946f9d1bdaf14 inherit pub_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes a http request.  <a href="class_constructorio___n_e_t_1_1_utils_1_1_helpers.html#acc2a0ee67bffc90765d946f9d1bdaf14">More...</a><br /></td></tr>
-<tr class="separator:acc2a0ee67bffc90765d946f9d1bdaf14 inherit pub_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad773d81b6f3d785c6ebbb856d1e9e48f inherit pub_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers"><td class="memItemLeft" align="right" valign="top">static async Task&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constructorio___n_e_t_1_1_utils_1_1_helpers.html#ad773d81b6f3d785c6ebbb856d1e9e48f">MakeHttpRequest</a> (Hashtable options, HttpMethod httpMethod, string url, Dictionary&lt; string, string &gt; requestHeaders, object requestBody=null, Dictionary&lt; string, StreamContent &gt; files=null)</td></tr>
+<tr class="memdesc:ad773d81b6f3d785c6ebbb856d1e9e48f inherit pub_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes a http request.  <a href="class_constructorio___n_e_t_1_1_utils_1_1_helpers.html#ad773d81b6f3d785c6ebbb856d1e9e48f">More...</a><br /></td></tr>
+<tr class="separator:ad773d81b6f3d785c6ebbb856d1e9e48f inherit pub_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="class_constructorio___n_e_t_1_1_utils_1_1_helpers.html">Constructorio_NET.Utils.Helpers</a></td></tr>
 <tr class="memitem:a9903a8102bf6def4fca1a34e5b76dd75 inherit pro_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constructorio___n_e_t_1_1_utils_1_1_helpers.html#a9903a8102bf6def4fca1a34e5b76dd75">OurEscapeDataString</a> (string str)</td></tr>
 <tr class="memdesc:a9903a8102bf6def4fca1a34e5b76dd75 inherit pro_static_methods_class_constructorio___n_e_t_1_1_utils_1_1_helpers"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method in order to modify a string to ensure proper url encoding.  <a href="class_constructorio___n_e_t_1_1_utils_1_1_helpers.html#a9903a8102bf6def4fca1a34e5b76dd75">More...</a><br /></td></tr>
@@ -229,6 +366,98 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a1969368e6384db8e50a91fb152a82556" name="a1969368e6384db8e50a91fb152a82556"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1969368e6384db8e50a91fb152a82556">&#9670;&nbsp;</a></span>CreateFacetConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> &gt; Constructorio_NET.Modules.Catalog.CreateFacetConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a>&#160;</td>
+          <td class="paramname"><em>facet</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>section</em> = <code>&quot;Products&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a Facet Configuration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facet</td><td>New Facet Configuration to be created.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Facet object representing the facet created.</dd></dl>
+
+</div>
+</div>
+<a id="adaa25e0e00586896106df6e2dacb83ac" name="adaa25e0e00586896106df6e2dacb83ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaa25e0e00586896106df6e2dacb83ac">&#9670;&nbsp;</a></span>DeleteFacetConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html">Facet</a> &gt; Constructorio_NET.Modules.Catalog.DeleteFacetConfig </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>facetName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>section</em> = <code>&quot;Products&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deletes a Facet Configuration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetName</td><td>Name of the facet configuration/facet group.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Facet object representing the facet configuration deleted</dd></dl>
+
+</div>
+</div>
 <a id="a826404d61bed8b3e6fe10a688d27c40b" name="a826404d61bed8b3e6fe10a688d27c40b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a826404d61bed8b3e6fe10a688d27c40b">&#9670;&nbsp;</a></span>DeleteItemGroups()</h2>
 
@@ -261,6 +490,52 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Constructorio's confirmation message.</dd></dl>
+
+</div>
+</div>
+<a id="a06f9864fda5db0297bc927f37cbb3e75" name="a06f9864fda5db0297bc927f37cbb3e75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06f9864fda5db0297bc927f37cbb3e75">&#9670;&nbsp;</a></span>GetAllFacetConfigs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_get_all_response.html">FacetGetAllResponse</a> &gt; Constructorio_NET.Modules.Catalog.GetAllFacetConfigs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_pagination_options.html">PaginationOptions</a>&#160;</td>
+          <td class="paramname"><em>paginationOptions</em> = <code>null</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>section</em> = <code>&quot;Products&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets all facets in a particular section. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">paginationOptions</td><td>PaginationOptions object for pagination.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of Facets in a given section.</dd></dl>
 
 </div>
 </div>

@@ -1,6 +1,11 @@
 var searchData=
 [
-  ['deleteitemgroups_0',['DeleteItemGroups',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a826404d61bed8b3e6fe10a688d27c40b',1,'Constructorio_NET::Modules::Catalog']]],
-  ['deleteitems_1',['DeleteItems',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#a3ada11cba0adfc09899e786a899fb87d',1,'Constructorio_NET::Modules::Items']]],
-  ['deletevariations_2',['DeleteVariations',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#a90948f6c2e38c386e1a11ce148aebf1d',1,'Constructorio_NET::Modules::Items']]]
+  ['data_0',['Data',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#aedd369d78b765dcaecdd97203db004d0',1,'Constructorio_NET.Models.Facet.Data()'],['../class_constructorio___n_e_t_1_1_models_1_1_facet_option.html#a38a2182ce6dcf2a4dc2416e7eb57a554',1,'Constructorio_NET.Models.FacetOption.Data()']]],
+  ['deletefacetconfig_1',['DeleteFacetConfig',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#adaa25e0e00586896106df6e2dacb83ac',1,'Constructorio_NET::Modules::Catalog']]],
+  ['deletefacetoption_2',['DeleteFacetOption',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#aa3d4014682f2de088e19dc1df7757af5',1,'Constructorio_NET::Modules::Catalog']]],
+  ['deleteitemgroups_3',['DeleteItemGroups',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a826404d61bed8b3e6fe10a688d27c40b',1,'Constructorio_NET::Modules::Catalog']]],
+  ['deleteitems_4',['DeleteItems',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#a3ada11cba0adfc09899e786a899fb87d',1,'Constructorio_NET::Modules::Items']]],
+  ['deletevariations_5',['DeleteVariations',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#a90948f6c2e38c386e1a11ce148aebf1d',1,'Constructorio_NET::Modules::Items']]],
+  ['displayname_6',['DisplayName',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a88a91986d25d7b708d3aacd4d215cb2a',1,'Constructorio_NET.Models.Facet.DisplayName()'],['../class_constructorio___n_e_t_1_1_models_1_1_facet_option.html#a7a9e63aa7c99477922a9d3412fab8bcb',1,'Constructorio_NET.Models.FacetOption.DisplayName()']]],
+  ['dynamic_7',['Dynamic',['../namespace_constructorio___n_e_t_1_1_models.html#acec0b2faa939d96a7ee2f841a334c3b1a971fd8cc345d8bd9f92e9f7d88fdf20c',1,'Constructorio_NET::Models']]]
 ];
