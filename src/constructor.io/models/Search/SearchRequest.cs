@@ -32,6 +32,11 @@ namespace Constructorio_NET.Models
         public List<string> HiddenFields { get; set; }
 
         /// <summary>
+        /// Gets or sets hidden facets fields to return.
+        /// </summary>
+        public List<string> HiddenFacets { get; set; }
+
+        /// <summary>
         /// Gets or sets the page number of the results to return.
         /// </summary>
         public int Page { get; set; }
@@ -124,6 +129,11 @@ namespace Constructorio_NET.Models
             if (this.HiddenFields != null)
             {
                 parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
+            }
+
+            if (this.HiddenFacets != null)
+            {
+                parameters.Add(Constants.HIDDEN_FACETS, this.HiddenFacets);
             }
 
             if (this.Page != 0)

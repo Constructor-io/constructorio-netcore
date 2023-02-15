@@ -32,6 +32,11 @@ namespace Constructorio_NET.Models
         public List<string> HiddenFields { get; set; }
 
         /// <summary>
+        /// Gets or sets hidden facets fields to return.
+        /// </summary>
+        public List<string> HiddenFacets { get; set; }
+
+        /// <summary>
         /// Gets or sets user test cells.
         /// </summary>
         public Dictionary<string, string> TestCells { get; set; }
@@ -119,6 +124,11 @@ namespace Constructorio_NET.Models
             if (this.HiddenFields != null)
             {
                 parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
+            }
+
+            if (this.HiddenFacets != null)
+            {
+                parameters.Add(Constants.HIDDEN_FACETS, this.HiddenFacets);
             }
 
             return parameters;

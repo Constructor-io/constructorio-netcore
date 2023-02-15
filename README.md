@@ -101,10 +101,17 @@ request.Filters = new Dictionary<string, List<string>>()
     { "Brand", new List<string>() { "Jif" } }
 };
 
-// Add the following paramaters to request for hidden fields or facets
+// Add the following paramaters to request for hidden fields
 request.HiddenFields = new List<string>
 {
     "hidden_price_field",
+    "hidden_brand_field",
+}
+
+// Add the following paramaters to request for hidden facets
+request.HiddenFacets = new List<string>
+{
+    "hidden_price_facet",
     "hidden_brand_facet",
 }
 
@@ -140,12 +147,19 @@ request.Filters = new Dictionary<string, List<string>>()
     { "Brand", new List<string>() { "Jif" } }
 };
 
-// Add the following paramaters to request for hidden fields or facets
+// Add the following paramaters to request for hidden fields
 request.HiddenFields = new List<string>
 {
     "hidden_price_field",
+    "hidden_brand_field",
+}
+
+// Add the following paramaters to request for hidden facets
+request.HiddenFacets = new List<string>
+{
+    "hidden_price_facet",
     "hidden_brand_facet",
-};
+}
 
 // Create a UserInfo object with the unique device identifier and session
 UserInfo userInfo = new UserInfo("device-id-1123123", 5);
@@ -179,10 +193,17 @@ request.Filters = new Dictionary<string, List<string>>()
     { "Brand", new List<string>() { "Jif" } }
 };
 
-// Add the following paramaters to request for hidden fields or facets
+// Add the following paramaters to request for hidden fields
 request.HiddenFields = new List<string>
 {
     "hidden_price_field",
+    "hidden_brand_field",
+}
+
+// Add the following paramaters to request for hidden facets
+request.HiddenFacets = new List<string>
+{
+    "hidden_price_facet",
     "hidden_brand_facet",
 }
 

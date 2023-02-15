@@ -151,6 +151,18 @@ namespace Constructorio_NET.Utils
                     }
                 }
 
+                // Add hidden facets as fmt_options
+                if (queryParams.Contains(Constants.HIDDEN_FACETS))
+                {
+                    List<string> hiddenFacets = (List<string>)queryParams[Constants.HIDDEN_FACETS];
+                    queryParams.Remove(Constants.HIDDEN_FACETS);
+
+                    foreach (var hiddenFacet in hiddenFacets)
+                    {
+                        url.Append($"&{Constants.FMT_OPTIONS}{OurEscapeDataString("[" + Constants.HIDDEN_FACETS + "]")}={OurEscapeDataString(hiddenFacet)}");
+                    }
+                }
+
                 // Add remaining query params to query string
                 foreach (DictionaryEntry queryParam in queryParams)
                 {
