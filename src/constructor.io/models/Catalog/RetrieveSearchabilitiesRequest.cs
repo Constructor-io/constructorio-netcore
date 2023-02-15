@@ -27,7 +27,7 @@ namespace Constructorio_NET.Models
         public int Offset { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the section.
+        /// Gets or sets the name of the section. Defaults to "Products".
         /// </summary>
         public string Section { get; set; }
 
@@ -123,13 +123,15 @@ namespace Constructorio_NET.Models
 
             if (!string.IsNullOrEmpty(this.Section))
             {
-                parameters.Add(Constants.SECTION, this.Section);
+                this.Section = "Products";
             }
 
             if (!string.IsNullOrEmpty(this.SortOrder))
             {
                 parameters.Add(Constants.SORT_ORDER, this.SortOrder);
             }
+
+            parameters.Add(Constants.SECTION, this.Section);
 
             return parameters;
         }

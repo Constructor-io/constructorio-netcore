@@ -239,7 +239,7 @@ namespace Constructorio_NET.Tests
                 Searchable = true
             };
             SearchabilitiesResponse res = await constructorio.Catalog.RetrieveSearchabilities(req);
-            Assert.IsTrue(res.TotalCount == 1, "Total Count should exist");
+            Assert.IsTrue(res.TotalCount == 1, "Total Count is equal to 1");
             Assert.IsNotNull(res.Searchabilities.Count == 1, "Searchabilities should exist");
         }
 
@@ -252,7 +252,7 @@ namespace Constructorio_NET.Tests
                 Name = "groups",
             };
             SearchabilitiesResponse res = await constructorio.Catalog.RetrieveSearchabilities(req);
-            Assert.IsTrue(res.TotalCount == 1, "Total Count should exist");
+            Assert.IsTrue(res.TotalCount == 1, "Total Count is equal to 1");
             Assert.IsNotNull(res.Searchabilities.Count == 1, "Searchabilities should exist");
         }
 
@@ -302,13 +302,13 @@ namespace Constructorio_NET.Tests
             SearchabilitiesResponse res = await constructorio.Catalog.PatchSearchabilities(req);
             Assert.IsNotNull(res.TotalCount, "Total Count should exist");
             Assert.IsNotNull(res.Searchabilities, "Searchabilities should exist");
-            Assert.IsTrue(res.Searchabilities[0].Name == searchabilities[0].Name, "All Searchabilities match");
-            Assert.IsTrue(res.Searchabilities[1].Name == searchabilities[1].Name, "All Searchabilities match");
-            Assert.IsTrue(res.Searchabilities[1].Hidden == true, "Searchability field is set");
+            Assert.IsTrue(res.Searchabilities[0].Name == searchabilities[0].Name, "All returned Searchabilities match requested");
             Assert.IsTrue(res.Searchabilities[0].Hidden == false, "Searchability field is set");
             Assert.IsTrue(res.Searchabilities[0].FuzzySearchable == false, "Searchability field is set");
             Assert.IsTrue(res.Searchabilities[0].ExactSearchable == true, "Searchability field is set");
             Assert.IsTrue(res.Searchabilities[0].Displayable == true, "Searchability field is set");
+            Assert.IsTrue(res.Searchabilities[1].Name == searchabilities[1].Name, "All returned Searchabilities match requested");
+            Assert.IsTrue(res.Searchabilities[1].Hidden == true, "Searchability field is set");
         }
 
         public async Task AddItemGroup()
