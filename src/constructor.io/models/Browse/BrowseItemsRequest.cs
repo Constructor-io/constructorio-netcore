@@ -22,7 +22,7 @@ namespace Constructorio_NET.Models
         public string SortOrder { get; set; }
         public Dictionary<string, string> TestCells { get; set; }
         public UserInfo UserInfo { get; set; }
-        public VariationsMap VariationMap { get; set; }
+        public VariationsMap VariationsMap { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BrowseItemsRequest"/> class.
@@ -119,9 +119,9 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
 
-            if (this.VariationMap != null && this.VariationMap.GroupBy.Count > 0 && this.VariationMap.Values.Count > 0)
+            if (this.VariationsMap != null && this.VariationsMap.Values.Count > 0)
             {
-                string serializedJson = JsonConvert.SerializeObject(this.VariationMap);
+                string serializedJson = JsonConvert.SerializeObject(this.VariationsMap);
                 parameters.Add(Constants.VARIATIONS_MAP, serializedJson);
             }
 

@@ -109,6 +109,26 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithVariationsMap()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddGroupByRule("url", "data.url");
+            req.VariationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+            req.VariationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(reqVariationsMap, "Variations Map was passed as parameter");
+            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
+        }
+
+        [Test]
         public async Task GetBrowseItemsResults()
         {
             BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds)

@@ -48,16 +48,16 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public async Task GetAutocompleteResultsShouldReturnResultWithVariationMap()
+        public async Task GetAutocompleteResultsShouldReturnResultWithVariationsMap()
         {
             AutocompleteRequest req = new AutocompleteRequest("item1")
             {
                 UserInfo = UserInfo,
-                VariationMap = new VariationsMap()
+                VariationsMap = new VariationsMap()
             };
-            req.VariationMap.AddGroupByRule("url", "data.url");
-            req.VariationMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
-            req.VariationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+            req.VariationsMap.AddGroupByRule("url", "data.url");
+            req.VariationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+            req.VariationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
             res.Request.TryGetValue("variations_map", out object reqVariationsMap);
