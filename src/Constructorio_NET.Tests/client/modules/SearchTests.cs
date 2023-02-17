@@ -127,5 +127,39 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual("Content 1 mobile alt text", res.Response.RefinedContent[0].Data["mobileAssetAltText"], "refined content mobileAssetAltText is correct");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithHiddenFields()
+        {
+            string requestedHiddenField = "testField";
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = this.UserInfo,
+                HiddenFields = new List<string> { requestedHiddenField }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            var returnedHiddenfield = res.Response.Results[0].Data.Metadata[requestedHiddenField];
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(returnedHiddenfield, "Hidden field returned");
+        }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithHiddenFacets()
+        {
+            string requestedHiddenFacet = "Brand";
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = this.UserInfo,
+                HiddenFacets = new List<string> { requestedHiddenFacet }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            string returnedHiddenFacet = res.Response.Facets.Find(el => el.Hidden).DisplayName;
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.True(requestedHiddenFacet == returnedHiddenFacet, "Hidden facet returned");
+        }
     }
 }

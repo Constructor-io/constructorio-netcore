@@ -98,21 +98,6 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public async Task GetAutocompleteResultsShouldReturnResultWithHiddenFacets()
-        {
-            AutocompleteRequest req = new AutocompleteRequest("item1")
-            {
-                UserInfo = UserInfo,
-                HiddenFacets = new List<string> { "testField" }
-            };
-            ConstructorIO constructorio = new ConstructorIO(this.Config);
-            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
-
-            Assert.NotNull(res.ResultId, "Result id exists");
-            Assert.GreaterOrEqual(res.Sections["Products"].Count, 5, "Results exist");
-        }
-
-        [Test]
         public async Task GetAutocompleteResultsShouldReturnResultWithMultipleFilters()
         {
             AutocompleteRequest req = new AutocompleteRequest("item")
