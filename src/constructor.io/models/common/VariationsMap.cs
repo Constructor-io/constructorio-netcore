@@ -48,7 +48,7 @@ namespace Constructorio_NET.Models
         {
             Values = new Dictionary<string, Value>();
             GroupBy = new List<Group>();
-            DType = DTypes.Array;
+            DType = DTypes.Object;
         }
 
         public void AddGroupByRule(string name, string field)
