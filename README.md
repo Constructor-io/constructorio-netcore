@@ -106,14 +106,14 @@ request.HiddenFields = new List<string>
 {
     "hidden_price_field",
     "hidden_brand_field",
-}
+};
 
 // Add the following paramaters to request for hidden facets
 request.HiddenFacets = new List<string>
 {
     "hidden_price_facet",
     "hidden_brand_facet",
-}
+};
 
 // Create a UserInfo object with the unique device identifier and session
 UserInfo userInfo = new UserInfo("device-id-1123123", 5);
@@ -152,14 +152,14 @@ request.HiddenFields = new List<string>
 {
     "hidden_price_field",
     "hidden_brand_field",
-}
+};
 
 // Add the following paramaters to request for hidden facets
 request.HiddenFacets = new List<string>
 {
     "hidden_price_facet",
     "hidden_brand_facet",
-}
+};
 
 // Create a UserInfo object with the unique device identifier and session
 UserInfo userInfo = new UserInfo("device-id-1123123", 5);
@@ -198,14 +198,14 @@ request.HiddenFields = new List<string>
 {
     "hidden_price_field",
     "hidden_brand_field",
-}
+};
 
 // Add the following paramaters to request for hidden facets
 request.HiddenFacets = new List<string>
 {
     "hidden_price_facet",
     "hidden_brand_facet",
-}
+};
 
 // Create a UserInfo object with the unique device identifier and session
 UserInfo userInfo = new UserInfo("device-id-1123123", 5);
