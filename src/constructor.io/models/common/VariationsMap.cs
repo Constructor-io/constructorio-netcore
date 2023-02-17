@@ -37,8 +37,10 @@ namespace Constructorio_NET.Models
     {
         [JsonProperty("group_by")]
         public List<Group> GroupBy { get; set; }
+
         [JsonProperty("values")]
         public Dictionary<string, Value> Values { get; set; }
+
         [JsonProperty("dtype")]
         public string DType { get; set; }
 
