@@ -1,5 +1,5 @@
 var searchData=
 [
   ['value_0',['Value',['../class_constructorio___n_e_t_1_1_models_1_1_facet_option.html#a84f8e87f0c468dd997eb558029e56849',1,'Constructorio_NET::Models::FacetOption']]],
-  ['variationmap_1',['VariationMap',['../class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#af10541c1bdcaf8f386f97d5704d0ecf8',1,'Constructorio_NET.Models.AutocompleteRequest.VariationMap()'],['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a9d49c41a3c8be6eedd2ab670d35e4324',1,'Constructorio_NET.Models.BrowseRequest.VariationMap()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a63c31a456cd5e8da9c186aed66b6646f',1,'Constructorio_NET.Models.SearchRequest.VariationMap()']]]
+  ['variationsmap_1',['VariationsMap',['../class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a8f3ecae312ba44f8186c50a7ab5f1b44',1,'Constructorio_NET.Models.AutocompleteRequest.VariationsMap()'],['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a33fa332c06ac7e7f4e711d61f7b87776',1,'Constructorio_NET.Models.BrowseRequest.VariationsMap()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#aa9e2f44913598ae57cad6f2fe3883afc',1,'Constructorio_NET.Models.SearchRequest.VariationsMap()']]]
 ];
