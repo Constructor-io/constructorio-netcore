@@ -19,7 +19,7 @@ namespace Constructorio_NET.Tests
         [OneTimeSetUp]
         public void Setup()
         {
-            this.Searchabilities.Add(new Searchability() { Name = "testSearchability", ExactSearchable = true });
+            this.Searchabilities.Add(new Searchability("testSearchability") { ExactSearchable = true });
         }
 
         [Test]

@@ -73,9 +73,5 @@ namespace Constructorio_NET.Models
         {
             Name = name;
         }
-
-        public Searchability()
-        {
-        }
     }
 }

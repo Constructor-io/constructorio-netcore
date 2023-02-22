@@ -280,7 +280,7 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             List<Searchability> searchabilities = new List<Searchability>
             {
-                new Searchability() { Name = "testSearchability", ExactSearchable = true }
+                new Searchability("testSearchability") { ExactSearchable = true }
             };
             PatchSearchabilitiesRequest req = new PatchSearchabilitiesRequest(searchabilities);
             SearchabilitiesResponse res = await constructorio.Catalog.PatchSearchabilities(req);
@@ -295,8 +295,8 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             List<Searchability> searchabilities = new List<Searchability>
             {
-                new Searchability() { Name = "testSearchability", ExactSearchable = true, Hidden = false, FuzzySearchable = false, Displayable = true },
-                new Searchability() { Name = "testSearchability2", Hidden = true }
+                new Searchability("testSearchability") { ExactSearchable = true, Hidden = false, FuzzySearchable = false, Displayable = true },
+                new Searchability("testSearchability2") { Hidden = true }
             };
             PatchSearchabilitiesRequest req = new PatchSearchabilitiesRequest(searchabilities);
             SearchabilitiesResponse res = await constructorio.Catalog.PatchSearchabilities(req);
