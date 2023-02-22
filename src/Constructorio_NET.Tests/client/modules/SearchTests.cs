@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
@@ -69,6 +70,49 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
             Assert.IsNotNull(res.Response.Facets[0].Max);
             Assert.IsNotNull(res.Response.Facets[0].Min);
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetSearchResultsWithPreFilterExpression()
+        {
+            JObject preFilterExpression = JObject.Parse(@"{
+                or: [
+                    {
+                    and:
+                        [
+                        { name: 'group_id', value: 'BrandXY' },
+                        { name: 'Color', value: 'red' },
+                    ],
+                    },
+                    {
+                    and:
+                        [
+                        { name: 'Color', value: 'blue' },
+                        { name: 'Brand', value: 'XYZ' },
+                    ],
+                    },
+                ],
+            }");
+            SearchRequest req = new SearchRequest(this.Query)
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = preFilterExpression,
+
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+
+            Assert.AreEqual(reqPreFilterExpression, preFilterExpression, "Pre Filter Expression is sent in request");
+            Assert.AreEqual(2, res.Response.Results.Count, "total number of results expected to be 2");
+            Assert.IsTrue(
+                res.Response.Results.TrueForAll(result =>
+                {
+                    var facetValue = result.Data.Facets.Find(facet => facet.Name == "Color");
+                    return facetValue.Values.Contains("red") || facetValue.Values.Contains("blue");
+                }),
+                "Result set consists of only filtered items");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 

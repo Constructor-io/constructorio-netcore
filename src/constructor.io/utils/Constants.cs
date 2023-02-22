@@ -35,5 +35,6 @@
         public const string STATUS = "status";
         public const string TYPE = "type";
         public const string OFFSET = "offset";
+        public const string PRE_FILTER_EXPRESSION = "pre_filter_expression";
     }
 }

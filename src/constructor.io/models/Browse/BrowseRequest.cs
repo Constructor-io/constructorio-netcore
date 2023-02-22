@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Constructorio_NET.Models
 {
@@ -25,6 +26,11 @@ namespace Constructorio_NET.Models
         /// Gets or sets the format options used to refine result groups.
         /// </summary>
         public Dictionary<string, string> FmtOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the faceting expression used to scope search results.
+        /// </summary>
+        public JObject PreFilterExpression { get; set; }
 
         /// <summary>
         /// Gets or sets hidden metadata fields to return.
@@ -130,6 +136,12 @@ namespace Constructorio_NET.Models
             if (this.FmtOptions != null)
             {
                 parameters.Add(Constants.FMT_OPTIONS, this.FmtOptions);
+            }
+
+            if (this.PreFilterExpression != null)
+            {
+                string preFilterJson = JsonConvert.SerializeObject(this.PreFilterExpression);
+                parameters.Add(Constants.PRE_FILTER_EXPRESSION, preFilterJson);
             }
 
             if (this.HiddenFields != null)
