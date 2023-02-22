@@ -121,7 +121,7 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.SORT_BY, this.SortBy);
             }
 
-            if (!string.IsNullOrEmpty(this.Section))
+            if (string.IsNullOrEmpty(this.Section))
             {
                 this.Section = "Products";
             }
