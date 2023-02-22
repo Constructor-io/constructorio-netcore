@@ -161,5 +161,25 @@ namespace Constructorio_NET.Tests
             Assert.NotNull(res.ResultId, "Result id exists");
             Assert.True(requestedHiddenFacet == returnedHiddenFacet, "Hidden facet returned");
         }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithVariationsMap()
+        {
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddGroupByRule("url", "data.url");
+            req.VariationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+            req.VariationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(reqVariationsMap, "Variations Map was passed as parameter");
+            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
+        }
     }
 }
