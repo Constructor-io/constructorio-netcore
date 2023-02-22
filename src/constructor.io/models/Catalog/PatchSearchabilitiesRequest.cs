@@ -17,7 +17,7 @@ namespace Constructorio_NET.Models
         public List<Searchability> Searchabilities { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the section.
+        /// Gets or sets the name of the section. Defaults to "Products".
         /// </summary>
         public string Section { get; set; }
 

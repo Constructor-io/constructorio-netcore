@@ -59,7 +59,6 @@ namespace Constructorio_NET.Modules
         internal string CreateRetrieveSearchabilitiesUrl(RetrieveSearchabilitiesRequest req)
         {
             List<string> paths = new List<string> { "v1", "searchabilities" };
-
             Hashtable queryParams = req.GetRequestParameters();
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
