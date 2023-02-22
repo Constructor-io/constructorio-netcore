@@ -11,7 +11,7 @@ namespace Constructorio_NET.Tests
     [TestFixture]
     public class BrowseTest
     {
-        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ApiKey = "key_vM4GkLckwiuxwyRA";
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
         private readonly string FilterName = "Color";
@@ -106,6 +106,26 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(res.Response.Collection.DisplayName, this.CollectionId, "display name should match");
             Assert.AreEqual(res.Response.Collection.Id, this.CollectionId, "id should match");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithVariationsMap()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddGroupByRule("url", "data.url");
+            req.VariationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+            req.VariationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(reqVariationsMap, "Variations Map was passed as parameter");
+            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
         }
 
         [Test]

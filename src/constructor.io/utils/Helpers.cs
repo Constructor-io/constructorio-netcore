@@ -198,7 +198,7 @@ namespace Constructorio_NET.Utils
         /// <param name="requestBody">Key values pairs used for the POST body.</param>
         /// <param name="files">Dictionary of streamcontent.</param>
         /// <returns>Task.</returns>
-        public static async Task<string> MakeHttpRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, Hashtable requestBody = null, Dictionary<string, StreamContent> files = null)
+        public static async Task<string> MakeHttpRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody = null, Dictionary<string, StreamContent> files = null)
         {
             HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
 

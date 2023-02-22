@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['notificationemail_0',['NotificationEmail',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a2884db524b4233da9ea073489af8c193',1,'Constructorio_NET::Models::CatalogRequest']]],
-  ['numresults_1',['NumResults',['../class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a3f81b74397cc1519278609563265c5ba',1,'Constructorio_NET::Models::RecommendationsRequest']]]
+  ['hidden_0',['Hidden',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a8ea6b325a2bf6f7c7293b06428fa73f1',1,'Constructorio_NET.Models.Facet.Hidden()'],['../class_constructorio___n_e_t_1_1_models_1_1_facet_option.html#ad7e29f77c999d617c3d5fa546fe8b67a',1,'Constructorio_NET.Models.FacetOption.Hidden()']]],
+  ['hiddenfields_1',['HiddenFields',['../class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a1ef1dbf8bca99e75d848040887292935',1,'Constructorio_NET.Models.AutocompleteRequest.HiddenFields()'],['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a75c3ad92e6c9e1bfa9c1988a5b0b46c4',1,'Constructorio_NET.Models.BrowseRequest.HiddenFields()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a7d4ab052af99c136f7a05935e3803eb6',1,'Constructorio_NET.Models.SearchRequest.HiddenFields()']]]
 ];

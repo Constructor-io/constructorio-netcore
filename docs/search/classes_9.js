@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['taskrequest_0',['TaskRequest',['../class_constructorio___n_e_t_1_1_models_1_1_task_request.html',1,'Constructorio_NET::Models']]],
-  ['taskresponse_1',['TaskResponse',['../class_constructorio___n_e_t_1_1_models_1_1_task_response.html',1,'Constructorio_NET::Models']]],
-  ['tasks_2',['Tasks',['../class_constructorio___n_e_t_1_1_modules_1_1_tasks.html',1,'Constructorio_NET::Modules']]],
-  ['tasksstatuscounts_3',['TasksStatusCounts',['../class_constructorio___n_e_t_1_1_models_1_1_tasks_status_counts.html',1,'Constructorio_NET::Models']]]
+  ['search_0',['Search',['../class_constructorio___n_e_t_1_1_modules_1_1_search.html',1,'Constructorio_NET::Modules']]],
+  ['searchrequest_1',['SearchRequest',['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html',1,'Constructorio_NET::Models']]],
+  ['searchresponse_2',['SearchResponse',['../class_constructorio___n_e_t_1_1_models_1_1_search_response.html',1,'Constructorio_NET::Models']]],
+  ['searchresponseinner_3',['SearchResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_search_response_inner.html',1,'Constructorio_NET::Models']]],
+  ['servererror_4',['ServerError',['../class_constructorio___n_e_t_1_1_models_1_1_server_error.html',1,'Constructorio_NET::Models']]]
 ];

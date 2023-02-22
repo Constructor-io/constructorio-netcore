@@ -20,5 +20,8 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("variations")]
         public List<Result> Variations { get; set; }
+
+        [JsonProperty("variations_map")]
+        public object VariationsMap { get; set; }
     }
 }

@@ -129,11 +129,11 @@ Retrieving Autocomplete Results</h1>
 <div class="line">request.UserInfo = userInfo;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Add a variations map to request specific variation attributes as an array or object (optional)</span></div>
-<div class="line">VariationsMap variationMap = <span class="keyword">new</span> VariationsMap();</div>
-<div class="line">variationMap.AddGroupByRule(<span class="stringliteral">&quot;url&quot;</span>, <span class="stringliteral">&quot;data.url&quot;</span>);</div>
-<div class="line">variationMap.AddValueRule(<span class="stringliteral">&quot;variation_id&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.variation_id&quot;</span>);</div>
-<div class="line">variationMap.AddValueRule(<span class="stringliteral">&quot;deactivated&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.deactivated&quot;</span>);</div>
-<div class="line">request.VariationMap = variationMap;</div>
+<div class="line">VariationsMap variationsMap = <span class="keyword">new</span> VariationsMap();</div>
+<div class="line">variationsMap.AddGroupByRule(<span class="stringliteral">&quot;url&quot;</span>, <span class="stringliteral">&quot;data.url&quot;</span>);</div>
+<div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;variation_id&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.variation_id&quot;</span>);</div>
+<div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;deactivated&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.deactivated&quot;</span>);</div>
+<div class="line">request.VariationsMap = variationsMap;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
 <div class="line">AutocompleteResponse response = await constructorio.Autocomplete.GetAutocompleteResults(request);</div>
@@ -164,11 +164,11 @@ Retrieving Search Results</h1>
 <div class="line">request.UserInfo = userInfo;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Add a variations map to request specific variation attributes as an array or object (optional)</span></div>
-<div class="line">VariationsMap variationMap = <span class="keyword">new</span> VariationsMap();</div>
-<div class="line">variationMap.AddGroupByRule(<span class="stringliteral">&quot;url&quot;</span>, <span class="stringliteral">&quot;data.url&quot;</span>);</div>
-<div class="line">variationMap.AddValueRule(<span class="stringliteral">&quot;variation_id&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.variation_id&quot;</span>);</div>
-<div class="line">variationMap.AddValueRule(<span class="stringliteral">&quot;deactivated&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.deactivated&quot;</span>);</div>
-<div class="line">request.VariationMap = variationMap;</div>
+<div class="line">VariationsMap variationsMap = <span class="keyword">new</span> VariationsMap();</div>
+<div class="line">variationsMap.AddGroupByRule(<span class="stringliteral">&quot;url&quot;</span>, <span class="stringliteral">&quot;data.url&quot;</span>);</div>
+<div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;variation_id&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.variation_id&quot;</span>);</div>
+<div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;deactivated&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.deactivated&quot;</span>);</div>
+<div class="line">request.VariationsMap = variationsMap;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
 <div class="line">SearchResponse response = await constructorio.Search.GetSearchResults(request);</div>
@@ -199,11 +199,11 @@ Retrieving Browse Results</h1>
 <div class="line">request.UserInfo = userInfo;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Add a variations map to request specific variation attributes as an array or object (optional)</span></div>
-<div class="line">VariationsMap variationMap = <span class="keyword">new</span> VariationsMap();</div>
-<div class="line">variationMap.AddGroupByRule(<span class="stringliteral">&quot;url&quot;</span>, <span class="stringliteral">&quot;data.url&quot;</span>);</div>
-<div class="line">variationMap.AddValueRule(<span class="stringliteral">&quot;variation_id&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.variation_id&quot;</span>);</div>
-<div class="line">variationMap.AddValueRule(<span class="stringliteral">&quot;deactivated&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.deactivated&quot;</span>);</div>
-<div class="line">request.VariationMap = variationMap;</div>
+<div class="line">VariationsMap variationsMap = <span class="keyword">new</span> VariationsMap();</div>
+<div class="line">variationsMap.AddGroupByRule(<span class="stringliteral">&quot;url&quot;</span>, <span class="stringliteral">&quot;data.url&quot;</span>);</div>
+<div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;variation_id&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.variation_id&quot;</span>);</div>
+<div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;deactivated&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.deactivated&quot;</span>);</div>
+<div class="line">request.VariationsMap = variationsMap;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
 <div class="line">BrowseResponse response = await constructorio.Browse.GetBrowseResults(request);</div>
@@ -250,11 +250,11 @@ Retrieving Recommendation Results</h1>
 <div class="line">request.UserInfo = userInfo;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Add a variations map to request specific variation attributes as an array or object (optional)</span></div>
-<div class="line">VariationsMap variationMap = <span class="keyword">new</span> VariationsMap();</div>
-<div class="line">variationMap.AddGroupByRule(<span class="stringliteral">&quot;url&quot;</span>, <span class="stringliteral">&quot;data.url&quot;</span>);</div>
-<div class="line">variationMap.AddValueRule(<span class="stringliteral">&quot;variation_id&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.variation_id&quot;</span>);</div>
-<div class="line">variationMap.AddValueRule(<span class="stringliteral">&quot;deactivated&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.deactivated&quot;</span>);</div>
-<div class="line">request.VariationMap = variationMap;</div>
+<div class="line">VariationsMap variationsMap = <span class="keyword">new</span> VariationsMap();</div>
+<div class="line">variationsMap.AddGroupByRule(<span class="stringliteral">&quot;url&quot;</span>, <span class="stringliteral">&quot;data.url&quot;</span>);</div>
+<div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;variation_id&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.variation_id&quot;</span>);</div>
+<div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;deactivated&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.deactivated&quot;</span>);</div>
+<div class="line">request.VariationsMap = variationsMap;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
 <div class="line">RecommendationsResponse response = await constructorio.Recommendations.GetRecommendationsResults(request);</div>

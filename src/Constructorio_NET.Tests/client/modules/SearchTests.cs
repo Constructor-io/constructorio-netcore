@@ -9,7 +9,7 @@ namespace Constructorio_NET.Tests
     [TestFixture]
     public class SearchTest
     {
-        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ApiKey = "key_vM4GkLckwiuxwyRA";
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
         private readonly string Query = "item";
@@ -92,7 +92,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public async Task GetSearchResultsWithRedirect()
         {
-            SearchRequest req = new SearchRequest("constructor")
+            SearchRequest req = new SearchRequest("rolling")
             {
                 UserInfo = this.UserInfo
             };
@@ -126,6 +126,26 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual("https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png", res.Response.RefinedContent[0].Data["mobileAssetUrl"], "refined content mobileAssetUrl is correct");
             Assert.AreEqual("Content 1 mobile alt text", res.Response.RefinedContent[0].Data["mobileAssetAltText"], "refined content mobileAssetAltText is correct");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithVariationsMap()
+        {
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddGroupByRule("url", "data.url");
+            req.VariationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+            req.VariationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(reqVariationsMap, "Variations Map was passed as parameter");
+            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
         }
     }
 }

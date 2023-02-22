@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['patchcatalog_0',['PatchCatalog',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#ae7daa644217a881408e9cd73040e6f6c',1,'Constructorio_NET::Modules::Catalog']]]
+  ['ourescapedatastring_0',['OurEscapeDataString',['../class_constructorio___n_e_t_1_1_utils_1_1_helpers.html#a9903a8102bf6def4fca1a34e5b76dd75',1,'Constructorio_NET::Utils::Helpers']]]
 ];

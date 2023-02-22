@@ -9,7 +9,7 @@ namespace Constructorio_NET.Tests
     [TestFixture]
     public class RecommendationsTest
     {
-        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ApiKey = "key_vM4GkLckwiuxwyRA";
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
         private ConstructorioConfig Config;
