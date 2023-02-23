@@ -152,12 +152,19 @@ Retrieving Search Results</h1>
 <div class="line">    { <span class="stringliteral">&quot;Brand&quot;</span>, <span class="keyword">new</span> List&lt;string&gt;() { <span class="stringliteral">&quot;Jif&quot;</span> } }</div>
 <div class="line">};</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Add the following paramaters to request for hidden fields or facets</span></div>
+<div class="line"><span class="comment">// Add the following paramaters to request for hidden fields</span></div>
 <div class="line">request.HiddenFields = <span class="keyword">new</span> List&lt;string&gt;</div>
 <div class="line">{</div>
 <div class="line">    <span class="stringliteral">&quot;hidden_price_field&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;hidden_brand_field&quot;</span>,</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Add the following paramaters to request for hidden facets</span></div>
+<div class="line">request.HiddenFacets = <span class="keyword">new</span> List&lt;string&gt;</div>
+<div class="line">{</div>
+<div class="line">    <span class="stringliteral">&quot;hidden_price_facet&quot;</span>,</div>
 <div class="line">    <span class="stringliteral">&quot;hidden_brand_facet&quot;</span>,</div>
-<div class="line">}</div>
+<div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Create a UserInfo object with the unique device identifier and session</span></div>
 <div class="line">UserInfo userInfo = <span class="keyword">new</span> UserInfo(<span class="stringliteral">&quot;device-id-1123123&quot;</span>, 5);</div>
@@ -187,10 +194,17 @@ Retrieving Browse Results</h1>
 <div class="line">    { <span class="stringliteral">&quot;Brand&quot;</span>, <span class="keyword">new</span> List&lt;string&gt;() { <span class="stringliteral">&quot;Jif&quot;</span> } }</div>
 <div class="line">};</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Add the following paramaters to request for hidden fields or facets</span></div>
+<div class="line"><span class="comment">// Add the following paramaters to request for hidden fields</span></div>
 <div class="line">request.HiddenFields = <span class="keyword">new</span> List&lt;string&gt;</div>
 <div class="line">{</div>
 <div class="line">    <span class="stringliteral">&quot;hidden_price_field&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;hidden_brand_field&quot;</span>,</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Add the following paramaters to request for hidden facets</span></div>
+<div class="line">request.HiddenFacets = <span class="keyword">new</span> List&lt;string&gt;</div>
+<div class="line">{</div>
+<div class="line">    <span class="stringliteral">&quot;hidden_price_facet&quot;</span>,</div>
 <div class="line">    <span class="stringliteral">&quot;hidden_brand_facet&quot;</span>,</div>
 <div class="line">};</div>
 <div class="line"> </div>
@@ -222,12 +236,19 @@ Retrieving Browse Results for Item ID's</h1>
 <div class="line">    { <span class="stringliteral">&quot;Brand&quot;</span>, <span class="keyword">new</span> List&lt;string&gt;() { <span class="stringliteral">&quot;Jif&quot;</span> } }</div>
 <div class="line">};</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Add the following paramaters to request for hidden fields or facets</span></div>
+<div class="line"><span class="comment">// Add the following paramaters to request for hidden fields</span></div>
 <div class="line">request.HiddenFields = <span class="keyword">new</span> List&lt;string&gt;</div>
 <div class="line">{</div>
 <div class="line">    <span class="stringliteral">&quot;hidden_price_field&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;hidden_brand_field&quot;</span>,</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Add the following paramaters to request for hidden facets</span></div>
+<div class="line">request.HiddenFacets = <span class="keyword">new</span> List&lt;string&gt;</div>
+<div class="line">{</div>
+<div class="line">    <span class="stringliteral">&quot;hidden_price_facet&quot;</span>,</div>
 <div class="line">    <span class="stringliteral">&quot;hidden_brand_facet&quot;</span>,</div>
-<div class="line">}</div>
+<div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Create a UserInfo object with the unique device identifier and session</span></div>
 <div class="line">UserInfo userInfo = <span class="keyword">new</span> UserInfo(<span class="stringliteral">&quot;device-id-1123123&quot;</span>, 5);</div>
