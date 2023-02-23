@@ -56,7 +56,6 @@ namespace Constructorio_NET.Models
         /// </summary>
         public Dictionary<string, string> Filters { get; set; }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RetrieveSearchabilitiesRequest"/> class.
         /// </summary>

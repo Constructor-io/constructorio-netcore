@@ -408,7 +408,7 @@ namespace Constructorio_NET.Modules
 
             throw new ConstructorException("DeleteItemGroups response data is malformed");
         }
-        
+
         // Facets
         internal string CreateFacetUrl(string section = "Products", string facetGroup = null, Hashtable queryParams = null)
         {
@@ -907,7 +907,7 @@ namespace Constructorio_NET.Modules
 
             throw new ConstructorException("DeleteFacetOption response data is malformed");
         }
-        
+
         /// <summary>
         /// Retrieves searchabilities with options for filtering, paginating.
         /// </summary>
