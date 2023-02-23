@@ -136,10 +136,11 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
-            string returnedHiddenFacet = res.Response.Facets.Find(el => el.Hidden).DisplayName;
+            FilterFacet returnedHiddenFacet = res.Response.Facets.Find(el => el.Hidden);
 
             Assert.NotNull(res.ResultId, "Result id exists");
-            Assert.True(requestedHiddenFacet == returnedHiddenFacet, "Hidden facet returned");
+            Assert.True(requestedHiddenFacet == returnedHiddenFacet.DisplayName, "Hidden facet returned");
+            Assert.True(returnedHiddenFacet.Hidden, "Returned facet is hidden");
         }
 
         [Test]
