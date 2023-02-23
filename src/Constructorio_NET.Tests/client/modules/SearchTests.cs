@@ -131,6 +131,41 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetSearchResultsShouldReturnResultWithHiddenFields()
+        {
+            string requestedHiddenField = "testField";
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = this.UserInfo,
+                HiddenFields = new List<string> { requestedHiddenField }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            var returnedHiddenfield = res.Response.Results[0].Data.Metadata[requestedHiddenField];
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(returnedHiddenfield, "Hidden field returned");
+        }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithHiddenFacets()
+        {
+            string requestedHiddenFacet = "Brand";
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = this.UserInfo,
+                HiddenFacets = new List<string> { requestedHiddenFacet }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            FilterFacet returnedHiddenFacet = res.Response.Facets.Find(el => el.Hidden);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.True(requestedHiddenFacet == returnedHiddenFacet.DisplayName, "Hidden facet returned");
+            Assert.True(returnedHiddenFacet.Hidden, "Returned facet is hidden");
+        }
+
+        [Test]
         public async Task GetSearchResultsShouldReturnResultWithVariationsMap()
         {
             SearchRequest req = new SearchRequest("item1")

@@ -11,6 +11,7 @@
         public const string FMT_OPTIONS = "fmt_options";
         public const string FORCE = "force";
         public const string HIDDEN_FIELDS = "hidden_fields";
+        public const string HIDDEN_FACETS = "hidden_facets";
         public const string ITEM_IDS = "ids";
         public const string NOTIFICATION_EMAIL = "notification_email";
         public const string PAGE = "page";

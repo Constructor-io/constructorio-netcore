@@ -111,6 +111,41 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithHiddenFields()
+        {
+            string requestedHiddenField = "testField";
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = this.UserInfo,
+                HiddenFields = new List<string> { requestedHiddenField }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            var returnedHiddenfield = res.Response.Results[0].Data.Metadata[requestedHiddenField];
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(returnedHiddenfield, "Hidden field returned");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithHiddenFacets()
+        {
+            string requestedHiddenFacet = "Brand";
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = this.UserInfo,
+                HiddenFacets = new List<string> { requestedHiddenFacet }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            FilterFacet returnedHiddenFacet = res.Response.Facets.Find(el => el.Hidden);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.True(requestedHiddenFacet == returnedHiddenFacet.DisplayName, "Hidden facet returned");
+            Assert.True(returnedHiddenFacet.Hidden, "Returned facet is hidden");
+        }
+
+        [Test]
         public async Task GetBrowseResultsShouldReturnResultWithVariationsMap()
         {
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)

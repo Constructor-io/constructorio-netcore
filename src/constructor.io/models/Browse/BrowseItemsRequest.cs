@@ -15,6 +15,7 @@ namespace Constructorio_NET.Models
         public Dictionary<string, List<string>> Filters { get; set; }
         public Dictionary<string, string> FmtOptions { get; set; }
         public List<string> HiddenFields { get; set; }
+        public List<string> HiddenFacets { get; set; }
         public int Page { get; set; }
         public int ResultsPerPage { get; set; }
         public string Section { get; set; }
@@ -87,6 +88,11 @@ namespace Constructorio_NET.Models
             if (this.HiddenFields != null)
             {
                 parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
+            }
+
+            if (this.HiddenFacets != null)
+            {
+                parameters.Add(Constants.HIDDEN_FACETS, this.HiddenFacets);
             }
 
             if (this.Page != 0)
