@@ -1,23 +1,5 @@
 var searchData=
 [
-  ['facet_0',['Facet',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html',1,'Constructorio_NET.Models.Facet'],['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#accfc4130ec7b9fbc84ec3d2147401d1e',1,'Constructorio_NET.Models.Facet.Facet()']]],
-  ['facetgetallresponse_1',['FacetGetAllResponse',['../class_constructorio___n_e_t_1_1_models_1_1_facet_get_all_response.html',1,'Constructorio_NET::Models']]],
-  ['facetmatchtype_2',['FacetMatchType',['../namespace_constructorio___n_e_t_1_1_models.html#a5fdf07385c3b5282300e3bd326c4ffad',1,'Constructorio_NET::Models']]],
-  ['facetoption_3',['FacetOption',['../class_constructorio___n_e_t_1_1_models_1_1_facet_option.html',1,'Constructorio_NET::Models']]],
-  ['facetoptionsgetallresponse_4',['FacetOptionsGetAllResponse',['../class_constructorio___n_e_t_1_1_models_1_1_facet_options_get_all_response.html',1,'Constructorio_NET::Models']]],
-  ['facetrangeformat_5',['FacetRangeFormat',['../namespace_constructorio___n_e_t_1_1_models.html#a7f795439c8e3788451783cfbc058f679',1,'Constructorio_NET::Models']]],
-  ['facetrangeinclusive_6',['FacetRangeInclusive',['../namespace_constructorio___n_e_t_1_1_models.html#a63da9f0bb69116c94bd34196fcb16c9f',1,'Constructorio_NET::Models']]],
-  ['facetrangetype_7',['FacetRangeType',['../namespace_constructorio___n_e_t_1_1_models.html#acec0b2faa939d96a7ee2f841a334c3b1',1,'Constructorio_NET::Models']]],
-  ['facetsortorder_8',['FacetSortOrder',['../namespace_constructorio___n_e_t_1_1_models.html#a2c70ccf7e3fbc456cd2e730d0ff4cdb0',1,'Constructorio_NET::Models']]],
-  ['facettype_9',['FacetType',['../namespace_constructorio___n_e_t_1_1_models.html#ad434f5d919c50eafe52f9e72ce4a23ec',1,'Constructorio_NET::Models']]],
-  ['files_10',['Files',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#af6d7277ef979580aff7c26e404fe0b46',1,'Constructorio_NET::Models::CatalogRequest']]],
-  ['filterfacet_11',['FilterFacet',['../class_constructorio___n_e_t_1_1_models_1_1_filter_facet.html',1,'Constructorio_NET::Models']]],
-  ['filterfacetoption_12',['FilterFacetOption',['../class_constructorio___n_e_t_1_1_models_1_1_filter_facet_option.html',1,'Constructorio_NET::Models']]],
-  ['filtergroup_13',['FilterGroup',['../class_constructorio___n_e_t_1_1_models_1_1_filter_group.html',1,'Constructorio_NET::Models']]],
-  ['filtername_14',['FilterName',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a8695d59273c68c0ac9c55c901a33577b',1,'Constructorio_NET::Models::BrowseRequest']]],
-  ['filters_15',['Filters',['../class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#ad91fb75b9fdb08435e35d99a4b5f00cc',1,'Constructorio_NET.Models.AutocompleteRequest.Filters()'],['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#ae0ab06260cb58b59fb6fa70c41800e65',1,'Constructorio_NET.Models.BrowseRequest.Filters()'],['../class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a196b3f5d86bf05e38ed1921ae42c3f08',1,'Constructorio_NET.Models.RecommendationsRequest.Filters()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#aa6e4b41109d2addaca5991230b893c07',1,'Constructorio_NET.Models.SearchRequest.Filters()']]],
-  ['filtersortoption_16',['FilterSortOption',['../class_constructorio___n_e_t_1_1_models_1_1_filter_sort_option.html',1,'Constructorio_NET::Models']]],
-  ['filtervalue_17',['FilterValue',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a4ed26185f047818c20a020c998429292',1,'Constructorio_NET::Models::BrowseRequest']]],
-  ['fmtoptions_18',['FmtOptions',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a8286c09dca598c848193614a6d503f86',1,'Constructorio_NET.Models.BrowseRequest.FmtOptions()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a167ad4e459eacce396210b2909183032',1,'Constructorio_NET.Models.SearchRequest.FmtOptions()']]],
-  ['force_19',['Force',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a877747da3863fa031d85abca3f955046',1,'Constructorio_NET::Models::CatalogRequest']]]
+  ['exactsearchable_0',['ExactSearchable',['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html#ac86ff20105eb234e88bff76193d4cd9d',1,'Constructorio_NET::Models::Searchability']]],
+  ['exampleitems_1',['ExampleItems',['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html#a7129bc091e5cc156e7be3fb6914260f7',1,'Constructorio_NET::Models::Searchability']]]
 ];

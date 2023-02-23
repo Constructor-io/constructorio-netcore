@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['page_0',['Page',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a437b2630dcb401c03debf6432f82b854',1,'Constructorio_NET.Models.BrowseRequest.Page()'],['../class_constructorio___n_e_t_1_1_models_1_1_items_request.html#a49c15ab3b658471a42623aa794692c2e',1,'Constructorio_NET.Models.ItemsRequest.Page()'],['../class_constructorio___n_e_t_1_1_models_1_1_variations_request.html#a43d38a44df17f0f60050f97b8f66be26',1,'Constructorio_NET.Models.VariationsRequest.Page()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#af7bbb2a12e42216d50f3bec5aeeae394',1,'Constructorio_NET.Models.SearchRequest.Page()']]],
-  ['podid_1',['PodId',['../class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ac9938932455b7719213e358aca996add',1,'Constructorio_NET::Models::RecommendationsRequest']]],
-  ['position_2',['Position',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a90efcf60e51da2c44c41766164897d40',1,'Constructorio_NET.Models.Facet.Position()'],['../class_constructorio___n_e_t_1_1_models_1_1_facet_option.html#a2371554ef5455516267578197f7bb4e1',1,'Constructorio_NET.Models.FacetOption.Position()']]],
-  ['protected_3',['Protected',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a08ca6181693ec94e4fb4023f88b82772',1,'Constructorio_NET::Models::Facet']]]
+  ['offset_0',['Offset',['../class_constructorio___n_e_t_1_1_models_1_1_retrieve_searchabilities_request.html#a3931c49a58a26769c0671d7286934f4a',1,'Constructorio_NET::Models::RetrieveSearchabilitiesRequest']]],
+  ['options_1',['Options',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a2a3e84b395df14842b7cd84a89787ea3',1,'Constructorio_NET::Models::Facet']]]
 ];
