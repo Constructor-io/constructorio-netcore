@@ -35,5 +35,7 @@
         public const string STATUS = "status";
         public const string TYPE = "type";
         public const string OFFSET = "offset";
+        public const string ANSWERS = "a";
+        public const string VERSION_ID = "version_id";
     }
 }
