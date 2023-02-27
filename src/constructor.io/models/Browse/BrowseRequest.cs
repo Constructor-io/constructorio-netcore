@@ -30,7 +30,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets the faceting expression used to scope search results.
         /// </summary>
-        public JObject PreFilterExpression { get; set; }
+        public PreFilterExpression PreFilterExpression { get; set; }
 
         /// <summary>
         /// Gets or sets hidden metadata fields to return.
@@ -140,7 +140,7 @@ namespace Constructorio_NET.Models
 
             if (this.PreFilterExpression != null)
             {
-                string preFilterJson = JsonConvert.SerializeObject(this.PreFilterExpression);
+                string preFilterJson = this.PreFilterExpression.GetExpression();
                 parameters.Add(Constants.PRE_FILTER_EXPRESSION, preFilterJson);
             }
 
