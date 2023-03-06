@@ -13,7 +13,6 @@ namespace Constructorio_NET.Tests
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
         private readonly string UserId = "user1";
-        private readonly string Section = "Products";
         private readonly string Id = "1";
         private readonly List<List<string>> Answers = new List<List<string>>()
         {
@@ -21,10 +20,6 @@ namespace Constructorio_NET.Tests
         };
         private readonly string VersionId = "1234";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
-        private readonly Dictionary<string, string> TestCells = new Dictionary<string, string>()
-        {
-            { "test1", "original" },
-        };
         private readonly string IP = "1,2,3";
         private readonly string OS = "Mac";
         private UserInfo UserInfo;
@@ -45,10 +40,8 @@ namespace Constructorio_NET.Tests
             QuizRequest req = new QuizRequest(this.Id)
             {
                 UserInfo = this.UserInfo,
-                Section = this.Section,
                 Answers = this.Answers,
                 VersionId = this.VersionId,
-                TestCells = this.TestCells,
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -56,10 +49,8 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.SessionId, requestParameters[Constants.SESSION_ID]);
             Assert.AreEqual(this.UserId, requestParameters[Constants.USER_ID]);
             Assert.AreEqual(this.UserSegments, requestParameters[Constants.USER_SEGMENTS]);
-            Assert.AreEqual(this.Section, requestParameters[Constants.SECTION]);
             Assert.AreEqual(this.Answers, requestParameters[Constants.ANSWERS]);
             Assert.AreEqual(this.VersionId, requestParameters[Constants.VERSION_ID]);
-            Assert.AreEqual(this.TestCells, requestParameters[Constants.TEST_CELLS]);
         }
 
         [Test]

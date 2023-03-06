@@ -151,6 +151,18 @@ namespace Constructorio_NET.Utils
                     }
                 }
 
+                // Add quiz answers to query string
+                if (queryParams.Contains(Constants.ANSWERS))
+                {
+                    List<List<string>> answers = (List<List<string>>)queryParams[Constants.ANSWERS];
+                    queryParams.Remove(Constants.ANSWERS);
+
+                    foreach (var answer in answers)
+                    {
+                        url.Append($"&{Constants.ANSWERS}={OurEscapeDataString(string.Join(",", answer))}");
+                    }
+                }
+
                 // Add remaining query params to query string
                 foreach (DictionaryEntry queryParam in queryParams)
                 {

@@ -28,13 +28,7 @@ namespace Constructorio_NET.Tests
         [OneTimeSetUp]
         public void Setup()
         {
-            JObject json = JObject.Parse(File.ReadAllText("./../../../../../.config/local.json"));
-            string testApiToken = json.SelectToken("TEST_API_TOKEN").Value<string>();
-
-            this.Config = new ConstructorioConfig(this.ApiKey)
-            {
-                ApiToken = testApiToken
-            };
+            this.Config = new ConstructorioConfig(this.ApiKey);
             this.UserInfo = new UserInfo(ClientId, SessionId);
         }
 
@@ -67,6 +61,11 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             NextQuestionResponse res = await constructorio.Quizzes.GetNextQuestion(req);
             Assert.IsNotNull(res.NextQuestion, "NextQuestion should exist");
+            Assert.IsNotNull(res.NextQuestion.Id, "NextQuestion Id should exist");
+            Assert.IsNotNull(res.NextQuestion.Title, "NextQuestion Title should exist");
+            Assert.IsNotNull(res.NextQuestion.Type, "NextQuestion Type should exist");
+            Assert.IsNotNull(res.NextQuestion.Description, "NextQuestion Description should exist");
+            Assert.IsNotNull(res.NextQuestion.Images, "NextQuestion Images should exist");
             Assert.IsNotNull(res.IsLastQuestion, "IsLastQuestion should exist");
             Assert.IsNotNull(res.VersionId, "VersionId should exist");
         }
@@ -82,7 +81,8 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             QuizResultsResponse res = await constructorio.Quizzes.GetResults(req);
             Assert.IsNotNull(res.Result, "Result should exist");
-            Assert.IsNotNull(res.ResultsUrl, "ResultsUrl should exist");
+            Assert.IsNotNull(res.Result.FilterExpression, "FilterExpression should exist");
+            Assert.IsNotNull(res.Result.ResultsUrl, "ResultsUrl should exist");
             Assert.IsNotNull(res.VersionId, "VersionId should exist");
         }
     }

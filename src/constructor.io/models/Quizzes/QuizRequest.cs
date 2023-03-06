@@ -17,11 +17,6 @@ namespace Constructorio_NET.Models
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the section.
-        /// </summary>
-        public string Section { get; set; }
-
-        /// <summary>
         /// Gets or sets An array of answers in the format [[1,2],[1]].
         /// </summary>
         public List<List<string>> Answers { get; set; }
@@ -30,11 +25,6 @@ namespace Constructorio_NET.Models
         /// Gets or sets version identifier for the quiz.
         /// </summary>
         public string VersionId { get; set; }
-
-        /// <summary>
-        /// Gets or sets user test cells.
-        /// </summary>
-        public Dictionary<string, string> TestCells { get; set; }
 
         /// <summary>
         /// Gets or sets collection of user related data.
@@ -93,16 +83,6 @@ namespace Constructorio_NET.Models
             if (this.VersionId != null)
             {
                 parameters.Add(Constants.VERSION_ID, this.VersionId);
-            }
-
-            if (this.Section != null)
-            {
-                parameters.Add(Constants.SECTION, this.Section);
-            }
-
-            if (this.TestCells != null)
-            {
-                parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
 
             return parameters;
