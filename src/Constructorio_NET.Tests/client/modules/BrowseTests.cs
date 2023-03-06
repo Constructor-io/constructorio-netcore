@@ -11,7 +11,7 @@ namespace Constructorio_NET.Tests
     [TestFixture]
     public class BrowseTest
     {
-        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ApiKey = "key_vM4GkLckwiuxwyRA";
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
         private readonly string FilterName = "Color";
@@ -72,6 +72,8 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.Response.Facets[0].Data, "data object expected to exist");
+            Assert.IsNotNull(res.Response.Facets[0].Hidden, "hidden field expected to exist");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
@@ -109,6 +111,61 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithHiddenFields()
+        {
+            string requestedHiddenField = "testField";
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = this.UserInfo,
+                HiddenFields = new List<string> { requestedHiddenField }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            var returnedHiddenfield = res.Response.Results[0].Data.Metadata[requestedHiddenField];
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(returnedHiddenfield, "Hidden field returned");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithHiddenFacets()
+        {
+            string requestedHiddenFacet = "Brand";
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = this.UserInfo,
+                HiddenFacets = new List<string> { requestedHiddenFacet }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            FilterFacet returnedHiddenFacet = res.Response.Facets.Find(el => el.Hidden);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.True(requestedHiddenFacet == returnedHiddenFacet.DisplayName, "Hidden facet returned");
+            Assert.True(returnedHiddenFacet.Hidden, "Returned facet is hidden");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithVariationsMap()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddGroupByRule("url", "data.url");
+            req.VariationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+            req.VariationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(reqVariationsMap, "Variations Map was passed as parameter");
+            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
+        }
+
+        [Test]
         public async Task GetBrowseItemsResults()
         {
             BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds)
@@ -140,6 +197,8 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
+            Assert.IsNotNull(res.Response.Facets[0].Data, "data object expected to exist");
+            Assert.IsNotNull(res.Response.Facets[0].Hidden, "hidden field expected to exist");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 

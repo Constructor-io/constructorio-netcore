@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -29,5 +28,11 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("type")]
         public string Type { get; set; }
+
+        [JsonProperty("data")]
+        public Dictionary<string, object> Data { get; set; }
+
+        [JsonProperty("hidden")]
+        public bool Hidden { get; set; }
     }
 }

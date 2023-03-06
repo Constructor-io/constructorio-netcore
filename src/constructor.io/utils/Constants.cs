@@ -11,6 +11,7 @@
         public const string FMT_OPTIONS = "fmt_options";
         public const string FORCE = "force";
         public const string HIDDEN_FIELDS = "hidden_fields";
+        public const string HIDDEN_FACETS = "hidden_facets";
         public const string ITEM_IDS = "ids";
         public const string NOTIFICATION_EMAIL = "notification_email";
         public const string PAGE = "page";
@@ -34,6 +35,8 @@
         public const string END_DATE = "end_date";
         public const string STATUS = "status";
         public const string TYPE = "type";
+        public const string NAME = "name";
+        public const string SEARCHABLE = "searchable";
         public const string OFFSET = "offset";
         public const string ANSWERS = "a";
         public const string VERSION_ID = "version_id";

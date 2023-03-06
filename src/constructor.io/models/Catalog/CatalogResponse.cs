@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 /**
- * Constructor.io Task Response
+ * Constructor.io Catalog Response
  */
 namespace Constructorio_NET.Models
 {

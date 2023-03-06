@@ -9,7 +9,7 @@ namespace Constructorio_NET.Tests
     [TestFixture]
     public class SearchTest
     {
-        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ApiKey = "key_vM4GkLckwiuxwyRA";
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
         private readonly string Query = "item";
@@ -69,6 +69,8 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
             Assert.IsNotNull(res.Response.Facets[0].Max);
             Assert.IsNotNull(res.Response.Facets[0].Min);
+            Assert.IsNotNull(res.Response.Facets[0].Data, "data object expected to exist");
+            Assert.IsNotNull(res.Response.Facets[0].Hidden, "hidden field expected to exist");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
@@ -92,7 +94,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public async Task GetSearchResultsWithRedirect()
         {
-            SearchRequest req = new SearchRequest("constructor")
+            SearchRequest req = new SearchRequest("rolling")
             {
                 UserInfo = this.UserInfo
             };
@@ -126,6 +128,61 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual("https://constructor.io/wp-content/uploads/2022/09/groceryshop-2022-r2.png", res.Response.RefinedContent[0].Data["mobileAssetUrl"], "refined content mobileAssetUrl is correct");
             Assert.AreEqual("Content 1 mobile alt text", res.Response.RefinedContent[0].Data["mobileAssetAltText"], "refined content mobileAssetAltText is correct");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithHiddenFields()
+        {
+            string requestedHiddenField = "testField";
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = this.UserInfo,
+                HiddenFields = new List<string> { requestedHiddenField }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            var returnedHiddenfield = res.Response.Results[0].Data.Metadata[requestedHiddenField];
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(returnedHiddenfield, "Hidden field returned");
+        }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithHiddenFacets()
+        {
+            string requestedHiddenFacet = "Brand";
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = this.UserInfo,
+                HiddenFacets = new List<string> { requestedHiddenFacet }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            FilterFacet returnedHiddenFacet = res.Response.Facets.Find(el => el.Hidden);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.True(requestedHiddenFacet == returnedHiddenFacet.DisplayName, "Hidden facet returned");
+            Assert.True(returnedHiddenFacet.Hidden, "Returned facet is hidden");
+        }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithVariationsMap()
+        {
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddGroupByRule("url", "data.url");
+            req.VariationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+            req.VariationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(reqVariationsMap, "Variations Map was passed as parameter");
+            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
         }
     }
 }

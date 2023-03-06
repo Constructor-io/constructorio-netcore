@@ -66,7 +66,7 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.RESULTS_PER_PAGE, this.ResultsPerPage);
             }
 
-            if (!string.IsNullOrEmpty(this.Section))
+            if (string.IsNullOrEmpty(this.Section))
             {
                 this.Section = "Products";
             }

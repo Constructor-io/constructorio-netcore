@@ -11,5 +11,6 @@ var searchData=
   ['resultdata_8',['ResultData',['../class_constructorio___n_e_t_1_1_models_1_1_result_data.html',1,'Constructorio_NET::Models']]],
   ['resultfacet_9',['ResultFacet',['../class_constructorio___n_e_t_1_1_models_1_1_result_facet.html',1,'Constructorio_NET::Models']]],
   ['resultgroup_10',['ResultGroup',['../class_constructorio___n_e_t_1_1_models_1_1_result_group.html',1,'Constructorio_NET::Models']]],
-  ['resultpod_11',['ResultPod',['../class_constructorio___n_e_t_1_1_models_1_1_result_pod.html',1,'Constructorio_NET::Models']]]
+  ['resultpod_11',['ResultPod',['../class_constructorio___n_e_t_1_1_models_1_1_result_pod.html',1,'Constructorio_NET::Models']]],
+  ['retrievesearchabilitiesrequest_12',['RetrieveSearchabilitiesRequest',['../class_constructorio___n_e_t_1_1_models_1_1_retrieve_searchabilities_request.html',1,'Constructorio_NET::Models']]]
 ];

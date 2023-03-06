@@ -170,6 +170,22 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void MakeUrlSearchWithHiddenFacets()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            List<string> hiddenFacets = new List<string>() { "inventory", "margin" };
+            Hashtable queryParams = new Hashtable()
+            {
+                { Constants.HIDDEN_FACETS, hiddenFacets }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search\/{this.Query}\?key={this.ApiKey}&c={this.Version}&fmt_options%5Bhidden_facets%5D=inventory&fmt_options%5Bhidden_facets%5D=margin&_dt=";
+            bool regexMatched = Regex.Match(url, expectedUrl).Success;
+            Assert.That(regexMatched, "url should be properly formed");
+        }
+
+        [Test]
         public void MakeUrlSearchWithFmtOptions()
         {
             List<string> paths = new List<string> { "search", this.Query };

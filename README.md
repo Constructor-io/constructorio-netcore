@@ -74,11 +74,11 @@ UserInfo userInfo = new UserInfo("device-id-1123123", 5);
 request.UserInfo = userInfo;
 
 // Add a variations map to request specific variation attributes as an array or object (optional)
-VariationsMap variationMap = new VariationsMap();
-variationMap.AddGroupByRule("url", "data.url");
-variationMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
-variationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
-request.VariationMap = variationMap;
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.AddGroupByRule("url", "data.url");
+variationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+variationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+request.VariationsMap = variationsMap;
 
 // Request results as an object
 AutocompleteResponse response = await constructorio.Autocomplete.GetAutocompleteResults(request);
@@ -101,23 +101,30 @@ request.Filters = new Dictionary<string, List<string>>()
     { "Brand", new List<string>() { "Jif" } }
 };
 
-// Add the following paramaters to request for hidden fields or facets
+// Add the following paramaters to request for hidden fields
 request.HiddenFields = new List<string>
 {
     "hidden_price_field",
+    "hidden_brand_field",
+};
+
+// Add the following paramaters to request for hidden facets
+request.HiddenFacets = new List<string>
+{
+    "hidden_price_facet",
     "hidden_brand_facet",
-}
+};
 
 // Create a UserInfo object with the unique device identifier and session
 UserInfo userInfo = new UserInfo("device-id-1123123", 5);
 request.UserInfo = userInfo;
 
 // Add a variations map to request specific variation attributes as an array or object (optional)
-VariationsMap variationMap = new VariationsMap();
-variationMap.AddGroupByRule("url", "data.url");
-variationMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
-variationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
-request.VariationMap = variationMap;
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.AddGroupByRule("url", "data.url");
+variationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+variationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+request.VariationsMap = variationsMap;
 
 // Request results as an object
 SearchResponse response = await constructorio.Search.GetSearchResults(request);
@@ -140,10 +147,17 @@ request.Filters = new Dictionary<string, List<string>>()
     { "Brand", new List<string>() { "Jif" } }
 };
 
-// Add the following paramaters to request for hidden fields or facets
+// Add the following paramaters to request for hidden fields
 request.HiddenFields = new List<string>
 {
     "hidden_price_field",
+    "hidden_brand_field",
+};
+
+// Add the following paramaters to request for hidden facets
+request.HiddenFacets = new List<string>
+{
+    "hidden_price_facet",
     "hidden_brand_facet",
 };
 
@@ -152,11 +166,11 @@ UserInfo userInfo = new UserInfo("device-id-1123123", 5);
 request.UserInfo = userInfo;
 
 // Add a variations map to request specific variation attributes as an array or object (optional)
-VariationsMap variationMap = new VariationsMap();
-variationMap.AddGroupByRule("url", "data.url");
-variationMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
-variationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
-request.VariationMap = variationMap;
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.AddGroupByRule("url", "data.url");
+variationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+variationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+request.VariationsMap = variationsMap;
 
 // Request results as an object
 BrowseResponse response = await constructorio.Browse.GetBrowseResults(request);
@@ -179,12 +193,19 @@ request.Filters = new Dictionary<string, List<string>>()
     { "Brand", new List<string>() { "Jif" } }
 };
 
-// Add the following paramaters to request for hidden fields or facets
+// Add the following paramaters to request for hidden fields
 request.HiddenFields = new List<string>
 {
     "hidden_price_field",
+    "hidden_brand_field",
+};
+
+// Add the following paramaters to request for hidden facets
+request.HiddenFacets = new List<string>
+{
+    "hidden_price_facet",
     "hidden_brand_facet",
-}
+};
 
 // Create a UserInfo object with the unique device identifier and session
 UserInfo userInfo = new UserInfo("device-id-1123123", 5);
@@ -211,11 +232,11 @@ UserInfo userInfo = new UserInfo("device-id-1123123", 5);
 request.UserInfo = userInfo;
 
 // Add a variations map to request specific variation attributes as an array or object (optional)
-VariationsMap variationMap = new VariationsMap();
-variationMap.AddGroupByRule("url", "data.url");
-variationMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
-variationMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
-request.VariationMap = variationMap;
+VariationsMap variationsMap = new VariationsMap();
+variationsMap.AddGroupByRule("url", "data.url");
+variationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
+variationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+request.VariationsMap = variationsMap;
 
 // Request results as an object
 RecommendationsResponse response = await constructorio.Recommendations.GetRecommendationsResults(request);

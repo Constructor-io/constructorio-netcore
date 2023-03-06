@@ -32,6 +32,11 @@ namespace Constructorio_NET.Models
         public List<string> HiddenFields { get; set; }
 
         /// <summary>
+        /// Gets or sets hidden facets fields to return.
+        /// </summary>
+        public List<string> HiddenFacets { get; set; }
+
+        /// <summary>
         /// Gets or sets the page number of the results to return.
         /// </summary>
         public int Page { get; set; }
@@ -69,7 +74,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets how to return variation data.
         /// </summary>
-        public VariationsMap VariationMap { get; set; }
+        public VariationsMap VariationsMap { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchRequest"/> class.
@@ -126,6 +131,11 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
             }
 
+            if (this.HiddenFacets != null)
+            {
+                parameters.Add(Constants.HIDDEN_FACETS, this.HiddenFacets);
+            }
+
             if (this.Page != 0)
             {
                 parameters.Add(Constants.PAGE, this.Page);
@@ -156,9 +166,9 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.TEST_CELLS, this.TestCells);
             }
 
-            if (this.VariationMap != null && this.VariationMap.GroupBy.Count > 0 && this.VariationMap.Values.Count > 0)
+            if (this.VariationsMap != null && this.VariationsMap.Values.Count > 0)
             {
-                string serializedJson = JsonConvert.SerializeObject(this.VariationMap);
+                string serializedJson = JsonConvert.SerializeObject(this.VariationsMap);
                 parameters.Add(Constants.VARIATIONS_MAP, serializedJson);
             }
 

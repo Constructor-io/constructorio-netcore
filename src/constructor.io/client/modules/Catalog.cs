@@ -56,6 +56,34 @@ namespace Constructorio_NET.Modules
             return url;
         }
 
+        internal string CreateRetrieveSearchabilitiesUrl(RetrieveSearchabilitiesRequest req)
+        {
+            List<string> paths = new List<string> { "v1", "searchabilities" };
+            Hashtable queryParams = req.GetRequestParameters();
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            {
+                { "_dt", true },
+                { "c", true },
+            };
+            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+
+            return url;
+        }
+
+        internal string CreatePatchSearchabilitiesUrl(PatchSearchabilitiesRequest req)
+        {
+            List<string> paths = new List<string> { "v1", "searchabilities" };
+            Hashtable queryParams = req.GetRequestParameters();
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            {
+                { "_dt", true },
+                { "c", true },
+            };
+            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+
+            return url;
+        }
+
         /// <summary>
         /// Send full catalog files to replace the current catalog.
         /// </summary>
@@ -878,6 +906,70 @@ namespace Constructorio_NET.Modules
             }
 
             throw new ConstructorException("DeleteFacetOption response data is malformed");
+        }
+
+        /// <summary>
+        /// Retrieves searchabilities with options for filtering, paginating.
+        /// </summary>
+        /// <param name="retrieveSearchabilitiesRequest">Constructorio's retrieve searchabilities request object.</param>
+        /// <returns>Constructorio's Searchability response object.</returns>
+        public async Task<SearchabilitiesResponse> RetrieveSearchabilities(RetrieveSearchabilitiesRequest retrieveSearchabilitiesRequest)
+        {
+            string url;
+            string result;
+
+            try
+            {
+                url = CreateRetrieveSearchabilitiesUrl(retrieveSearchabilitiesRequest);
+                Dictionary<string, string> requestHeaders = retrieveSearchabilitiesRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                result = await MakeHttpRequest(this.Options, new HttpMethod("GET"), url, requestHeaders, null, null);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<SearchabilitiesResponse>(result);
+            }
+
+            throw new ConstructorException("RetrieveSearchabilities response data is malformed");
+        }
+
+        /// <summary>
+        /// Send single or multiple searchabilities to create or modify.
+        /// </summary>
+        /// <param name="patchSearchabilitiesRequest">Constructorio's patch searchabilities request object.</param>
+        /// <returns>Constructorio's Searchability response object.</returns>
+        public async Task<SearchabilitiesResponse> PatchSearchabilities(PatchSearchabilitiesRequest patchSearchabilitiesRequest)
+        {
+            string url;
+            string result;
+            Hashtable postbody = new Hashtable
+            {
+                { "searchabilities", patchSearchabilitiesRequest.Searchabilities }
+            };
+
+            try
+            {
+                url = CreatePatchSearchabilitiesUrl(patchSearchabilitiesRequest);
+                Dictionary<string, string> requestHeaders = patchSearchabilitiesRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, postbody, null);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<SearchabilitiesResponse>(result);
+            }
+
+            throw new ConstructorException("PatchSearchabilities response data is malformed");
         }
     }
 }

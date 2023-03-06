@@ -151,6 +151,18 @@ namespace Constructorio_NET.Utils
                     }
                 }
 
+                // Add hidden facets as fmt_options
+                if (queryParams.Contains(Constants.HIDDEN_FACETS))
+                {
+                    List<string> hiddenFacets = (List<string>)queryParams[Constants.HIDDEN_FACETS];
+                    queryParams.Remove(Constants.HIDDEN_FACETS);
+
+                    foreach (var hiddenFacet in hiddenFacets)
+                    {
+                        url.Append($"&{Constants.FMT_OPTIONS}{OurEscapeDataString("[" + Constants.HIDDEN_FACETS + "]")}={OurEscapeDataString(hiddenFacet)}");
+                    }
+                }
+
                 // Add quiz answers to query string
                 if (queryParams.Contains(Constants.ANSWERS))
                 {
@@ -183,6 +195,10 @@ namespace Constructorio_NET.Utils
                         {
                             url.Append($"&{paramKey}={OurEscapeDataString(listValue)}");
                         }
+                    }
+                    else if (valueDataType == typeof(bool))
+                    {
+                        url.Append($"&{OurEscapeDataString(paramKey)}={OurEscapeDataString(queryParam.Value.ToString())}");
                     }
                 }
 
