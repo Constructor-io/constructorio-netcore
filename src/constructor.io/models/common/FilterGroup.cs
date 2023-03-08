@@ -23,5 +23,8 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("group_id")]
         public string GroupId { get; set; }
+
+        [JsonProperty("data")]
+        public Dictionary<string, object> Data { get; set; }
     }
 }
