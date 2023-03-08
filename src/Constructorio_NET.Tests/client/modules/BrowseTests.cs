@@ -63,7 +63,7 @@ namespace Constructorio_NET.Tests
             BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
 
             Assert.IsNotNull(res.Response.Groups, "Groups should not be null");
-            Assert.IsNotNull(res.Response.Groups[0].Data, "Groups should not be null");
+            Assert.IsNotNull(res.Response.Groups[0].Data, "Groups[0].Data should not be null");
         }
 
         [Test]

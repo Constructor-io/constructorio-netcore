@@ -61,7 +61,7 @@ namespace Constructorio_NET.Tests
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
 
             Assert.IsNotNull(res.Response.Groups, "Groups should not be null");
-            Assert.IsNotNull(res.Response.Groups[0].Data, "Groups should not be null");
+            Assert.IsNotNull(res.Response.Groups[0].Data, "Groups[0].Data should not be null");
         }
 
         [Test]
