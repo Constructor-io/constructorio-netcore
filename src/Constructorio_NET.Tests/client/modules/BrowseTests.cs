@@ -56,6 +56,17 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetBrowseResultGroupsData()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+
+            Assert.IsNotNull(res.Response.Groups, "Groups should not be null");
+            Assert.IsNotNull(res.Response.Groups[0].Data, "Groups should not be null");
+        }
+
+        [Test]
         public async Task GetBrowseResultsWithFilters()
         {
             Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
