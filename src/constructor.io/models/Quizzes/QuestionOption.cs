@@ -17,5 +17,8 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("attribute")]
         public OptionAttribute Attribute { get; set; }
+
+        [JsonProperty("images")]
+        public QuestionImages Images { get; set; }
     }
 }

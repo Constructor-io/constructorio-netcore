@@ -1,13 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
+public enum QuestionType
+{
+    [EnumMember(Value = "single")]
+    Single,
+    [EnumMember(Value = "multiple")]
+    Multiple,
+    [EnumMember(Value = "open")]
+    Open,
+    [EnumMember(Value = "cover")]
+    Cover,
+}
+
 /**
- * Constructor.io QuestionResponse Response
+ * Constructor.io NextQuestion Response
  */
 namespace Constructorio_NET.Models
 {
-    public class QuestionResponse
+    public class NextQuestion
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -25,7 +38,7 @@ namespace Constructorio_NET.Models
         public string InputPlaceholder { get; set; }
 
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public QuestionType Type { get; set; }
 
         [JsonProperty("images")]
         public QuestionImages Images { get; set; }

@@ -10,7 +10,7 @@ namespace Constructorio_NET.Models
     public class NextQuestionResponse
     {
         [JsonProperty("next_question")]
-        public QuestionResponse NextQuestion { get; set; }
+        public NextQuestion NextQuestion { get; set; }
 
         [JsonProperty("is_last_question")]
         public bool IsLastQuestion { get; set; }
