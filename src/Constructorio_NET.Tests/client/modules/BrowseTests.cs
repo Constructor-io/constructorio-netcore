@@ -1,10 +1,9 @@
-using Constructorio_NET.Models;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Constructorio_NET.Models;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
 {
@@ -242,7 +241,7 @@ namespace Constructorio_NET.Tests
             Assert.IsTrue(
                 res.Response.Results.TrueForAll(result =>
                 {
-                    var facetValue = Double.Parse(result.Data.Facets.Find(facet => facet.Name == "price_01").Values[0]);
+                    var facetValue = double.Parse(result.Data.Facets.Find(facet => facet.Name == "price_01").Values[0]);
                     return facetValue < 20 && facetValue > 0;
                 }),
                 "Result set consists of only filtered items");
@@ -294,7 +293,7 @@ namespace Constructorio_NET.Tests
                     double? facetPrice = null;
                     if (facetPriceObj != null)
                     {
-                        facetPrice = Double.Parse(facetPriceObj.Values[0]);
+                        facetPrice = double.Parse(facetPriceObj.Values[0]);
                     }
 
                     List<string> facetColors = new List<string>();
@@ -370,8 +369,8 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-            Assert.AreEqual(res.Response.Collection.DisplayName, this.CollectionId, "display name should match");
-            Assert.AreEqual(res.Response.Collection.Id, this.CollectionId, "id should match");
+            Assert.AreEqual(this.CollectionId, res.Response.Collection.DisplayName, "display name should match");
+            Assert.AreEqual(this.CollectionId, res.Response.Collection.Id, "id should match");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 

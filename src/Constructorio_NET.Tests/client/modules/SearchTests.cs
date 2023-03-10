@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
@@ -99,8 +98,8 @@ namespace Constructorio_NET.Tests
             {
                 UserInfo = this.UserInfo,
                 PreFilterExpression = preFilterExpression,
-
             };
+
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
             res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
@@ -178,8 +177,8 @@ namespace Constructorio_NET.Tests
             {
                 UserInfo = this.UserInfo,
                 PreFilterExpression = preFilterExpression,
-
             };
+
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
             res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
@@ -206,8 +205,8 @@ namespace Constructorio_NET.Tests
             {
                 UserInfo = this.UserInfo,
                 PreFilterExpression = preFilterExpression,
-
             };
+
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
             res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
@@ -233,8 +232,8 @@ namespace Constructorio_NET.Tests
             {
                 UserInfo = this.UserInfo,
                 PreFilterExpression = rangeFilterByPrice,
-
             };
+
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
             res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
@@ -245,7 +244,7 @@ namespace Constructorio_NET.Tests
             Assert.IsTrue(
                   res.Response.Results.TrueForAll(result =>
                   {
-                      var facetValue = Double.Parse(result.Data.Facets.Find(facet => facet.Name == "price_01").Values[0]);
+                      var facetValue = double.Parse(result.Data.Facets.Find(facet => facet.Name == "price_01").Values[0]);
                       return facetValue < 20 && facetValue > 0;
                   }),
                   "Result set consists of only filtered items");
@@ -279,12 +278,11 @@ namespace Constructorio_NET.Tests
             {
                 UserInfo = this.UserInfo,
                 PreFilterExpression = preFilterExpression,
-
             };
+
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
             res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
-
 
             Assert.AreEqual(reqPreFilterExpression, JObject.Parse(preFilterExpression.GetExpression()), "Pre Filter Expression differs in request");
             Assert.AreEqual(4, res.Response.Results.Count, "Total number of results expected to be 7");
@@ -299,7 +297,7 @@ namespace Constructorio_NET.Tests
                     double? facetPrice = null;
                     if (facetPriceObj != null)
                     {
-                        facetPrice = Double.Parse(facetPriceObj.Values[0]);
+                        facetPrice = double.Parse(facetPriceObj.Values[0]);
                     }
 
                     List<string> facetColors = new List<string>();
