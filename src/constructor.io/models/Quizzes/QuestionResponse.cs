@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-public enum QuestionType
-{
-    [EnumMember(Value = "single")]
-    Single,
-    [EnumMember(Value = "multiple")]
-    Multiple,
-    [EnumMember(Value = "open")]
-    Open,
-    [EnumMember(Value = "cover")]
-    Cover,
-}
-
 /**
  * Constructor.io NextQuestion Response
  */
 namespace Constructorio_NET.Models
 {
+    public enum QuestionType
+    {
+        [EnumMember(Value = "single")]
+        Single,
+        [EnumMember(Value = "multiple")]
+        Multiple,
+        [EnumMember(Value = "open")]
+        Open,
+        [EnumMember(Value = "cover")]
+        Cover,
+    }
+
     public class NextQuestion
     {
         [JsonProperty("id")]
