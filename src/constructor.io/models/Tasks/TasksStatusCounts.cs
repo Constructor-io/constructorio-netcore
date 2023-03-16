@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 /**
  * Constructor.io Status Counts
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Tasks
 {
     public class TasksStatusCounts
     {

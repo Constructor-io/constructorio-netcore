@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
+using Constructorio_NET.Models.Browse;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 

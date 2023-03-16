@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Models;
+using Constructorio_NET.Models.Search;
 using Constructorio_NET.Utils;
 using NUnit.Framework;
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Constructorio_NET.Utils;
 using Newtonsoft.Json;
 
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Autocomplete
 {
     /// <summary>
     /// Constructor.io Autocomplete Request Class.

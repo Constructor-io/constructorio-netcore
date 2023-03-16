@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Task
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Tasks
 {
     public class TaskResponse
     {

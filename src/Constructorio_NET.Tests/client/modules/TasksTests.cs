@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
+using Constructorio_NET.Models.Catalog;
+using Constructorio_NET.Models.Tasks;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 

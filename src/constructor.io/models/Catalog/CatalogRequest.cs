@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Constructorio_NET.Utils;
 
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Catalog
 {
     /// <summary>
     /// Constructor.io Catalog Request Class.

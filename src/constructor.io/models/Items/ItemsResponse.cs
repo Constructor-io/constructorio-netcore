@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Constructorio_NET.Models;
 using Newtonsoft.Json;
 
 /**
  * Constructor.io Items Response
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Items
 {
     public class ItemsResponse
     {

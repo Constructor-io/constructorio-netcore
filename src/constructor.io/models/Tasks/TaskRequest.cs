@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Tasks
 {
     /// <summary>
     /// Constructor.io Task Request Class.

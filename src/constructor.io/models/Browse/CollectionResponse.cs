@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Collection
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Browse
 {
     public class CollectionResponse
     {

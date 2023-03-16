@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Browse Facets Response
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Browse
 {
     public class BrowseFacetsResponse
     {

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Search Response Inner
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Search
 {
     public class SearchResponseInner
     {

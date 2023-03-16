@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Browse Response Inner
  **/
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Browse
 {
     public class BrowseResponseInner
     {

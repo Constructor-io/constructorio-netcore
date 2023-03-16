@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 /**
  * Constructor.io Pod
  */
-namespace Constructorio_NET.Models
+namespace Constructorio_NET.Models.Recommendations
 {
     public class ResultPod
     {
