@@ -28,7 +28,7 @@ namespace Constructorio_NET.Models
         public Dictionary<string, string> FmtOptions { get; set; }
 
         /// <summary>
-        /// Gets or sets the faceting expression used to scope search results.
+        /// Gets or sets the filtering expression used to scope search results.
         /// </summary>
         public PreFilterExpression PreFilterExpression { get; set; }
 
