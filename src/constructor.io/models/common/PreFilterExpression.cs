@@ -3,101 +3,104 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
-[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-public abstract class PreFilterExpression
+namespace Constructorio_NET.Models
 {
-    public virtual string GetExpression()
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    public abstract class PreFilterExpression
     {
-        return JsonConvert.SerializeObject(this);
-    }
-}
-
-public class JsonPrefilterExpression : PreFilterExpression
-{
-    private JObject _JsonObject { get; set; }
-    public override string GetExpression()
-    {
-        return JsonConvert.SerializeObject(_JsonObject);
+        public virtual string GetExpression()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 
-    public JsonPrefilterExpression(JObject customJson)
+    public class JsonPrefilterExpression : PreFilterExpression
     {
-        _JsonObject = customJson;
+        private JObject JsonObject { get; set; }
+        public override string GetExpression()
+        {
+            return JsonConvert.SerializeObject(JsonObject);
+        }
+
+        public JsonPrefilterExpression(JObject customJson)
+        {
+            JsonObject = customJson;
+        }
+
+        public JsonPrefilterExpression(string customJsonString)
+        {
+            JsonObject = JObject.Parse(customJsonString);
+        }
+
+        public JsonPrefilterExpression() { }
     }
 
-    public JsonPrefilterExpression(string customJsonString)
+    public class OrPreFilterExpression : PreFilterExpression
     {
-        _JsonObject = JObject.Parse(customJsonString);
+        [JsonProperty("or")]
+        public List<PreFilterExpression> Or { get; set; }
+
+        public OrPreFilterExpression(List<PreFilterExpression> expressions)
+        {
+            Or = expressions;
+        }
+
+        public OrPreFilterExpression() { }
     }
 
-    public JsonPrefilterExpression() { }
-}
-
-public class OrPreFilterExpression : PreFilterExpression
-{
-    [JsonProperty("or")]
-    public List<PreFilterExpression> Or { get; set; }
-
-    public OrPreFilterExpression(List<PreFilterExpression> expressions)
+    public class AndPreFilterExpression : PreFilterExpression
     {
-        Or = expressions;
+        [JsonProperty("and")]
+        public List<PreFilterExpression> And { get; set; }
+
+        public AndPreFilterExpression(List<PreFilterExpression> expressions)
+        {
+            And = expressions;
+        }
+
+        public AndPreFilterExpression() { }
     }
 
-    public OrPreFilterExpression() { }
-}
-
-public class AndPreFilterExpression : PreFilterExpression
-{
-    [JsonProperty("and")]
-    public List<PreFilterExpression> And { get; set; }
-
-    public AndPreFilterExpression(List<PreFilterExpression> expressions)
+    public class NotPreFilterExpression : PreFilterExpression
     {
-        And = expressions;
+        [JsonProperty("not")]
+        public PreFilterExpression Not { get; set; }
+
+        public NotPreFilterExpression(PreFilterExpression expression)
+        {
+            Not = expression;
+        }
+
+        public NotPreFilterExpression() { }
     }
 
-    public AndPreFilterExpression() { }
-}
-
-public class NotPreFilterExpression : PreFilterExpression
-{
-    [JsonProperty("not")]
-    public PreFilterExpression Not { get; set; }
-
-    public NotPreFilterExpression(PreFilterExpression expression)
+    public abstract class PreFilterExpressionBase : PreFilterExpression
     {
-        Not = expression;
+        [JsonProperty("name")]
+        public string Name { get; set; }
     }
 
-    public NotPreFilterExpression() { }
-}
-
-public abstract class PreFilterExpressionBase : PreFilterExpression
-{
-    [JsonProperty("name")]
-    public string Name { get; set; }
-}
-
-public class ValuePreFilterExpression : PreFilterExpressionBase
-{
-    [JsonProperty("value")]
-    public string Value { get; set; }
-
-    public ValuePreFilterExpression(string name, string value)
+    public class ValuePreFilterExpression : PreFilterExpressionBase
     {
-        Name = name;
-        Value = value;
+        [JsonProperty("value")]
+        public string Value { get; set; }
+
+        public ValuePreFilterExpression(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
     }
-}
 
-public class RangePreFilterExpression : PreFilterExpressionBase
-{
-    [JsonProperty("range")]
-    public List<string> Range { get; set; }
-
-    public RangePreFilterExpression(string name, List<string> range)
+    public class RangePreFilterExpression : PreFilterExpressionBase
     {
-        Name = name;
-        Range = range;
+        [JsonProperty("range")]
+        public List<string> Range { get; set; }
+
+        public RangePreFilterExpression(string name, List<string> range)
+        {
+            Name = name;
+            Range = range;
+        }
     }
 }
