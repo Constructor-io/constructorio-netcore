@@ -119,6 +119,28 @@ variationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variati
 variationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
 request.VariationsMap = variationsMap;
 
+// Faceting expression to scope results, it is applied before other filters and doesn't affect facet counts
+string preFilterExpressionJObject = @"{
+    or: [
+        {
+        and:
+            [
+            { name: 'group_id', value: 'BrandXY' },
+            { name: 'Color', value: 'red' },
+        ],
+        },
+        {
+        and:
+            [
+            { name: 'Color', value: 'blue' },
+            { name: 'Brand', value: 'XYZ' },
+        ],
+        },
+    ],
+}";
+JsonPrefilterExpression preFilterExpression = new JsonPrefilterExpression(preFilterExpressionJObject);
+request.PreFilterExpression = preFilterExpression;
+
 // Request results as an object
 SearchResponse response = await constructorio.Search.GetSearchResults(request);
 ```
@@ -157,6 +179,28 @@ variationsMap.AddGroupByRule("url", "data.url");
 variationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
 variationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
 request.VariationsMap = variationsMap;
+
+// Faceting expression to scope results, it is applied before other filters and doesn't affect facet counts
+string preFilterExpressionJObject = @"{
+    or: [
+        {
+        and:
+            [
+            { name: 'group_id', value: 'BrandXY' },
+            { name: 'Color', value: 'red' },
+        ],
+        },
+        {
+        and:
+            [
+            { name: 'Color', value: 'blue' },
+            { name: 'Brand', value: 'XYZ' },
+        ],
+        },
+    ],
+}";
+JsonPrefilterExpression preFilterExpression = new JsonPrefilterExpression(preFilterExpressionJObject);
+request.PreFilterExpression = preFilterExpression;
 
 // Request results as an object
 BrowseResponse response = await constructorio.Browse.GetBrowseResults(request);
