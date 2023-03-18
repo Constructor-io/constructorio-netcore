@@ -177,6 +177,28 @@ Retrieving Search Results</h1>
 <div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;deactivated&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.deactivated&quot;</span>);</div>
 <div class="line">request.VariationsMap = variationsMap;</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">// Faceting expression to scope results, it is applied before other filters and doesn&#39;t affect facet counts</span></div>
+<div class="line"><span class="keywordtype">string</span> preFilterExpressionJObject = <span class="stringliteral">@&quot;{</span></div>
+<div class="line"><span class="stringliteral">    or: [</span></div>
+<div class="line"><span class="stringliteral">        {</span></div>
+<div class="line"><span class="stringliteral">        and:</span></div>
+<div class="line"><span class="stringliteral">            [</span></div>
+<div class="line"><span class="stringliteral">            { name: &#39;group_id&#39;, value: &#39;BrandXY&#39; },</span></div>
+<div class="line"><span class="stringliteral">            { name: &#39;Color&#39;, value: &#39;red&#39; },</span></div>
+<div class="line"><span class="stringliteral">        ],</span></div>
+<div class="line"><span class="stringliteral">        },</span></div>
+<div class="line"><span class="stringliteral">        {</span></div>
+<div class="line"><span class="stringliteral">        and:</span></div>
+<div class="line"><span class="stringliteral">            [</span></div>
+<div class="line"><span class="stringliteral">            { name: &#39;Color&#39;, value: &#39;blue&#39; },</span></div>
+<div class="line"><span class="stringliteral">            { name: &#39;Brand&#39;, value: &#39;XYZ&#39; },</span></div>
+<div class="line"><span class="stringliteral">        ],</span></div>
+<div class="line"><span class="stringliteral">        },</span></div>
+<div class="line"><span class="stringliteral">    ],</span></div>
+<div class="line"><span class="stringliteral">}&quot;</span>;</div>
+<div class="line">JsonPrefilterExpression preFilterExpression = <span class="keyword">new</span> JsonPrefilterExpression(preFilterExpressionJObject);</div>
+<div class="line">request.PreFilterExpression = preFilterExpression;</div>
+<div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
 <div class="line">SearchResponse response = await constructorio.Search.GetSearchResults(request);</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
@@ -218,6 +240,28 @@ Retrieving Browse Results</h1>
 <div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;variation_id&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.variation_id&quot;</span>);</div>
 <div class="line">variationsMap.AddValueRule(<span class="stringliteral">&quot;deactivated&quot;</span>, AggregationTypes.First, <span class="stringliteral">&quot;data.deactivated&quot;</span>);</div>
 <div class="line">request.VariationsMap = variationsMap;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Faceting expression to scope results, it is applied before other filters and doesn&#39;t affect facet counts</span></div>
+<div class="line"><span class="keywordtype">string</span> preFilterExpressionJObject = <span class="stringliteral">@&quot;{</span></div>
+<div class="line"><span class="stringliteral">    or: [</span></div>
+<div class="line"><span class="stringliteral">        {</span></div>
+<div class="line"><span class="stringliteral">        and:</span></div>
+<div class="line"><span class="stringliteral">            [</span></div>
+<div class="line"><span class="stringliteral">            { name: &#39;group_id&#39;, value: &#39;BrandXY&#39; },</span></div>
+<div class="line"><span class="stringliteral">            { name: &#39;Color&#39;, value: &#39;red&#39; },</span></div>
+<div class="line"><span class="stringliteral">        ],</span></div>
+<div class="line"><span class="stringliteral">        },</span></div>
+<div class="line"><span class="stringliteral">        {</span></div>
+<div class="line"><span class="stringliteral">        and:</span></div>
+<div class="line"><span class="stringliteral">            [</span></div>
+<div class="line"><span class="stringliteral">            { name: &#39;Color&#39;, value: &#39;blue&#39; },</span></div>
+<div class="line"><span class="stringliteral">            { name: &#39;Brand&#39;, value: &#39;XYZ&#39; },</span></div>
+<div class="line"><span class="stringliteral">        ],</span></div>
+<div class="line"><span class="stringliteral">        },</span></div>
+<div class="line"><span class="stringliteral">    ],</span></div>
+<div class="line"><span class="stringliteral">}&quot;</span>;</div>
+<div class="line">JsonPrefilterExpression preFilterExpression = <span class="keyword">new</span> JsonPrefilterExpression(preFilterExpressionJObject);</div>
+<div class="line">request.PreFilterExpression = preFilterExpression;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Request results as an object</span></div>
 <div class="line">BrowseResponse response = await constructorio.Browse.GetBrowseResults(request);</div>

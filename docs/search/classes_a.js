@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['taskrequest_0',['TaskRequest',['../class_constructorio___n_e_t_1_1_models_1_1_task_request.html',1,'Constructorio_NET::Models']]],
-  ['taskresponse_1',['TaskResponse',['../class_constructorio___n_e_t_1_1_models_1_1_task_response.html',1,'Constructorio_NET::Models']]],
-  ['tasks_2',['Tasks',['../class_constructorio___n_e_t_1_1_modules_1_1_tasks.html',1,'Constructorio_NET::Modules']]],
-  ['tasksstatuscounts_3',['TasksStatusCounts',['../class_constructorio___n_e_t_1_1_models_1_1_tasks_status_counts.html',1,'Constructorio_NET::Models']]]
+  ['paginationoptions_0',['PaginationOptions',['../class_constructorio___n_e_t_1_1_models_1_1_pagination_options.html',1,'Constructorio_NET::Models']]],
+  ['patchsearchabilitiesrequest_1',['PatchSearchabilitiesRequest',['../class_constructorio___n_e_t_1_1_models_1_1_patch_searchabilities_request.html',1,'Constructorio_NET::Models']]],
+  ['prefilterexpression_2',['PreFilterExpression',['../class_constructorio___n_e_t_1_1_models_1_1_pre_filter_expression.html',1,'Constructorio_NET::Models']]],
+  ['prefilterexpressionbase_3',['PreFilterExpressionBase',['../class_constructorio___n_e_t_1_1_models_1_1_pre_filter_expression_base.html',1,'Constructorio_NET::Models']]]
 ];
