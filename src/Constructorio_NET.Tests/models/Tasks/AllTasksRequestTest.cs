@@ -11,6 +11,7 @@ namespace Constructorio_NET.Tests
     {
         private readonly int Page = 2;
         private readonly int ResultsPerPage = 20;
+        private readonly int Offset = 10;
         private readonly string StartDate = "2010-01-02";
         private readonly string EndDate = "2020-02-02";
         private readonly string Status = "QUEUED";
@@ -25,6 +26,7 @@ namespace Constructorio_NET.Tests
                 StartDate = this.StartDate,
                 Status = this.Status,
                 Type = this.Type,
+                Offset = this.Offset
             };
 
             Assert.AreEqual(this.ResultsPerPage, req.ResultsPerPage);
@@ -33,6 +35,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.EndDate, req.EndDate);
             Assert.AreEqual(this.Status, req.Status);
             Assert.AreEqual(this.Type, req.Type);
+            Assert.AreEqual(this.Offset, req.Offset);
         }
 
         [Test]
@@ -45,7 +48,8 @@ namespace Constructorio_NET.Tests
                 Type = this.Type,
                 StartDate = this.StartDate,
                 EndDate = this.EndDate,
-                Status = this.Status
+                Status = this.Status,
+                Offset = this.Offset
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -55,6 +59,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.StartDate, requestParameters[Constants.START_DATE]);
             Assert.AreEqual(this.EndDate, requestParameters[Constants.END_DATE]);
             Assert.AreEqual(this.Status, requestParameters[Constants.STATUS]);
+            Assert.AreEqual(this.Offset, requestParameters[Constants.OFFSET]);
         }
     }
 }

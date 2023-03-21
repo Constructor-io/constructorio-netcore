@@ -11,8 +11,8 @@ namespace Constructorio_NET.Models
     public class AllTasksRequest
     {
         public int ResultsPerPage { get; set; }
-
         public int Page { get; set; }
+        public int Offset { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string Status { get; set; }
@@ -24,7 +24,6 @@ namespace Constructorio_NET.Models
         public AllTasksRequest()
         {
             this.ResultsPerPage = 20;
-            this.Page = 1;
         }
 
         /// <summary>
@@ -49,6 +48,10 @@ namespace Constructorio_NET.Models
             if (this.Page != 0)
             {
                 parameters.Add(Constants.PAGE, this.Page);
+            }
+
+            if (this.Offset != 0) {
+                parameters.Add(Constants.OFFSET, this.Offset);
             }
 
             if (this.ResultsPerPage != 0)
