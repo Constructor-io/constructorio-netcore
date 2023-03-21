@@ -22,6 +22,10 @@ namespace Constructorio_NET.Models
             this.SetClientId(clientId);
         }
 
+        public UserInfo()
+        {
+        }
+
         public string GetClientId()
         {
             return this.clientId;

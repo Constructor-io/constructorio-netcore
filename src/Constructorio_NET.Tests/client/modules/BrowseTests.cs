@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -56,6 +55,17 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetBrowseResultGroupsData()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+
+            Assert.IsNotNull(res.Response.Groups, "Groups should not be null");
+            Assert.IsNotNull(res.Response.Groups[0].Data, "Groups[0].Data should not be null");
+        }
+
+        [Test]
         public async Task GetBrowseResultsWithFilters()
         {
             Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
@@ -74,6 +84,273 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
             Assert.IsNotNull(res.Response.Facets[0].Data, "data object expected to exist");
             Assert.IsNotNull(res.Response.Facets[0].Hidden, "hidden field expected to exist");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsWithPreFilterExpressionJson()
+        {
+            JObject preFilterExpressionJObject = JObject.Parse(@"{
+                or: [
+                    {
+                    and:
+                        [
+                        { name: 'group_id', value: 'BrandXY' },
+                        { name: 'Color', value: 'red' },
+                    ],
+                    },
+                    {
+                    and:
+                        [
+                        { name: 'Color', value: 'blue' },
+                        { name: 'Brand', value: 'XYZ' },
+                    ],
+                    },
+                ],
+            }");
+            JsonPrefilterExpression preFilterExpression = new JsonPrefilterExpression(preFilterExpressionJObject);
+            BrowseRequest req = new BrowseRequest("group_id", "All")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = preFilterExpression,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+
+            Assert.AreEqual(reqPreFilterExpression, JObject.Parse(preFilterExpression.GetExpression()), "Pre Filter Expression differs in request");
+            Assert.AreEqual(2, res.Response.Results.Count, "Total number of results expected to be 2");
+            Assert.IsTrue(
+                res.Response.Results.TrueForAll(result =>
+                {
+                    var facetValue = result.Data.Facets.Find(facet => facet.Name == "Color");
+                    return facetValue.Values.Contains("red") || facetValue.Values.Contains("blue");
+                }),
+                "Result set contains items with Facet.Color other than red or blue");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsWithPreFilterExpressionJsonString()
+        {
+            string preFilterExpressionJObject = @"{
+                or: [
+                    {
+                    and:
+                        [
+                        { name: 'group_id', value: 'BrandXY' },
+                        { name: 'Color', value: 'red' },
+                    ],
+                    },
+                    {
+                    and:
+                        [
+                        { name: 'Color', value: 'blue' },
+                        { name: 'Brand', value: 'XYZ' },
+                    ],
+                    },
+                ],
+            }";
+            JsonPrefilterExpression preFilterExpression = new JsonPrefilterExpression(preFilterExpressionJObject);
+            BrowseRequest req = new BrowseRequest("group_id", "All")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = preFilterExpression,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+
+            Assert.AreEqual(reqPreFilterExpression, JObject.Parse(preFilterExpression.GetExpression()), "Pre Filter Expression differs in request");
+            Assert.AreEqual(2, res.Response.Results.Count, "Total number of results expected to be 2");
+            Assert.IsTrue(
+                res.Response.Results.TrueForAll(result =>
+                {
+                    var facetValue = result.Data.Facets.Find(facet => facet.Name == "Color");
+                    return facetValue.Values.Contains("red") || facetValue.Values.Contains("blue");
+                }),
+                "Result set contains items with Facet.Color other than red or blue");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsWithPreFilterExpression()
+        {
+            ValuePreFilterExpression filterByGroupId1 = new ValuePreFilterExpression("group_id", "BrandXY");
+            ValuePreFilterExpression filterByColor1 = new ValuePreFilterExpression("Color", "red");
+            AndPreFilterExpression filterByBothGroupIdAndColor1 = new AndPreFilterExpression(new List<PreFilterExpression> { filterByGroupId1, filterByColor1 });
+
+            ValuePreFilterExpression filterByBrand2 = new ValuePreFilterExpression("Brand", "XYZ");
+            ValuePreFilterExpression filterByColor2 = new ValuePreFilterExpression("Color", "blue");
+            AndPreFilterExpression filterByBothBrandAndColor2 = new AndPreFilterExpression(new List<PreFilterExpression> { filterByBrand2, filterByColor2 });
+
+            OrPreFilterExpression preFilterExpression = new OrPreFilterExpression();
+            preFilterExpression.Or = new List<PreFilterExpression> { filterByBothGroupIdAndColor1, filterByBothBrandAndColor2 };
+
+            BrowseRequest req = new BrowseRequest("group_id", "All")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = preFilterExpression,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+
+            Assert.AreEqual(reqPreFilterExpression, JObject.Parse(preFilterExpression.GetExpression()), "Pre Filter Expression differs in request");
+            Assert.AreEqual(2, res.Response.Results.Count, "Total number of results expected to be 2");
+            Assert.IsTrue(
+                res.Response.Results.TrueForAll(result =>
+                {
+                    var facetValue = result.Data.Facets.Find(facet => facet.Name == "Color");
+                    return facetValue.Values.Contains("red") || facetValue.Values.Contains("blue");
+                }),
+                "Result set contains items with Facet.Color other than red or blue");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsWithPreFilterExpressionNot()
+        {
+            ValuePreFilterExpression filterByColor1 = new ValuePreFilterExpression("Color", "Blue");
+            NotPreFilterExpression preFilterExpression = new NotPreFilterExpression(filterByColor1);
+
+            BrowseRequest req = new BrowseRequest("group_id", "All")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = preFilterExpression,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+
+            Assert.AreEqual(reqPreFilterExpression, JObject.Parse(preFilterExpression.GetExpression()), "Pre Filter Expression differs in request");
+            Assert.AreEqual(9, res.Response.Results.Count, "Total number of results expected to be 9");
+            Assert.IsTrue(
+                res.Response.Results.TrueForAll(result =>
+                {
+                    var facetValue = result.Data.Facets.Find(facet => facet.Name == "Color");
+                    return facetValue == null || !facetValue.Values.Contains("Blue");
+                }),
+                "Result set contains facet.Color = Blue");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsWithPreFilterExpressionRange()
+        {
+            RangePreFilterExpression rangeFilterByPrice = new RangePreFilterExpression("price_01", new List<string> { "0", "20" });
+
+            BrowseRequest req = new BrowseRequest("group_id", "All")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = rangeFilterByPrice,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+
+            Assert.AreEqual(reqPreFilterExpression, JObject.Parse(rangeFilterByPrice.GetExpression()), "Pre Filter Expression differs in request");
+            Assert.AreEqual(1, res.Response.Results.Count, "Total number of results expected to be 1");
+            Assert.IsTrue(
+                res.Response.Results.TrueForAll(result =>
+                {
+                    var facetValue = double.Parse(result.Data.Facets.Find(facet => facet.Name == "price_01").Values[0]);
+                    return facetValue < 20 && facetValue > 0;
+                }),
+                "Result set consists of only filtered items");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsWithPreFilterExpressionMultiple()
+        {
+            ValuePreFilterExpression filterByGroupId1 = new ValuePreFilterExpression("group_id", "StyleB");
+            ValuePreFilterExpression filterByColor1 = new ValuePreFilterExpression("Color", "red");
+            OrPreFilterExpression orExpression = new OrPreFilterExpression(new List<PreFilterExpression> { filterByColor1, filterByGroupId1 });
+
+            ValuePreFilterExpression filterByBrand2 = new ValuePreFilterExpression("Brand", "XYZ");
+            ValuePreFilterExpression filterByColor2 = new ValuePreFilterExpression("Color", "blue");
+            AndPreFilterExpression andExpression = new AndPreFilterExpression(new List<PreFilterExpression> { filterByBrand2, filterByColor2 });
+
+            ValuePreFilterExpression valueExpression = new ValuePreFilterExpression("Color", "silver");
+
+            RangePreFilterExpression rangeExpression = new RangePreFilterExpression("price_01", new List<string> { "0", "20" });
+
+            OrPreFilterExpression preFilterExpression = new OrPreFilterExpression(new List<PreFilterExpression>
+            {
+                orExpression,
+                andExpression,
+                valueExpression,
+                rangeExpression
+            });
+
+            BrowseRequest req = new BrowseRequest("group_id", "All")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = preFilterExpression,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+
+            Assert.AreEqual(reqPreFilterExpression, JObject.Parse(preFilterExpression.GetExpression()), "Pre Filter Expression differs in request");
+            Assert.AreEqual(7, res.Response.Results.Count, "Total number of results expected to be 7");
+            Assert.IsTrue(
+                res.Response.Results.TrueForAll(result =>
+                {
+                    var groupIdObj = result.Data.Groups;
+                    var facetPriceObj = result.Data.Facets.Find(facet => facet.Name == "price_01");
+                    var facetColorObj = result.Data.Facets.Find(facet => facet.Name == "Color");
+                    var facetBrandsObj = result.Data.Facets.Find(facet => facet.Name == "Brand");
+
+                    double? facetPrice = null;
+                    if (facetPriceObj != null)
+                    {
+                        facetPrice = double.Parse(facetPriceObj.Values[0]);
+                    }
+
+                    List<string> facetColors = new List<string>();
+                    if (facetColorObj != null)
+                    {
+                        facetColors = facetColorObj.Values;
+                    }
+
+                    List<string> facetBrands = new List<string>();
+                    if (facetBrandsObj != null)
+                    {
+                        facetBrands = facetBrandsObj.Values;
+                    }
+
+                    List<string> groupIds = new List<string>();
+                    if (groupIdObj != null)
+                    {
+                        groupIds = groupIdObj.ConvertAll<string>(group => group.GroupId);
+                    }
+
+                    if (groupIds.Contains("StyleB"))
+                    {
+                        return true;
+                    }
+                    else if (facetColors.Contains("red"))
+                    {
+                        return true;
+                    }
+                    else if (facetBrands.Contains("XYZ") && facetColors.Contains("blue"))
+                    {
+                        return true;
+                    }
+                    else if (facetColors.Contains("silver"))
+                    {
+                        return true;
+                    }
+                    else if (facetPrice != null && facetPrice > 0 && facetPrice < 20)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }),
+                "Result set contains items other than filtered items");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
@@ -105,8 +382,8 @@ namespace Constructorio_NET.Tests
             Assert.Greater(res.Response.TotalNumResults, 0, "total number of results expected to be greater than 0");
             Assert.Greater(res.Response.Results.Count, 0, "length of results expected to be greater than 0");
             Assert.Greater(res.Response.Facets.Count, 0, "length of facets expected to be greater than 0");
-            Assert.AreEqual(res.Response.Collection.DisplayName, this.CollectionId, "display name should match");
-            Assert.AreEqual(res.Response.Collection.Id, this.CollectionId, "id should match");
+            Assert.AreEqual(this.CollectionId, res.Response.Collection.DisplayName, "display name should match");
+            Assert.AreEqual(this.CollectionId, res.Response.Collection.Id, "id should match");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 

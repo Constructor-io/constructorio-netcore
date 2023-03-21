@@ -4,5 +4,6 @@ var searchData=
   ['percentagepresence_1',['PercentagePresence',['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html#ad9feee76afdbfa1910ad57e0bb6350cb',1,'Constructorio_NET::Models::Searchability']]],
   ['podid_2',['PodId',['../class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ac9938932455b7719213e358aca996add',1,'Constructorio_NET::Models::RecommendationsRequest']]],
   ['position_3',['Position',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a90efcf60e51da2c44c41766164897d40',1,'Constructorio_NET.Models.Facet.Position()'],['../class_constructorio___n_e_t_1_1_models_1_1_facet_option.html#a2371554ef5455516267578197f7bb4e1',1,'Constructorio_NET.Models.FacetOption.Position()']]],
-  ['protected_4',['Protected',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a08ca6181693ec94e4fb4023f88b82772',1,'Constructorio_NET::Models::Facet']]]
+  ['prefilterexpression_4',['PreFilterExpression',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a40ed14197e2014a8510c29106e81e6a3',1,'Constructorio_NET.Models.BrowseRequest.PreFilterExpression()'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a0b31e1f8c6d7cd37a679ca25001c8208',1,'Constructorio_NET.Models.SearchRequest.PreFilterExpression()']]],
+  ['protected_5',['Protected',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a08ca6181693ec94e4fb4023f88b82772',1,'Constructorio_NET::Models::Facet']]]
 ];

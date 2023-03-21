@@ -40,5 +40,6 @@
         public const string OFFSET = "offset";
         public const string ANSWERS = "a";
         public const string VERSION_ID = "version_id";
+        public const string PRE_FILTER_EXPRESSION = "pre_filter_expression";
     }
 }
