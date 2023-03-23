@@ -19,6 +19,7 @@ namespace Constructorio_NET
         public Search Search { get; }
         public Tasks Tasks { get; }
         public Items Items { get; }
+        public Quizzes Quizzes { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorIO"/> class.
@@ -58,6 +59,7 @@ namespace Constructorio_NET
             this.Search = new Search(options);
             this.Tasks = new Tasks(options);
             this.Items = new Items(options);
+            this.Quizzes = new Quizzes(options);
         }
     }
 }
