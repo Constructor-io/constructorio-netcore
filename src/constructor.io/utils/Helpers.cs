@@ -73,7 +73,7 @@ namespace Constructorio_NET.Utils
 
             foreach (var path in paths)
             {
-                url.Append($"/{HttpUtility.UrlPathEncode(path)}");
+                url.Append($"/{Uri.EscapeDataString(path)}");
             }
 
             url.Append($"?{Constants.API_KEY}={options[Constants.API_KEY]}");
@@ -228,9 +228,12 @@ namespace Constructorio_NET.Utils
 
             foreach (var header in requestHeaders)
             {
-                if (header.Key == Constants.USER_AGENT) {
+                if (header.Key == Constants.USER_AGENT)
+                {
                     httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
-                } else {
+                }
+                else
+                {
                     httpRequest.Headers.Add(header.Key, header.Value);
                 }
             }
