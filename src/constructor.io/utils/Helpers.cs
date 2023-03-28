@@ -228,7 +228,11 @@ namespace Constructorio_NET.Utils
 
             foreach (var header in requestHeaders)
             {
-                httpRequest.Headers.Add(header.Key, header.Value);
+                if (header.Key == Constants.USER_AGENT) {
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                } else {
+                    httpRequest.Headers.Add(header.Key, header.Value);
+                }
             }
 
             if (options.ContainsKey(Constants.CONSTRUCTOR_TOKEN))
