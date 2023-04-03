@@ -24,7 +24,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets version identifier for the quiz.
         /// </summary>
-        public string VersionId { get; set; }
+        public string QuizVersionId { get; set; }
 
         /// <summary>
         /// Gets or sets collection of user related data.
@@ -80,9 +80,9 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.ANSWERS, this.Answers);
             }
 
-            if (this.VersionId != null)
+            if (this.QuizVersionId != null)
             {
-                parameters.Add(Constants.VERSION_ID, this.VersionId);
+                parameters.Add(Constants.QUIZ_VERSION_ID, this.QuizVersionId);
             }
 
             return parameters;

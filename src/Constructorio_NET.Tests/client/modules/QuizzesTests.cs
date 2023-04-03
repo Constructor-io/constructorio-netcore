@@ -21,7 +21,7 @@ namespace Constructorio_NET.Tests
             new List<string>() { "1", "2" },
             new List<string>() { "seen" },
         };
-        private readonly string VersionId = "e03210db-0cc6-459c-8f17-bf014c4f554d";
+        private readonly string QuizVersionId = "e03210db-0cc6-459c-8f17-bf014c4f554d";
         private ConstructorioConfig Config;
         private UserInfo UserInfo;
 
@@ -56,7 +56,7 @@ namespace Constructorio_NET.Tests
             QuizRequest req = new QuizRequest(this.Id)
             {
                 Answers = this.Answers,
-                VersionId = this.VersionId
+                QuizVersionId = this.QuizVersionId
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             NextQuestionResponse res = await constructorio.Quizzes.GetNextQuestion(req);
@@ -67,7 +67,7 @@ namespace Constructorio_NET.Tests
             Assert.IsNotNull(res.NextQuestion.Description, "NextQuestion Description should exist");
             Assert.IsNotNull(res.NextQuestion.Images, "NextQuestion Images should exist");
             Assert.IsNotNull(res.IsLastQuestion, "IsLastQuestion should exist");
-            Assert.IsNotNull(res.VersionId, "VersionId should exist");
+            Assert.IsNotNull(res.QuizVersionId, "QuizVersionId should exist");
         }
 
         [Test]
@@ -76,14 +76,14 @@ namespace Constructorio_NET.Tests
             QuizRequest req = new QuizRequest(this.Id)
             {
                 Answers = this.Answers,
-                VersionId = this.VersionId
+                QuizVersionId = this.QuizVersionId
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             QuizResultsResponse res = await constructorio.Quizzes.GetResults(req);
             Assert.IsNotNull(res.Result, "Result should exist");
             Assert.IsNotNull(res.Result.FilterExpression, "FilterExpression should exist");
             Assert.IsNotNull(res.Result.ResultsUrl, "ResultsUrl should exist");
-            Assert.IsNotNull(res.VersionId, "VersionId should exist");
+            Assert.IsNotNull(res.QuizVersionId, "QuizVersionId should exist");
         }
     }
 }
