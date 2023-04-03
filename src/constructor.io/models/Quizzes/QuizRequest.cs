@@ -14,7 +14,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets the quiz id used to get quiz result.
         /// </summary>
-        public string Id { get; set; }
+        public string QuizId { get; set; }
 
         /// <summary>
         /// Gets or sets An array of answers in the format [[1,2],[1]].
@@ -47,7 +47,7 @@ namespace Constructorio_NET.Models
                 throw new ArgumentException("quiz id is required");
             }
 
-            this.Id = id;
+            this.QuizId = id;
         }
 
         /// <summary>

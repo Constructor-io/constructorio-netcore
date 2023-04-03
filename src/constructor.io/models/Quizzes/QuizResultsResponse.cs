@@ -26,5 +26,8 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("quiz_session_id")]
         public string QuizSessionId { get; set; }
+
+        [JsonProperty("quiz_id")]
+        public string QuizId { get; set; }
     }
 }
