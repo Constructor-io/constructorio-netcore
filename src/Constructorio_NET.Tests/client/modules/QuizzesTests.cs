@@ -22,6 +22,7 @@ namespace Constructorio_NET.Tests
             new List<string>() { "seen" },
         };
         private readonly string QuizVersionId = "e03210db-0cc6-459c-8f17-bf014c4f554d";
+        private readonly string QuizSessionId = "ca380401-3805-4ded-8f28-638e5a4baa92";
         private ConstructorioConfig Config;
         private UserInfo UserInfo;
 
@@ -68,6 +69,22 @@ namespace Constructorio_NET.Tests
             Assert.IsNotNull(res.NextQuestion.Images, "NextQuestion Images should exist");
             Assert.IsNotNull(res.IsLastQuestion, "IsLastQuestion should exist");
             Assert.IsNotNull(res.QuizVersionId, "QuizVersionId should exist");
+            Assert.IsNotNull(res.QuizSessionId, "QuizSessionId should exist");
+        }
+
+        [Test]
+        public async Task GetQuizNextQuestionShouldMatchPassedIds()
+        {
+            QuizRequest req = new QuizRequest(this.Id)
+            {
+                Answers = this.Answers,
+                QuizVersionId = this.QuizVersionId,
+                QuizSessionId = this.QuizSessionId
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            NextQuestionResponse res = await constructorio.Quizzes.GetNextQuestion(req);
+            Assert.AreEqual(this.QuizVersionId, res.QuizVersionId, "QuizVersionId should match the one passed in the request");
+            Assert.AreEqual(this.QuizSessionId, res.QuizSessionId, "QuizSessionId should match the one passed in the request");
         }
 
         [Test]
@@ -83,7 +100,23 @@ namespace Constructorio_NET.Tests
             Assert.IsNotNull(res.Result, "Result should exist");
             Assert.IsNotNull(res.Result.FilterExpression, "FilterExpression should exist");
             Assert.IsNotNull(res.Result.ResultsUrl, "ResultsUrl should exist");
+            Assert.IsNotNull(res.QuizSessionId, "QuizSessionId should exist");
             Assert.IsNotNull(res.QuizVersionId, "QuizVersionId should exist");
+        }
+
+        [Test]
+        public async Task GetQuizResultsShouldMatchPassedIds()
+        {
+            QuizRequest req = new QuizRequest(this.Id)
+            {
+                Answers = this.Answers,
+                QuizVersionId = this.QuizVersionId,
+                QuizSessionId = this.QuizSessionId
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            QuizResultsResponse res = await constructorio.Quizzes.GetResults(req);
+            Assert.AreEqual(this.QuizVersionId, res.QuizVersionId, "QuizVersionId should match the one passed in the request");
+            Assert.AreEqual(this.QuizSessionId, res.QuizSessionId, "QuizSessionId should match the one passed in the request");
         }
     }
 }
