@@ -27,6 +27,11 @@ namespace Constructorio_NET.Models
         public string QuizVersionId { get; set; }
 
         /// <summary>
+        /// Session id to mark the current session of a quiz. If not specified, generates new quiz_session_id in response.
+        /// </summary>
+        public string QuizSessionId { get; set; }
+
+        /// <summary>
         /// Gets or sets collection of user related data.
         /// </summary>
         public UserInfo UserInfo { get; set; }
@@ -83,6 +88,11 @@ namespace Constructorio_NET.Models
             if (this.QuizVersionId != null)
             {
                 parameters.Add(Constants.QUIZ_VERSION_ID, this.QuizVersionId);
+            }
+
+            if (this.QuizSessionId != null)
+            {
+                parameters.Add(Constants.QUIZ_SESSION_ID, this.QuizSessionId);
             }
 
             return parameters;
