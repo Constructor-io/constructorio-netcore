@@ -50,7 +50,8 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.PAGE, this.Page);
             }
 
-            if (this.Offset != 0) {
+            if (this.Offset != 0)
+            {
                 parameters.Add(Constants.OFFSET, this.Offset);
             }
 
