@@ -12,6 +12,7 @@ namespace Constructorio_NET.Models
     {
         public int Page { get; set; }
         public int ResultsPerPage { get; set; }
+        public int Offset { get; set; }
         public bool ShowHiddenFacets { get; set; }
         public bool ShowProtectedFacets { get; set; }
         public UserInfo UserInfo { get; set; }
@@ -36,6 +37,11 @@ namespace Constructorio_NET.Models
             if (this.Page != 0)
             {
                 parameters.Add(Constants.PAGE, this.Page);
+            }
+
+            if (this.Offset != 0)
+            {
+                parameters.Add(Constants.OFFSET, this.Offset);
             }
 
             if (this.ResultsPerPage != 0)
