@@ -28,7 +28,7 @@ namespace Constructorio_NET.Modules
         internal string CreateQuizUrl(QuizRequest req, string endpoint)
         {
             Hashtable requestParams = req.GetRequestParameters();
-            List<string> paths = new List<string> { req.Id, endpoint };
+            List<string> paths = new List<string> { req.QuizId, endpoint };
 
             return MakeUrl(this.Options, paths, requestParams);
         }

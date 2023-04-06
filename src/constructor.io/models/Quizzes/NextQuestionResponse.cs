@@ -15,7 +15,13 @@ namespace Constructorio_NET.Models
         [JsonProperty("is_last_question")]
         public bool IsLastQuestion { get; set; }
 
-        [JsonProperty("version_id")]
-        public string VersionId { get; set; }
+        [JsonProperty("quiz_version_id")]
+        public string QuizVersionId { get; set; }
+
+        [JsonProperty("quiz_session_id")]
+        public string QuizSessionId { get; set; }
+
+        [JsonProperty("quiz_id")]
+        public string QuizId { get; set; }
     }
 }

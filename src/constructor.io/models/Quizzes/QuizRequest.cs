@@ -14,7 +14,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets the quiz id used to get quiz result.
         /// </summary>
-        public string Id { get; set; }
+        public string QuizId { get; set; }
 
         /// <summary>
         /// Gets or sets An array of answers in the format [[1,2],[1]].
@@ -22,9 +22,16 @@ namespace Constructorio_NET.Models
         public List<List<string>> Answers { get; set; }
 
         /// <summary>
-        /// Gets or sets version identifier for the quiz.
+        /// Version identifier for the quiz. Version ID will be returned with the first request and it should be passed with subsequent requests. 
+        /// More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning
         /// </summary>
-        public string VersionId { get; set; }
+        public string QuizVersionId { get; set; }
+
+        /// <summary>
+        /// Session identifier for the quiz. Session ID will be returned with the first request and it should be passed with subsequent requests. 
+        /// More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
+        /// </summary>
+        public string QuizSessionId { get; set; }
 
         /// <summary>
         /// Gets or sets collection of user related data.
@@ -42,7 +49,7 @@ namespace Constructorio_NET.Models
                 throw new ArgumentException("quiz id is required");
             }
 
-            this.Id = id;
+            this.QuizId = id;
         }
 
         /// <summary>
@@ -80,9 +87,14 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.ANSWERS, this.Answers);
             }
 
-            if (this.VersionId != null)
+            if (this.QuizVersionId != null)
             {
-                parameters.Add(Constants.VERSION_ID, this.VersionId);
+                parameters.Add(Constants.QUIZ_VERSION_ID, this.QuizVersionId);
+            }
+
+            if (this.QuizSessionId != null)
+            {
+                parameters.Add(Constants.QUIZ_SESSION_ID, this.QuizSessionId);
             }
 
             return parameters;

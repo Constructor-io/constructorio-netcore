@@ -18,7 +18,8 @@ namespace Constructorio_NET.Tests
         {
             new List<string>() { "1", "2" }
         };
-        private readonly string VersionId = "1234";
+        private readonly string QuizVersionId = "1234";
+        private readonly string QuizSessionId = "4321";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
         private readonly string IP = "1,2,3";
         private readonly string OS = "Mac";
@@ -41,7 +42,8 @@ namespace Constructorio_NET.Tests
             {
                 UserInfo = this.UserInfo,
                 Answers = this.Answers,
-                VersionId = this.VersionId,
+                QuizVersionId = this.QuizVersionId,
+                QuizSessionId = this.QuizSessionId,
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -50,7 +52,8 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.UserId, requestParameters[Constants.USER_ID]);
             Assert.AreEqual(this.UserSegments, requestParameters[Constants.USER_SEGMENTS]);
             Assert.AreEqual(this.Answers, requestParameters[Constants.ANSWERS]);
-            Assert.AreEqual(this.VersionId, requestParameters[Constants.VERSION_ID]);
+            Assert.AreEqual(this.QuizVersionId, requestParameters[Constants.QUIZ_VERSION_ID]);
+            Assert.AreEqual(this.QuizSessionId, requestParameters[Constants.QUIZ_SESSION_ID]);
         }
 
         [Test]
