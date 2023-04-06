@@ -65,7 +65,7 @@ namespace Constructorio_NET.Modules
             string url;
             string result;
 
-            url = CreateQuizUrl(quizzesRequest, "finalize");
+            url = CreateQuizUrl(quizzesRequest, "results");
             Dictionary<string, string> requestHeaders = quizzesRequest.GetRequestHeaders();
             result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
 

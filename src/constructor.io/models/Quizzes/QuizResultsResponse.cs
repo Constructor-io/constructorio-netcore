@@ -7,19 +7,16 @@ using Newtonsoft.Json;
  */
 namespace Constructorio_NET.Models
 {
-    public class ResultResponse
-    {
-        [JsonProperty("filter_expression")]
-        public Dictionary<string, object> FilterExpression { get; set; }
-
-        [JsonProperty("results_url")]
-        public string ResultsUrl { get; set; }
-    }
-
     public class QuizResultsResponse
     {
-        [JsonProperty("result")]
-        public ResultResponse Result { get; set; }
+        [JsonProperty("request")]
+        public Dictionary<string, object> Request { get; set; }
+
+        [JsonProperty("response")]
+        public QuizResultsResponseInner Response { get; set; }
+
+        [JsonProperty("result_id")]
+        public string ResultId { get; set; }
 
         [JsonProperty("quiz_version_id")]
         public string QuizVersionId { get; set; }
