@@ -13,6 +13,7 @@ namespace Constructorio_NET.Tests
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
         private readonly int Page = 2;
+        private readonly int Offset = 10;
         private readonly int ResultsPerPage = 20;
         private readonly string IP = "1,2,3";
         private readonly string OS = "Mac";
@@ -34,11 +35,13 @@ namespace Constructorio_NET.Tests
                 UserInfo = this.UserInfo,
                 Page = this.Page,
                 ResultsPerPage = this.ResultsPerPage,
+                Offset = this.Offset,
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
             Assert.AreEqual(this.ResultsPerPage, requestParameters[Constants.RESULTS_PER_PAGE]);
             Assert.AreEqual(this.Page, requestParameters[Constants.PAGE]);
+            Assert.AreEqual(this.Offset, requestParameters[Constants.OFFSET]);
         }
 
         [Test]
