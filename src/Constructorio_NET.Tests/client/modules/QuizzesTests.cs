@@ -97,7 +97,7 @@ namespace Constructorio_NET.Tests
                 Answers = this.Answers,
                 QuizVersionId = this.QuizVersionId
             };
-            ConstructorIO constructorio = new ConstructorIO(this.Config);   
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
             QuizResultsResponse res = await constructorio.Quizzes.GetResults(req);
             Assert.IsNotNull(res.Response, "Response should exist");
             Assert.IsNotNull(res.Response.RefinedContent, "RefinedContent should exist");
