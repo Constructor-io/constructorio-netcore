@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
 	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 	<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-	<ReleaseVersion>2.9.1</ReleaseVersion>
-  <Version>2.9.1</Version>
+	<ReleaseVersion>2.10.1</ReleaseVersion>
+  <Version>2.10.1</Version>
   <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
