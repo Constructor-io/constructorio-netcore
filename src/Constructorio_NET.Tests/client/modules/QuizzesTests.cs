@@ -99,12 +99,17 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             QuizResultsResponse res = await constructorio.Quizzes.GetResults(req);
-            Assert.IsNotNull(res.Result, "Result should exist");
-            Assert.IsNotNull(res.Result.FilterExpression, "FilterExpression should exist");
-            Assert.IsNotNull(res.Result.ResultsUrl, "ResultsUrl should exist");
+            Assert.IsNotNull(res.Response, "Response should exist");
+            Assert.IsNotNull(res.Response.RefinedContent, "RefinedContent should exist");
+            Assert.IsNotNull(res.Response.Results, "Results should exist");
+            Assert.IsNotNull(res.Response.Facets, "Facets should exist");
+            Assert.IsNotNull(res.Response.Groups, "Groups should exist");
+            Assert.IsNotNull(res.Response.TotalNumResults, "TotalNumResults should exist");
+            Assert.IsNotNull(res.Response.SortOptions, "SortOptions should exist");
             Assert.IsNotNull(res.QuizSessionId, "QuizSessionId should exist");
             Assert.IsNotNull(res.QuizVersionId, "QuizVersionId should exist");
             Assert.IsNotNull(res.QuizId, "QuizId should exist");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 
         [Test]
