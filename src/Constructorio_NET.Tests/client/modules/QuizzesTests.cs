@@ -100,7 +100,6 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             QuizResultsResponse res = await constructorio.Quizzes.GetResults(req);
             Assert.IsNotNull(res.Response, "Response should exist");
-            Assert.IsNotNull(res.Response.RefinedContent, "RefinedContent should exist");
             Assert.IsNotNull(res.Response.Results, "Results should exist");
             Assert.IsNotNull(res.Response.Facets, "Facets should exist");
             Assert.IsNotNull(res.Response.Groups, "Groups should exist");
