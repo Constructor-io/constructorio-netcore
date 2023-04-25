@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Constructorio_NET.Models;
-using Newtonsoft.Json;
+﻿using Constructorio_NET.Models;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Constructorio_NET.Tests
 {
@@ -177,7 +173,7 @@ namespace Constructorio_NET.Tests
             List<ConstructorVariation> items = new List<ConstructorVariation>();
             ConstructorVariation item = TestUtils.PeekVariation();
             items.Add(item);
-            bool result = await constructorio.Items.UpdateVariations(items, "Products", false, "stanley.peng@constructor.io");
+            bool result = await constructorio.Items.UpdateVariations(items, "Products", false, "stanley.peng@constructor.io", CatalogRequest.OnMissingStrategy.IGNORE);
             Assert.IsTrue(result);
         }
 
