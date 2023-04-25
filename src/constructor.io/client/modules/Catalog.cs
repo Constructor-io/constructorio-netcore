@@ -971,5 +971,260 @@ namespace Constructorio_NET.Modules
 
             throw new ConstructorException("PatchSearchabilities response data is malformed");
         }
+
+        // Sort Options
+        internal string CreateSortOptionsUrl(SortOptionsRequest req, string filterBySortBy = null)
+        {
+            List<string> paths = new List<string> { "v1", "sort_options" };
+            Hashtable queryParams = req.GetRequestParameters();
+
+            bool toFilterBySortBy = filterBySortBy != null;
+
+            if (toFilterBySortBy)
+            {
+                queryParams.Add("sort_by", filterBySortBy);
+            }
+
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            {
+                { "_dt", true },
+                { "c", true },
+            };
+            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+
+            return url;
+        }
+
+        /// <summary>
+        /// Retrieves a list of all Sort Options.
+        /// </summary>
+        /// <param name="sortOptionsRequest">Constructorio's <see cref="SortOptionsRequest"/> object model.</param>
+        /// <returns>Constructorio's <see cref="SortOptionList"/> object.</returns>
+        public async Task<SortOptionList> RetrieveSortOptions(SortOptionsRequest sortOptionsRequest)
+        {
+            string url = CreateSortOptionsUrl(sortOptionsRequest);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            string result;
+            try
+            {
+                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<SortOptionList>(result);
+            }
+
+            throw new ConstructorException("RetrieveSortOptions response data is malformed");
+        }
+
+        /// <summary>
+        /// Retrieves a list of all Sort Options associated with a sort_by field.
+        /// </summary>
+        /// <param name="retrieveSortOptionBySortByRequest">Constructorio's <see cref="RetrieveSortOptionBySortByRequest"/> object model.</param>
+        /// <returns>Constructorio's <see cref="SortOptionList"/> object.</returns>
+        public async Task<SortOptionList> RetrieveSortOptionsBySortBy(RetrieveSortOptionBySortByRequest retrieveSortOptionBySortByRequest)
+        {
+            string url = CreateSortOptionsUrl(retrieveSortOptionBySortByRequest, retrieveSortOptionBySortByRequest.FilterBySortBy);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            string result;
+            try
+            {
+                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<SortOptionList>(result);
+            }
+
+            throw new ConstructorException("RetrieveSortOptionsBySortBy response data is malformed");
+        }
+
+        /// <summary>
+        /// Replaces all existing Sort Options with a new list of Sort Options.
+        /// At most 50 Sort Options can be provided.
+        /// </summary>
+        /// <param name="sortOptionsListRequest">Constructorio's <see cref="SortOptionsListRequest"/> object model.</param>
+        /// <returns>Constructorio's <see cref="SortOptionList"/> object.</returns>
+        public async Task<SortOptionList> SetSortOptions(SortOptionsListRequest sortOptionsListRequest)
+        {
+            string url = CreateSortOptionsUrl(sortOptionsListRequest);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            string result;
+            try
+            {
+                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, sortOptionsListRequest.GetSortOptionsList());
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<SortOptionList>(result);
+            }
+
+            throw new ConstructorException("SetSortOptions response data is malformed");
+        }
+
+        /// <summary>
+        /// Deletes a list of Sort Options, identified by sort_by and sort_order.
+        /// </summary>
+        /// <param name="sortOptionsListRequest">Constructorio's <see cref="SortOptionsListRequest"/> object model.</param>
+        /// <returns>True if delete request succeeds.</returns>
+        public async Task<bool> DeleteSortOption(SortOptionsListRequest sortOptionsListRequest)
+        {
+            string url = CreateSortOptionsUrl(sortOptionsListRequest);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            string result;
+            try
+            {
+                result = await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, sortOptionsListRequest.GetSortOptionListForDeletion());
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return true;
+        }
+
+        internal string CreateSortOptionUrl(SortOptionsRequest req, string filterBySortBy = null, SortOrderType? filterBySortOrder = null)
+        {
+            List<string> paths = new List<string> { "v1", "sort_option" };
+            Hashtable queryParams = req.GetRequestParameters();
+
+            bool toTargetSpecificSortOption = filterBySortOrder != null && filterBySortBy != null;
+
+            if (toTargetSpecificSortOption)
+            {
+                paths.Add(filterBySortBy);
+                paths.Add(filterBySortOrder.ToString().ToLower());
+            }
+
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            {
+                { "_dt", true },
+                { "c", true },
+            };
+            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+
+            return url;
+        }
+
+        /// <summary>
+        /// Creates a Sort Option.
+        /// </summary>
+        /// <param name="sortOptionsSingleRequest">Constructorio's <see cref="SortOptionsSingleRequest"/> object model.</param>
+        /// <returns>Constructorio's <see cref="SortOption"/> object.</returns>
+        public async Task<SortOption> CreateSortOption(SortOptionsSingleRequest sortOptionsSingleRequest)
+        {
+            string url = CreateSortOptionUrl(sortOptionsSingleRequest);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            string result;
+            try
+            {
+                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, sortOptionsSingleRequest.SortOption);
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<SortOption>(result);
+            }
+
+            throw new ConstructorException("CreateSortOption response data is malformed");
+        }
+
+        /// <summary>
+        /// Creates or Replace a Sort Option.
+        /// </summary>
+        /// <param name="sortOptionsSingleRequest">Constructorio's <see cref="SortOptionsSingleRequest"/> object model.</param>
+        /// <returns>Constructorio's <see cref="SortOption"/> object.</returns>
+        public async Task<SortOption> CreateOrReplaceSortOption(SortOptionsSingleRequest sortOptionsSingleRequest)
+        {
+            if (sortOptionsSingleRequest.SortOption.SortBy == null)
+            {
+                throw new ConstructorException("SortBy is a required property for SortOptionsSingleRequest.SortOption.");
+            }
+
+            string url = CreateSortOptionUrl(sortOptionsSingleRequest, sortOptionsSingleRequest.SortOption.SortBy, sortOptionsSingleRequest.SortOption.SortOrder);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            string result;
+            try
+            {
+                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, sortOptionsSingleRequest.GetSortOptionDelta());
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<SortOption>(result);
+            }
+
+            throw new ConstructorException("CreateOrReplaceSortOption response data is malformed");
+        }
+
+        /// <summary>
+        /// Updates a Sort Option.
+        /// </summary>
+        /// <param name="sortOptionsSingleRequest">Constructorio's <see cref="SortOptionsSingleRequest"/> object model.</param>
+        /// <returns>Constructorio's <see cref="SortOption"/> object.</returns>
+        public async Task<SortOption> UpdateSortOption(SortOptionsSingleRequest sortOptionsSingleRequest)
+        {
+            if (sortOptionsSingleRequest.SortOption.SortBy == null)
+            {
+                throw new ConstructorException("SortBy is a required property for SortOptionsSingleRequest.SortOption.");
+            }
+
+            string url = CreateSortOptionUrl(sortOptionsSingleRequest, sortOptionsSingleRequest.SortOption.SortBy, sortOptionsSingleRequest.SortOption.SortOrder);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            string result;
+            try
+            {
+                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, sortOptionsSingleRequest.GetSortOptionDelta());
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result != null)
+            {
+                return JsonConvert.DeserializeObject<SortOption>(result);
+            }
+
+            throw new ConstructorException("UpdateSortOption response data is malformed");
+        }
     }
 }
