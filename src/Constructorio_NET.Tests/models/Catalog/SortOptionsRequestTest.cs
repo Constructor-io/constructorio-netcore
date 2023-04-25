@@ -43,7 +43,6 @@ namespace Constructorio_NET.Tests
             {
                 Section = this.Section
             };
-            Console.WriteLine(JsonConvert.SerializeObject(req));
             Assert.AreEqual(
                 $"{{\"SortOptions\":[{{\"sort_by\":\"test\",\"sort_order\":\"ascending\"}}],\"Section\":\"{this.Section}\"}}",
                 JsonConvert.SerializeObject(req)
