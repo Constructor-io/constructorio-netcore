@@ -86,7 +86,7 @@ namespace Constructorio_NET.Tests
             List<ConstructorItem> items = new List<ConstructorItem>();
             ConstructorItem item = TestUtils.PeekItem();
             items.Add(item);
-            bool result = await constructorio.Items.UpdateItems(items, "Products", false, "stanley.peng@constructor.io");
+            bool result = await constructorio.Items.UpdateItems(items, "Products", false, "stanley.peng@constructor.io", CatalogRequest.OnMissingStrategy.CREATE);
             Assert.IsTrue(result);
         }
 
