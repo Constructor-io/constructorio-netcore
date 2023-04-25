@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Constructorio_NET.Tests
 {
@@ -12,7 +12,7 @@ namespace Constructorio_NET.Tests
         private readonly string ApiKey = "key_vM4GkLckwiuxwyRA";
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
-        private readonly string Query = "/item/#";
+        private readonly string Query = "item";
         private ConstructorioConfig Config;
         private UserInfo UserInfo;
 
