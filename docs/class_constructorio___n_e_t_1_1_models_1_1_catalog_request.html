@@ -67,6 +67,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="class_constructorio___n_e_t_1_1_models_1_1_catalog_request-members.html">List of all members</a>  </div>
@@ -77,6 +78,14 @@ $(function() {
 <p>Constructor.io Catalog Request Class.  
  <a href="class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a6dfda6ce8ed6edc1c8a495def066301b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a6dfda6ce8ed6edc1c8a495def066301b">OnMissingStrategy</a> { <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a6dfda6ce8ed6edc1c8a495def066301bac2759effffc94bb9acc71d69fe3e8a1f">FAIL</a>
+, <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a6dfda6ce8ed6edc1c8a495def066301ba294ce20cdefa29be3be0735cb62e715d">CREATE</a>
+, <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a6dfda6ce8ed6edc1c8a495def066301baa2e843feab94ef623fea888f07c28696">IGNORE</a>
+ }</td></tr>
+<tr class="separator:a6dfda6ce8ed6edc1c8a495def066301b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac4f0aa736884609d773993a2b7973352"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#ac4f0aa736884609d773993a2b7973352">CatalogRequest</a> (Dictionary&lt; string, StreamContent &gt; files)</td></tr>
@@ -107,10 +116,37 @@ string&#160;</td><td class="memItemRight" valign="bottom"><b>NotificationEmail</
 string&#160;</td><td class="memItemRight" valign="bottom"><b>Section</b><code> [get, set]</code></td></tr>
 <tr class="memdesc:a331eb97de003b25d9178f1d047d91f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the name of the section. <br /></td></tr>
 <tr class="separator:a331eb97de003b25d9178f1d047d91f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27fc9e3953bd80985173d6a3821349a6"><td class="memItemLeft" align="right" valign="top"><a id="a27fc9e3953bd80985173d6a3821349a6" name="a27fc9e3953bd80985173d6a3821349a6"></a>
+<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a6dfda6ce8ed6edc1c8a495def066301b">OnMissingStrategy</a>&#160;</td><td class="memItemRight" valign="bottom"><b>OnMissing</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a27fc9e3953bd80985173d6a3821349a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the strategy for missing items. Defaults to "FAIL". Only applicable to PatchCatalog requests. <br /></td></tr>
+<tr class="separator:a27fc9e3953bd80985173d6a3821349a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Constructor.io Catalog Request Class. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a6dfda6ce8ed6edc1c8a495def066301b" name="a6dfda6ce8ed6edc1c8a495def066301b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dfda6ce8ed6edc1c8a495def066301b">&#9670;&nbsp;</a></span>OnMissingStrategy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a6dfda6ce8ed6edc1c8a495def066301b">Constructorio_NET.Models.CatalogRequest.OnMissingStrategy</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6dfda6ce8ed6edc1c8a495def066301bac2759effffc94bb9acc71d69fe3e8a1f" name="a6dfda6ce8ed6edc1c8a495def066301bac2759effffc94bb9acc71d69fe3e8a1f"></a>FAIL&#160;</td><td class="fielddoc"><p >Default strategy. Missing items will cause the ingestion to fail. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6dfda6ce8ed6edc1c8a495def066301ba294ce20cdefa29be3be0735cb62e715d" name="a6dfda6ce8ed6edc1c8a495def066301ba294ce20cdefa29be3be0735cb62e715d"></a>CREATE&#160;</td><td class="fielddoc"><p >Missing items will be created. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6dfda6ce8ed6edc1c8a495def066301baa2e843feab94ef623fea888f07c28696" name="a6dfda6ce8ed6edc1c8a495def066301baa2e843feab94ef623fea888f07c28696"></a>IGNORE&#160;</td><td class="fielddoc"><p >Missing items will be ignored. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac4f0aa736884609d773993a2b7973352" name="ac4f0aa736884609d773993a2b7973352"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac4f0aa736884609d773993a2b7973352">&#9670;&nbsp;</a></span>CatalogRequest()</h2>
 
