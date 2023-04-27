@@ -187,7 +187,7 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public async Task PatchCatalogWithOnMissingStrateggy()
+        public async Task PatchCatalogWithOnMissingStrategy()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
