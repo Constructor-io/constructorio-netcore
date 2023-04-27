@@ -24,7 +24,7 @@ namespace Constructorio_NET.Modules
             this.Options = options;
         }
 
-        internal string CreateItemsUrl(string section, bool force = false, string notificationEmail = null)
+        internal string CreateItemsUrl(string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL)
         {
             List<string> paths = new List<string> { "v2", "items" };
             Hashtable queryParams = new Hashtable();
@@ -43,6 +43,11 @@ namespace Constructorio_NET.Modules
                 queryParams.Add("notification_email", notificationEmail);
             }
 
+            if (onMissing != CatalogRequest.OnMissingStrategy.FAIL)
+            {
+                queryParams.Add(Constants.ON_MISSING, onMissing.ToString());
+            }
+
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
                 { "_dt", true },
@@ -52,7 +57,7 @@ namespace Constructorio_NET.Modules
             return url;
         }
 
-        internal string CreateVariationsUrl(string section, bool force = false, string notificationEmail = null)
+        internal string CreateVariationsUrl(string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL)
         {
             List<string> paths = new List<string> { "v2", "variations" };
             Hashtable queryParams = new Hashtable();
@@ -69,6 +74,11 @@ namespace Constructorio_NET.Modules
             if (!string.IsNullOrEmpty(notificationEmail))
             {
                 queryParams.Add("notification_email", notificationEmail);
+            }
+
+            if (onMissing != CatalogRequest.OnMissingStrategy.FAIL)
+            {
+                queryParams.Add(Constants.ON_MISSING, onMissing.ToString());
             }
 
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
@@ -172,15 +182,16 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section to upload items to.</param>
         /// <param name="force">Boolean to indicate whether or not to use force sync.</param>
         /// <param name="notificationEmail">Email to send failure notifications to.</param>
+        /// <param name="onMissing">Either "FAIL", "CREATE", or "IGNORE". Indicating what to do when missing items are present in an update. "FAIL" fails the ingestion. "CREATE" creates the missing items. "IGNORE" ignores the missing items. Defaults to "FAIL".</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> UpdateItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null)
+        public async Task<bool> UpdateItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL)
         {
             string url;
             string result;
 
             try
             {
-                url = CreateItemsUrl(section, force, notificationEmail);
+                url = CreateItemsUrl(section, force, notificationEmail, onMissing);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("items", items);
@@ -202,15 +213,16 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section to upload variations to.</param>
         /// <param name="force">Boolean to indicate whether or not to use force sync.</param>
         /// <param name="notificationEmail">Email to send failure notifications to.</param>
+        /// <param name="onMissing">Either "FAIL", "CREATE", or "IGNORE". Indicating what to do when missing items are present in an update. "FAIL" fails the ingestion. "CREATE" creates the missing items. "IGNORE" ignores the missing items. Defaults to "FAIL".</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> UpdateVariations(List<ConstructorVariation> Variations, string section, bool force = false, string notificationEmail = null)
+        public async Task<bool> UpdateVariations(List<ConstructorVariation> Variations, string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL)
         {
             string url;
             string result;
 
             try
             {
-                url = CreateVariationsUrl(section, force, notificationEmail);
+                url = CreateVariationsUrl(section, force, notificationEmail, onMissing);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("variations", Variations);

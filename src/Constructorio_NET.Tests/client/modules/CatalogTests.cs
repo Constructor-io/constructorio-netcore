@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -188,6 +187,21 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task PatchCatalogWithOnMissingStrategy()
+        {
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "items", itemsStream },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            CatalogRequest req = new CatalogRequest(files);
+            req.OnMissing = CatalogRequest.OnMissingStrategy.IGNORE;
+            CatalogResponse res = await constructorio.Catalog.PatchCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
         public async Task PatchCatalogWithVariations()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
@@ -313,7 +327,7 @@ namespace Constructorio_NET.Tests
 
         public async Task AddItemGroup()
         {
-            ItemGroupsRequest req = new ItemGroupsRequest(new List<ConstructorItemGroup> { itemGroup1 } );
+            ItemGroupsRequest req = new ItemGroupsRequest(new List<ConstructorItemGroup> { itemGroup1 });
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             ConstructorItemGroup res = await constructorio.Catalog.AddItemGroup(req);
             Assert.IsTrue(res.Id == itemGroup1.Id, "Id should match");
@@ -329,7 +343,7 @@ namespace Constructorio_NET.Tests
             JObject newData = JObject.Parse("{\"value\":\"name\"}");
             itemGroup1.Name = newName;
             itemGroup1.Data = newData;
-            ItemGroupsRequest req = new ItemGroupsRequest(new List<ConstructorItemGroup> { itemGroup1 } );
+            ItemGroupsRequest req = new ItemGroupsRequest(new List<ConstructorItemGroup> { itemGroup1 });
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             ConstructorItemGroup res = await constructorio.Catalog.AddItemGroup(req);
             Assert.IsTrue(res.Id == itemGroup1.Id, "Id should match");
