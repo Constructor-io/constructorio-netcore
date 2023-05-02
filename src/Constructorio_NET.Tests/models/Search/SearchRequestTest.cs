@@ -49,6 +49,7 @@ namespace Constructorio_NET.Tests
             {
                 UserInfo = this.UserInfo,
                 Page = this.Page,
+                Offset = this.Offset,
                 Section = this.Section,
                 SortBy = this.SortBy,
                 SortOrder = SortOrder,

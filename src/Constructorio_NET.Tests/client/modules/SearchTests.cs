@@ -373,6 +373,7 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
             Assert.AreEqual(3, (long)res.Request["page"], "total number of results expected to be 1");
+            Assert.AreEqual(1, (long)res.Request["num_results_per_page"], "Expect request to include num_results_per_page parameter");
             Assert.Greater(res.Response.TotalNumResults, 1, "total number of results expected to be 1");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
