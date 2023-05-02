@@ -43,6 +43,5 @@
         public const string QUIZ_SESSION_ID = "quiz_session_id";
         public const string PRE_FILTER_EXPRESSION = "pre_filter_expression";
         public const string ON_MISSING = "on_missing";
-        public const string OFFSET = "offset";
     }
 }
