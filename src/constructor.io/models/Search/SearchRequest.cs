@@ -155,7 +155,12 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.HIDDEN_FACETS, this.HiddenFacets);
             }
 
-            if (this.Page != 0)
+            if (this.Offset != 0 && this.Page > 0)
+            {
+                parameters.Add(Constants.OFFSET, this.Offset);
+            }
+
+            if (this.Page != 0 && this.Offset > 0)
             {
                 parameters.Add(Constants.PAGE, this.Page);
             }
