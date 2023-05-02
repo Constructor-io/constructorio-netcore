@@ -43,7 +43,14 @@ namespace Constructorio_NET.Models
         public List<string> HiddenFacets { get; set; }
 
         /// <summary>
+        /// Gets or sets the number of results to skip from the beginning.
+        /// Can't be used together with <see cref="Page"/>.
+        /// </summary>
+        public int Offset { get; set; }
+
+        /// <summary>
         /// Gets or sets the page number of the results to return.
+        /// Can't be used together with <see cref="Offset"/>.
         /// </summary>
         public int Page { get; set; }
 
