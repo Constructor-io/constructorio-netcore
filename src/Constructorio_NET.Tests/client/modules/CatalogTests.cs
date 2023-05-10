@@ -459,7 +459,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public async Task RetrieveSortOptionsWithSortByShouldReturnResults()
         {
-            SortOptionsRequest req = new SortOptionsRequest("Products", this.sortBy);
+            SortOptionsRequest req = new SortOptionsRequest(this.sortBy);
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SortOptionList res = await constructorio.Catalog.RetrieveSortOptions(req);
 
