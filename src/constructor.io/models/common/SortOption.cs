@@ -25,7 +25,7 @@ namespace Constructorio_NET.Models
         public string SortBy { get; set; }
 
         /// <summary>
-        /// Order the data will be sorted in.
+        /// Order the results will be sorted in.
         /// </summary>
         [JsonProperty("sort_order")]
         public SortOrderType SortOrder { get; set; }
@@ -88,13 +88,13 @@ namespace Constructorio_NET.Models
     public enum SortOrderType
     {
         /// <summary>
-        /// Specifies that data should be sorted in ascending order.
+        /// Specifies that results should be sorted in ascending order.
         /// </summary>
         [EnumMember(Value = "ascending")]
         Ascending,
 
         /// <summary>
-        /// Specifies that data should be sorted in descending order.
+        /// Specifies that results should be sorted in descending order.
         /// </summary>
         [EnumMember(Value = "descending")]
         Descending
