@@ -373,6 +373,24 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
             Assert.AreEqual(3, (long)res.Request["page"], "total number of results expected to be 1");
+            Assert.AreEqual(1, (long)res.Request["num_results_per_page"], "Expect request to include num_results_per_page parameter");
+            Assert.Greater(res.Response.TotalNumResults, 1, "total number of results expected to be 1");
+            Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetSearchResultsWithResultParamsWithOffset()
+        {
+            SearchRequest req = new SearchRequest(this.Query)
+            {
+                UserInfo = this.UserInfo,
+                Offset = 3,
+                ResultsPerPage = 1
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            Assert.AreEqual(3, (long)res.Request["offset"], "total number of results expected to be 1");
             Assert.Greater(res.Response.TotalNumResults, 1, "total number of results expected to be 1");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
@@ -470,6 +488,20 @@ namespace Constructorio_NET.Tests
             Assert.NotNull(res.ResultId, "Result id exists");
             Assert.NotNull(reqVariationsMap, "Variations Map was passed as parameter");
             Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
+        }
+
+        [Test]
+        public void GetSearchResultsWithPageAndOffset()
+        {
+            SearchRequest req = new SearchRequest(this.Query)
+            {
+                UserInfo = this.UserInfo,
+                Page = 1,
+                Offset = 2,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Search.GetSearchResults(req));
+            Assert.IsTrue(ex.Message == "Http[400]: offset, page are mutually exclusive", "Correct error is returned");
         }
     }
 }

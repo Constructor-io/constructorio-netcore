@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -198,6 +197,21 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
+            CatalogResponse res = await constructorio.Catalog.PatchCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public async Task PatchCatalogWithOnMissingStrategy()
+        {
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "items", itemsStream },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            CatalogRequest req = new CatalogRequest(files);
+            req.OnMissing = CatalogRequest.OnMissingStrategy.IGNORE;
             CatalogResponse res = await constructorio.Catalog.PatchCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");

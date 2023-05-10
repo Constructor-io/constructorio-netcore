@@ -22,14 +22,14 @@ namespace Constructorio_NET.Models
         public List<List<string>> Answers { get; set; }
 
         /// <summary>
-        /// Version identifier for the quiz. Version ID will be returned with the first request and it should be passed with subsequent requests.
-        /// More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning
+        /// Gets or sets version identifier for the quiz. Version ID will be returned with the first request and it should be passed with subsequent requests.
+        /// More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning.
         /// </summary>
         public string QuizVersionId { get; set; }
 
         /// <summary>
-        /// Session identifier for the quiz. Session ID will be returned with the first request and it should be passed with subsequent requests.
-        /// More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions
+        /// Gets or sets session identifier for the quiz. Session ID will be returned with the first request and it should be passed with subsequent requests.
+        /// More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions.
         /// </summary>
         public string QuizSessionId { get; set; }
 

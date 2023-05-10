@@ -11,6 +11,24 @@ namespace Constructorio_NET.Models
     /// </summary>
     public class CatalogRequest
     {
+        public enum OnMissingStrategy
+        {
+            /// <summary>
+            /// Default strategy. Missing items will cause the ingestion to fail.
+            /// </summary>
+            FAIL,
+
+            /// <summary>
+            /// Missing items will be created.
+            /// </summary>
+            CREATE,
+
+            /// <summary>
+            /// Missing items will be ignored.
+            /// </summary>
+            IGNORE
+        }
+
         /// <summary>
         /// Gets or sets collection of files to upload.
         /// </summary>
@@ -32,6 +50,11 @@ namespace Constructorio_NET.Models
         public string Section { get; set; }
 
         /// <summary>
+        /// Gets or sets the strategy for missing items. Defaults to "FAIL". Only applicable to PatchCatalog requests.
+        /// </summary>
+        public OnMissingStrategy OnMissing { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CatalogRequest"/> class.
         /// </summary>
         /// <param name="files">Dictionary of stream content to for the request.</param>
@@ -45,6 +68,7 @@ namespace Constructorio_NET.Models
             }
 
             this.Files = files;
+            this.OnMissing = OnMissingStrategy.FAIL;
         }
 
         /// <summary>
@@ -68,6 +92,11 @@ namespace Constructorio_NET.Models
             if (this.Section == null)
             {
                 this.Section = "Products";
+            }
+
+            if (this.OnMissing != OnMissingStrategy.FAIL)
+            {
+                parameters.Add(Constants.ON_MISSING, this.OnMissing.ToString());
             }
 
             parameters.Add(Constants.SECTION, this.Section);

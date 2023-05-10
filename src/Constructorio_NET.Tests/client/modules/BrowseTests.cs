@@ -360,12 +360,32 @@ namespace Constructorio_NET.Tests
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
             {
                 UserInfo = this.UserInfo,
+                Page = 1,
                 ResultsPerPage = 1
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
-            Assert.AreEqual(1, (long)res.Request["num_results_per_page"], "Expect request to include page parameter");
+            Assert.AreEqual(1, (long)res.Request["page"], "total number of results expected to be 1");
+            Assert.AreEqual(1, (long)res.Request["num_results_per_page"], "Expect request to include num_results_per_page parameter");
             Assert.AreEqual(1, res.Response.TotalNumResults, "total number of results expected to be 1");
+            Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsWithResultParamsWithOffset()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, "yellow")
+            {
+                UserInfo = this.UserInfo,
+                Offset = 1,
+                ResultsPerPage = 1
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            Assert.AreEqual(1, (long)res.Request["offset"], "total number of results expected to be 1");
+            Assert.AreEqual(1, (long)res.Request["num_results_per_page"], "Expect request to include num_results_per_page parameter");
+            Assert.AreEqual(2, res.Response.TotalNumResults, "total number of results expected to be 2");
             Assert.AreEqual(1, res.Response.Results.Count, "length of results expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
@@ -566,6 +586,20 @@ namespace Constructorio_NET.Tests
             BrowseFacetOptionsResponse res = await constructorio.Browse.GetBrowseFacetOptionsResult(req);
             Assert.GreaterOrEqual(res.Response.Facets.Count, 1, "length of facets expected to be equal to 1");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public void GetBrowseResultsWithPageAndOffset()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = this.UserInfo,
+                Page = 1,
+                Offset = 2,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Browse.GetBrowseResults(req));
+            Assert.IsTrue(ex.Message == "Http[400]: You've used both 'page' and 'offset' parameters for pagination. Please, use just one of them", "Correct error is returned");
         }
     }
 }

@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
-    <ReleaseVersion>2.10.1</ReleaseVersion>
+    <ReleaseVersion>2.12.0</ReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>

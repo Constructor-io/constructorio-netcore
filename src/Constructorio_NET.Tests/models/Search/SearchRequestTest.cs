@@ -17,6 +17,7 @@ namespace Constructorio_NET.Tests
         {
             { "Color", new List<string>() { "green", "blue" } }
         };
+        private readonly int Offset = 4;
         private readonly int Page = 2;
         private readonly string Section = "Search Suggestions";
         private readonly string SortBy = "Price";
@@ -48,6 +49,7 @@ namespace Constructorio_NET.Tests
             {
                 UserInfo = this.UserInfo,
                 Page = this.Page,
+                Offset = this.Offset,
                 Section = this.Section,
                 SortBy = this.SortBy,
                 SortOrder = SortOrder,
@@ -60,6 +62,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.SessionId, requestParameters[Constants.SESSION_ID]);
             Assert.AreEqual(this.UserId, requestParameters[Constants.USER_ID]);
             Assert.AreEqual(this.UserSegments, requestParameters[Constants.USER_SEGMENTS]);
+            Assert.AreEqual(this.Offset, requestParameters[Constants.OFFSET]);
             Assert.AreEqual(this.Page, requestParameters[Constants.PAGE]);
             Assert.AreEqual(this.Section, requestParameters[Constants.SECTION]);
             Assert.AreEqual(this.SortBy, requestParameters[Constants.SORT_BY]);

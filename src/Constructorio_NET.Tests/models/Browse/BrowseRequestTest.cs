@@ -14,6 +14,7 @@ namespace Constructorio_NET.Tests
         private readonly int SessionId = 4;
         private readonly string UserId = "user1";
         private readonly int Page = 2;
+        private readonly int Offset = 4;
         private readonly string FilterName = "Color";
         private readonly string FilterValue = "Blue";
         private readonly string Section = "Search Suggestions";
@@ -45,6 +46,7 @@ namespace Constructorio_NET.Tests
             {
                 UserInfo = this.UserInfo,
                 Page = this.Page,
+                Offset = this.Offset,
                 Section = this.Section,
                 SortBy = this.SortBy,
                 SortOrder = SortOrder,
@@ -57,6 +59,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.UserId, requestParameters[Constants.USER_ID]);
             Assert.AreEqual(this.UserSegments, requestParameters[Constants.USER_SEGMENTS]);
             Assert.AreEqual(this.Page, requestParameters[Constants.PAGE]);
+            Assert.AreEqual(this.Offset, requestParameters[Constants.OFFSET]);
             Assert.AreEqual(this.Section, requestParameters[Constants.SECTION]);
             Assert.AreEqual(this.SortBy, requestParameters[Constants.SORT_BY]);
             Assert.AreEqual(this.SortOrder, requestParameters[Constants.SORT_ORDER]);

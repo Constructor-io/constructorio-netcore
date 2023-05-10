@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['id_0',['Id',['../class_constructorio___n_e_t_1_1_models_1_1_quiz_request.html#a008bc74f4353529d6845515cb9ee387a',1,'Constructorio_NET::Models::QuizRequest']]],
-  ['ids_1',['Ids',['../class_constructorio___n_e_t_1_1_models_1_1_items_request.html#a5bffae324774a2abfb271aa21cf68299',1,'Constructorio_NET.Models.ItemsRequest.Ids()'],['../class_constructorio___n_e_t_1_1_models_1_1_variations_request.html#af396c9f99dda6a10a594f3e29b218620',1,'Constructorio_NET.Models.VariationsRequest.Ids()']]],
+  ['ids_0',['Ids',['../class_constructorio___n_e_t_1_1_models_1_1_items_request.html#a5bffae324774a2abfb271aa21cf68299',1,'Constructorio_NET.Models.ItemsRequest.Ids()'],['../class_constructorio___n_e_t_1_1_models_1_1_variations_request.html#af396c9f99dda6a10a594f3e29b218620',1,'Constructorio_NET.Models.VariationsRequest.Ids()']]],
+  ['ignore_1',['IGNORE',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a6dfda6ce8ed6edc1c8a495def066301baa2e843feab94ef623fea888f07c28696',1,'Constructorio_NET::Models::CatalogRequest']]],
   ['itemgroupid_2',['ItemGroupId',['../class_constructorio___n_e_t_1_1_models_1_1_item_groups_request.html#a1cfd16c84b3322ea468b6ada25211272',1,'Constructorio_NET::Models::ItemGroupsRequest']]],
   ['itemgroups_3',['ItemGroups',['../class_constructorio___n_e_t_1_1_models_1_1_item_groups_request.html#a5929cc4fb95ebacdd7ecf7eb599bdb26',1,'Constructorio_NET::Models::ItemGroupsRequest']]],
   ['itemgroupsgetresponse_4',['ItemGroupsGetResponse',['../class_constructorio___n_e_t_1_1_models_1_1_item_groups_get_response.html',1,'Constructorio_NET::Models']]],
