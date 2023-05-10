@@ -25,7 +25,7 @@ namespace Constructorio_NET.Models
             };
         }
 
-        public SortOptionsSingleRequest(SortOption sortOption, string section = "Products") : base(section)
+        public SortOptionsSingleRequest(SortOption sortOption) : base()
         {
             this.SortOption = sortOption;
         }

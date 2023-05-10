@@ -34,7 +34,7 @@ namespace Constructorio_NET.Models
             return new SortOptionList(sortOptionsIds);
         }
 
-        public SortOptionsListRequest(List<SortOption> sortOptions, string section = "Products") : base(section)
+        public SortOptionsListRequest(List<SortOption> sortOptions) : base()
         {
             this.SortOptions = sortOptions;
         }
