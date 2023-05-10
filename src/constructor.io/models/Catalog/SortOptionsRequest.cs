@@ -13,6 +13,18 @@ namespace Constructorio_NET.Models
         /// Gets or sets the name of the section.
         /// </summary>
         public string Section { get; set; }
+        /// <summary>
+        /// [Optional] Gets or sets SortBy property if you wish to retrieve a specific sort option.
+        /// </summary>
+        public string SortBy { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SortOptionsRequest"/> class.
+        /// </summary>
+        public SortOptionsRequest()
+        {
+            this.Section = "Products";
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SortOptionsRequest"/> class.
@@ -21,6 +33,17 @@ namespace Constructorio_NET.Models
         public SortOptionsRequest(string section = "Products")
         {
             this.Section = section;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SortOptionsRequest"/> class with a fiterBySortBy.
+        /// </summary>
+        /// <param name="section">Section to address the request to.</param>
+        /// <param name="filterBySortBy">A sort_by property to retrieve a specific Sort Option.</param>
+        public SortOptionsRequest(string section = "Products", string sortBy = null)
+        {
+            this.Section = section;
+            this.SortBy = sortBy;
         }
 
         /// <summary>

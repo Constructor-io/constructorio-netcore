@@ -973,16 +973,16 @@ namespace Constructorio_NET.Modules
         }
 
         // Sort Options
-        internal string CreateSortOptionsUrl(SortOptionsRequest req, string filterBySortBy = null)
+        internal string CreateSortOptionsUrl(SortOptionsRequest req)
         {
             List<string> paths = new List<string> { "v1", "sort_options" };
             Hashtable queryParams = req.GetRequestParameters();
 
-            bool toFilterBySortBy = filterBySortBy != null;
+            bool toFilterBySortBy = req.SortBy != null;
 
             if (toFilterBySortBy)
             {
-                queryParams.Add("sort_by", filterBySortBy);
+                queryParams.Add("sort_by", req.SortBy);
             }
 
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
@@ -997,8 +997,10 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Retrieves a list of all Sort Options.
+        /// Specify an optional SortBy property to retrieve a specific sort option.
         /// </summary>
         /// <param name="sortOptionsRequest">Constructorio's <see cref="SortOptionsRequest"/> object model.</param>
+        /// <param name="sortOptionsRequest.SortBy">A sort_by property to retrieve a specific Sort Option.</param>
         /// <returns>Constructorio's <see cref="SortOptionList"/> object.</returns>
         public async Task<SortOptionList> RetrieveSortOptions(SortOptionsRequest sortOptionsRequest)
         {
@@ -1022,35 +1024,6 @@ namespace Constructorio_NET.Modules
             }
 
             throw new ConstructorException("RetrieveSortOptions response data is malformed");
-        }
-
-        /// <summary>
-        /// Retrieves a list of all Sort Options associated with a sort_by field.
-        /// </summary>
-        /// <param name="retrieveSortOptionBySortByRequest">Constructorio's <see cref="RetrieveSortOptionBySortByRequest"/> object model.</param>
-        /// <returns>Constructorio's <see cref="SortOptionList"/> object.</returns>
-        public async Task<SortOptionList> RetrieveSortOptionsBySortBy(RetrieveSortOptionBySortByRequest retrieveSortOptionBySortByRequest)
-        {
-            string url = CreateSortOptionsUrl(retrieveSortOptionBySortByRequest, retrieveSortOptionBySortByRequest.FilterBySortBy);
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
-            AddAuthHeaders(this.Options, requestHeaders);
-
-            string result;
-            try
-            {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
-            }
-            catch (Exception e)
-            {
-                throw new ConstructorException(e);
-            }
-
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<SortOptionList>(result);
-            }
-
-            throw new ConstructorException("RetrieveSortOptionsBySortBy response data is malformed");
         }
 
         /// <summary>
@@ -1088,7 +1061,7 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="sortOptionsListRequest">Constructorio's <see cref="SortOptionsListRequest"/> object model.</param>
         /// <returns>True if delete request succeeds.</returns>
-        public async Task<bool> DeleteSortOption(SortOptionsListRequest sortOptionsListRequest)
+        public async Task<bool> DeleteSortOptions(SortOptionsListRequest sortOptionsListRequest)
         {
             string url = CreateSortOptionsUrl(sortOptionsListRequest);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();

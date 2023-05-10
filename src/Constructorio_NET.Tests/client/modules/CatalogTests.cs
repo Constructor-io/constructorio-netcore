@@ -55,7 +55,7 @@ namespace Constructorio_NET.Tests
         public async Task Cleanup()
         {
             var constructorio = new ConstructorIO(Config);
-            await constructorio.Catalog.DeleteSortOption(new SortOptionsListRequest(this.sortOptions));
+            await constructorio.Catalog.DeleteSortOptions(new SortOptionsListRequest(this.sortOptions));
             await constructorio.Catalog.SetSortOptions(new SortOptionsListRequest(this.sortOptions));
         }
 
@@ -453,18 +453,18 @@ namespace Constructorio_NET.Tests
             SortOptionList res = await constructorio.Catalog.RetrieveSortOptions(req);
 
             Assert.IsNotNull(res.SortOptions, "Sort options shoud exist.");
-            Assert.IsTrue(res.SortOptions.Count > 0, "Sort options shoud exist.");
+            Assert.IsTrue(res.SortOptions.Count > 1, "Sort options shoud exist.");
         }
 
         [Test]
         public async Task RetrieveSortOptionsWithSortByShouldReturnResults()
         {
-            RetrieveSortOptionBySortByRequest req = new RetrieveSortOptionBySortByRequest(this.sortBy);
+            SortOptionsRequest req = new SortOptionsRequest("Products", this.sortBy);
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            SortOptionList res = await constructorio.Catalog.RetrieveSortOptionsBySortBy(req);
+            SortOptionList res = await constructorio.Catalog.RetrieveSortOptions(req);
 
             Assert.IsNotNull(res.SortOptions, "Sort options array should exist.");
-            Assert.IsTrue(res.SortOptions.Count > 0, "Sort option shoud exist.");
+            Assert.AreEqual(1, res.SortOptions.Count, "Sort option shoud exist.");
             Assert.AreEqual(res.SortOptions[0].SortBy, this.sortBy, "Sort option should match sort_by passed in.");
         }
 
@@ -605,7 +605,7 @@ namespace Constructorio_NET.Tests
             SortOptionsListRequest req = new SortOptionsListRequest(new List<SortOption> { sortOption });
 
             req.SortOptions[0].SortBy = null;
-            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.DeleteSortOption(req));
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.DeleteSortOptions(req));
             Assert.AreEqual("Http[400]: sort_options[0].sort_by is a required field of type string", ex.Message, "Correct Error is Returned");
         }
 
@@ -620,7 +620,7 @@ namespace Constructorio_NET.Tests
             SortOption sortOption = new SortOption(sortByTest, sortOrder, pathInMetadataTest);
             SortOptionsListRequest req = new SortOptionsListRequest(new List<SortOption> { sortOption });
 
-            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.DeleteSortOption(req));
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.DeleteSortOptions(req));
             Assert.AreEqual("Http[404]: No such sorting option with name `test-delete` and order of `ascending` was found.", ex.Message, "Correct Error is Returned");
         }
 
@@ -631,7 +631,7 @@ namespace Constructorio_NET.Tests
             SortOption sortOption = new SortOption(this.sortBy, this.sortOrderType, this.pathInMetadata);
 
             SortOptionsListRequest req = new SortOptionsListRequest(new List<SortOption> { sortOption });
-            bool res = await constructorio.Catalog.DeleteSortOption(req);
+            bool res = await constructorio.Catalog.DeleteSortOptions(req);
             Assert.IsTrue(res);
 
             // Resets the store
