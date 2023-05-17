@@ -38,7 +38,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public void SortOptionsShouldSerialize()
         {
-            SortOption sortOption = new SortOption("test", SortOrderType.Ascending);
+            SortOption sortOption = new SortOption("test", SortOrder.Ascending);
             SortOptionsListRequest req = new SortOptionsListRequest(new List<SortOption>() { sortOption })
             {
                 Section = this.Section

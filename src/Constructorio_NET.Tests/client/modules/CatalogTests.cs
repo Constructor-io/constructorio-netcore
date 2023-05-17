@@ -17,11 +17,11 @@ namespace Constructorio_NET.Tests
         private readonly ConstructorItemGroup itemGroup2 = new ConstructorItemGroup("itemGroup2", "Item Group 2", JObject.Parse("{\"name\":\"value\"}"));
         private readonly string sortBy = "relevance";
         private readonly string pathInMetadata = "relevance";
-        private readonly SortOrderType sortOrderType = SortOrderType.Ascending;
+        private readonly SortOrder sortOrderType = SortOrder.Ascending;
         private readonly List<SortOption> sortOptions = new List<SortOption>()
         {
-            new SortOption("Collections", SortOrderType.Descending, "Collections"),
-            new SortOption("relevance", SortOrderType.Ascending, "relevance")
+            new SortOption("Collections", SortOrder.Descending, "Collections"),
+            new SortOption("relevance", SortOrder.Ascending, "relevance")
         };
         private ConstructorioConfig Config;
         private StreamContent itemsStream;
@@ -435,7 +435,7 @@ namespace Constructorio_NET.Tests
         public void SetSortOptionsShouldFailWhenRequiredFieldsAreMissing()
         {
             ConstructorIO constructorio = new ConstructorIO(this.Config);
-            SortOption sortOption = new SortOption(this.sortBy, SortOrderType.Descending);
+            SortOption sortOption = new SortOption(this.sortBy, SortOrder.Descending);
             SortOptionsListRequest req = new SortOptionsListRequest(new List<SortOption> { sortOption });
 
             var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.SetSortOptions(req));
@@ -497,7 +497,7 @@ namespace Constructorio_NET.Tests
         public void CreateSortOptionFailsIfMissingRequiredParams()
         {
             string sortByTest = "test";
-            SortOrderType sortOrder = SortOrderType.Ascending;
+            SortOrder sortOrder = SortOrder.Ascending;
 
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SortOption sortOption = new SortOption(sortByTest, sortOrder);
@@ -516,7 +516,7 @@ namespace Constructorio_NET.Tests
         public async Task CreateSortOption()
         {
             string sortByTest = "test";
-            SortOrderType sortOrder = SortOrderType.Ascending;
+            SortOrder sortOrder = SortOrder.Ascending;
             string pathInMetadataTest = "test";
 
             ConstructorIO constructorio = new ConstructorIO(this.Config);
@@ -533,7 +533,7 @@ namespace Constructorio_NET.Tests
         public void CreateOrReplaceSortOptionFailsIfMissingRequiredParams()
         {
             string sortByTest = "test2";
-            SortOrderType sortOrder = SortOrderType.Ascending;
+            SortOrder sortOrder = SortOrder.Ascending;
 
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SortOption sortOption = new SortOption(sortByTest, sortOrder);
@@ -552,7 +552,7 @@ namespace Constructorio_NET.Tests
         public async Task CreateOrReplaceSortOption()
         {
             string sortByTest = "test2";
-            SortOrderType sortOrder = SortOrderType.Ascending;
+            SortOrder sortOrder = SortOrder.Ascending;
             string pathInMetadataTest = "test";
 
             ConstructorIO constructorio = new ConstructorIO(this.Config);
@@ -569,7 +569,7 @@ namespace Constructorio_NET.Tests
         public void UpdateOptionFailsIfMissingRequiredParams()
         {
             string sortByTest = this.sortBy;
-            SortOrderType sortOrder = SortOrderType.Descending;
+            SortOrder sortOrder = SortOrder.Descending;
 
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SortOption sortOption = new SortOption(sortByTest, sortOrder);
@@ -584,7 +584,7 @@ namespace Constructorio_NET.Tests
         public void UpdateOptionFailsIfSortOptionDoesntExist()
         {
             string sortByTest = this.sortBy;
-            SortOrderType sortOrder = SortOrderType.Descending;
+            SortOrder sortOrder = SortOrder.Descending;
 
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SortOption sortOption = new SortOption(sortByTest, sortOrder);
@@ -598,7 +598,7 @@ namespace Constructorio_NET.Tests
         public async Task UpdateSortOption()
         {
             string sortByTest = this.sortBy;
-            SortOrderType sortOrder = this.sortOrderType;
+            SortOrder sortOrder = this.sortOrderType;
             string pathInMetadataTest = "test";
 
             ConstructorIO constructorio = new ConstructorIO(this.Config);
@@ -627,7 +627,7 @@ namespace Constructorio_NET.Tests
         public void DeleteSortOptionsShouldFailIfSortOptionDoesntExist()
         {
             string sortByTest = "test-delete";
-            SortOrderType sortOrder = SortOrderType.Ascending;
+            SortOrder sortOrder = SortOrder.Ascending;
             string pathInMetadataTest = "test-delete";
 
             ConstructorIO constructorio = new ConstructorIO(this.Config);

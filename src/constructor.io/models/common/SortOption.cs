@@ -28,7 +28,7 @@ namespace Constructorio_NET.Models
         /// Order the results will be sorted in.
         /// </summary>
         [JsonProperty("sort_order")]
-        public SortOrderType SortOrder { get; set; }
+        public SortOrder? SortOrder { get; set; }
 
         /// <summary>
         /// Order the sort option will be presented in.
@@ -59,7 +59,7 @@ namespace Constructorio_NET.Models
         /// <param name="sortBy"><see cref="SortOption.SortBy"/></param>
         /// <param name="sortOrder"><see cref="SortOption.SortOrder"/></param>
         [JsonConstructor]
-        public SortOption(string sortBy, SortOrderType sortOrder)
+        public SortOption(string sortBy, SortOrder? sortOrder)
         {
             this.SortBy = sortBy;
             this.SortOrder = sortOrder;
@@ -67,12 +67,17 @@ namespace Constructorio_NET.Models
         }
 
         /// <summary>
+        /// Initializes an empty instance of the <see cref="SortOption"/> class, typically for delta requests.
+        /// </summary>
+        public SortOption() { }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SortOption"/> class.
         /// </summary>
         /// <param name="sortBy"><see cref="SortOption.SortBy"/></param>
         /// <param name="sortOrder"><see cref="SortOption.SortOrder"/></param>
         /// <param name="pathInMetadata"><see cref="SortOption.PathInMetadata"/></param>
-        public SortOption(string sortBy, SortOrderType sortOrder, string pathInMetadata)
+        public SortOption(string sortBy, SortOrder sortOrder, string pathInMetadata)
         {
             this.SortBy = sortBy;
             this.SortOrder = sortOrder;
@@ -85,7 +90,7 @@ namespace Constructorio_NET.Models
     /// Constructorio Supported Sort Order Types.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum SortOrderType
+    public enum SortOrder
     {
         /// <summary>
         /// Specifies that results should be sorted in ascending order.

@@ -1080,7 +1080,7 @@ namespace Constructorio_NET.Modules
             return true;
         }
 
-        internal string CreateSortOptionUrl(SortOptionsRequest req, string filterBySortBy = null, SortOrderType? filterBySortOrder = null)
+        internal string CreateSortOptionUrl(SortOptionsRequest req, string filterBySortBy = null, SortOrder? filterBySortOrder = null)
         {
             List<string> paths = new List<string> { "v1", "sort_option" };
             Hashtable queryParams = req.GetRequestParameters();
