@@ -6,5 +6,10 @@ var searchData=
   ['searchrequest_3',['SearchRequest',['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html',1,'Constructorio_NET::Models']]],
   ['searchresponse_4',['SearchResponse',['../class_constructorio___n_e_t_1_1_models_1_1_search_response.html',1,'Constructorio_NET::Models']]],
   ['searchresponseinner_5',['SearchResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_search_response_inner.html',1,'Constructorio_NET::Models']]],
-  ['servererror_6',['ServerError',['../class_constructorio___n_e_t_1_1_models_1_1_server_error.html',1,'Constructorio_NET::Models']]]
+  ['servererror_6',['ServerError',['../class_constructorio___n_e_t_1_1_models_1_1_server_error.html',1,'Constructorio_NET::Models']]],
+  ['sortoption_7',['SortOption',['../class_constructorio___n_e_t_1_1_models_1_1_sort_option.html',1,'Constructorio_NET::Models']]],
+  ['sortoptionlist_8',['SortOptionList',['../class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html',1,'Constructorio_NET::Models']]],
+  ['sortoptionslistrequest_9',['SortOptionsListRequest',['../class_constructorio___n_e_t_1_1_models_1_1_sort_options_list_request.html',1,'Constructorio_NET::Models']]],
+  ['sortoptionsrequest_10',['SortOptionsRequest',['../class_constructorio___n_e_t_1_1_models_1_1_sort_options_request.html',1,'Constructorio_NET::Models']]],
+  ['sortoptionssinglerequest_11',['SortOptionsSingleRequest',['../class_constructorio___n_e_t_1_1_models_1_1_sort_options_single_request.html',1,'Constructorio_NET::Models']]]
 ];
