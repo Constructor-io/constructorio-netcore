@@ -23,6 +23,7 @@
         public const string SECTION = "section";
         public const string SERVICE_URL = "serviceUrl";
         public const string SESSION_ID = "s";
+        public const string SORT_OPTION = "sort_option";
         public const string SORT_BY = "sort_by";
         public const string SORT_ORDER = "sort_order";
         public const string TEST_CELLS = "test_cells";

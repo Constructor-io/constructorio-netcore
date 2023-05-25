@@ -15,6 +15,14 @@ namespace Constructorio_NET.Tests
         private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
         private readonly ConstructorItemGroup itemGroup1 = new ConstructorItemGroup("itemGroup1", "Item Group 1", JObject.Parse("{\"name\":\"value\"}"));
         private readonly ConstructorItemGroup itemGroup2 = new ConstructorItemGroup("itemGroup2", "Item Group 2", JObject.Parse("{\"name\":\"value\"}"));
+        private readonly string sortBy = "relevance";
+        private readonly string pathInMetadata = "relevance";
+        private readonly SortOrder sortOrderType = SortOrder.Ascending;
+        private readonly List<SortOption> sortOptions = new List<SortOption>()
+        {
+            new SortOption("Collections", SortOrder.Descending, "Collections"),
+            new SortOption("relevance", SortOrder.Ascending, "relevance")
+        };
         private ConstructorioConfig Config;
         private StreamContent itemsStream;
         private StreamContent variationsStream;
@@ -40,6 +48,14 @@ namespace Constructorio_NET.Tests
         public void Delay()
         {
             Thread.Sleep(1000);
+        }
+
+        [OneTimeTearDown]
+        public async Task Cleanup()
+        {
+            var constructorio = new ConstructorIO(Config);
+            await constructorio.Catalog.DeleteSortOptions(new SortOptionsListRequest(this.sortOptions));
+            await constructorio.Catalog.SetSortOptions(new SortOptionsListRequest(this.sortOptions));
         }
 
         [Test]
@@ -413,6 +429,227 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             string res = await constructorio.Catalog.DeleteItemGroups(req);
             Assert.IsTrue(res == "We've started deleting all of your groups. This may take some time to complete.");
+        }
+
+        [Test]
+        public void SetSortOptionsShouldFailWhenRequiredFieldsAreMissing()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(this.sortBy, SortOrder.Descending);
+            SortOptionsListRequest req = new SortOptionsListRequest(new List<SortOption> { sortOption });
+
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.SetSortOptions(req));
+            Assert.AreEqual("Http[400]: sort_options[0].path_in_metadata is a required field of type string", ex.Message, "Correct Error is Returned");
+
+            req.SortOptions[0].PathInMetadata = this.pathInMetadata;
+            req.SortOptions[0].SortBy = null;
+            ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.SetSortOptions(req));
+            Assert.AreEqual("Http[400]: sort_options[0].sort_by is a required field of type string", ex.Message, "Correct Error is Returned");
+        }
+
+        [Test]
+        public async Task SetSortOptions()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOptionsListRequest req = new SortOptionsListRequest(this.sortOptions);
+            SortOptionList res = await constructorio.Catalog.SetSortOptions(req);
+
+            Assert.IsNotNull(res.SortOptions, "Sort options array should exist.");
+            Assert.IsTrue(res.SortOptions.Count > 0, "Sort option shoud exist.");
+            Assert.AreEqual(res.SortOptions[0].SortBy, this.sortOptions[0].SortBy, "Sort option should match sort_by passed in.");
+        }
+
+        [Test]
+        public async Task RetrieveSortOptionsShouldReturnResults()
+        {
+            SortOptionsRequest req = new SortOptionsRequest();
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOptionList res = await constructorio.Catalog.RetrieveSortOptions(req);
+
+            Assert.IsNotNull(res.SortOptions, "Sort options shoud exist.");
+            Assert.IsTrue(res.SortOptions.Count > 1, "Sort options shoud exist.");
+        }
+
+        [Test]
+        public async Task RetrieveSortOptionsWithSortByShouldReturnResults()
+        {
+            SortOptionsRequest req = new SortOptionsRequest(this.sortBy);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOptionList res = await constructorio.Catalog.RetrieveSortOptions(req);
+
+            Assert.IsNotNull(res.SortOptions, "Sort options array should exist.");
+            Assert.AreEqual(1, res.SortOptions.Count, "Sort option shoud exist.");
+            Assert.AreEqual(res.SortOptions[0].SortBy, this.sortBy, "Sort option should match sort_by passed in.");
+        }
+
+        [Test]
+        public void CreateSortOptionFailsIfExists()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(this.sortBy, this.sortOrderType, this.pathInMetadata);
+            SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
+
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.CreateSortOption(req));
+            Assert.AreEqual($"Http[409]: Sort option with sort by `{this.sortBy}` and sort order `SortOrderType.{this.sortOrderType.ToString().ToUpper()}` already exists.", ex.Message, "Correct Error is Returned");
+        }
+
+        [Test]
+        public void CreateSortOptionFailsIfMissingRequiredParams()
+        {
+            string sortByTest = "test";
+            SortOrder sortOrder = SortOrder.Ascending;
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(sortByTest, sortOrder);
+            SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
+
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.CreateSortOption(req));
+            Assert.AreEqual("Http[400]: path_in_metadata is a required field of type string", ex.Message, "Correct Error is Returned");
+
+            req.SortOption.PathInMetadata = this.pathInMetadata;
+            req.SortOption.SortBy = null;
+            ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.CreateSortOption(req));
+            Assert.AreEqual("Http[400]: sort_by is a required field of type string", ex.Message, "Correct Error is Returned");
+        }
+
+        [Test]
+        public async Task CreateSortOption()
+        {
+            string sortByTest = "test";
+            SortOrder sortOrder = SortOrder.Ascending;
+            string pathInMetadataTest = "test";
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(sortByTest, sortOrder, pathInMetadataTest);
+            SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
+
+            SortOption res = await constructorio.Catalog.CreateSortOption(req);
+            Assert.AreEqual(sortByTest, res.SortBy);
+            Assert.AreEqual(sortOrder, res.SortOrder);
+            Assert.AreEqual(pathInMetadataTest, res.PathInMetadata);
+        }
+
+        [Test]
+        public void CreateOrReplaceSortOptionFailsIfMissingRequiredParams()
+        {
+            string sortByTest = "test2";
+            SortOrder sortOrder = SortOrder.Ascending;
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(sortByTest, sortOrder);
+            SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
+
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.CreateOrReplaceSortOption(req));
+            Assert.AreEqual("Http[400]: path_in_metadata is a required field of type string", ex.Message, "Correct Error is Returned");
+
+            req.SortOption.PathInMetadata = this.pathInMetadata;
+            req.SortOption.SortBy = null;
+            ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.CreateOrReplaceSortOption(req));
+            Assert.AreEqual("SortBy is a required property for SortOptionsSingleRequest.SortOption.", ex.Message, "Correct Error is Returned");
+        }
+
+        [Test]
+        public async Task CreateOrReplaceSortOption()
+        {
+            string sortByTest = "test2";
+            SortOrder sortOrder = SortOrder.Ascending;
+            string pathInMetadataTest = "test";
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(sortByTest, sortOrder, pathInMetadataTest);
+            SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
+
+            SortOption res = await constructorio.Catalog.CreateOrReplaceSortOption(req);
+            Assert.AreEqual(sortByTest, res.SortBy);
+            Assert.AreEqual(sortOrder, res.SortOrder);
+            Assert.AreEqual(pathInMetadataTest, res.PathInMetadata);
+        }
+
+        [Test]
+        public void UpdateOptionFailsIfMissingRequiredParams()
+        {
+            string sortByTest = this.sortBy;
+            SortOrder sortOrder = SortOrder.Descending;
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(sortByTest, sortOrder);
+            SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
+
+            req.SortOption.SortBy = null;
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.UpdateSortOption(req));
+            Assert.AreEqual("SortBy is a required property for SortOptionsSingleRequest.SortOption.", ex.Message, "Correct Error is Returned");
+        }
+
+        [Test]
+        public void UpdateOptionFailsIfSortOptionDoesntExist()
+        {
+            string sortByTest = this.sortBy;
+            SortOrder sortOrder = SortOrder.Descending;
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(sortByTest, sortOrder);
+            SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
+
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.UpdateSortOption(req));
+            Assert.AreEqual($"Http[404]: No such sorting option with name `{this.sortBy}` and order of `descending` was found.", ex.Message, "Correct Error is Returned");
+        }
+
+        [Test]
+        public async Task UpdateSortOption()
+        {
+            string sortByTest = this.sortBy;
+            SortOrder sortOrder = this.sortOrderType;
+            string pathInMetadataTest = "test";
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(sortByTest, sortOrder, pathInMetadataTest);
+            SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
+
+            SortOption res = await constructorio.Catalog.UpdateSortOption(req);
+            Assert.AreEqual(sortByTest, res.SortBy);
+            Assert.AreEqual(sortOrder, res.SortOrder);
+            Assert.AreEqual(pathInMetadataTest, res.PathInMetadata);
+        }
+
+        [Test]
+        public void DeleteSortOptionsShouldFailWhenRequiredFieldsAreMissing()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(this.sortBy, this.sortOrderType, this.pathInMetadata);
+            SortOptionsListRequest req = new SortOptionsListRequest(new List<SortOption> { sortOption });
+
+            req.SortOptions[0].SortBy = null;
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.DeleteSortOptions(req));
+            Assert.AreEqual("Http[400]: sort_options[0].sort_by is a required field of type string", ex.Message, "Correct Error is Returned");
+        }
+
+        [Test]
+        public void DeleteSortOptionsShouldFailIfSortOptionDoesntExist()
+        {
+            string sortByTest = "test-delete";
+            SortOrder sortOrder = SortOrder.Ascending;
+            string pathInMetadataTest = "test-delete";
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(sortByTest, sortOrder, pathInMetadataTest);
+            SortOptionsListRequest req = new SortOptionsListRequest(new List<SortOption> { sortOption });
+
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.DeleteSortOptions(req));
+            Assert.AreEqual("Http[404]: No such sorting option with name `test-delete` and order of `ascending` was found.", ex.Message, "Correct Error is Returned");
+        }
+
+        [Test]
+        public async Task DeleteSortOptions()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(this.sortBy, this.sortOrderType, this.pathInMetadata);
+
+            SortOptionsListRequest req = new SortOptionsListRequest(new List<SortOption> { sortOption });
+            bool res = await constructorio.Catalog.DeleteSortOptions(req);
+            Assert.IsTrue(res);
+
+            // Resets the store
+            await constructorio.Catalog.SetSortOptions(new SortOptionsListRequest(this.sortOptions));
         }
     }
 }
