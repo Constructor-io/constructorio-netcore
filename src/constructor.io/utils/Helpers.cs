@@ -13,7 +13,7 @@ namespace Constructorio_NET.Utils
 {
     public class Helpers
     {
-        private static readonly HttpClient Client = new HttpClient();
+        private readonly HttpClient Client = ConstructorIO.HttpClient;
 
         protected Helpers()
         {
