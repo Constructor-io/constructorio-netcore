@@ -13,8 +13,6 @@ namespace Constructorio_NET.Utils
 {
     public class Helpers
     {
-        private readonly HttpClient Client = ConstructorIO.HttpClient;
-
         protected Helpers()
         {
         }
@@ -270,7 +268,7 @@ namespace Constructorio_NET.Utils
                 httpRequest.Content = reqContent;
             }
 
-            HttpResponseMessage response = await Client.SendAsync(httpRequest);
+            HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest);
             HttpContent resContent = response.Content;
             string result = await resContent.ReadAsStringAsync();
 
