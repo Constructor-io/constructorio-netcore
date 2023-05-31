@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Net.Http;
 using Constructorio_NET.Models;
 using Constructorio_NET.Modules;
 using Constructorio_NET.Utils;
@@ -20,6 +21,7 @@ namespace Constructorio_NET
         public Tasks Tasks { get; }
         public Items Items { get; }
         public Quizzes Quizzes { get; }
+        public static readonly HttpClient HttpClient = new HttpClient();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorIO"/> class.
