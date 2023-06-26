@@ -32,7 +32,7 @@ namespace Constructorio_NET.Models
         public string Description { get; set; }
 
         [JsonIgnore]
-        public Dictionary<string, List<dynamic>> Facets { get; set; }
+        public Dictionary<string, List<object>> Facets { get; set; }
 
         [JsonIgnore]
         public Dictionary<string, object> Metadata { get; set; }
