@@ -55,9 +55,10 @@ namespace Constructorio_NET.Tests
             item.Name = name;
             item.Id = id;
 
-            Dictionary<string, List<string>> facets = new Dictionary<string, List<string>>();
-            facets.Add("color", new List<string> { "blue", "red" });
-            facets.Add("size", new List<string> { "large" });
+            Dictionary<string, List<dynamic>> facets = new Dictionary<string, List<dynamic>>();
+            facets.Add("color", new List<dynamic> { "blue", "red" });
+            facets.Add("size", new List<dynamic> { "large" });
+            facets.Add("price", new List<dynamic> { 3.99 });
 
             Dictionary<string, object> metadata = new Dictionary<string, object>();
             metadata.Add("brand", "abc");
