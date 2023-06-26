@@ -119,7 +119,7 @@ namespace Constructorio_NET.Models
 
                     if (value.TryGetValue("facets", out dictVal))
                     {
-                        this.Facets = ((JObject)dictVal).ToObject<Dictionary<string, List<dynamic>>>();
+                        this.Facets = ((JObject)dictVal).ToObject<Dictionary<string, List<object>>>();
                         value.Remove("facets");
                     }
 
