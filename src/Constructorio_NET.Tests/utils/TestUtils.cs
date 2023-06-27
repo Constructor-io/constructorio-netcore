@@ -83,9 +83,9 @@ namespace Constructorio_NET.Tests
             ConstructorVariation item = new ConstructorVariation(id, itemId, name);
             item.Name = name;
             item.Id = id;
-            Dictionary<string, List<string>> facets = new Dictionary<string, List<string>>();
-            facets.Add("color", new List<string> { "blue", "red" });
-            facets.Add("size", new List<string> { "large" });
+            Dictionary<string, List<object>> facets = new Dictionary<string, List<object>>();
+            facets.Add("color", new List<object> { "blue", "red" });
+            facets.Add("size", new List<object> { "large" });
 
             Dictionary<string, object> metadata = new Dictionary<string, object>();
             metadata.Add("brand", "abc");
