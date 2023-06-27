@@ -599,7 +599,7 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Browse.GetBrowseResults(req));
-            Assert.IsTrue(ex.Message == "Http[400]: You've used both 'page' and 'offset' parameters for pagination. Please, use just one of them", "Correct error is returned");
+            Assert.IsTrue(ex.Message == "Http[400]: offset, page are mutually exclusive", "Correct error is returned");
         }
     }
 }

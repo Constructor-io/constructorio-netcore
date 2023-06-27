@@ -32,7 +32,7 @@ namespace Constructorio_NET.Models
         public string Description { get; set; }
 
         [JsonIgnore]
-        public Dictionary<string, List<string>> Facets { get; set; }
+        public Dictionary<string, List<object>> Facets { get; set; }
 
         [JsonIgnore]
         public Dictionary<string, object> Metadata { get; set; }
@@ -119,7 +119,7 @@ namespace Constructorio_NET.Models
 
                     if (value.TryGetValue("facets", out dictVal))
                     {
-                        this.Facets = ((JObject)dictVal).ToObject<Dictionary<string, List<string>>>();
+                        this.Facets = ((JObject)dictVal).ToObject<Dictionary<string, List<object>>>();
                         value.Remove("facets");
                     }
 
