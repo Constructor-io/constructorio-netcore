@@ -436,6 +436,21 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetSearchResultsShouldReturnResultWithResultSources()
+        {
+            SearchRequest req = new SearchRequest("item")
+            {
+                UserInfo = this.UserInfo
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            Assert.NotNull(res.Response.ResultSources.TokenMatch, "token match exists");
+            Assert.NotNull(res.Response.ResultSources.EmbeddingsMatch, "embeddings match exists");
+            Assert.AreEqual(res.Response.ResultSources.TokenMatch.Count, 5, "number of token matches expected to be 5");
+            Assert.AreEqual(res.Response.ResultSources.EmbeddingsMatch.Count, 0, "number of embeddings matches expected to be 0");
+        }
+
+        [Test]
         public async Task GetSearchResultsShouldReturnResultWithHiddenFields()
         {
             string requestedHiddenField = "testField";
