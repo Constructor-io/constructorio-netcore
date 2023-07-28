@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 
 /**
- * Constructor.io Filter Facet
+ * Constructor.io Result Sources
  **/
 namespace Constructorio_NET.Models
 {
