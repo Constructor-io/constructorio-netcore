@@ -463,6 +463,23 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithResultSources()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = UserInfo,
+                Page = 1,
+                ResultsPerPage = 1
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            Assert.NotNull(res.Response.ResultSources.TokenMatch, "token match exists");
+            Assert.NotNull(res.Response.ResultSources.EmbeddingsMatch, "embeddings match exists");
+            Assert.AreEqual(1, res.Response.ResultSources.TokenMatch.Count, "number of token matches expected to be 1");
+            Assert.AreEqual(0, res.Response.ResultSources.EmbeddingsMatch.Count, "number of embeddings matches expected to be 0");
+        }
+
+        [Test]
         public async Task GetBrowseItemsResults()
         {
             BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds)
