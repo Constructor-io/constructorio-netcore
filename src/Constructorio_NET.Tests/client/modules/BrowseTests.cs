@@ -475,8 +475,8 @@ namespace Constructorio_NET.Tests
             BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
             Assert.NotNull(res.Response.ResultSources.TokenMatch, "token match exists");
             Assert.NotNull(res.Response.ResultSources.EmbeddingsMatch, "embeddings match exists");
-            Assert.AreEqual(res.Response.ResultSources.TokenMatch.Count, 1, "number of token matches expected to be 1");
-            Assert.AreEqual(res.Response.ResultSources.EmbeddingsMatch.Count, 0, "number of embeddings matches expected to be 0");
+            Assert.AreEqual(1, res.Response.ResultSources.TokenMatch.Count, "number of token matches expected to be 1");
+            Assert.AreEqual(0, res.Response.ResultSources.EmbeddingsMatch.Count, "number of embeddings matches expected to be 0");
         }
 
         [Test]
