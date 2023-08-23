@@ -1,12 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 
 namespace Constructorio_NET.Models
 {
-  interface IFilterable
-  {
-  }
+    public interface IFilterable
+    {
+        /// <summary>
+        /// Gets or sets filters used to refine results.
+        /// </summary>
+        Dictionary<string, List<string>> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or sets user test cells.
+        /// </summary>
+        Dictionary<string, string> TestCells { get; set; }
+
+        /// <summary>
+        /// Gets or sets collection of user related data.
+        /// </summary>
+        UserInfo UserInfo { get; set; }
+
+        /// <summary>
+        /// Gets or sets how to return variation data.
+        /// </summary>
+        VariationsMap VariationsMap { get; set; }
+    }
 }
