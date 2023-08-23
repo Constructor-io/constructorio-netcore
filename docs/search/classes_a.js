@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['paginationoptions_0',['PaginationOptions',['../class_constructorio___n_e_t_1_1_models_1_1_pagination_options.html',1,'Constructorio_NET::Models']]],
-  ['patchsearchabilitiesrequest_1',['PatchSearchabilitiesRequest',['../class_constructorio___n_e_t_1_1_models_1_1_patch_searchabilities_request.html',1,'Constructorio_NET::Models']]],
-  ['prefilterexpression_2',['PreFilterExpression',['../class_constructorio___n_e_t_1_1_models_1_1_pre_filter_expression.html',1,'Constructorio_NET::Models']]],
-  ['prefilterexpressionbase_3',['PreFilterExpressionBase',['../class_constructorio___n_e_t_1_1_models_1_1_pre_filter_expression_base.html',1,'Constructorio_NET::Models']]]
+  ['optionattribute_0',['OptionAttribute',['../class_constructorio___n_e_t_1_1_models_1_1_option_attribute.html',1,'Constructorio_NET::Models']]],
+  ['orprefilterexpression_1',['OrPreFilterExpression',['../class_constructorio___n_e_t_1_1_models_1_1_or_pre_filter_expression.html',1,'Constructorio_NET::Models']]]
 ];

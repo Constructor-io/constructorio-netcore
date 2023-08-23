@@ -51,6 +51,24 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetRecommendationsResultsShouldReturnResultsWithStrategyId()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("filtered_items")
+            {
+                Filters = new Dictionary<string, List<string>>()
+                {
+                    { "Brand", new List<string>() { "XYZ" } }
+                },
+                UserInfo = this.UserInfo,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.AreEqual("filtered_items", res.Response.Results[0].Strategy.Id, "Strategy id exists");
+            Assert.NotNull(res.ResultId, "Result id exists");
+        }
+
+        [Test]
         public async Task GetRecommendationsResultsShouldReturnAResultWithMultipleItemIds()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1")

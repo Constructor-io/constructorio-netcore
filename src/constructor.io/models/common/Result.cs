@@ -23,5 +23,8 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("variations_map")]
         public object VariationsMap { get; set; }
+
+        [JsonProperty("strategy")]
+        public RecommendationStrategy Strategy { get; set; }
     }
 }

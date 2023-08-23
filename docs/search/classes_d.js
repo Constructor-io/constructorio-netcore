@@ -1,15 +1,19 @@
 var searchData=
 [
-  ['search_0',['Search',['../class_constructorio___n_e_t_1_1_modules_1_1_search.html',1,'Constructorio_NET::Modules']]],
-  ['searchabilitiesresponse_1',['SearchabilitiesResponse',['../class_constructorio___n_e_t_1_1_models_1_1_searchabilities_response.html',1,'Constructorio_NET::Models']]],
-  ['searchability_2',['Searchability',['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html',1,'Constructorio_NET::Models']]],
-  ['searchrequest_3',['SearchRequest',['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html',1,'Constructorio_NET::Models']]],
-  ['searchresponse_4',['SearchResponse',['../class_constructorio___n_e_t_1_1_models_1_1_search_response.html',1,'Constructorio_NET::Models']]],
-  ['searchresponseinner_5',['SearchResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_search_response_inner.html',1,'Constructorio_NET::Models']]],
-  ['servererror_6',['ServerError',['../class_constructorio___n_e_t_1_1_models_1_1_server_error.html',1,'Constructorio_NET::Models']]],
-  ['sortoption_7',['SortOption',['../class_constructorio___n_e_t_1_1_models_1_1_sort_option.html',1,'Constructorio_NET::Models']]],
-  ['sortoptionlist_8',['SortOptionList',['../class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html',1,'Constructorio_NET::Models']]],
-  ['sortoptionslistrequest_9',['SortOptionsListRequest',['../class_constructorio___n_e_t_1_1_models_1_1_sort_options_list_request.html',1,'Constructorio_NET::Models']]],
-  ['sortoptionsrequest_10',['SortOptionsRequest',['../class_constructorio___n_e_t_1_1_models_1_1_sort_options_request.html',1,'Constructorio_NET::Models']]],
-  ['sortoptionssinglerequest_11',['SortOptionsSingleRequest',['../class_constructorio___n_e_t_1_1_models_1_1_sort_options_single_request.html',1,'Constructorio_NET::Models']]]
+  ['rangeprefilterexpression_0',['RangePreFilterExpression',['../class_constructorio___n_e_t_1_1_models_1_1_range_pre_filter_expression.html',1,'Constructorio_NET::Models']]],
+  ['recommendations_1',['Recommendations',['../class_constructorio___n_e_t_1_1_modules_1_1_recommendations.html',1,'Constructorio_NET::Modules']]],
+  ['recommendationsrequest_2',['RecommendationsRequest',['../class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html',1,'Constructorio_NET::Models']]],
+  ['recommendationsresponse_3',['RecommendationsResponse',['../class_constructorio___n_e_t_1_1_models_1_1_recommendations_response.html',1,'Constructorio_NET::Models']]],
+  ['recommendationsresponseinner_4',['RecommendationsResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_recommendations_response_inner.html',1,'Constructorio_NET::Models']]],
+  ['recommendationstrategy_5',['RecommendationStrategy',['../class_constructorio___n_e_t_1_1_models_1_1_recommendation_strategy.html',1,'Constructorio_NET::Models']]],
+  ['redirect_6',['Redirect',['../class_constructorio___n_e_t_1_1_models_1_1_redirect.html',1,'Constructorio_NET::Models']]],
+  ['redirectdata_7',['RedirectData',['../class_constructorio___n_e_t_1_1_models_1_1_redirect_data.html',1,'Constructorio_NET::Models']]],
+  ['refinedcontent_8',['RefinedContent',['../class_constructorio___n_e_t_1_1_models_1_1_refined_content.html',1,'Constructorio_NET::Models']]],
+  ['result_9',['Result',['../class_constructorio___n_e_t_1_1_models_1_1_result.html',1,'Constructorio_NET::Models']]],
+  ['resultdata_10',['ResultData',['../class_constructorio___n_e_t_1_1_models_1_1_result_data.html',1,'Constructorio_NET::Models']]],
+  ['resultfacet_11',['ResultFacet',['../class_constructorio___n_e_t_1_1_models_1_1_result_facet.html',1,'Constructorio_NET::Models']]],
+  ['resultgroup_12',['ResultGroup',['../class_constructorio___n_e_t_1_1_models_1_1_result_group.html',1,'Constructorio_NET::Models']]],
+  ['resultpod_13',['ResultPod',['../class_constructorio___n_e_t_1_1_models_1_1_result_pod.html',1,'Constructorio_NET::Models']]],
+  ['resultsources_14',['ResultSources',['../class_constructorio___n_e_t_1_1_models_1_1_result_sources.html',1,'Constructorio_NET::Models']]],
+  ['retrievesearchabilitiesrequest_15',['RetrieveSearchabilitiesRequest',['../class_constructorio___n_e_t_1_1_models_1_1_retrieve_searchabilities_request.html',1,'Constructorio_NET::Models']]]
 ];
