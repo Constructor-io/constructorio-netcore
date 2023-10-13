@@ -44,6 +44,9 @@ namespace Constructorio_NET.Models
         [JsonProperty("dtype")]
         public string DType { get; set; }
 
+        [JsonProperty("filter_by")]
+        public JObject FilterBy { get: set; }
+
         public VariationsMap()
         {
             Values = new Dictionary<string, Value>();
@@ -73,6 +76,14 @@ namespace Constructorio_NET.Models
             {
                 this.Values = new Dictionary<string, Value> { { name, new Value { Aggregation = aggregation, Field = field } } };
             }
+        }
+
+        public void AddFilterByRule(string filterByString) {
+            this.FilterBy = JObject.parse(filterByString);
+        }
+
+        public void AddFilterByRule(JObject filterBy) {
+            this.FilterBy = filterBy;
         }
     }
 }
