@@ -319,6 +319,17 @@ Task response = await constructorio.Tasks.GetTask(request);
 - Download ".NET Core Test Explorer" Extension
 - In settings => .NET Core Test Explorer => Test Project Path: Constructorio_NET/Constructorio_NET.Tests
 
+## Testing
+- Make sure you have .NET SDK V6 installed
+- Open your terminal and navigate to the test directory:
+  ```bash
+  cd src/Constructorio_NET.Tests/
+  ```
+- Run the following command to execute tests:
+  ```bash
+  dotnet test
+  ```
+
 ## For code coverage:
 - if initial setup:
   - dotnet husky install
