@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Constructorio_NET.Tests
 {
@@ -453,12 +453,14 @@ namespace Constructorio_NET.Tests
             req.VariationsMap.AddGroupByRule("url", "data.url");
             req.VariationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
             req.VariationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
+            req.VariationsMap.AddFilterByRule("{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}");
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
             res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse("    {\r\n  \"filter_by\": {\r\n    \"and\": [\r\n      {\r\n        \"not\": {\r\n          \"field\": \"data.brand\",\r\n          \"value\": \"Best Brand\"\r\n        }\r\n      }\r\n    ]\r\n  },\r\n  \"group_by\": [\r\n    {\r\n      \"name\": \"url\",\r\n      \"field\": \"data.url\"\r\n    }\r\n  ],\r\n  \"values\": {\r\n    \"variation_id\": {\r\n      \"aggregation\": \"first\",\r\n      \"field\": \"data.variation_id\"\r\n    },\r\n    \"deactivated\": {\r\n      \"aggregation\": \"first\",\r\n      \"field\": \"data.deactivated\"\r\n    }\r\n  },\r\n  \"dtype\": \"object\"\r\n}");
 
             Assert.NotNull(res.ResultId, "Result id exists");
-            Assert.NotNull(reqVariationsMap, "Variations Map was passed as parameter");
+            Assert.AreEqual(JObject.Parse(reqVariationsMap.ToString()), variationMapResult, "Variations Map was passed as parameter");
             Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
         }
 
