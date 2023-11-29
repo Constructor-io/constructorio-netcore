@@ -67,7 +67,6 @@ namespace Constructorio_NET.Tests
             Assert.IsNotNull(res.NextQuestion.Type, "NextQuestion Type should exist");
             Assert.IsNotNull(res.NextQuestion.Description, "NextQuestion Description should exist");
             Assert.IsNotNull(res.NextQuestion.Images, "NextQuestion Images should exist");
-            Assert.IsNotNull(res.IsLastQuestion, "IsLastQuestion should exist");
             Assert.IsNotNull(res.QuizVersionId, "QuizVersionId should exist");
             Assert.IsNotNull(res.QuizSessionId, "QuizSessionId should exist");
             Assert.IsNotNull(res.QuizId, "QuizId should exist");

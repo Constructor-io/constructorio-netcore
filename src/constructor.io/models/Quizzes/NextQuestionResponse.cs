@@ -12,9 +12,6 @@ namespace Constructorio_NET.Models
         [JsonProperty("next_question")]
         public NextQuestion NextQuestion { get; set; }
 
-        [JsonProperty("is_last_question")]
-        public bool IsLastQuestion { get; set; }
-
         [JsonProperty("quiz_version_id")]
         public string QuizVersionId { get; set; }
 
