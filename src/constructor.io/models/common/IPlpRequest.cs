@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Constructorio_NET.Models
 {
-    internal interface IPlpRequest : IFilterable, IPagable
+    internal interface IPlpRequest : IFilterable, IPageable
     {
         /// <summary>
         /// Gets or sets the format options used to refine result groups.

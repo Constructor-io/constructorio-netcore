@@ -1,6 +1,6 @@
 namespace Constructorio_NET.Models
 {
-    public interface IPagable
+    public interface IPageable
     {
         /// <summary>
         /// Gets or sets the number of results to skip from the beginning.
