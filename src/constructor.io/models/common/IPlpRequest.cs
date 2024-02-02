@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Constructorio_NET.Models
 {
-    internal interface IPlpRequest : IFilterable, IPageable
+    public interface IPlpRequest : IFilterable, IPageable, ISortable, IUserDetails
     {
         /// <summary>
         /// Gets or sets the format options used to refine result groups.
@@ -23,6 +23,11 @@ namespace Constructorio_NET.Models
         /// Gets or sets the filtering expression used to scope search results.
         /// </summary>
         PreFilterExpression PreFilterExpression { get; set; }
+
+        /// <summary>
+        /// Gets or sets how to return variation data.
+        /// </summary>
+        VariationsMap VariationsMap { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the section.

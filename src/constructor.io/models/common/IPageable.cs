@@ -18,15 +18,5 @@ namespace Constructorio_NET.Models
         /// Gets or sets the number of results per page to return.
         /// </summary>
         int ResultsPerPage { get; set; }
-
-        /// <summary>
-        /// Gets or sets the sort method for results.
-        /// </summary>
-        string SortBy { get; set; }
-
-        /// <summary>
-        /// Gets or sets the sort order for results.
-        /// </summary>
-        string SortOrder { get; set; }
     }
 }

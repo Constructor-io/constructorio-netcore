@@ -9,7 +9,7 @@ namespace Constructorio_NET.Models
     /// <summary>
     /// Constructor.io Autocomplete Request Class.
     /// </summary>
-    public class AutocompleteRequest : IFilterable
+    public class AutocompleteRequest : IFilterable, IUserDetails
     {
         /// <summary>
         /// Gets or sets the query used to refine results.
