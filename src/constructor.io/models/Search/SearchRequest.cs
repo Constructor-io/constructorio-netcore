@@ -10,7 +10,7 @@ namespace Constructorio_NET.Models
     /// <summary>
     /// Constructor.io Search Request Class.
     /// </summary>
-    public class SearchRequest
+    public class SearchRequest : IPlpRequest
     {
         /// <summary>
         /// Gets or sets the query used to refine results.

@@ -10,7 +10,7 @@ namespace Constructorio_NET.Models
     /// <summary>
     /// Constructor.io Browse Request Class.
     /// </summary>
-    public class BrowseRequest
+    public class BrowseRequest : IPlpRequest
     {
         /// <summary>
         /// Gets or sets the filter name used to refine results.
