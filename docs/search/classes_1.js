@@ -2,13 +2,18 @@ var searchData=
 [
   ['browse_0',['Browse',['../class_constructorio___n_e_t_1_1_modules_1_1_browse.html',1,'Constructorio_NET::Modules']]],
   ['browsefacetoptionsrequest_1',['BrowseFacetOptionsRequest',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facet_options_request.html',1,'Constructorio_NET::Models']]],
-  ['browsefacetoptionsresponse_2',['BrowseFacetOptionsResponse',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facet_options_response.html',1,'Constructorio_NET::Models']]],
-  ['browsefacetoptionsresponseinner_3',['BrowseFacetOptionsResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facet_options_response_inner.html',1,'Constructorio_NET::Models']]],
-  ['browsefacetsrequest_4',['BrowseFacetsRequest',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_request.html',1,'Constructorio_NET::Models']]],
-  ['browsefacetsresponse_5',['BrowseFacetsResponse',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_response.html',1,'Constructorio_NET::Models']]],
-  ['browsefacetsresponseinner_6',['BrowseFacetsResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_response_inner.html',1,'Constructorio_NET::Models']]],
-  ['browseitemsrequest_7',['BrowseItemsRequest',['../class_constructorio___n_e_t_1_1_models_1_1_browse_items_request.html',1,'Constructorio_NET::Models']]],
-  ['browserequest_8',['BrowseRequest',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html',1,'Constructorio_NET::Models']]],
-  ['browseresponse_9',['BrowseResponse',['../class_constructorio___n_e_t_1_1_models_1_1_browse_response.html',1,'Constructorio_NET::Models']]],
-  ['browseresponseinner_10',['BrowseResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_browse_response_inner.html',1,'Constructorio_NET::Models']]]
+  ['browsefacetoptionsrequesttest_2',['BrowseFacetOptionsRequestTest',['../class_constructorio___n_e_t_1_1_tests_1_1_browse_facet_options_request_test.html',1,'Constructorio_NET::Tests']]],
+  ['browsefacetoptionsresponse_3',['BrowseFacetOptionsResponse',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facet_options_response.html',1,'Constructorio_NET::Models']]],
+  ['browsefacetoptionsresponseinner_4',['BrowseFacetOptionsResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facet_options_response_inner.html',1,'Constructorio_NET::Models']]],
+  ['browsefacetsrequest_5',['BrowseFacetsRequest',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_request.html',1,'Constructorio_NET::Models']]],
+  ['browsefacetsrequesttest_6',['BrowseFacetsRequestTest',['../class_constructorio___n_e_t_1_1_tests_1_1_browse_facets_request_test.html',1,'Constructorio_NET::Tests']]],
+  ['browsefacetsresponse_7',['BrowseFacetsResponse',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_response.html',1,'Constructorio_NET::Models']]],
+  ['browsefacetsresponseinner_8',['BrowseFacetsResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_response_inner.html',1,'Constructorio_NET::Models']]],
+  ['browseitemsrequest_9',['BrowseItemsRequest',['../class_constructorio___n_e_t_1_1_models_1_1_browse_items_request.html',1,'Constructorio_NET::Models']]],
+  ['browseitemsrequesttest_10',['BrowseItemsRequestTest',['../class_constructorio___n_e_t_1_1_tests_1_1_browse_items_request_test.html',1,'Constructorio_NET::Tests']]],
+  ['browserequest_11',['BrowseRequest',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html',1,'Constructorio_NET::Models']]],
+  ['browserequesttest_12',['BrowseRequestTest',['../class_constructorio___n_e_t_1_1_tests_1_1_browse_request_test.html',1,'Constructorio_NET::Tests']]],
+  ['browseresponse_13',['BrowseResponse',['../class_constructorio___n_e_t_1_1_models_1_1_browse_response.html',1,'Constructorio_NET::Models']]],
+  ['browseresponseinner_14',['BrowseResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_browse_response_inner.html',1,'Constructorio_NET::Models']]],
+  ['browsetest_15',['BrowseTest',['../class_constructorio___n_e_t_1_1_tests_1_1_browse_test.html',1,'Constructorio_NET::Tests']]]
 ];
