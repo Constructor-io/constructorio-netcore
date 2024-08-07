@@ -29,10 +29,7 @@ namespace Constructorio_NET
         /// <param name="config">Collection of values to pass to modules.</param>
         public ConstructorIO(ConstructorioConfig config)
         {
-            Hashtable options = new Hashtable
-            {
-                { Constants.VERSION, this.Version }
-            };
+            Hashtable options = new Hashtable { { Constants.VERSION, this.Version } };
 
             if (config.Contains("ApiKey"))
             {
