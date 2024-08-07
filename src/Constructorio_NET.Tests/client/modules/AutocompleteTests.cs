@@ -1,8 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Constructorio_NET.Tests
 {
@@ -25,25 +26,30 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetAutocompleteResultsWithInvalidApiKeyShouldError()
         {
-            AutocompleteRequest req = new AutocompleteRequest("item")
-            {
-                UserInfo = UserInfo
-            };
+            AutocompleteRequest req = new AutocompleteRequest("item") { UserInfo = UserInfo };
             ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig("invalidKey"));
-            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Autocomplete.GetAutocompleteResults(req));
-            Assert.IsTrue(ex.Message == "Http[400]: You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration.", "Correct Error is Returned");
+            var ex = Assert.ThrowsAsync<ConstructorException>(
+                () => constructorio.Autocomplete.GetAutocompleteResults(req)
+            );
+            Assert.IsTrue(
+                ex.Message
+                    == "Http[400]: You have supplied an invalid `key` or `autocomplete_key`. You can find your key at app.constructor.io/dashboard/accounts/api_integration.",
+                "Correct Error is Returned"
+            );
         }
 
         [Test]
         public async Task GetAutocompleteResults()
         {
-            AutocompleteRequest req = new AutocompleteRequest("item")
-            {
-                UserInfo = UserInfo
-            };
+            AutocompleteRequest req = new AutocompleteRequest("item") { UserInfo = UserInfo };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
+            res.Sections.TryGetValue("Products", out List<Result> Products);
+            Dictionary<string, object> labels = Products[0].Labels;
 
+            labels.TryGetValue("is_sponsored", out object isSponsored);
+
+            Assert.AreEqual((bool)isSponsored, true);
             Assert.NotNull(res.ResultId, "Result id exists");
         }
 
@@ -56,16 +62,32 @@ namespace Constructorio_NET.Tests
                 VariationsMap = new VariationsMap()
             };
             req.VariationsMap.AddGroupByRule("url", "data.url");
-            req.VariationsMap.AddValueRule("variation_id", AggregationTypes.First, "data.variation_id");
-            req.VariationsMap.AddValueRule("deactivated", AggregationTypes.First, "data.deactivated");
-            req.VariationsMap.AddFilterByRule("{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}");
+            req.VariationsMap.AddValueRule(
+                "variation_id",
+                AggregationTypes.First,
+                "data.variation_id"
+            );
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.First,
+                "data.deactivated"
+            );
+            req.VariationsMap.AddFilterByRule(
+                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}"
+            );
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
             res.Request.TryGetValue("variations_map", out object reqVariationsMap);
-            JObject variationMapResult = JObject.Parse("    {\r\n  \"filter_by\": {\r\n    \"and\": [\r\n      {\r\n        \"not\": {\r\n          \"field\": \"data.brand\",\r\n          \"value\": \"Best Brand\"\r\n        }\r\n      }\r\n    ]\r\n  },\r\n  \"group_by\": [\r\n    {\r\n      \"name\": \"url\",\r\n      \"field\": \"data.url\"\r\n    }\r\n  ],\r\n  \"values\": {\r\n    \"variation_id\": {\r\n      \"aggregation\": \"first\",\r\n      \"field\": \"data.variation_id\"\r\n    },\r\n    \"deactivated\": {\r\n      \"aggregation\": \"first\",\r\n      \"field\": \"data.deactivated\"\r\n    }\r\n  },\r\n  \"dtype\": \"object\"\r\n}");
+            JObject variationMapResult = JObject.Parse(
+                "    {\r\n  \"filter_by\": {\r\n    \"and\": [\r\n      {\r\n        \"not\": {\r\n          \"field\": \"data.brand\",\r\n          \"value\": \"Best Brand\"\r\n        }\r\n      }\r\n    ]\r\n  },\r\n  \"group_by\": [\r\n    {\r\n      \"name\": \"url\",\r\n      \"field\": \"data.url\"\r\n    }\r\n  ],\r\n  \"values\": {\r\n    \"variation_id\": {\r\n      \"aggregation\": \"first\",\r\n      \"field\": \"data.variation_id\"\r\n    },\r\n    \"deactivated\": {\r\n      \"aggregation\": \"first\",\r\n      \"field\": \"data.deactivated\"\r\n    }\r\n  },\r\n  \"dtype\": \"object\"\r\n}"
+            );
 
             Assert.NotNull(res.ResultId, "Result id exists");
-            Assert.AreEqual(JObject.Parse(reqVariationsMap.ToString()), variationMapResult, "Variations Map was passed as parameter");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
         }
 
         [Test]
@@ -81,7 +103,11 @@ namespace Constructorio_NET.Tests
 
             Assert.NotNull(res.ResultId, "Result id exists");
             Assert.AreEqual(0, res.Sections["Products"].Count, "Products don't exist");
-            Assert.GreaterOrEqual(res.Sections["Search Suggestions"].Count, 4, "Search Suggestsions Exist");
+            Assert.GreaterOrEqual(
+                res.Sections["Search Suggestions"].Count,
+                4,
+                "Search Suggestsions Exist"
+            );
         }
 
         [Test]
@@ -117,3 +143,4 @@ namespace Constructorio_NET.Tests
         }
     }
 }
+
