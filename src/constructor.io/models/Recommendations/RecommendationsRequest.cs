@@ -26,6 +26,11 @@ namespace Constructorio_NET.Models
         public List<string> ItemIds { get; set; }
 
         /// <summary>
+        /// Gets or sets term.
+        /// </summary>
+        public string Term { get; set; }
+
+        /// <summary>
         /// Gets or sets filters used to refine results.
         /// </summary>
         public Dictionary<string, List<string>> Filters { get; set; }
@@ -113,6 +118,11 @@ namespace Constructorio_NET.Models
             if (this.ItemIds != null && this.ItemIds.Count != 0)
             {
                 parameters.Add("item_id", this.ItemIds);
+            }
+
+            if (this.Term != null)
+            {
+                parameters.Add("term", this.Term);
             }
 
             return parameters;
