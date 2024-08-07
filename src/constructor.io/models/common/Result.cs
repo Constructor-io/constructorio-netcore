@@ -26,5 +26,9 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("strategy")]
         public RecommendationStrategy Strategy { get; set; }
+
+        [JsonProperty("labels")]
+        public Dictionary<string, object> Labels { get; set; }
     }
 }
+
