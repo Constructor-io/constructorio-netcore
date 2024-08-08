@@ -14,6 +14,7 @@ namespace Constructorio_NET.Tests
         private readonly int SessionId = 4;
         private readonly string Pod = "Pod1";
         private readonly string Section = "Search Suggestions";
+        private readonly string Term = "Apple";
         private readonly int NumResults = 5;
         private readonly string UserId = "user1";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
@@ -44,6 +45,7 @@ namespace Constructorio_NET.Tests
                 NumResults = this.NumResults,
                 Section = this.Section,
                 TestCells = this.TestCells,
+                Term = this.Term
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -54,6 +56,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.Section, requestParameters[Constants.SECTION]);
             Assert.AreEqual(this.NumResults, requestParameters["num_results"]);
             Assert.AreEqual(this.TestCells, requestParameters[Constants.TEST_CELLS]);
+            Assert.AreEqual(this.Term, requestParameters["term"]);
         }
 
         [Test]

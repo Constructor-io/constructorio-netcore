@@ -101,6 +101,23 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetRecommendationsResultsShouldReturnAResultWithTerm()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("query_recommendations")
+            {
+                UserInfo = this.UserInfo,
+                Term = "apple",
+                NumResults = 5
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual("apple", res.Request["term"], "Term is set");
+        }
+
+        [Test]
         public async Task GetRecommendationsResultsShouldReturnAResultProvidedUserInfo()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1")
