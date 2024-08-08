@@ -12,7 +12,7 @@ namespace Constructorio_NET
     /// </summary>
     public class ConstructorIO
     {
-        private readonly string Version = "cionet-3.4.0";
+        private readonly string Version = "cionet-3.4.1";
         public Autocomplete Autocomplete { get; }
         public Browse Browse { get; }
         public Catalog Catalog { get; }
@@ -29,10 +29,7 @@ namespace Constructorio_NET
         /// <param name="config">Collection of values to pass to modules.</param>
         public ConstructorIO(ConstructorioConfig config)
         {
-            Hashtable options = new Hashtable
-            {
-                { Constants.VERSION, this.Version }
-            };
+            Hashtable options = new Hashtable { { Constants.VERSION, this.Version } };
 
             if (config.Contains("ApiKey"))
             {
