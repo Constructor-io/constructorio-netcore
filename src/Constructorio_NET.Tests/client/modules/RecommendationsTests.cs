@@ -114,7 +114,7 @@ namespace Constructorio_NET.Tests
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
-            Assert.AreEqual(5, res.Request["num_results"], "Num Results is set");
+            Assert.AreEqual("apple", res.Request["term"], "Term is set");
         }
 
         [Test]
