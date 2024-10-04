@@ -27,6 +27,11 @@ namespace Constructorio_NET.Models
         public Dictionary<string, List<string>> Filters { get; set; }
 
         /// <summary>
+        /// Gets or sets filters per section used to refine results.
+        /// </summary>
+        public Dictionary<string, Dictionary<string, List<string>>> FiltersPerSection { get; set; }
+
+        /// <summary>
         /// Gets or sets hidden metadata fields to return.
         /// </summary>
         public List<string> HiddenFields { get; set; }
@@ -93,6 +98,11 @@ namespace Constructorio_NET.Models
             if (this.Filters != null)
             {
                 parameters.Add(Constants.FILTERS, this.Filters);
+            }
+
+            if (this.FiltersPerSection != null)
+            {
+                parameters.Add(Constants.FILTERS_PER_SECTION, this.FiltersPerSection);
             }
 
             if (this.TestCells != null)

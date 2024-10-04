@@ -141,6 +141,37 @@ namespace Constructorio_NET.Tests
             Assert.NotNull(res.ResultId, "Result id exists");
             Assert.GreaterOrEqual(res.Sections["Products"].Count, 1, "Results exist");
         }
+
+        [Test]
+        public async Task GetAutocompleteResultsShouldReturnResultWithFiltersPerSection()
+        {
+            Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>();
+
+            AutocompleteRequest req = new AutocompleteRequest("item")
+            {
+                UserInfo = UserInfo,
+                FiltersPerSection = new Dictionary<string, Dictionary<string, List<string>>>()
+            };
+
+            filters.Add("group_id", new List<string> { "All" });
+            req.FiltersPerSection.Add("Products", filters);
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+
+            object responseFilters;
+            res.Request.TryGetValue("filters", out responseFilters);
+
+            JObject parsedResponseFilters = (JObject)responseFilters;
+            Assert.NotNull(parsedResponseFilters, "Filters exist in response");
+
+            JObject productsSection = (JObject)parsedResponseFilters["Products"];
+            Assert.NotNull(productsSection, "Section exist in filters");
+
+            JArray filterValues = (JArray)productsSection["group_id"];
+            Assert.GreaterOrEqual(filterValues.Count, 1, "Results exist");
+            Assert.AreEqual("All", filterValues.First.ToString());
+        }
     }
 }
-
