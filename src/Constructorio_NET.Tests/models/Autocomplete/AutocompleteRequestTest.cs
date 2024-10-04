@@ -17,6 +17,10 @@ namespace Constructorio_NET.Tests
         {
             { "Color", new List<string>() { "green", "blue" } }
         };
+        private readonly Dictionary<string, Dictionary<string, List<string>>> FiltersPerSection = new Dictionary<string, Dictionary<string, List<string>>>()
+        {
+            { "Products", new Dictionary<string, List<string>>() { { "Color", new List<string>() { "green", "blue" } } } }
+        };
         private readonly string UserId = "user1";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
         private readonly Dictionary<string, string> TestCells = new Dictionary<string, string>()
@@ -45,6 +49,7 @@ namespace Constructorio_NET.Tests
                 UserInfo = this.UserInfo,
                 Filters = this.Filters,
                 TestCells = this.TestCells,
+                FiltersPerSection = this.FiltersPerSection,
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -54,6 +59,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.UserSegments, requestParameters[Constants.USER_SEGMENTS]);
             Assert.AreEqual(this.Filters, requestParameters[Constants.FILTERS]);
             Assert.AreEqual(this.TestCells, requestParameters[Constants.TEST_CELLS]);
+            Assert.AreEqual(this.FiltersPerSection, requestParameters[Constants.FILTERS_PER_SECTION]);
         }
 
         [Test]
