@@ -207,6 +207,7 @@ namespace Constructorio_NET.Tests
             bool regexMatched2 = Regex.Match(url, expectedUrl2).Success;
             Assert.That(regexMatched1 && regexMatched2, "url should be properly formed");
         }
+
         [Test]
         public void MakeUrlSearchWithFiltersPerSection()
         {

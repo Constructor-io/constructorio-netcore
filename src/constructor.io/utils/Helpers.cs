@@ -115,9 +115,8 @@ namespace Constructorio_NET.Utils
 
                 if (queryParams.Contains(Constants.FILTERS_PER_SECTION))
                 {
-
                     Dictionary<string, Dictionary<string, List<string>>> filtersPerSection = (Dictionary<string, Dictionary<string, List<string>>>)queryParams[Constants.FILTERS_PER_SECTION];
-                    queryParams.Remove(Constants.FILTERS);
+                    queryParams.Remove(Constants.FILTERS_PER_SECTION);
 
                     foreach (var section in filtersPerSection)
                     {

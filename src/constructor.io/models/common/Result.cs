@@ -31,4 +31,3 @@ namespace Constructorio_NET.Models
         public Dictionary<string, object> Labels { get; set; }
     }
 }
-

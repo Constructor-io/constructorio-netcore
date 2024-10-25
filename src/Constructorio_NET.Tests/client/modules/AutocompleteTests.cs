@@ -49,7 +49,7 @@ namespace Constructorio_NET.Tests
 
             labels.TryGetValue("is_sponsored", out object isSponsored);
 
-            Assert.AreEqual((bool)isSponsored, true);
+            Assert.AreEqual(true, (bool)isSponsored);
             Assert.NotNull(res.ResultId, "Result id exists");
         }
 
