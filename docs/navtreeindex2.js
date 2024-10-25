@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html#a463be735e4ba623479241282e54f9190":[2,0,0,0,80,1],
+"class_constructorio___n_e_t_1_1_models_1_1_sort_options_list_request.html":[1,0,0,0,81],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_options_list_request.html":[2,0,0,0,81],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_options_list_request.html#a519babde5354c9975e57e54607ce2de3":[1,0,0,0,81,0],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_options_list_request.html#a519babde5354c9975e57e54607ce2de3":[2,0,0,0,81,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX2 =
 "functions_d.html":[2,3,0,3],
 "functions_e.html":[2,3,0,4],
 "functions_enum.html":[2,3,2],
-"functions_f.html":[2,3,0,5],
-"functions_func.html":[2,3,1],
-"functions_g.html":[2,3,0,6]
+"functions_f.html":[2,3,0,5]
 };

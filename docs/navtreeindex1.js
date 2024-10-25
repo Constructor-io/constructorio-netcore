@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"class_constructorio___n_e_t_1_1_models_1_1_item_groups_request.html#a7d5340ad0da414f20e2fd4c33e9ad258":[2,0,0,0,37,0],
+"class_constructorio___n_e_t_1_1_models_1_1_item_groups_request.html#ac6fb7c69f07a21041ad5862135a2531b":[1,0,0,0,37,2],
 "class_constructorio___n_e_t_1_1_models_1_1_item_groups_request.html#ac6fb7c69f07a21041ad5862135a2531b":[2,0,0,0,37,2],
 "class_constructorio___n_e_t_1_1_models_1_1_item_groups_response.html":[1,0,0,0,38],
 "class_constructorio___n_e_t_1_1_models_1_1_item_groups_response.html":[2,0,0,0,38],
@@ -247,7 +249,5 @@ var NAVTREEINDEX1 =
 "class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html":[2,0,0,0,80],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html#a11cba67e4cd0ab2ca56ae1be712d4562":[1,0,0,0,80,0],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html#a11cba67e4cd0ab2ca56ae1be712d4562":[2,0,0,0,80,0],
-"class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html#a463be735e4ba623479241282e54f9190":[1,0,0,0,80,1],
-"class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html#a463be735e4ba623479241282e54f9190":[2,0,0,0,80,1],
-"class_constructorio___n_e_t_1_1_models_1_1_sort_options_list_request.html":[1,0,0,0,81]
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html#a463be735e4ba623479241282e54f9190":[1,0,0,0,80,1]
 };

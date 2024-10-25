@@ -4,6 +4,7 @@ var class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request =
     [ "GetRequestHeaders", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#ab582880743334f275f6a04bcdbd715a2", null ],
     [ "GetRequestParameters", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#ab0ad0cd8b2728201baad781569fbef6a", null ],
     [ "Filters", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#ad91fb75b9fdb08435e35d99a4b5f00cc", null ],
+    [ "FiltersPerSection", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a2d4681bc9c53cd2c258c6843fa3499f4", null ],
     [ "HiddenFields", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a1ef1dbf8bca99e75d848040887292935", null ],
     [ "Query", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a9e23b6b584b9dd0e403ce20599f8cd93", null ],
     [ "ResultsPerSection", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#aa4c36b1f0b66d3184857abb2acbce705", null ],
