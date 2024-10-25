@@ -207,5 +207,26 @@ namespace Constructorio_NET.Tests
             bool regexMatched2 = Regex.Match(url, expectedUrl2).Success;
             Assert.That(regexMatched1 && regexMatched2, "url should be properly formed");
         }
+
+        [Test]
+        public void MakeUrlSearchWithFiltersPerSection()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            Dictionary<string, Dictionary<string, List<string>>> filtersPerSection = new Dictionary<string, Dictionary<string, List<string>>>
+            {
+                { "Products", new Dictionary<string, List<string>>() { { "Color", new List<string>() { "blue", "green" } } } }
+            };
+            Hashtable queryParams = new Hashtable()
+            {
+                { Constants.FILTERS_PER_SECTION, filtersPerSection },
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            string filterParameterBlue = "&filters%5BProducts%5D%5BColor%5D=blue";
+            string filterParameterGreen = "&filters%5BProducts%5D%5BColor%5D=green";
+            bool hasColorBlueFilter = Regex.Match(url, filterParameterBlue).Success;
+            bool hasColorGreenFilter = Regex.Match(url, filterParameterGreen).Success;
+            Assert.That(hasColorBlueFilter && hasColorGreenFilter, "url is properly formed and has all filters applied");
+        }
     }
 }

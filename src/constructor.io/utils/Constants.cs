@@ -8,6 +8,7 @@
         public const string CONSTRUCTOR_TOKEN = "constructorToken";
         public const string FACET_NAME = "facet_name";
         public const string FILTERS = "filters";
+        public const string FILTERS_PER_SECTION = "filters_per_section";
         public const string FMT_OPTIONS = "fmt_options";
         public const string FORCE = "force";
         public const string HIDDEN_FIELDS = "hidden_fields";

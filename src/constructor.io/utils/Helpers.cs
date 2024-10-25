@@ -113,6 +113,25 @@ namespace Constructorio_NET.Utils
                     }
                 }
 
+                if (queryParams.Contains(Constants.FILTERS_PER_SECTION))
+                {
+                    Dictionary<string, Dictionary<string, List<string>>> filtersPerSection = (Dictionary<string, Dictionary<string, List<string>>>)queryParams[Constants.FILTERS_PER_SECTION];
+                    queryParams.Remove(Constants.FILTERS_PER_SECTION);
+
+                    foreach (var section in filtersPerSection)
+                    {
+                        foreach (var filter in filtersPerSection[section.Key])
+                        {
+                            string sectionName = section.Key;
+                            string filterGroup = filter.Key;
+                            foreach (string filterOption in filter.Value)
+                            {
+                                url.Append($"&{Constants.FILTERS}{OurEscapeDataString("[" + sectionName + "]")}{OurEscapeDataString("[" + filterGroup + "]")}={OurEscapeDataString(filterOption)}");
+                            }
+                        }
+                    }
+                }
+
                 // Add test cells to query string
                 if (queryParams.Contains(Constants.TEST_CELLS))
                 {

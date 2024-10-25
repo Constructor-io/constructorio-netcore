@@ -48,7 +48,7 @@ namespace Constructorio_NET.Tests
 
             labels.TryGetValue("is_sponsored", out object isSponsored);
 
-            Assert.AreEqual((bool)isSponsored, true);
+            Assert.AreEqual(true, (bool)isSponsored);
             Assert.Greater(
                 res.Response.TotalNumResults,
                 0,
@@ -742,4 +742,3 @@ namespace Constructorio_NET.Tests
         }
     }
 }
-
