@@ -31,5 +31,8 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("result_sources")]
         public ResultSources ResultSources { get; set; }
+
+        [JsonProperty("related_searches")]
+        public List<RelatedSearch> RelatedSearches { get; set; }
     }
 }
