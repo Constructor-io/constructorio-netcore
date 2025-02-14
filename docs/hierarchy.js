@@ -114,6 +114,7 @@ var hierarchy =
     [ "Constructorio_NET.Models.Redirect", "class_constructorio___n_e_t_1_1_models_1_1_redirect.html", null ],
     [ "Constructorio_NET.Models.RedirectData", "class_constructorio___n_e_t_1_1_models_1_1_redirect_data.html", null ],
     [ "Constructorio_NET.Models.RefinedContent", "class_constructorio___n_e_t_1_1_models_1_1_refined_content.html", null ],
+    [ "Constructorio_NET.Models.RelatedSearch", "class_constructorio___n_e_t_1_1_models_1_1_related_search.html", null ],
     [ "Constructorio_NET.Models.Result", "class_constructorio___n_e_t_1_1_models_1_1_result.html", null ],
     [ "Constructorio_NET.Models.ResultData", "class_constructorio___n_e_t_1_1_models_1_1_result_data.html", null ],
     [ "Constructorio_NET.Models.ResultFacet", "class_constructorio___n_e_t_1_1_models_1_1_result_facet.html", null ],

@@ -66,6 +66,7 @@ var namespace_constructorio___n_e_t_1_1_models =
     [ "Redirect", "class_constructorio___n_e_t_1_1_models_1_1_redirect.html", null ],
     [ "RedirectData", "class_constructorio___n_e_t_1_1_models_1_1_redirect_data.html", null ],
     [ "RefinedContent", "class_constructorio___n_e_t_1_1_models_1_1_refined_content.html", null ],
+    [ "RelatedSearch", "class_constructorio___n_e_t_1_1_models_1_1_related_search.html", null ],
     [ "Result", "class_constructorio___n_e_t_1_1_models_1_1_result.html", null ],
     [ "ResultData", "class_constructorio___n_e_t_1_1_models_1_1_result_data.html", null ],
     [ "ResultFacet", "class_constructorio___n_e_t_1_1_models_1_1_result_facet.html", null ],
