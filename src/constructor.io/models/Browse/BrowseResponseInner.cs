@@ -27,6 +27,9 @@ namespace Constructorio_NET.Models
         [JsonProperty("sort_options")]
         public List<FilterSortOption> SortOptions { get; set; }
 
+        [JsonProperty("refined_content")]
+        public List<RefinedContent> RefinedContent { get; set; }
+
         [JsonProperty("result_sources")]
         public ResultSources ResultSources { get; set; }
     }
