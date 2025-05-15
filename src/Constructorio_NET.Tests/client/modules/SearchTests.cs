@@ -9,7 +9,7 @@ namespace Constructorio_NET.Tests
     [TestFixture]
     public class SearchTest
     {
-        private readonly string ApiKey = "key_vM4GkLckwiuxwyRA";
+        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
         private readonly string ClientId = "r4nd-cl1ent-1d";
         private readonly int SessionId = 4;
         private readonly string Query = "item";
@@ -70,12 +70,12 @@ namespace Constructorio_NET.Tests
         [Test]
         public async Task GetSearchResultsShouldReturnResultWithVaritionsSlice()
         {
-            SearchRequest req = new SearchRequest('item1') { UserInfo = this.UserInfo };
+            SearchRequest req = new SearchRequest("item1") { UserInfo = this.UserInfo };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
-            string sliceAttribute = res.Response.Results[0].VariaionSlice['Color'][0];
+            string sliceAttribute = res.Response.Results[0].VariationSlice["Color"][0];
 
-            Assert.AreEqual('Blue', sliceAttribute);
+            Assert.AreEqual("Blue", sliceAttribute);
         }
 
         [Test]
