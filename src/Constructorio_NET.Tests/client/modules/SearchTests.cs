@@ -68,6 +68,17 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetSearchResultsShouldReturnResultWithVaritionsSlice()
+        {
+            SearchRequest req = new SearchRequest('item1') { UserInfo = this.UserInfo };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            string sliceAttribute = res.Response.Results[0].VariaionSlice['Color'][0];
+
+            Assert.AreEqual('Blue', sliceAttribute);
+        }
+
+        [Test]
         public async Task GetSearchResultsGroupData()
         {
             SearchRequest req = new SearchRequest(this.Query) { UserInfo = this.UserInfo };
