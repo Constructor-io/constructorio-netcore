@@ -23,13 +23,13 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Gets or sets version identifier for the quiz. Version ID will be returned with the first request and it should be passed with subsequent requests.
-        /// More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-versioning.
+        /// More information can be found: https://docs.constructor.com/reference/configuration-quizzes
         /// </summary>
         public string QuizVersionId { get; set; }
 
         /// <summary>
         /// Gets or sets session identifier for the quiz. Session ID will be returned with the first request and it should be passed with subsequent requests.
-        /// More information can be found: https://docs.constructor.io/rest_api/quiz/using_quizzes/#quiz-sessions.
+        /// More information can be found: https://docs.constructor.com/reference/configuration-quizzes
         /// </summary>
         public string QuizSessionId { get; set; }
 
