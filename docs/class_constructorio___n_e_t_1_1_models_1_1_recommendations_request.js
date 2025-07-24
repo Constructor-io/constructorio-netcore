@@ -10,5 +10,6 @@ var class_constructorio___n_e_t_1_1_models_1_1_recommendations_request =
     [ "Section", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ad83391f159315e8d8da538edd2e80b5d", null ],
     [ "Term", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a26b0ae4138cc1aa1e903798b356a4df7", null ],
     [ "TestCells", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a67239fddcfd1c716d5af0c5f416753d4", null ],
-    [ "UserInfo", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ae5540a4f5777a59b3ad7a51e89a6d4a5", null ]
+    [ "UserInfo", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ae5540a4f5777a59b3ad7a51e89a6d4a5", null ],
+    [ "VariationsMap", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#aa6ba6a36d8be3aec3148d96d5e9a418f", null ]
 ];
