@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
@@ -115,6 +116,46 @@ namespace Constructorio_NET.Tests
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
             Assert.AreEqual("apple", res.Request["term"], "Term is set");
+        }
+
+        [Test]
+        public async Task GetRecommendationsResultsShouldReturnAResultWithVariationsMap()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddGroupByRule("url", "data.url");
+            req.VariationsMap.AddValueRule(
+                "variation_id",
+                AggregationTypes.First,
+                "data.variation_id"
+            );
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.First,
+                "data.deactivated"
+            );
+            req.VariationsMap.AddFilterByRule(
+                "{\"and\":[{\"not\":{\"field\":\"data.brand\",\"value\":\"Best Brand\"}}]}"
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"filter_by\": { \"type\": \"and\", \"and\": [{ \"type\": \"not\", \"not\": { \"type\": \"single\", \"field\": \"data.brand\", \"value\": \"Best Brand\" }}]}, \"group_by\": [{ \"name\": \"url\", \"field\": \"data.url\"}], \"values\": { \"variation_id\": { \"aggregation\": \"first\", \"field\": \"data.variation_id\"}, \"deactivated\": { \"aggregation\": \"first\", \"field\": \"data.deactivated\"}}, \"dtype\": \"object\" }"
+            );
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
+            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
         }
 
         [Test]

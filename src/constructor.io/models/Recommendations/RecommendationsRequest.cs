@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Utils;
+using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
 {
@@ -65,6 +66,11 @@ namespace Constructorio_NET.Models
         }
 
         /// <summary>
+        /// Gets or sets how to return variation data.
+        /// </summary>
+        public VariationsMap VariationsMap { get; set; }
+
+        /// <summary>
         /// Get request parameters.
         /// </summary>
         /// <returns>Hashtable of request parameters.</returns>
@@ -123,6 +129,12 @@ namespace Constructorio_NET.Models
             if (this.Term != null)
             {
                 parameters.Add("term", this.Term);
+            }
+
+            if (this.VariationsMap != null && this.VariationsMap.Values.Count > 0)
+            {
+                string serializedJson = JsonConvert.SerializeObject(this.VariationsMap);
+                parameters.Add(Constants.VARIATIONS_MAP, serializedJson);
             }
 
             return parameters;
