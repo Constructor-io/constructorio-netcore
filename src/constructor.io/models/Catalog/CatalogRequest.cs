@@ -29,6 +29,19 @@ namespace Constructorio_NET.Models
             IGNORE
         }
 
+        public enum FormatType
+        {
+            /// <summary>
+            /// CSV format (default).
+            /// </summary>
+            CSV,
+
+            /// <summary>
+            /// JSON Lines format.
+            /// </summary>
+            JSONL
+        }
+
         /// <summary>
         /// Gets or sets collection of files to upload.
         /// </summary>
@@ -55,6 +68,11 @@ namespace Constructorio_NET.Models
         public OnMissingStrategy OnMissing { get; set; }
 
         /// <summary>
+        /// Gets or sets the format of the files. Defaults to "CSV".
+        /// </summary>
+        public FormatType Format { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CatalogRequest"/> class.
         /// </summary>
         /// <param name="files">Dictionary of stream content to for the request.</param>
@@ -69,6 +87,7 @@ namespace Constructorio_NET.Models
 
             this.Files = files;
             this.OnMissing = OnMissingStrategy.FAIL;
+            this.Format = FormatType.CSV;
         }
 
         /// <summary>
@@ -97,6 +116,11 @@ namespace Constructorio_NET.Models
             if (this.OnMissing != OnMissingStrategy.FAIL)
             {
                 parameters.Add(Constants.ON_MISSING, this.OnMissing.ToString());
+            }
+
+            if (this.Format != FormatType.CSV)
+            {
+                parameters.Add(Constants.FORMAT, this.Format.ToString().ToLower());
             }
 
             parameters.Add(Constants.SECTION, this.Section);
