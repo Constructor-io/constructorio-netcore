@@ -50,5 +50,42 @@ namespace Constructorio_NET.Tests
         {
             Assert.Throws<ArgumentException>(() => new CatalogRequest(null));
         }
+
+        [Test]
+        public void DefaultFormatIsCsv()
+        {
+            CatalogRequest req = new CatalogRequest(this.Files);
+            Assert.AreEqual(CatalogRequest.FormatType.CSV, req.Format);
+        }
+
+        [Test]
+        public void FormatCanBeSetToJsonl()
+        {
+            CatalogRequest req = new CatalogRequest(this.Files)
+            {
+                Format = CatalogRequest.FormatType.JSONL
+            };
+            Assert.AreEqual(CatalogRequest.FormatType.JSONL, req.Format);
+        }
+
+        [Test]
+        public void GetRequestParametersWithDefaultFormat()
+        {
+            CatalogRequest req = new CatalogRequest(this.Files);
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.IsFalse(requestParameters.ContainsKey(Constants.FORMAT));
+        }
+
+        [Test]
+        public void GetRequestParametersWithJsonlFormat()
+        {
+            CatalogRequest req = new CatalogRequest(this.Files)
+            {
+                Format = CatalogRequest.FormatType.JSONL
+            };
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.IsTrue(requestParameters.ContainsKey(Constants.FORMAT));
+            Assert.AreEqual("jsonl", requestParameters[Constants.FORMAT]);
+        }
     }
 }
