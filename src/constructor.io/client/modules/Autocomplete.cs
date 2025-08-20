@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
@@ -35,15 +35,13 @@ namespace Constructorio_NET.Modules
         /// Retrieve Autocomplete results from API.
         /// </summary>
         /// <param name="autocompleteRequest">Constructorio's autocomplete request object.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>Constructorio's autocomplete response object.</returns>
-        public async Task<AutocompleteResponse> GetAutocompleteResults(AutocompleteRequest autocompleteRequest)
+        public async Task<AutocompleteResponse> GetAutocompleteResults(AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
         {
-            string url;
-            string result;
-
-            url = CreateAutocompleteUrl(autocompleteRequest);
+            var url = CreateAutocompleteUrl(autocompleteRequest);
             Dictionary<string, string> requestHeaders = autocompleteRequest.GetRequestHeaders();
-            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             if (result != null)
             {

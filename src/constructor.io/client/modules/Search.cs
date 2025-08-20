@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
@@ -35,16 +35,13 @@ namespace Constructorio_NET.Modules
         /// Retrieve search results from API.
         /// </summary>
         /// <param name="searchRequest">Constructorio's search request object.</param>
+        /// <param name="cancellationToken">The cancellation token to terminate the request.</param>
         /// <returns>Constructorio's search response object.</returns>
-        public async Task<SearchResponse> GetSearchResults(SearchRequest searchRequest)
+        public async Task<SearchResponse> GetSearchResults(SearchRequest searchRequest, CancellationToken cancellationToken = default)
         {
-            string url;
-            string result;
-            Dictionary<string, string> requestHeaders;
-
-            url = CreateSearchUrl(searchRequest);
-            requestHeaders = searchRequest.GetRequestHeaders();
-            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+            var url = CreateSearchUrl(searchRequest);
+            var requestHeaders = searchRequest.GetRequestHeaders();
+            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             if (result != null)
             {
