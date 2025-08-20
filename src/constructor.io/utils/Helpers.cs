@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web;
 using Constructorio_NET.Models;
 using Newtonsoft.Json;
 
@@ -120,7 +119,7 @@ namespace Constructorio_NET.Utils
 
                     foreach (var section in filtersPerSection)
                     {
-                        foreach (var filter in filtersPerSection[section.Key])
+                        foreach (var filter in section.Value)
                         {
                             string sectionName = section.Key;
                             string filterGroup = filter.Key;
@@ -241,7 +240,7 @@ namespace Constructorio_NET.Utils
         /// <returns>Task.</returns>
         public static async Task<string> MakeHttpRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody = null, Dictionary<string, StreamContent> files = null)
         {
-            HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
+            using HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
 
             foreach (var header in requestHeaders)
             {
@@ -264,19 +263,19 @@ namespace Constructorio_NET.Utils
             {
                 var formData = new MultipartFormDataContent();
 
-                if (files.ContainsKey("items"))
+                if (files.TryGetValue("items", out var items))
                 {
-                    formData.Add(files["items"], "items", "items.csv");
+                    formData.Add(items, "items", "items.csv");
                 }
 
-                if (files.ContainsKey("variations"))
+                if (files.TryGetValue("variations", out var variations))
                 {
-                    formData.Add(files["variations"], "variations", "variations.csv");
+                    formData.Add(variations, "variations", "variations.csv");
                 }
 
-                if (files.ContainsKey("item_groups"))
+                if (files.TryGetValue("item_groups", out var itemGroups))
                 {
-                    formData.Add(files["item_groups"], "item_groups", "item_groups.csv");
+                    formData.Add(itemGroups, "item_groups", "item_groups.csv");
                 }
 
                 httpRequest.Content = formData;
@@ -287,7 +286,7 @@ namespace Constructorio_NET.Utils
                 httpRequest.Content = reqContent;
             }
 
-            HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest);
+            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest);
             HttpContent resContent = response.Content;
             string result = await resContent.ReadAsStringAsync();
 

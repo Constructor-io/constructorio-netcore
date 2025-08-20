@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
@@ -59,7 +58,7 @@ namespace Constructorio_NET.Modules
 
         internal string CreateVariationsUrl(string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL)
         {
-            List<string> paths = new List<string> { "v2", "variations" };
+            List<string> paths = new List<string>(capacity: 2) { "v2", "variations" };
             Hashtable queryParams = new Hashtable();
             if (force)
             {
@@ -92,7 +91,7 @@ namespace Constructorio_NET.Modules
 
         internal string CreateRetrieveItemsUrl(ItemsRequest req)
         {
-            List<string> paths = new List<string> { "v2", "items" };
+            List<string> paths = new List<string>(capacity: 2) { "v2", "items" };
             Hashtable queryParams = req.GetRequestParameters();
             Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
             {
@@ -250,7 +249,7 @@ namespace Constructorio_NET.Modules
 
             try
             {
-                List<ConstructorItem> cleanedItems = items.Select((item) => new ConstructorItem(item.Id)).ToList();
+                List<ConstructorItem> cleanedItems = items.ConvertAll((item) => new ConstructorItem(item.Id));
                 url = CreateItemsUrl(section);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
@@ -279,7 +278,7 @@ namespace Constructorio_NET.Modules
 
             try
             {
-                List<ConstructorVariation> cleanedVariations = variations.Select((item) => new ConstructorVariation(item.Id)).ToList();
+                List<ConstructorVariation> cleanedVariations = variations.ConvertAll((item) => new ConstructorVariation(item.Id));
                 url = CreateVariationsUrl(section);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
