@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web;
 using Constructorio_NET.Models;
 using Newtonsoft.Json;
 
@@ -120,7 +120,7 @@ namespace Constructorio_NET.Utils
 
                     foreach (var section in filtersPerSection)
                     {
-                        foreach (var filter in filtersPerSection[section.Key])
+                        foreach (var filter in section.Value)
                         {
                             string sectionName = section.Key;
                             string filterGroup = filter.Key;
@@ -241,6 +241,45 @@ namespace Constructorio_NET.Utils
         /// <returns>Task.</returns>
         public static async Task<string> MakeHttpRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody = null, Dictionary<string, StreamContent> files = null)
         {
+            using HttpRequestMessage httpRequest = CreateRequest(options, httpMethod, url, requestHeaders, requestBody, files);
+
+            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest);
+            HttpContent resContent = response.Content;
+            string result = await resContent.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                ServerError error = JsonConvert.DeserializeObject<ServerError>(result);
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
+            }
+
+            return result;
+        }
+
+        public static async Task<T> MakeHttpRequest<T>(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody = null, Dictionary<string, StreamContent> files = null, JsonSerializer jsonSerializer = null)
+        {
+            using HttpRequestMessage httpRequest = CreateRequest(options, httpMethod, url, requestHeaders, requestBody, files);
+            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                ServerError error = await DeserializeFromResponse<ServerError>(response);
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
+            }
+
+            return await DeserializeFromResponse<T>(response, jsonSerializer);
+        }
+
+        private static async Task<T> DeserializeFromResponse<T>(HttpResponseMessage response, JsonSerializer jsonSerializer = null)
+        {
+            using Stream stream = await response.Content.ReadAsStreamAsync();
+            using StreamReader streamReader = new StreamReader(stream);
+            using JsonTextReader jsonTextReader = new JsonTextReader(streamReader);
+            return (jsonSerializer ?? NewtonsoftJsonUtf8Content.DefaultJsonSerializer).Deserialize<T>(jsonTextReader);
+        }
+
+        private static HttpRequestMessage CreateRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody, Dictionary<string, StreamContent> files)
+        {
             HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
 
             foreach (var header in requestHeaders)
@@ -264,40 +303,29 @@ namespace Constructorio_NET.Utils
             {
                 var formData = new MultipartFormDataContent();
 
-                if (files.ContainsKey("items"))
+                if (files.TryGetValue("items", out var items))
                 {
-                    formData.Add(files["items"], "items", "items.csv");
+                    formData.Add(items, "items", "items.csv");
                 }
 
-                if (files.ContainsKey("variations"))
+                if (files.TryGetValue("variations", out var variations))
                 {
-                    formData.Add(files["variations"], "variations", "variations.csv");
+                    formData.Add(variations, "variations", "variations.csv");
                 }
 
-                if (files.ContainsKey("item_groups"))
+                if (files.TryGetValue("item_groups", out var itemGroups))
                 {
-                    formData.Add(files["item_groups"], "item_groups", "item_groups.csv");
+                    formData.Add(itemGroups, "item_groups", "item_groups.csv");
                 }
 
                 httpRequest.Content = formData;
             }
             else if (requestBody != null)
             {
-                StringContent reqContent = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
-                httpRequest.Content = reqContent;
+                httpRequest.Content = new NewtonsoftJsonUtf8Content(requestBody);
             }
 
-            HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest);
-            HttpContent resContent = response.Content;
-            string result = await resContent.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-            {
-                ServerError error = JsonConvert.DeserializeObject<ServerError>(result);
-                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
-            }
-
-            return result;
+            return httpRequest;
         }
 
         /// <summary>

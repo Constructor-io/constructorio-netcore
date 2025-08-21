@@ -1,11 +1,9 @@
-﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
-using Newtonsoft.Json;
 
 namespace Constructorio_NET.Modules
 {
@@ -25,9 +23,9 @@ namespace Constructorio_NET.Modules
 
         public string CreateAllTasksUrl(AllTasksRequest req)
         {
-            List<string> paths = new List<string> { "v1", "tasks" };
+            List<string> paths = new List<string>(capacity: 2) { "v1", "tasks" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>(capacity: 2)
             {
                 { "_dt", true },
                 { "c", true },
@@ -39,26 +37,21 @@ namespace Constructorio_NET.Modules
         public async Task<AllTasksResponse> GetAllTasks(AllTasksRequest allTasksRequest)
         {
             string url;
-            string result;
+            AllTasksResponse result;
 
             url = CreateAllTasksUrl(allTasksRequest);
             Dictionary<string, string> requestHeaders = allTasksRequest.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest(this.Options, new HttpMethod("GET"), url, requestHeaders);
+            result = await MakeHttpRequest<AllTasksResponse>(Options, HttpMethod.Get, url, requestHeaders);
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<AllTasksResponse>(result);
-            }
-
-            throw new ConstructorException("All Tasks response data is malformed");
+            return result ?? throw new ConstructorException("All Tasks response data is malformed");
         }
 
         public string CreateTaskUrl(TaskRequest req)
         {
-            List<string> paths = new List<string> { "v1", "tasks", $"{req.TaskId}" };
+            List<string> paths = new List<string>(capacity: 3) { "v1", "tasks", $"{req.TaskId}" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>(capacity: 1)
             {
                 { "c", true },
             };
@@ -70,19 +63,14 @@ namespace Constructorio_NET.Modules
         public async Task<TaskResponse> GetTask(TaskRequest taskRequest)
         {
             string url;
-            string result;
+            TaskResponse result;
 
             url = CreateTaskUrl(taskRequest);
             Dictionary<string, string> requestHeaders = taskRequest.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest(this.Options, new HttpMethod("GET"), url, requestHeaders);
+            result = await MakeHttpRequest<TaskResponse>(Options, HttpMethod.Get, url, requestHeaders);
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<TaskResponse>(result);
-            }
-
-            throw new ConstructorException("Task response data is malformed");
+            return result ?? throw new ConstructorException("Task response data is malformed");
         }
     }
 }

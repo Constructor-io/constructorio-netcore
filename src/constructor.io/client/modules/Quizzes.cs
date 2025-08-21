@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
-using Newtonsoft.Json;
 
 namespace Constructorio_NET.Modules
 {
@@ -28,7 +26,7 @@ namespace Constructorio_NET.Modules
         internal string CreateQuizUrl(QuizRequest req, string endpoint)
         {
             Hashtable requestParams = req.GetRequestParameters();
-            List<string> paths = new List<string> { req.QuizId, endpoint };
+            List<string> paths = new List<string>(capacity: 2) { req.QuizId, endpoint };
 
             return MakeUrl(this.Options, paths, requestParams);
         }
@@ -41,18 +39,13 @@ namespace Constructorio_NET.Modules
         public async Task<NextQuestionResponse> GetNextQuestion(QuizRequest quizzesRequest)
         {
             string url;
-            string result;
+            NextQuestionResponse result;
 
             url = CreateQuizUrl(quizzesRequest, "next");
             Dictionary<string, string> requestHeaders = quizzesRequest.GetRequestHeaders();
-            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+            result = await MakeHttpRequest<NextQuestionResponse>(Options, HttpMethod.Get, url, requestHeaders);
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<NextQuestionResponse>(result);
-            }
-
-            throw new ConstructorException("GetNextQuestion response data is malformed");
+            return result ?? throw new ConstructorException("GetNextQuestion response data is malformed");
         }
 
         /// <summary>
@@ -63,18 +56,13 @@ namespace Constructorio_NET.Modules
         public async Task<QuizResultsResponse> GetResults(QuizRequest quizzesRequest)
         {
             string url;
-            string result;
+            QuizResultsResponse result;
 
             url = CreateQuizUrl(quizzesRequest, "results");
             Dictionary<string, string> requestHeaders = quizzesRequest.GetRequestHeaders();
-            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+            result = await MakeHttpRequest<QuizResultsResponse>(this.Options, HttpMethod.Get, url, requestHeaders);
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<QuizResultsResponse>(result);
-            }
-
-            throw new ConstructorException("GetResults response data is malformed");
+            return result ?? throw new ConstructorException("GetResults response data is malformed");
         }
     }
 }
