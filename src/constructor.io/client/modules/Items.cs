@@ -11,6 +11,11 @@ namespace Constructorio_NET.Modules
 {
     public class Items : Helpers
     {
+        private static readonly JsonSerializer ObjectCreationHandlingReplaceJsonSerializer = JsonSerializer.Create(
+            new JsonSerializerSettings
+            {
+                ObjectCreationHandling = ObjectCreationHandling.Replace
+            });
         private readonly Hashtable Options;
 
         /// <summary>
@@ -47,7 +52,7 @@ namespace Constructorio_NET.Modules
                 queryParams.Add(Constants.ON_MISSING, onMissing.ToString());
             }
 
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>(capacity: 1)
             {
                 { "_dt", true },
             };
@@ -80,7 +85,7 @@ namespace Constructorio_NET.Modules
                 queryParams.Add(Constants.ON_MISSING, onMissing.ToString());
             }
 
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>(capacity: 1)
             {
                 { "_dt", true },
             };
@@ -93,7 +98,7 @@ namespace Constructorio_NET.Modules
         {
             List<string> paths = new List<string>(capacity: 2) { "v2", "items" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>(capacity: 1)
             {
                 { "_dt", true },
             };
@@ -104,9 +109,9 @@ namespace Constructorio_NET.Modules
 
         internal string CreateRetrieveVariationsUrl(VariationsRequest req)
         {
-            List<string> paths = new List<string> { "v2", "variations" };
+            List<string> paths = new List<string>(capacity: 2) { "v2", "variations" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
+            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>(capacity: 1)
             {
                 { "_dt", true },
             };
@@ -134,7 +139,7 @@ namespace Constructorio_NET.Modules
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("items", items);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PUT"), url, requestHeaders, requestBody, null);
+                result = await MakeHttpRequest(Options, HttpMethod.Put, url, requestHeaders, requestBody, null);
             }
             catch (Exception e)
             {
@@ -164,7 +169,7 @@ namespace Constructorio_NET.Modules
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("variations", variations);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PUT"), url, requestHeaders, requestBody, null);
+                result = await MakeHttpRequest(Options, HttpMethod.Put, url, requestHeaders, requestBody, null);
             }
             catch (Exception e)
             {
@@ -195,7 +200,7 @@ namespace Constructorio_NET.Modules
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("items", items);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, requestBody, null);
+                result = await MakeHttpRequest(Options, new HttpMethod("PATCH"), url, requestHeaders, requestBody, null);
             }
             catch (Exception e)
             {
@@ -226,7 +231,7 @@ namespace Constructorio_NET.Modules
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("variations", Variations);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, requestBody, null);
+                result = await MakeHttpRequest(Options, new HttpMethod("PATCH"), url, requestHeaders, requestBody, null);
             }
             catch (Exception e)
             {
@@ -255,7 +260,7 @@ namespace Constructorio_NET.Modules
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("items", cleanedItems);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("DELETE"), url, requestHeaders, requestBody, null);
+                result = await MakeHttpRequest(Options, HttpMethod.Delete, url, requestHeaders, requestBody, null);
             }
             catch (Exception e)
             {
@@ -284,7 +289,7 @@ namespace Constructorio_NET.Modules
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("variations", cleanedVariations);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("DELETE"), url, requestHeaders, requestBody, null);
+                result = await MakeHttpRequest(Options, HttpMethod.Delete, url, requestHeaders, requestBody, null);
             }
             catch (Exception e)
             {
@@ -302,19 +307,13 @@ namespace Constructorio_NET.Modules
         public async Task<ItemsResponse> RetrieveItems(ItemsRequest req)
         {
             string url;
-            string result;
+            ItemsResponse result;
             url = CreateRetrieveItemsUrl(req);
             Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest(this.Options, new HttpMethod("GET"), url, requestHeaders, null);
+            result = await MakeHttpRequest<ItemsResponse>(Options, HttpMethod.Get, url, requestHeaders, null, jsonSerializer: ObjectCreationHandlingReplaceJsonSerializer);
 
-            if (result != null)
-            {
-                JsonSerializerSettings settings = new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace };
-                return JsonConvert.DeserializeObject<ItemsResponse>(result, settings);
-            }
-
-            throw new ConstructorException("RetrieveItems response data is malformed");
+            return result ?? throw new ConstructorException("RetrieveItems response data is malformed");
         }
 
         /// <summary>
@@ -325,19 +324,13 @@ namespace Constructorio_NET.Modules
         public async Task<VariationsResponse> RetrieveVariations(VariationsRequest req)
         {
             string url;
-            string result;
+            VariationsResponse result;
             url = CreateRetrieveVariationsUrl(req);
             Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest(this.Options, new HttpMethod("GET"), url, requestHeaders, null);
+            result = await MakeHttpRequest<VariationsResponse>(Options, HttpMethod.Get, url, requestHeaders, null, jsonSerializer: ObjectCreationHandlingReplaceJsonSerializer);
 
-            if (result != null)
-            {
-                JsonSerializerSettings settings = new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace };
-                return JsonConvert.DeserializeObject<VariationsResponse>(result, settings);
-            }
-
-            throw new ConstructorException("RetrieveVariations response data is malformed");
+            return result ?? throw new ConstructorException("RetrieveVariations response data is malformed");
         }
     }
 }

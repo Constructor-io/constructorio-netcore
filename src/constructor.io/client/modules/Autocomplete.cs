@@ -1,11 +1,9 @@
-﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
-using Newtonsoft.Json;
 
 namespace Constructorio_NET.Modules
 {
@@ -26,7 +24,7 @@ namespace Constructorio_NET.Modules
         internal string CreateAutocompleteUrl(AutocompleteRequest req)
         {
             Hashtable requestParams = req.GetRequestParameters();
-            List<string> paths = new List<string> { "autocomplete", req.Query };
+            List<string> paths = new List<string>(capacity: 2) { "autocomplete", req.Query };
 
             return MakeUrl(this.Options, paths, requestParams);
         }
@@ -39,18 +37,13 @@ namespace Constructorio_NET.Modules
         public async Task<AutocompleteResponse> GetAutocompleteResults(AutocompleteRequest autocompleteRequest)
         {
             string url;
-            string result;
+            AutocompleteResponse result;
 
             url = CreateAutocompleteUrl(autocompleteRequest);
             Dictionary<string, string> requestHeaders = autocompleteRequest.GetRequestHeaders();
-            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+            result = await MakeHttpRequest<AutocompleteResponse>(Options, HttpMethod.Get, url, requestHeaders);
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<AutocompleteResponse>(result);
-            }
-
-            throw new ConstructorException("GetAutocompleteResults response data is malformed");
+            return result ?? throw new ConstructorException("GetAutocompleteResults response data is malformed");
         }
     }
 }
