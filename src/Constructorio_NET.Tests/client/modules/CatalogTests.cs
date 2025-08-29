@@ -483,23 +483,6 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public async Task CreateSortOption()
-        {
-            string sortByTest = "test";
-            SortOrder sortOrder = SortOrder.Ascending;
-            string pathInMetadataTest = "test";
-
-            ConstructorIO constructorio = new ConstructorIO(this.Config);
-            SortOption sortOption = new SortOption(sortByTest, sortOrder, pathInMetadataTest);
-            SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
-
-            SortOption res = await constructorio.Catalog.CreateSortOption(req);
-            Assert.AreEqual(sortByTest, res.SortBy);
-            Assert.AreEqual(sortOrder, res.SortOrder);
-            Assert.AreEqual(pathInMetadataTest, res.PathInMetadata);
-        }
-
-        [Test]
         public void CreateSortOptionFailsIfExists()
         {
             ConstructorIO constructorio = new ConstructorIO(this.Config);
@@ -527,6 +510,23 @@ namespace Constructorio_NET.Tests
             req.SortOption.SortBy = null;
             ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.CreateSortOption(req));
             Assert.AreEqual("Http[400]: sort_by: field required", ex.Message, "Correct Error is Returned");
+        }
+
+        [Test]
+        public async Task CreateSortOption()
+        {
+            string sortByTest = "test";
+            SortOrder sortOrder = SortOrder.Ascending;
+            string pathInMetadataTest = "test";
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SortOption sortOption = new SortOption(sortByTest, sortOrder, pathInMetadataTest);
+            SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
+
+            SortOption res = await constructorio.Catalog.CreateSortOption(req);
+            Assert.AreEqual(sortByTest, res.SortBy);
+            Assert.AreEqual(sortOrder, res.SortOrder);
+            Assert.AreEqual(pathInMetadataTest, res.PathInMetadata);
         }
 
         [Test]
