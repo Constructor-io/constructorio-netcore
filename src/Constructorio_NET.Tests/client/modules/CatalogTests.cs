@@ -404,6 +404,7 @@ namespace Constructorio_NET.Tests
             ItemGroupsRequest req = new ItemGroupsRequest();
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             await constructorio.Catalog.AddItemGroup(new ItemGroupsRequest(new List<ConstructorItemGroup> { itemGroup1 }));
+            await Task.Delay(100);
             ItemGroupsGetResponse res = await constructorio.Catalog.GetItemGroup(req);
             Assert.IsTrue(res.TotalCount > 0, "Total Count should exist");
             Assert.IsNotEmpty(res.ItemGroups, "Item groups should be returned");
@@ -415,6 +416,7 @@ namespace Constructorio_NET.Tests
             ItemGroupsRequest req = new ItemGroupsRequest(itemGroup1.Id);
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             await constructorio.Catalog.AddItemGroup(new ItemGroupsRequest(new List<ConstructorItemGroup> { itemGroup1 }));
+            await Task.Delay(100);
             ItemGroupsGetResponse res = await constructorio.Catalog.GetItemGroup(req);
             Assert.IsTrue(res.TotalCount > 0, "Total Count should exist");
             Assert.IsNotEmpty(res.ItemGroups, "Item groups should be returned");
@@ -539,14 +541,12 @@ namespace Constructorio_NET.Tests
             SortOption sortOption = new SortOption(sortByTest, sortOrder);
             SortOptionsSingleRequest req = new SortOptionsSingleRequest(sortOption);
 
-            Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.CreateOrReplaceSortOption(req));
-
-            // currently the API returns 500, commenting the exact error code & message check until it's fixed
-            // Assert.AreEqual("Http[400]: path_in_metadata is a required field of type string", ex.Message, "Correct Error is Returned");
+            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.CreateOrReplaceSortOption(req));
+            Assert.AreEqual("Http[400]: path_in_metadata is a required field of type string", ex.Message, "Correct Error is Returned");
 
             req.SortOption.PathInMetadata = this.pathInMetadata;
             req.SortOption.SortBy = null;
-            var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.CreateOrReplaceSortOption(req));
+            ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Catalog.CreateOrReplaceSortOption(req));
             Assert.AreEqual("SortBy is a required property for SortOptionsSingleRequest.SortOption.", ex.Message, "Correct Error is Returned");
         }
 
