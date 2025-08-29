@@ -75,7 +75,7 @@ namespace Constructorio_NET.Tests
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
             string sliceAttribute = res.Response.Results[0].VariationSlice["Color"][0];
 
-            Assert.AreEqual("Blue", sliceAttribute);
+            Assert.AreEqual("red", sliceAttribute);
         }
 
         [Test]

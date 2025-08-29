@@ -242,8 +242,10 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="items">List of ConstructorItems with only Item Id.</param>
         /// <param name="section">Section to upload items to.</param>
+        /// <param name="force">Boolean to indicate whether or not to use force sync.</param>
+        /// <param name="notificationEmail">Email to send failure notifications to.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> DeleteItems(List<ConstructorItem> items, string section)
+        public async Task<bool> DeleteItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null)
         {
             string url;
             string result;
@@ -251,7 +253,7 @@ namespace Constructorio_NET.Modules
             try
             {
                 List<ConstructorItem> cleanedItems = items.Select((item) => new ConstructorItem(item.Id)).ToList();
-                url = CreateItemsUrl(section);
+                url = CreateItemsUrl(section, force, notificationEmail);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("items", cleanedItems);

@@ -129,6 +129,21 @@ namespace Constructorio_NET.Tests
             item.Url = "testurl";
             item.ImageUrl = "testimageurl";
             items.Add(item);
+            bool result = await constructorio.Items.DeleteItems(items, "Products", true, "stanley.peng@constructor.io");
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public async Task DeleteItemsWithOnlyItemsAndSectionShouldReturnTrue()
+        {
+            var constructorio = new ConstructorIO(this.Config);
+            List<ConstructorItem> items = new List<ConstructorItem>();
+            ConstructorItem item = new ConstructorItem();
+            item.Id = "testItem";
+            item.Name = "testName";
+            item.Url = "testurl";
+            item.ImageUrl = "testimageurl";
+            items.Add(item);
             bool result = await constructorio.Items.DeleteItems(items, "Products");
             Assert.IsTrue(result);
         }

@@ -155,7 +155,10 @@ namespace Constructorio_NET.Tests
                 variationMapResult,
                 "Variations Map was passed as parameter"
             );
-            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
+            foreach (var result in res.Response.Results)
+            {
+                Assert.NotNull(result.VariationsMap, "Variations Map exists in every result");
+            }
         }
 
         [Test]

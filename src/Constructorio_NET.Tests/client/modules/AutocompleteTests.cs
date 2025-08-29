@@ -79,7 +79,7 @@ namespace Constructorio_NET.Tests
             AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
             res.Request.TryGetValue("variations_map", out object reqVariationsMap);
             JObject variationMapResult = JObject.Parse(
-                "    {\r\n  \"filter_by\": {\r\n    \"and\": [\r\n      {\r\n        \"not\": {\r\n          \"field\": \"data.brand\",\r\n          \"value\": \"Best Brand\"\r\n        }\r\n      }\r\n    ]\r\n  },\r\n  \"group_by\": [\r\n    {\r\n      \"name\": \"url\",\r\n      \"field\": \"data.url\"\r\n    }\r\n  ],\r\n  \"values\": {\r\n    \"variation_id\": {\r\n      \"aggregation\": \"first\",\r\n      \"field\": \"data.variation_id\"\r\n    },\r\n    \"deactivated\": {\r\n      \"aggregation\": \"first\",\r\n      \"field\": \"data.deactivated\"\r\n    }\r\n  },\r\n  \"dtype\": \"object\"\r\n}"
+                "{\r\n  \"filter_by\": {\r\n    \"type\": \"and\",\r\n    \"and\": [\r\n      {\r\n        \"type\": \"not\",\r\n        \"not\": {\r\n          \"type\": \"single\",\r\n          \"field\": \"data.brand\",\r\n          \"value\": \"Best Brand\"\r\n        }\r\n      }\r\n    ]\r\n  },\r\n  \"group_by\": [\r\n    {\r\n      \"name\": \"url\",\r\n      \"field\": \"data.url\"\r\n    }\r\n  ],\r\n  \"values\": {\r\n    \"variation_id\": {\r\n      \"aggregation\": \"first\",\r\n      \"field\": \"data.variation_id\"\r\n    },\r\n    \"deactivated\": {\r\n      \"aggregation\": \"first\",\r\n      \"field\": \"data.deactivated\"\r\n    }\r\n  },\r\n  \"dtype\": \"object\"\r\n}"
             );
 
             Assert.NotNull(res.ResultId, "Result id exists");
