@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
@@ -39,16 +40,24 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's autocomplete response object.</returns>
         public async Task<AutocompleteResponse> GetAutocompleteResults(AutocompleteRequest autocompleteRequest, CancellationToken cancellationToken = default)
         {
-            var url = CreateAutocompleteUrl(autocompleteRequest);
-            Dictionary<string, string> requestHeaders = autocompleteRequest.GetRequestHeaders();
-            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            if (result != null)
+            try
             {
-                return JsonConvert.DeserializeObject<AutocompleteResponse>(result);
-            }
+                var url = CreateAutocompleteUrl(autocompleteRequest);
+                Dictionary<string, string> requestHeaders = autocompleteRequest.GetRequestHeaders();
+                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            throw new ConstructorException("GetAutocompleteResults response data is malformed");
+                if (result != null)
+                {
+                    return JsonConvert.DeserializeObject<AutocompleteResponse>(result);
+                }
+
+                throw new ConstructorException("GetAutocompleteResults response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
     }
 }

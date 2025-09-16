@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
@@ -39,16 +40,24 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's browse response object.</returns>
         public async Task<BrowseResponse> GetBrowseResults(BrowseRequest browseRequest, CancellationToken cancellationToken = default)
         {
-            var url = CreateBrowseUrl(browseRequest);
-            Dictionary<string, string> requestHeaders = browseRequest.GetRequestHeaders();
-            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            if (result != null)
+            try
             {
-                return JsonConvert.DeserializeObject<BrowseResponse>(result);
-            }
+                var url = CreateBrowseUrl(browseRequest);
+                Dictionary<string, string> requestHeaders = browseRequest.GetRequestHeaders();
+                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            throw new ConstructorException("GetBrowseResults response data is malformed");
+                if (result != null)
+                {
+                    return JsonConvert.DeserializeObject<BrowseResponse>(result);
+                }
+
+                throw new ConstructorException("GetBrowseResults response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
 
         internal string CreateBrowseItemsUrl(BrowseItemsRequest req)
@@ -67,16 +76,24 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's browse response object.</returns>
         public async Task<BrowseResponse> GetBrowseItemsResult(BrowseItemsRequest browseItemsRequest, CancellationToken cancellationToken = default)
         {
-            var url = CreateBrowseItemsUrl(browseItemsRequest);
-            Dictionary<string, string> requestHeaders = browseItemsRequest.GetRequestHeaders();
-            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            if (result != null)
+            try
             {
-                return JsonConvert.DeserializeObject<BrowseResponse>(result);
-            }
+                var url = CreateBrowseItemsUrl(browseItemsRequest);
+                Dictionary<string, string> requestHeaders = browseItemsRequest.GetRequestHeaders();
+                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            throw new ConstructorException("GetBrowseItemsResult response data is malformed");
+                if (result != null)
+                {
+                    return JsonConvert.DeserializeObject<BrowseResponse>(result);
+                }
+
+                throw new ConstructorException("GetBrowseItemsResult response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
 
         internal string CreateBrowseFacetsUrl(BrowseFacetsRequest req)
@@ -99,17 +116,25 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's browse facets response object.</returns>
         public async Task<BrowseFacetsResponse> GetBrowseFacetsResult(BrowseFacetsRequest browseFacetsRequest, CancellationToken cancellationToken = default)
         {
-            var url = CreateBrowseFacetsUrl(browseFacetsRequest);
-            Dictionary<string, string> requestHeaders = browseFacetsRequest.GetRequestHeaders();
-            AddAuthHeaders(this.Options, requestHeaders);
-            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            if (result != null)
+            try
             {
-                return JsonConvert.DeserializeObject<BrowseFacetsResponse>(result);
-            }
+                var url = CreateBrowseFacetsUrl(browseFacetsRequest);
+                Dictionary<string, string> requestHeaders = browseFacetsRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            throw new ConstructorException("GetBrowseFacetsResult response data is malformed");
+                if (result != null)
+                {
+                    return JsonConvert.DeserializeObject<BrowseFacetsResponse>(result);
+                }
+
+                throw new ConstructorException("GetBrowseFacetsResult response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
 
         internal string CreateBrowseFacetOptionsUrl(BrowseFacetOptionsRequest req)
@@ -132,17 +157,25 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's browse facet options response object.</returns>
         public async Task<BrowseFacetOptionsResponse> GetBrowseFacetOptionsResult(BrowseFacetOptionsRequest browseFacetOptionsRequest, CancellationToken cancellationToken = default)
         {
-            var url = CreateBrowseFacetOptionsUrl(browseFacetOptionsRequest);
-            Dictionary<string, string> requestHeaders = browseFacetOptionsRequest.GetRequestHeaders();
-            AddAuthHeaders(this.Options, requestHeaders);
-            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            if (result != null)
+            try
             {
-                return JsonConvert.DeserializeObject<BrowseFacetOptionsResponse>(result);
-            }
+                var url = CreateBrowseFacetOptionsUrl(browseFacetOptionsRequest);
+                Dictionary<string, string> requestHeaders = browseFacetOptionsRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            throw new ConstructorException("GetBrowseFacetOptionsResult response data is malformed");
+                if (result != null)
+                {
+                    return JsonConvert.DeserializeObject<BrowseFacetOptionsResponse>(result);
+                }
+
+                throw new ConstructorException("GetBrowseFacetOptionsResult response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -41,16 +42,24 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's quiz next question object.</returns>
         public async Task<NextQuestionResponse> GetNextQuestion(QuizRequest quizzesRequest, CancellationToken cancellationToken = default)
         {
-            var url = CreateQuizUrl(quizzesRequest, "next");
-            Dictionary<string, string> requestHeaders = quizzesRequest.GetRequestHeaders();
-            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            if (result != null)
+            try
             {
-                return JsonConvert.DeserializeObject<NextQuestionResponse>(result);
-            }
+                var url = CreateQuizUrl(quizzesRequest, "next");
+                Dictionary<string, string> requestHeaders = quizzesRequest.GetRequestHeaders();
+                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            throw new ConstructorException("GetNextQuestion response data is malformed");
+                if (result != null)
+                {
+                    return JsonConvert.DeserializeObject<NextQuestionResponse>(result);
+                }
+
+                throw new ConstructorException("GetNextQuestion response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
 
         /// <summary>
@@ -61,16 +70,25 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's quiz results response object.</returns>
         public async Task<QuizResultsResponse> GetResults(QuizRequest quizzesRequest, CancellationToken cancellationToken = default)
         {
-            var url = CreateQuizUrl(quizzesRequest, "results");
-            Dictionary<string, string> requestHeaders = quizzesRequest.GetRequestHeaders();
-            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            if (result != null)
+            try
             {
-                return JsonConvert.DeserializeObject<QuizResultsResponse>(result);
-            }
+                var url = CreateQuizUrl(quizzesRequest, "results");
+                Dictionary<string, string> requestHeaders = quizzesRequest.GetRequestHeaders();
+                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            throw new ConstructorException("GetResults response data is malformed");
+                if (result != null)
+                {
+                    return JsonConvert.DeserializeObject<QuizResultsResponse>(result);
+                }
+
+                throw new ConstructorException("GetResults response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
+
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -39,16 +40,25 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's recommendations response object.</returns>
         public async Task<RecommendationsResponse> GetRecommendationsResults(RecommendationsRequest recommendationsRequest, CancellationToken cancellationToken = default)
         {
-            var url = CreateRecommendationsUrl(recommendationsRequest);
-            var requestHeaders = recommendationsRequest.GetRequestHeaders();
-            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            if (result != null)
+            try
             {
-                return JsonConvert.DeserializeObject<RecommendationsResponse>(result);
-            }
+                var url = CreateRecommendationsUrl(recommendationsRequest);
+                var requestHeaders = recommendationsRequest.GetRequestHeaders();
+                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            throw new ConstructorException("GetRecommendationsResults response data is malformed");
+                if (result != null)
+                {
+                    return JsonConvert.DeserializeObject<RecommendationsResponse>(result);
+                }
+
+                throw new ConstructorException("GetRecommendationsResults response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
+
     }
 }
