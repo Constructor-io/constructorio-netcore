@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-
     <IsPackable>false</IsPackable>
     <ReleaseVersion>3.11.1</ReleaseVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\constructor.io\constructor.io.csproj" />
+    <ProjectReference Include="..\Constructorio.NET\Constructorio.NET.csproj" />
   </ItemGroup>
 
 </Project>
