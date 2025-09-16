@@ -4,22 +4,33 @@
 set -e
 
 # Configuration
-NUGET_SOURCE=${1:-https://api.nuget.org/v3/index.json}
-API_KEY=${2:-$NUGET_API_KEY}
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DRY_RUN=false
+API_KEY="$NUGET_API_KEY"
 
-echo "Publishing Constructor.io .NET SDK..."
+# Parse arguments
+for arg in "$@"; do
+    case $arg in
+        --dry-run)
+            DRY_RUN=true
+            ;;
+    esac
+done
 
-# Check if API key is provided
-if [[ -z "$API_KEY" ]]; then
+if [[ "$DRY_RUN" == true ]]; then
+    echo "Constructor.io .NET SDK Publish Script (DRY RUN)"
+else
+    echo "Publishing Constructor.io .NET SDK..."
+fi
+
+# Check if API key is provided (not needed for dry run)
+if [[ "$DRY_RUN" == false && -z "$API_KEY" ]]; then
     echo "Error: NuGet API key not provided."
-    echo "Usage: ./publish.sh [nuget-source] [api-key]"
-    echo "Or set NUGET_API_KEY environment variable"
+    echo "Set NUGET_API_KEY environment variable"
     exit 1
 fi
 
 # Find the latest package
-PACKAGE=$(find ./artifacts -name "*.nupkg" | head -1)
+PACKAGE=$(find ./artifacts -name "*.nupkg" 2>/dev/null | head -1)
 
 if [[ -z "$PACKAGE" ]]; then
     echo "Error: No .nupkg file found in ./artifacts"
@@ -28,9 +39,23 @@ if [[ -z "$PACKAGE" ]]; then
 fi
 
 echo "Found package: $(basename "$PACKAGE")"
-echo "Publishing to: $NUGET_SOURCE"
+echo "Publishing to: https://api.nuget.org/v3/index.json"
 
-# Publish the package
-dotnet nuget push "$PACKAGE" --source "$NUGET_SOURCE" --api-key "$API_KEY"
-
-echo "Package published successfully!"
+if [[ "$DRY_RUN" == true ]]; then
+    echo ""
+    echo "DRY RUN: Would execute the following command:"
+    echo "dotnet nuget push \"$PACKAGE\" --source \"https://api.nuget.org/v3/index.json\" --api-key \"[HIDDEN]\""
+    echo ""
+    echo "Package details:"
+    echo "  File: $PACKAGE"
+    echo "  Size: $(du -h "$PACKAGE" | cut -f1)"
+    if [[ -n "$API_KEY" ]]; then
+        echo "  API Key: [PROVIDED]"
+    else
+        echo "  API Key: [NOT PROVIDED - would fail]"
+    fi
+else
+    # Publish the package
+    dotnet nuget push "$PACKAGE" --source "https://api.nuget.org/v3/index.json" --api-key "$API_KEY"
+    echo "Package published successfully!"
+fi
