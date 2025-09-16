@@ -1,0 +1,4 @@
+{"id":"10001","item_name":"Item1","url":"https://test.com/p/10001","group_ids":"All","facet:Color":"Blue","facet:Brand":"XYZ","metadata:testField":"hiddenFieldValue","description":"item","image_url":"https://test.com/p/10001","facet:Price":"10"}
+{"id":"10002","item_name":"Item2","url":"https://test.com/p/10002","group_ids":"BrandXY","facet:Color":"yellow","facet:Brand":"","metadata:testField":"testFieldValue","description":"item","image_url":"https://test.com/p/10002","facet:Price":"12"}
+{"id":"10003","item_name":"Item3","url":"https://test.com/p/10003","group_ids":"","facet:Color":"","facet:Brand":"","metadata:testField":"","description":"item","image_url":"https://test.com/p/10003","facet:Price":".99"}
+{"id":"10004","item_name":"Item4","url":"https://test.com/p/10004","group_ids":"","facet:Color":"","facet:Brand":"","metadata:testField":"","description":"item","image_url":"https://test.com/p/10004","facet:Price":"2.50"}
