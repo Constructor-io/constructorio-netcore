@@ -24,22 +24,12 @@ namespace Constructorio_NET.Tests
             new SortOption("relevance", SortOrder.Ascending, "relevance")
         };
         private ConstructorioConfig Config;
-        private StreamContent itemsStream;
-        private StreamContent variationsStream;
-        private StreamContent itemGroupsStream;
 
         [OneTimeSetUp]
         public void Setup()
         {
             JObject json = JObject.Parse(System.IO.File.ReadAllText("./../../../../../.config/local.json"));
             string testApiToken = json.SelectToken("TEST_API_TOKEN").Value<string>();
-
-            itemsStream = new StreamContent(System.IO.File.OpenRead("./../../../resources/csv/items.csv"));
-            itemsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
-            variationsStream = new StreamContent(System.IO.File.OpenRead("./../../../resources/csv/variations.csv"));
-            variationsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
-            itemGroupsStream = new StreamContent(System.IO.File.OpenRead("./../../../resources/csv/item_groups.csv"));
-            itemGroupsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
 
             this.Config = new ConstructorioConfig(this.ApiKey, testApiToken);
         }
@@ -58,12 +48,33 @@ namespace Constructorio_NET.Tests
             await constructorio.Catalog.SetSortOptions(new SortOptionsListRequest(this.sortOptions));
         }
 
+        private StreamContent CreateItemsStream()
+        {
+            var stream = new StreamContent(System.IO.File.OpenRead("./../../../resources/csv/items.csv"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            return stream;
+        }
+
+        private StreamContent CreateVariationsStream()
+        {
+            var stream = new StreamContent(System.IO.File.OpenRead("./../../../resources/csv/variations.csv"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            return stream;
+        }
+
+        private StreamContent CreateItemGroupsStream()
+        {
+            var stream = new StreamContent(System.IO.File.OpenRead("./../../../resources/csv/item_groups.csv"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            return stream;
+        }
+
         [Test]
         public void ReplaceCatalogWithInvalidApiTokenShouldError()
         {
             var files = new Dictionary<string, StreamContent>()
             {
-                { "items", itemsStream },
+                { "items", CreateItemsStream() },
             };
             var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey, "invalidKey"));
             var req = new CatalogRequest(files);
@@ -76,7 +87,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "items", itemsStream },
+                { "items", CreateItemsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
@@ -90,7 +101,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "variations", variationsStream },
+                { "variations", CreateVariationsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
@@ -104,7 +115,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "item_groups", itemGroupsStream },
+                { "item_groups", CreateItemGroupsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
@@ -125,7 +136,7 @@ namespace Constructorio_NET.Tests
         {
             var files = new Dictionary<string, StreamContent>()
             {
-                { "items", itemsStream },
+                { "items", CreateItemsStream() },
             };
             var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey, "invalidKey"));
             var req = new CatalogRequest(files);
@@ -138,7 +149,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "items", itemsStream },
+                { "items", CreateItemsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
@@ -152,7 +163,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "variations", variationsStream },
+                { "variations", CreateVariationsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
@@ -166,7 +177,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "item_groups", itemGroupsStream },
+                { "item_groups", CreateItemGroupsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
@@ -180,7 +191,7 @@ namespace Constructorio_NET.Tests
         {
             var files = new Dictionary<string, StreamContent>()
             {
-                { "items", itemsStream },
+                { "items", CreateItemsStream() },
             };
             var constructorio = new ConstructorIO(new ConstructorioConfig(ApiKey) { ApiToken = "invalidKey" });
             var req = new CatalogRequest(files);
@@ -193,7 +204,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "items", itemsStream },
+                { "items", CreateItemsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
@@ -207,7 +218,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "items", itemsStream },
+                { "items", CreateItemsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
@@ -222,7 +233,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "variations", variationsStream },
+                { "variations", CreateVariationsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
@@ -236,7 +247,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "item_groups", itemGroupsStream },
+                { "item_groups", CreateItemGroupsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);

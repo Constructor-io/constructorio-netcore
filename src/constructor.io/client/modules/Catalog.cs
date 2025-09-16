@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
@@ -88,18 +89,30 @@ namespace Constructorio_NET.Modules
         /// Send full catalog files to replace the current catalog.
         /// </summary>
         /// <param name="catalogRequest">Constructorio's catalog request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<CatalogResponse> ReplaceCatalog(CatalogRequest catalogRequest)
+        public async Task<CatalogResponse> ReplaceCatalog(CatalogRequest catalogRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
 
             try
             {
-                url = CreateCatalogUrl(catalogRequest);
+                var url = CreateCatalogUrl(catalogRequest);
                 Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PUT"), url, requestHeaders, null, catalogRequest.Files);
+                result = await MakeHttpRequest(
+                    this.Options,
+                    HttpMethod.Put,
+                    url,
+                    requestHeaders,
+                    null,
+                    catalogRequest.Files,
+                    cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -118,19 +131,23 @@ namespace Constructorio_NET.Modules
         /// Send full catalog files to update the current catalog.
         /// </summary>
         /// <param name="catalogRequest">Constructorio's catalog request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<CatalogResponse> UpdateCatalog(CatalogRequest catalogRequest)
+        public async Task<CatalogResponse> UpdateCatalog(CatalogRequest catalogRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
 
             try
             {
-                url = CreateCatalogUrl(catalogRequest);
-                requestHeaders = catalogRequest.GetRequestHeaders();
+                var url = CreateCatalogUrl(catalogRequest);
+                Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
+                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, null, catalogRequest.Files, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -149,19 +166,24 @@ namespace Constructorio_NET.Modules
         /// Send full catalog files to patch update the current catalog.
         /// </summary>
         /// <param name="catalogRequest">Constructorio's catalog request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<CatalogResponse> PatchCatalog(CatalogRequest catalogRequest)
+        public async Task<CatalogResponse> PatchCatalog(CatalogRequest catalogRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
 
             try
             {
-                url = CreateCatalogUrl(catalogRequest);
+                var url = CreateCatalogUrl(catalogRequest);
                 url += "&patch_delta=true";
                 Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, null, catalogRequest.Files);
+                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, null, catalogRequest.Files, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -180,16 +202,16 @@ namespace Constructorio_NET.Modules
         /// Add item group to a catalog.
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's item group.</returns>
-        public async Task<ConstructorItemGroup> AddItemGroup(ItemGroupsRequest itemGroupsRequest)
+        public async Task<ConstructorItemGroup> AddItemGroup(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
 
             try
             {
                 ConstructorItemGroup itemGroup = itemGroupsRequest.ItemGroups[0];
-                url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroup.Id });
+                var url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroup.Id });
                 Hashtable requestBody = new Hashtable();
 
                 if (itemGroup.Name != null)
@@ -209,7 +231,12 @@ namespace Constructorio_NET.Modules
 
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PUT"), url, requestHeaders, requestBody);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -228,16 +255,16 @@ namespace Constructorio_NET.Modules
         /// Update item group in a catalog.
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's item group.</returns>
-        public async Task<ConstructorItemGroup> UpdateItemGroup(ItemGroupsRequest itemGroupsRequest)
+        public async Task<ConstructorItemGroup> UpdateItemGroup(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
 
             try
             {
                 ConstructorItemGroup itemGroup = itemGroupsRequest.ItemGroups[0];
-                url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroup.Id });
+                var url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroup.Id });
                 Hashtable requestBody = new Hashtable();
 
                 if (itemGroup.Name != null)
@@ -257,7 +284,12 @@ namespace Constructorio_NET.Modules
 
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PUT"), url, requestHeaders, requestBody);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -276,22 +308,27 @@ namespace Constructorio_NET.Modules
         /// Add item group(s) to a catalog (limit of 1,000).
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's item group response object.</returns>
-        public async Task<ItemGroupsResponse> AddItemGroups(ItemGroupsRequest itemGroupsRequest)
+        public async Task<ItemGroupsResponse> AddItemGroups(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
 
             try
             {
-                url = CreateItemGroupsUrl(itemGroupsRequest);
+                var url = CreateItemGroupsUrl(itemGroupsRequest);
                 Hashtable requestBody = new Hashtable
                 {
                     { "item_groups", itemGroupsRequest.ItemGroups }
                 };
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("POST"), url, requestHeaders, requestBody);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -310,22 +347,27 @@ namespace Constructorio_NET.Modules
         /// Update item group(s) in a catalog (limit of 1,000).
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's item group response object.</returns>
-        public async Task<ItemGroupsResponse> UpdateItemGroups(ItemGroupsRequest itemGroupsRequest)
+        public async Task<ItemGroupsResponse> UpdateItemGroups(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
 
             try
             {
-                url = CreateItemGroupsUrl(itemGroupsRequest);
+                var url = CreateItemGroupsUrl(itemGroupsRequest);
                 Hashtable requestBody = new Hashtable
                 {
                     { "item_groups", itemGroupsRequest.ItemGroups }
                 };
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, requestBody);
+                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -344,14 +386,15 @@ namespace Constructorio_NET.Modules
         /// Retrieves item group(s) in a tree structure.
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's item group response object.</returns>
-        public async Task<ItemGroupsGetResponse> GetItemGroup(ItemGroupsRequest itemGroupsRequest)
+        public async Task<ItemGroupsGetResponse> GetItemGroup(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
 
             try
             {
+                string url;
                 if (itemGroupsRequest.ItemGroupId != null)
                 {
                     url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroupsRequest.ItemGroupId });
@@ -364,7 +407,12 @@ namespace Constructorio_NET.Modules
                 Hashtable requestBody = new Hashtable();
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("GET"), url, requestHeaders, requestBody);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -383,18 +431,23 @@ namespace Constructorio_NET.Modules
         /// Delete all item groups.
         /// </summary>
         /// <param name="itemGroupsRequest">Constructorio's item groups request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's confirmation message.</returns>
-        public async Task<string> DeleteItemGroups(ItemGroupsRequest itemGroupsRequest)
+        public async Task<string> DeleteItemGroups(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
 
             try
             {
-                url = CreateItemGroupsUrl(itemGroupsRequest);
+                var url = CreateItemGroupsUrl(itemGroupsRequest);
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("DELETE"), url, requestHeaders);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -444,8 +497,9 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="facet">New Facet Configuration to be created.</param>
         /// <param name="section">Section in which the facet is defined.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Facet object representing the facet created.</returns>
-        public async Task<Facet> CreateFacetConfig(Facet facet, string section = "Products")
+        public async Task<Facet> CreateFacetConfig(Facet facet, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -454,7 +508,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, facet);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, facet, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -474,8 +533,9 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="paginationOptions">PaginationOptions object for pagination.</param>
         /// <param name="section">Section in which the facet is defined.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>List of Facets in a given section.</returns>
-        public async Task<FacetGetAllResponse> GetAllFacetConfigs(PaginationOptions paginationOptions = null, string section = "Products")
+        public async Task<FacetGetAllResponse> GetAllFacetConfigs(PaginationOptions paginationOptions = null, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url;
             if (paginationOptions != null)
@@ -493,7 +553,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -510,10 +575,12 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Gets a facet given the facet name and section.
+        /// </summary>
         /// <param name="facetName">Name of the facet.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<Facet> GetFacetConfig(string facetName, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Facet object representing the facet.</returns>
+        public async Task<Facet> GetFacetConfig(string facetName, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facetName);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -522,7 +589,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -539,10 +611,12 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Partially updates a list of facet configurations.
+        /// </summary>
         /// <param name="facetFieldsList">List of facets fields to be updated.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<List<Facet>> BatchPartiallyUpdateFacetConfigs(List<Facet> facetFieldsList, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>List of updated facet configurations.</returns>
+        public async Task<List<Facet>> BatchPartiallyUpdateFacetConfigs(List<Facet> facetFieldsList, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -551,7 +625,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, facetFieldsList);
+                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, facetFieldsList, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -568,10 +647,12 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Partially updates a specifc facet configuration by facet name.
+        /// </summary>
         /// <param name="facetFields">Facets fields to be updated.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<Facet> PartiallyUpdateFacetConfig(Facet facetFields, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Updated facet configuration.</returns>
+        public async Task<Facet> PartiallyUpdateFacetConfig(Facet facetFields, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facetFields.Name);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -580,7 +661,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, facetFields);
+                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, facetFields, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -597,10 +683,12 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Replace an existing facet configuration by facet name.
+        /// </summary>
         /// <param name="facet">New Facet Configuration to be created.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<Facet> UpdateFacetConfig(Facet facet, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Updated facet configuration.</returns>
+        public async Task<Facet> UpdateFacetConfig(Facet facet, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facet.Name);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -609,7 +697,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, facet);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, facet, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -629,8 +722,9 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="facetName">Name of the facet configuration/facet group.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// <returns>Facet object representing the facet configuration deleted</returns>
-        public async Task<Facet> DeleteFacetConfig(string facetName, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Facet object representing the facet configuration deleted.</returns>
+        public async Task<Facet> DeleteFacetConfig(string facetName, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facetName);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -639,7 +733,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -687,11 +786,13 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Creates a Facet Option given a facet group name.
+        /// </summary>
         /// <param name="facetOption">New Facet Option to be created.</param>
         /// <param name="facetGroupName">Facet Group where the Facet Option should be created.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<FacetOption> CreateFacetOption(FacetOption facetOption, string facetGroupName, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Created facet option.</returns>
+        public async Task<FacetOption> CreateFacetOption(FacetOption facetOption, string facetGroupName, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetOptionsUrl(facetGroupName, section);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -700,7 +801,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, facetOption);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, facetOption, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -717,11 +823,13 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Gets all Facet Options in a facet group.
+        /// </summary>
         /// <param name="facetGroupName">Facet Group to retrieve the Facet Options from.</param>
         /// <param name="paginationOptions">PaginationOptions object for pagination.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<FacetOptionsGetAllResponse> GetAllFacetOptions(string facetGroupName, PaginationOptions paginationOptions = null, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Response containing all facet options in the specified group.</returns>
+        public async Task<FacetOptionsGetAllResponse> GetAllFacetOptions(string facetGroupName, PaginationOptions paginationOptions = null, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url;
             if (paginationOptions != null)
@@ -739,7 +847,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -756,21 +869,27 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Gets a specific Facet Option given the facet option value and facet group.
+        /// </summary>
         /// <param name="facetOptionValue">Facet Option value to identify the Facet Option to be retrieved.</param>
         /// <param name="facetGroupName">Facet Group where the Facet Option resides.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<FacetOption> GetFacetOption(string facetOptionValue, string facetGroupName, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>The requested facet option.</returns>
+        public async Task<FacetOption> GetFacetOption(string facetOptionValue, string facetGroupName, string section = "Products", CancellationToken cancellationToken = default)
         {
-            string url;
-            url = CreateFacetOptionsUrl(facetGroupName, section, facetOptionValue);
+            string url = CreateFacetOptionsUrl(facetGroupName, section, facetOptionValue);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -787,21 +906,27 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Creates the Facet Options if they don't exists, or partially updates them if they do.
+        /// </summary>
         /// <param name="facetOptions">List of Facet Options to be created or partially updated.</param>
         /// <param name="facetGroupName">Facet Group where the Facet Options reside.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<List<FacetOption>> BatchCreateOrUpdateFacetOptions(List<FacetOption> facetOptions, string facetGroupName, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>List of created or updated facet options.</returns>
+        public async Task<List<FacetOption>> BatchCreateOrUpdateFacetOptions(List<FacetOption> facetOptions, string facetGroupName, string section = "Products", CancellationToken cancellationToken = default)
         {
-            string url;
-            url = CreateFacetOptionsUrl(facetGroupName, section);
+            string url = CreateFacetOptionsUrl(facetGroupName, section);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, facetOptions);
+                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, facetOptions, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -818,21 +943,27 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Replaces an existing Facet Option with a new one.
+        /// </summary>
         /// <param name="facetOption">New Facet Option.</param>
         /// <param name="facetGroupName">Facet Group where the Facet Option resides.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<FacetOption> ReplaceFacetOption(FacetOption facetOption, string facetGroupName, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>The replaced facet option.</returns>
+        public async Task<FacetOption> ReplaceFacetOption(FacetOption facetOption, string facetGroupName, string section = "Products", CancellationToken cancellationToken = default)
         {
-            string url;
-            url = CreateFacetOptionsUrl(facetGroupName, section, facetOption.Value);
+            string url = CreateFacetOptionsUrl(facetGroupName, section, facetOption.Value);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, facetOption);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, facetOption, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -849,21 +980,27 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Partially updates an existing Facet Option.
+        /// </summary>
         /// <param name="facetOption">Facet Option values for partial updating.</param>
         /// <param name="facetGroupName">Facet Group where the Facet Option resides.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<FacetOption> PartiallyUpdateFacetOption(FacetOption facetOption, string facetGroupName, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>The updated facet option.</returns>
+        public async Task<FacetOption> PartiallyUpdateFacetOption(FacetOption facetOption, string facetGroupName, string section = "Products", CancellationToken cancellationToken = default)
         {
-            string url;
-            url = CreateFacetOptionsUrl(facetGroupName, section, facetOption.Value);
+            string url = CreateFacetOptionsUrl(facetGroupName, section, facetOption.Value);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, facetOption);
+                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, facetOption, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -880,11 +1017,13 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Deletes a particular Facet Option given the Facet Option Value and Facet Group.
+        /// </summary>
         /// <param name="facetOptionValue">Facet Option value to identify the Facet Option to be deleted.</param>
         /// <param name="facetGroupName">Facet Group where the Facet Option resides.</param>
         /// <param name="section">Section in which the facet is defined.</param>
-        /// </summary>
-        public async Task<FacetOption> DeleteFacetOption(string facetOptionValue, string facetGroupName, string section = "Products")
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>The deleted facet option.</returns>
+        public async Task<FacetOption> DeleteFacetOption(string facetOptionValue, string facetGroupName, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetOptionsUrl(facetGroupName, section, facetOptionValue);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -893,7 +1032,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -912,18 +1056,23 @@ namespace Constructorio_NET.Modules
         /// Retrieves searchabilities with options for filtering, paginating.
         /// </summary>
         /// <param name="retrieveSearchabilitiesRequest">Constructorio's retrieve searchabilities request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's Searchability response object.</returns>
-        public async Task<SearchabilitiesResponse> RetrieveSearchabilities(RetrieveSearchabilitiesRequest retrieveSearchabilitiesRequest)
+        public async Task<SearchabilitiesResponse> RetrieveSearchabilities(RetrieveSearchabilitiesRequest retrieveSearchabilitiesRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
 
             try
             {
-                url = CreateRetrieveSearchabilitiesUrl(retrieveSearchabilitiesRequest);
+                var url = CreateRetrieveSearchabilitiesUrl(retrieveSearchabilitiesRequest);
                 Dictionary<string, string> requestHeaders = retrieveSearchabilitiesRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("GET"), url, requestHeaders, null, null);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -942,10 +1091,10 @@ namespace Constructorio_NET.Modules
         /// Send single or multiple searchabilities to create or modify.
         /// </summary>
         /// <param name="patchSearchabilitiesRequest">Constructorio's patch searchabilities request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's Searchability response object.</returns>
-        public async Task<SearchabilitiesResponse> PatchSearchabilities(PatchSearchabilitiesRequest patchSearchabilitiesRequest)
+        public async Task<SearchabilitiesResponse> PatchSearchabilities(PatchSearchabilitiesRequest patchSearchabilitiesRequest, CancellationToken cancellationToken = default)
         {
-            string url;
             string result;
             Hashtable postbody = new Hashtable
             {
@@ -954,10 +1103,15 @@ namespace Constructorio_NET.Modules
 
             try
             {
-                url = CreatePatchSearchabilitiesUrl(patchSearchabilitiesRequest);
+                var url = CreatePatchSearchabilitiesUrl(patchSearchabilitiesRequest);
                 Dictionary<string, string> requestHeaders = patchSearchabilitiesRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, postbody, null);
+                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, postbody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -1000,9 +1154,9 @@ namespace Constructorio_NET.Modules
         /// Specify an optional SortBy property to retrieve a specific sort option.
         /// </summary>
         /// <param name="sortOptionsRequest">Constructorio's <see cref="SortOptionsRequest"/> object model.</param>
-        /// <param name="sortOptionsRequest.SortBy">A sort_by property to retrieve a specific Sort Option.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's <see cref="SortOptionList"/> object.</returns>
-        public async Task<SortOptionList> RetrieveSortOptions(SortOptionsRequest sortOptionsRequest)
+        public async Task<SortOptionList> RetrieveSortOptions(SortOptionsRequest sortOptionsRequest, CancellationToken cancellationToken = default)
         {
             string url = CreateSortOptionsUrl(sortOptionsRequest);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -1011,7 +1165,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -1031,8 +1190,9 @@ namespace Constructorio_NET.Modules
         /// At most 50 Sort Options can be provided.
         /// </summary>
         /// <param name="sortOptionsListRequest">Constructorio's <see cref="SortOptionsListRequest"/> object model.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's <see cref="SortOptionList"/> object.</returns>
-        public async Task<SortOptionList> SetSortOptions(SortOptionsListRequest sortOptionsListRequest)
+        public async Task<SortOptionList> SetSortOptions(SortOptionsListRequest sortOptionsListRequest, CancellationToken cancellationToken = default)
         {
             string url = CreateSortOptionsUrl(sortOptionsListRequest);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -1041,7 +1201,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, sortOptionsListRequest.GetSortOptionsList());
+                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, sortOptionsListRequest.GetSortOptionsList(), cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -1060,17 +1225,22 @@ namespace Constructorio_NET.Modules
         /// Deletes a list of Sort Options, identified by sort_by and sort_order.
         /// </summary>
         /// <param name="sortOptionsListRequest">Constructorio's <see cref="SortOptionsListRequest"/> object model.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>True if delete request succeeds.</returns>
-        public async Task<bool> DeleteSortOptions(SortOptionsListRequest sortOptionsListRequest)
+        public async Task<bool> DeleteSortOptions(SortOptionsListRequest sortOptionsListRequest, CancellationToken cancellationToken = default)
         {
             string url = CreateSortOptionsUrl(sortOptionsListRequest);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, sortOptionsListRequest.GetSortOptionListForDeletion());
+                await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, sortOptionsListRequest.GetSortOptionListForDeletion(), cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -1107,8 +1277,9 @@ namespace Constructorio_NET.Modules
         /// Creates a Sort Option.
         /// </summary>
         /// <param name="sortOptionsSingleRequest">Constructorio's <see cref="SortOptionsSingleRequest"/> object model.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's <see cref="SortOption"/> object.</returns>
-        public async Task<SortOption> CreateSortOption(SortOptionsSingleRequest sortOptionsSingleRequest)
+        public async Task<SortOption> CreateSortOption(SortOptionsSingleRequest sortOptionsSingleRequest, CancellationToken cancellationToken = default)
         {
             string url = CreateSortOptionUrl(sortOptionsSingleRequest);
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
@@ -1117,7 +1288,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, sortOptionsSingleRequest.SortOption);
+                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, sortOptionsSingleRequest.SortOption, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -1136,8 +1312,9 @@ namespace Constructorio_NET.Modules
         /// Creates or Replace a Sort Option.
         /// </summary>
         /// <param name="sortOptionsSingleRequest">Constructorio's <see cref="SortOptionsSingleRequest"/> object model.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's <see cref="SortOption"/> object.</returns>
-        public async Task<SortOption> CreateOrReplaceSortOption(SortOptionsSingleRequest sortOptionsSingleRequest)
+        public async Task<SortOption> CreateOrReplaceSortOption(SortOptionsSingleRequest sortOptionsSingleRequest, CancellationToken cancellationToken = default)
         {
             if (sortOptionsSingleRequest.SortOption.SortBy == null)
             {
@@ -1151,7 +1328,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, sortOptionsSingleRequest.GetSortOptionDelta());
+                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, sortOptionsSingleRequest.GetSortOptionDelta(), cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -1170,8 +1352,9 @@ namespace Constructorio_NET.Modules
         /// Updates a Sort Option.
         /// </summary>
         /// <param name="sortOptionsSingleRequest">Constructorio's <see cref="SortOptionsSingleRequest"/> object model.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's <see cref="SortOption"/> object.</returns>
-        public async Task<SortOption> UpdateSortOption(SortOptionsSingleRequest sortOptionsSingleRequest)
+        public async Task<SortOption> UpdateSortOption(SortOptionsSingleRequest sortOptionsSingleRequest, CancellationToken cancellationToken = default)
         {
             if (sortOptionsSingleRequest.SortOption.SortBy == null)
             {
@@ -1185,7 +1368,12 @@ namespace Constructorio_NET.Modules
             string result;
             try
             {
-                result = await MakeHttpRequest(this.Options, new HttpMethod("PATCH"), url, requestHeaders, sortOptionsSingleRequest.GetSortOptionDelta());
+                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, sortOptionsSingleRequest.GetSortOptionDelta(), cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {

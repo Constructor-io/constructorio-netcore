@@ -1,11 +1,12 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using Constructorio_NET.Models;
 using Newtonsoft.Json;
 
@@ -13,6 +14,8 @@ namespace Constructorio_NET.Utils
 {
     public class Helpers
     {
+        protected static readonly HttpMethod HttpMethodPatch = new HttpMethod("PATCH");
+
         protected Helpers()
         {
         }
@@ -118,11 +121,11 @@ namespace Constructorio_NET.Utils
                     Dictionary<string, Dictionary<string, List<string>>> filtersPerSection = (Dictionary<string, Dictionary<string, List<string>>>)queryParams[Constants.FILTERS_PER_SECTION];
                     queryParams.Remove(Constants.FILTERS_PER_SECTION);
 
-                    foreach (var section in filtersPerSection)
+                    foreach (var sectionKey in filtersPerSection.Select(fps => fps.Key))
                     {
-                        foreach (var filter in filtersPerSection[section.Key])
+                        foreach (var filter in filtersPerSection[sectionKey])
                         {
-                            string sectionName = section.Key;
+                            string sectionName = sectionKey;
                             string filterGroup = filter.Key;
                             foreach (string filterOption in filter.Value)
                             {
@@ -238,66 +241,80 @@ namespace Constructorio_NET.Utils
         /// <param name="requestHeaders">Additional headers to send with the request.</param>
         /// <param name="requestBody">Key values pairs used for the POST body.</param>
         /// <param name="files">Dictionary of streamcontent.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Task.</returns>
-        public static async Task<string> MakeHttpRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody = null, Dictionary<string, StreamContent> files = null)
+        public static async Task<string> MakeHttpRequest(
+            Hashtable options,
+            HttpMethod httpMethod,
+            string url,
+            Dictionary<string, string> requestHeaders,
+            object requestBody = null,
+            Dictionary<string, StreamContent> files = null,
+            CancellationToken cancellationToken = default)
         {
-            HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
-
-            foreach (var header in requestHeaders)
+            // Wrapping this in the using will dispose of the HttpRequestMessage object and the content inside it, but NOT the singleton HttpClient object.
+            using (var httpRequest = new HttpRequestMessage(httpMethod, url))
             {
-                if (header.Key == Constants.USER_AGENT)
+                foreach (var header in requestHeaders)
                 {
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
-                }
-                else
-                {
-                    httpRequest.Headers.Add(header.Key, header.Value);
-                }
-            }
-
-            if (options.ContainsKey(Constants.CONSTRUCTOR_TOKEN))
-            {
-                httpRequest.Headers.Add(Constants.SECURITY_TOKEN, (string)options[Constants.CONSTRUCTOR_TOKEN]);
-            }
-
-            if (files != null)
-            {
-                var formData = new MultipartFormDataContent();
-
-                if (files.ContainsKey("items"))
-                {
-                    formData.Add(files["items"], "items", "items.csv");
+                    if (header.Key == Constants.USER_AGENT)
+                    {
+                        httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    }
+                    else
+                    {
+                        httpRequest.Headers.Add(header.Key, header.Value);
+                    }
                 }
 
-                if (files.ContainsKey("variations"))
+                if (options.ContainsKey(Constants.CONSTRUCTOR_TOKEN))
                 {
-                    formData.Add(files["variations"], "variations", "variations.csv");
+                    httpRequest.Headers.Add(Constants.SECURITY_TOKEN, (string)options[Constants.CONSTRUCTOR_TOKEN]);
                 }
 
-                if (files.ContainsKey("item_groups"))
+                if (files != null)
                 {
-                    formData.Add(files["item_groups"], "item_groups", "item_groups.csv");
+                    var formData = new MultipartFormDataContent();
+
+                    if (files.TryGetValue("items", out var items))
+                    {
+                        formData.Add(items, "items", "items.csv");
+                    }
+
+                    if (files.TryGetValue("variations", out var variations))
+                    {
+                        formData.Add(variations, "variations", "variations.csv");
+                    }
+
+                    if (files.TryGetValue("item_groups", out var itemGroups))
+                    {
+                        formData.Add(itemGroups, "item_groups", "item_groups.csv");
+                    }
+
+                    httpRequest.Content = formData;
+                }
+                else if (requestBody != null)
+                {
+                    StringContent reqContent = new StringContent(JsonConvert.SerializeObject(requestBody),
+                        Encoding.UTF8, "application/json");
+                    httpRequest.Content = reqContent;
                 }
 
-                httpRequest.Content = formData;
-            }
-            else if (requestBody != null)
-            {
-                StringContent reqContent = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
-                httpRequest.Content = reqContent;
-            }
+                // Wrapping this in the using will dispose of the HttpResponseMessage object and the content inside it, but NOT the singleton HttpClient object.
+                using (var response = await ConstructorIO.HttpClient.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false))
+                {
+                    HttpContent resContent = response.Content;
+                    string result = await resContent.ReadAsStringAsync().ConfigureAwait(false);
 
-            HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest);
-            HttpContent resContent = response.Content;
-            string result = await resContent.ReadAsStringAsync();
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        ServerError error = JsonConvert.DeserializeObject<ServerError>(result);
+                        throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
+                    }
 
-            if (!response.IsSuccessStatusCode)
-            {
-                ServerError error = JsonConvert.DeserializeObject<ServerError>(result);
-                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
+                    return result;
+                }
             }
-
-            return result;
         }
 
         /// <summary>
@@ -312,7 +329,7 @@ namespace Constructorio_NET.Utils
                 throw new ConstructorException("apiToken was not found");
             }
 
-            string encodedToken = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes($"{options[Constants.API_TOKEN]}:"));
+            string encodedToken = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{options[Constants.API_TOKEN]}:"));
             requestHeaders.Add("Authorization", $"Basic {encodedToken}");
         }
     }

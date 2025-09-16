@@ -16,23 +16,22 @@ namespace Constructorio_NET.Tests
         private readonly string Section = "Search Suggestions";
         private readonly string NotificationEmail = "mail@mail.mail";
         private readonly bool Force = true;
-        private StreamContent itemsStream;
         private Dictionary<string, StreamContent> Files;
 
-        [OneTimeSetUp]
-        public void Setup()
+        private StreamContent CreateItemsStream()
         {
-            itemsStream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
-            itemsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
-            Files = new Dictionary<string, StreamContent>()
-            {
-                { "items", itemsStream },
-            };
+            var stream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            return stream;
         }
 
         [Test]
         public void GetRequestParameters()
         {
+            Files = new Dictionary<string, StreamContent>()
+            {
+                { "items", CreateItemsStream() },
+            };
             CatalogRequest req = new CatalogRequest(this.Files)
             {
                 Section = this.Section,
