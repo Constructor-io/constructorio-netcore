@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['deletefacetconfig_0',['DeleteFacetConfig',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#adaa25e0e00586896106df6e2dacb83ac',1,'Constructorio_NET::Modules::Catalog']]],
-  ['deletefacetoption_1',['DeleteFacetOption',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#aa3d4014682f2de088e19dc1df7757af5',1,'Constructorio_NET::Modules::Catalog']]],
-  ['deleteitemgroups_2',['DeleteItemGroups',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a826404d61bed8b3e6fe10a688d27c40b',1,'Constructorio_NET::Modules::Catalog']]],
-  ['deleteitems_3',['DeleteItems',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#a3ada11cba0adfc09899e786a899fb87d',1,'Constructorio_NET::Modules::Items']]],
-  ['deletesortoptions_4',['DeleteSortOptions',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a8c2a594e31ff43429abb1b71b16c0931',1,'Constructorio_NET::Modules::Catalog']]],
-  ['deletevariations_5',['DeleteVariations',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#a90948f6c2e38c386e1a11ce148aebf1d',1,'Constructorio_NET::Modules::Items']]]
+  ['deletefacetconfig_0',['DeleteFacetConfig',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#ac4a1121344ef14e6ce6c3b452cf1cc4d',1,'Constructorio_NET::Modules::Catalog']]],
+  ['deletefacetoption_1',['DeleteFacetOption',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a6aa15b7a77b148473baa8678b3cf0bfc',1,'Constructorio_NET::Modules::Catalog']]],
+  ['deleteitemgroups_2',['DeleteItemGroups',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a00a7f65672a658cc410c63b296bf54c3',1,'Constructorio_NET::Modules::Catalog']]],
+  ['deleteitems_3',['DeleteItems',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#ac676ca89c70bb3b8420492dff622a44c',1,'Constructorio_NET::Modules::Items']]],
+  ['deletesortoptions_4',['DeleteSortOptions',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a94516008ea362b9eae38d91026a1be65',1,'Constructorio_NET::Modules::Catalog']]],
+  ['deletevariations_5',['DeleteVariations',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#aa3cbb9f56dafb8d56f218a25e5b8d309',1,'Constructorio_NET::Modules::Items']]]
 ];

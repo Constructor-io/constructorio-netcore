@@ -20,6 +20,7 @@ var hierarchy =
     [ "Constructorio_NET.Models.BrowseResponse", "class_constructorio___n_e_t_1_1_models_1_1_browse_response.html", null ],
     [ "Constructorio_NET.Models.BrowseResponseInner", "class_constructorio___n_e_t_1_1_models_1_1_browse_response_inner.html", null ],
     [ "Constructorio_NET.Tests.BrowseTest", "class_constructorio___n_e_t_1_1_tests_1_1_browse_test.html", null ],
+    [ "Constructorio_NET.Tests.CancellationTokenTests", "class_constructorio___n_e_t_1_1_tests_1_1_cancellation_token_tests.html", null ],
     [ "Constructorio_NET.Models.CatalogRequest", "class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html", null ],
     [ "Constructorio_NET.Tests.CatalogRequestTest", "class_constructorio___n_e_t_1_1_tests_1_1_catalog_request_test.html", null ],
     [ "Constructorio_NET.Models.CatalogResponse", "class_constructorio___n_e_t_1_1_models_1_1_catalog_response.html", null ],
