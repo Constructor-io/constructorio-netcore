@@ -85,7 +85,6 @@ namespace Constructorio_NET.Tests
             Assert.NotNull(res.ResultId, "Result id exists");
             var actualVariationMap = JObject.Parse(reqVariationsMap.ToString());
 
-            // Just validate structure instead of exact match since backend has changed
             Assert.IsTrue(actualVariationMap.ContainsKey("filter_by"), "Should contain filter_by");
             Assert.IsTrue(actualVariationMap.ContainsKey("group_by"), "Should contain group_by");
             Assert.IsTrue(actualVariationMap.ContainsKey("values"), "Should contain values");
