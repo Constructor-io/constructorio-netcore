@@ -100,8 +100,14 @@ namespace Constructorio_NET.Modules
                 var url = CreateCatalogUrl(catalogRequest);
                 Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, null,
-                    catalogRequest.Files, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest(
+                    this.Options,
+                    HttpMethod.Put,
+                    url,
+                    requestHeaders,
+                    null,
+                    catalogRequest.Files,
+                    cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {

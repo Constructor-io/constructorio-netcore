@@ -14,7 +14,7 @@ namespace Constructorio_NET.Utils
 {
     public class Helpers
     {
-        protected readonly HttpMethod HttpMethodPatch = new HttpMethod("PATCH");
+        protected static readonly HttpMethod HttpMethodPatch = new HttpMethod("PATCH");
 
         protected Helpers()
         {
@@ -243,7 +243,14 @@ namespace Constructorio_NET.Utils
         /// <param name="files">Dictionary of streamcontent.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Task.</returns>
-        public static async Task<string> MakeHttpRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody = null, Dictionary<string, StreamContent> files = null, CancellationToken cancellationToken = default)
+        public static async Task<string> MakeHttpRequest(
+            Hashtable options,
+            HttpMethod httpMethod,
+            string url,
+            Dictionary<string, string> requestHeaders,
+            object requestBody = null,
+            Dictionary<string, StreamContent> files = null,
+            CancellationToken cancellationToken = default)
         {
             // Wrapping this in the using will dispose of the HttpRequestMessage object and the content inside it, but NOT the singleton HttpClient object.
             using (var httpRequest = new HttpRequestMessage(httpMethod, url))
