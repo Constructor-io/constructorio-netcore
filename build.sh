@@ -27,25 +27,25 @@ echo "Building Constructor.io .NET SDK ($CONFIGURATION)..."
 # Clean (optional)
 if [[ "$CLEAN" == true ]]; then
     echo "Cleaning..."
-    dotnet clean "$SRC_DIR/Constructorio.NET.sln" --configuration "$CONFIGURATION"
+    dotnet clean "$SRC_DIR/Constructorio_Net.sln" --configuration "$CONFIGURATION"
 fi
 
 # Restore, build, test (optional), pack
 echo "Restoring packages..."
-dotnet restore "$SRC_DIR/Constructorio.NET.sln"
+dotnet restore "$SRC_DIR/Constructorio_Net.sln"
 
 echo "Building solution..."
-dotnet build "$SRC_DIR/Constructorio.NET.sln" --configuration "$CONFIGURATION" --no-restore
+dotnet build "$SRC_DIR/Constructorio_Net.sln" --configuration "$CONFIGURATION" --no-restore
 
 # Only run tests if explicitly requested
 if [[ "$RUN_TESTS" == true ]]; then
     echo "Running tests..."
-    dotnet test "$SRC_DIR/Constructorio.NET.Tests/Constructorio.NET.Tests.csproj" --configuration "$CONFIGURATION" --no-build || echo "Some tests failed, continuing..."
+    dotnet test "$SRC_DIR/Constructorio_NET.Tests/Constructorio_NET.Tests.csproj" --configuration "$CONFIGURATION" --no-build || echo "Some tests failed, continuing..."
 else
     echo "Skipping tests (use --test to run tests)"
 fi
 
 echo "Creating package..."
-dotnet pack "$SRC_DIR/Constructorio.NET/Constructorio.NET.csproj" --configuration "$CONFIGURATION" --no-build --output ./artifacts
+dotnet pack "$SRC_DIR/constructor.io/constructor.io.csproj" --configuration "$CONFIGURATION" --no-build --output ./artifacts
 
 echo "Build complete!"
