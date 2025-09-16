@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['batchcreateorupdatefacetoptions_0',['BatchCreateOrUpdateFacetOptions',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#afaf8397ffb4ed3af8bb19a6a886a3bcc',1,'Constructorio_NET::Modules::Catalog']]],
-  ['batchpartiallyupdatefacetconfigs_1',['BatchPartiallyUpdateFacetConfigs',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a326a4415a096e96fcca54f76872cbdd5',1,'Constructorio_NET::Modules::Catalog']]],
+  ['batchcreateorupdatefacetoptions_0',['BatchCreateOrUpdateFacetOptions',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a6f08bb81accc326332058ff69f966e68',1,'Constructorio_NET::Modules::Catalog']]],
+  ['batchpartiallyupdatefacetconfigs_1',['BatchPartiallyUpdateFacetConfigs',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#ab4f2a1b6c717b584e711a66284b1dfb0',1,'Constructorio_NET::Modules::Catalog']]],
   ['below_2',['Below',['../namespace_constructorio___n_e_t_1_1_models.html#a63da9f0bb69116c94bd34196fcb16c9fae59dd8d25c0b6bb6697eac0617ccd412',1,'Constructorio_NET::Models']]],
   ['boundaries_3',['Boundaries',['../namespace_constructorio___n_e_t_1_1_models.html#a7f795439c8e3788451783cfbc058f679a8c0d5bd10a22aaaa32f275d92436f5f3',1,'Constructorio_NET::Models']]],
   ['browse_4',['Browse',['../class_constructorio___n_e_t_1_1_modules_1_1_browse.html',1,'Constructorio_NET::Modules']]],
