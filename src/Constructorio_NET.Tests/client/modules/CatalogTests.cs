@@ -287,7 +287,7 @@ namespace Constructorio_NET.Tests
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
             {
-                { "item_groups", CreateItemGroupsJsonlStream() },
+                { "item_groups", CreateJsonlItemGroupsStream() },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
