@@ -18,6 +18,15 @@ namespace Constructorio_NET.Tests
         private readonly bool Force = true;
         private Dictionary<string, StreamContent> Files;
 
+        [SetUp]
+        public void SetUp()
+        {
+            Files = new Dictionary<string, StreamContent>()
+            {
+                { "items", CreateItemsStream() },
+            };
+        }
+
         private StreamContent CreateItemsStream()
         {
             var stream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
@@ -28,10 +37,6 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetRequestParameters()
         {
-            Files = new Dictionary<string, StreamContent>()
-            {
-                { "items", CreateItemsStream() },
-            };
             CatalogRequest req = new CatalogRequest(this.Files)
             {
                 Section = this.Section,
