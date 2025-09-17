@@ -26,7 +26,7 @@ namespace Constructorio_NET.Modules
         internal string CreateRecommendationsUrl(RecommendationsRequest req)
         {
             Hashtable queryParams = req.GetRequestParameters();
-            List<string> paths = new List<string>(capacity: 3) { "recommendations", "v1", "pods", req.PodId };
+            List<string> paths = new List<string>(capacity: 4) { "recommendations", "v1", "pods", req.PodId };
 
             return MakeUrl(this.Options, paths, queryParams);
         }
