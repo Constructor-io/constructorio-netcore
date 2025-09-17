@@ -99,6 +99,7 @@ $(function(){initNavTree('class_constructorio___n_e_t_1_1_utils_1_1_helpers.html
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="class_constructorio___n_e_t_1_1_utils_1_1_helpers-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Constructorio_NET.Utils.Helpers Class Reference</div></div>
 </div><!--header-->
@@ -106,9 +107,9 @@ $(function(){initNavTree('class_constructorio___n_e_t_1_1_utils_1_1_helpers.html
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ad773d81b6f3d785c6ebbb856d1e9e48f" id="r_ad773d81b6f3d785c6ebbb856d1e9e48f"><td class="memItemLeft" align="right" valign="top">static async Task&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad773d81b6f3d785c6ebbb856d1e9e48f">MakeHttpRequest</a> (Hashtable options, HttpMethod httpMethod, string url, Dictionary&lt; string, string &gt; requestHeaders, object requestBody=null, Dictionary&lt; string, StreamContent &gt; files=null)</td></tr>
-<tr class="memdesc:ad773d81b6f3d785c6ebbb856d1e9e48f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes a http request.  <br /></td></tr>
-<tr class="separator:ad773d81b6f3d785c6ebbb856d1e9e48f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9b1040d50fa2f6baacc75aee4e2e461" id="r_ac9b1040d50fa2f6baacc75aee4e2e461"><td class="memItemLeft" align="right" valign="top">static async Task&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9b1040d50fa2f6baacc75aee4e2e461">MakeHttpRequest</a> (Hashtable options, HttpMethod httpMethod, string url, Dictionary&lt; string, string &gt; requestHeaders, object requestBody=null, Dictionary&lt; string, StreamContent &gt; files=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:ac9b1040d50fa2f6baacc75aee4e2e461"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes a http request.  <br /></td></tr>
+<tr class="separator:ac9b1040d50fa2f6baacc75aee4e2e461"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -121,6 +122,12 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:a00e110490f7d95fd842eaba636eec0ce" id="r_a00e110490f7d95fd842eaba636eec0ce"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00e110490f7d95fd842eaba636eec0ce">MakeUrl</a> (Hashtable options, List&lt; string &gt; paths, Hashtable queryParams, Dictionary&lt; string, bool &gt; omittedQueryParams=null)</td></tr>
 <tr class="memdesc:a00e110490f7d95fd842eaba636eec0ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes a URL to issue requests with.  <br /></td></tr>
 <tr class="separator:a00e110490f7d95fd842eaba636eec0ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a43ab8069454cd8784c3c3aabe1a3b0f6" id="r_a43ab8069454cd8784c3c3aabe1a3b0f6"><td class="memItemLeft" align="right" valign="top"><a id="a43ab8069454cd8784c3c3aabe1a3b0f6" name="a43ab8069454cd8784c3c3aabe1a3b0f6"></a>
+static readonly HttpMethod&#160;</td><td class="memItemRight" valign="bottom"><b>HttpMethodPatch</b> = new HttpMethod(&quot;PATCH&quot;)</td></tr>
+<tr class="separator:a43ab8069454cd8784c3c3aabe1a3b0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4c970aa25a03a7e118839d4c175f7ccb" name="a4c970aa25a03a7e118839d4c175f7ccb"></a>
@@ -157,8 +164,8 @@ Static Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad773d81b6f3d785c6ebbb856d1e9e48f" name="ad773d81b6f3d785c6ebbb856d1e9e48f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad773d81b6f3d785c6ebbb856d1e9e48f">&#9670;&#160;</a></span>MakeHttpRequest()</h2>
+<a id="ac9b1040d50fa2f6baacc75aee4e2e461" name="ac9b1040d50fa2f6baacc75aee4e2e461"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9b1040d50fa2f6baacc75aee4e2e461">&#9670;&#160;</a></span>MakeHttpRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +201,12 @@ Static Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Dictionary&lt; string, StreamContent &gt;</td>          <td class="paramname"><span class="paramname"><em>files</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>&#160;)</td>
+          <td class="paramtype">Dictionary&lt; string, StreamContent &gt;</td>          <td class="paramname"><span class="paramname"><em>files</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -213,6 +225,7 @@ Static Protected Member Functions</h2></td></tr>
     <tr><td class="paramname">requestHeaders</td><td>Additional headers to send with the request.</td></tr>
     <tr><td class="paramname">requestBody</td><td>Key values pairs used for the POST body.</td></tr>
     <tr><td class="paramname">files</td><td>Dictionary of streamcontent.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
   </table>
   </dd>
 </dl>

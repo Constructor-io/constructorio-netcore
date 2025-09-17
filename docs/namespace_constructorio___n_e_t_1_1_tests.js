@@ -8,6 +8,7 @@ var namespace_constructorio___n_e_t_1_1_tests =
     [ "BrowseItemsRequestTest", "class_constructorio___n_e_t_1_1_tests_1_1_browse_items_request_test.html", null ],
     [ "BrowseRequestTest", "class_constructorio___n_e_t_1_1_tests_1_1_browse_request_test.html", null ],
     [ "BrowseTest", "class_constructorio___n_e_t_1_1_tests_1_1_browse_test.html", null ],
+    [ "CancellationTokenTests", "class_constructorio___n_e_t_1_1_tests_1_1_cancellation_token_tests.html", null ],
     [ "CatalogRequestTest", "class_constructorio___n_e_t_1_1_tests_1_1_catalog_request_test.html", null ],
     [ "CatalogTest", "class_constructorio___n_e_t_1_1_tests_1_1_catalog_test.html", null ],
     [ "ConstructorioConfigTest", "class_constructorio___n_e_t_1_1_tests_1_1_constructorio_config_test.html", null ],

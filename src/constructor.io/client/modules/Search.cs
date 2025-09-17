@@ -1,6 +1,8 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
@@ -33,18 +35,23 @@ namespace Constructorio_NET.Modules
         /// Retrieve search results from API.
         /// </summary>
         /// <param name="searchRequest">Constructorio's search request object.</param>
+        /// <param name="cancellationToken">The cancellation token to terminate the request.</param>
         /// <returns>Constructorio's search response object.</returns>
-        public async Task<SearchResponse> GetSearchResults(SearchRequest searchRequest)
+        public async Task<SearchResponse> GetSearchResults(SearchRequest searchRequest, CancellationToken cancellationToken = default)
         {
-            string url;
-            SearchResponse result;
-            Dictionary<string, string> requestHeaders;
+            try
+            {
+                var url = CreateSearchUrl(searchRequest);
+                var requestHeaders = searchRequest.GetRequestHeaders();
+                var result = await MakeHttpRequest<SearchResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            url = CreateSearchUrl(searchRequest);
-            requestHeaders = searchRequest.GetRequestHeaders();
-            result = await MakeHttpRequest<SearchResponse>(Options, HttpMethod.Get, url, requestHeaders);
-
-            return result ?? throw new ConstructorException("GetSearchResults response data is malformed");
+                return result ?? throw new ConstructorException("GetSearchResults response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
     }
 }

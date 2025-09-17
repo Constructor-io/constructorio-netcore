@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
@@ -126,20 +127,23 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section to upload items to.</param>
         /// <param name="force">Boolean to indicate whether or not to use force sync.</param>
         /// <param name="notificationEmail">Email to send failure notifications to.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> CreateOrReplaceItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null)
+        public async Task<bool> CreateOrReplaceItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CancellationToken cancellationToken = default)
         {
-            string url;
-            string result;
-
             try
             {
-                url = CreateItemsUrl(section, force, notificationEmail);
+                var url = CreateItemsUrl(section, force, notificationEmail);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("items", items);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(Options, HttpMethod.Put, url, requestHeaders, requestBody, null);
+                await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -156,20 +160,23 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section to upload items to.</param>
         /// <param name="force">Boolean to indicate whether or not to use force sync.</param>
         /// <param name="notificationEmail">Email to send failure notifications to.</param>
+        /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> CreateOrReplaceVariations(List<ConstructorVariation> variations, string section, bool force = false, string notificationEmail = null)
+        public async Task<bool> CreateOrReplaceVariations(List<ConstructorVariation> variations, string section, bool force = false, string notificationEmail = null, CancellationToken cancellationToken = default)
         {
-            string url;
-            string result;
-
             try
             {
-                url = CreateVariationsUrl(section, force, notificationEmail);
+                var url = CreateVariationsUrl(section, force, notificationEmail);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("variations", variations);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(Options, HttpMethod.Put, url, requestHeaders, requestBody, null);
+                await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -187,20 +194,23 @@ namespace Constructorio_NET.Modules
         /// <param name="force">Boolean to indicate whether or not to use force sync.</param>
         /// <param name="notificationEmail">Email to send failure notifications to.</param>
         /// <param name="onMissing">Either "FAIL", "CREATE", or "IGNORE". Indicating what to do when missing items are present in an update. "FAIL" fails the ingestion. "CREATE" creates the missing items. "IGNORE" ignores the missing items. Defaults to "FAIL".</param>
+        /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> UpdateItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL)
+        public async Task<bool> UpdateItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL, CancellationToken cancellationToken = default)
         {
-            string url;
-            string result;
-
             try
             {
-                url = CreateItemsUrl(section, force, notificationEmail, onMissing);
+                var url = CreateItemsUrl(section, force, notificationEmail, onMissing);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("items", items);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(Options, new HttpMethod("PATCH"), url, requestHeaders, requestBody, null);
+                await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -218,20 +228,23 @@ namespace Constructorio_NET.Modules
         /// <param name="force">Boolean to indicate whether or not to use force sync.</param>
         /// <param name="notificationEmail">Email to send failure notifications to.</param>
         /// <param name="onMissing">Either "FAIL", "CREATE", or "IGNORE". Indicating what to do when missing items are present in an update. "FAIL" fails the ingestion. "CREATE" creates the missing items. "IGNORE" ignores the missing items. Defaults to "FAIL".</param>
+        /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> UpdateVariations(List<ConstructorVariation> Variations, string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL)
+        public async Task<bool> UpdateVariations(List<ConstructorVariation> Variations, string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL, CancellationToken cancellationToken = default)
         {
-            string url;
-            string result;
-
             try
             {
-                url = CreateVariationsUrl(section, force, notificationEmail, onMissing);
+                var url = CreateVariationsUrl(section, force, notificationEmail, onMissing);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("variations", Variations);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(Options, new HttpMethod("PATCH"), url, requestHeaders, requestBody, null);
+                await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -246,21 +259,24 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="items">List of ConstructorItems with only Item Id.</param>
         /// <param name="section">Section to upload items to.</param>
+        /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> DeleteItems(List<ConstructorItem> items, string section)
+        public async Task<bool> DeleteItems(List<ConstructorItem> items, string section, CancellationToken cancellationToken = default)
         {
-            string url;
-            string result;
-
             try
             {
                 List<ConstructorItem> cleanedItems = items.ConvertAll((item) => new ConstructorItem(item.Id));
-                url = CreateItemsUrl(section);
+                var url = CreateItemsUrl(section);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("items", cleanedItems);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(Options, HttpMethod.Delete, url, requestHeaders, requestBody, null);
+                await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -275,21 +291,24 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="variations">List of ConstructorItems with only Item Id.</param>
         /// <param name="section">Section to upload items to.</param>
+        /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> DeleteVariations(List<ConstructorVariation> variations, string section)
+        public async Task<bool> DeleteVariations(List<ConstructorVariation> variations, string section, CancellationToken cancellationToken = default)
         {
-            string url;
-            string result;
-
             try
             {
                 List<ConstructorVariation> cleanedVariations = variations.ConvertAll((item) => new ConstructorVariation(item.Id));
-                url = CreateVariationsUrl(section);
+                var url = CreateVariationsUrl(section);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
                 requestBody.Add("variations", cleanedVariations);
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(Options, HttpMethod.Delete, url, requestHeaders, requestBody, null);
+                await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
             }
             catch (Exception e)
             {
@@ -303,15 +322,14 @@ namespace Constructorio_NET.Modules
         /// Retrieves items or specific items.
         /// </summary>
         /// <param name="req">The Items request object.</param>
+        /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's Items response object.</returns>
-        public async Task<ItemsResponse> RetrieveItems(ItemsRequest req)
+        public async Task<ItemsResponse> RetrieveItems(ItemsRequest req, CancellationToken cancellationToken = default)
         {
-            string url;
-            ItemsResponse result;
-            url = CreateRetrieveItemsUrl(req);
+            var url = CreateRetrieveItemsUrl(req);
             Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest<ItemsResponse>(Options, HttpMethod.Get, url, requestHeaders, null, jsonSerializer: ObjectCreationHandlingReplaceJsonSerializer);
+            var result = await MakeHttpRequest<ItemsResponse>(Options, HttpMethod.Get, url, requestHeaders, jsonSerializer: ObjectCreationHandlingReplaceJsonSerializer, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             return result ?? throw new ConstructorException("RetrieveItems response data is malformed");
         }
@@ -320,15 +338,14 @@ namespace Constructorio_NET.Modules
         /// Retrieves variations or specific variations.
         /// </summary>
         /// <param name="req">Variations request object</param>
+        /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<VariationsResponse> RetrieveVariations(VariationsRequest req)
+        public async Task<VariationsResponse> RetrieveVariations(VariationsRequest req, CancellationToken cancellationToken = default)
         {
-            string url;
-            VariationsResponse result;
-            url = CreateRetrieveVariationsUrl(req);
+            var url = CreateRetrieveVariationsUrl(req);
             Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest<VariationsResponse>(Options, HttpMethod.Get, url, requestHeaders, null, jsonSerializer: ObjectCreationHandlingReplaceJsonSerializer);
+            var result = await MakeHttpRequest<VariationsResponse>(Options, HttpMethod.Get, url, requestHeaders, jsonSerializer: ObjectCreationHandlingReplaceJsonSerializer, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             return result ?? throw new ConstructorException("RetrieveVariations response data is malformed");
         }

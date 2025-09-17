@@ -1,6 +1,8 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
@@ -34,17 +36,22 @@ namespace Constructorio_NET.Modules
             return url;
         }
 
-        public async Task<AllTasksResponse> GetAllTasks(AllTasksRequest allTasksRequest)
+        public async Task<AllTasksResponse> GetAllTasks(AllTasksRequest allTasksRequest, CancellationToken cancellationToken = default)
         {
-            string url;
-            AllTasksResponse result;
+            try
+            {
+                var url = CreateAllTasksUrl(allTasksRequest);
+                Dictionary<string, string> requestHeaders = allTasksRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                var result = await MakeHttpRequest<AllTasksResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            url = CreateAllTasksUrl(allTasksRequest);
-            Dictionary<string, string> requestHeaders = allTasksRequest.GetRequestHeaders();
-            AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest<AllTasksResponse>(Options, HttpMethod.Get, url, requestHeaders);
-
-            return result ?? throw new ConstructorException("All Tasks response data is malformed");
+                return result ?? throw new ConstructorException("All Tasks response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
 
         public string CreateTaskUrl(TaskRequest req)
@@ -60,17 +67,22 @@ namespace Constructorio_NET.Modules
             return url;
         }
 
-        public async Task<TaskResponse> GetTask(TaskRequest taskRequest)
+        public async Task<TaskResponse> GetTask(TaskRequest taskRequest, CancellationToken cancellationToken = default)
         {
-            string url;
-            TaskResponse result;
+            try
+            {
+                var url = CreateTaskUrl(taskRequest);
+                Dictionary<string, string> requestHeaders = taskRequest.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                var result = await MakeHttpRequest<TaskResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            url = CreateTaskUrl(taskRequest);
-            Dictionary<string, string> requestHeaders = taskRequest.GetRequestHeaders();
-            AddAuthHeaders(this.Options, requestHeaders);
-            result = await MakeHttpRequest<TaskResponse>(Options, HttpMethod.Get, url, requestHeaders);
-
-            return result ?? throw new ConstructorException("Task response data is malformed");
+                return result ?? throw new ConstructorException("Task response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
@@ -33,18 +35,23 @@ namespace Constructorio_NET.Modules
         /// Retrieve recommendations results from API.
         /// </summary>
         /// <param name="recommendationsRequest">Constructorio's recommendations request object.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>Constructorio's recommendations response object.</returns>
-        public async Task<RecommendationsResponse> GetRecommendationsResults(RecommendationsRequest recommendationsRequest)
+        public async Task<RecommendationsResponse> GetRecommendationsResults(RecommendationsRequest recommendationsRequest, CancellationToken cancellationToken = default)
         {
-            string url;
-            RecommendationsResponse result;
-            Dictionary<string, string> requestHeaders;
+            try
+            {
+                var url = CreateRecommendationsUrl(recommendationsRequest);
+                var requestHeaders = recommendationsRequest.GetRequestHeaders();
+                var result = await MakeHttpRequest<RecommendationsResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            url = CreateRecommendationsUrl(recommendationsRequest);
-            requestHeaders = recommendationsRequest.GetRequestHeaders();
-            result = await MakeHttpRequest<RecommendationsResponse>(Options, HttpMethod.Get, url, requestHeaders);
-
-            return result ?? throw new ConstructorException("GetRecommendationsResults response data is malformed");
+                return result ?? throw new ConstructorException("GetRecommendationsResults response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
     }
 }

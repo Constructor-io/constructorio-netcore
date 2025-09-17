@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Newtonsoft.Json;
@@ -13,6 +14,8 @@ namespace Constructorio_NET.Utils
 {
     public class Helpers
     {
+        protected static readonly HttpMethod HttpMethodPatch = new HttpMethod("PATCH");
+
         protected Helpers()
         {
         }
@@ -238,12 +241,21 @@ namespace Constructorio_NET.Utils
         /// <param name="requestHeaders">Additional headers to send with the request.</param>
         /// <param name="requestBody">Key values pairs used for the POST body.</param>
         /// <param name="files">Dictionary of streamcontent.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Task.</returns>
-        public static async Task<string> MakeHttpRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody = null, Dictionary<string, StreamContent> files = null)
+        public static async Task<string> MakeHttpRequest(
+            Hashtable options,
+            HttpMethod httpMethod,
+            string url,
+            Dictionary<string, string> requestHeaders,
+            object requestBody = null,
+            Dictionary<string, StreamContent> files = null,
+            CancellationToken cancellationToken = default)
         {
+            // Wrapping this in the using will dispose of the HttpRequestMessage object and the content inside it, but NOT the singleton HttpClient object.
             using HttpRequestMessage httpRequest = CreateRequest(options, httpMethod, url, requestHeaders, requestBody, files);
 
-            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest);
+            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContent resContent = response.Content;
             string result = await resContent.ReadAsStringAsync();
 
@@ -256,10 +268,18 @@ namespace Constructorio_NET.Utils
             return result;
         }
 
-        public static async Task<T> MakeHttpRequest<T>(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody = null, Dictionary<string, StreamContent> files = null, JsonSerializer jsonSerializer = null)
+        public static async Task<T> MakeHttpRequest<T>(
+            Hashtable options,
+            HttpMethod httpMethod,
+            string url,
+            Dictionary<string, string> requestHeaders,
+            object requestBody = null,
+            Dictionary<string, StreamContent> files = null,
+            JsonSerializer jsonSerializer = null,
+            CancellationToken cancellationToken = default)
         {
             using HttpRequestMessage httpRequest = CreateRequest(options, httpMethod, url, requestHeaders, requestBody, files);
-            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead);
+            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -281,7 +301,6 @@ namespace Constructorio_NET.Utils
         private static HttpRequestMessage CreateRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody, Dictionary<string, StreamContent> files)
         {
             HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
-
             foreach (var header in requestHeaders)
             {
                 if (header.Key == Constants.USER_AGENT)
@@ -340,7 +359,7 @@ namespace Constructorio_NET.Utils
                 throw new ConstructorException("apiToken was not found");
             }
 
-            string encodedToken = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes($"{options[Constants.API_TOKEN]}:"));
+            string encodedToken = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{options[Constants.API_TOKEN]}:"));
             requestHeaders.Add("Authorization", $"Basic {encodedToken}");
         }
     }

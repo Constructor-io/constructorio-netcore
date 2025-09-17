@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Net.Http;
 using Constructorio_NET.Models;
 using Constructorio_NET.Modules;
@@ -12,7 +11,7 @@ namespace Constructorio_NET
     /// </summary>
     public class ConstructorIO
     {
-        private readonly string Version = "cionet-3.11.0";
+        private readonly string Version = "cionet-3.12.0";
         public Autocomplete Autocomplete { get; }
         public Browse Browse { get; }
         public Catalog Catalog { get; }
