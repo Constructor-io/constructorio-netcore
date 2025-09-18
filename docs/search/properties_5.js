@@ -7,5 +7,6 @@ var searchData=
   ['filtervalue_4',['FilterValue',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a4ed26185f047818c20a020c998429292',1,'Constructorio_NET::Models::BrowseRequest']]],
   ['fmtoptions_5',['FmtOptions',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a8286c09dca598c848193614a6d503f86',1,'Constructorio_NET.Models.BrowseRequest.FmtOptions'],['../interface_constructorio___n_e_t_1_1_models_1_1_i_plp_request.html#a81c4049915a8ae92b52b5478e53e8dbd',1,'Constructorio_NET.Models.IPlpRequest.FmtOptions'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a167ad4e459eacce396210b2909183032',1,'Constructorio_NET.Models.SearchRequest.FmtOptions']]],
   ['force_6',['Force',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a877747da3863fa031d85abca3f955046',1,'Constructorio_NET::Models::CatalogRequest']]],
-  ['fuzzysearchable_7',['FuzzySearchable',['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html#a5e6c468e290851af307ea3b9d4f50ef8',1,'Constructorio_NET::Models::Searchability']]]
+  ['format_7',['Format',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a5e912c3557df510cbaa0e62907293a5a',1,'Constructorio_NET::Models::CatalogRequest']]],
+  ['fuzzysearchable_8',['FuzzySearchable',['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html#a5e6c468e290851af307ea3b9d4f50ef8',1,'Constructorio_NET::Models::Searchability']]]
 ];

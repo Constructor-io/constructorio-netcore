@@ -1,5 +1,13 @@
 var NAVTREEINDEX2 =
 {
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#aa1e56debfdc5213e85e213785c14b0f0":[2,0,0,0,80,6],
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#aa6c685670f6df69241d6a038efdd7738":[1,0,0,0,80,1],
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#aa6c685670f6df69241d6a038efdd7738":[2,0,0,0,80,1],
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#ac60c2e41c915c62312c79d3805f643c1":[1,0,0,0,80,4],
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#ac60c2e41c915c62312c79d3805f643c1":[2,0,0,0,80,4],
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#ae9a6ed85bd3f8dc5ae70a0e30ae0ba56":[1,0,0,0,80,5],
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#ae9a6ed85bd3f8dc5ae70a0e30ae0ba56":[2,0,0,0,80,5],
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html":[1,0,0,0,81],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html":[2,0,0,0,81],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html#a11cba67e4cd0ab2ca56ae1be712d4562":[1,0,0,0,81,0],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_option_list.html#a11cba67e4cd0ab2ca56ae1be712d4562":[2,0,0,0,81,0],
@@ -241,13 +249,5 @@ var NAVTREEINDEX2 =
 "class_constructorio___n_e_t_1_1_tests_1_1_sort_options_test.html":[2,0,0,2,24],
 "class_constructorio___n_e_t_1_1_tests_1_1_task_request_test.html":[1,0,0,2,25],
 "class_constructorio___n_e_t_1_1_tests_1_1_task_request_test.html":[2,0,0,2,25],
-"class_constructorio___n_e_t_1_1_tests_1_1_tasks_test.html":[1,0,0,2,26],
-"class_constructorio___n_e_t_1_1_tests_1_1_tasks_test.html":[2,0,0,2,26],
-"class_constructorio___n_e_t_1_1_tests_1_1_user_info_test.html":[1,0,0,2,27],
-"class_constructorio___n_e_t_1_1_tests_1_1_user_info_test.html":[2,0,0,2,27],
-"class_constructorio___n_e_t_1_1_utils_1_1_helpers.html":[1,0,0,3,0],
-"class_constructorio___n_e_t_1_1_utils_1_1_helpers.html":[2,0,0,3,0],
-"classes.html":[2,1],
-"functions.html":[2,3,0],
-"functions.html":[2,3,0,0]
+"class_constructorio___n_e_t_1_1_tests_1_1_tasks_test.html":[1,0,0,2,26]
 };
