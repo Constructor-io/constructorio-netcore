@@ -150,14 +150,14 @@ namespace Constructorio_NET.Tests
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
-            var actualVariationMap = JObject.Parse(reqVariationsMap.ToString());
-
-            Assert.IsTrue(actualVariationMap.ContainsKey("filter_by"), "Should contain filter_by");
-            Assert.IsTrue(actualVariationMap.ContainsKey("group_by"), "Should contain group_by");
-            Assert.IsTrue(actualVariationMap.ContainsKey("values"), "Should contain values");
-            if (res.Response.Results.Count > 0)
+            Assert.AreEqual(
+                 JObject.Parse(reqVariationsMap.ToString()),
+                 variationMapResult,
+                 "Variations Map was passed as parameter"
+             );
+            foreach (var result in res.Response.Results)
             {
-                Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
+                Assert.NotNull(result.VariationsMap, "Variations Map exists in every result");
             }
         }
 

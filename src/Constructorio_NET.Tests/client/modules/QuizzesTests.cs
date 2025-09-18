@@ -117,6 +117,7 @@ namespace Constructorio_NET.Tests
             QuizResultsResponse res = await constructorio.Quizzes.GetResults(req);
             Assert.AreEqual(this.QuizId, res.QuizId, "QuizId should match the one passed in the request");
             Assert.IsNotNull(res.QuizSessionId, "QuizSessionId should exist");
+            Assert.IsNotNull(res.QuizVersionId, "QuizVersionId should exist");
         }
     }
 }
