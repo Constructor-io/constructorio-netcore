@@ -320,7 +320,7 @@ Task response = await constructorio.Tasks.GetTask(request);
 - In settings => .NET Core Test Explorer => Test Project Path: Constructorio_NET/Constructorio_NET.Tests
 
 ## Testing
-- Make sure you have .NET SDK V6 installed
+- Make sure you have .NET SDK V8 installed
 - Open your terminal and navigate to the test directory:
   ```bash
   cd src/Constructorio_NET.Tests/
