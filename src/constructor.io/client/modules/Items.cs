@@ -292,7 +292,7 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's catalog response object.</returns>
         public async Task<bool> DeleteItems(List<ConstructorItem> items, string section)
         {
-            return await InternalDeleteItems(items, section, false, null);
+            return await this.InternalDeleteItems(items, section, false, null);
         }
         
         /// <summary>
@@ -304,7 +304,7 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's catalog response object.</returns>
         public async Task<bool> DeleteItems(List<ConstructorItem> items, string section, CancellationToken cancellationToken = default)
         {
-            return await InternalDeleteItems(items, section, false, null, cancellationToken);
+            return await this.InternalDeleteItems(items, section, false, null, cancellationToken);
         }
 
         /// <summary>
@@ -318,7 +318,7 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's catalog response object.</returns>
         public async Task<bool> DeleteItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CancellationToken cancellationToken = default)
         {
-            return await InternalDeleteItems(items, section, force, notificationEmail, cancellationToken);
+            return await this.InternalDeleteItems(items, section, force, notificationEmail, cancellationToken);
         }
 
 
