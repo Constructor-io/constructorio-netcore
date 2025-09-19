@@ -541,7 +541,6 @@ namespace Constructorio_NET.Tests
             ItemGroupsRequest req = new ItemGroupsRequest();
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             await constructorio.Catalog.AddItemGroup(new ItemGroupsRequest(new List<ConstructorItemGroup> { itemGroup1 }));
-            await Task.Delay(100);
             ItemGroupsGetResponse res = await constructorio.Catalog.GetItemGroup(req);
             Assert.IsTrue(res.TotalCount > 0, "Total Count should exist");
             Assert.IsNotEmpty(res.ItemGroups, "Item groups should be returned");
@@ -553,7 +552,6 @@ namespace Constructorio_NET.Tests
             ItemGroupsRequest req = new ItemGroupsRequest(itemGroup1.Id);
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             await constructorio.Catalog.AddItemGroup(new ItemGroupsRequest(new List<ConstructorItemGroup> { itemGroup1 }));
-            await Task.Delay(100);
             ItemGroupsGetResponse res = await constructorio.Catalog.GetItemGroup(req);
             Assert.IsTrue(res.TotalCount > 0, "Total Count should exist");
             Assert.IsNotEmpty(res.ItemGroups, "Item groups should be returned");
