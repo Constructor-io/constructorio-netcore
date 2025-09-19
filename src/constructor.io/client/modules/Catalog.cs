@@ -28,12 +28,7 @@ namespace Constructorio_NET.Modules
         {
             List<string> paths = new List<string> { "v1", "catalog" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-                { "c", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtAndCQueryParams);
 
             return url;
         }
@@ -48,11 +43,7 @@ namespace Constructorio_NET.Modules
             }
 
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
 
             return url;
         }
@@ -61,12 +52,7 @@ namespace Constructorio_NET.Modules
         {
             List<string> paths = new List<string> { "v1", "searchabilities" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-                { "c", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtAndCQueryParams);
 
             return url;
         }
@@ -75,12 +61,7 @@ namespace Constructorio_NET.Modules
         {
             List<string> paths = new List<string> { "v1", "searchabilities" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-                { "c", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtAndCQueryParams);
 
             return url;
         }
@@ -481,13 +462,7 @@ namespace Constructorio_NET.Modules
                 queryParams.Add(Constants.SECTION, section);
             }
 
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-                { "c", true },
-            };
-
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtAndCQueryParams);
 
             return url;
         }
@@ -773,13 +748,7 @@ namespace Constructorio_NET.Modules
                 queryParams.Add(Constants.SECTION, section);
             }
 
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-                { "c", true },
-            };
-
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtAndCQueryParams);
 
             return url;
         }
@@ -1139,12 +1108,7 @@ namespace Constructorio_NET.Modules
                 queryParams.Add("sort_by", req.SortBy);
             }
 
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-                { "c", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtAndCQueryParams);
 
             return url;
         }
@@ -1263,12 +1227,7 @@ namespace Constructorio_NET.Modules
                 paths.Add(filterBySortOrder.ToString().ToLower());
             }
 
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-                { "c", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtAndCQueryParams);
 
             return url;
         }
