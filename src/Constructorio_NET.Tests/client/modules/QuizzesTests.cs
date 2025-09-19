@@ -21,8 +21,8 @@ namespace Constructorio_NET.Tests
             new List<string>() { "1", "2" },
             new List<string>() { "seen" },
         };
-        private readonly string QuizVersionId = "cc8a9dac-d337-4dbc-bbf7-48469c0de7af";
-        private readonly string QuizSessionId = "0603dd67-c38c-410d-ade1-d2b38e51bafe";
+        private readonly string QuizVersionId = "e03210db-0cc6-459c-8f17-bf014c4f554d";
+        private readonly string QuizSessionId = "ca380401-3805-4ded-8f28-638e5a4baa92";
         private ConstructorioConfig Config;
         private UserInfo UserInfo;
 
