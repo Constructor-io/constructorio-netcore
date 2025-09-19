@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -232,6 +232,49 @@ namespace Constructorio_NET.Utils
             return url.ToString();
         }
 
+        private static async Task<T> DeserializeFromResponse<T>(HttpResponseMessage response, JsonSerializer jsonSerializer = null)
+        {
+            using Stream stream = await response.Content.ReadAsStreamAsync();
+            using StreamReader streamReader = new StreamReader(stream);
+            using JsonTextReader jsonTextReader = new JsonTextReader(streamReader);
+            return (jsonSerializer ?? NewtonsoftJsonUtf8Content.DefaultJsonSerializer).Deserialize<T>(jsonTextReader);
+        }
+
+        /// <summary>
+        /// Makes a http request and returns the deserialized response.
+        /// </summary>
+        /// <typeparam name="T">The type to deserialize the response into.</typeparam>
+        /// <param name="options">Hashtable of options from Constructorio instantiation.</param>
+        /// <param name="httpMethod">HTTP request method.</param>
+        /// <param name="url">Url for the request.</param>
+        /// <param name="requestHeaders">Additional headers to send with the request.</param>
+        /// <param name="requestBody">Key values pairs used for the POST body.</param>
+        /// <param name="files">Dictionary of streamcontent.</param>
+        /// <param name="jsonSerializer">If set, it will be used instead of the default serializer.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>The deserialized object.</returns>
+        public static async Task<T> MakeHttpRequest<T>(
+            Hashtable options,
+            HttpMethod httpMethod,
+            string url,
+            Dictionary<string, string> requestHeaders,
+            object requestBody = null,
+            Dictionary<string, StreamContent> files = null,
+            JsonSerializer jsonSerializer = null,
+            CancellationToken cancellationToken = default)
+        {
+            using HttpRequestMessage httpRequest = CreateRequest(options, httpMethod, url, requestHeaders, requestBody, files);
+            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                ServerError error = await DeserializeFromResponse<ServerError>(response);
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
+            }
+
+            return await DeserializeFromResponse<T>(response, jsonSerializer);
+        }
+
         /// <summary>
         /// Makes a http request.
         /// </summary>
@@ -266,36 +309,6 @@ namespace Constructorio_NET.Utils
             }
 
             return result;
-        }
-
-        public static async Task<T> MakeHttpRequest<T>(
-            Hashtable options,
-            HttpMethod httpMethod,
-            string url,
-            Dictionary<string, string> requestHeaders,
-            object requestBody = null,
-            Dictionary<string, StreamContent> files = null,
-            JsonSerializer jsonSerializer = null,
-            CancellationToken cancellationToken = default)
-        {
-            using HttpRequestMessage httpRequest = CreateRequest(options, httpMethod, url, requestHeaders, requestBody, files);
-            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                ServerError error = await DeserializeFromResponse<ServerError>(response);
-                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
-            }
-
-            return await DeserializeFromResponse<T>(response, jsonSerializer);
-        }
-
-        private static async Task<T> DeserializeFromResponse<T>(HttpResponseMessage response, JsonSerializer jsonSerializer = null)
-        {
-            using Stream stream = await response.Content.ReadAsStreamAsync();
-            using StreamReader streamReader = new StreamReader(stream);
-            using JsonTextReader jsonTextReader = new JsonTextReader(streamReader);
-            return (jsonSerializer ?? NewtonsoftJsonUtf8Content.DefaultJsonSerializer).Deserialize<T>(jsonTextReader);
         }
 
         private static HttpRequestMessage CreateRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody, Dictionary<string, StreamContent> files)
