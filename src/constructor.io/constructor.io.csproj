@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
 	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 	<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-	<ReleaseVersion>3.12.0</ReleaseVersion>
-  <Version>3.12.0</Version>
+	<ReleaseVersion>3.13.0</ReleaseVersion>
+  <Version>3.13.0</Version>
   <PackageReadmeFile>README.md</PackageReadmeFile>
   <LangVersion>latest</LangVersion>
   </PropertyGroup>
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 
   <ItemGroup>
