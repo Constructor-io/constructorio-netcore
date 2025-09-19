@@ -24,7 +24,7 @@ namespace Constructorio_NET.Modules
         /// <param name="notificationEmail">Email to send failure notifications to.</param>
         /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        private async Task<bool> InternalDeleteItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CancellationToken cancellationToken = default)
+        internal async Task<bool> InternalDeleteItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CancellationToken cancellationToken = default)
         {
             try
             {
