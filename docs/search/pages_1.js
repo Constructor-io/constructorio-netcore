@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['io_20netcore_20client_0',['Constructor.io Netcore Client',['../md_cio_2constructorio-netcore_2_r_e_a_d_m_e.html',1,'']]]
+  ['browse_20results_0',['Retrieving Browse Results',['../md__r_e_a_d_m_e.html#autotoc_md7',1,'']]],
+  ['browse_20results_20for_20item_20id_20s_1',['Retrieving Browse Results for Item ID&apos;s',['../md__r_e_a_d_m_e.html#autotoc_md8',1,'']]]
 ];

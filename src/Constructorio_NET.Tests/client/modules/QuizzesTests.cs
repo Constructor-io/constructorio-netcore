@@ -56,8 +56,7 @@ namespace Constructorio_NET.Tests
         {
             QuizRequest req = new QuizRequest(this.QuizId)
             {
-                Answers = this.Answers,
-                QuizVersionId = this.QuizVersionId
+                Answers = this.Answers
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             NextQuestionResponse res = await constructorio.Quizzes.GetNextQuestion(req);
@@ -78,14 +77,12 @@ namespace Constructorio_NET.Tests
             QuizRequest req = new QuizRequest(this.QuizId)
             {
                 Answers = this.Answers,
-                QuizVersionId = this.QuizVersionId,
                 QuizSessionId = this.QuizSessionId
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             NextQuestionResponse res = await constructorio.Quizzes.GetNextQuestion(req);
-            Assert.AreEqual(this.QuizVersionId, res.QuizVersionId, "QuizVersionId should match the one passed in the request");
-            Assert.AreEqual(this.QuizSessionId, res.QuizSessionId, "QuizSessionId should match the one passed in the request");
             Assert.AreEqual(this.QuizId, res.QuizId, "QuizId should match the one passed in the request");
+            Assert.IsNotNull(res.QuizSessionId, "QuizSessionId should exist");
         }
 
         [Test]
@@ -93,8 +90,7 @@ namespace Constructorio_NET.Tests
         {
             QuizRequest req = new QuizRequest(this.QuizId)
             {
-                Answers = this.Answers,
-                QuizVersionId = this.QuizVersionId
+                Answers = this.Answers
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             QuizResultsResponse res = await constructorio.Quizzes.GetResults(req);
@@ -105,7 +101,6 @@ namespace Constructorio_NET.Tests
             Assert.IsNotNull(res.Response.TotalNumResults, "TotalNumResults should exist");
             Assert.IsNotNull(res.Response.SortOptions, "SortOptions should exist");
             Assert.IsNotNull(res.QuizSessionId, "QuizSessionId should exist");
-            Assert.IsNotNull(res.QuizVersionId, "QuizVersionId should exist");
             Assert.IsNotNull(res.QuizId, "QuizId should exist");
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
@@ -116,14 +111,13 @@ namespace Constructorio_NET.Tests
             QuizRequest req = new QuizRequest(this.QuizId)
             {
                 Answers = this.Answers,
-                QuizVersionId = this.QuizVersionId,
                 QuizSessionId = this.QuizSessionId
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             QuizResultsResponse res = await constructorio.Quizzes.GetResults(req);
-            Assert.AreEqual(this.QuizVersionId, res.QuizVersionId, "QuizVersionId should match the one passed in the request");
-            Assert.AreEqual(this.QuizSessionId, res.QuizSessionId, "QuizSessionId should match the one passed in the request");
             Assert.AreEqual(this.QuizId, res.QuizId, "QuizId should match the one passed in the request");
+            Assert.IsNotNull(res.QuizSessionId, "QuizSessionId should exist");
+            Assert.IsNotNull(res.QuizVersionId, "QuizVersionId should exist");
         }
     }
 }

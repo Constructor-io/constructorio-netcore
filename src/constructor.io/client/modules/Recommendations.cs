@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
@@ -35,23 +36,29 @@ namespace Constructorio_NET.Modules
         /// Retrieve recommendations results from API.
         /// </summary>
         /// <param name="recommendationsRequest">Constructorio's recommendations request object.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>Constructorio's recommendations response object.</returns>
-        public async Task<RecommendationsResponse> GetRecommendationsResults(RecommendationsRequest recommendationsRequest)
+        public async Task<RecommendationsResponse> GetRecommendationsResults(RecommendationsRequest recommendationsRequest, CancellationToken cancellationToken = default)
         {
-            string url;
-            string result;
-            Dictionary<string, string> requestHeaders;
-
-            url = CreateRecommendationsUrl(recommendationsRequest);
-            requestHeaders = recommendationsRequest.GetRequestHeaders();
-            result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders);
-
-            if (result != null)
+            try
             {
-                return JsonConvert.DeserializeObject<RecommendationsResponse>(result);
-            }
+                var url = CreateRecommendationsUrl(recommendationsRequest);
+                var requestHeaders = recommendationsRequest.GetRequestHeaders();
+                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            throw new ConstructorException("GetRecommendationsResults response data is malformed");
+                if (result != null)
+                {
+                    return JsonConvert.DeserializeObject<RecommendationsResponse>(result);
+                }
+
+                throw new ConstructorException("GetRecommendationsResults response data is malformed");
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
         }
+
     }
 }

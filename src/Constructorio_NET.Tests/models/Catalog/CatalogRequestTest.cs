@@ -16,18 +16,22 @@ namespace Constructorio_NET.Tests
         private readonly string Section = "Search Suggestions";
         private readonly string NotificationEmail = "mail@mail.mail";
         private readonly bool Force = true;
-        private StreamContent itemsStream;
         private Dictionary<string, StreamContent> Files;
 
-        [OneTimeSetUp]
-        public void Setup()
+        [SetUp]
+        public void SetUp()
         {
-            itemsStream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
-            itemsStream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
             Files = new Dictionary<string, StreamContent>()
             {
-                { "items", itemsStream },
+                { "items", CreateItemsStream() },
             };
+        }
+
+        private StreamContent CreateItemsStream()
+        {
+            var stream = new StreamContent(File.OpenRead("./../../../resources/csv/items.csv"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/csv");
+            return stream;
         }
 
         [Test]
@@ -50,6 +54,43 @@ namespace Constructorio_NET.Tests
         public void CatalogRequestWithInvalidFiles()
         {
             Assert.Throws<ArgumentException>(() => new CatalogRequest(null));
+        }
+
+        [Test]
+        public void DefaultFormatIsCsv()
+        {
+            CatalogRequest req = new CatalogRequest(this.Files);
+            Assert.AreEqual(CatalogRequest.FormatType.CSV, req.Format);
+        }
+
+        [Test]
+        public void FormatCanBeSetToJsonl()
+        {
+            CatalogRequest req = new CatalogRequest(this.Files)
+            {
+                Format = CatalogRequest.FormatType.JSONL
+            };
+            Assert.AreEqual(CatalogRequest.FormatType.JSONL, req.Format);
+        }
+
+        [Test]
+        public void GetRequestParametersWithDefaultFormat()
+        {
+            CatalogRequest req = new CatalogRequest(this.Files);
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.IsFalse(requestParameters.ContainsKey(Constants.FORMAT));
+        }
+
+        [Test]
+        public void GetRequestParametersWithJsonlFormat()
+        {
+            CatalogRequest req = new CatalogRequest(this.Files)
+            {
+                Format = CatalogRequest.FormatType.JSONL
+            };
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.IsTrue(requestParameters.ContainsKey(Constants.FORMAT));
+            Assert.AreEqual("jsonl", requestParameters[Constants.FORMAT]);
         }
     }
 }
