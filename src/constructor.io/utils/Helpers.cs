@@ -111,12 +111,12 @@ namespace Constructorio_NET.Utils
 
                     foreach (var filter in filters)
                     {
-                        string filterGroup = filter.Key;
+                        string filterGroupUrlEscaped = OurEscapeDataString(filter.Key);
 
                         foreach (string filterOption in filter.Value)
                         {
                             url.Append("&" + Constants.FILTERS + UrlEscapedStartSquareBracket)
-                                .Append(OurEscapeDataString(filterGroup))
+                                .Append(filterGroupUrlEscaped)
                                 .Append(UrlEscapedEndSquareBracket + "=")
                                 .Append(OurEscapeDataString(filterOption));
                         }
