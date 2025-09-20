@@ -198,9 +198,7 @@ namespace Constructorio_NET.Utils
 
                     foreach (var hiddenFacet in hiddenFacets)
                     {
-                        url.Append("&" + Constants.FMT_OPTIONS + UrlEscapedStartSquareBracket)
-                            .Append(OurEscapeDataString(Constants.HIDDEN_FACETS))
-                            .Append(UrlEscapedEndSquareBracket + "=")
+                        url.Append("&" + Constants.FMT_OPTIONS + UrlEscapedStartSquareBracket + Constants.HIDDEN_FACETS + UrlEscapedEndSquareBracket + "=")
                             .Append(OurEscapeDataString(hiddenFacet));
                     }
                 }
