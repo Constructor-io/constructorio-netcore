@@ -59,7 +59,7 @@ namespace Constructorio_NET.Modules
         {
             List<string> paths = new List<string> { "v1", "tasks", $"{req.TaskId}" };
             Hashtable queryParams = req.GetRequestParameters();
-            string url = MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitCQueryParam);
 
             return url;
         }
