@@ -27,6 +27,11 @@ namespace Constructorio_NET.Models
         public List<string> ItemIds { get; set; }
 
         /// <summary>
+        /// Gets or sets variation ids.
+        /// </summary>
+        public List<string> VariationIds { get; set; }
+
+        /// <summary>
         /// Gets or sets term.
         /// </summary>
         public string Term { get; set; }
@@ -124,6 +129,11 @@ namespace Constructorio_NET.Models
             if (this.ItemIds != null && this.ItemIds.Count != 0)
             {
                 parameters.Add("item_id", this.ItemIds);
+            }
+
+            if (this.VariationIds != null && this.VariationIds.Count != 0)
+            {
+                parameters.Add("variation_id", this.VariationIds);
             }
 
             if (this.Term != null)

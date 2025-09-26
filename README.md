@@ -271,6 +271,9 @@ RecommendationsRequest request = new RecommendationsRequest("pdp_complementary_i
 request.NumResults = 5;
 request.ItemIds = new List<string> { "9838172" };
 
+// Optionally, set variation IDs to use as seeds for recommendations (requires item IDs)
+request.VariationIds = new List<string> { "variation_123", "variation_456" };
+
 // Create a UserInfo object with the unique device identifier and session
 UserInfo userInfo = new UserInfo("device-id-1123123", 5);
 request.UserInfo = userInfo;

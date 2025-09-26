@@ -162,6 +162,40 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetRecommendationsResultsShouldReturnAResultWithVariationIds()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                VariationIds = new List<string> { "variation_1", "variation_2" }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(new List<string> { "variation_1", "variation_2" }, res.Request["variation_id"], "Variation IDs are set");
+        }
+
+        [Test]
+        public async Task GetRecommendationsResultsShouldReturnAResultWithSingleVariationId()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                VariationIds = new List<string> { "single_variation" }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(new List<string> { "single_variation" }, res.Request["variation_id"], "Single Variation ID is set");
+        }
+
+        [Test]
         public async Task GetRecommendationsResultsShouldReturnAResultProvidedUserInfo()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1")

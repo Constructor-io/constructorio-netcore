@@ -18,6 +18,7 @@ namespace Constructorio_NET.Tests
         private readonly int NumResults = 5;
         private readonly string UserId = "user1";
         private readonly List<string> UserSegments = new List<string>() { "us", "desktop" };
+        private readonly List<string> VariationIds = new List<string>() { "var1", "var2" };
         private readonly Dictionary<string, string> TestCells = new Dictionary<string, string>()
         {
             { "test1", "original" },
@@ -70,6 +71,19 @@ namespace Constructorio_NET.Tests
             Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
             Assert.AreEqual(this.OS, requestHeaders[Constants.USER_AGENT]);
             Assert.AreEqual(this.IP, requestHeaders[Constants.USER_IP]);
+        }
+
+        [Test]
+        public void GetRequestParametersWithVariationIds()
+        {
+            RecommendationsRequest req = new RecommendationsRequest(this.Pod)
+            {
+                UserInfo = this.UserInfo,
+                VariationIds = this.VariationIds
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.AreEqual(this.VariationIds, requestParameters["variation_id"]);
         }
 
         [Test]
