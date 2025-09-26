@@ -17,6 +17,20 @@ namespace Constructorio_NET.Utils
         protected static readonly HttpMethod HttpMethodPatch = new HttpMethod("PATCH");
         private static readonly Regex WhitespaceRegex = new Regex(@"\s", RegexOptions.Compiled);
 
+        protected static readonly Dictionary<string, bool> OmitCQueryParam = new Dictionary<string, bool>
+        {
+            { "c", true },
+        };
+        protected static readonly Dictionary<string, bool> OmitDtQueryParam = new Dictionary<string, bool>()
+        {
+            { "_dt", true },
+        };
+        protected static readonly Dictionary<string, bool> OmitDtAndCQueryParams = new Dictionary<string, bool>
+        {
+            { "_dt", true },
+            { "c", true },
+        };
+
         protected Helpers()
         {
         }
