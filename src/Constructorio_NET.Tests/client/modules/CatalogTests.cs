@@ -69,6 +69,27 @@ namespace Constructorio_NET.Tests
             return stream;
         }
 
+        private StreamContent CreateJsonlItemsStream()
+        {
+            var stream = new StreamContent(System.IO.File.OpenRead("./../../../resources/jsonl/items.jsonl"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/jsonl");
+            return stream;
+        }
+
+        private StreamContent CreateJsonlVariationsStream()
+        {
+            var stream = new StreamContent(System.IO.File.OpenRead("./../../../resources/jsonl/variations.jsonl"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/jsonl");
+            return stream;
+        }
+
+        private StreamContent CreateJsonlItemGroupsStream()
+        {
+            var stream = new StreamContent(System.IO.File.OpenRead("./../../../resources/jsonl/item_groups.jsonl"));
+            stream.Headers.ContentType = new MediaTypeHeaderValue("text/jsonl");
+            return stream;
+        }
+
         [Test]
         public void ReplaceCatalogWithInvalidApiTokenShouldError()
         {
@@ -97,6 +118,21 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task ReplaceCatalogWithItemsJsonlFormat()
+        {
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "items", CreateJsonlItemsStream() },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            CatalogRequest req = new CatalogRequest(files);
+            req.Format = CatalogRequest.FormatType.JSONL;
+            CatalogResponse res = await constructorio.Catalog.ReplaceCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
         public async Task ReplaceCatalogWithVariations()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
@@ -119,6 +155,36 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
+            CatalogResponse res = await constructorio.Catalog.ReplaceCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public async Task ReplaceCatalogWithVariationsJsonlFormat()
+        {
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "variations", CreateJsonlVariationsStream() },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            CatalogRequest req = new CatalogRequest(files);
+            req.Format = CatalogRequest.FormatType.JSONL;
+            CatalogResponse res = await constructorio.Catalog.ReplaceCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public async Task ReplaceCatalogWithItemGroupsJsonlFormat()
+        {
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "item_groups", CreateJsonlItemGroupsStream() },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            CatalogRequest req = new CatalogRequest(files);
+            req.Format = CatalogRequest.FormatType.JSONL;
             CatalogResponse res = await constructorio.Catalog.ReplaceCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
@@ -159,6 +225,21 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task UpdateCatalogWithItemsJsonlFormat()
+        {
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "items", CreateJsonlItemsStream() },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            CatalogRequest req = new CatalogRequest(files);
+            req.Format = CatalogRequest.FormatType.JSONL;
+            CatalogResponse res = await constructorio.Catalog.UpdateCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
         public async Task UpdateCatalogWithVariations()
         {
             Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
@@ -187,6 +268,36 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task UpdateCatalogWithVariationsJsonlFormat()
+        {
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "variations", CreateJsonlVariationsStream() },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            CatalogRequest req = new CatalogRequest(files);
+            req.Format = CatalogRequest.FormatType.JSONL;
+            CatalogResponse res = await constructorio.Catalog.UpdateCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public async Task UpdateCatalogWithItemGroupsJsonlFormat()
+        {
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "item_groups", CreateJsonlItemGroupsStream() },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            CatalogRequest req = new CatalogRequest(files);
+            req.Format = CatalogRequest.FormatType.JSONL;
+            CatalogResponse res = await constructorio.Catalog.UpdateCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
         public void PatchCatalogWithInvalidApiTokenShouldError()
         {
             var files = new Dictionary<string, StreamContent>()
@@ -208,6 +319,21 @@ namespace Constructorio_NET.Tests
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             CatalogRequest req = new CatalogRequest(files);
+            CatalogResponse res = await constructorio.Catalog.PatchCatalog(req);
+            Assert.IsNotNull(res.TaskId, "TaskId should exist");
+            Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");
+        }
+
+        [Test]
+        public async Task PatchCatalogWithItemsJsonlFormat()
+        {
+            Dictionary<string, StreamContent> files = new Dictionary<string, StreamContent>()
+            {
+                { "items", CreateJsonlItemsStream() },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            CatalogRequest req = new CatalogRequest(files);
+            req.Format = CatalogRequest.FormatType.JSONL;
             CatalogResponse res = await constructorio.Catalog.PatchCatalog(req);
             Assert.IsNotNull(res.TaskId, "TaskId should exist");
             Assert.IsNotNull(res.TaskStatusPath, "TaskStatusPath should exist");

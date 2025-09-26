@@ -274,6 +274,21 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void DeleteItems_WithOptionalOptionsAndPreCancelledToken_ThrowsTaskCanceledException()
+        {
+            // Arrange
+            var item = TestUtils.CreateRandomItem();
+            List<ConstructorItem> items = new List<ConstructorItem> { item };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            var cancelledToken = new CancellationToken(true);
+
+            // Act & Assert
+            Assert.ThrowsAsync<TaskCanceledException>(
+                async () => await constructorio.Items.DeleteItems(items, "Products", false, null, cancelledToken)
+            );
+        }
+
+        [Test]
         public void GetRecommendationsResults_WithPreCancelledToken_ThrowsTaskCanceledException()
         {
             // Arrange

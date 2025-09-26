@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-  	<ReleaseVersion>3.12.0</ReleaseVersion>
-    <Version>3.12.0</Version>
+  	<ReleaseVersion>3.14.1</ReleaseVersion>
+    <Version>3.14.1</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
 
     <!-- NuGet Package Metadata -->

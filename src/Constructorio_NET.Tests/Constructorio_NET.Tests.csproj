@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
-    <ReleaseVersion>3.12.0</ReleaseVersion>
+    <ReleaseVersion>3.14.1</ReleaseVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <!-- Suppress NUnit analyzer warnings for now -->
