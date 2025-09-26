@@ -55,7 +55,29 @@ if [[ "$DRY_RUN" == true ]]; then
         echo "  API Key: [NOT PROVIDED - would fail]"
     fi
 else
-    # Publish the package
-    dotnet nuget push "$PACKAGE" --source "https://api.nuget.org/v3/index.json" --api-key "$API_KEY"
-    echo "Package published successfully!"
+    # Show confirmation prompt
+    echo ""
+    echo "About to execute:"
+    echo "dotnet nuget push \"$PACKAGE\" --source \"https://api.nuget.org/v3/index.json\" --api-key \"[HIDDEN]\""
+    echo ""
+    echo "Package details:"
+    echo "  File: $PACKAGE"
+    echo "  Size: $(du -h "$PACKAGE" | cut -f1)"
+    echo ""
+    read -p "Do you want to proceed with publishing? (y/N): " -n 1 -r
+    echo
+
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        # Publish the package
+        dotnet nuget push "$PACKAGE" --source "https://api.nuget.org/v3/index.json" --api-key "$API_KEY"
+        echo "Package published successfully!"
+
+        # Clean up artifacts folder
+        echo "Cleaning up artifacts folder..."
+        rm -rf ./artifacts
+        echo "Artifacts folder cleaned up."
+    else
+        echo "Publishing cancelled."
+        exit 0
+    fi
 fi
