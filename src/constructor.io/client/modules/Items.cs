@@ -16,6 +16,40 @@ namespace Constructorio_NET.Modules
         private readonly Hashtable Options;
 
         /// <summary>
+        /// Internal method to delete items from section using itemIds, multiple overloaded methods use this method.
+        /// </summary>
+        /// <param name="items">List of ConstructorItems with only Item Id.</param>
+        /// <param name="section">Section to upload items to.</param>
+        /// <param name="force">Boolean to indicate whether or not to use force sync.</param>
+        /// <param name="notificationEmail">Email to send failure notifications to.</param>
+        /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
+        /// <returns>Constructorio's catalog response object.</returns>
+        internal async Task<bool> InternalDeleteItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                List<ConstructorItem> cleanedItems = items.Select((item) => new ConstructorItem(item.Id)).ToList();
+                var url = CreateItemsUrl(section, force, notificationEmail);
+                Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+                Hashtable requestBody = new Hashtable();
+                requestBody.Add("items", cleanedItems);
+                AddAuthHeaders(this.Options, requestHeaders);
+                await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                // Bubble this up to the caller to determine how to handle canceled operations
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Items"/> class.
         /// Interface for item/variation related API calls.
         /// </summary>
@@ -239,32 +273,38 @@ namespace Constructorio_NET.Modules
         /// </summary>
         /// <param name="items">List of ConstructorItems with only Item Id.</param>
         /// <param name="section">Section to upload items to.</param>
+        /// <returns>Constructorio's catalog response object.</returns>
+        public async Task<bool> DeleteItems(List<ConstructorItem> items, string section)
+        {
+            return await this.InternalDeleteItems(items, section, false, null);
+        }
+        
+        /// <summary>
+        /// Deletes items from section using itemIds.
+        /// </summary>
+        /// <param name="items">List of ConstructorItems with only Item Id.</param>
+        /// <param name="section">Section to upload items to.</param>
         /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
         public async Task<bool> DeleteItems(List<ConstructorItem> items, string section, CancellationToken cancellationToken = default)
         {
-            try
-            {
-                List<ConstructorItem> cleanedItems = items.Select((item) => new ConstructorItem(item.Id)).ToList();
-                var url = CreateItemsUrl(section);
-                Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
-                Hashtable requestBody = new Hashtable();
-                requestBody.Add("items", cleanedItems);
-                AddAuthHeaders(this.Options, requestHeaders);
-                await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (OperationCanceledException)
-            {
-                // Bubble this up to the caller to determine how to handle canceled operations
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new ConstructorException(e);
-            }
-
-            return true;
+            return await this.InternalDeleteItems(items, section, false, null, cancellationToken);
         }
+
+        /// <summary>
+        /// Deletes items from section using itemIds.
+        /// </summary>
+        /// <param name="items">List of ConstructorItems with only Item Id.</param>
+        /// <param name="section">Section to upload items to.</param>
+        /// <param name="force">Boolean to indicate whether or not to use force sync.</param>
+        /// <param name="notificationEmail">Email to send failure notifications to.</param>
+        /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
+        /// <returns>Constructorio's catalog response object.</returns>
+        public async Task<bool> DeleteItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CancellationToken cancellationToken = default)
+        {
+            return await this.InternalDeleteItems(items, section, force, notificationEmail, cancellationToken);
+        }
+
 
         /// <summary>
         /// Deletes variations from a section.
