@@ -17,6 +17,7 @@ namespace Constructorio_NET.Utils
         private const string UrlEscapedStartSquareBracket = "%5B";
         private const string UrlEscapedEndSquareBracket = "%5D";
         protected static readonly HttpMethod HttpMethodPatch = new HttpMethod("PATCH");
+        private static readonly Regex WhitespaceRegex = new Regex(@"\s", RegexOptions.Compiled);
 
         protected Helpers()
         {
@@ -29,7 +30,7 @@ namespace Constructorio_NET.Utils
         /// <returns>Url encoded string.</returns>
         protected static string OurEscapeDataString(string str)
         {
-            string encodedString = Regex.Replace(str, @"\s", " ");
+            string encodedString = WhitespaceRegex.Replace(str, " ");
             encodedString = Uri.EscapeDataString(encodedString);
 
             return encodedString;
