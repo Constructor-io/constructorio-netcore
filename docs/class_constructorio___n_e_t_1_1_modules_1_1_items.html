@@ -104,8 +104,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a48450987315dc5040846d27bb07c9b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates items in a section.  <br /></td></tr>
 <tr class="memitem:aa7fe52984e6040c2706001ec887b9129" id="r_aa7fe52984e6040c2706001ec887b9129"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7fe52984e6040c2706001ec887b9129">UpdateVariations</a> (List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_constructor_variation.html">ConstructorVariation</a> &gt; Variations, string section, bool force=false, string notificationEmail=null, <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a6dfda6ce8ed6edc1c8a495def066301b">CatalogRequest.OnMissingStrategy</a> onMissing=CatalogRequest.OnMissingStrategy.FAIL, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:aa7fe52984e6040c2706001ec887b9129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates variations in a section.  <br /></td></tr>
+<tr class="memitem:a3ada11cba0adfc09899e786a899fb87d" id="r_a3ada11cba0adfc09899e786a899fb87d"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ada11cba0adfc09899e786a899fb87d">DeleteItems</a> (List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_constructor_item.html">ConstructorItem</a> &gt; items, string section)</td></tr>
+<tr class="memdesc:a3ada11cba0adfc09899e786a899fb87d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes items from section using itemIds.  <br /></td></tr>
 <tr class="memitem:ac676ca89c70bb3b8420492dff622a44c" id="r_ac676ca89c70bb3b8420492dff622a44c"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac676ca89c70bb3b8420492dff622a44c">DeleteItems</a> (List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_constructor_item.html">ConstructorItem</a> &gt; items, string section, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:ac676ca89c70bb3b8420492dff622a44c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes items from section using itemIds.  <br /></td></tr>
+<tr class="memitem:afaabd1830f2a61e713bdecb2b644fe8a" id="r_afaabd1830f2a61e713bdecb2b644fe8a"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afaabd1830f2a61e713bdecb2b644fe8a">DeleteItems</a> (List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_constructor_item.html">ConstructorItem</a> &gt; items, string section, bool force=false, string notificationEmail=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:afaabd1830f2a61e713bdecb2b644fe8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes items from section using itemIds.  <br /></td></tr>
 <tr class="memitem:aa3cbb9f56dafb8d56f218a25e5b8d309" id="r_aa3cbb9f56dafb8d56f218a25e5b8d309"><td class="memItemLeft" align="right" valign="top">async Task&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3cbb9f56dafb8d56f218a25e5b8d309">DeleteVariations</a> (List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_constructor_variation.html">ConstructorVariation</a> &gt; variations, string section, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:aa3cbb9f56dafb8d56f218a25e5b8d309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes variations from a section.  <br /></td></tr>
 <tr class="memitem:a5ad86b474e26685e4506a8ecc69df24a" id="r_a5ad86b474e26685e4506a8ecc69df24a"><td class="memItemLeft" align="right" valign="top">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_items_response.html">ItemsResponse</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ad86b474e26685e4506a8ecc69df24a">RetrieveItems</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_items_request.html">ItemsRequest</a> req, CancellationToken cancellationToken=default)</td></tr>
@@ -278,8 +282,104 @@ static readonly HttpMethod&#160;</td><td class="memItemRight" valign="bottom"><b
 
 </div>
 </div>
+<a id="a3ada11cba0adfc09899e786a899fb87d" name="a3ada11cba0adfc09899e786a899fb87d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ada11cba0adfc09899e786a899fb87d">&#9670;&#160;</a></span>DeleteItems() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; Constructorio_NET.Modules.Items.DeleteItems </td>
+          <td>(</td>
+          <td class="paramtype">List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_constructor_item.html">ConstructorItem</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>items</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deletes items from section using itemIds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">items</td><td>List of ConstructorItems with only Item Id.</td></tr>
+    <tr><td class="paramname">section</td><td>Section to upload items to.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Constructorio's catalog response object.</dd></dl>
+
+</div>
+</div>
+<a id="afaabd1830f2a61e713bdecb2b644fe8a" name="afaabd1830f2a61e713bdecb2b644fe8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaabd1830f2a61e713bdecb2b644fe8a">&#9670;&#160;</a></span>DeleteItems() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; bool &gt; Constructorio_NET.Modules.Items.DeleteItems </td>
+          <td>(</td>
+          <td class="paramtype">List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_constructor_item.html">ConstructorItem</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>items</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>force</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>notificationEmail</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deletes items from section using itemIds. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">items</td><td>List of ConstructorItems with only Item Id.</td></tr>
+    <tr><td class="paramname">section</td><td>Section to upload items to.</td></tr>
+    <tr><td class="paramname">force</td><td>Boolean to indicate whether or not to use force sync.</td></tr>
+    <tr><td class="paramname">notificationEmail</td><td>Email to send failure notifications to.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token for the HTTP request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Constructorio's catalog response object.</dd></dl>
+
+</div>
+</div>
 <a id="ac676ca89c70bb3b8420492dff622a44c" name="ac676ca89c70bb3b8420492dff622a44c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac676ca89c70bb3b8420492dff622a44c">&#9670;&#160;</a></span>DeleteItems()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac676ca89c70bb3b8420492dff622a44c">&#9670;&#160;</a></span>DeleteItems() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
