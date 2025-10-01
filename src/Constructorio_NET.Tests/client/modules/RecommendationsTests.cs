@@ -162,6 +162,43 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetRecommendationsResultsShouldReturnAResultWithVariationIds()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                VariationIds = new List<string> { "variation_1", "variation_2" }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            // Backend currently only uses the first variation ID
+            JArray variationIds = (JArray)res.Request["variation_id"];
+            Assert.AreEqual("variation_1", variationIds[0].ToString(), "First variation ID is set");
+        }
+
+        [Test]
+        public async Task GetRecommendationsResultsShouldReturnAResultWithSingleVariationId()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                VariationIds = new List<string> { "single_variation" }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            // Backend currently only uses the first variation ID
+            Assert.AreEqual("single_variation", res.Request["variation_id"].ToString(), "Variation ID is set");
+        }
+
+        [Test]
         public async Task GetRecommendationsResultsShouldReturnAResultProvidedUserInfo()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1")
