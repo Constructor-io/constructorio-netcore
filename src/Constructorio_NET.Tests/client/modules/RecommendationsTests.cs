@@ -175,7 +175,9 @@ namespace Constructorio_NET.Tests
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
-            Assert.AreEqual(new List<string> { "variation_1", "variation_2" }, res.Request["variation_id"], "Variation IDs are set");
+            // Backend currently only uses the first variation ID
+            JArray variationIds = (JArray)res.Request["variation_id"];
+            Assert.AreEqual("variation_1", variationIds[0].ToString(), "First variation ID is set");
         }
 
         [Test]
@@ -192,7 +194,8 @@ namespace Constructorio_NET.Tests
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
-            Assert.AreEqual(new List<string> { "single_variation" }, res.Request["variation_id"], "Single Variation ID is set");
+            // Backend currently only uses the first variation ID
+            Assert.AreEqual("single_variation", res.Request["variation_id"].ToString(), "Variation ID is set");
         }
 
         [Test]
