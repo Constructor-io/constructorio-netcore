@@ -337,6 +337,9 @@ Retrieving Recommendation Results</h1>
 <div class="line">request.NumResults = 5;</div>
 <div class="line">request.ItemIds = <span class="keyword">new</span> List&lt;string&gt; { <span class="stringliteral">&quot;9838172&quot;</span> };</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">// Optionally, set variation IDs to use as seeds for recommendations (requires item IDs)</span></div>
+<div class="line">request.VariationIds = <span class="keyword">new</span> List&lt;string&gt; { <span class="stringliteral">&quot;variation_123&quot;</span>, <span class="stringliteral">&quot;variation_456&quot;</span> };</div>
+<div class="line"> </div>
 <div class="line"><span class="comment">// Create a UserInfo object with the unique device identifier and session</span></div>
 <div class="line">UserInfo userInfo = <span class="keyword">new</span> UserInfo(<span class="stringliteral">&quot;device-id-1123123&quot;</span>, 5);</div>
 <div class="line">request.UserInfo = userInfo;</div>
