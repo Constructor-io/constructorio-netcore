@@ -46,5 +46,6 @@
         public const string PRE_FILTER_EXPRESSION = "pre_filter_expression";
         public const string ON_MISSING = "on_missing";
         public const string FORMAT = "format";
+        public const string HTTP_CLIENT = "httpClient";
     }
 }

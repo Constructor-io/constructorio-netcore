@@ -26,7 +26,16 @@ namespace Constructorio_NET
         /// Initializes a new instance of the <see cref="ConstructorIO"/> class.
         /// </summary>
         /// <param name="config">Collection of values to pass to modules.</param>
-        public ConstructorIO(ConstructorioConfig config)
+        public ConstructorIO(ConstructorioConfig config) : this(config, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConstructorIO"/> class with a custom HttpClient.
+        /// </summary>
+        /// <param name="config">Collection of values to pass to modules.</param>
+        /// <param name="httpClient">Custom HttpClient instance (typically from IHttpClientFactory). If null, uses the default static HttpClient.</param>
+        public ConstructorIO(ConstructorioConfig config, HttpClient httpClient)
         {
             Hashtable options = new Hashtable { { Constants.VERSION, this.Version } };
 
@@ -49,6 +58,9 @@ namespace Constructorio_NET
             {
                 options.Add(Constants.SERVICE_URL, config.ServiceUrl);
             }
+
+            // Store the HttpClient instance in options (null means use the static one)
+            options.Add(Constants.HTTP_CLIENT, httpClient);
 
             this.Autocomplete = new Autocomplete(options);
             this.Browse = new Browse(options);
