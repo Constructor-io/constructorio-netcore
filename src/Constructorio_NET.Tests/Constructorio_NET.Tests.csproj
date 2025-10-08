@@ -5,16 +5,21 @@
 
     <IsPackable>false</IsPackable>
     <ReleaseVersion>3.15.0</ReleaseVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <!-- Suppress NUnit analyzer warnings for now -->
+    <NoWarn>$(NoWarn);NUnit1032;NUnit2005</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="coverlet.msbuild" Version="6.0.4">
-		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		<PrivateAssets>all</PrivateAssets>
-	</PackageReference>
+  	<PackageReference Include="coverlet.msbuild" Version="6.0.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="NUnit" Version="3.14.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="5.1.0" />
+    <PackageReference Include="NUnit.Analyzers" Version="3.10.0" />
   </ItemGroup>
 
   <ItemGroup>

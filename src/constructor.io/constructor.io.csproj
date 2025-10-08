@@ -2,11 +2,34 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-	<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-	<ReleaseVersion>3.15.0</ReleaseVersion>
-  <Version>3.15.0</Version>
-  <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  	<ReleaseVersion>3.15.0</ReleaseVersion>
+    <Version>3.15.0</Version>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <!-- NuGet Package Metadata -->
+    <PackageId>constructor.io</PackageId>
+    <Title>Constructor.io .NET SDK</Title>
+    <Authors>Constructor.io Corporation</Authors>
+    <Company>Constructor.io Corporation</Company>
+    <Product>Constructor.io .NET SDK</Product>
+    <PackageTags>search;constructor;sdk;api;autocomplete;recommendations;ecommerce;artificial-intelligence;machine-learning;personalization</PackageTags>
+    <RepositoryUrl>https://github.com/Constructor-io/constructorio-netcore</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Constructor-io/constructorio-netcore</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) Constructor.io Corporation</Copyright>
+
+    <!-- Assembly metadata -->
+    <AssemblyTitle>Constructor.io .NET SDK</AssemblyTitle>
+    <AssemblyDescription>Official .NET SDK for Constructor.io platform</AssemblyDescription>
+    <AssemblyCompany>Constructor.io Corporation</AssemblyCompany>
+    <AssemblyProduct>Constructor.io .NET SDK</AssemblyProduct>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

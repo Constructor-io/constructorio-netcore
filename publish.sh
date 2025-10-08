@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Simple publish script for Constructor.io .NET SDK
+set -e
+
+# Configuration
+DRY_RUN=false
+API_KEY="$NUGET_API_KEY"
+
+# Parse arguments
+for arg in "$@"; do
+    case $arg in
+        --dry-run)
+            DRY_RUN=true
+            ;;
+    esac
+done
+
+if [[ "$DRY_RUN" == true ]]; then
+    echo "Constructor.io .NET SDK Publish Script (DRY RUN)"
+else
+    echo "Publishing Constructor.io .NET SDK..."
+fi
+
+# Check if API key is provided (not needed for dry run)
+if [[ "$DRY_RUN" == false && -z "$API_KEY" ]]; then
+    echo "Error: NuGet API key not provided."
+    echo "Set NUGET_API_KEY environment variable"
+    exit 1
+fi
+
+# Find the latest package (most recently modified .nupkg file)
+PACKAGE=$(ls -t ./artifacts/*.nupkg 2>/dev/null | head -1)
+
+if [[ -z "$PACKAGE" ]]; then
+    echo "Error: No .nupkg file found in ./artifacts"
+    echo "Run ./build.sh first to create the package"
+    exit 1
+fi
+
+echo "Found package: $(basename "$PACKAGE")"
+echo "Publishing to: https://api.nuget.org/v3/index.json"
+
+if [[ "$DRY_RUN" == true ]]; then
+    echo ""
+    echo "DRY RUN: Would execute the following command:"
+    echo "dotnet nuget push \"$PACKAGE\" --source \"https://api.nuget.org/v3/index.json\" --api-key \"[HIDDEN]\""
+    echo ""
+    echo "Package details:"
+    echo "  File: $PACKAGE"
+    echo "  Size: $(du -h "$PACKAGE" | cut -f1)"
+    if [[ -n "$API_KEY" ]]; then
+        echo "  API Key: [PROVIDED]"
+    else
+        echo "  API Key: [NOT PROVIDED - would fail]"
+    fi
+else
+    # Show confirmation prompt
+    echo ""
+    echo "About to execute:"
+    echo "dotnet nuget push \"$PACKAGE\" --source \"https://api.nuget.org/v3/index.json\" --api-key \"[HIDDEN]\""
+    echo ""
+    echo "Package details:"
+    echo "  File: $PACKAGE"
+    echo "  Size: $(du -h "$PACKAGE" | cut -f1)"
+    echo ""
+    read -p "Do you want to proceed with publishing? (y/N): " -n 1 -r
+    echo
+
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        # Publish the package
+        dotnet nuget push "$PACKAGE" --source "https://api.nuget.org/v3/index.json" --api-key "$API_KEY"
+        echo "Package published successfully!"
+
+        # Clean up artifacts folder
+        echo "Cleaning up artifacts folder..."
+        rm -rf ./artifacts
+        echo "Artifacts folder cleaned up."
+    else
+        echo "Publishing cancelled."
+        exit 0
+    fi
+fi
