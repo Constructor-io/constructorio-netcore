@@ -29,8 +29,8 @@ if [[ "$DRY_RUN" == false && -z "$API_KEY" ]]; then
     exit 1
 fi
 
-# Find the latest package
-PACKAGE=$(find ./artifacts -name "*.nupkg" 2>/dev/null | head -1)
+# Find the latest package (most recently modified .nupkg file)
+PACKAGE=$(ls -t ./artifacts/*.nupkg 2>/dev/null | head -1)
 
 if [[ -z "$PACKAGE" ]]; then
     echo "Error: No .nupkg file found in ./artifacts"
