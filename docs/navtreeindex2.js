@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#a9f28417980757b8aa7484bc611ff4c6a":[2,0,0,0,80,0],
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#aa1e56debfdc5213e85e213785c14b0f0":[1,0,0,0,80,6],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#aa1e56debfdc5213e85e213785c14b0f0":[2,0,0,0,80,6],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#aa6c685670f6df69241d6a038efdd7738":[1,0,0,0,80,1],
 "class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#aa6c685670f6df69241d6a038efdd7738":[2,0,0,0,80,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX2 =
 "class_constructorio___n_e_t_1_1_tests_1_1_retrieve_searchabilities_request_test.html":[2,0,0,2,21],
 "class_constructorio___n_e_t_1_1_tests_1_1_search_request_test.html":[1,0,0,2,22],
 "class_constructorio___n_e_t_1_1_tests_1_1_search_request_test.html":[2,0,0,2,22],
-"class_constructorio___n_e_t_1_1_tests_1_1_search_test.html":[1,0,0,2,23],
-"class_constructorio___n_e_t_1_1_tests_1_1_search_test.html":[2,0,0,2,23],
-"class_constructorio___n_e_t_1_1_tests_1_1_sort_options_test.html":[1,0,0,2,24]
+"class_constructorio___n_e_t_1_1_tests_1_1_search_test.html":[1,0,0,2,23]
 };
