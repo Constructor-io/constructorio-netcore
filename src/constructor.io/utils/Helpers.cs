@@ -301,13 +301,15 @@ namespace Constructorio_NET.Utils
                     httpRequest.Content = reqContent;
                 }
 
-                // Determine which HttpClient to use: instance-specific or static
-                HttpClient clientToUse = options.ContainsKey(Constants.HTTP_CLIENT) && options[Constants.HTTP_CLIENT] != null
-                    ? (HttpClient)options[Constants.HTTP_CLIENT]
-                    : ConstructorIO.HttpClient;
+                // Get the HttpClient (validated and resolved in constructor)
+                HttpClient httpClient = options[Constants.HTTP_CLIENT] as HttpClient;
+                if (httpClient == null)
+                {
+                    throw new ConstructorException("The HTTP_CLIENT option is missing or not a valid HttpClient instance.");
+                }
 
                 // Wrapping this in the using will dispose of the HttpResponseMessage object and the content inside it, but NOT the HttpClient object.
-                using (var response = await clientToUse.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false))
+                using (var response = await httpClient.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false))
                 {
                     HttpContent resContent = response.Content;
                     string result = await resContent.ReadAsStringAsync().ConfigureAwait(false);
