@@ -36,7 +36,9 @@ services.AddScoped<ConstructorIO>(serviceProvider =>
 {
     var config = serviceProvider.GetRequiredService<ConstructorioConfig>();
     var httpClient = serviceProvider.GetRequiredService<IHttpClientFactory>().CreateClient();
-    return new ConstructorIO(config, httpClient);
+    config.HttpClient = httpClient;
+
+    return new ConstructorIO(config);
 });
 ```
 
