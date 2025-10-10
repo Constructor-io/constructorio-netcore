@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Net.Http;
 using Constructorio_NET.Models;
 using Constructorio_NET.Modules;
@@ -20,12 +21,16 @@ namespace Constructorio_NET
         public Tasks Tasks { get; }
         public Items Items { get; }
         public Quizzes Quizzes { get; }
+
+        /// <summary>
+        /// Static HttpClient for backwards compatibility when not using dependency injection.
+        /// </summary>
         public static readonly HttpClient HttpClient = new HttpClient();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorIO"/> class.
         /// </summary>
-        /// <param name="config">Collection of values to pass to modules.</param>
+        /// <param name="config">Configuration object containing API credentials and optional HttpClient.</param>
         public ConstructorIO(ConstructorioConfig config)
         {
             Hashtable options = new Hashtable { { Constants.VERSION, this.Version } };
@@ -49,6 +54,16 @@ namespace Constructorio_NET
             {
                 options.Add(Constants.SERVICE_URL, config.ServiceUrl);
             }
+
+            // Resolve and validate which HttpClient to use early
+            HttpClient httpClientToUse = config.HttpClient;
+            if (httpClientToUse == null)
+            {
+                httpClientToUse = HttpClient;
+            }
+
+            // Store the resolved HttpClient instance
+            options.Add(Constants.HTTP_CLIENT, httpClientToUse);
 
             this.Autocomplete = new Autocomplete(options);
             this.Browse = new Browse(options);

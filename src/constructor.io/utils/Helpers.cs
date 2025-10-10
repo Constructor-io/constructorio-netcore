@@ -301,8 +301,15 @@ namespace Constructorio_NET.Utils
                     httpRequest.Content = reqContent;
                 }
 
-                // Wrapping this in the using will dispose of the HttpResponseMessage object and the content inside it, but NOT the singleton HttpClient object.
-                using (var response = await ConstructorIO.HttpClient.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false))
+                // Get the HttpClient (validated and resolved in constructor)
+                HttpClient httpClient = options[Constants.HTTP_CLIENT] as HttpClient;
+                if (httpClient == null)
+                {
+                    throw new ConstructorException("The HTTP_CLIENT option is missing or not a valid HttpClient instance.");
+                }
+
+                // Wrapping this in the using will dispose of the HttpResponseMessage object and the content inside it, but NOT the HttpClient object.
+                using (var response = await httpClient.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false))
                 {
                     HttpContent resContent = response.Content;
                     string result = await resContent.ReadAsStringAsync().ConfigureAwait(false);
