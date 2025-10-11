@@ -100,12 +100,8 @@ namespace Constructorio_NET.Modules
         {
             Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "browse", "facets" };
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-            };
 
-            return MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            return MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
         }
 
         /// <summary>
@@ -141,12 +137,8 @@ namespace Constructorio_NET.Modules
         {
             Hashtable queryParams = req.GetRequestParameters();
             List<string> paths = new List<string> { "browse", "facet_options" };
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-            };
 
-            return MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            return MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
         }
 
         /// <summary>

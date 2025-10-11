@@ -364,3 +364,5 @@ Constructorio_NET/Constructorio_NET.Tests/resources/csv/*
 .config/local.json
 
 .DS_Store
+
+/src/.idea/*
