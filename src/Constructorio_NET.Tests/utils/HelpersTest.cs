@@ -228,5 +228,82 @@ namespace Constructorio_NET.Tests
             bool hasColorGreenFilter = Regex.Match(url, filterParameterGreen).Success;
             Assert.That(hasColorBlueFilter && hasColorGreenFilter, "url is properly formed and has all filters applied");
         }
+
+        [Test]
+        public void MakeUrlSearchWithFiltersContainingSpecialCharacters()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>()
+            {
+                { "Size & Fit", new List<string>() { "Small (S)", "Large (L)" } }
+            };
+            Hashtable queryParams = new Hashtable()
+            {
+                { Constants.FILTERS, filters }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            string expectedFilterGroup = "filters%5BSize%20%26%20Fit%5D";
+            string expectedValue1 = "Small%20%28S%29";
+            string expectedValue2 = "Large%20%28L%29";
+            bool hasFilterGroup = Regex.Match(url, expectedFilterGroup).Success;
+            bool hasValue1 = Regex.Match(url, expectedValue1).Success;
+            bool hasValue2 = Regex.Match(url, expectedValue2).Success;
+            Assert.That(hasFilterGroup && hasValue1 && hasValue2, "url should properly encode special characters in filters");
+        }
+
+        [Test]
+        public void MakeUrlSearchWithIntegerParameter()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            Hashtable queryParams = new Hashtable()
+            {
+                { Constants.PAGE, 2 },
+                { Constants.OFFSET, 10 }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            bool hasPage = Regex.Match(url, "&page=2").Success;
+            bool hasOffset = Regex.Match(url, "&offset=10").Success;
+            Assert.That(hasPage && hasOffset, "url should properly handle integer parameters");
+        }
+
+        [Test]
+        public void MakeUrlSearchWithBooleanParameter()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            Hashtable queryParams = new Hashtable()
+            {
+                { Constants.SHOW_HIDDEN_FACETS, true },
+                { Constants.SHOW_PROTECTED_FACETS, false }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            bool hasShowHidden = Regex.Match(url, "&show_hidden_facets=True").Success;
+            bool hasShowProtected = Regex.Match(url, "&show_protected_facets=False").Success;
+            Assert.That(hasShowHidden && hasShowProtected, "url should properly handle boolean parameters");
+        }
+
+        [Test]
+        public void MakeUrlSearchWithAnswers()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            List<List<string>> answers = new List<List<string>>()
+            {
+                new List<string>() { "1", "2" },
+                new List<string>() { "3" }
+            };
+            Hashtable queryParams = new Hashtable()
+            {
+                { Constants.ANSWERS, answers }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            string expectedAnswer1 = "&a=1%2C2";
+            string expectedAnswer2 = "&a=3";
+            bool hasAnswer1 = Regex.Match(url, expectedAnswer1).Success;
+            bool hasAnswer2 = Regex.Match(url, expectedAnswer2).Success;
+            Assert.That(hasAnswer1 && hasAnswer2, "url should properly encode quiz answers");
+        }
     }
 }
