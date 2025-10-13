@@ -27,12 +27,7 @@ namespace Constructorio_NET.Modules
         {
             List<string> paths = new List<string>(capacity: 2) { "v1", "tasks" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>(capacity: 2)
-            {
-                { "_dt", true },
-                { "c", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtAndCQueryParams);
             return url;
         }
 
@@ -58,11 +53,7 @@ namespace Constructorio_NET.Modules
         {
             List<string> paths = new List<string>(capacity: 3) { "v1", "tasks", $"{req.TaskId}" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>(capacity: 1)
-            {
-                { "c", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitCQueryParam);
 
             return url;
         }

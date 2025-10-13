@@ -22,5 +22,6 @@ var searchData=
   ['browseresponse_19',['BrowseResponse',['../class_constructorio___n_e_t_1_1_models_1_1_browse_response.html',1,'Constructorio_NET::Models']]],
   ['browseresponseinner_20',['BrowseResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_browse_response_inner.html',1,'Constructorio_NET::Models']]],
   ['browsetest_21',['BrowseTest',['../class_constructorio___n_e_t_1_1_tests_1_1_browse_test.html',1,'Constructorio_NET::Tests']]],
-  ['bucketsize_22',['BucketSize',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#ac983fbbce7323f8e1f04487d5ed6e35c',1,'Constructorio_NET::Models::Facet']]]
+  ['bucketsize_22',['BucketSize',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#ac983fbbce7323f8e1f04487d5ed6e35c',1,'Constructorio_NET::Models::Facet']]],
+  ['building_23',['Building',['../md__r_e_a_d_m_e.html#autotoc_md14',1,'']]]
 ];
