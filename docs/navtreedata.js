@@ -39,9 +39,11 @@ var NAVTREE =
       [ "Retrieving Task with Task ID", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
       [ "Development", "md__r_e_a_d_m_e.html#autotoc_md12", [
         [ "Using VS Code", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
-        [ "Testing", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
-        [ "For code coverage:", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
-        [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md16", null ]
+        [ "Building", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
+        [ "Testing", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
+        [ "For code coverage:", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
+        [ "Publishing", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
+        [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md18", null ]
       ] ]
     ] ],
     [ "Namespaces", "namespaces.html", [
