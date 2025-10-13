@@ -83,11 +83,7 @@ namespace Constructorio_NET.Modules
                 queryParams.Add(Constants.ON_MISSING, onMissing.ToString());
             }
 
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
 
             return url;
         }
@@ -116,11 +112,7 @@ namespace Constructorio_NET.Modules
                 queryParams.Add(Constants.ON_MISSING, onMissing.ToString());
             }
 
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
 
             return url;
         }
@@ -129,11 +121,7 @@ namespace Constructorio_NET.Modules
         {
             List<string> paths = new List<string> { "v2", "items" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
 
             return url;
         }
@@ -142,11 +130,7 @@ namespace Constructorio_NET.Modules
         {
             List<string> paths = new List<string> { "v2", "variations" };
             Hashtable queryParams = req.GetRequestParameters();
-            Dictionary<string, bool> omittedQueryParams = new Dictionary<string, bool>()
-            {
-                { "_dt", true },
-            };
-            string url = MakeUrl(this.Options, paths, queryParams, omittedQueryParams);
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
             return url;
         }
 
