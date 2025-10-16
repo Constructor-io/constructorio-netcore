@@ -1,7 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
@@ -227,6 +232,43 @@ namespace Constructorio_NET.Tests
             bool hasColorBlueFilter = Regex.Match(url, filterParameterBlue).Success;
             bool hasColorGreenFilter = Regex.Match(url, filterParameterGreen).Success;
             Assert.That(hasColorBlueFilter && hasColorGreenFilter, "url is properly formed and has all filters applied");
+        }
+
+        [Test]
+        public async Task TestCreateRequest()
+        {
+            Hashtable requestBody = new Hashtable
+            {
+                {
+                    "searchabilities", new List<Searchability>
+                    {
+                        new("testSearchability") { ExactSearchable = true, Hidden = false, FuzzySearchable = false, Displayable = true },
+                        new("testSearchability2") { Hidden = true }
+                    }
+                }
+            };
+
+            // Old way of doing it
+            // This allocates a StringBuilder to serialize the JSON into, and then allocates & builds the UTF16 string from that
+            string serializeObjectUtf16String = JsonConvert.SerializeObject(requestBody);
+
+            // StringContent immediately converts the UTF16 string chars to UTF8 bytes and allocates an array for them
+            StringContent stringContent = new StringContent(serializeObjectUtf16String, Encoding.UTF8, "application/json");
+
+
+            // new way of doing it, serializes JSON bytes directly to MemoryStream
+            // A MemoryStream has to be allocated, as we need to know the length for the Content-Length header
+            // Otherwise we could just write it directly to the request stream
+            using NewtonsoftJsonUtf8Content newtonsoftJsonUtf8Content = new NewtonsoftJsonUtf8Content(requestBody);
+
+            string actualString = await newtonsoftJsonUtf8Content.ReadAsStringAsync();
+            string expectedString = await stringContent.ReadAsStringAsync();
+            Assert.That(actualString, Is.EqualTo(expectedString));
+
+            byte[] actualBytes = await newtonsoftJsonUtf8Content.ReadAsByteArrayAsync();
+            byte[] expectedBytes = await stringContent.ReadAsByteArrayAsync();
+            Assert.That(actualBytes.Length, Is.EqualTo(expectedBytes.Length));
+            Assert.That(actualBytes, Is.EqualTo(expectedBytes));
         }
     }
 }
