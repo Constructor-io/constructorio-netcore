@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -255,7 +256,6 @@ namespace Constructorio_NET.Tests
             // StringContent immediately converts the UTF16 string chars to UTF8 bytes and allocates an array for them
             StringContent stringContent = new StringContent(serializeObjectUtf16String, Encoding.UTF8, "application/json");
 
-
             // new way of doing it, serializes JSON bytes directly to MemoryStream
             // A MemoryStream has to be allocated, as we need to know the length for the Content-Length header
             // Otherwise we could just write it directly to the request stream
@@ -269,6 +269,67 @@ namespace Constructorio_NET.Tests
             byte[] expectedBytes = await stringContent.ReadAsByteArrayAsync();
             Assert.That(actualBytes.Length, Is.EqualTo(expectedBytes.Length));
             Assert.That(actualBytes, Is.EqualTo(expectedBytes));
+        }
+
+        [Test]
+        public async Task TestNewtonsoftJsonUtf8ContentSerialization()
+        {
+            // Test that NewtonsoftJsonUtf8Content properly serializes various object types
+            var complexObject = new Hashtable
+            {
+                { "string_field", "test value" },
+                { "number_field", 42 },
+                { "boolean_field", true },
+                { "array_field", new List<string> { "item1", "item2", "item3" } },
+                {
+                    "nested_object", new Hashtable
+                    {
+                        { "nested_string", "nested value" },
+                        { "nested_number", 123 }
+                    }
+                }
+            };
+
+            using NewtonsoftJsonUtf8Content content = new NewtonsoftJsonUtf8Content(complexObject);
+            string serializedJson = await content.ReadAsStringAsync();
+
+            // Verify the JSON can be deserialized back
+            var deserialized = JsonConvert.DeserializeObject<Hashtable>(serializedJson);
+
+            Assert.That(deserialized, Is.Not.Null, "Deserialized object should not be null");
+            Assert.That(deserialized["string_field"], Is.EqualTo("test value"));
+            Assert.That(deserialized["number_field"], Is.EqualTo(42L)); // JSON numbers deserialize as long
+            Assert.That(deserialized["boolean_field"], Is.EqualTo(true));
+        }
+
+        [Test]
+        public async Task TestNewtonsoftJsonUtf8ContentDispose()
+        {
+            // Test that NewtonsoftJsonUtf8Content properly disposes resources
+            NewtonsoftJsonUtf8Content content = new NewtonsoftJsonUtf8Content(new Hashtable { { "test", "value" } });
+
+            // Read content before disposal
+            string result = await content.ReadAsStringAsync();
+            Assert.That(result, Is.Not.Null.And.Not.Empty);
+
+            // Dispose the content
+            content.Dispose();
+
+            // Attempting to read after disposal should throw
+            Assert.ThrowsAsync<ObjectDisposedException>(async () => await content.ReadAsStringAsync());
+        }
+
+        [Test]
+        public void TestNewtonsoftJsonUtf8ContentComputesLength()
+        {
+            // Test that TryComputeLength returns the correct content length
+            var testData = new Hashtable { { "key", "value" } };
+            using NewtonsoftJsonUtf8Content content = new NewtonsoftJsonUtf8Content(testData);
+
+            // The content should be able to compute its length
+            bool canComputeLength = content.Headers.ContentLength.HasValue;
+            Assert.That(canComputeLength, Is.True, "Content should have a computable length");
+            Assert.That(content.Headers.ContentLength.Value, Is.GreaterThan(0), "Content length should be greater than 0");
         }
     }
 }

@@ -65,7 +65,7 @@ namespace Constructorio_NET.Modules
 
         internal string CreateItemsUrl(string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL)
         {
-            List<string> paths = new List<string> { "v2", "items" };
+            List<string> paths = new List<string>(capacity: 2) { "v2", "items" };
             Hashtable queryParams = new Hashtable();
             if (force)
             {

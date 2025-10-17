@@ -309,7 +309,7 @@ namespace Constructorio_NET.Utils
             if (!response.IsSuccessStatusCode)
             {
                 ServerError error = await DeserializeFromResponse<ServerError>(response);
-                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error?.Message ?? "Unknown error"}");
             }
 
             return await DeserializeFromResponse<T>(response, jsonSerializer);
@@ -340,12 +340,12 @@ namespace Constructorio_NET.Utils
 
             using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContent resContent = response.Content;
-            string result = await resContent.ReadAsStringAsync();
+            string result = await resContent.ReadAsStringAsync().ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {
                 ServerError error = JsonConvert.DeserializeObject<ServerError>(result);
-                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error?.Message ?? "Unknown error"}");
             }
 
             return result;
