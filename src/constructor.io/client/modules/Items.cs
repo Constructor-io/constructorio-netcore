@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +12,11 @@ namespace Constructorio_NET.Modules
 {
     public class Items : Helpers
     {
+        private static readonly JsonSerializer ObjectCreationHandlingReplaceJsonSerializer = JsonSerializer.Create(
+            new JsonSerializerSettings
+            {
+                ObjectCreationHandling = ObjectCreationHandling.Replace
+            });
         private readonly Hashtable Options;
 
         /// <summary>
@@ -28,7 +32,7 @@ namespace Constructorio_NET.Modules
         {
             try
             {
-                List<ConstructorItem> cleanedItems = items.Select((item) => new ConstructorItem(item.Id)).ToList();
+                List<ConstructorItem> cleanedItems = items.ConvertAll(item => new ConstructorItem(item.Id));
                 var url = CreateItemsUrl(section, force, notificationEmail);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
@@ -61,7 +65,7 @@ namespace Constructorio_NET.Modules
 
         internal string CreateItemsUrl(string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL)
         {
-            List<string> paths = new List<string> { "v2", "items" };
+            List<string> paths = new List<string>(capacity: 2) { "v2", "items" };
             Hashtable queryParams = new Hashtable();
             if (force)
             {
@@ -90,7 +94,7 @@ namespace Constructorio_NET.Modules
 
         internal string CreateVariationsUrl(string section, bool force = false, string notificationEmail = null, CatalogRequest.OnMissingStrategy onMissing = CatalogRequest.OnMissingStrategy.FAIL)
         {
-            List<string> paths = new List<string> { "v2", "variations" };
+            List<string> paths = new List<string>(capacity: 2) { "v2", "variations" };
             Hashtable queryParams = new Hashtable();
             if (force)
             {
@@ -119,7 +123,7 @@ namespace Constructorio_NET.Modules
 
         internal string CreateRetrieveItemsUrl(ItemsRequest req)
         {
-            List<string> paths = new List<string> { "v2", "items" };
+            List<string> paths = new List<string>(capacity: 2) { "v2", "items" };
             Hashtable queryParams = req.GetRequestParameters();
             string url = MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
 
@@ -128,7 +132,7 @@ namespace Constructorio_NET.Modules
 
         internal string CreateRetrieveVariationsUrl(VariationsRequest req)
         {
-            List<string> paths = new List<string> { "v2", "variations" };
+            List<string> paths = new List<string>(capacity: 2) { "v2", "variations" };
             Hashtable queryParams = req.GetRequestParameters();
             string url = MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
             return url;
@@ -286,9 +290,9 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section to upload items to.</param>
         /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> DeleteItems(List<ConstructorItem> items, string section, CancellationToken cancellationToken = default)
+        public Task<bool> DeleteItems(List<ConstructorItem> items, string section, CancellationToken cancellationToken = default)
         {
-            return await this.InternalDeleteItems(items, section, false, null, cancellationToken);
+            return InternalDeleteItems(items, section, false, null, cancellationToken);
         }
 
         /// <summary>
@@ -300,9 +304,9 @@ namespace Constructorio_NET.Modules
         /// <param name="notificationEmail">Email to send failure notifications to.</param>
         /// <param name="cancellationToken">The cancellation token for the HTTP request.</param>
         /// <returns>Constructorio's catalog response object.</returns>
-        public async Task<bool> DeleteItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CancellationToken cancellationToken = default)
+        public Task<bool> DeleteItems(List<ConstructorItem> items, string section, bool force = false, string notificationEmail = null, CancellationToken cancellationToken = default)
         {
-            return await this.InternalDeleteItems(items, section, force, notificationEmail, cancellationToken);
+            return InternalDeleteItems(items, section, force, notificationEmail, cancellationToken);
         }
 
 
@@ -317,7 +321,7 @@ namespace Constructorio_NET.Modules
         {
             try
             {
-                List<ConstructorVariation> cleanedVariations = variations.Select((item) => new ConstructorVariation(item.Id)).ToList();
+                List<ConstructorVariation> cleanedVariations = variations.ConvertAll((item) => new ConstructorVariation(item.Id));
                 var url = CreateVariationsUrl(section);
                 Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
                 Hashtable requestBody = new Hashtable();
@@ -349,15 +353,9 @@ namespace Constructorio_NET.Modules
             var url = CreateRetrieveItemsUrl(req);
             Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var result = await MakeHttpRequest<ItemsResponse>(Options, HttpMethod.Get, url, requestHeaders, jsonSerializer: ObjectCreationHandlingReplaceJsonSerializer, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            if (result != null)
-            {
-                JsonSerializerSettings settings = new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace };
-                return JsonConvert.DeserializeObject<ItemsResponse>(result, settings);
-            }
-
-            throw new ConstructorException("RetrieveItems response data is malformed");
+            return result ?? throw new ConstructorException("RetrieveItems response data is malformed");
         }
 
         /// <summary>
@@ -371,15 +369,9 @@ namespace Constructorio_NET.Modules
             var url = CreateRetrieveVariationsUrl(req);
             Dictionary<string, string> requestHeaders = req.GetRequestHeaders();
             AddAuthHeaders(this.Options, requestHeaders);
-            var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var result = await MakeHttpRequest<VariationsResponse>(Options, HttpMethod.Get, url, requestHeaders, jsonSerializer: ObjectCreationHandlingReplaceJsonSerializer, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            if (result != null)
-            {
-                JsonSerializerSettings settings = new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace };
-                return JsonConvert.DeserializeObject<VariationsResponse>(result, settings);
-            }
-
-            throw new ConstructorException("RetrieveVariations response data is malformed");
+            return result ?? throw new ConstructorException("RetrieveVariations response data is malformed");
         }
     }
 }

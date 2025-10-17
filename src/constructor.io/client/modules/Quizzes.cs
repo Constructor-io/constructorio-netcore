@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
-using Newtonsoft.Json;
 
 namespace Constructorio_NET.Modules
 {
@@ -29,7 +28,7 @@ namespace Constructorio_NET.Modules
         internal string CreateQuizUrl(QuizRequest req, string endpoint)
         {
             Hashtable requestParams = req.GetRequestParameters();
-            List<string> paths = new List<string> { req.QuizId, endpoint };
+            List<string> paths = new List<string>(capacity: 2) { req.QuizId, endpoint };
 
             return MakeUrl(this.Options, paths, requestParams);
         }
@@ -46,14 +45,9 @@ namespace Constructorio_NET.Modules
             {
                 var url = CreateQuizUrl(quizzesRequest, "next");
                 Dictionary<string, string> requestHeaders = quizzesRequest.GetRequestHeaders();
-                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var result = await MakeHttpRequest<NextQuestionResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                if (result != null)
-                {
-                    return JsonConvert.DeserializeObject<NextQuestionResponse>(result);
-                }
-
-                throw new ConstructorException("GetNextQuestion response data is malformed");
+                return result ?? throw new ConstructorException("GetNextQuestion response data is malformed");
             }
             catch (OperationCanceledException)
             {
@@ -74,14 +68,9 @@ namespace Constructorio_NET.Modules
             {
                 var url = CreateQuizUrl(quizzesRequest, "results");
                 Dictionary<string, string> requestHeaders = quizzesRequest.GetRequestHeaders();
-                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var result = await MakeHttpRequest<QuizResultsResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                if (result != null)
-                {
-                    return JsonConvert.DeserializeObject<QuizResultsResponse>(result);
-                }
-
-                throw new ConstructorException("GetResults response data is malformed");
+                return result ?? throw new ConstructorException("GetResults response data is malformed");
             }
             catch (OperationCanceledException)
             {
@@ -89,6 +78,5 @@ namespace Constructorio_NET.Modules
                 throw;
             }
         }
-
     }
 }

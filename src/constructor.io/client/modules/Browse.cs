@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
-using Newtonsoft.Json;
 
 namespace Constructorio_NET.Modules
 {
@@ -27,7 +26,7 @@ namespace Constructorio_NET.Modules
         internal string CreateBrowseUrl(BrowseRequest req)
         {
             Hashtable queryParams = req.GetRequestParameters();
-            List<string> paths = new List<string> { "browse", req.FilterName, req.FilterValue };
+            List<string> paths = new List<string>(capacity: 3) { "browse", req.FilterName, req.FilterValue };
 
             return MakeUrl(this.Options, paths, queryParams);
         }
@@ -44,14 +43,9 @@ namespace Constructorio_NET.Modules
             {
                 var url = CreateBrowseUrl(browseRequest);
                 Dictionary<string, string> requestHeaders = browseRequest.GetRequestHeaders();
-                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var result = await MakeHttpRequest<BrowseResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                if (result != null)
-                {
-                    return JsonConvert.DeserializeObject<BrowseResponse>(result);
-                }
-
-                throw new ConstructorException("GetBrowseResults response data is malformed");
+                return result ?? throw new ConstructorException("GetBrowseResults response data is malformed");
             }
             catch (OperationCanceledException)
             {
@@ -63,7 +57,7 @@ namespace Constructorio_NET.Modules
         internal string CreateBrowseItemsUrl(BrowseItemsRequest req)
         {
             Hashtable queryParams = req.GetRequestParameters();
-            List<string> paths = new List<string> { "browse", "items" };
+            List<string> paths = new List<string>(capacity: 2) { "browse", "items" };
 
             return MakeUrl(this.Options, paths, queryParams);
         }
@@ -80,14 +74,9 @@ namespace Constructorio_NET.Modules
             {
                 var url = CreateBrowseItemsUrl(browseItemsRequest);
                 Dictionary<string, string> requestHeaders = browseItemsRequest.GetRequestHeaders();
-                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var result = await MakeHttpRequest<BrowseResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                if (result != null)
-                {
-                    return JsonConvert.DeserializeObject<BrowseResponse>(result);
-                }
-
-                throw new ConstructorException("GetBrowseItemsResult response data is malformed");
+                return result ?? throw new ConstructorException("GetBrowseItemsResult response data is malformed");
             }
             catch (OperationCanceledException)
             {
@@ -99,7 +88,7 @@ namespace Constructorio_NET.Modules
         internal string CreateBrowseFacetsUrl(BrowseFacetsRequest req)
         {
             Hashtable queryParams = req.GetRequestParameters();
-            List<string> paths = new List<string> { "browse", "facets" };
+            List<string> paths = new List<string>(capacity: 2) { "browse", "facets" };
 
             return MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
         }
@@ -117,14 +106,9 @@ namespace Constructorio_NET.Modules
                 var url = CreateBrowseFacetsUrl(browseFacetsRequest);
                 Dictionary<string, string> requestHeaders = browseFacetsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var result = await MakeHttpRequest<BrowseFacetsResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                if (result != null)
-                {
-                    return JsonConvert.DeserializeObject<BrowseFacetsResponse>(result);
-                }
-
-                throw new ConstructorException("GetBrowseFacetsResult response data is malformed");
+                return result ?? throw new ConstructorException("GetBrowseFacetsResult response data is malformed");
             }
             catch (OperationCanceledException)
             {
@@ -136,7 +120,7 @@ namespace Constructorio_NET.Modules
         internal string CreateBrowseFacetOptionsUrl(BrowseFacetOptionsRequest req)
         {
             Hashtable queryParams = req.GetRequestParameters();
-            List<string> paths = new List<string> { "browse", "facet_options" };
+            List<string> paths = new List<string>(capacity: 2) { "browse", "facet_options" };
 
             return MakeUrl(this.Options, paths, queryParams, OmitDtQueryParam);
         }
@@ -154,14 +138,9 @@ namespace Constructorio_NET.Modules
                 var url = CreateBrowseFacetOptionsUrl(browseFacetOptionsRequest);
                 Dictionary<string, string> requestHeaders = browseFacetOptionsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var result = await MakeHttpRequest<BrowseFacetOptionsResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                if (result != null)
-                {
-                    return JsonConvert.DeserializeObject<BrowseFacetOptionsResponse>(result);
-                }
-
-                throw new ConstructorException("GetBrowseFacetOptionsResult response data is malformed");
+                return result ?? throw new ConstructorException("GetBrowseFacetOptionsResult response data is malformed");
             }
             catch (OperationCanceledException)
             {
