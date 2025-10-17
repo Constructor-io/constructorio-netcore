@@ -42,7 +42,7 @@ internal sealed class NewtonsoftJsonUtf8Content : HttpContent
     protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
     {
         _memoryStream.Seek(0, SeekOrigin.Begin);
-        await _memoryStream.CopyToAsync(stream);
+        await _memoryStream.CopyToAsync(stream).ConfigureAwait(false);
     }
 
     protected override bool TryComputeLength(out long length)
