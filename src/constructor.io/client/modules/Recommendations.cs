@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
-using Newtonsoft.Json;
 
 namespace Constructorio_NET.Modules
 {
@@ -27,7 +26,7 @@ namespace Constructorio_NET.Modules
         internal string CreateRecommendationsUrl(RecommendationsRequest req)
         {
             Hashtable queryParams = req.GetRequestParameters();
-            List<string> paths = new List<string> { "recommendations", "v1", "pods", req.PodId };
+            List<string> paths = new List<string>(capacity: 4) { "recommendations", "v1", "pods", req.PodId };
 
             return MakeUrl(this.Options, paths, queryParams);
         }
@@ -44,14 +43,9 @@ namespace Constructorio_NET.Modules
             {
                 var url = CreateRecommendationsUrl(recommendationsRequest);
                 var requestHeaders = recommendationsRequest.GetRequestHeaders();
-                var result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var result = await MakeHttpRequest<RecommendationsResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                if (result != null)
-                {
-                    return JsonConvert.DeserializeObject<RecommendationsResponse>(result);
-                }
-
-                throw new ConstructorException("GetRecommendationsResults response data is malformed");
+                return result ?? throw new ConstructorException("GetRecommendationsResults response data is malformed");
             }
             catch (OperationCanceledException)
             {
@@ -59,6 +53,5 @@ namespace Constructorio_NET.Modules
                 throw;
             }
         }
-
     }
 }

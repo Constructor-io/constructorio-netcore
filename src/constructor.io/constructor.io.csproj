@@ -7,6 +7,7 @@
   	<ReleaseVersion>3.15.1</ReleaseVersion>
     <Version>3.15.1</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <LangVersion>latest</LangVersion>
 
     <!-- NuGet Package Metadata -->
     <PackageId>constructor.io</PackageId>
@@ -38,6 +39,10 @@
     <None Remove="tests\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Constructorio_NET.Tests" />
+  </ItemGroup>
+    
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>

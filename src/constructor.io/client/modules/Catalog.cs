@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
-using Newtonsoft.Json;
 
 namespace Constructorio_NET.Modules
 {
@@ -74,14 +73,14 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's catalog response object.</returns>
         public async Task<CatalogResponse> ReplaceCatalog(CatalogRequest catalogRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            CatalogResponse result;
 
             try
             {
                 var url = CreateCatalogUrl(catalogRequest);
                 Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(
+                result = await MakeHttpRequest<CatalogResponse>(
                     this.Options,
                     HttpMethod.Put,
                     url,
@@ -100,12 +99,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<CatalogResponse>(result);
-            }
-
-            throw new ConstructorException("ReplaceCatalog response data is malformed");
+            return result ?? throw new ConstructorException("ReplaceCatalog response data is malformed");
         }
 
         /// <summary>
@@ -116,14 +110,14 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's catalog response object.</returns>
         public async Task<CatalogResponse> UpdateCatalog(CatalogRequest catalogRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            CatalogResponse result;
 
             try
             {
                 var url = CreateCatalogUrl(catalogRequest);
                 Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, null, catalogRequest.Files, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<CatalogResponse>(Options, HttpMethodPatch, url, requestHeaders, null, catalogRequest.Files, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -135,12 +129,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<CatalogResponse>(result);
-            }
-
-            throw new ConstructorException("UpdateCatalog response data is malformed");
+            return result ?? throw new ConstructorException("UpdateCatalog response data is malformed");
         }
 
         /// <summary>
@@ -151,7 +140,7 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's catalog response object.</returns>
         public async Task<CatalogResponse> PatchCatalog(CatalogRequest catalogRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            CatalogResponse result;
 
             try
             {
@@ -159,7 +148,7 @@ namespace Constructorio_NET.Modules
                 url += "&patch_delta=true";
                 Dictionary<string, string> requestHeaders = catalogRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, null, catalogRequest.Files, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<CatalogResponse>(Options, HttpMethodPatch, url, requestHeaders, null, catalogRequest.Files, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -171,12 +160,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<CatalogResponse>(result);
-            }
-
-            throw new ConstructorException("PatchCatalog response data is malformed");
+            return result ?? throw new ConstructorException("PatchCatalog response data is malformed");
         }
 
         /// <summary>
@@ -187,7 +171,7 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's item group.</returns>
         public async Task<ConstructorItemGroup> AddItemGroup(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            ConstructorItemGroup result;
 
             try
             {
@@ -212,7 +196,7 @@ namespace Constructorio_NET.Modules
 
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<ConstructorItemGroup>(Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -224,12 +208,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<ConstructorItemGroup>(result);
-            }
-
-            throw new ConstructorException("AddItemGroup response data is malformed");
+            return result ?? throw new ConstructorException("AddItemGroup response data is malformed");
         }
 
         /// <summary>
@@ -240,12 +219,12 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's item group.</returns>
         public async Task<ConstructorItemGroup> UpdateItemGroup(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            ConstructorItemGroup result;
 
             try
             {
                 ConstructorItemGroup itemGroup = itemGroupsRequest.ItemGroups[0];
-                var url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroup.Id });
+                var url = CreateItemGroupsUrl(itemGroupsRequest, new List<string>(capacity: 1) { itemGroup.Id });
                 Hashtable requestBody = new Hashtable();
 
                 if (itemGroup.Name != null)
@@ -265,7 +244,7 @@ namespace Constructorio_NET.Modules
 
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<ConstructorItemGroup>(Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -277,12 +256,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<ConstructorItemGroup>(result);
-            }
-
-            throw new ConstructorException("UpdateItemGroup response data is malformed");
+            return result ?? throw new ConstructorException("UpdateItemGroup response data is malformed");
         }
 
         /// <summary>
@@ -293,7 +267,7 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's item group response object.</returns>
         public async Task<ItemGroupsResponse> AddItemGroups(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            ItemGroupsResponse result;
 
             try
             {
@@ -304,7 +278,7 @@ namespace Constructorio_NET.Modules
                 };
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<ItemGroupsResponse>(Options, HttpMethod.Post, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -316,12 +290,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<ItemGroupsResponse>(result);
-            }
-
-            throw new ConstructorException("AddItemGroups response data is malformed");
+            return result ?? throw new ConstructorException("AddItemGroups response data is malformed");
         }
 
         /// <summary>
@@ -332,7 +301,7 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's item group response object.</returns>
         public async Task<ItemGroupsResponse> UpdateItemGroups(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            ItemGroupsResponse result;
 
             try
             {
@@ -343,7 +312,7 @@ namespace Constructorio_NET.Modules
                 };
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<ItemGroupsResponse>(Options, HttpMethodPatch, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -355,12 +324,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<ItemGroupsResponse>(result);
-            }
-
-            throw new ConstructorException("UpdateItemGroups response data is malformed");
+            return result ?? throw new ConstructorException("UpdateItemGroups response data is malformed");
         }
 
         /// <summary>
@@ -371,14 +335,14 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's item group response object.</returns>
         public async Task<ItemGroupsGetResponse> GetItemGroup(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            ItemGroupsGetResponse result;
 
             try
             {
                 string url;
                 if (itemGroupsRequest.ItemGroupId != null)
                 {
-                    url = CreateItemGroupsUrl(itemGroupsRequest, new List<string> { itemGroupsRequest.ItemGroupId });
+                    url = CreateItemGroupsUrl(itemGroupsRequest, new List<string>(capacity: 1) { itemGroupsRequest.ItemGroupId });
                 }
                 else
                 {
@@ -388,7 +352,7 @@ namespace Constructorio_NET.Modules
                 Hashtable requestBody = new Hashtable();
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<ItemGroupsGetResponse>(Options, HttpMethod.Get, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -400,12 +364,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<ItemGroupsGetResponse>(result);
-            }
-
-            throw new ConstructorException("GetItemGroup response data is malformed");
+            return result ?? throw new ConstructorException("GetItemGroup response data is malformed");
         }
 
         /// <summary>
@@ -416,14 +375,14 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's confirmation message.</returns>
         public async Task<string> DeleteItemGroups(ItemGroupsRequest itemGroupsRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            ItemGroupsResponse result;
 
             try
             {
                 var url = CreateItemGroupsUrl(itemGroupsRequest);
                 Dictionary<string, string> requestHeaders = itemGroupsRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<ItemGroupsResponse>(Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -435,12 +394,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<ItemGroupsResponse>(result).Message;
-            }
-
-            throw new ConstructorException("DeleteItemGroups response data is malformed");
+            return result?.Message ?? throw new ConstructorException("DeleteItemGroups response data is malformed");
         }
 
         // Facets
@@ -480,10 +434,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            Facet result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, facet, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<Facet>(Options, HttpMethod.Post, url, requestHeaders, facet, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -495,12 +449,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<Facet>(result);
-            }
-
-            throw new ConstructorException("CreateFacetConfig response data is malformed");
+            return result ?? throw new ConstructorException("CreateFacetConfig response data is malformed");
         }
 
         /// <summary>
@@ -525,10 +474,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            FacetGetAllResponse result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<FacetGetAllResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -540,12 +489,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<FacetGetAllResponse>(result);
-            }
-
-            throw new ConstructorException("GetAllFacetConfigs response data is malformed");
+            return result ?? throw new ConstructorException("GetAllFacetConfigs response data is malformed");
         }
 
         /// <summary>
@@ -561,10 +505,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            Facet result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<Facet>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -576,12 +520,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<Facet>(result);
-            }
-
-            throw new ConstructorException("GetFacetConfig response data is malformed");
+            return result ?? throw new ConstructorException("GetFacetConfig response data is malformed");
         }
 
         /// <summary>
@@ -597,10 +536,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            List<Facet> result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, facetFieldsList, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<List<Facet>>(Options, HttpMethodPatch, url, requestHeaders, facetFieldsList, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -612,12 +551,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<List<Facet>>(result);
-            }
-
-            throw new ConstructorException("BatchPartiallyUpdateFacetConfigs response data is malformed");
+            return result ?? throw new ConstructorException("BatchPartiallyUpdateFacetConfigs response data is malformed");
         }
 
         /// <summary>
@@ -633,10 +567,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            Facet result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, facetFields, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<Facet>(Options, HttpMethodPatch, url, requestHeaders, facetFields, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -648,12 +582,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<Facet>(result);
-            }
-
-            throw new ConstructorException("PartiallyUpdateFacetConfig response data is malformed");
+            return result ?? throw new ConstructorException("PartiallyUpdateFacetConfig response data is malformed");
         }
 
         /// <summary>
@@ -669,10 +598,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            Facet result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, facet, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<Facet>(Options, HttpMethod.Put, url, requestHeaders, facet, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -684,12 +613,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<Facet>(result);
-            }
-
-            throw new ConstructorException("UpdateFacetConfig response data is malformed");
+            return result ?? throw new ConstructorException("UpdateFacetConfig response data is malformed");
         }
 
         /// <summary>
@@ -705,10 +629,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            Facet result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<Facet>(Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -720,12 +644,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<Facet>(result);
-            }
-
-            throw new ConstructorException("DeleteFacetConfig response data is malformed");
+            return result ?? throw new ConstructorException("DeleteFacetConfig response data is malformed");
         }
 
         // Facet Options
@@ -767,10 +686,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            FacetOption result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, facetOption, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<FacetOption>(Options, HttpMethod.Post, url, requestHeaders, facetOption, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -782,12 +701,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<FacetOption>(result);
-            }
-
-            throw new ConstructorException("CreateFacetOption response data is malformed");
+            return result ?? throw new ConstructorException("CreateFacetOption response data is malformed");
         }
 
         /// <summary>
@@ -813,10 +727,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            FacetOptionsGetAllResponse result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<FacetOptionsGetAllResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -828,12 +742,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<FacetOptionsGetAllResponse>(result);
-            }
-
-            throw new ConstructorException("GetAllFacetOptions response data is malformed");
+            return result ?? throw new ConstructorException("GetAllFacetOptions response data is malformed");
         }
 
         /// <summary>
@@ -850,10 +759,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            FacetOption result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<FacetOption>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -865,12 +774,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<FacetOption>(result);
-            }
-
-            throw new ConstructorException("GetFacetOption response data is malformed");
+            return result ?? throw new ConstructorException("GetFacetOption response data is malformed");
         }
 
         /// <summary>
@@ -887,10 +791,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            List<FacetOption> result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, facetOptions, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<List<FacetOption>>(Options, HttpMethodPatch, url, requestHeaders, facetOptions, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -902,12 +806,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<List<FacetOption>>(result);
-            }
-
-            throw new ConstructorException("BatchCreateOrUpdateFacetOptions response data is malformed");
+            return result ?? throw new ConstructorException("BatchCreateOrUpdateFacetOptions response data is malformed");
         }
 
         /// <summary>
@@ -924,10 +823,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            FacetOption result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, facetOption, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<FacetOption>(Options, HttpMethod.Put, url, requestHeaders, facetOption, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -939,12 +838,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<FacetOption>(result);
-            }
-
-            throw new ConstructorException("ReplaceFacetOption response data is malformed");
+            return result ?? throw new ConstructorException("ReplaceFacetOption response data is malformed");
         }
 
         /// <summary>
@@ -961,10 +855,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            FacetOption result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, facetOption, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<FacetOption>(Options, HttpMethodPatch, url, requestHeaders, facetOption, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -976,12 +870,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<FacetOption>(result);
-            }
-
-            throw new ConstructorException("PartiallyUpdateFacetOption response data is malformed");
+            return result ?? throw new ConstructorException("PartiallyUpdateFacetOption response data is malformed");
         }
 
         /// <summary>
@@ -998,10 +887,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            FacetOption result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<FacetOption>(Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1013,12 +902,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<FacetOption>(result);
-            }
-
-            throw new ConstructorException("DeleteFacetOption response data is malformed");
+            return result ?? throw new ConstructorException("DeleteFacetOption response data is malformed");
         }
 
         /// <summary>
@@ -1029,14 +913,14 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's Searchability response object.</returns>
         public async Task<SearchabilitiesResponse> RetrieveSearchabilities(RetrieveSearchabilitiesRequest retrieveSearchabilitiesRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            SearchabilitiesResponse result;
 
             try
             {
                 var url = CreateRetrieveSearchabilitiesUrl(retrieveSearchabilitiesRequest);
                 Dictionary<string, string> requestHeaders = retrieveSearchabilitiesRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<SearchabilitiesResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1048,12 +932,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<SearchabilitiesResponse>(result);
-            }
-
-            throw new ConstructorException("RetrieveSearchabilities response data is malformed");
+            return result ?? throw new ConstructorException("RetrieveSearchabilities response data is malformed");
         }
 
         /// <summary>
@@ -1064,7 +943,7 @@ namespace Constructorio_NET.Modules
         /// <returns>Constructorio's Searchability response object.</returns>
         public async Task<SearchabilitiesResponse> PatchSearchabilities(PatchSearchabilitiesRequest patchSearchabilitiesRequest, CancellationToken cancellationToken = default)
         {
-            string result;
+            SearchabilitiesResponse result;
             Hashtable postbody = new Hashtable
             {
                 { "searchabilities", patchSearchabilitiesRequest.Searchabilities }
@@ -1075,7 +954,7 @@ namespace Constructorio_NET.Modules
                 var url = CreatePatchSearchabilitiesUrl(patchSearchabilitiesRequest);
                 Dictionary<string, string> requestHeaders = patchSearchabilitiesRequest.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
-                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, postbody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<SearchabilitiesResponse>(Options, HttpMethodPatch, url, requestHeaders, postbody, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1087,18 +966,13 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<SearchabilitiesResponse>(result);
-            }
-
-            throw new ConstructorException("PatchSearchabilities response data is malformed");
+            return result ?? throw new ConstructorException("PatchSearchabilities response data is malformed");
         }
 
         // Sort Options
         internal string CreateSortOptionsUrl(SortOptionsRequest req)
         {
-            List<string> paths = new List<string> { "v1", "sort_options" };
+            List<string> paths = new List<string>(capacity: 2) { "v1", "sort_options" };
             Hashtable queryParams = req.GetRequestParameters();
 
             bool toFilterBySortBy = req.SortBy != null;
@@ -1126,10 +1000,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            SortOptionList result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<SortOptionList>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1141,12 +1015,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<SortOptionList>(result);
-            }
-
-            throw new ConstructorException("RetrieveSortOptions response data is malformed");
+            return result ?? throw new ConstructorException("RetrieveSortOptions response data is malformed");
         }
 
         /// <summary>
@@ -1162,10 +1031,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            SortOptionList result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, sortOptionsListRequest.GetSortOptionsList(), cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<SortOptionList>(Options, HttpMethod.Put, url, requestHeaders, sortOptionsListRequest.GetSortOptionsList(), cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1177,12 +1046,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<SortOptionList>(result);
-            }
-
-            throw new ConstructorException("SetSortOptions response data is malformed");
+            return result ?? throw new ConstructorException("SetSortOptions response data is malformed");
         }
 
         /// <summary>
@@ -1244,10 +1108,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            SortOption result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Post, url, requestHeaders, sortOptionsSingleRequest.SortOption, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<SortOption>(Options, HttpMethod.Post, url, requestHeaders, sortOptionsSingleRequest.SortOption, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1259,12 +1123,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<SortOption>(result);
-            }
-
-            throw new ConstructorException("CreateSortOption response data is malformed");
+            return result ?? throw new ConstructorException("CreateSortOption response data is malformed");
         }
 
         /// <summary>
@@ -1284,10 +1143,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            SortOption result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethod.Put, url, requestHeaders, sortOptionsSingleRequest.GetSortOptionDelta(), cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<SortOption>(Options, HttpMethod.Put, url, requestHeaders, sortOptionsSingleRequest.GetSortOptionDelta(), cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1299,12 +1158,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<SortOption>(result);
-            }
-
-            throw new ConstructorException("CreateOrReplaceSortOption response data is malformed");
+            return result ?? throw new ConstructorException("CreateOrReplaceSortOption response data is malformed");
         }
 
         /// <summary>
@@ -1324,10 +1178,10 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
-            string result;
+            SortOption result;
             try
             {
-                result = await MakeHttpRequest(this.Options, HttpMethodPatch, url, requestHeaders, sortOptionsSingleRequest.GetSortOptionDelta(), cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<SortOption>(Options, HttpMethodPatch, url, requestHeaders, sortOptionsSingleRequest.GetSortOptionDelta(), cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1339,12 +1193,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result != null)
-            {
-                return JsonConvert.DeserializeObject<SortOption>(result);
-            }
-
-            throw new ConstructorException("UpdateSortOption response data is malformed");
+            return result ?? throw new ConstructorException("UpdateSortOption response data is malformed");
         }
     }
 }
