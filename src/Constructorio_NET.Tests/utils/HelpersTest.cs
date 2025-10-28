@@ -300,6 +300,20 @@ namespace Constructorio_NET.Tests
             Assert.That(deserialized["string_field"], Is.EqualTo("test value"));
             Assert.That(deserialized["number_field"], Is.EqualTo(42L)); // JSON numbers deserialize as long
             Assert.That(deserialized["boolean_field"], Is.EqualTo(true));
+
+            // Verify array_field
+            var arrayField = deserialized["array_field"] as Newtonsoft.Json.Linq.JArray;
+            Assert.That(arrayField, Is.Not.Null, "array_field should not be null");
+            Assert.That(arrayField.Count, Is.EqualTo(3), "array_field should have 3 items");
+            Assert.That(arrayField[0].ToString(), Is.EqualTo("item1"));
+            Assert.That(arrayField[1].ToString(), Is.EqualTo("item2"));
+            Assert.That(arrayField[2].ToString(), Is.EqualTo("item3"));
+
+            // Verify nested_object
+            var nestedObject = deserialized["nested_object"] as Newtonsoft.Json.Linq.JObject;
+            Assert.That(nestedObject, Is.Not.Null, "nested_object should not be null");
+            Assert.That(nestedObject["nested_string"].ToString(), Is.EqualTo("nested value"));
+            Assert.That(nestedObject["nested_number"].ToObject<long>(), Is.EqualTo(123L));
         }
 
         [Test]
