@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -143,11 +143,11 @@ namespace Constructorio_NET.Utils
                     Dictionary<string, Dictionary<string, List<string>>> filtersPerSection = (Dictionary<string, Dictionary<string, List<string>>>)queryParams[Constants.FILTERS_PER_SECTION];
                     queryParams.Remove(Constants.FILTERS_PER_SECTION);
 
-                    foreach (var sectionKey in filtersPerSection.Select(fps => fps.Key))
+                    foreach (var section in filtersPerSection)
                     {
-                        foreach (var filter in filtersPerSection[sectionKey])
+                        foreach (var filter in section.Value)
                         {
-                            string sectionName = sectionKey;
+                            string sectionName = section.Key;
                             string filterGroup = filter.Key;
                             foreach (string filterOption in filter.Value)
                             {
@@ -272,6 +272,49 @@ namespace Constructorio_NET.Utils
             return url.ToString();
         }
 
+        private static async Task<T> DeserializeFromResponse<T>(HttpResponseMessage response, JsonSerializer jsonSerializer = null)
+        {
+            using Stream stream = await response.Content.ReadAsStreamAsync();
+            using StreamReader streamReader = new StreamReader(stream);
+            using JsonTextReader jsonTextReader = new JsonTextReader(streamReader);
+            return (jsonSerializer ?? NewtonsoftJsonUtf8Content.DefaultJsonSerializer).Deserialize<T>(jsonTextReader);
+        }
+
+        /// <summary>
+        /// Makes a http request and returns the deserialized response.
+        /// </summary>
+        /// <typeparam name="T">The type to deserialize the response into.</typeparam>
+        /// <param name="options">Hashtable of options from Constructorio instantiation.</param>
+        /// <param name="httpMethod">HTTP request method.</param>
+        /// <param name="url">Url for the request.</param>
+        /// <param name="requestHeaders">Additional headers to send with the request.</param>
+        /// <param name="requestBody">Key values pairs used for the POST body.</param>
+        /// <param name="files">Dictionary of streamcontent.</param>
+        /// <param name="jsonSerializer">If set, it will be used instead of the default serializer.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>The deserialized object.</returns>
+        public static async Task<T> MakeHttpRequest<T>(
+            Hashtable options,
+            HttpMethod httpMethod,
+            string url,
+            Dictionary<string, string> requestHeaders,
+            object requestBody = null,
+            Dictionary<string, StreamContent> files = null,
+            JsonSerializer jsonSerializer = null,
+            CancellationToken cancellationToken = default)
+        {
+            using HttpRequestMessage httpRequest = CreateRequest(options, httpMethod, url, requestHeaders, requestBody, files);
+            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                ServerError error = await DeserializeFromResponse<ServerError>(response);
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error?.Message ?? "Unknown error"}");
+            }
+
+            return await DeserializeFromResponse<T>(response, jsonSerializer);
+        }
+
         /// <summary>
         /// Makes a http request.
         /// </summary>
@@ -293,68 +336,68 @@ namespace Constructorio_NET.Utils
             CancellationToken cancellationToken = default)
         {
             // Wrapping this in the using will dispose of the HttpRequestMessage object and the content inside it, but NOT the singleton HttpClient object.
-            using (var httpRequest = new HttpRequestMessage(httpMethod, url))
+            using HttpRequestMessage httpRequest = CreateRequest(options, httpMethod, url, requestHeaders, requestBody, files);
+
+            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContent resContent = response.Content;
+            string result = await resContent.ReadAsStringAsync().ConfigureAwait(false);
+
+            if (!response.IsSuccessStatusCode)
             {
-                foreach (var header in requestHeaders)
+                ServerError error = JsonConvert.DeserializeObject<ServerError>(result);
+                throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error?.Message ?? "Unknown error"}");
+            }
+
+            return result;
+        }
+
+        private static HttpRequestMessage CreateRequest(Hashtable options, HttpMethod httpMethod, string url, Dictionary<string, string> requestHeaders, object requestBody, Dictionary<string, StreamContent> files)
+        {
+            HttpRequestMessage httpRequest = new HttpRequestMessage(httpMethod, url);
+            foreach (var header in requestHeaders)
+            {
+                if (header.Key == Constants.USER_AGENT)
                 {
-                    if (header.Key == Constants.USER_AGENT)
-                    {
-                        httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
-                    }
-                    else
-                    {
-                        httpRequest.Headers.Add(header.Key, header.Value);
-                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
                 }
-
-                if (options.ContainsKey(Constants.CONSTRUCTOR_TOKEN))
+                else
                 {
-                    httpRequest.Headers.Add(Constants.SECURITY_TOKEN, (string)options[Constants.CONSTRUCTOR_TOKEN]);
-                }
-
-                if (files != null)
-                {
-                    var formData = new MultipartFormDataContent();
-
-                    if (files.TryGetValue("items", out var items))
-                    {
-                        formData.Add(items, "items", "items.csv");
-                    }
-
-                    if (files.TryGetValue("variations", out var variations))
-                    {
-                        formData.Add(variations, "variations", "variations.csv");
-                    }
-
-                    if (files.TryGetValue("item_groups", out var itemGroups))
-                    {
-                        formData.Add(itemGroups, "item_groups", "item_groups.csv");
-                    }
-
-                    httpRequest.Content = formData;
-                }
-                else if (requestBody != null)
-                {
-                    StringContent reqContent = new StringContent(JsonConvert.SerializeObject(requestBody),
-                        Encoding.UTF8, "application/json");
-                    httpRequest.Content = reqContent;
-                }
-
-                // Wrapping this in the using will dispose of the HttpResponseMessage object and the content inside it, but NOT the singleton HttpClient object.
-                using (var response = await ConstructorIO.HttpClient.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false))
-                {
-                    HttpContent resContent = response.Content;
-                    string result = await resContent.ReadAsStringAsync().ConfigureAwait(false);
-
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        ServerError error = JsonConvert.DeserializeObject<ServerError>(result);
-                        throw new ConstructorException($"Http[{(int)response.StatusCode}]: {error.Message}");
-                    }
-
-                    return result;
+                    httpRequest.Headers.Add(header.Key, header.Value);
                 }
             }
+
+            if (options.ContainsKey(Constants.CONSTRUCTOR_TOKEN))
+            {
+                httpRequest.Headers.Add(Constants.SECURITY_TOKEN, (string)options[Constants.CONSTRUCTOR_TOKEN]);
+            }
+
+            if (files != null)
+            {
+                var formData = new MultipartFormDataContent();
+
+                if (files.TryGetValue("items", out var items))
+                {
+                    formData.Add(items, "items", "items.csv");
+                }
+
+                if (files.TryGetValue("variations", out var variations))
+                {
+                    formData.Add(variations, "variations", "variations.csv");
+                }
+
+                if (files.TryGetValue("item_groups", out var itemGroups))
+                {
+                    formData.Add(itemGroups, "item_groups", "item_groups.csv");
+                }
+
+                httpRequest.Content = formData;
+            }
+            else if (requestBody != null)
+            {
+                httpRequest.Content = new NewtonsoftJsonUtf8Content(requestBody);
+            }
+
+            return httpRequest;
         }
 
         /// <summary>
