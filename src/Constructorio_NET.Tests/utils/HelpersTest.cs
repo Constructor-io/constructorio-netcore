@@ -285,9 +285,9 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public void MakeUrlSearchWithAnswers()
+        public void MakeUrlQuizzesWithAnswers()
         {
-            List<string> paths = new List<string> { "search", this.Query };
+            List<string> paths = new List<string> { "quizzes", this.Query };
             List<List<string>> answers = new List<List<string>>()
             {
                 new List<string>() { "1", "2" },
