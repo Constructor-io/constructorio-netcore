@@ -303,8 +303,18 @@ namespace Constructorio_NET.Utils
             JsonSerializer jsonSerializer = null,
             CancellationToken cancellationToken = default)
         {
+            // Get the HttpClient (validated and resolved in constructor)
+            HttpClient httpClient = options[Constants.HTTP_CLIENT] as HttpClient;
+
+            if (httpClient == null)
+            {
+                throw new ConstructorException("The HTTP_CLIENT option is missing or not a valid HttpClient instance.");
+            }
+
             using HttpRequestMessage httpRequest = CreateRequest(options, httpMethod, url, requestHeaders, requestBody, files);
-            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+            // Wrapping this in the using will dispose of the HttpResponseMessage object and the content inside it, but NOT the HttpClient object.
+            using HttpResponseMessage response = await httpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -335,10 +345,18 @@ namespace Constructorio_NET.Utils
             Dictionary<string, StreamContent> files = null,
             CancellationToken cancellationToken = default)
         {
+            // Get the HttpClient (validated and resolved in constructor)
+            HttpClient httpClient = options[Constants.HTTP_CLIENT] as HttpClient;
+
+            if (httpClient == null)
+            {
+                throw new ConstructorException("The HTTP_CLIENT option is missing or not a valid HttpClient instance.");
+            }
+
             // Wrapping this in the using will dispose of the HttpRequestMessage object and the content inside it, but NOT the singleton HttpClient object.
             using HttpRequestMessage httpRequest = CreateRequest(options, httpMethod, url, requestHeaders, requestBody, files);
 
-            using HttpResponseMessage response = await ConstructorIO.HttpClient.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            using HttpResponseMessage response = await httpClient.SendAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
             HttpContent resContent = response.Content;
             string result = await resContent.ReadAsStringAsync().ConfigureAwait(false);
 

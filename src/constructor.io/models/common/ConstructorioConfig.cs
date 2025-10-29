@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Net.Http;
 
 namespace Constructorio_NET.Models
 {
@@ -26,6 +27,11 @@ namespace Constructorio_NET.Models
         /// Gets or sets url used to direct requests to correct DNS zone.
         /// </summary>
         public string ServiceUrl { get; set; } = "https://ac.cnstrc.com";
+
+        /// <summary>
+        /// Gets or sets the HttpClient instance to use for requests.
+        /// </summary>
+        public HttpClient HttpClient { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructorioConfig"/> class.
