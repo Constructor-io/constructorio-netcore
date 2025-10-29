@@ -8,9 +8,9 @@ var searchData=
   ['deletesortoptions_5',['DeleteSortOptions',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a94516008ea362b9eae38d91026a1be65',1,'Constructorio_NET::Modules::Catalog']]],
   ['deletevariations_6',['DeleteVariations',['../class_constructorio___n_e_t_1_1_modules_1_1_items.html#aa3cbb9f56dafb8d56f218a25e5b8d309',1,'Constructorio_NET::Modules::Items']]],
   ['descending_7',['Descending',['../namespace_constructorio___n_e_t_1_1_models.html#a18c05b09c6f89729a2260d511e512a2aae3cf5ac19407b1a62c6fccaff675a53b',1,'Constructorio_NET::Models']]],
-  ['development_8',['Development',['../md__r_e_a_d_m_e.html#autotoc_md12',1,'']]],
+  ['development_8',['Development',['../md__r_e_a_d_m_e.html#autotoc_md14',1,'']]],
   ['displayable_9',['Displayable',['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html#a733323239a9570fd0f5077a105981217',1,'Constructorio_NET::Models::Searchability']]],
   ['displayname_10',['DisplayName',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a88a91986d25d7b708d3aacd4d215cb2a',1,'Constructorio_NET.Models.Facet.DisplayName'],['../class_constructorio___n_e_t_1_1_models_1_1_facet_option.html#a7a9e63aa7c99477922a9d3412fab8bcb',1,'Constructorio_NET.Models.FacetOption.DisplayName'],['../class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#ac60c2e41c915c62312c79d3805f643c1',1,'Constructorio_NET.Models.SortOption.DisplayName']]],
-  ['documentation_11',['Documentation',['../md__r_e_a_d_m_e.html#autotoc_md1',1,'Documentation'],['../md__r_e_a_d_m_e.html#autotoc_md18',1,'Documentation']]],
+  ['documentation_11',['Documentation',['../md__r_e_a_d_m_e.html#autotoc_md1',1,'Documentation'],['../md__r_e_a_d_m_e.html#autotoc_md20',1,'Documentation']]],
   ['dynamic_12',['Dynamic',['../namespace_constructorio___n_e_t_1_1_models.html#acec0b2faa939d96a7ee2f841a334c3b1a971fd8cc345d8bd9f92e9f7d88fdf20c',1,'Constructorio_NET::Models']]]
 ];

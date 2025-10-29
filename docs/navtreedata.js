@@ -28,22 +28,25 @@ var NAVTREE =
     [ "Constructor.io Netcore Client", "md__r_e_a_d_m_e.html", [
       [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
       [ "Requirements", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
-      [ "Installation", "md__r_e_a_d_m_e.html#autotoc_md3", null ],
-      [ "Uploading a Catalog", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
-      [ "Retrieving Autocomplete Results", "md__r_e_a_d_m_e.html#autotoc_md5", null ],
-      [ "Retrieving Search Results", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
-      [ "Retrieving Browse Results", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
-      [ "Retrieving Browse Results for Item ID's", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
-      [ "Retrieving Recommendation Results", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
-      [ "Retrieving All Tasks", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
-      [ "Retrieving Task with Task ID", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
-      [ "Development", "md__r_e_a_d_m_e.html#autotoc_md12", [
-        [ "Using VS Code", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
-        [ "Building", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
-        [ "Testing", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
-        [ "For code coverage:", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
-        [ "Publishing", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
-        [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md18", null ]
+      [ "Installation", "md__r_e_a_d_m_e.html#autotoc_md3", [
+        [ "Basic Usage", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
+        [ "Using with IHttpClientFactory", "md__r_e_a_d_m_e.html#autotoc_md5", null ]
+      ] ],
+      [ "Uploading a Catalog", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
+      [ "Retrieving Autocomplete Results", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
+      [ "Retrieving Search Results", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
+      [ "Retrieving Browse Results", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
+      [ "Retrieving Browse Results for Item ID's", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
+      [ "Retrieving Recommendation Results", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
+      [ "Retrieving All Tasks", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
+      [ "Retrieving Task with Task ID", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
+      [ "Development", "md__r_e_a_d_m_e.html#autotoc_md14", [
+        [ "Using VS Code", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
+        [ "Building", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
+        [ "Testing", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
+        [ "For code coverage:", "md__r_e_a_d_m_e.html#autotoc_md18", null ],
+        [ "Publishing", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
+        [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md20", null ]
       ] ]
     ] ],
     [ "Namespaces", "namespaces.html", [
@@ -60,6 +63,7 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
         [ "Properties", "functions_prop.html", null ]
       ] ]
@@ -70,9 +74,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"class_constructorio___n_e_t_1_1_models_1_1_item_groups_request.html#a17cf2fa47cccc9e136c378f117e530e8",
-"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#a9f28417980757b8aa7484bc611ff4c6a",
-"class_constructorio___n_e_t_1_1_tests_1_1_search_test.html"
+"class_constructorio___n_e_t_1_1_models_1_1_item_groups_request.html",
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#a6de68fcccc11c506e579ff3de381bf9d",
+"class_constructorio___n_e_t_1_1_tests_1_1_search_request_test.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

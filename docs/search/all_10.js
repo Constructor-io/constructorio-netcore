@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['s_0',['Retrieving Browse Results for Item ID&apos;s',['../md__r_e_a_d_m_e.html#autotoc_md8',1,'']]],
+  ['s_0',['Retrieving Browse Results for Item ID&apos;s',['../md__r_e_a_d_m_e.html#autotoc_md10',1,'']]],
   ['search_1',['Search',['../class_constructorio___n_e_t_1_1_modules_1_1_search.html',1,'Constructorio_NET::Modules']]],
-  ['search_20results_2',['Retrieving Search Results',['../md__r_e_a_d_m_e.html#autotoc_md6',1,'']]],
+  ['search_20results_2',['Retrieving Search Results',['../md__r_e_a_d_m_e.html#autotoc_md8',1,'']]],
   ['searchabilities_3',['Searchabilities',['../class_constructorio___n_e_t_1_1_models_1_1_patch_searchabilities_request.html#a66c2d1e5c8e6868f76b12c678c4436a3',1,'Constructorio_NET::Models::PatchSearchabilitiesRequest']]],
   ['searchabilitiesresponse_4',['SearchabilitiesResponse',['../class_constructorio___n_e_t_1_1_models_1_1_searchabilities_response.html',1,'Constructorio_NET::Models']]],
   ['searchability_5',['Searchability',['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html',1,'Constructorio_NET::Models']]],
