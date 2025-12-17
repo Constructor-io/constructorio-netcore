@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using System;
 
 namespace Constructorio_NET.Tests
 {
