@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using System;
 
 namespace Constructorio_NET.Tests
 {
@@ -722,6 +723,35 @@ namespace Constructorio_NET.Tests
             res.Request.TryGetValue("variations_map", out object reqVariationsMap);
             JObject variationMapResult = JObject.Parse(
                 "{ \"filter_by\": { \"type\": \"and\", \"and\": [{ \"type\": \"not\", \"not\": { \"type\": \"single\", \"field\": \"data.brand\", \"value\": \"Best Brand\" }}]}, \"group_by\": [{ \"name\": \"url\", \"field\": \"data.url\"}], \"values\": { \"variation_id\": { \"aggregation\": \"first\", \"field\": \"data.variation_id\"}, \"deactivated\": { \"aggregation\": \"first\", \"field\": \"data.deactivated\"}}, \"dtype\": \"object\" }"
+            );
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
+        }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithVariationsMapValueCount()
+        {
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                "true"
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": \"true\" }}, \"dtype\": \"object\" }"
             );
 
             Assert.NotNull(res.ResultId, "Result id exists");

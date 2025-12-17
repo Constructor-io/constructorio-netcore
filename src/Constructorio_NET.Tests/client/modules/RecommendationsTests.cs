@@ -162,6 +162,41 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetRecommendationsResultsShouldReturnAResultWithVariationsMapValueCount()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                "true"
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": \"true\" }}, \"dtype\": \"object\" }"
+            );
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                 JObject.Parse(reqVariationsMap.ToString()),
+                 variationMapResult,
+                 "Variations Map was passed as parameter"
+             );
+            foreach (var result in res.Response.Results)
+            {
+                Assert.NotNull(result.VariationsMap, "Variations Map exists in every result");
+            }
+        }
+
+        [Test]
         public async Task GetRecommendationsResultsShouldReturnAResultWithVariationIds()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1")
