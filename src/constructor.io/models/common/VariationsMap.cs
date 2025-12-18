@@ -11,7 +11,7 @@ namespace Constructorio_NET.Models
         [JsonProperty("field")]
         public string Field { get; set; }
         [JsonProperty("value")]
-        public string CountedValue { get; set; }
+        public object CountedValue { get; set; }
     }
 
     public class Group
@@ -70,7 +70,7 @@ namespace Constructorio_NET.Models
             }
         }
 
-        public void AddValueRule(string name, string aggregation, string field, string? countedValue = null)
+        public void AddValueRule(string name, string aggregation, string field, object? countedValue = null)
         {
             if (this.Values != null)
             {
