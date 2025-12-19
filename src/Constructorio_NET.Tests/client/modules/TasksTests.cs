@@ -46,7 +46,7 @@ namespace Constructorio_NET.Tests
             TaskRequest req = new TaskRequest(this.TaskId);
             ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig(this.ApiKey) { ApiToken = "invalidToken" });
             var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Tasks.GetTask(req));
-            Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
+            Assert.IsTrue(ex.Message == "Http[401]: Unauthorized");
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace Constructorio_NET.Tests
             AllTasksRequest req = new AllTasksRequest();
             ConstructorIO constructorio = new ConstructorIO(new ConstructorioConfig(this.ApiKey) { ApiToken = "invalidToken" });
             var ex = Assert.ThrowsAsync<ConstructorException>(() => constructorio.Tasks.GetAllTasks(req));
-            Assert.IsTrue(ex.Message == "Http[401]: Invalid auth_token. If you've forgotten your token, you can generate a new one at app.constructor.io/dashboard", "Correct Error is Returned");
+            Assert.IsTrue(ex.Message == "Http[401]: Unauthorized");
         }
 
         [Test]
