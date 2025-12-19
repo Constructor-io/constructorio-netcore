@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['pattern_0',['Request/Response Pattern',['../md__c_l_a_u_d_e.html#autotoc_md13',1,'']]],
-  ['personalization_1',['User Personalization',['../md__c_l_a_u_d_e.html#autotoc_md14',1,'']]],
-  ['project_20structure_2',['Project Structure',['../md__c_l_a_u_d_e.html#autotoc_md8',1,'']]],
-  ['publishing_3',['Publishing',['../md__c_l_a_u_d_e.html#autotoc_md6',1,'Publishing'],['../md__r_e_a_d_m_e.html#autotoc_md35',1,'Publishing']]]
+  ['uploading_20a_20catalog_0',['Uploading a Catalog',['../md__r_e_a_d_m_e.html#autotoc_md6',1,'']]],
+  ['usage_1',['Basic Usage',['../md__r_e_a_d_m_e.html#autotoc_md4',1,'']]],
+  ['using_20vs_20code_2',['Using VS Code',['../md__r_e_a_d_m_e.html#autotoc_md15',1,'']]],
+  ['using_20with_20ihttpclientfactory_3',['Using with IHttpClientFactory',['../md__r_e_a_d_m_e.html#autotoc_md5',1,'']]]
 ];

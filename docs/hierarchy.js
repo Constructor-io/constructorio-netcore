@@ -83,7 +83,6 @@ var hierarchy =
       [ "Constructorio_NET.Models.IPlpRequest", "interface_constructorio___n_e_t_1_1_models_1_1_i_plp_request.html", null ]
     ] ],
     [ "Constructorio_NET.Models.Match", "class_constructorio___n_e_t_1_1_models_1_1_match.html", null ],
-    [ "Constructorio_NET.Tests.MudaafiTest", "class_constructorio___n_e_t_1_1_tests_1_1_mudaafi_test.html", null ],
     [ "Constructorio_NET.Models.NextQuestion", "class_constructorio___n_e_t_1_1_models_1_1_next_question.html", null ],
     [ "Constructorio_NET.Models.NextQuestionResponse", "class_constructorio___n_e_t_1_1_models_1_1_next_question_response.html", null ],
     [ "Constructorio_NET.Models.OptionAttribute", "class_constructorio___n_e_t_1_1_models_1_1_option_attribute.html", null ],
