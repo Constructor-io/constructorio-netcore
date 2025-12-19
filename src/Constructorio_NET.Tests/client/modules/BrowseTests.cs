@@ -736,7 +736,7 @@ namespace Constructorio_NET.Tests
             BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
             res.Request.TryGetValue("variations_map", out object reqVariationsMap);
             JObject variationMapResult = JObject.Parse(
-                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": \"24\" }}, \"dtype\": \"object\" }"
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": 24 }}, \"dtype\": \"object\" }"
             );
 
             Assert.NotNull(res.ResultId, "Result id exists");
