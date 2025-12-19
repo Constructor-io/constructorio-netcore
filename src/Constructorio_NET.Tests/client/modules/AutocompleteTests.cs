@@ -91,7 +91,7 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
-        public async Task GetAutocompleteResultsShouldReturnResultWithVariationsMapValueCount()
+        public async Task GetAutocompleteResultsShouldReturnResultWithVariationsMapStringValueCount()
         {
             AutocompleteRequest req = new AutocompleteRequest("item1")
             {
@@ -110,6 +110,64 @@ namespace Constructorio_NET.Tests
             JObject variationMapResult = JObject.Parse(
                 "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": \"true\" }}, \"dtype\": \"object\" }"
               );
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
+        }
+
+        [Test]
+        public async Task GetAutocompleteResultsShouldReturnResultWithVariationsMapBooleanValueCount()
+        {
+            AutocompleteRequest req = new AutocompleteRequest("item1")
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                true
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": true }}, \"dtype\": \"object\" }"
+            );
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
+        }
+
+        [Test]
+        public async Task GetAutocompleteResultsShouldReturnResultWithVariationsMapIntegerValueCount()
+        {
+            AutocompleteRequest req = new AutocompleteRequest("item1")
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                24
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": 24 }}, \"dtype\": \"object\" }"
+            );
 
             Assert.NotNull(res.ResultId, "Result id exists");
             Assert.AreEqual(
