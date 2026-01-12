@@ -76,7 +76,7 @@ namespace Constructorio_NET.Models
         public VariationsMap VariationsMap { get; set; }
 
         /// <summary>
-        /// Gets or sets the filtering expression used to scope results.
+        /// Gets or sets the filtering expression used to scope recommendation results.
         /// </summary>
         public PreFilterExpression PreFilterExpression { get; set; }
 
