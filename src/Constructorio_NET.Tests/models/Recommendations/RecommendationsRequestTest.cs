@@ -91,5 +91,26 @@ namespace Constructorio_NET.Tests
         {
             Assert.Throws<ArgumentException>(() => new RecommendationsRequest(null));
         }
+
+        [Test]
+        public void GetRequestParametersWithPreFilterExpression()
+        {
+            ValuePreFilterExpression filterByGroupId = new ValuePreFilterExpression("group_id", "BrandXY");
+            ValuePreFilterExpression filterByColor = new ValuePreFilterExpression("Color", "red");
+            AndPreFilterExpression preFilterExpression = new AndPreFilterExpression(
+                new List<PreFilterExpression> { filterByGroupId, filterByColor }
+            );
+
+            RecommendationsRequest req = new RecommendationsRequest(this.Pod)
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = preFilterExpression
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.IsNotNull(requestParameters[Constants.PRE_FILTER_EXPRESSION]);
+            Assert.IsTrue(requestParameters[Constants.PRE_FILTER_EXPRESSION].ToString().Contains("group_id"));
+            Assert.IsTrue(requestParameters[Constants.PRE_FILTER_EXPRESSION].ToString().Contains("BrandXY"));
+        }
     }
 }
