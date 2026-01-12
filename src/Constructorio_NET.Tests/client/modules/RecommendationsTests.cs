@@ -321,5 +321,22 @@ namespace Constructorio_NET.Tests
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
         }
+
+        [Test]
+        public async Task GetRecommendationsResultsWithPreFilterExpression()
+        {
+            ValuePreFilterExpression filterByBrand = new ValuePreFilterExpression("Brand", "XYZ");
+            RecommendationsRequest req = new RecommendationsRequest("filtered_items")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = filterByBrand,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.IsNotNull(res.Request["pre_filter_expression"], "PreFilterExpression was passed as parameter");
+        }
     }
 }
