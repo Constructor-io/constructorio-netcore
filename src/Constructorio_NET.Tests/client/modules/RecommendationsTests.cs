@@ -321,5 +321,53 @@ namespace Constructorio_NET.Tests
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
         }
+
+        [Test]
+        public async Task GetRecommendationsResultsWithPreFilterExpression()
+        {
+            ValuePreFilterExpression filterByBrand = new ValuePreFilterExpression("Brand", "XYZ");
+            RecommendationsRequest req = new RecommendationsRequest("filtered_items")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = filterByBrand,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.IsNotNull(res.Request["pre_filter_expression"], "PreFilterExpression was passed as parameter");
+        }
+
+        [Test]
+        public async Task GetRecommendationsResultsWithPreFilterExpressionJson()
+        {
+            JObject preFilterExpressionJObject = JObject.Parse(
+                @"{
+                    'name': 'Brand',
+                    'value': 'XYZ'
+                }"
+            );
+            JsonPrefilterExpression preFilterExpression = new JsonPrefilterExpression(
+                preFilterExpressionJObject
+            );
+            RecommendationsRequest req = new RecommendationsRequest("filtered_items")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = preFilterExpression,
+            };
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+
+            Assert.AreEqual(
+                reqPreFilterExpression,
+                JObject.Parse(preFilterExpression.GetExpression()),
+                "Pre Filter Expression is sent in request"
+            );
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+        }
     }
 }

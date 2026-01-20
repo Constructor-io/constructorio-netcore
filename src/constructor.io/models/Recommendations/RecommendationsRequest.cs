@@ -76,6 +76,11 @@ namespace Constructorio_NET.Models
         public VariationsMap VariationsMap { get; set; }
 
         /// <summary>
+        /// Gets or sets the filtering expression used to scope recommendation results.
+        /// </summary>
+        public PreFilterExpression PreFilterExpression { get; set; }
+
+        /// <summary>
         /// Get request parameters.
         /// </summary>
         /// <returns>Hashtable of request parameters.</returns>
@@ -145,6 +150,12 @@ namespace Constructorio_NET.Models
             {
                 string serializedJson = JsonConvert.SerializeObject(this.VariationsMap);
                 parameters.Add(Constants.VARIATIONS_MAP, serializedJson);
+            }
+
+            if (this.PreFilterExpression != null)
+            {
+                string preFilterJson = this.PreFilterExpression.GetExpression();
+                parameters.Add(Constants.PRE_FILTER_EXPRESSION, preFilterJson);
             }
 
             return parameters;
