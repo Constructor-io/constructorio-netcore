@@ -348,7 +348,7 @@ namespace Constructorio_NET.Tests
                     'value': 'XYZ'
                 }"
             );
-            JsonPreFilterExpression preFilterExpression = new JsonPreFilterExpression(
+            JsonPrefilterExpression preFilterExpression = new JsonPrefilterExpression(
                 preFilterExpressionJObject
             );
             RecommendationsRequest req = new RecommendationsRequest("filtered_items")
