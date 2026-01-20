@@ -7,6 +7,7 @@ var class_constructorio___n_e_t_1_1_models_1_1_recommendations_request =
     [ "ItemIds", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#acfb702090f75b2cfd44eda00a5a9eead", null ],
     [ "NumResults", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a3f81b74397cc1519278609563265c5ba", null ],
     [ "PodId", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ac9938932455b7719213e358aca996add", null ],
+    [ "PreFilterExpression", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a3a442a0f24a6e4a32fd48b881b97914c", null ],
     [ "Section", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ad83391f159315e8d8da538edd2e80b5d", null ],
     [ "Term", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a26b0ae4138cc1aa1e903798b356a4df7", null ],
     [ "TestCells", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a67239fddcfd1c716d5af0c5f416753d4", null ],
