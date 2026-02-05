@@ -25,7 +25,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets the format options used to refine result groups.
         /// </summary>
-        public Dictionary<string, string> FmtOptions { get; set; }
+        public FmtOptions FmtOptions { get; set; }
 
         /// <summary>
         /// Gets or sets the filtering expression used to scope search results.

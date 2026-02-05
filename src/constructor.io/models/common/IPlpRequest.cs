@@ -7,7 +7,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets the format options used to refine result groups.
         /// </summary>
-        Dictionary<string, string> FmtOptions { get; set; }
+        FmtOptions FmtOptions { get; set; }
 
         /// <summary>
         /// Gets or sets hidden facets fields to return.

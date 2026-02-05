@@ -13,7 +13,7 @@ namespace Constructorio_NET.Models
     {
         public List<string> ItemIds { get; set; }
         public Dictionary<string, List<string>> Filters { get; set; }
-        public Dictionary<string, string> FmtOptions { get; set; }
+        public FmtOptions FmtOptions { get; set; }
         public List<string> HiddenFields { get; set; }
         public List<string> HiddenFacets { get; set; }
         public int Offset { get; set; }
