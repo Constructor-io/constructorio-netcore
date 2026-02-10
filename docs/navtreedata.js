@@ -75,8 +75,8 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "class_constructorio___n_e_t_1_1_models_1_1_item_groups_request.html",
-"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#a4de22e4f6e831d7b8209f9c027a120d6",
-"class_constructorio___n_e_t_1_1_tests_1_1_retrieve_searchabilities_request_test.html"
+"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#a476dcf09e6bb059cae3b704f7d43b8d8",
+"class_constructorio___n_e_t_1_1_tests_1_1_recommendations_test.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
