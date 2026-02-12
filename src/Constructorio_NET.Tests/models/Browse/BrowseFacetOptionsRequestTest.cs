@@ -38,6 +38,34 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetRequestParametersWithShowHiddenFacets()
+        {
+            BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(FilterName)
+            {
+                ShowHiddenFacets = true,
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            FmtOptions fmtOptions = (FmtOptions)requestParameters[Constants.FMT_OPTIONS];
+            Assert.IsNotNull(fmtOptions);
+            Assert.AreEqual(true, fmtOptions.ShowHiddenFacets);
+        }
+
+        [Test]
+        public void GetRequestParametersWithShowProtectedFacets()
+        {
+            BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(FilterName)
+            {
+                ShowProtectedFacets = true,
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            FmtOptions fmtOptions = (FmtOptions)requestParameters[Constants.FMT_OPTIONS];
+            Assert.IsNotNull(fmtOptions);
+            Assert.AreEqual(true, fmtOptions.ShowProtectedFacets);
+        }
+
+        [Test]
         public void GetRequestHeaders()
         {
             BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(FilterName)
