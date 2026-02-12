@@ -180,15 +180,54 @@ namespace Constructorio_NET.Utils
                 // Add format options to query string
                 if (queryParams.Contains(Constants.FMT_OPTIONS))
                 {
-                    Dictionary<string, string> fmtOptions = (Dictionary<string, string>)queryParams[Constants.FMT_OPTIONS];
+                    FmtOptions fmtOptions = (FmtOptions)queryParams[Constants.FMT_OPTIONS];
                     queryParams.Remove(Constants.FMT_OPTIONS);
 
-                    foreach (var fmtOption in fmtOptions)
+                    // Scalar values
+                    if (fmtOptions.GroupsMaxDepth.HasValue)
                     {
-                        url.Append("&" + Constants.FMT_OPTIONS + UrlEscapedStartSquareBracket)
-                            .Append(OurEscapeDataString(fmtOption.Key))
-                            .Append(UrlEscapedEndSquareBracket + "=")
-                            .Append(OurEscapeDataString(fmtOption.Value));
+                        AppendFmtOption(url, "groups_max_depth", fmtOptions.GroupsMaxDepth.Value.ToString());
+                    }
+
+                    if (!string.IsNullOrEmpty(fmtOptions.GroupsStart))
+                    {
+                        AppendFmtOption(url, "groups_start", fmtOptions.GroupsStart);
+                    }
+
+                    if (fmtOptions.ShowHiddenFields.HasValue)
+                    {
+                        AppendFmtOption(url, "show_hidden_fields", fmtOptions.ShowHiddenFields.Value.ToString().ToLower());
+                    }
+
+                    if (!string.IsNullOrEmpty(fmtOptions.VariationsReturnType))
+                    {
+                        AppendFmtOption(url, "variations_return_type", fmtOptions.VariationsReturnType);
+                    }
+
+                    if (fmtOptions.ShowHiddenFacets.HasValue)
+                    {
+                        AppendFmtOption(url, "show_hidden_facets", fmtOptions.ShowHiddenFacets.Value.ToString().ToLower());
+                    }
+
+                    if (fmtOptions.ShowProtectedFacets.HasValue)
+                    {
+                        AppendFmtOption(url, "show_protected_facets", fmtOptions.ShowProtectedFacets.Value.ToString().ToLower());
+                    }
+
+                    // Array values (indexed format)
+                    if (fmtOptions.Fields != null)
+                    {
+                        AppendFmtOptionArray(url, "fields", fmtOptions.Fields);
+                    }
+
+                    if (fmtOptions.HiddenFields != null)
+                    {
+                        AppendFmtOptionArray(url, "hidden_fields", fmtOptions.HiddenFields);
+                    }
+
+                    if (fmtOptions.HiddenFacets != null)
+                    {
+                        AppendFmtOptionArray(url, "hidden_facets", fmtOptions.HiddenFacets);
                     }
                 }
 
@@ -270,6 +309,25 @@ namespace Constructorio_NET.Utils
             }
 
             return url.ToString();
+        }
+
+        private static void AppendFmtOption(StringBuilder url, string key, string value)
+        {
+            url.Append("&" + Constants.FMT_OPTIONS + UrlEscapedStartSquareBracket)
+                .Append(OurEscapeDataString(key))
+                .Append(UrlEscapedEndSquareBracket + "=")
+                .Append(OurEscapeDataString(value));
+        }
+
+        private static void AppendFmtOptionArray(StringBuilder url, string key, List<string> values)
+        {
+            foreach (string value in values)
+            {
+                url.Append("&" + Constants.FMT_OPTIONS + UrlEscapedStartSquareBracket)
+                    .Append(OurEscapeDataString(key))
+                    .Append(UrlEscapedEndSquareBracket + "=")
+                    .Append(OurEscapeDataString(value));
+            }
         }
 
         private static async Task<T> DeserializeFromResponse<T>(HttpResponseMessage response, JsonSerializer jsonSerializer = null)
