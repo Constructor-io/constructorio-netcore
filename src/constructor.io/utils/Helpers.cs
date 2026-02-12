@@ -206,12 +206,12 @@ namespace Constructorio_NET.Utils
 
                     if (fmtOptions.ShowHiddenFacets.HasValue)
                     {
-                        AppendFmtOption(url, "show_hidden_facets", fmtOptions.ShowHiddenFacets.Value.ToString());
+                        AppendFmtOption(url, "show_hidden_facets", fmtOptions.ShowHiddenFacets.Value.ToString().ToLower());
                     }
 
                     if (fmtOptions.ShowProtectedFacets.HasValue)
                     {
-                        AppendFmtOption(url, "show_protected_facets", fmtOptions.ShowProtectedFacets.Value.ToString());
+                        AppendFmtOption(url, "show_protected_facets", fmtOptions.ShowProtectedFacets.Value.ToString().ToLower());
                     }
 
                     // Array values (indexed format)
