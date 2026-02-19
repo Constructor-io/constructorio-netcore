@@ -568,6 +568,20 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void RedirectDataIndexerAccessesArbitraryKeys()
+        {
+            string json = @"{""url"":""/test"",""rule_id"":49023,""match_id"":185282,""foo"":""bar"",""custom_key"":123}";
+            RedirectData data = Newtonsoft.Json.JsonConvert.DeserializeObject<RedirectData>(json);
+
+            Assert.AreEqual("/test", data.Url, "Url property should be accessible");
+            Assert.AreEqual(49023, data.RuleId, "RuleId property should be accessible");
+            Assert.AreEqual(185282, data.MatchId, "MatchId property should be accessible");
+            Assert.AreEqual("bar", data["foo"]?.ToString(), "Indexer should access arbitrary string key");
+            Assert.AreEqual(123L, data["custom_key"], "Indexer should access arbitrary numeric key");
+            Assert.IsNull(data["nonexistent"], "Indexer should return null for missing keys");
+        }
+
+        [Test]
         public async Task GetSearchResultsShouldReturnResultWithRefinedContent()
         {
             SearchRequest req = new SearchRequest("item") { UserInfo = this.UserInfo };
