@@ -49,7 +49,7 @@ namespace Constructorio_NET.Tests
         {
             BrowseFacetsRequest req = new BrowseFacetsRequest()
             {
-                ShowHiddenFacets = true,
+                FmtOptions = new FmtOptions { ShowHiddenFacets = true },
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -61,7 +61,7 @@ namespace Constructorio_NET.Tests
         {
             BrowseFacetsRequest req = new BrowseFacetsRequest()
             {
-                ShowProtectedFacets = true,
+                FmtOptions = new FmtOptions { ShowProtectedFacets = true },
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
@@ -95,8 +95,8 @@ namespace Constructorio_NET.Tests
                 FmtOptions = new FmtOptions()
                 {
                     GroupsMaxDepth = 3,
+                    ShowHiddenFacets = true,
                 },
-                ShowHiddenFacets = true,
             };
 
             Hashtable requestParameters = req.GetRequestParameters();

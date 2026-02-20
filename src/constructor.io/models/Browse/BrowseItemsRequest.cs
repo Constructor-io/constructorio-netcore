@@ -14,8 +14,6 @@ namespace Constructorio_NET.Models
         public List<string> ItemIds { get; set; }
         public Dictionary<string, List<string>> Filters { get; set; }
         public FmtOptions FmtOptions { get; set; }
-        public List<string> HiddenFields { get; set; }
-        public List<string> HiddenFacets { get; set; }
         public int Offset { get; set; }
         public int Page { get; set; }
         public int ResultsPerPage { get; set; }
@@ -81,22 +79,9 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.FILTERS, this.Filters);
             }
 
-            FmtOptions fmtOptions = this.FmtOptions;
-            if (this.HiddenFields != null)
+            if (this.FmtOptions != null)
             {
-                fmtOptions ??= new FmtOptions();
-                fmtOptions.HiddenFields ??= this.HiddenFields;
-            }
-
-            if (this.HiddenFacets != null)
-            {
-                fmtOptions ??= new FmtOptions();
-                fmtOptions.HiddenFacets ??= this.HiddenFacets;
-            }
-
-            if (fmtOptions != null)
-            {
-                foreach (DictionaryEntry entry in fmtOptions.GetQueryParameters())
+                foreach (DictionaryEntry entry in this.FmtOptions.GetQueryParameters())
                 {
                     parameters.Add(entry.Key, entry.Value);
                 }

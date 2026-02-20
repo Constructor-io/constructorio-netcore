@@ -678,7 +678,7 @@ namespace Constructorio_NET.Tests
             SearchRequest req = new SearchRequest("item1")
             {
                 UserInfo = this.UserInfo,
-                HiddenFields = new List<string> { requestedHiddenField }
+                FmtOptions = new FmtOptions { HiddenFields = new List<string> { requestedHiddenField } }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
@@ -695,7 +695,7 @@ namespace Constructorio_NET.Tests
             SearchRequest req = new SearchRequest("item1")
             {
                 UserInfo = this.UserInfo,
-                HiddenFacets = new List<string> { requestedHiddenFacet }
+                FmtOptions = new FmtOptions { HiddenFacets = new List<string> { requestedHiddenFacet } }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);

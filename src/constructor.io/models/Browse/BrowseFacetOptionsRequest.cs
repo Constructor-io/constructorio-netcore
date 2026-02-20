@@ -11,8 +11,6 @@ namespace Constructorio_NET.Models
     public class BrowseFacetOptionsRequest
     {
         public string FacetName { get; set; }
-        public bool ShowHiddenFacets { get; set; }
-        public bool ShowProtectedFacets { get; set; }
         public FmtOptions FmtOptions { get; set; }
         public UserInfo UserInfo { get; set; }
 
@@ -38,22 +36,9 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.FACET_NAME, this.FacetName);
             }
 
-            FmtOptions fmtOptions = this.FmtOptions;
-            if (this.ShowHiddenFacets)
+            if (this.FmtOptions != null)
             {
-                fmtOptions ??= new FmtOptions();
-                fmtOptions.ShowHiddenFacets = this.ShowHiddenFacets;
-            }
-
-            if (this.ShowProtectedFacets)
-            {
-                fmtOptions ??= new FmtOptions();
-                fmtOptions.ShowProtectedFacets = this.ShowProtectedFacets;
-            }
-
-            if (fmtOptions != null)
-            {
-                foreach (DictionaryEntry entry in fmtOptions.GetQueryParameters())
+                foreach (DictionaryEntry entry in this.FmtOptions.GetQueryParameters())
                 {
                     parameters.Add(entry.Key, entry.Value);
                 }

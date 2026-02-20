@@ -13,8 +13,6 @@ namespace Constructorio_NET.Models
         public int Page { get; set; }
         public int ResultsPerPage { get; set; }
         public int Offset { get; set; }
-        public bool ShowHiddenFacets { get; set; }
-        public bool ShowProtectedFacets { get; set; }
         public FmtOptions FmtOptions { get; set; }
         public UserInfo UserInfo { get; set; }
 
@@ -48,22 +46,9 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.RESULTS_PER_PAGE, this.ResultsPerPage);
             }
 
-            FmtOptions fmtOptions = this.FmtOptions;
-            if (this.ShowHiddenFacets)
+            if (this.FmtOptions != null)
             {
-                fmtOptions ??= new FmtOptions();
-                fmtOptions.ShowHiddenFacets = this.ShowHiddenFacets;
-            }
-
-            if (this.ShowProtectedFacets)
-            {
-                fmtOptions ??= new FmtOptions();
-                fmtOptions.ShowProtectedFacets = this.ShowProtectedFacets;
-            }
-
-            if (fmtOptions != null)
-            {
-                foreach (DictionaryEntry entry in fmtOptions.GetQueryParameters())
+                foreach (DictionaryEntry entry in this.FmtOptions.GetQueryParameters())
                 {
                     parameters.Add(entry.Key, entry.Value);
                 }

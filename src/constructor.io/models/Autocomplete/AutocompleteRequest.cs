@@ -32,9 +32,9 @@ namespace Constructorio_NET.Models
         public Dictionary<string, Dictionary<string, List<string>>> FiltersPerSection { get; set; }
 
         /// <summary>
-        /// Gets or sets hidden metadata fields to return.
+        /// Gets or sets the format options used to refine result groups.
         /// </summary>
-        public List<string> HiddenFields { get; set; }
+        public FmtOptions FmtOptions { get; set; }
 
         /// <summary>
         /// Gets or sets user test cells.
@@ -126,10 +126,9 @@ namespace Constructorio_NET.Models
                 }
             }
 
-            if (this.HiddenFields != null)
+            if (this.FmtOptions != null)
             {
-                FmtOptions fmtOptions = new FmtOptions { HiddenFields = this.HiddenFields };
-                foreach (DictionaryEntry entry in fmtOptions.GetQueryParameters())
+                foreach (DictionaryEntry entry in this.FmtOptions.GetQueryParameters())
                 {
                     parameters.Add(entry.Key, entry.Value);
                 }

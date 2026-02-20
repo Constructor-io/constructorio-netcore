@@ -33,16 +33,6 @@ namespace Constructorio_NET.Models
         public PreFilterExpression PreFilterExpression { get; set; }
 
         /// <summary>
-        /// Gets or sets hidden metadata fields to return.
-        /// </summary>
-        public List<string> HiddenFields { get; set; }
-
-        /// <summary>
-        /// Gets or sets hidden facets fields to return.
-        /// </summary>
-        public List<string> HiddenFacets { get; set; }
-
-        /// <summary>
         /// Gets or sets the number of results to skip from the beginning.
         /// Can't be used together with <see cref="Page"/>.
         /// </summary>
@@ -151,22 +141,9 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.PRE_FILTER_EXPRESSION, preFilterJson);
             }
 
-            FmtOptions fmtOptions = this.FmtOptions;
-            if (this.HiddenFields != null)
+            if (this.FmtOptions != null)
             {
-                fmtOptions ??= new FmtOptions();
-                fmtOptions.HiddenFields ??= this.HiddenFields;
-            }
-
-            if (this.HiddenFacets != null)
-            {
-                fmtOptions ??= new FmtOptions();
-                fmtOptions.HiddenFacets ??= this.HiddenFacets;
-            }
-
-            if (fmtOptions != null)
-            {
-                foreach (DictionaryEntry entry in fmtOptions.GetQueryParameters())
+                foreach (DictionaryEntry entry in this.FmtOptions.GetQueryParameters())
                 {
                     parameters.Add(entry.Key, entry.Value);
                 }
