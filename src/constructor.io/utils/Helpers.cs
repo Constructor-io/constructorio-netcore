@@ -217,17 +217,17 @@ namespace Constructorio_NET.Utils
                     // Array values (indexed format)
                     if (fmtOptions.Fields != null)
                     {
-                        AppendFmtOptionArray(url, "fields", fmtOptions.Fields);
+                        AppendFmtOption(url, "fields", fmtOptions.Fields);
                     }
 
                     if (fmtOptions.HiddenFields != null)
                     {
-                        AppendFmtOptionArray(url, "hidden_fields", fmtOptions.HiddenFields);
+                        AppendFmtOption(url, "hidden_fields", fmtOptions.HiddenFields);
                     }
 
                     if (fmtOptions.HiddenFacets != null)
                     {
-                        AppendFmtOptionArray(url, "hidden_facets", fmtOptions.HiddenFacets);
+                        AppendFmtOption(url, "hidden_facets", fmtOptions.HiddenFacets);
                     }
                 }
 
@@ -319,7 +319,7 @@ namespace Constructorio_NET.Utils
                 .Append(OurEscapeDataString(value));
         }
 
-        private static void AppendFmtOptionArray(StringBuilder url, string key, List<string> values)
+        private static void AppendFmtOption(StringBuilder url, string key, List<string> values)
         {
             foreach (string value in values)
             {
