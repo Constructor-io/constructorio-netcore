@@ -15,6 +15,7 @@ namespace Constructorio_NET.Models
         public int Offset { get; set; }
         public bool ShowHiddenFacets { get; set; }
         public bool ShowProtectedFacets { get; set; }
+        public FmtOptions FmtOptions { get; set; }
         public UserInfo UserInfo { get; set; }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.RESULTS_PER_PAGE, this.ResultsPerPage);
             }
 
-            FmtOptions fmtOptions = null;
+            FmtOptions fmtOptions = this.FmtOptions;
             if (this.ShowHiddenFacets)
             {
                 fmtOptions ??= new FmtOptions();

@@ -73,6 +73,46 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetRequestParametersWithFmtOptions()
+        {
+            BrowseFacetsRequest req = new BrowseFacetsRequest()
+            {
+                FmtOptions = new FmtOptions()
+                {
+                    GroupsMaxDepth = 3,
+                    ShowHiddenFacets = true,
+                    ShowProtectedFacets = true,
+                },
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            FmtOptions fmtOptions = (FmtOptions)requestParameters[Constants.FMT_OPTIONS];
+            Assert.IsNotNull(fmtOptions);
+            Assert.AreEqual(3, fmtOptions.GroupsMaxDepth);
+            Assert.AreEqual(true, fmtOptions.ShowHiddenFacets);
+            Assert.AreEqual(true, fmtOptions.ShowProtectedFacets);
+        }
+
+        [Test]
+        public void GetRequestParametersWithFmtOptionsAndShowHiddenFacets()
+        {
+            BrowseFacetsRequest req = new BrowseFacetsRequest()
+            {
+                FmtOptions = new FmtOptions()
+                {
+                    GroupsMaxDepth = 3,
+                },
+                ShowHiddenFacets = true,
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            FmtOptions fmtOptions = (FmtOptions)requestParameters[Constants.FMT_OPTIONS];
+            Assert.IsNotNull(fmtOptions);
+            Assert.AreEqual(3, fmtOptions.GroupsMaxDepth);
+            Assert.AreEqual(true, fmtOptions.ShowHiddenFacets);
+        }
+
+        [Test]
         public void GetRequestHeaders()
         {
             BrowseFacetsRequest req = new BrowseFacetsRequest()
