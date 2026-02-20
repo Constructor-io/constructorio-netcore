@@ -53,9 +53,7 @@ namespace Constructorio_NET.Tests
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
-            FmtOptions fmtOptions = (FmtOptions)requestParameters[Constants.FMT_OPTIONS];
-            Assert.IsNotNull(fmtOptions);
-            Assert.AreEqual(true, fmtOptions.ShowHiddenFacets);
+            Assert.AreEqual("true", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FACETS}]"]);
         }
 
         [Test]
@@ -67,9 +65,7 @@ namespace Constructorio_NET.Tests
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
-            FmtOptions fmtOptions = (FmtOptions)requestParameters[Constants.FMT_OPTIONS];
-            Assert.IsNotNull(fmtOptions);
-            Assert.AreEqual(true, fmtOptions.ShowProtectedFacets);
+            Assert.AreEqual("true", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_PROTECTED_FACETS}]"]);
         }
 
         [Test]
@@ -86,11 +82,9 @@ namespace Constructorio_NET.Tests
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
-            FmtOptions fmtOptions = (FmtOptions)requestParameters[Constants.FMT_OPTIONS];
-            Assert.IsNotNull(fmtOptions);
-            Assert.AreEqual(3, fmtOptions.GroupsMaxDepth);
-            Assert.AreEqual(true, fmtOptions.ShowHiddenFacets);
-            Assert.AreEqual(true, fmtOptions.ShowProtectedFacets);
+            Assert.AreEqual("3", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]"]);
+            Assert.AreEqual("true", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FACETS}]"]);
+            Assert.AreEqual("true", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_PROTECTED_FACETS}]"]);
         }
 
         [Test]
@@ -106,10 +100,8 @@ namespace Constructorio_NET.Tests
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
-            FmtOptions fmtOptions = (FmtOptions)requestParameters[Constants.FMT_OPTIONS];
-            Assert.IsNotNull(fmtOptions);
-            Assert.AreEqual(3, fmtOptions.GroupsMaxDepth);
-            Assert.AreEqual(true, fmtOptions.ShowHiddenFacets);
+            Assert.AreEqual("3", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]"]);
+            Assert.AreEqual("true", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FACETS}]"]);
         }
 
         [Test]

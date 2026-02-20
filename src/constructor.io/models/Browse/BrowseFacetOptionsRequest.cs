@@ -53,7 +53,10 @@ namespace Constructorio_NET.Models
 
             if (fmtOptions != null)
             {
-                parameters.Add(Constants.FMT_OPTIONS, fmtOptions);
+                foreach (DictionaryEntry entry in fmtOptions.GetQueryParameters())
+                {
+                    parameters.Add(entry.Key, entry.Value);
+                }
             }
 
             return parameters;

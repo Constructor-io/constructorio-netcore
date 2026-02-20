@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using Constructorio_NET.Utils;
 
 namespace Constructorio_NET.Models
 {
@@ -53,5 +55,62 @@ namespace Constructorio_NET.Models
         /// Gets or sets whether to show protected facets.
         /// </summary>
         public bool? ShowProtectedFacets { get; set; }
+
+        /// <summary>
+        /// Returns a Hashtable of pre-formatted query parameters with keys like "fmt_options[property_name]".
+        /// Values are either string or List&lt;string&gt;.
+        /// </summary>
+        /// <returns>Hashtable of query parameters.</returns>
+        public Hashtable GetQueryParameters()
+        {
+            Hashtable parameters = new Hashtable();
+
+            if (this.GroupsMaxDepth.HasValue)
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]", this.GroupsMaxDepth.Value.ToString());
+            }
+
+            if (!string.IsNullOrEmpty(this.GroupsStart))
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.GROUPS_START}]", this.GroupsStart);
+            }
+
+            if (this.ShowHiddenFields.HasValue)
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FIELDS}]", this.ShowHiddenFields.Value.ToString().ToLower());
+            }
+
+            if (!string.IsNullOrEmpty(this.VariationsReturnType))
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.VARIATIONS_RETURN_TYPE}]", this.VariationsReturnType);
+            }
+
+            if (this.ShowHiddenFacets.HasValue)
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FACETS}]", this.ShowHiddenFacets.Value.ToString().ToLower());
+            }
+
+            if (this.ShowProtectedFacets.HasValue)
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.SHOW_PROTECTED_FACETS}]", this.ShowProtectedFacets.Value.ToString().ToLower());
+            }
+
+            if (this.Fields != null)
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.FIELDS}]", this.Fields);
+            }
+
+            if (this.HiddenFields != null)
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FIELDS}]", this.HiddenFields);
+            }
+
+            if (this.HiddenFacets != null)
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FACETS}]", this.HiddenFacets);
+            }
+
+            return parameters;
+        }
     }
 }

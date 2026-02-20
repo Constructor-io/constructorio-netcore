@@ -166,7 +166,7 @@ namespace Constructorio_NET.Tests
             List<string> hiddenFields = new List<string>() { "inventory", "margin" };
             Hashtable queryParams = new Hashtable()
             {
-                { Constants.HIDDEN_FIELDS, hiddenFields }
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FIELDS}]", hiddenFields }
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
@@ -182,7 +182,7 @@ namespace Constructorio_NET.Tests
             List<string> hiddenFacets = new List<string>() { "inventory", "margin" };
             Hashtable queryParams = new Hashtable()
             {
-                { Constants.HIDDEN_FACETS, hiddenFacets }
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FACETS}]", hiddenFacets }
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
@@ -195,15 +195,11 @@ namespace Constructorio_NET.Tests
         public void MakeUrlSearchWithFmtOptions()
         {
             List<string> paths = new List<string> { "search", this.Query };
-            FmtOptions fmtOptions = new FmtOptions
-            {
-                GroupsMaxDepth = 3,
-                GroupsStart = "current"
-            };
             Hashtable queryParams = new Hashtable()
             {
                 { Constants.SECTION, "Search Suggestions" },
-                { Constants.FMT_OPTIONS, fmtOptions }
+                { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]", "3" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_START}]", "current" },
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
@@ -218,13 +214,9 @@ namespace Constructorio_NET.Tests
         public void MakeUrlSearchWithFmtOptionsFieldsArray()
         {
             List<string> paths = new List<string> { "search", this.Query };
-            FmtOptions fmtOptions = new FmtOptions
-            {
-                Fields = new List<string> { "id", "variation_id", "name" }
-            };
             Hashtable queryParams = new Hashtable()
             {
-                { Constants.FMT_OPTIONS, fmtOptions }
+                { $"{Constants.FMT_OPTIONS}[{Constants.FIELDS}]", new List<string> { "id", "variation_id", "name" } }
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
@@ -238,13 +230,9 @@ namespace Constructorio_NET.Tests
         public void MakeUrlSearchWithFmtOptionsHiddenFieldsArray()
         {
             List<string> paths = new List<string> { "search", this.Query };
-            FmtOptions fmtOptions = new FmtOptions
-            {
-                HiddenFields = new List<string> { "inventory", "margin" }
-            };
             Hashtable queryParams = new Hashtable()
             {
-                { Constants.FMT_OPTIONS, fmtOptions }
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FIELDS}]", new List<string> { "inventory", "margin" } }
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
@@ -257,13 +245,9 @@ namespace Constructorio_NET.Tests
         public void MakeUrlSearchWithFmtOptionsHiddenFacetsArray()
         {
             List<string> paths = new List<string> { "search", this.Query };
-            FmtOptions fmtOptions = new FmtOptions
-            {
-                HiddenFacets = new List<string> { "brand", "category" }
-            };
             Hashtable queryParams = new Hashtable()
             {
-                { Constants.FMT_OPTIONS, fmtOptions }
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FACETS}]", new List<string> { "brand", "category" } }
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
@@ -276,19 +260,15 @@ namespace Constructorio_NET.Tests
         public void MakeUrlSearchWithFmtOptionsAllProperties()
         {
             List<string> paths = new List<string> { "search", this.Query };
-            FmtOptions fmtOptions = new FmtOptions
-            {
-                GroupsMaxDepth = 5,
-                GroupsStart = "top",
-                ShowHiddenFields = true,
-                VariationsReturnType = "all",
-                Fields = new List<string> { "id" },
-                HiddenFields = new List<string> { "inventory" },
-                HiddenFacets = new List<string> { "brand" }
-            };
             Hashtable queryParams = new Hashtable()
             {
-                { Constants.FMT_OPTIONS, fmtOptions }
+                { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]", "5" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_START}]", "top" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FIELDS}]", "true" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.VARIATIONS_RETURN_TYPE}]", "all" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.FIELDS}]", new List<string> { "id" } },
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FIELDS}]", new List<string> { "inventory" } },
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FACETS}]", new List<string> { "brand" } },
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);

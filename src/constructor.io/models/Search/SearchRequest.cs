@@ -140,19 +140,25 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.PRE_FILTER_EXPRESSION, preFilterJson);
             }
 
-            if (this.FmtOptions != null)
-            {
-                parameters.Add(Constants.FMT_OPTIONS, this.FmtOptions);
-            }
-
+            FmtOptions fmtOptions = this.FmtOptions;
             if (this.HiddenFields != null)
             {
-                parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
+                fmtOptions ??= new FmtOptions();
+                fmtOptions.HiddenFields ??= this.HiddenFields;
             }
 
             if (this.HiddenFacets != null)
             {
-                parameters.Add(Constants.HIDDEN_FACETS, this.HiddenFacets);
+                fmtOptions ??= new FmtOptions();
+                fmtOptions.HiddenFacets ??= this.HiddenFacets;
+            }
+
+            if (fmtOptions != null)
+            {
+                foreach (DictionaryEntry entry in fmtOptions.GetQueryParameters())
+                {
+                    parameters.Add(entry.Key, entry.Value);
+                }
             }
 
             if (this.Offset != 0)

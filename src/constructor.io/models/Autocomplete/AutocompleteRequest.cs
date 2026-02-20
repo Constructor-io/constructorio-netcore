@@ -128,7 +128,11 @@ namespace Constructorio_NET.Models
 
             if (this.HiddenFields != null)
             {
-                parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
+                FmtOptions fmtOptions = new FmtOptions { HiddenFields = this.HiddenFields };
+                foreach (DictionaryEntry entry in fmtOptions.GetQueryParameters())
+                {
+                    parameters.Add(entry.Key, entry.Value);
+                }
             }
 
             return parameters;
