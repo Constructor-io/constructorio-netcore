@@ -81,6 +81,11 @@ namespace Constructorio_NET.Models
         public PreFilterExpression PreFilterExpression { get; set; }
 
         /// <summary>
+        /// Gets or sets format options to control result formatting.
+        /// </summary>
+        public FmtOptions FmtOptions { get; set; }
+
+        /// <summary>
         /// Get request parameters.
         /// </summary>
         /// <returns>Hashtable of request parameters.</returns>
@@ -156,6 +161,14 @@ namespace Constructorio_NET.Models
             {
                 string preFilterJson = this.PreFilterExpression.GetExpression();
                 parameters.Add(Constants.PRE_FILTER_EXPRESSION, preFilterJson);
+            }
+
+            if (this.FmtOptions != null)
+            {
+                foreach (DictionaryEntry entry in this.FmtOptions.GetQueryParameters())
+                {
+                    parameters.Add(entry.Key, entry.Value);
+                }
             }
 
             return parameters;

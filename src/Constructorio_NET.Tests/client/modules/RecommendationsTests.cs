@@ -340,6 +340,40 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetRecommendationsResultsShouldReturnResultWithHiddenFields()
+        {
+            string requestedHiddenField = "testField";
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                FmtOptions = new FmtOptions { HiddenFields = new List<string> { requestedHiddenField } }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+        }
+
+        [Test]
+        public async Task GetRecommendationsResultsShouldReturnResultWithHiddenFacets()
+        {
+            string requestedHiddenFacet = "Brand";
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                FmtOptions = new FmtOptions { HiddenFacets = new List<string> { requestedHiddenFacet } }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+        }
+
+        [Test]
         public async Task GetRecommendationsResultsWithPreFilterExpressionJson()
         {
             JObject preFilterExpressionJObject = JObject.Parse(
