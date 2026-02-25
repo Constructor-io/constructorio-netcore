@@ -354,6 +354,22 @@ namespace Constructorio_NET.Tests
 
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
+
+            // If we received at least one result, verify that the requested hidden field
+            // is present in the metadata of the first result.
+            if (res.Response.Results.Count > 0)
+            {
+                var metadata = res.Response.Results[0].Data?.Metadata;
+                Assert.IsNotNull(metadata, "Result metadata exists");
+                Assert.IsTrue(
+                    metadata.ContainsKey(requestedHiddenField),
+                    "Requested hidden field is present in result metadata"
+                );
+                Assert.IsNotNull(
+                    metadata[requestedHiddenField],
+                    "Requested hidden field has a non-null value in result metadata"
+                );
+            }
         }
 
         [Test]
