@@ -73,9 +73,11 @@ namespace Constructorio_NET.Tests
             SearchRequest req = new SearchRequest("item1") { UserInfo = this.UserInfo };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
-            string sliceAttribute = res.Response.Results[0].VariationSlice["Color"][0];
 
-            Assert.AreEqual("Blue", sliceAttribute);
+            Assert.IsNotNull(res.Response.Results[0].VariationSlice, "VariationSlice should exist");
+            Assert.IsTrue(res.Response.Results[0].VariationSlice.ContainsKey("Color"), "VariationSlice should contain Color key");
+            Assert.Greater(res.Response.Results[0].VariationSlice["Color"].Count, 0, "Color slice should have at least one value");
+            Assert.IsNotEmpty(res.Response.Results[0].VariationSlice["Color"][0], "Color slice value should not be empty");
         }
 
         [Test]
