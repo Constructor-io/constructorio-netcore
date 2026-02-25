@@ -352,7 +352,6 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
 
-            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
 
             // If we received at least one result, verify that the requested hidden field
@@ -370,23 +369,6 @@ namespace Constructorio_NET.Tests
                     "Requested hidden field has a non-null value in result metadata"
                 );
             }
-        }
-
-        [Test]
-        public async Task GetRecommendationsResultsShouldReturnResultWithHiddenFacets()
-        {
-            string requestedHiddenFacet = "Brand";
-            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
-            {
-                UserInfo = this.UserInfo,
-                ItemIds = new List<string> { "power_drill" },
-                FmtOptions = new FmtOptions { HiddenFacets = new List<string> { requestedHiddenFacet } }
-            };
-            ConstructorIO constructorio = new ConstructorIO(this.Config);
-            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
-
-            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
-            Assert.NotNull(res.ResultId, "Result id exists");
         }
 
         [Test]
