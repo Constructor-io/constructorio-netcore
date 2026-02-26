@@ -340,6 +340,38 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetRecommendationsResultsShouldReturnResultWithHiddenFields()
+        {
+            string requestedHiddenField = "testField";
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                FmtOptions = new FmtOptions { HiddenFields = new List<string> { requestedHiddenField } }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+
+            // If we received at least one result, verify that the requested hidden field
+            // is present in the metadata of the first result.
+            if (res.Response.Results.Count > 0)
+            {
+                var metadata = res.Response.Results[0].Data?.Metadata;
+                Assert.IsNotNull(metadata, "Result metadata exists");
+                Assert.IsTrue(
+                    metadata.ContainsKey(requestedHiddenField),
+                    "Requested hidden field is present in result metadata"
+                );
+                Assert.IsNotNull(
+                    metadata[requestedHiddenField],
+                    "Requested hidden field has a non-null value in result metadata"
+                );
+            }
+        }
+
+        [Test]
         public async Task GetRecommendationsResultsWithPreFilterExpressionJson()
         {
             JObject preFilterExpressionJObject = JObject.Parse(

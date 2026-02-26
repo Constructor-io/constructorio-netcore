@@ -87,6 +87,23 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetRequestParametersWithFmtOptions()
+        {
+            RecommendationsRequest req = new RecommendationsRequest(this.Pod)
+            {
+                UserInfo = this.UserInfo,
+                FmtOptions = new FmtOptions
+                {
+                    HiddenFields = new List<string> { "inventory" },
+                },
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            List<string> hiddenFields = (List<string>)requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FIELDS}]"];
+            Assert.AreEqual(new List<string> { "inventory" }, hiddenFields);
+        }
+
+        [Test]
         public void RecommendationsRequestWithInvalidPod()
         {
             Assert.Throws<ArgumentException>(() => new RecommendationsRequest(null));
