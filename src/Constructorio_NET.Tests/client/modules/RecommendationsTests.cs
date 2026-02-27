@@ -343,10 +343,13 @@ namespace Constructorio_NET.Tests
         public async Task GetRecommendationsResultsShouldReturnResultWithHiddenFields()
         {
             string requestedHiddenField = "testField";
-            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            RecommendationsRequest req = new RecommendationsRequest("filtered_items")
             {
                 UserInfo = this.UserInfo,
-                ItemIds = new List<string> { "power_drill" },
+                Filters = new Dictionary<string, List<string>>()
+                {
+                    { "Brand", new List<string>() { "XYZ" } }
+                },
                 FmtOptions = new FmtOptions { HiddenFields = new List<string> { requestedHiddenField } }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
