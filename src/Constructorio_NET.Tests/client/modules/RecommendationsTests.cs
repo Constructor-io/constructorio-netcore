@@ -353,22 +353,18 @@ namespace Constructorio_NET.Tests
             RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
 
             Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.Greater(res.Response.Results.Count, 0, "Results expected to be greater than 0");
 
-            // If we received at least one result, verify that the requested hidden field
-            // is present in the metadata of the first result.
-            if (res.Response.Results.Count > 0)
-            {
-                var metadata = res.Response.Results[0].Data?.Metadata;
-                Assert.IsNotNull(metadata, "Result metadata exists");
-                Assert.IsTrue(
-                    metadata.ContainsKey(requestedHiddenField),
-                    "Requested hidden field is present in result metadata"
-                );
-                Assert.IsNotNull(
-                    metadata[requestedHiddenField],
-                    "Requested hidden field has a non-null value in result metadata"
-                );
-            }
+            var metadata = res.Response.Results[0].Data?.Metadata;
+            Assert.IsNotNull(metadata, "Result metadata exists");
+            Assert.IsTrue(
+                metadata.ContainsKey(requestedHiddenField),
+                "Requested hidden field is present in result metadata"
+            );
+            Assert.IsNotNull(
+                metadata[requestedHiddenField],
+                "Requested hidden field has a non-null value in result metadata"
+            );
         }
 
         [Test]
