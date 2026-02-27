@@ -72,11 +72,29 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetQueryParametersShowHiddenFacetsFalse()
+        {
+            FmtOptions fmtOptions = new FmtOptions { ShowHiddenFacets = false };
+            Hashtable result = fmtOptions.GetQueryParameters();
+            Assert.AreEqual("false", result[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FACETS}]"]);
+            Assert.AreEqual(1, result.Count);
+        }
+
+        [Test]
         public void GetQueryParametersShowProtectedFacets()
         {
             FmtOptions fmtOptions = new FmtOptions { ShowProtectedFacets = true };
             Hashtable result = fmtOptions.GetQueryParameters();
             Assert.AreEqual("true", result[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_PROTECTED_FACETS}]"]);
+            Assert.AreEqual(1, result.Count);
+        }
+
+        [Test]
+        public void GetQueryParametersShowProtectedFacetsFalse()
+        {
+            FmtOptions fmtOptions = new FmtOptions { ShowProtectedFacets = false };
+            Hashtable result = fmtOptions.GetQueryParameters();
+            Assert.AreEqual("false", result[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_PROTECTED_FACETS}]"]);
             Assert.AreEqual(1, result.Count);
         }
 
