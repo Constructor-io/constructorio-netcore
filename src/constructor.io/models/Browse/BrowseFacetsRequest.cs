@@ -17,13 +17,6 @@ namespace Constructorio_NET.Models
         public UserInfo UserInfo { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BrowseFacetsRequest"/> class.
-        /// </summary>
-        public BrowseFacetsRequest()
-        {
-        }
-
-        /// <summary>
         /// Get request parameters.
         /// </summary>
         /// <returns>Hashtable of request parameters.</returns>
