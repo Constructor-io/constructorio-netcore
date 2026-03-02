@@ -36,6 +36,7 @@ var namespace_constructorio___n_e_t_1_1_models =
     [ "FilterFacetOption", "class_constructorio___n_e_t_1_1_models_1_1_filter_facet_option.html", null ],
     [ "FilterGroup", "class_constructorio___n_e_t_1_1_models_1_1_filter_group.html", null ],
     [ "FilterSortOption", "class_constructorio___n_e_t_1_1_models_1_1_filter_sort_option.html", null ],
+    [ "FmtOptions", "class_constructorio___n_e_t_1_1_models_1_1_fmt_options.html", "class_constructorio___n_e_t_1_1_models_1_1_fmt_options" ],
     [ "IFilterable", "interface_constructorio___n_e_t_1_1_models_1_1_i_filterable.html", "interface_constructorio___n_e_t_1_1_models_1_1_i_filterable" ],
     [ "IPageable", "interface_constructorio___n_e_t_1_1_models_1_1_i_pageable.html", "interface_constructorio___n_e_t_1_1_models_1_1_i_pageable" ],
     [ "IPlpRequest", "interface_constructorio___n_e_t_1_1_models_1_1_i_plp_request.html", "interface_constructorio___n_e_t_1_1_models_1_1_i_plp_request" ],

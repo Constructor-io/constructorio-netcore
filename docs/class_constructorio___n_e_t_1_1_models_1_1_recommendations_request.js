@@ -4,6 +4,7 @@ var class_constructorio___n_e_t_1_1_models_1_1_recommendations_request =
     [ "GetRequestHeaders", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a1dc2b4447fdffbb8cad5d5ef465267c6", null ],
     [ "GetRequestParameters", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ab1915fa2c287423045be4f9c386fd653", null ],
     [ "Filters", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a196b3f5d86bf05e38ed1921ae42c3f08", null ],
+    [ "FmtOptions", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a392b727b1e70eae7c570d22f4ae4dd1a", null ],
     [ "ItemIds", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#acfb702090f75b2cfd44eda00a5a9eead", null ],
     [ "NumResults", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a3f81b74397cc1519278609563265c5ba", null ],
     [ "PodId", "class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#ac9938932455b7719213e358aca996add", null ],

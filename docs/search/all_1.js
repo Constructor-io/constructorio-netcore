@@ -12,7 +12,7 @@ var searchData=
   ['browsefacetoptionsrequesttest_9',['BrowseFacetOptionsRequestTest',['../class_constructorio___n_e_t_1_1_tests_1_1_browse_facet_options_request_test.html',1,'Constructorio_NET::Tests']]],
   ['browsefacetoptionsresponse_10',['BrowseFacetOptionsResponse',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facet_options_response.html',1,'Constructorio_NET::Models']]],
   ['browsefacetoptionsresponseinner_11',['BrowseFacetOptionsResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facet_options_response_inner.html',1,'Constructorio_NET::Models']]],
-  ['browsefacetsrequest_12',['BrowseFacetsRequest',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_request.html',1,'Constructorio_NET.Models.BrowseFacetsRequest'],['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_request.html#ae6e0068fc199068e0bb3a39ed332574f',1,'Constructorio_NET.Models.BrowseFacetsRequest.BrowseFacetsRequest()']]],
+  ['browsefacetsrequest_12',['BrowseFacetsRequest',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_request.html',1,'Constructorio_NET::Models']]],
   ['browsefacetsrequesttest_13',['BrowseFacetsRequestTest',['../class_constructorio___n_e_t_1_1_tests_1_1_browse_facets_request_test.html',1,'Constructorio_NET::Tests']]],
   ['browsefacetsresponse_14',['BrowseFacetsResponse',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_response.html',1,'Constructorio_NET::Models']]],
   ['browsefacetsresponseinner_15',['BrowseFacetsResponseInner',['../class_constructorio___n_e_t_1_1_models_1_1_browse_facets_response_inner.html',1,'Constructorio_NET::Models']]],

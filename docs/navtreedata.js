@@ -74,9 +74,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"class_constructorio___n_e_t_1_1_models_1_1_item_groups_request.html",
-"class_constructorio___n_e_t_1_1_models_1_1_sort_option.html#a476dcf09e6bb059cae3b704f7d43b8d8",
-"class_constructorio___n_e_t_1_1_tests_1_1_recommendations_test.html"
+"class_constructorio___n_e_t_1_1_models_1_1_fmt_options.html#a4e7750bbc8a2c892cbfb754bb766dd46",
+"class_constructorio___n_e_t_1_1_models_1_1_searchability.html#ac17529d133e797ac9add686e44009093",
+"class_constructorio___n_e_t_1_1_tests_1_1_facets_test.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

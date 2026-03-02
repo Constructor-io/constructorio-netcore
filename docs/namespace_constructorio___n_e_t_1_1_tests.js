@@ -21,6 +21,7 @@ var namespace_constructorio___n_e_t_1_1_tests =
     [ "RetrieveSearchabilitiesRequestTest", "class_constructorio___n_e_t_1_1_tests_1_1_retrieve_searchabilities_request_test.html", null ],
     [ "SortOptionsTest", "class_constructorio___n_e_t_1_1_tests_1_1_sort_options_test.html", null ],
     [ "ConstructorioConfigTest", "class_constructorio___n_e_t_1_1_tests_1_1_constructorio_config_test.html", null ],
+    [ "FmtOptionsTest", "class_constructorio___n_e_t_1_1_tests_1_1_fmt_options_test.html", null ],
     [ "UserInfoTest", "class_constructorio___n_e_t_1_1_tests_1_1_user_info_test.html", null ],
     [ "QuizRequestTest", "class_constructorio___n_e_t_1_1_tests_1_1_quiz_request_test.html", null ],
     [ "RecommendationsRequestTest", "class_constructorio___n_e_t_1_1_tests_1_1_recommendations_request_test.html", null ],
