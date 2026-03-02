@@ -13,18 +13,8 @@ namespace Constructorio_NET.Models
         public int Page { get; set; }
         public int ResultsPerPage { get; set; }
         public int Offset { get; set; }
-        public bool ShowHiddenFacets { get; set; }
-        public bool ShowProtectedFacets { get; set; }
+        public FmtOptions FmtOptions { get; set; }
         public UserInfo UserInfo { get; set; }
-        private Dictionary<string, string> FmtOptions { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BrowseFacetsRequest"/> class.
-        /// </summary>
-        public BrowseFacetsRequest()
-        {
-            FmtOptions = new Dictionary<string, string>();
-        }
 
         /// <summary>
         /// Get request parameters.
@@ -49,19 +39,12 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.RESULTS_PER_PAGE, this.ResultsPerPage);
             }
 
-            if (this.ShowHiddenFacets)
+            if (this.FmtOptions != null)
             {
-                this.FmtOptions.Add(Constants.SHOW_HIDDEN_FACETS, this.ShowHiddenFacets.ToString());
-            }
-
-            if (this.ShowProtectedFacets)
-            {
-                this.FmtOptions.Add(Constants.SHOW_PROTECTED_FACETS, this.ShowProtectedFacets.ToString());
-            }
-
-            if (this.FmtOptions != null && this.FmtOptions.Count != 0)
-            {
-                parameters.Add(Constants.FMT_OPTIONS, this.FmtOptions);
+                foreach (DictionaryEntry entry in this.FmtOptions.GetQueryParameters())
+                {
+                    parameters.Add(entry.Key, entry.Value);
+                }
             }
 
             return parameters;

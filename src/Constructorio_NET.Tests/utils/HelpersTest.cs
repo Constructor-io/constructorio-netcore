@@ -166,7 +166,7 @@ namespace Constructorio_NET.Tests
             List<string> hiddenFields = new List<string>() { "inventory", "margin" };
             Hashtable queryParams = new Hashtable()
             {
-                { Constants.HIDDEN_FIELDS, hiddenFields }
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FIELDS}]", hiddenFields }
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
@@ -182,7 +182,7 @@ namespace Constructorio_NET.Tests
             List<string> hiddenFacets = new List<string>() { "inventory", "margin" };
             Hashtable queryParams = new Hashtable()
             {
-                { Constants.HIDDEN_FACETS, hiddenFacets }
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FACETS}]", hiddenFacets }
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
@@ -195,15 +195,11 @@ namespace Constructorio_NET.Tests
         public void MakeUrlSearchWithFmtOptions()
         {
             List<string> paths = new List<string> { "search", this.Query };
-            Dictionary<string, string> fmtOptions = new Dictionary<string, string>()
-            {
-                { "groups_max_depth", "3" },
-                { "groups_start", "current" }
-            };
             Hashtable queryParams = new Hashtable()
             {
                 { Constants.SECTION, "Search Suggestions" },
-                { Constants.FMT_OPTIONS, fmtOptions }
+                { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]", "3" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_START}]", "current" },
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
@@ -212,6 +208,77 @@ namespace Constructorio_NET.Tests
             bool regexMatched1 = Regex.Match(url, expectedUrl1).Success;
             bool regexMatched2 = Regex.Match(url, expectedUrl2).Success;
             Assert.That(regexMatched1 && regexMatched2, "url should be properly formed");
+        }
+
+        [Test]
+        public void MakeUrlSearchWithFmtOptionsFieldsArray()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            Hashtable queryParams = new Hashtable()
+            {
+                { $"{Constants.FMT_OPTIONS}[{Constants.FIELDS}]", new List<string> { "id", "variation_id", "name" } }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            bool hasField0 = Regex.Match(url, "&fmt_options%5Bfields%5D=id").Success;
+            bool hasField1 = Regex.Match(url, "&fmt_options%5Bfields%5D=variation_id").Success;
+            bool hasField2 = Regex.Match(url, "&fmt_options%5Bfields%5D=name").Success;
+            Assert.That(hasField0 && hasField1 && hasField2, "url should have repeated fields keys");
+        }
+
+        [Test]
+        public void MakeUrlSearchWithFmtOptionsHiddenFieldsArray()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            Hashtable queryParams = new Hashtable()
+            {
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FIELDS}]", new List<string> { "inventory", "margin" } }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            bool hasField0 = Regex.Match(url, "&fmt_options%5Bhidden_fields%5D=inventory").Success;
+            bool hasField1 = Regex.Match(url, "&fmt_options%5Bhidden_fields%5D=margin").Success;
+            Assert.That(hasField0 && hasField1, "url should have repeated hidden_fields keys");
+        }
+
+        [Test]
+        public void MakeUrlSearchWithFmtOptionsHiddenFacetsArray()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            Hashtable queryParams = new Hashtable()
+            {
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FACETS}]", new List<string> { "brand", "category" } }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            bool hasFacet0 = Regex.Match(url, "&fmt_options%5Bhidden_facets%5D=brand").Success;
+            bool hasFacet1 = Regex.Match(url, "&fmt_options%5Bhidden_facets%5D=category").Success;
+            Assert.That(hasFacet0 && hasFacet1, "url should have repeated hidden_facets keys");
+        }
+
+        [Test]
+        public void MakeUrlSearchWithFmtOptionsAllProperties()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            Hashtable queryParams = new Hashtable()
+            {
+                { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]", "5" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_START}]", "top" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FIELDS}]", "true" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.VARIATIONS_RETURN_TYPE}]", "all" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.FIELDS}]", new List<string> { "id" } },
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FIELDS}]", new List<string> { "inventory" } },
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FACETS}]", new List<string> { "brand" } },
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            Assert.That(Regex.Match(url, "&fmt_options%5Bgroups_max_depth%5D=5").Success, "should have groups_max_depth");
+            Assert.That(Regex.Match(url, "&fmt_options%5Bgroups_start%5D=top").Success, "should have groups_start");
+            Assert.That(Regex.Match(url, "&fmt_options%5Bshow_hidden_fields%5D=true").Success, "should have show_hidden_fields");
+            Assert.That(Regex.Match(url, "&fmt_options%5Bvariations_return_type%5D=all").Success, "should have variations_return_type");
+            Assert.That(Regex.Match(url, "&fmt_options%5Bfields%5D=id").Success, "should have fields array");
+            Assert.That(Regex.Match(url, "&fmt_options%5Bhidden_fields%5D=inventory").Success, "should have hidden_fields array");
+            Assert.That(Regex.Match(url, "&fmt_options%5Bhidden_facets%5D=brand").Success, "should have hidden_facets array");
         }
 
         [Test]

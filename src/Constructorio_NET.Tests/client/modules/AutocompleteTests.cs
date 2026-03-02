@@ -203,7 +203,7 @@ namespace Constructorio_NET.Tests
             AutocompleteRequest req = new AutocompleteRequest("item1")
             {
                 UserInfo = UserInfo,
-                HiddenFields = new List<string> { "testField" }
+                FmtOptions = new FmtOptions { HiddenFields = new List<string> { "testField" } }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);

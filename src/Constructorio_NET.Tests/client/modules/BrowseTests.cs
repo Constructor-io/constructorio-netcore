@@ -589,7 +589,7 @@ namespace Constructorio_NET.Tests
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
             {
                 UserInfo = this.UserInfo,
-                HiddenFields = new List<string> { requestedHiddenField }
+                FmtOptions = new FmtOptions { HiddenFields = new List<string> { requestedHiddenField } }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
@@ -606,7 +606,7 @@ namespace Constructorio_NET.Tests
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
             {
                 UserInfo = this.UserInfo,
-                HiddenFacets = new List<string> { requestedHiddenFacet }
+                FmtOptions = new FmtOptions { HiddenFacets = new List<string> { requestedHiddenFacet } }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
@@ -866,6 +866,23 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetBrowseItemsResultsShouldReturnResultWithHiddenFields()
+        {
+            string requestedHiddenField = "testField";
+            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds)
+            {
+                UserInfo = this.UserInfo,
+                FmtOptions = new FmtOptions { HiddenFields = new List<string> { requestedHiddenField } }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseItemsResult(req);
+            var returnedHiddenField = res.Response.Results[0].Data.Metadata[requestedHiddenField];
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(returnedHiddenField, "Hidden field returned");
+        }
+
+        [Test]
         public async Task GetBrowseFacetsResults()
         {
             BrowseFacetsRequest req = new BrowseFacetsRequest { UserInfo = this.UserInfo };
@@ -913,8 +930,7 @@ namespace Constructorio_NET.Tests
             BrowseFacetsRequest req = new BrowseFacetsRequest
             {
                 UserInfo = this.UserInfo,
-                ShowHiddenFacets = true,
-                ShowProtectedFacets = true
+                FmtOptions = new FmtOptions { ShowHiddenFacets = true, ShowProtectedFacets = true }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseFacetsResponse res = await constructorio.Browse.GetBrowseFacetsResult(req);
@@ -956,8 +972,7 @@ namespace Constructorio_NET.Tests
             BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(this.FilterName)
             {
                 UserInfo = this.UserInfo,
-                ShowHiddenFacets = true,
-                ShowProtectedFacets = true
+                FmtOptions = new FmtOptions { ShowHiddenFacets = true, ShowProtectedFacets = true }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseFacetOptionsResponse res = await constructorio.Browse.GetBrowseFacetOptionsResult(

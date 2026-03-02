@@ -45,6 +45,66 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetRequestParametersWithShowHiddenFacets()
+        {
+            BrowseFacetsRequest req = new BrowseFacetsRequest()
+            {
+                FmtOptions = new FmtOptions { ShowHiddenFacets = true },
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.AreEqual("true", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FACETS}]"]);
+        }
+
+        [Test]
+        public void GetRequestParametersWithShowProtectedFacets()
+        {
+            BrowseFacetsRequest req = new BrowseFacetsRequest()
+            {
+                FmtOptions = new FmtOptions { ShowProtectedFacets = true },
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.AreEqual("true", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_PROTECTED_FACETS}]"]);
+        }
+
+        [Test]
+        public void GetRequestParametersWithFmtOptions()
+        {
+            BrowseFacetsRequest req = new BrowseFacetsRequest()
+            {
+                FmtOptions = new FmtOptions()
+                {
+                    GroupsMaxDepth = 3,
+                    ShowHiddenFacets = true,
+                    ShowProtectedFacets = true,
+                },
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.AreEqual("3", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]"]);
+            Assert.AreEqual("true", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FACETS}]"]);
+            Assert.AreEqual("true", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_PROTECTED_FACETS}]"]);
+        }
+
+        [Test]
+        public void GetRequestParametersWithFmtOptionsAndShowHiddenFacets()
+        {
+            BrowseFacetsRequest req = new BrowseFacetsRequest()
+            {
+                FmtOptions = new FmtOptions()
+                {
+                    GroupsMaxDepth = 3,
+                    ShowHiddenFacets = true,
+                },
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.AreEqual("3", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]"]);
+            Assert.AreEqual("true", requestParameters[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FACETS}]"]);
+        }
+
+        [Test]
         public void GetRequestHeaders()
         {
             BrowseFacetsRequest req = new BrowseFacetsRequest()
