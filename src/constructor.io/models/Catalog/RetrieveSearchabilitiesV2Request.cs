@@ -51,6 +51,11 @@ namespace Constructorio_NET.Models
         public bool? Displayable { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to filter by hidden.
+        /// </summary>
+        public bool? Hidden { get; set; }
+
+        /// <summary>
         /// Gets or sets the match type for filters. Valid values are "and" or "or". Default is "and".
         /// </summary>
         public string MatchType { get; set; }
@@ -113,6 +118,11 @@ namespace Constructorio_NET.Models
             if (this.Displayable.HasValue)
             {
                 parameters.Add("displayable", this.Displayable.Value.ToString().ToLower());
+            }
+
+            if (this.Hidden.HasValue)
+            {
+                parameters.Add("hidden", this.Hidden.Value.ToString().ToLower());
             }
 
             if (!string.IsNullOrEmpty(this.MatchType))

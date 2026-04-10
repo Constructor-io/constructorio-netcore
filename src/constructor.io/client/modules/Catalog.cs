@@ -428,6 +428,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Facet object representing the facet created.</returns>
+        [Obsolete("Use CreateFacetConfigV2 instead. This method will be removed in the next major version.")]
         public async Task<Facet> CreateFacetConfig(Facet facet, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section);
@@ -459,6 +460,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>List of Facets in a given section.</returns>
+        [Obsolete("Use GetAllFacetConfigsV2 instead. This method will be removed in the next major version.")]
         public async Task<FacetGetAllResponse> GetAllFacetConfigs(PaginationOptions paginationOptions = null, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url;
@@ -499,6 +501,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Facet object representing the facet.</returns>
+        [Obsolete("Use GetFacetConfigV2 instead. This method will be removed in the next major version.")]
         public async Task<Facet> GetFacetConfig(string facetName, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facetName);
@@ -530,6 +533,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>List of updated facet configurations.</returns>
+        [Obsolete("Use BatchPartiallyUpdateFacetConfigsV2 instead. This method will be removed in the next major version.")]
         public async Task<List<Facet>> BatchPartiallyUpdateFacetConfigs(List<Facet> facetFieldsList, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section);
@@ -561,6 +565,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Updated facet configuration.</returns>
+        [Obsolete("Use PartiallyUpdateFacetConfigV2 instead. This method will be removed in the next major version.")]
         public async Task<Facet> PartiallyUpdateFacetConfig(Facet facetFields, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facetFields.Name);
@@ -592,6 +597,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Updated facet configuration.</returns>
+        [Obsolete("Use ReplaceFacetConfigV2 instead. This method will be removed in the next major version.")]
         public async Task<Facet> UpdateFacetConfig(Facet facet, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facet.Name);
@@ -623,6 +629,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Facet object representing the facet configuration deleted.</returns>
+        [Obsolete("Use DeleteFacetConfigV2 instead. This method will be removed in the next major version.")]
         public async Task<Facet> DeleteFacetConfig(string facetName, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facetName);
@@ -911,6 +918,7 @@ namespace Constructorio_NET.Modules
         /// <param name="retrieveSearchabilitiesRequest">Constructorio's retrieve searchabilities request object.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's Searchability response object.</returns>
+        [Obsolete("Use RetrieveSearchabilitiesV2 instead. This method will be removed in the next major version.")]
         public async Task<SearchabilitiesResponse> RetrieveSearchabilities(RetrieveSearchabilitiesRequest retrieveSearchabilitiesRequest, CancellationToken cancellationToken = default)
         {
             SearchabilitiesResponse result;
@@ -941,6 +949,7 @@ namespace Constructorio_NET.Modules
         /// <param name="patchSearchabilitiesRequest">Constructorio's patch searchabilities request object.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's Searchability response object.</returns>
+        [Obsolete("Use PatchSearchabilitiesV2 instead. This method will be removed in the next major version.")]
         public async Task<SearchabilitiesResponse> PatchSearchabilities(PatchSearchabilitiesRequest patchSearchabilitiesRequest, CancellationToken cancellationToken = default)
         {
             SearchabilitiesResponse result;
@@ -1354,10 +1363,10 @@ namespace Constructorio_NET.Modules
                 { "facets", facets }
             };
 
-            List<FacetV2> result;
+            FacetV2GetAllResponse result;
             try
             {
-                result = await MakeHttpRequest<List<FacetV2>>(Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<FacetV2GetAllResponse>(Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1368,7 +1377,12 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            return result ?? throw new ConstructorException("CreateOrReplaceFacetConfigsV2 response data is malformed");
+            if (result == null)
+            {
+                throw new ConstructorException("CreateOrReplaceFacetConfigsV2 response data is malformed");
+            }
+
+            return result.Facets;
         }
 
         /// <summary>
@@ -1394,10 +1408,10 @@ namespace Constructorio_NET.Modules
                 { "facets", facetFieldsList }
             };
 
-            List<FacetV2> result;
+            FacetV2GetAllResponse result;
             try
             {
-                result = await MakeHttpRequest<List<FacetV2>>(Options, HttpMethodPatch, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<FacetV2GetAllResponse>(Options, HttpMethodPatch, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1408,7 +1422,12 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            return result ?? throw new ConstructorException("BatchPartiallyUpdateFacetConfigsV2 response data is malformed");
+            if (result == null)
+            {
+                throw new ConstructorException("BatchPartiallyUpdateFacetConfigsV2 response data is malformed");
+            }
+
+            return result.Facets;
         }
 
         /// <summary>

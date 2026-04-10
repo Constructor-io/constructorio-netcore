@@ -11,7 +11,7 @@ namespace Constructorio_NET.Tests
     [TestFixture]
     public class FacetsTestV2
     {
-        private readonly string ApiKey = "ZqXaOfXuBWD4s3XzCI1q";
+        private readonly string ApiKey = Environment.GetEnvironmentVariable("TEST_CATALOG_FACETS_V2_API_KEY");
         private ConstructorioConfig Config;
         private static List<FacetV2> CreatedFacets = new List<FacetV2>();
 
@@ -108,6 +108,26 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void CreateFacetConfigV2_ThrowsWhenNullFacet()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await constructorio.Catalog.CreateFacetConfigV2(null));
+        }
+
+        [Test]
+        public async Task CreateFacetConfigV2_ErrorWhenAlreadyExists()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            FacetV2 facet = CreateRandomFacet(FacetTypeV2.Multiple);
+            await constructorio.Catalog.CreateFacetConfigV2(facet);
+
+            Assert.ThrowsAsync<ConstructorException>(async () =>
+                await constructorio.Catalog.CreateFacetConfigV2(facet));
+        }
+
+        [Test]
         public async Task GetAllFacetConfigsV2()
         {
             ConstructorIO constructorio = new ConstructorIO(this.Config);
@@ -138,6 +158,19 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetAllFacetConfigsV2WithOffset()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            PaginationOptions pagination = new PaginationOptions();
+            pagination.Offset = 0;
+            pagination.NumResultsPerPage = 10;
+            FacetV2GetAllResponse facetResponse = await constructorio.Catalog.GetAllFacetConfigsV2(pagination);
+
+            Assert.IsNotNull(facetResponse, "Response should not be null");
+            Assert.IsNotNull(facetResponse.Facets, "Facets array should not be null");
+        }
+
+        [Test]
         public async Task GetFacetConfigV2()
         {
             ConstructorIO constructorio = new ConstructorIO(this.Config);
@@ -147,6 +180,25 @@ namespace Constructorio_NET.Tests
             FacetV2 facet = await constructorio.Catalog.GetFacetConfigV2(facetToFetch.Name);
 
             Assert.AreEqual(facet.Name, facetToFetch.Name, "Incorrect facet fetched");
+            Assert.IsNotNull(facet.PathInMetadata, "PathInMetadata should be set");
+        }
+
+        [Test]
+        public void GetFacetConfigV2_ThrowsWhenNameEmpty()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await constructorio.Catalog.GetFacetConfigV2(string.Empty));
+        }
+
+        [Test]
+        public void GetFacetConfigV2_ErrorWhenNotFound()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ConstructorException>(async () =>
+                await constructorio.Catalog.GetFacetConfigV2("non-existent-facet-" + Guid.NewGuid()));
         }
 
         [Test]
@@ -165,6 +217,26 @@ namespace Constructorio_NET.Tests
 
             Assert.AreEqual(facet.DisplayName, changedFacet.DisplayName, "Facet display name not changed correctly");
             Assert.AreEqual(facet.Position, changedFacet.Position, "Facet position not changed correctly");
+            Assert.AreEqual(facet.PathInMetadata, changedFacet.PathInMetadata, "PathInMetadata should be preserved");
+        }
+
+        [Test]
+        public void PartiallyUpdateFacetConfigV2_ThrowsWhenNull()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await constructorio.Catalog.PartiallyUpdateFacetConfigV2(null));
+        }
+
+        [Test]
+        public void PartiallyUpdateFacetConfigV2_ThrowsWhenNameEmpty()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            FacetV2 facet = new FacetV2();
+
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await constructorio.Catalog.PartiallyUpdateFacetConfigV2(facet));
         }
 
         [Test]
@@ -182,6 +254,27 @@ namespace Constructorio_NET.Tests
             FacetV2 newFacet = await constructorio.Catalog.ReplaceFacetConfigV2(facet);
 
             Assert.AreEqual("changed", newFacet.DisplayName, "Display Name not properly updated.");
+            Assert.AreEqual(facet.Name, newFacet.Name, "Name should match");
+            Assert.AreEqual(facet.PathInMetadata, newFacet.PathInMetadata, "PathInMetadata should match");
+        }
+
+        [Test]
+        public void ReplaceFacetConfigV2_ThrowsWhenNull()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await constructorio.Catalog.ReplaceFacetConfigV2(null));
+        }
+
+        [Test]
+        public void ReplaceFacetConfigV2_ThrowsWhenNameEmpty()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            FacetV2 facet = new FacetV2();
+
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await constructorio.Catalog.ReplaceFacetConfigV2(facet));
         }
 
         [Test]
@@ -208,6 +301,24 @@ namespace Constructorio_NET.Tests
 
             Assert.AreEqual(deletedFacet.Name, facetToDelete.Name, "Wrong facet deleted");
             CreatedFacets.RemoveAt(CreatedFacets.Count - 1);
+        }
+
+        [Test]
+        public void DeleteFacetConfigV2_ThrowsWhenNameEmpty()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await constructorio.Catalog.DeleteFacetConfigV2(string.Empty));
+        }
+
+        [Test]
+        public void DeleteFacetConfigV2_ErrorWhenNotFound()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ConstructorException>(async () =>
+                await constructorio.Catalog.DeleteFacetConfigV2("non-existent-facet-" + Guid.NewGuid()));
         }
 
         [Test]
@@ -251,6 +362,24 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void BatchPartiallyUpdateFacetConfigsV2_ThrowsWhenNull()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await constructorio.Catalog.BatchPartiallyUpdateFacetConfigsV2(null));
+        }
+
+        [Test]
+        public void BatchPartiallyUpdateFacetConfigsV2_ThrowsWhenEmpty()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await constructorio.Catalog.BatchPartiallyUpdateFacetConfigsV2(new List<FacetV2>()));
+        }
+
+        [Test]
         public async Task CreateOrReplaceFacetConfigsV2()
         {
             ConstructorIO constructorio = new ConstructorIO(this.Config);
@@ -268,6 +397,24 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(2, createdFacets.Count, "Should have created 2 facets");
             Assert.AreEqual(newFacets[0].Name, createdFacets[0].Name, "First facet name mismatch");
             Assert.AreEqual(newFacets[1].Name, createdFacets[1].Name, "Second facet name mismatch");
+        }
+
+        [Test]
+        public void CreateOrReplaceFacetConfigsV2_ThrowsWhenNull()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await constructorio.Catalog.CreateOrReplaceFacetConfigsV2(null));
+        }
+
+        [Test]
+        public void CreateOrReplaceFacetConfigsV2_ThrowsWhenEmpty()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            Assert.ThrowsAsync<ArgumentException>(async () =>
+                await constructorio.Catalog.CreateOrReplaceFacetConfigsV2(new List<FacetV2>()));
         }
     }
 }
