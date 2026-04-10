@@ -10,6 +10,8 @@ namespace Constructorio_NET.Models
         public string Aggregation { get; set; }
         [JsonProperty("field")]
         public string Field { get; set; }
+        [JsonProperty("value")]
+        public object CountedValue { get; set; }
     }
 
     public class Group
@@ -26,6 +28,7 @@ namespace Constructorio_NET.Models
         public const string Min = "min";
         public const string Max = "max";
         public const string All = "all";
+        public const string ValueCount = "value_count";
     }
 
     public static class DTypes
@@ -67,15 +70,15 @@ namespace Constructorio_NET.Models
             }
         }
 
-        public void AddValueRule(string name, string aggregation, string field)
+        public void AddValueRule(string name, string aggregation, string field, object? countedValue = null)
         {
             if (this.Values != null)
             {
-                this.Values.Add(name, new Value { Aggregation = aggregation, Field = field });
+                this.Values.Add(name, new Value { Aggregation = aggregation, Field = field, CountedValue = countedValue });
             }
             else
             {
-                this.Values = new Dictionary<string, Value> { { name, new Value { Aggregation = aggregation, Field = field } } };
+                this.Values = new Dictionary<string, Value> { { name, new Value { Aggregation = aggregation, Field = field, CountedValue = countedValue } } };
             }
         }
 

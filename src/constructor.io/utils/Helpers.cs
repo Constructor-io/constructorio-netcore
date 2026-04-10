@@ -177,47 +177,6 @@ namespace Constructorio_NET.Utils
                     }
                 }
 
-                // Add format options to query string
-                if (queryParams.Contains(Constants.FMT_OPTIONS))
-                {
-                    Dictionary<string, string> fmtOptions = (Dictionary<string, string>)queryParams[Constants.FMT_OPTIONS];
-                    queryParams.Remove(Constants.FMT_OPTIONS);
-
-                    foreach (var fmtOption in fmtOptions)
-                    {
-                        url.Append("&" + Constants.FMT_OPTIONS + UrlEscapedStartSquareBracket)
-                            .Append(OurEscapeDataString(fmtOption.Key))
-                            .Append(UrlEscapedEndSquareBracket + "=")
-                            .Append(OurEscapeDataString(fmtOption.Value));
-                    }
-                }
-
-                // Add hidden fields as fmt_options
-                if (queryParams.Contains(Constants.HIDDEN_FIELDS))
-                {
-                    List<string> hiddenFields = (List<string>)queryParams[Constants.HIDDEN_FIELDS];
-                    queryParams.Remove(Constants.HIDDEN_FIELDS);
-
-                    foreach (var hiddenField in hiddenFields)
-                    {
-                        url.Append("&" + Constants.FMT_OPTIONS + UrlEscapedStartSquareBracket + Constants.HIDDEN_FIELDS + UrlEscapedEndSquareBracket + "=")
-                            .Append(OurEscapeDataString(hiddenField));
-                    }
-                }
-
-                // Add hidden facets as fmt_options
-                if (queryParams.Contains(Constants.HIDDEN_FACETS))
-                {
-                    List<string> hiddenFacets = (List<string>)queryParams[Constants.HIDDEN_FACETS];
-                    queryParams.Remove(Constants.HIDDEN_FACETS);
-
-                    foreach (var hiddenFacet in hiddenFacets)
-                    {
-                        url.Append("&" + Constants.FMT_OPTIONS + UrlEscapedStartSquareBracket + Constants.HIDDEN_FACETS + UrlEscapedEndSquareBracket + "=")
-                            .Append(OurEscapeDataString(hiddenFacet));
-                    }
-                }
-
                 // Add quiz answers to query string
                 if (queryParams.Contains(Constants.ANSWERS))
                 {

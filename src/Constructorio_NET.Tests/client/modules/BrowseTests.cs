@@ -589,7 +589,7 @@ namespace Constructorio_NET.Tests
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
             {
                 UserInfo = this.UserInfo,
-                HiddenFields = new List<string> { requestedHiddenField }
+                FmtOptions = new FmtOptions { HiddenFields = new List<string> { requestedHiddenField } }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
@@ -606,7 +606,7 @@ namespace Constructorio_NET.Tests
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
             {
                 UserInfo = this.UserInfo,
-                HiddenFacets = new List<string> { requestedHiddenFacet }
+                FmtOptions = new FmtOptions { HiddenFacets = new List<string> { requestedHiddenFacet } }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
@@ -647,6 +647,96 @@ namespace Constructorio_NET.Tests
             res.Request.TryGetValue("variations_map", out object reqVariationsMap);
             JObject variationMapResult = JObject.Parse(
                 "{ \"filter_by\": { \"type\": \"and\", \"and\": [{ \"type\": \"not\", \"not\": { \"type\": \"single\", \"field\": \"data.brand\", \"value\": \"Best Brand\" }}]}, \"group_by\": [{ \"name\": \"url\", \"field\": \"data.url\"}], \"values\": { \"variation_id\": { \"aggregation\": \"first\", \"field\": \"data.variation_id\"}, \"deactivated\": { \"aggregation\": \"first\", \"field\": \"data.deactivated\"}}, \"dtype\": \"object\" }"
+            );
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
+            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithVariationsMapStringValueCount()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                "true"
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": \"true\" }}, \"dtype\": \"object\" }"
+            );
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
+            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithVariationsMapBooleanValueCount()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                true
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": true }}, \"dtype\": \"object\" }"
+            );
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
+            Assert.NotNull(res.Response.Results[0].VariationsMap, "Variations Map exists");
+        }
+
+        [Test]
+        public async Task GetBrowseResultsShouldReturnResultWithVariationsMapIntegerValueCount()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                24
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": 24 }}, \"dtype\": \"object\" }"
             );
 
             Assert.NotNull(res.ResultId, "Result id exists");
@@ -776,6 +866,23 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetBrowseItemsResultsShouldReturnResultWithHiddenFields()
+        {
+            string requestedHiddenField = "testField";
+            BrowseItemsRequest req = new BrowseItemsRequest(this.ItemIds)
+            {
+                UserInfo = this.UserInfo,
+                FmtOptions = new FmtOptions { HiddenFields = new List<string> { requestedHiddenField } }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseItemsResult(req);
+            var returnedHiddenField = res.Response.Results[0].Data.Metadata[requestedHiddenField];
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.NotNull(returnedHiddenField, "Hidden field returned");
+        }
+
+        [Test]
         public async Task GetBrowseFacetsResults()
         {
             BrowseFacetsRequest req = new BrowseFacetsRequest { UserInfo = this.UserInfo };
@@ -823,8 +930,7 @@ namespace Constructorio_NET.Tests
             BrowseFacetsRequest req = new BrowseFacetsRequest
             {
                 UserInfo = this.UserInfo,
-                ShowHiddenFacets = true,
-                ShowProtectedFacets = true
+                FmtOptions = new FmtOptions { ShowHiddenFacets = true, ShowProtectedFacets = true }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseFacetsResponse res = await constructorio.Browse.GetBrowseFacetsResult(req);
@@ -866,8 +972,7 @@ namespace Constructorio_NET.Tests
             BrowseFacetOptionsRequest req = new BrowseFacetOptionsRequest(this.FilterName)
             {
                 UserInfo = this.UserInfo,
-                ShowHiddenFacets = true,
-                ShowProtectedFacets = true
+                FmtOptions = new FmtOptions { ShowHiddenFacets = true, ShowProtectedFacets = true }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             BrowseFacetOptionsResponse res = await constructorio.Browse.GetBrowseFacetOptionsResult(

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['offset_0',['Offset',['../class_constructorio___n_e_t_1_1_models_1_1_browse_request.html#a65c577b1c63458a10979e8c67fd5d5d7',1,'Constructorio_NET.Models.BrowseRequest.Offset'],['../class_constructorio___n_e_t_1_1_models_1_1_retrieve_searchabilities_request.html#a3931c49a58a26769c0671d7286934f4a',1,'Constructorio_NET.Models.RetrieveSearchabilitiesRequest.Offset'],['../interface_constructorio___n_e_t_1_1_models_1_1_i_pageable.html#a9c16db8c35018bdc4976a74754dda568',1,'Constructorio_NET.Models.IPageable.Offset'],['../class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a806b4dd275a252560f6fe41da422cd2e',1,'Constructorio_NET.Models.SearchRequest.Offset']]],
-  ['onmissing_1',['OnMissing',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a27fc9e3953bd80985173d6a3821349a6',1,'Constructorio_NET::Models::CatalogRequest']]],
-  ['options_2',['Options',['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a2a3e84b395df14842b7cd84a89787ea3',1,'Constructorio_NET::Models::Facet']]]
+  ['name_0',['Name',['../class_constructorio___n_e_t_1_1_models_1_1_retrieve_searchabilities_request.html#ae935326e1070e89c1f15c8d832b47685',1,'Constructorio_NET.Models.RetrieveSearchabilitiesRequest.Name'],['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html#abcd61098c45acd0dfb23415a8d193e07',1,'Constructorio_NET.Models.Searchability.Name'],['../class_constructorio___n_e_t_1_1_models_1_1_facet.html#a33ecc51a0a578a340e8d1919774efb32',1,'Constructorio_NET.Models.Facet.Name']]],
+  ['notificationemail_1',['NotificationEmail',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a2884db524b4233da9ea073489af8c193',1,'Constructorio_NET::Models::CatalogRequest']]],
+  ['numresults_2',['NumResults',['../class_constructorio___n_e_t_1_1_models_1_1_recommendations_request.html#a3f81b74397cc1519278609563265c5ba',1,'Constructorio_NET::Models::RecommendationsRequest']]],
+  ['numresultsperpage_3',['NumResultsPerPage',['../class_constructorio___n_e_t_1_1_models_1_1_retrieve_searchabilities_request.html#a9c675fcfbd78bd737277e8d7a612194c',1,'Constructorio_NET::Models::RetrieveSearchabilitiesRequest']]]
 ];

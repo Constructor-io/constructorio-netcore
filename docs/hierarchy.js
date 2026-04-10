@@ -44,6 +44,8 @@ var hierarchy =
     [ "Constructorio_NET.Models.FilterFacetOption", "class_constructorio___n_e_t_1_1_models_1_1_filter_facet_option.html", null ],
     [ "Constructorio_NET.Models.FilterGroup", "class_constructorio___n_e_t_1_1_models_1_1_filter_group.html", null ],
     [ "Constructorio_NET.Models.FilterSortOption", "class_constructorio___n_e_t_1_1_models_1_1_filter_sort_option.html", null ],
+    [ "Constructorio_NET.Models.FmtOptions", "class_constructorio___n_e_t_1_1_models_1_1_fmt_options.html", null ],
+    [ "Constructorio_NET.Tests.FmtOptionsTest", "class_constructorio___n_e_t_1_1_tests_1_1_fmt_options_test.html", null ],
     [ "Constructorio_NET.Models.Group", "class_constructorio___n_e_t_1_1_models_1_1_group.html", null ],
     [ "Constructorio_NET.Utils.Helpers", "class_constructorio___n_e_t_1_1_utils_1_1_helpers.html", [
       [ "Constructorio_NET.Modules.Autocomplete", "class_constructorio___n_e_t_1_1_modules_1_1_autocomplete.html", null ],

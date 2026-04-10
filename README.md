@@ -6,6 +6,8 @@
 
 Full API documentation is available on [Github Pages](https://constructor-io.github.io/constructorio-netcore/)
 
+Updating from v3 to v4? Be sure to read [the migration guide](https://github.com/Constructor-io/constructorio-netcore/wiki/Migration-Guide-v3-to-v4).
+
 # Requirements
 
 Requesting results from your .NET based back-end can be useful in order to control result rendering logic on your server, or augment/hydrate results with data from another system. However, a back-end integration has additional requirements compared to a front-end integration. Please review the [Additional Information For Backend Integrations](https://github.com/Constructor-io/constructorio-netcore/wiki/Additional-Information-for-Backend-Integrations) article within the wiki for more detail.

@@ -162,6 +162,111 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetRecommendationsResultsShouldReturnAResultWithVariationsMapStringValueCount()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                "true"
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": \"true\" }}, \"dtype\": \"object\" }"
+            );
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                 JObject.Parse(reqVariationsMap.ToString()),
+                 variationMapResult,
+                 "Variations Map was passed as parameter"
+             );
+            foreach (var result in res.Response.Results)
+            {
+                Assert.NotNull(result.VariationsMap, "Variations Map exists in every result");
+            }
+        }
+
+        [Test]
+        public async Task GetRecommendationsResultsShouldReturnAResultWithVariationsMapBooleanValueCount()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                true
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": true }}, \"dtype\": \"object\" }"
+            );
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                 JObject.Parse(reqVariationsMap.ToString()),
+                 variationMapResult,
+                 "Variations Map was passed as parameter"
+             );
+            foreach (var result in res.Response.Results)
+            {
+                Assert.NotNull(result.VariationsMap, "Variations Map exists in every result");
+            }
+        }
+
+        [Test]
+        public async Task GetRecommendationsResultsShouldReturnAResultWithVariationsMapIntegerValueCount()
+        {
+            RecommendationsRequest req = new RecommendationsRequest("item_page_1")
+            {
+                UserInfo = this.UserInfo,
+                ItemIds = new List<string> { "power_drill" },
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                24
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": 24 }}, \"dtype\": \"object\" }"
+            );
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                 JObject.Parse(reqVariationsMap.ToString()),
+                 variationMapResult,
+                 "Variations Map was passed as parameter"
+             );
+            foreach (var result in res.Response.Results)
+            {
+                Assert.NotNull(result.VariationsMap, "Variations Map exists in every result");
+            }
+        }
+
+        [Test]
         public async Task GetRecommendationsResultsShouldReturnAResultWithVariationIds()
         {
             RecommendationsRequest req = new RecommendationsRequest("item_page_1")
@@ -213,6 +318,85 @@ namespace Constructorio_NET.Tests
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
 
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+        }
+
+        [Test]
+        public async Task GetRecommendationsResultsWithPreFilterExpression()
+        {
+            ValuePreFilterExpression filterByBrand = new ValuePreFilterExpression("Brand", "XYZ");
+            RecommendationsRequest req = new RecommendationsRequest("filtered_items")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = filterByBrand,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.IsNotNull(res.Request["pre_filter_expression"], "PreFilterExpression was passed as parameter");
+        }
+
+        [Test]
+        public async Task GetRecommendationsResultsShouldReturnResultWithHiddenFields()
+        {
+            string requestedHiddenField = "testField";
+            RecommendationsRequest req = new RecommendationsRequest("filtered_items")
+            {
+                UserInfo = this.UserInfo,
+                Filters = new Dictionary<string, List<string>>()
+                {
+                    { "Brand", new List<string>() { "XYZ" } }
+                },
+                FmtOptions = new FmtOptions { HiddenFields = new List<string> { requestedHiddenField } }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.Greater(res.Response.Results.Count, 0, "Results expected to be greater than 0");
+
+            var metadata = res.Response.Results[0].Data?.Metadata;
+            Assert.IsNotNull(metadata, "Result metadata exists");
+            Assert.IsTrue(
+                metadata.ContainsKey(requestedHiddenField),
+                "Requested hidden field is present in result metadata"
+            );
+            Assert.IsNotNull(
+                metadata[requestedHiddenField],
+                "Requested hidden field has a non-null value in result metadata"
+            );
+        }
+
+        [Test]
+        public async Task GetRecommendationsResultsWithPreFilterExpressionJson()
+        {
+            JObject preFilterExpressionJObject = JObject.Parse(
+                @"{
+                    'name': 'Brand',
+                    'value': 'XYZ'
+                }"
+            );
+            JsonPrefilterExpression preFilterExpression = new JsonPrefilterExpression(
+                preFilterExpressionJObject
+            );
+            RecommendationsRequest req = new RecommendationsRequest("filtered_items")
+            {
+                UserInfo = this.UserInfo,
+                PreFilterExpression = preFilterExpression,
+            };
+
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            RecommendationsResponse res = await constructorio.Recommendations.GetRecommendationsResults(req);
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+
+            Assert.AreEqual(
+                reqPreFilterExpression,
+                JObject.Parse(preFilterExpression.GetExpression()),
+                "Pre Filter Expression is sent in request"
+            );
             Assert.GreaterOrEqual(res.Response.Results.Count, 0, "Results exist");
             Assert.NotNull(res.ResultId, "Result id exists");
         }

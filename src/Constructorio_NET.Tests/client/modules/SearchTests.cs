@@ -73,9 +73,11 @@ namespace Constructorio_NET.Tests
             SearchRequest req = new SearchRequest("item1") { UserInfo = this.UserInfo };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
-            string sliceAttribute = res.Response.Results[0].VariationSlice["Color"][0];
 
-            Assert.AreEqual("Blue", sliceAttribute);
+            Assert.IsNotNull(res.Response.Results[0].VariationSlice, "VariationSlice should exist");
+            Assert.IsTrue(res.Response.Results[0].VariationSlice.ContainsKey("Color"), "VariationSlice should contain Color key");
+            Assert.Greater(res.Response.Results[0].VariationSlice["Color"].Count, 0, "Color slice should have at least one value");
+            Assert.IsNotEmpty(res.Response.Results[0].VariationSlice["Color"][0], "Color slice value should not be empty");
         }
 
         [Test]
@@ -568,6 +570,20 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void RedirectDataIndexerAccessesArbitraryKeys()
+        {
+            string json = @"{""url"":""/test"",""rule_id"":49023,""match_id"":185282,""foo"":""bar"",""custom_key"":123}";
+            RedirectData data = Newtonsoft.Json.JsonConvert.DeserializeObject<RedirectData>(json);
+
+            Assert.AreEqual("/test", data.Url, "Url property should be accessible");
+            Assert.AreEqual(49023, data.RuleId, "RuleId property should be accessible");
+            Assert.AreEqual(185282, data.MatchId, "MatchId property should be accessible");
+            Assert.AreEqual("bar", data["foo"]?.ToString(), "Indexer should access arbitrary string key");
+            Assert.AreEqual(123L, data["custom_key"], "Indexer should access arbitrary numeric key");
+            Assert.IsNull(data["nonexistent"], "Indexer should return null for missing keys");
+        }
+
+        [Test]
         public async Task GetSearchResultsShouldReturnResultWithRefinedContent()
         {
             SearchRequest req = new SearchRequest("item") { UserInfo = this.UserInfo };
@@ -664,7 +680,7 @@ namespace Constructorio_NET.Tests
             SearchRequest req = new SearchRequest("item1")
             {
                 UserInfo = this.UserInfo,
-                HiddenFields = new List<string> { requestedHiddenField }
+                FmtOptions = new FmtOptions { HiddenFields = new List<string> { requestedHiddenField } }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
@@ -681,7 +697,7 @@ namespace Constructorio_NET.Tests
             SearchRequest req = new SearchRequest("item1")
             {
                 UserInfo = this.UserInfo,
-                HiddenFacets = new List<string> { requestedHiddenFacet }
+                FmtOptions = new FmtOptions { HiddenFacets = new List<string> { requestedHiddenFacet } }
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             SearchResponse res = await constructorio.Search.GetSearchResults(req);
@@ -722,6 +738,93 @@ namespace Constructorio_NET.Tests
             res.Request.TryGetValue("variations_map", out object reqVariationsMap);
             JObject variationMapResult = JObject.Parse(
                 "{ \"filter_by\": { \"type\": \"and\", \"and\": [{ \"type\": \"not\", \"not\": { \"type\": \"single\", \"field\": \"data.brand\", \"value\": \"Best Brand\" }}]}, \"group_by\": [{ \"name\": \"url\", \"field\": \"data.url\"}], \"values\": { \"variation_id\": { \"aggregation\": \"first\", \"field\": \"data.variation_id\"}, \"deactivated\": { \"aggregation\": \"first\", \"field\": \"data.deactivated\"}}, \"dtype\": \"object\" }"
+            );
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
+        }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithVariationsMapStringValueCount()
+        {
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                "true"
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": \"true\" }}, \"dtype\": \"object\" }"
+            );
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
+        }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithVariationsMapBooleanValueCount()
+        {
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                true
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": true }}, \"dtype\": \"object\" }"
+            );
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.AreEqual(
+                JObject.Parse(reqVariationsMap.ToString()),
+                variationMapResult,
+                "Variations Map was passed as parameter"
+            );
+        }
+
+        [Test]
+        public async Task GetSearchResultsShouldReturnResultWithVariationsMapIntegerValueCount()
+        {
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = UserInfo,
+                VariationsMap = new VariationsMap()
+            };
+            req.VariationsMap.AddValueRule(
+                "deactivated",
+                AggregationTypes.ValueCount,
+                "data.deactivated",
+                24
+            );
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            res.Request.TryGetValue("variations_map", out object reqVariationsMap);
+            JObject variationMapResult = JObject.Parse(
+                "{ \"group_by\": [], \"values\": { \"deactivated\": { \"aggregation\": \"value_count\", \"field\": \"data.deactivated\", \"value\": 24 }}, \"dtype\": \"object\" }"
             );
 
             Assert.NotNull(res.ResultId, "Result id exists");

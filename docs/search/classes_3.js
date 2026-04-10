@@ -9,5 +9,7 @@ var searchData=
   ['filterfacet_6',['FilterFacet',['../class_constructorio___n_e_t_1_1_models_1_1_filter_facet.html',1,'Constructorio_NET::Models']]],
   ['filterfacetoption_7',['FilterFacetOption',['../class_constructorio___n_e_t_1_1_models_1_1_filter_facet_option.html',1,'Constructorio_NET::Models']]],
   ['filtergroup_8',['FilterGroup',['../class_constructorio___n_e_t_1_1_models_1_1_filter_group.html',1,'Constructorio_NET::Models']]],
-  ['filtersortoption_9',['FilterSortOption',['../class_constructorio___n_e_t_1_1_models_1_1_filter_sort_option.html',1,'Constructorio_NET::Models']]]
+  ['filtersortoption_9',['FilterSortOption',['../class_constructorio___n_e_t_1_1_models_1_1_filter_sort_option.html',1,'Constructorio_NET::Models']]],
+  ['fmtoptions_10',['FmtOptions',['../class_constructorio___n_e_t_1_1_models_1_1_fmt_options.html',1,'Constructorio_NET::Models']]],
+  ['fmtoptionstest_11',['FmtOptionsTest',['../class_constructorio___n_e_t_1_1_tests_1_1_fmt_options_test.html',1,'Constructorio_NET::Tests']]]
 ];

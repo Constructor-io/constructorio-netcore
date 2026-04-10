@@ -25,22 +25,12 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets the format options used to refine result groups.
         /// </summary>
-        public Dictionary<string, string> FmtOptions { get; set; }
+        public FmtOptions FmtOptions { get; set; }
 
         /// <summary>
         /// Gets or sets the filtering expression used to scope search results.
         /// </summary>
         public PreFilterExpression PreFilterExpression { get; set; }
-
-        /// <summary>
-        /// Gets or sets hidden metadata fields to return.
-        /// </summary>
-        public List<string> HiddenFields { get; set; }
-
-        /// <summary>
-        /// Gets or sets hidden facets fields to return.
-        /// </summary>
-        public List<string> HiddenFacets { get; set; }
 
         /// <summary>
         /// Gets or sets the number of results to skip from the beginning.
@@ -145,25 +135,18 @@ namespace Constructorio_NET.Models
                 parameters.Add(Constants.FILTERS, this.Filters);
             }
 
-            if (this.FmtOptions != null)
-            {
-                parameters.Add(Constants.FMT_OPTIONS, this.FmtOptions);
-            }
-
             if (this.PreFilterExpression != null)
             {
                 string preFilterJson = this.PreFilterExpression.GetExpression();
                 parameters.Add(Constants.PRE_FILTER_EXPRESSION, preFilterJson);
             }
 
-            if (this.HiddenFields != null)
+            if (this.FmtOptions != null)
             {
-                parameters.Add(Constants.HIDDEN_FIELDS, this.HiddenFields);
-            }
-
-            if (this.HiddenFacets != null)
-            {
-                parameters.Add(Constants.HIDDEN_FACETS, this.HiddenFacets);
+                foreach (DictionaryEntry entry in this.FmtOptions.GetQueryParameters())
+                {
+                    parameters.Add(entry.Key, entry.Value);
+                }
             }
 
             if (this.Offset != 0)

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Constructorio_NET.Models
 {
     public interface IPlpRequest : IFilterable, IPageable, ISortable, IUserDetails
@@ -7,17 +5,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets the format options used to refine result groups.
         /// </summary>
-        Dictionary<string, string> FmtOptions { get; set; }
-
-        /// <summary>
-        /// Gets or sets hidden facets fields to return.
-        /// </summary>
-        List<string> HiddenFacets { get; set; }
-
-        /// <summary>
-        /// Gets or sets hidden metadata fields to return.
-        /// </summary>
-        List<string> HiddenFields { get; set; }
+        FmtOptions FmtOptions { get; set; }
 
         /// <summary>
         /// Gets or sets the filtering expression used to scope search results.
