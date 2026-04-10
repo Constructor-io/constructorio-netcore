@@ -16,7 +16,7 @@ namespace Constructorio_NET.Models
         public List<string> SearchabilityNames { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the section. Defaults to "Products".
+        /// Gets or sets the name of the section. If not set, the API defaults to "Products".
         /// </summary>
         public string Section { get; set; }
 

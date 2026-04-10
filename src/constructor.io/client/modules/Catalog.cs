@@ -1207,7 +1207,7 @@ namespace Constructorio_NET.Modules
 
         #region V2 Facets
 
-        internal string CreateFacetUrlV2(string section = "Products", string facetName = null, Hashtable queryParams = null)
+        internal string CreateFacetUrlV2(string section = null, string facetName = null, Hashtable queryParams = null)
         {
             List<string> paths = new List<string> { "v2", "facets" };
             if (facetName != null)
@@ -1237,7 +1237,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>FacetV2 object representing the facet created.</returns>
-        public async Task<FacetV2> CreateFacetConfigV2(FacetV2 facet, string section = "Products", CancellationToken cancellationToken = default)
+        public async Task<FacetV2> CreateFacetConfigV2(FacetV2 facet, string section = null, CancellationToken cancellationToken = default)
         {
             if (facet == null)
             {
@@ -1272,7 +1272,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>List of v2 Facets in a given section.</returns>
-        public async Task<FacetV2GetAllResponse> GetAllFacetConfigsV2(PaginationOptions paginationOptions = null, string section = "Products", CancellationToken cancellationToken = default)
+        public async Task<FacetV2GetAllResponse> GetAllFacetConfigsV2(PaginationOptions paginationOptions = null, string section = null, CancellationToken cancellationToken = default)
         {
             string url;
             if (paginationOptions != null)
@@ -1311,7 +1311,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>FacetV2 object representing the facet.</returns>
-        public async Task<FacetV2> GetFacetConfigV2(string facetName, string section = "Products", CancellationToken cancellationToken = default)
+        public async Task<FacetV2> GetFacetConfigV2(string facetName, string section = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(facetName))
             {
@@ -1347,7 +1347,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>List of created or replaced v2 facet configurations.</returns>
-        public async Task<List<FacetV2>> CreateOrReplaceFacetConfigsV2(List<FacetV2> facets, string section = "Products", CancellationToken cancellationToken = default)
+        public async Task<List<FacetV2>> CreateOrReplaceFacetConfigsV2(List<FacetV2> facets, string section = null, CancellationToken cancellationToken = default)
         {
             if (facets == null || facets.Count == 0)
             {
@@ -1392,7 +1392,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>List of updated v2 facet configurations.</returns>
-        public async Task<List<FacetV2>> BatchPartiallyUpdateFacetConfigsV2(List<FacetV2> facetFieldsList, string section = "Products", CancellationToken cancellationToken = default)
+        public async Task<List<FacetV2>> BatchPartiallyUpdateFacetConfigsV2(List<FacetV2> facetFieldsList, string section = null, CancellationToken cancellationToken = default)
         {
             if (facetFieldsList == null || facetFieldsList.Count == 0)
             {
@@ -1438,7 +1438,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Replaced v2 facet configuration.</returns>
-        public async Task<FacetV2> ReplaceFacetConfigV2(FacetV2 facet, string section = "Products", CancellationToken cancellationToken = default)
+        public async Task<FacetV2> ReplaceFacetConfigV2(FacetV2 facet, string section = null, CancellationToken cancellationToken = default)
         {
             if (facet == null)
             {
@@ -1478,7 +1478,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Updated v2 facet configuration.</returns>
-        public async Task<FacetV2> PartiallyUpdateFacetConfigV2(FacetV2 facetFields, string section = "Products", CancellationToken cancellationToken = default)
+        public async Task<FacetV2> PartiallyUpdateFacetConfigV2(FacetV2 facetFields, string section = null, CancellationToken cancellationToken = default)
         {
             if (facetFields == null)
             {
@@ -1518,7 +1518,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>FacetV2 object representing the facet configuration deleted.</returns>
-        public async Task<FacetV2> DeleteFacetConfigV2(string facetName, string section = "Products", CancellationToken cancellationToken = default)
+        public async Task<FacetV2> DeleteFacetConfigV2(string facetName, string section = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(facetName))
             {
@@ -1550,7 +1550,7 @@ namespace Constructorio_NET.Modules
 
         #region V2 Searchabilities
 
-        internal string CreateSearchabilitiesUrlV2(string section = "Products", string name = null, Hashtable queryParams = null)
+        internal string CreateSearchabilitiesUrlV2(string section = null, string name = null, Hashtable queryParams = null)
         {
             List<string> paths = new List<string> { "v2", "searchabilities" };
             if (name != null)
@@ -1590,7 +1590,7 @@ namespace Constructorio_NET.Modules
 
             try
             {
-                var url = CreateSearchabilitiesUrlV2(retrieveSearchabilitiesV2Request.Section ?? "Products", queryParams: retrieveSearchabilitiesV2Request.GetRequestParameters());
+                var url = CreateSearchabilitiesUrlV2(retrieveSearchabilitiesV2Request.Section, queryParams: retrieveSearchabilitiesV2Request.GetRequestParameters());
                 Dictionary<string, string> requestHeaders = retrieveSearchabilitiesV2Request.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
                 result = await MakeHttpRequest<SearchabilitiesV2Response>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -1614,7 +1614,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section name. Defaults to "Products".</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>SearchabilityV2 object representing the searchability.</returns>
-        public async Task<SearchabilityV2> GetSearchabilityV2(string name, string section = "Products", CancellationToken cancellationToken = default)
+        public async Task<SearchabilityV2> GetSearchabilityV2(string name, string section = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -1663,7 +1663,7 @@ namespace Constructorio_NET.Modules
 
             try
             {
-                var url = CreateSearchabilitiesUrlV2(patchSearchabilitiesV2Request.Section ?? "Products", queryParams: patchSearchabilitiesV2Request.GetRequestParameters());
+                var url = CreateSearchabilitiesUrlV2(patchSearchabilitiesV2Request.Section, queryParams: patchSearchabilitiesV2Request.GetRequestParameters());
                 Dictionary<string, string> requestHeaders = patchSearchabilitiesV2Request.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
                 result = await MakeHttpRequest<SearchabilitiesV2Response>(Options, HttpMethodPatch, url, requestHeaders, postbody, cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -1688,7 +1688,7 @@ namespace Constructorio_NET.Modules
         /// <param name="skipRebuild">Whether to skip index rebuild.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Updated SearchabilityV2 object.</returns>
-        public async Task<SearchabilityV2> PatchSearchabilityV2(SearchabilityV2 searchability, string section = "Products", bool? skipRebuild = null, CancellationToken cancellationToken = default)
+        public async Task<SearchabilityV2> PatchSearchabilityV2(SearchabilityV2 searchability, string section = null, bool? skipRebuild = null, CancellationToken cancellationToken = default)
         {
             if (searchability == null)
             {
@@ -1710,10 +1710,32 @@ namespace Constructorio_NET.Modules
             Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
             AddAuthHeaders(this.Options, requestHeaders);
 
+            // Build body without name — it's already in the URL path and the API rejects it as an extra field
+            var body = new Dictionary<string, object>();
+            if (searchability.FuzzySearchable.HasValue)
+            {
+                body["fuzzy_searchable"] = searchability.FuzzySearchable.Value;
+            }
+
+            if (searchability.ExactSearchable.HasValue)
+            {
+                body["exact_searchable"] = searchability.ExactSearchable.Value;
+            }
+
+            if (searchability.Displayable.HasValue)
+            {
+                body["displayable"] = searchability.Displayable.Value;
+            }
+
+            if (searchability.Hidden.HasValue)
+            {
+                body["hidden"] = searchability.Hidden.Value;
+            }
+
             SearchabilityV2 result;
             try
             {
-                result = await MakeHttpRequest<SearchabilityV2>(Options, HttpMethodPatch, url, requestHeaders, searchability, cancellationToken: cancellationToken).ConfigureAwait(false);
+                result = await MakeHttpRequest<SearchabilityV2>(Options, HttpMethodPatch, url, requestHeaders, body, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
@@ -1744,7 +1766,7 @@ namespace Constructorio_NET.Modules
 
             try
             {
-                var url = CreateSearchabilitiesUrlV2(deleteSearchabilitiesV2Request.Section ?? "Products", queryParams: deleteSearchabilitiesV2Request.GetRequestParameters());
+                var url = CreateSearchabilitiesUrlV2(deleteSearchabilitiesV2Request.Section, queryParams: deleteSearchabilitiesV2Request.GetRequestParameters());
                 Dictionary<string, string> requestHeaders = deleteSearchabilitiesV2Request.GetRequestHeaders();
                 AddAuthHeaders(this.Options, requestHeaders);
                 result = await MakeHttpRequest<SearchabilitiesV2Response>(Options, HttpMethod.Delete, url, requestHeaders, deleteSearchabilitiesV2Request.GetRequestBody(), cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -1769,7 +1791,7 @@ namespace Constructorio_NET.Modules
         /// <param name="skipRebuild">Whether to skip index rebuild.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Deleted SearchabilityV2 object.</returns>
-        public async Task<SearchabilityV2> DeleteSearchabilityV2(string name, string section = "Products", bool? skipRebuild = null, CancellationToken cancellationToken = default)
+        public async Task<SearchabilityV2> DeleteSearchabilityV2(string name, string section = null, bool? skipRebuild = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(name))
             {

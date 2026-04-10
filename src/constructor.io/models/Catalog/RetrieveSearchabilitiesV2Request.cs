@@ -26,7 +26,7 @@ namespace Constructorio_NET.Models
         public int Offset { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the section. Defaults to "Products".
+        /// Gets or sets the name of the section. If not set, the API defaults to "Products".
         /// </summary>
         public string Section { get; set; }
 
