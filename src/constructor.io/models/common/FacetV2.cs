@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -83,15 +84,12 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Used to create inclusive buckets.
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Include)]
+        [JsonConverter(typeof(FacetRangeInclusiveConverter))]
         public FacetRangeInclusive? RangeInclusive { get; set; }
 
-        // Used by Json.Net to determine whether or not to serialize RangeInclusive.
         public bool ShouldSerializeRangeInclusive()
         {
-            if (RangeInclusive == null) return false;
-            if (RangeInclusive == FacetRangeInclusive.Null) RangeInclusive = null;
-            return true;
+            return RangeInclusive != null;
         }
 
         /// <summary>
@@ -177,6 +175,45 @@ namespace Constructorio_NET.Models
         [JsonConstructor]
         public FacetV2()
         {
+        }
+    }
+
+    /// <summary>
+    /// Serializes FacetRangeInclusive.Null as JSON null, and Above/Below as their snake_case strings.
+    /// </summary>
+    internal class FacetRangeInclusiveConverter : JsonConverter<FacetRangeInclusive?>
+    {
+        public override void WriteJson(JsonWriter writer, FacetRangeInclusive? value, JsonSerializer serializer)
+        {
+            if (value == null || value == FacetRangeInclusive.Null)
+            {
+                writer.WriteNull();
+            }
+            else
+            {
+                writer.WriteValue(value.ToString().ToLowerInvariant());
+            }
+        }
+
+        public override FacetRangeInclusive? ReadJson(JsonReader reader, Type objectType, FacetRangeInclusive? existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return FacetRangeInclusive.Null;
+            }
+
+            string val = reader.Value?.ToString();
+            if (string.IsNullOrEmpty(val))
+            {
+                return FacetRangeInclusive.Null;
+            }
+
+            if (Enum.TryParse<FacetRangeInclusive>(val, true, out var result))
+            {
+                return result;
+            }
+
+            return FacetRangeInclusive.Null;
         }
     }
 }
