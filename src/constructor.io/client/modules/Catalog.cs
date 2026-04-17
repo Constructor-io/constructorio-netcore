@@ -1377,7 +1377,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result == null)
+            if (result == null || result.Facets == null)
             {
                 throw new ConstructorException("CreateOrReplaceFacetConfigsV2 response data is malformed");
             }
@@ -1422,7 +1422,7 @@ namespace Constructorio_NET.Modules
                 throw new ConstructorException(e);
             }
 
-            if (result == null)
+            if (result == null || result.Facets == null)
             {
                 throw new ConstructorException("BatchPartiallyUpdateFacetConfigsV2 response data is malformed");
             }
@@ -1611,7 +1611,7 @@ namespace Constructorio_NET.Modules
         /// Gets a specific v2 searchability by name.
         /// </summary>
         /// <param name="name">Name of the searchability field.</param>
-        /// <param name="section">Section name. Defaults to "Products".</param>
+        /// <param name="section">Section name. If null, the API defaults to "Products".</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>SearchabilityV2 object representing the searchability.</returns>
         public async Task<SearchabilityV2> GetSearchabilityV2(string name, string section = null, CancellationToken cancellationToken = default)
@@ -1684,7 +1684,7 @@ namespace Constructorio_NET.Modules
         /// Partially updates a specific v2 searchability by name.
         /// </summary>
         /// <param name="searchability">SearchabilityV2 fields to be updated.</param>
-        /// <param name="section">Section name. Defaults to "Products".</param>
+        /// <param name="section">Section name. If null, the API defaults to "Products".</param>
         /// <param name="skipRebuild">Whether to skip index rebuild.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Updated SearchabilityV2 object.</returns>
@@ -1787,7 +1787,7 @@ namespace Constructorio_NET.Modules
         /// Delete a specific v2 searchability by name.
         /// </summary>
         /// <param name="name">Name of the searchability field to delete.</param>
-        /// <param name="section">Section name. Defaults to "Products".</param>
+        /// <param name="section">Section name. If null, the API defaults to "Products".</param>
         /// <param name="skipRebuild">Whether to skip index rebuild.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Deleted SearchabilityV2 object.</returns>
