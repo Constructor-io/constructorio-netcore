@@ -155,6 +155,7 @@ namespace Constructorio_NET.Tests
             FacetV2GetAllResponse facetResponse = await constructorio.Catalog.GetAllFacetConfigsV2(pagination);
 
             Assert.IsNotNull(facetResponse, "Response should not be null");
+            Assert.AreEqual(2, facetResponse.Facets.Count, "Should respect NumResultsPerPage");
         }
 
         [Test]
@@ -221,6 +222,29 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task PartiallyUpdateFacetConfigV2WithNullValues()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            FacetV2 facet = CreateRandomFacet(FacetTypeV2.Multiple);
+            facet.DisplayName = "unchanged";
+            facet.Position = 1;
+            facet.RangeInclusive = FacetRangeInclusive.Above;
+            await constructorio.Catalog.CreateFacetConfigV2(facet);
+
+            facet.DisplayName = "changed";
+            facet.Position = null;
+            facet.RangeInclusive = FacetRangeInclusive.Null;
+
+            FacetV2 changedFacet = await constructorio.Catalog.PartiallyUpdateFacetConfigV2(facet);
+
+            Assert.AreEqual(facet.DisplayName, changedFacet.DisplayName, "Facet display name not changed correctly");
+            Assert.IsNull(changedFacet.Position, "Facet position should be null after patch");
+            Assert.IsTrue(
+                changedFacet.RangeInclusive == null || changedFacet.RangeInclusive == FacetRangeInclusive.Null,
+                "Facet range inclusive should be cleared after patch");
+        }
+
+        [Test]
         public void PartiallyUpdateFacetConfigV2_ThrowsWhenNull()
         {
             ConstructorIO constructorio = new ConstructorIO(this.Config);
@@ -256,6 +280,7 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual("changed", newFacet.DisplayName, "Display Name not properly updated.");
             Assert.AreEqual(facet.Name, newFacet.Name, "Name should match");
             Assert.AreEqual(facet.PathInMetadata, newFacet.PathInMetadata, "PathInMetadata should match");
+            Assert.IsNull(newFacet.Position, "Position should be null after replace");
         }
 
         [Test]

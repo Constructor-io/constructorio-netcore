@@ -264,6 +264,8 @@ namespace Constructorio_NET.Tests
 
             Assert.IsNotNull(result, "Response should not be null");
             Assert.AreEqual(searchability.Name, result.Name, "Name should match");
+            Assert.IsTrue(result.Displayable.HasValue, "Displayable should be set on response");
+            Assert.IsFalse(result.Displayable.Value, "Displayable should be updated");
         }
 
         [Test]
@@ -451,6 +453,8 @@ namespace Constructorio_NET.Tests
             var created = response.Searchabilities.Find(s => s.Name == searchability.Name);
             Assert.IsNotNull(created, "Created searchability should be in response");
             Assert.IsNotNull(created.CreatedAt, "CreatedAt should be set");
+            Assert.IsTrue(created.Displayable.HasValue && created.Displayable.Value, "Displayable should reflect the value set on creation");
+            Assert.IsTrue(created.Hidden.HasValue && created.Hidden.Value, "Hidden should reflect the value set on creation");
         }
     }
 }
