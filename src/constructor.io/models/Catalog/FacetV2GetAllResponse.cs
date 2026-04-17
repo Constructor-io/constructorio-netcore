@@ -14,7 +14,7 @@ namespace Constructorio_NET.Models
         /// Gets or sets the list of facet configurations.
         /// </summary>
         [JsonProperty("facets")]
-        public List<FacetV2> Facets { get; set; }
+        public List<FacetV2> Facets { get; set; } = new List<FacetV2>();
 
         /// <summary>
         /// Gets or sets the total count of facet configurations.

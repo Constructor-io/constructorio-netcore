@@ -14,7 +14,7 @@ namespace Constructorio_NET.Models
         /// Gets or sets the list of searchability configurations.
         /// </summary>
         [JsonProperty("searchabilities")]
-        public List<SearchabilityV2> Searchabilities { get; set; }
+        public List<SearchabilityV2> Searchabilities { get; set; } = new List<SearchabilityV2>();
 
         /// <summary>
         /// Gets or sets the total count of searchability configurations.

@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -63,6 +64,11 @@ namespace Constructorio_NET.Models
         /// <param name="name">Name of the searchability field.</param>
         public SearchabilityV2(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("name is required", nameof(name));
+            }
+
             Name = name;
         }
 

@@ -64,8 +64,8 @@ namespace Constructorio_NET.Models
         public FacetSortOrder? SortOrder { get; set; }
 
         /// <summary>
-        /// Sort direction for `SortOrderBy`.
-        /// Default value is `false` for SortOrderBy = `value` and `true` otherwise.
+        /// Sort direction for `SortOrder`.
+        /// Default value is `false` for SortOrder = `value` and `true` otherwise.
         /// </summary>
         public bool? SortDescending { get; set; }
 
@@ -77,7 +77,7 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Format of range facets. Determines whether the facet is configured to display as a slider (in which case the search endpoint will return only min & max values) or as a list of buckets.
-        /// Required if FaceType = `range`.
+        /// Required if FacetType = `range`.
         /// </summary>
         public FacetRangeFormat? RangeFormat { get; set; }
 
@@ -94,7 +94,7 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Defines the cut-off points for generating static range buckets. Expects list of sorted numbers (like [10, 25, 40]).
-        /// Required if FacetType = `range` & BucketSize = null.
+        /// Required if FacetType = `range` and a `bucket_size`/dynamic range is not configured.
         /// </summary>
         public List<double> RangeLimits { get; set; }
 
@@ -163,6 +163,16 @@ namespace Constructorio_NET.Models
         /// <param name="type"><see cref="FacetV2.Type"/></param>
         public FacetV2(string name, string pathInMetadata, FacetTypeV2 type)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("name is required", nameof(name));
+            }
+
+            if (string.IsNullOrEmpty(pathInMetadata))
+            {
+                throw new ArgumentException("pathInMetadata is required", nameof(pathInMetadata));
+            }
+
             this.Name = name;
             this.PathInMetadata = pathInMetadata;
             this.Type = type;
@@ -213,7 +223,7 @@ namespace Constructorio_NET.Models
                 return result;
             }
 
-            return FacetRangeInclusive.Null;
+            throw new JsonSerializationException($"Unknown FacetRangeInclusive value: '{val}'");
         }
     }
 }

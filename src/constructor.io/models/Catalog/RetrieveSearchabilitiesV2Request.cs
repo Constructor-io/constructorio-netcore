@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Utils;
@@ -83,6 +84,11 @@ namespace Constructorio_NET.Models
         /// <returns>Hashtable of request parameters.</returns>
         public Hashtable GetRequestParameters()
         {
+            if (this.Page > 0 && this.Offset > 0)
+            {
+                throw new InvalidOperationException("Page and Offset are mutually exclusive — set only one.");
+            }
+
             Hashtable parameters = new Hashtable();
 
             if (!string.IsNullOrEmpty(this.Name))
