@@ -257,6 +257,34 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void MakeUrlSearchWithFmtOptionsHiddenSortOptionsArray()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            Hashtable queryParams = new Hashtable()
+            {
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_SORT_OPTIONS}]", new List<string> { "priceUSD", "priceEUR" } }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            bool hasSort0 = Regex.Match(url, "&fmt_options%5Bhidden_sort_options%5D=priceUSD").Success;
+            bool hasSort1 = Regex.Match(url, "&fmt_options%5Bhidden_sort_options%5D=priceEUR").Success;
+            Assert.That(hasSort0 && hasSort1, "url should have repeated hidden_sort_options keys");
+        }
+
+        [Test]
+        public void MakeUrlSearchWithFmtOptionsShowHiddenSortOptions()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            Hashtable queryParams = new Hashtable()
+            {
+                { $"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_SORT_OPTIONS}]", "true" }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            Assert.That(Regex.Match(url, "&fmt_options%5Bshow_hidden_sort_options%5D=true").Success, "url should have show_hidden_sort_options");
+        }
+
+        [Test]
         public void MakeUrlSearchWithFmtOptionsAllProperties()
         {
             List<string> paths = new List<string> { "search", this.Query };
@@ -265,20 +293,24 @@ namespace Constructorio_NET.Tests
                 { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]", "5" },
                 { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_START}]", "top" },
                 { $"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FIELDS}]", "true" },
+                { $"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_SORT_OPTIONS}]", "true" },
                 { $"{Constants.FMT_OPTIONS}[{Constants.VARIATIONS_RETURN_TYPE}]", "all" },
                 { $"{Constants.FMT_OPTIONS}[{Constants.FIELDS}]", new List<string> { "id" } },
                 { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FIELDS}]", new List<string> { "inventory" } },
                 { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FACETS}]", new List<string> { "brand" } },
+                { $"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_SORT_OPTIONS}]", new List<string> { "priceUSD" } },
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
             Assert.That(Regex.Match(url, "&fmt_options%5Bgroups_max_depth%5D=5").Success, "should have groups_max_depth");
             Assert.That(Regex.Match(url, "&fmt_options%5Bgroups_start%5D=top").Success, "should have groups_start");
             Assert.That(Regex.Match(url, "&fmt_options%5Bshow_hidden_fields%5D=true").Success, "should have show_hidden_fields");
+            Assert.That(Regex.Match(url, "&fmt_options%5Bshow_hidden_sort_options%5D=true").Success, "should have show_hidden_sort_options");
             Assert.That(Regex.Match(url, "&fmt_options%5Bvariations_return_type%5D=all").Success, "should have variations_return_type");
             Assert.That(Regex.Match(url, "&fmt_options%5Bfields%5D=id").Success, "should have fields array");
             Assert.That(Regex.Match(url, "&fmt_options%5Bhidden_fields%5D=inventory").Success, "should have hidden_fields array");
             Assert.That(Regex.Match(url, "&fmt_options%5Bhidden_facets%5D=brand").Success, "should have hidden_facets array");
+            Assert.That(Regex.Match(url, "&fmt_options%5Bhidden_sort_options%5D=priceUSD").Success, "should have hidden_sort_options array");
         }
 
         [Test]

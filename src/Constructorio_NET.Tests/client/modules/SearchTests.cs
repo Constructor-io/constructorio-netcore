@@ -712,6 +712,29 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetSearchResultsWithHiddenSortOptions()
+        {
+            SearchRequest req = new SearchRequest("item1")
+            {
+                UserInfo = this.UserInfo,
+                FmtOptions = new FmtOptions
+                {
+                    HiddenSortOptions = new List<string> { "relevance" },
+                    ShowHiddenSortOptions = true
+                }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.Greater(
+                res.Response.TotalNumResults,
+                0,
+                "total number of results expected to be greater than 0"
+            );
+        }
+
+        [Test]
         public async Task GetSearchResultsShouldReturnResultWithVariationsMap()
         {
             SearchRequest req = new SearchRequest("item1")

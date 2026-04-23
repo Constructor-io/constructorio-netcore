@@ -621,6 +621,29 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetBrowseResultsWithHiddenSortOptions()
+        {
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = this.UserInfo,
+                FmtOptions = new FmtOptions
+                {
+                    HiddenSortOptions = new List<string> { "relevance" },
+                    ShowHiddenSortOptions = true
+                }
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            Assert.Greater(
+                res.Response.TotalNumResults,
+                0,
+                "total number of results expected to be greater than 0"
+            );
+        }
+
+        [Test]
         public async Task GetBrowseResultsShouldReturnResultWithVariationsMap()
         {
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
