@@ -623,12 +623,13 @@ namespace Constructorio_NET.Tests
         [Test]
         public async Task GetBrowseResultsWithHiddenSortOptions()
         {
+            string requestedHiddenSortOption = "relevance";
             BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
             {
                 UserInfo = this.UserInfo,
                 FmtOptions = new FmtOptions
                 {
-                    HiddenSortOptions = new List<string> { "relevance" },
+                    HiddenSortOptions = new List<string> { requestedHiddenSortOption },
                     ShowHiddenSortOptions = true
                 }
             };
@@ -641,6 +642,9 @@ namespace Constructorio_NET.Tests
                 0,
                 "total number of results expected to be greater than 0"
             );
+            Assert.IsNotEmpty(res.Response.SortOptions, "Sort options should be returned");
+            FilterSortOption hiddenSort = res.Response.SortOptions.Find(s => s.SortBy == requestedHiddenSortOption);
+            Assert.NotNull(hiddenSort, "Hidden sort option should be returned");
         }
 
         [Test]
