@@ -645,6 +645,7 @@ namespace Constructorio_NET.Tests
             Assert.IsNotEmpty(res.Response.SortOptions, "Sort options should be returned");
             FilterSortOption hiddenSort = res.Response.SortOptions.Find(s => s.SortBy == requestedHiddenSortOption);
             Assert.NotNull(hiddenSort, "Hidden sort option should be returned");
+            Assert.True(hiddenSort.Hidden, "Returned sort option is hidden");
         }
 
         [Test]
