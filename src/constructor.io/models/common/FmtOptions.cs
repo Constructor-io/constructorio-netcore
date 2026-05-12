@@ -36,9 +36,19 @@ namespace Constructorio_NET.Models
         public List<string>? HiddenFacets { get; set; }
 
         /// <summary>
+        /// Gets or sets hidden sort options to reveal (e.g., currency/locale-specific sorts).
+        /// </summary>
+        public List<string>? HiddenSortOptions { get; set; }
+
+        /// <summary>
         /// Gets or sets whether to show hidden fields.
         /// </summary>
         public bool? ShowHiddenFields { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether to show hidden sort options.
+        /// </summary>
+        public bool? ShowHiddenSortOptions { get; set; }
 
         /// <summary>
         /// Gets or sets the variations return type.
@@ -80,6 +90,11 @@ namespace Constructorio_NET.Models
                 parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FIELDS}]", this.ShowHiddenFields.Value.ToString().ToLower());
             }
 
+            if (this.ShowHiddenSortOptions.HasValue)
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_SORT_OPTIONS}]", this.ShowHiddenSortOptions.Value.ToString().ToLower());
+            }
+
             if (!string.IsNullOrEmpty(this.VariationsReturnType))
             {
                 parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.VARIATIONS_RETURN_TYPE}]", this.VariationsReturnType);
@@ -108,6 +123,11 @@ namespace Constructorio_NET.Models
             if (this.HiddenFacets != null)
             {
                 parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_FACETS}]", this.HiddenFacets);
+            }
+
+            if (this.HiddenSortOptions != null)
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.HIDDEN_SORT_OPTIONS}]", this.HiddenSortOptions);
             }
 
             return parameters;

@@ -19,5 +19,8 @@ namespace Constructorio_NET.Models
 
         [JsonProperty("status")]
         public string Status { get; set; }
+
+        [JsonProperty("hidden")]
+        public bool Hidden { get; set; }
     }
 }

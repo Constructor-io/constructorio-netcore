@@ -16,6 +16,7 @@
         public const string GROUPS_START = "groups_start";
         public const string HIDDEN_FIELDS = "hidden_fields";
         public const string HIDDEN_FACETS = "hidden_facets";
+        public const string HIDDEN_SORT_OPTIONS = "hidden_sort_options";
         public const string ITEM_IDS = "ids";
         public const string NOTIFICATION_EMAIL = "notification_email";
         public const string PAGE = "page";
@@ -23,6 +24,7 @@
         public const string SECURITY_TOKEN = "x-cnstrc-token";
         public const string SHOW_HIDDEN_FACETS = "show_hidden_facets";
         public const string SHOW_HIDDEN_FIELDS = "show_hidden_fields";
+        public const string SHOW_HIDDEN_SORT_OPTIONS = "show_hidden_sort_options";
         public const string SHOW_PROTECTED_FACETS = "show_protected_facets";
         public const string USER_SEGMENTS = "us";
         public const string SECTION = "section";
