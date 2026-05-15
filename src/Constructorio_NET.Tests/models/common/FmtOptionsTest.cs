@@ -129,10 +129,20 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetQueryParametersFacetGroupsLimit()
+        {
+            FmtOptions fmtOptions = new FmtOptions { FacetGroupsLimit = 10 };
+            Hashtable result = fmtOptions.GetQueryParameters();
+            Assert.AreEqual("10", result[$"{Constants.FMT_OPTIONS}[{Constants.FACET_GROUPS_LIMIT}]"]);
+            Assert.AreEqual(1, result.Count);
+        }
+
+        [Test]
         public void GetQueryParametersAllProperties()
         {
             FmtOptions fmtOptions = new FmtOptions
             {
+                FacetGroupsLimit = 20,
                 GroupsMaxDepth = 5,
                 GroupsStart = "top",
                 ShowHiddenFields = true,
@@ -145,7 +155,8 @@ namespace Constructorio_NET.Tests
             };
 
             Hashtable result = fmtOptions.GetQueryParameters();
-            Assert.AreEqual(9, result.Count);
+            Assert.AreEqual(10, result.Count);
+            Assert.AreEqual("20", result[$"{Constants.FMT_OPTIONS}[{Constants.FACET_GROUPS_LIMIT}]"]);
             Assert.AreEqual("5", result[$"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]"]);
             Assert.AreEqual("top", result[$"{Constants.FMT_OPTIONS}[{Constants.GROUPS_START}]"]);
             Assert.AreEqual("true", result[$"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FIELDS}]"]);
