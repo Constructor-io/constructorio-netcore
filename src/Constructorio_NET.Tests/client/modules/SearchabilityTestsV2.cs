@@ -121,6 +121,42 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task RetrieveSearchabilitiesV2WithExactSearchableFilter()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            var request = new RetrieveSearchabilitiesV2Request();
+            request.ExactSearchable = true;
+            SearchabilitiesV2Response response = await constructorio.Catalog.RetrieveSearchabilitiesV2(request);
+
+            Assert.IsNotNull(response, "Response should not be null");
+        }
+
+        [Test]
+        public async Task RetrieveSearchabilitiesV2WithMatchTypeOr()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            var request = new RetrieveSearchabilitiesV2Request();
+            request.FuzzySearchable = true;
+            request.Displayable = true;
+            request.MatchType = "or";
+            SearchabilitiesV2Response response = await constructorio.Catalog.RetrieveSearchabilitiesV2(request);
+
+            Assert.IsNotNull(response, "Response should not be null");
+        }
+
+        [Test]
+        public async Task RetrieveSearchabilitiesV2WithOffset()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            var request = new RetrieveSearchabilitiesV2Request();
+            request.Offset = 1;
+            request.NumResultsPerPage = 5;
+            SearchabilitiesV2Response response = await constructorio.Catalog.RetrieveSearchabilitiesV2(request);
+
+            Assert.IsNotNull(response, "Response should not be null");
+        }
+
+        [Test]
         public async Task RetrieveSearchabilitiesV2WithSorting()
         {
             ConstructorIO constructorio = new ConstructorIO(this.Config);
@@ -180,6 +216,21 @@ namespace Constructorio_NET.Tests
             var searchabilities = new List<SearchabilityV2> { searchability };
             var request = new PatchSearchabilitiesV2Request(searchabilities);
             request.SkipRebuild = true;
+
+            SearchabilitiesV2Response response = await constructorio.Catalog.PatchSearchabilitiesV2(request);
+
+            Assert.IsNotNull(response, "Response should not be null");
+            Assert.IsTrue(response.Searchabilities.Count > 0, "Should have created at least one searchability");
+        }
+
+        [Test]
+        public async Task PatchSearchabilitiesV2WithSection()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            var searchability = CreateRandomSearchability();
+            var searchabilities = new List<SearchabilityV2> { searchability };
+            var request = new PatchSearchabilitiesV2Request(searchabilities);
+            request.Section = "Products";
 
             SearchabilitiesV2Response response = await constructorio.Catalog.PatchSearchabilitiesV2(request);
 

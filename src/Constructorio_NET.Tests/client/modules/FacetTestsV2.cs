@@ -108,12 +108,101 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task CreateFacetConfigV2WithAllFields()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            FacetV2 facet = CreateRandomFacet(FacetTypeV2.Multiple);
+            facet.DisplayName = "Test Display Name";
+            facet.SortOrder = FacetSortOrder.Value;
+            facet.SortDescending = true;
+            facet.MatchType = FacetMatchType.All;
+            facet.Position = 5;
+            facet.Hidden = false;
+            facet.Protected = false;
+            facet.Countable = true;
+            facet.OptionsLimit = 100;
+
+            FacetV2 createdFacet = await constructorio.Catalog.CreateFacetConfigV2(facet);
+
+            Assert.IsNotNull(createdFacet, "Facet not created");
+            Assert.AreEqual(facet.Name, createdFacet.Name, "Facet name mismatch");
+            Assert.AreEqual(facet.DisplayName, createdFacet.DisplayName, "DisplayName mismatch");
+            Assert.AreEqual(facet.SortOrder, createdFacet.SortOrder, "SortOrder mismatch");
+            Assert.AreEqual(facet.SortDescending, createdFacet.SortDescending, "SortDescending mismatch");
+            Assert.AreEqual(facet.MatchType, createdFacet.MatchType, "MatchType mismatch");
+            Assert.AreEqual(facet.Position, createdFacet.Position, "Position mismatch");
+        }
+
+        [Test]
+        public async Task CreateRangeFacetWithRangeLimits()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            FacetV2 facet = CreateRandomFacet(FacetTypeV2.Range);
+            facet.RangeType = FacetRangeType.Static;
+            facet.RangeFormat = FacetRangeFormat.Options;
+            facet.RangeLimits = new List<double> { 10, 25, 50, 100 };
+            facet.RangeInclusive = FacetRangeInclusive.Above;
+
+            FacetV2 createdFacet = await constructorio.Catalog.CreateFacetConfigV2(facet);
+
+            Assert.IsNotNull(createdFacet, "Facet not created");
+            Assert.AreEqual(FacetTypeV2.Range, createdFacet.Type, "Type should be range");
+            Assert.AreEqual(FacetRangeFormat.Options, createdFacet.RangeFormat, "RangeFormat mismatch");
+            Assert.IsNotNull(createdFacet.RangeLimits, "RangeLimits should be set");
+            Assert.AreEqual(4, createdFacet.RangeLimits.Count, "RangeLimits count mismatch");
+        }
+
+        [Test]
+        public async Task CreateRangeFacetWithRangeInclusiveBelow()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            FacetV2 facet = CreateRandomFacet(FacetTypeV2.Range);
+            facet.RangeType = FacetRangeType.Static;
+            facet.RangeFormat = FacetRangeFormat.Options;
+            facet.RangeLimits = new List<double> { 20, 40, 60 };
+            facet.RangeInclusive = FacetRangeInclusive.Below;
+
+            FacetV2 createdFacet = await constructorio.Catalog.CreateFacetConfigV2(facet);
+
+            Assert.IsNotNull(createdFacet, "Facet not created");
+            Assert.AreEqual(FacetRangeInclusive.Below, createdFacet.RangeInclusive, "RangeInclusive should be below");
+        }
+
+        [Test]
         public void CreateFacetConfigV2_ThrowsWhenNullFacet()
         {
             ConstructorIO constructorio = new ConstructorIO(this.Config);
 
             Assert.ThrowsAsync<ArgumentNullException>(async () =>
                 await constructorio.Catalog.CreateFacetConfigV2(null));
+        }
+
+        [Test]
+        public void FacetV2Constructor_ThrowsWhenNameEmpty()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new FacetV2(string.Empty, "metadata.test", FacetTypeV2.Multiple));
+        }
+
+        [Test]
+        public void FacetV2Constructor_ThrowsWhenNameNull()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new FacetV2(null, "metadata.test", FacetTypeV2.Multiple));
+        }
+
+        [Test]
+        public void FacetV2Constructor_ThrowsWhenPathInMetadataEmpty()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new FacetV2("test-facet", string.Empty, FacetTypeV2.Multiple));
+        }
+
+        [Test]
+        public void FacetV2Constructor_ThrowsWhenPathInMetadataNull()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                new FacetV2("test-facet", null, FacetTypeV2.Multiple));
         }
 
         [Test]
@@ -165,6 +254,19 @@ namespace Constructorio_NET.Tests
             PaginationOptions pagination = new PaginationOptions();
             pagination.Offset = 0;
             pagination.NumResultsPerPage = 10;
+            FacetV2GetAllResponse facetResponse = await constructorio.Catalog.GetAllFacetConfigsV2(pagination);
+
+            Assert.IsNotNull(facetResponse, "Response should not be null");
+            Assert.IsNotNull(facetResponse.Facets, "Facets array should not be null");
+        }
+
+        [Test]
+        public async Task GetAllFacetConfigsV2WithPage()
+        {
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            PaginationOptions pagination = new PaginationOptions();
+            pagination.Page = 1;
+            pagination.NumResultsPerPage = 5;
             FacetV2GetAllResponse facetResponse = await constructorio.Catalog.GetAllFacetConfigsV2(pagination);
 
             Assert.IsNotNull(facetResponse, "Response should not be null");
