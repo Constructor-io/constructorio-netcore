@@ -1,6 +1,7 @@
 var class_constructorio___n_e_t_1_1_models_1_1_fmt_options =
 [
     [ "GetQueryParameters", "class_constructorio___n_e_t_1_1_models_1_1_fmt_options.html#a065e4704d31d42d771b6af0f54610d3b", null ],
+    [ "FacetGroupsLimit", "class_constructorio___n_e_t_1_1_models_1_1_fmt_options.html#a28f142b279446991a2493c805803bb08", null ],
     [ "Fields", "class_constructorio___n_e_t_1_1_models_1_1_fmt_options.html#a0d04548dbe971d670e8af0ac0d796644", null ],
     [ "GroupsMaxDepth", "class_constructorio___n_e_t_1_1_models_1_1_fmt_options.html#ae660e455a974995d876ab0ce9ff1d203", null ],
     [ "GroupsStart", "class_constructorio___n_e_t_1_1_models_1_1_fmt_options.html#ae20ebbd46879bc59499a87e854d4fe60", null ],
