@@ -290,6 +290,7 @@ namespace Constructorio_NET.Tests
             List<string> paths = new List<string> { "search", this.Query };
             Hashtable queryParams = new Hashtable()
             {
+                { $"{Constants.FMT_OPTIONS}[{Constants.FACET_GROUPS_LIMIT}]", "10" },
                 { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_MAX_DEPTH}]", "5" },
                 { $"{Constants.FMT_OPTIONS}[{Constants.GROUPS_START}]", "top" },
                 { $"{Constants.FMT_OPTIONS}[{Constants.SHOW_HIDDEN_FIELDS}]", "true" },
@@ -302,6 +303,7 @@ namespace Constructorio_NET.Tests
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
+            Assert.That(Regex.Match(url, "&fmt_options%5Bfacet_groups_limit%5D=10").Success, "should have facet_groups_limit");
             Assert.That(Regex.Match(url, "&fmt_options%5Bgroups_max_depth%5D=5").Success, "should have groups_max_depth");
             Assert.That(Regex.Match(url, "&fmt_options%5Bgroups_start%5D=top").Success, "should have groups_start");
             Assert.That(Regex.Match(url, "&fmt_options%5Bshow_hidden_fields%5D=true").Success, "should have show_hidden_fields");

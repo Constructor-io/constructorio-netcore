@@ -10,6 +10,11 @@ namespace Constructorio_NET.Models
     public class FmtOptions
     {
         /// <summary>
+        /// Gets or sets the maximum number of facet groups to return.
+        /// </summary>
+        public int? FacetGroupsLimit { get; set; }
+
+        /// <summary>
         /// Gets or sets the maximum depth of result groups to return.
         /// </summary>
         public int? GroupsMaxDepth { get; set; }
@@ -74,6 +79,11 @@ namespace Constructorio_NET.Models
         public Hashtable GetQueryParameters()
         {
             Hashtable parameters = new Hashtable();
+
+            if (this.FacetGroupsLimit.HasValue)
+            {
+                parameters.Add($"{Constants.FMT_OPTIONS}[{Constants.FACET_GROUPS_LIMIT}]", this.FacetGroupsLimit.Value.ToString());
+            }
 
             if (this.GroupsMaxDepth.HasValue)
             {
