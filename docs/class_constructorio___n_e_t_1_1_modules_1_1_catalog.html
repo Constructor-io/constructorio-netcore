@@ -158,6 +158,34 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad7f5684926092ef9481baa0b1f91079e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates or Replace a Sort Option.  <br /></td></tr>
 <tr class="memitem:a98244e2d3312a056242ca324b319490b" id="r_a98244e2d3312a056242ca324b319490b"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_sort_option.html">SortOption</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a98244e2d3312a056242ca324b319490b">UpdateSortOption</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_sort_options_single_request.html">SortOptionsSingleRequest</a> sortOptionsSingleRequest, CancellationToken cancellationToken=default)</td></tr>
 <tr class="memdesc:a98244e2d3312a056242ca324b319490b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a Sort Option.  <br /></td></tr>
+<tr class="memitem:a66b798133da32db9b83dd7e00c2210c2" id="r_a66b798133da32db9b83dd7e00c2210c2"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a66b798133da32db9b83dd7e00c2210c2">CreateFacetConfigV2</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> facet, string section=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a66b798133da32db9b83dd7e00c2210c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a v2 <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html" title="Constructorio Facet.">Facet</a> Configuration.  <br /></td></tr>
+<tr class="memitem:a9058381cf11a76f879aa7f0ec719bd8e" id="r_a9058381cf11a76f879aa7f0ec719bd8e"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2_get_all_response.html">FacetV2GetAllResponse</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9058381cf11a76f879aa7f0ec719bd8e">GetAllFacetConfigsV2</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_pagination_options.html">PaginationOptions</a> paginationOptions=null, string section=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a9058381cf11a76f879aa7f0ec719bd8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all v2 facets in a particular section.  <br /></td></tr>
+<tr class="memitem:ac6c5adbc9f9f9e7b6d5e79876cd3687b" id="r_ac6c5adbc9f9f9e7b6d5e79876cd3687b"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac6c5adbc9f9f9e7b6d5e79876cd3687b">GetFacetConfigV2</a> (string facetName, string section=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:ac6c5adbc9f9f9e7b6d5e79876cd3687b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a v2 facet given the facet name and section.  <br /></td></tr>
+<tr class="memitem:a5710fa56f1864d44a6d64461957f7972" id="r_a5710fa56f1864d44a6d64461957f7972"><td class="memItemLeft">async Task&lt; List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a5710fa56f1864d44a6d64461957f7972">CreateOrReplaceFacetConfigsV2</a> (List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; facets, string section=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a5710fa56f1864d44a6d64461957f7972"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create or replace v2 facet configurations (batch operation). Replacing will overwrite all other configurations, resetting them to defaults, except facet options.  <br /></td></tr>
+<tr class="memitem:a46903c73e51f3f6599456d168760df42" id="r_a46903c73e51f3f6599456d168760df42"><td class="memItemLeft">async Task&lt; List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a46903c73e51f3f6599456d168760df42">BatchPartiallyUpdateFacetConfigsV2</a> (List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; facetFieldsList, string section=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a46903c73e51f3f6599456d168760df42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partially updates a list of v2 facet configurations (batch operation).  <br /></td></tr>
+<tr class="memitem:aabd4a21c282334e49fb8d3c6ab644f94" id="r_aabd4a21c282334e49fb8d3c6ab644f94"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aabd4a21c282334e49fb8d3c6ab644f94">ReplaceFacetConfigV2</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> facet, string section=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:aabd4a21c282334e49fb8d3c6ab644f94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace an existing v2 facet configuration by facet name. This will overwrite all other configurations, resetting them to defaults, except facet options.  <br /></td></tr>
+<tr class="memitem:aad76307eb101d427117d3eaef8dd0a7e" id="r_aad76307eb101d427117d3eaef8dd0a7e"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aad76307eb101d427117d3eaef8dd0a7e">PartiallyUpdateFacetConfigV2</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> facetFields, string section=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:aad76307eb101d427117d3eaef8dd0a7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partially updates a specific v2 facet configuration by facet name.  <br /></td></tr>
+<tr class="memitem:a40e0415f4af37d8e86cbbe2ec2fe763f" id="r_a40e0415f4af37d8e86cbbe2ec2fe763f"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a40e0415f4af37d8e86cbbe2ec2fe763f">DeleteFacetConfigV2</a> (string facetName, string section=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a40e0415f4af37d8e86cbbe2ec2fe763f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes a v2 <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html" title="Constructorio Facet.">Facet</a> Configuration.  <br /></td></tr>
+<tr class="memitem:a1ff45ec03d1f0edf4f98fb32f322502d" id="r_a1ff45ec03d1f0edf4f98fb32f322502d"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchabilities_v2_response.html">SearchabilitiesV2Response</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a1ff45ec03d1f0edf4f98fb32f322502d">RetrieveSearchabilitiesV2</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_retrieve_searchabilities_v2_request.html">RetrieveSearchabilitiesV2Request</a> retrieveSearchabilitiesV2Request, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a1ff45ec03d1f0edf4f98fb32f322502d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves v2 searchabilities with options for filtering and paginating.  <br /></td></tr>
+<tr class="memitem:a39f614b75b956c8453be2d2611ddff68" id="r_a39f614b75b956c8453be2d2611ddff68"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html">SearchabilityV2</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a39f614b75b956c8453be2d2611ddff68">GetSearchabilityV2</a> (string name, string section=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a39f614b75b956c8453be2d2611ddff68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a specific v2 searchability by name.  <br /></td></tr>
+<tr class="memitem:a2a81dbf216e69cbfda2513b0611f539e" id="r_a2a81dbf216e69cbfda2513b0611f539e"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchabilities_v2_response.html">SearchabilitiesV2Response</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2a81dbf216e69cbfda2513b0611f539e">PatchSearchabilitiesV2</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_patch_searchabilities_v2_request.html">PatchSearchabilitiesV2Request</a> patchSearchabilitiesV2Request, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a2a81dbf216e69cbfda2513b0611f539e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create or update v2 searchabilities (batch operation).  <br /></td></tr>
+<tr class="memitem:a9978880d5e6e7651f9283ba9dd217dc6" id="r_a9978880d5e6e7651f9283ba9dd217dc6"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html">SearchabilityV2</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9978880d5e6e7651f9283ba9dd217dc6">PatchSearchabilityV2</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html">SearchabilityV2</a> searchability, string section=null, bool? skipRebuild=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a9978880d5e6e7651f9283ba9dd217dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partially updates a specific v2 searchability by name.  <br /></td></tr>
+<tr class="memitem:a43f1affa2c6d799bfd05f1b3bedb2864" id="r_a43f1affa2c6d799bfd05f1b3bedb2864"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchabilities_v2_response.html">SearchabilitiesV2Response</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a43f1affa2c6d799bfd05f1b3bedb2864">DeleteSearchabilitiesV2</a> (<a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_delete_searchabilities_v2_request.html">DeleteSearchabilitiesV2Request</a> deleteSearchabilitiesV2Request, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:a43f1affa2c6d799bfd05f1b3bedb2864"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete v2 searchabilities (batch operation).  <br /></td></tr>
+<tr class="memitem:aa06a1cd6d8a9f0d9ef58cc9dcbadc331" id="r_aa06a1cd6d8a9f0d9ef58cc9dcbadc331"><td class="memItemLeft">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html">SearchabilityV2</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa06a1cd6d8a9f0d9ef58cc9dcbadc331">DeleteSearchabilityV2</a> (string name, string section=null, bool? skipRebuild=null, CancellationToken cancellationToken=default)</td></tr>
+<tr class="memdesc:aa06a1cd6d8a9f0d9ef58cc9dcbadc331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a specific v2 searchability by name.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -389,6 +417,51 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
 
 </div>
 </div>
+<a id="a46903c73e51f3f6599456d168760df42" name="a46903c73e51f3f6599456d168760df42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46903c73e51f3f6599456d168760df42">&#9670;&#160;</a></span>BatchPartiallyUpdateFacetConfigsV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; &gt; Constructorio_NET.Modules.Catalog.BatchPartiallyUpdateFacetConfigsV2 </td>
+          <td>(</td>
+          <td class="paramtype">List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>facetFieldsList</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Partially updates a list of v2 facet configurations (batch operation). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetFieldsList</td><td>List of v2 facets fields to be updated.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of updated v2 facet configurations.</dd></dl>
+
+</div>
+</div>
 <a id="a162ce54d9434953ac5530cca18a504cd" name="a162ce54d9434953ac5530cca18a504cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a162ce54d9434953ac5530cca18a504cd">&#9670;&#160;</a></span>CreateFacetConfig()</h2>
 
@@ -431,6 +504,51 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html" title="Constructorio Facet.">Facet</a> object representing the facet created.</dd></dl>
+
+</div>
+</div>
+<a id="a66b798133da32db9b83dd7e00c2210c2" name="a66b798133da32db9b83dd7e00c2210c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66b798133da32db9b83dd7e00c2210c2">&#9670;&#160;</a></span>CreateFacetConfigV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; Constructorio_NET.Modules.Catalog.CreateFacetConfigV2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a></td>          <td class="paramname"><span class="paramname"><em>facet</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a v2 <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html" title="Constructorio Facet.">Facet</a> Configuration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facet</td><td>New v2 <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html" title="Constructorio Facet.">Facet</a> Configuration to be created.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html" title="Constructorio v2 Facet.">FacetV2</a> object representing the facet created.</dd></dl>
 
 </div>
 </div>
@@ -482,6 +600,51 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Created facet option.</dd></dl>
+
+</div>
+</div>
+<a id="a5710fa56f1864d44a6d64461957f7972" name="a5710fa56f1864d44a6d64461957f7972"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5710fa56f1864d44a6d64461957f7972">&#9670;&#160;</a></span>CreateOrReplaceFacetConfigsV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; &gt; Constructorio_NET.Modules.Catalog.CreateOrReplaceFacetConfigsV2 </td>
+          <td>(</td>
+          <td class="paramtype">List&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>facets</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create or replace v2 facet configurations (batch operation). Replacing will overwrite all other configurations, resetting them to defaults, except facet options. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facets</td><td>List of v2 facets to create or replace.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of created or replaced v2 facet configurations.</dd></dl>
 
 </div>
 </div>
@@ -608,6 +771,51 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
 
 </div>
 </div>
+<a id="a40e0415f4af37d8e86cbbe2ec2fe763f" name="a40e0415f4af37d8e86cbbe2ec2fe763f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40e0415f4af37d8e86cbbe2ec2fe763f">&#9670;&#160;</a></span>DeleteFacetConfigV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; Constructorio_NET.Modules.Catalog.DeleteFacetConfigV2 </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>facetName</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deletes a v2 <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html" title="Constructorio Facet.">Facet</a> Configuration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetName</td><td>Name of the facet configuration/facet group.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html" title="Constructorio v2 Facet.">FacetV2</a> object representing the facet configuration deleted.</dd></dl>
+
+</div>
+</div>
 <a id="a6aa15b7a77b148473baa8678b3cf0bfc" name="a6aa15b7a77b148473baa8678b3cf0bfc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6aa15b7a77b148473baa8678b3cf0bfc">&#9670;&#160;</a></span>DeleteFacetOption()</h2>
 
@@ -698,6 +906,96 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
 
 </div>
 </div>
+<a id="a43f1affa2c6d799bfd05f1b3bedb2864" name="a43f1affa2c6d799bfd05f1b3bedb2864"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43f1affa2c6d799bfd05f1b3bedb2864">&#9670;&#160;</a></span>DeleteSearchabilitiesV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchabilities_v2_response.html">SearchabilitiesV2Response</a> &gt; Constructorio_NET.Modules.Catalog.DeleteSearchabilitiesV2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_delete_searchabilities_v2_request.html">DeleteSearchabilitiesV2Request</a></td>          <td class="paramname"><span class="paramname"><em>deleteSearchabilitiesV2Request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete v2 searchabilities (batch operation). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deleteSearchabilitiesV2Request</td><td>Constructorio's v2 delete searchabilities request object.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Constructorio's v2 Searchabilities response object.</dd></dl>
+
+</div>
+</div>
+<a id="aa06a1cd6d8a9f0d9ef58cc9dcbadc331" name="aa06a1cd6d8a9f0d9ef58cc9dcbadc331"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa06a1cd6d8a9f0d9ef58cc9dcbadc331">&#9670;&#160;</a></span>DeleteSearchabilityV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html">SearchabilityV2</a> &gt; Constructorio_NET.Modules.Catalog.DeleteSearchabilityV2 </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool?</td>          <td class="paramname"><span class="paramname"><em>skipRebuild</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete a specific v2 searchability by name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of the searchability field to delete.</td></tr>
+    <tr><td class="paramname">section</td><td>Section name. If null, the API defaults to "Products".</td></tr>
+    <tr><td class="paramname">skipRebuild</td><td>Whether to skip index rebuild.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Deleted <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html" title="Constructor.io v2 Searchability model. Note: v2 removes percentage_presence, example_items,...">SearchabilityV2</a> object.</dd></dl>
+
+</div>
+</div>
 <a id="a94516008ea362b9eae38d91026a1be65" name="a94516008ea362b9eae38d91026a1be65"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a94516008ea362b9eae38d91026a1be65">&#9670;&#160;</a></span>DeleteSortOptions()</h2>
 
@@ -779,6 +1077,51 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>List of Facets in a given section.</dd></dl>
+
+</div>
+</div>
+<a id="a9058381cf11a76f879aa7f0ec719bd8e" name="a9058381cf11a76f879aa7f0ec719bd8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9058381cf11a76f879aa7f0ec719bd8e">&#9670;&#160;</a></span>GetAllFacetConfigsV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2_get_all_response.html">FacetV2GetAllResponse</a> &gt; Constructorio_NET.Modules.Catalog.GetAllFacetConfigsV2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_pagination_options.html">PaginationOptions</a></td>          <td class="paramname"><span class="paramname"><em>paginationOptions</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets all v2 facets in a particular section. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">paginationOptions</td><td><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_pagination_options.html" title="Constructor.io PaginationOptions Class.">PaginationOptions</a> object for pagination.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of v2 Facets in a given section.</dd></dl>
 
 </div>
 </div>
@@ -878,6 +1221,51 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
 
 </div>
 </div>
+<a id="ac6c5adbc9f9f9e7b6d5e79876cd3687b" name="ac6c5adbc9f9f9e7b6d5e79876cd3687b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6c5adbc9f9f9e7b6d5e79876cd3687b">&#9670;&#160;</a></span>GetFacetConfigV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; Constructorio_NET.Modules.Catalog.GetFacetConfigV2 </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>facetName</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a v2 facet given the facet name and section. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetName</td><td>Name of the facet.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html" title="Constructorio v2 Facet.">FacetV2</a> object representing the facet.</dd></dl>
+
+</div>
+</div>
 <a id="ae5922eab59e8637876b552bd4cd2bfe9" name="ae5922eab59e8637876b552bd4cd2bfe9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae5922eab59e8637876b552bd4cd2bfe9">&#9670;&#160;</a></span>GetFacetOption()</h2>
 
@@ -968,6 +1356,51 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
 
 </div>
 </div>
+<a id="a39f614b75b956c8453be2d2611ddff68" name="a39f614b75b956c8453be2d2611ddff68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39f614b75b956c8453be2d2611ddff68">&#9670;&#160;</a></span>GetSearchabilityV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html">SearchabilityV2</a> &gt; Constructorio_NET.Modules.Catalog.GetSearchabilityV2 </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a specific v2 searchability by name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of the searchability field.</td></tr>
+    <tr><td class="paramname">section</td><td>Section name. If null, the API defaults to "Products".</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html" title="Constructor.io v2 Searchability model. Note: v2 removes percentage_presence, example_items,...">SearchabilityV2</a> object representing the searchability.</dd></dl>
+
+</div>
+</div>
 <a id="af37b136315b78ccb1ede7542d24e124e" name="af37b136315b78ccb1ede7542d24e124e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af37b136315b78ccb1ede7542d24e124e">&#9670;&#160;</a></span>PartiallyUpdateFacetConfig()</h2>
 
@@ -1010,6 +1443,51 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Updated facet configuration.</dd></dl>
+
+</div>
+</div>
+<a id="aad76307eb101d427117d3eaef8dd0a7e" name="aad76307eb101d427117d3eaef8dd0a7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad76307eb101d427117d3eaef8dd0a7e">&#9670;&#160;</a></span>PartiallyUpdateFacetConfigV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; Constructorio_NET.Modules.Catalog.PartiallyUpdateFacetConfigV2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a></td>          <td class="paramname"><span class="paramname"><em>facetFields</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Partially updates a specific v2 facet configuration by facet name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facetFields</td><td>v2 <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html" title="Constructorio Facet.">Facet</a> fields to be updated.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Updated v2 facet configuration.</dd></dl>
 
 </div>
 </div>
@@ -1142,6 +1620,96 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
 
 </div>
 </div>
+<a id="a2a81dbf216e69cbfda2513b0611f539e" name="a2a81dbf216e69cbfda2513b0611f539e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a81dbf216e69cbfda2513b0611f539e">&#9670;&#160;</a></span>PatchSearchabilitiesV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchabilities_v2_response.html">SearchabilitiesV2Response</a> &gt; Constructorio_NET.Modules.Catalog.PatchSearchabilitiesV2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_patch_searchabilities_v2_request.html">PatchSearchabilitiesV2Request</a></td>          <td class="paramname"><span class="paramname"><em>patchSearchabilitiesV2Request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create or update v2 searchabilities (batch operation). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">patchSearchabilitiesV2Request</td><td>Constructorio's v2 patch searchabilities request object.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Constructorio's v2 Searchabilities response object.</dd></dl>
+
+</div>
+</div>
+<a id="a9978880d5e6e7651f9283ba9dd217dc6" name="a9978880d5e6e7651f9283ba9dd217dc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9978880d5e6e7651f9283ba9dd217dc6">&#9670;&#160;</a></span>PatchSearchabilityV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html">SearchabilityV2</a> &gt; Constructorio_NET.Modules.Catalog.PatchSearchabilityV2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html">SearchabilityV2</a></td>          <td class="paramname"><span class="paramname"><em>searchability</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool?</td>          <td class="paramname"><span class="paramname"><em>skipRebuild</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Partially updates a specific v2 searchability by name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">searchability</td><td><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html" title="Constructor.io v2 Searchability model. Note: v2 removes percentage_presence, example_items,...">SearchabilityV2</a> fields to be updated.</td></tr>
+    <tr><td class="paramname">section</td><td>Section name. If null, the API defaults to "Products".</td></tr>
+    <tr><td class="paramname">skipRebuild</td><td>Whether to skip index rebuild.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Updated <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html" title="Constructor.io v2 Searchability model. Note: v2 removes percentage_presence, example_items,...">SearchabilityV2</a> object.</dd></dl>
+
+</div>
+</div>
 <a id="a328d4ee1266b41036bb6888edce6bf27" name="a328d4ee1266b41036bb6888edce6bf27"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a328d4ee1266b41036bb6888edce6bf27">&#9670;&#160;</a></span>ReplaceCatalog()</h2>
 
@@ -1178,6 +1746,51 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Constructorio's catalog response object.</dd></dl>
+
+</div>
+</div>
+<a id="aabd4a21c282334e49fb8d3c6ab644f94" name="aabd4a21c282334e49fb8d3c6ab644f94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabd4a21c282334e49fb8d3c6ab644f94">&#9670;&#160;</a></span>ReplaceFacetConfigV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a> &gt; Constructorio_NET.Modules.Catalog.ReplaceFacetConfigV2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html">FacetV2</a></td>          <td class="paramname"><span class="paramname"><em>facet</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">null</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replace an existing v2 facet configuration by facet name. This will overwrite all other configurations, resetting them to defaults, except facet options. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">facet</td><td>New v2 <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_facet.html" title="Constructorio Facet.">Facet</a> Configuration to replace the existing one.</td></tr>
+    <tr><td class="paramname">section</td><td>Section in which the facet is defined.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Replaced v2 facet configuration.</dd></dl>
 
 </div>
 </div>
@@ -1268,6 +1881,45 @@ static readonly HttpMethod&#160;</td><td class="memItemRight"><b>HttpMethodPatch
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Constructorio's <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchability.html">Searchability</a> response object.</dd></dl>
+
+</div>
+</div>
+<a id="a1ff45ec03d1f0edf4f98fb32f322502d" name="a1ff45ec03d1f0edf4f98fb32f322502d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ff45ec03d1f0edf4f98fb32f322502d">&#9670;&#160;</a></span>RetrieveSearchabilitiesV2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">async Task&lt; <a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_searchabilities_v2_response.html">SearchabilitiesV2Response</a> &gt; Constructorio_NET.Modules.Catalog.RetrieveSearchabilitiesV2 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_constructorio___n_e_t_1_1_models_1_1_retrieve_searchabilities_v2_request.html">RetrieveSearchabilitiesV2Request</a></td>          <td class="paramname"><span class="paramname"><em>retrieveSearchabilitiesV2Request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CancellationToken</td>          <td class="paramname"><span class="paramname"><em>cancellationToken</em></span><span class="paramdefsep"> = </span><span class="paramdefval">default</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieves v2 searchabilities with options for filtering and paginating. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">retrieveSearchabilitiesV2Request</td><td>Constructorio's v2 retrieve searchabilities request object.</td></tr>
+    <tr><td class="paramname">cancellationToken</td><td>The cancellation token to abandon the request.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Constructorio's v2 Searchabilities response object.</dd></dl>
 
 </div>
 </div>

@@ -31,6 +31,7 @@ var hierarchy =
     [ "Constructorio_NET.Models.ConstructorItem", "class_constructorio___n_e_t_1_1_models_1_1_constructor_item.html", null ],
     [ "Constructorio_NET.Models.ConstructorItemGroup", "class_constructorio___n_e_t_1_1_models_1_1_constructor_item_group.html", null ],
     [ "Constructorio_NET.Models.ConstructorVariation", "class_constructorio___n_e_t_1_1_models_1_1_constructor_variation.html", null ],
+    [ "Constructorio_NET.Models.DeleteSearchabilitiesV2Request", "class_constructorio___n_e_t_1_1_models_1_1_delete_searchabilities_v2_request.html", null ],
     [ "Exception", null, [
       [ "Constructorio_NET.ConstructorException", "class_constructorio___n_e_t_1_1_constructor_exception.html", null ]
     ] ],
@@ -40,6 +41,9 @@ var hierarchy =
     [ "Constructorio_NET.Models.FacetOptionsGetAllResponse", "class_constructorio___n_e_t_1_1_models_1_1_facet_options_get_all_response.html", null ],
     [ "Constructorio_NET.Tests.FacetOptionTest", "class_constructorio___n_e_t_1_1_tests_1_1_facet_option_test.html", null ],
     [ "Constructorio_NET.Tests.FacetsTest", "class_constructorio___n_e_t_1_1_tests_1_1_facets_test.html", null ],
+    [ "Constructorio_NET.Tests.FacetsTestV2", "class_constructorio___n_e_t_1_1_tests_1_1_facets_test_v2.html", null ],
+    [ "Constructorio_NET.Models.FacetV2", "class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html", null ],
+    [ "Constructorio_NET.Models.FacetV2GetAllResponse", "class_constructorio___n_e_t_1_1_models_1_1_facet_v2_get_all_response.html", null ],
     [ "Constructorio_NET.Models.FilterFacet", "class_constructorio___n_e_t_1_1_models_1_1_filter_facet.html", null ],
     [ "Constructorio_NET.Models.FilterFacetOption", "class_constructorio___n_e_t_1_1_models_1_1_filter_facet_option.html", null ],
     [ "Constructorio_NET.Models.FilterGroup", "class_constructorio___n_e_t_1_1_models_1_1_filter_group.html", null ],
@@ -91,6 +95,7 @@ var hierarchy =
     [ "Constructorio_NET.Models.PaginationOptions", "class_constructorio___n_e_t_1_1_models_1_1_pagination_options.html", null ],
     [ "Constructorio_NET.Models.PatchSearchabilitiesRequest", "class_constructorio___n_e_t_1_1_models_1_1_patch_searchabilities_request.html", null ],
     [ "Constructorio_NET.Tests.PatchSearchabilitiesRequestTest", "class_constructorio___n_e_t_1_1_tests_1_1_patch_searchabilities_request_test.html", null ],
+    [ "Constructorio_NET.Models.PatchSearchabilitiesV2Request", "class_constructorio___n_e_t_1_1_models_1_1_patch_searchabilities_v2_request.html", null ],
     [ "Constructorio_NET.Models.PreFilterExpression", "class_constructorio___n_e_t_1_1_models_1_1_pre_filter_expression.html", [
       [ "Constructorio_NET.Models.AndPreFilterExpression", "class_constructorio___n_e_t_1_1_models_1_1_and_pre_filter_expression.html", null ],
       [ "Constructorio_NET.Models.JsonPrefilterExpression", "class_constructorio___n_e_t_1_1_models_1_1_json_prefilter_expression.html", null ],
@@ -126,8 +131,12 @@ var hierarchy =
     [ "Constructorio_NET.Models.ResultSources", "class_constructorio___n_e_t_1_1_models_1_1_result_sources.html", null ],
     [ "Constructorio_NET.Models.RetrieveSearchabilitiesRequest", "class_constructorio___n_e_t_1_1_models_1_1_retrieve_searchabilities_request.html", null ],
     [ "Constructorio_NET.Tests.RetrieveSearchabilitiesRequestTest", "class_constructorio___n_e_t_1_1_tests_1_1_retrieve_searchabilities_request_test.html", null ],
+    [ "Constructorio_NET.Models.RetrieveSearchabilitiesV2Request", "class_constructorio___n_e_t_1_1_models_1_1_retrieve_searchabilities_v2_request.html", null ],
     [ "Constructorio_NET.Models.SearchabilitiesResponse", "class_constructorio___n_e_t_1_1_models_1_1_searchabilities_response.html", null ],
+    [ "Constructorio_NET.Models.SearchabilitiesV2Response", "class_constructorio___n_e_t_1_1_models_1_1_searchabilities_v2_response.html", null ],
     [ "Constructorio_NET.Models.Searchability", "class_constructorio___n_e_t_1_1_models_1_1_searchability.html", null ],
+    [ "Constructorio_NET.Tests.SearchabilityTestsV2", "class_constructorio___n_e_t_1_1_tests_1_1_searchability_tests_v2.html", null ],
+    [ "Constructorio_NET.Models.SearchabilityV2", "class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html", null ],
     [ "Constructorio_NET.Tests.SearchRequestTest", "class_constructorio___n_e_t_1_1_tests_1_1_search_request_test.html", null ],
     [ "Constructorio_NET.Models.SearchResponse", "class_constructorio___n_e_t_1_1_models_1_1_search_response.html", null ],
     [ "Constructorio_NET.Models.SearchResponseInner", "class_constructorio___n_e_t_1_1_models_1_1_search_response_inner.html", null ],

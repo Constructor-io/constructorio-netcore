@@ -1,7 +1,7 @@
 var searchData=
 [
   ['updatecatalog_0',['UpdateCatalog',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a826f1339d528ac1773ddac1129667dba',1,'Constructorio_NET::Modules::Catalog']]],
-  ['updatedat_1',['UpdatedAt',['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html#ac17529d133e797ac9add686e44009093',1,'Constructorio_NET::Models::Searchability']]],
+  ['updatedat_1',['UpdatedAt',['../class_constructorio___n_e_t_1_1_models_1_1_searchability.html#ac17529d133e797ac9add686e44009093',1,'Constructorio_NET.Models.Searchability.UpdatedAt'],['../class_constructorio___n_e_t_1_1_models_1_1_searchability_v2.html#aab744aaf6baf9de48f9e90b963edf8a4',1,'Constructorio_NET.Models.SearchabilityV2.UpdatedAt'],['../class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html#a8438afa4cda8a5dd73d562ba5c3758f0',1,'Constructorio_NET.Models.FacetV2.UpdatedAt']]],
   ['updatefacetconfig_2',['UpdateFacetConfig',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#a21de27a9d181837283c3a790c4395852',1,'Constructorio_NET::Modules::Catalog']]],
   ['updateitemgroup_3',['UpdateItemGroup',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#aa8ed55e4aa5e1c044d9581156b0f42c7',1,'Constructorio_NET::Modules::Catalog']]],
   ['updateitemgroups_4',['UpdateItemGroups',['../class_constructorio___n_e_t_1_1_modules_1_1_catalog.html#aaf877bd47a40d1ff6891a7eaadd093fa',1,'Constructorio_NET::Modules::Catalog']]],

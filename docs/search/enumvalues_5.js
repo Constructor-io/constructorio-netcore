@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ignore_0',['IGNORE',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#a6dfda6ce8ed6edc1c8a495def066301baa2e843feab94ef623fea888f07c28696',1,'Constructorio_NET::Models::CatalogRequest']]]
+  ['hierarchical_0',['Hierarchical',['../namespace_constructorio___n_e_t_1_1_models.html#ad7331f16fe2eaba469f8d3c65f1b1fd4a55bb12cc60fba8f860517ac796c4fdda',1,'Constructorio_NET::Models']]]
 ];

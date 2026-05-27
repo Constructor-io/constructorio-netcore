@@ -6,5 +6,6 @@ var searchData=
   ['facetrangetype_3',['FacetRangeType',['../namespace_constructorio___n_e_t_1_1_models.html#acec0b2faa939d96a7ee2f841a334c3b1',1,'Constructorio_NET::Models']]],
   ['facetsortorder_4',['FacetSortOrder',['../namespace_constructorio___n_e_t_1_1_models.html#a2c70ccf7e3fbc456cd2e730d0ff4cdb0',1,'Constructorio_NET::Models']]],
   ['facettype_5',['FacetType',['../namespace_constructorio___n_e_t_1_1_models.html#ad434f5d919c50eafe52f9e72ce4a23ec',1,'Constructorio_NET::Models']]],
-  ['formattype_6',['FormatType',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#adb7fb37502fd653235d5f3304c09d51b',1,'Constructorio_NET::Models::CatalogRequest']]]
+  ['facettypev2_6',['FacetTypeV2',['../namespace_constructorio___n_e_t_1_1_models.html#ad7331f16fe2eaba469f8d3c65f1b1fd4',1,'Constructorio_NET::Models']]],
+  ['formattype_7',['FormatType',['../class_constructorio___n_e_t_1_1_models_1_1_catalog_request.html#adb7fb37502fd653235d5f3304c09d51b',1,'Constructorio_NET::Models::CatalogRequest']]]
 ];
