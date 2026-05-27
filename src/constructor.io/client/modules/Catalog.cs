@@ -428,6 +428,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Facet object representing the facet created.</returns>
+        [Obsolete("Use CreateFacetConfigV2 instead. This method will be removed in the next major version.")]
         public async Task<Facet> CreateFacetConfig(Facet facet, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section);
@@ -459,6 +460,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>List of Facets in a given section.</returns>
+        [Obsolete("Use GetAllFacetConfigsV2 instead. This method will be removed in the next major version.")]
         public async Task<FacetGetAllResponse> GetAllFacetConfigs(PaginationOptions paginationOptions = null, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url;
@@ -499,6 +501,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Facet object representing the facet.</returns>
+        [Obsolete("Use GetFacetConfigV2 instead. This method will be removed in the next major version.")]
         public async Task<Facet> GetFacetConfig(string facetName, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facetName);
@@ -530,6 +533,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>List of updated facet configurations.</returns>
+        [Obsolete("Use BatchPartiallyUpdateFacetConfigsV2 instead. This method will be removed in the next major version.")]
         public async Task<List<Facet>> BatchPartiallyUpdateFacetConfigs(List<Facet> facetFieldsList, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section);
@@ -561,6 +565,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Updated facet configuration.</returns>
+        [Obsolete("Use PartiallyUpdateFacetConfigV2 instead. This method will be removed in the next major version.")]
         public async Task<Facet> PartiallyUpdateFacetConfig(Facet facetFields, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facetFields.Name);
@@ -592,6 +597,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Updated facet configuration.</returns>
+        [Obsolete("Use ReplaceFacetConfigV2 instead. This method will be removed in the next major version.")]
         public async Task<Facet> UpdateFacetConfig(Facet facet, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facet.Name);
@@ -623,6 +629,7 @@ namespace Constructorio_NET.Modules
         /// <param name="section">Section in which the facet is defined.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Facet object representing the facet configuration deleted.</returns>
+        [Obsolete("Use DeleteFacetConfigV2 instead. This method will be removed in the next major version.")]
         public async Task<Facet> DeleteFacetConfig(string facetName, string section = "Products", CancellationToken cancellationToken = default)
         {
             string url = CreateFacetUrl(section, facetName);
@@ -911,6 +918,7 @@ namespace Constructorio_NET.Modules
         /// <param name="retrieveSearchabilitiesRequest">Constructorio's retrieve searchabilities request object.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's Searchability response object.</returns>
+        [Obsolete("Use RetrieveSearchabilitiesV2 instead. This method will be removed in the next major version.")]
         public async Task<SearchabilitiesResponse> RetrieveSearchabilities(RetrieveSearchabilitiesRequest retrieveSearchabilitiesRequest, CancellationToken cancellationToken = default)
         {
             SearchabilitiesResponse result;
@@ -941,6 +949,7 @@ namespace Constructorio_NET.Modules
         /// <param name="patchSearchabilitiesRequest">Constructorio's patch searchabilities request object.</param>
         /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
         /// <returns>Constructorio's Searchability response object.</returns>
+        [Obsolete("Use PatchSearchabilitiesV2 instead. This method will be removed in the next major version.")]
         public async Task<SearchabilitiesResponse> PatchSearchabilities(PatchSearchabilitiesRequest patchSearchabilitiesRequest, CancellationToken cancellationToken = default)
         {
             SearchabilitiesResponse result;
@@ -1195,5 +1204,627 @@ namespace Constructorio_NET.Modules
 
             return result ?? throw new ConstructorException("UpdateSortOption response data is malformed");
         }
+
+        #region V2 Facets
+
+        internal string CreateFacetUrlV2(string section = null, string facetName = null, Hashtable queryParams = null)
+        {
+            List<string> paths = new List<string> { "v2", "facets" };
+            if (facetName != null)
+            {
+                paths.Add(facetName);
+            }
+
+            if (queryParams == null)
+            {
+                queryParams = new Hashtable();
+            }
+
+            if (!string.IsNullOrEmpty(section))
+            {
+                queryParams.Add(Constants.SECTION, section);
+            }
+
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtAndCQueryParams);
+
+            return url;
+        }
+
+        /// <summary>
+        /// Creates a v2 Facet Configuration.
+        /// </summary>
+        /// <param name="facet">New v2 Facet Configuration to be created.</param>
+        /// <param name="section">Section in which the facet is defined.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>FacetV2 object representing the facet created.</returns>
+        public async Task<FacetV2> CreateFacetConfigV2(FacetV2 facet, string section = null, CancellationToken cancellationToken = default)
+        {
+            if (facet == null)
+            {
+                throw new ArgumentNullException(nameof(facet));
+            }
+
+            string url = CreateFacetUrlV2(section);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            FacetV2 result;
+            try
+            {
+                result = await MakeHttpRequest<FacetV2>(Options, HttpMethod.Post, url, requestHeaders, facet, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("CreateFacetConfigV2 response data is malformed");
+        }
+
+        /// <summary>
+        /// Gets all v2 facets in a particular section.
+        /// </summary>
+        /// <param name="paginationOptions">PaginationOptions object for pagination.</param>
+        /// <param name="section">Section in which the facet is defined.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>List of v2 Facets in a given section.</returns>
+        public async Task<FacetV2GetAllResponse> GetAllFacetConfigsV2(PaginationOptions paginationOptions = null, string section = null, CancellationToken cancellationToken = default)
+        {
+            string url;
+            if (paginationOptions != null)
+            {
+                url = CreateFacetUrlV2(section, queryParams: paginationOptions.GetQueryParameters());
+            }
+            else
+            {
+                url = CreateFacetUrlV2(section);
+            }
+
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            FacetV2GetAllResponse result;
+            try
+            {
+                result = await MakeHttpRequest<FacetV2GetAllResponse>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("GetAllFacetConfigsV2 response data is malformed");
+        }
+
+        /// <summary>
+        /// Gets a v2 facet given the facet name and section.
+        /// </summary>
+        /// <param name="facetName">Name of the facet.</param>
+        /// <param name="section">Section in which the facet is defined.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>FacetV2 object representing the facet.</returns>
+        public async Task<FacetV2> GetFacetConfigV2(string facetName, string section = null, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrEmpty(facetName))
+            {
+                throw new ArgumentException("facetName is required", nameof(facetName));
+            }
+
+            string url = CreateFacetUrlV2(section, facetName);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            FacetV2 result;
+            try
+            {
+                result = await MakeHttpRequest<FacetV2>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("GetFacetConfigV2 response data is malformed");
+        }
+
+        /// <summary>
+        /// Create or replace v2 facet configurations (batch operation).
+        /// Replacing will overwrite all other configurations, resetting them to defaults, except facet options.
+        /// </summary>
+        /// <param name="facets">List of v2 facets to create or replace.</param>
+        /// <param name="section">Section in which the facet is defined.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>List of created or replaced v2 facet configurations.</returns>
+        public async Task<List<FacetV2>> CreateOrReplaceFacetConfigsV2(List<FacetV2> facets, string section = null, CancellationToken cancellationToken = default)
+        {
+            if (facets == null || facets.Count == 0)
+            {
+                throw new ArgumentException("facets cannot be null or empty", nameof(facets));
+            }
+
+            string url = CreateFacetUrlV2(section);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            Hashtable requestBody = new Hashtable
+            {
+                { "facets", facets }
+            };
+
+            FacetV2GetAllResponse result;
+            try
+            {
+                result = await MakeHttpRequest<FacetV2GetAllResponse>(Options, HttpMethod.Put, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result == null || result.Facets == null)
+            {
+                throw new ConstructorException("CreateOrReplaceFacetConfigsV2 response data is malformed");
+            }
+
+            return result.Facets;
+        }
+
+        /// <summary>
+        /// Partially updates a list of v2 facet configurations (batch operation).
+        /// </summary>
+        /// <param name="facetFieldsList">List of v2 facets fields to be updated.</param>
+        /// <param name="section">Section in which the facet is defined.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>List of updated v2 facet configurations.</returns>
+        public async Task<List<FacetV2>> BatchPartiallyUpdateFacetConfigsV2(List<FacetV2> facetFieldsList, string section = null, CancellationToken cancellationToken = default)
+        {
+            if (facetFieldsList == null || facetFieldsList.Count == 0)
+            {
+                throw new ArgumentException("facetFieldsList cannot be null or empty", nameof(facetFieldsList));
+            }
+
+            string url = CreateFacetUrlV2(section);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            Hashtable requestBody = new Hashtable
+            {
+                { "facets", facetFieldsList }
+            };
+
+            FacetV2GetAllResponse result;
+            try
+            {
+                result = await MakeHttpRequest<FacetV2GetAllResponse>(Options, HttpMethodPatch, url, requestHeaders, requestBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            if (result == null || result.Facets == null)
+            {
+                throw new ConstructorException("BatchPartiallyUpdateFacetConfigsV2 response data is malformed");
+            }
+
+            return result.Facets;
+        }
+
+        /// <summary>
+        /// Replace an existing v2 facet configuration by facet name.
+        /// This will overwrite all other configurations, resetting them to defaults, except facet options.
+        /// </summary>
+        /// <param name="facet">New v2 Facet Configuration to replace the existing one.</param>
+        /// <param name="section">Section in which the facet is defined.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Replaced v2 facet configuration.</returns>
+        public async Task<FacetV2> ReplaceFacetConfigV2(FacetV2 facet, string section = null, CancellationToken cancellationToken = default)
+        {
+            if (facet == null)
+            {
+                throw new ArgumentNullException(nameof(facet));
+            }
+
+            if (string.IsNullOrEmpty(facet.Name))
+            {
+                throw new ArgumentException("facet.Name is required", nameof(facet));
+            }
+
+            string url = CreateFacetUrlV2(section, facet.Name);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            FacetV2 result;
+            try
+            {
+                result = await MakeHttpRequest<FacetV2>(Options, HttpMethod.Put, url, requestHeaders, facet, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("ReplaceFacetConfigV2 response data is malformed");
+        }
+
+        /// <summary>
+        /// Partially updates a specific v2 facet configuration by facet name.
+        /// </summary>
+        /// <param name="facetFields">v2 Facet fields to be updated.</param>
+        /// <param name="section">Section in which the facet is defined.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Updated v2 facet configuration.</returns>
+        public async Task<FacetV2> PartiallyUpdateFacetConfigV2(FacetV2 facetFields, string section = null, CancellationToken cancellationToken = default)
+        {
+            if (facetFields == null)
+            {
+                throw new ArgumentNullException(nameof(facetFields));
+            }
+
+            if (string.IsNullOrEmpty(facetFields.Name))
+            {
+                throw new ArgumentException("facetFields.Name is required", nameof(facetFields));
+            }
+
+            string url = CreateFacetUrlV2(section, facetFields.Name);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            FacetV2 result;
+            try
+            {
+                result = await MakeHttpRequest<FacetV2>(Options, HttpMethodPatch, url, requestHeaders, facetFields, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("PartiallyUpdateFacetConfigV2 response data is malformed");
+        }
+
+        /// <summary>
+        /// Deletes a v2 Facet Configuration.
+        /// </summary>
+        /// <param name="facetName">Name of the facet configuration/facet group.</param>
+        /// <param name="section">Section in which the facet is defined.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>FacetV2 object representing the facet configuration deleted.</returns>
+        public async Task<FacetV2> DeleteFacetConfigV2(string facetName, string section = null, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrEmpty(facetName))
+            {
+                throw new ArgumentException("facetName is required", nameof(facetName));
+            }
+
+            string url = CreateFacetUrlV2(section, facetName);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            FacetV2 result;
+            try
+            {
+                result = await MakeHttpRequest<FacetV2>(Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("DeleteFacetConfigV2 response data is malformed");
+        }
+
+        #endregion
+
+        #region V2 Searchabilities
+
+        internal string CreateSearchabilitiesUrlV2(string section = null, string name = null, Hashtable queryParams = null)
+        {
+            List<string> paths = new List<string> { "v2", "searchabilities" };
+            if (name != null)
+            {
+                paths.Add(name);
+            }
+
+            if (queryParams == null)
+            {
+                queryParams = new Hashtable();
+            }
+
+            if (!string.IsNullOrEmpty(section))
+            {
+                queryParams.Add(Constants.SECTION, section);
+            }
+
+            string url = MakeUrl(this.Options, paths, queryParams, OmitDtAndCQueryParams);
+
+            return url;
+        }
+
+        /// <summary>
+        /// Retrieves v2 searchabilities with options for filtering and paginating.
+        /// </summary>
+        /// <param name="retrieveSearchabilitiesV2Request">Constructorio's v2 retrieve searchabilities request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Constructorio's v2 Searchabilities response object.</returns>
+        public async Task<SearchabilitiesV2Response> RetrieveSearchabilitiesV2(RetrieveSearchabilitiesV2Request retrieveSearchabilitiesV2Request, CancellationToken cancellationToken = default)
+        {
+            if (retrieveSearchabilitiesV2Request == null)
+            {
+                throw new ArgumentNullException(nameof(retrieveSearchabilitiesV2Request));
+            }
+
+            SearchabilitiesV2Response result;
+
+            try
+            {
+                var url = CreateSearchabilitiesUrlV2(retrieveSearchabilitiesV2Request.Section, queryParams: retrieveSearchabilitiesV2Request.GetRequestParameters());
+                Dictionary<string, string> requestHeaders = retrieveSearchabilitiesV2Request.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                result = await MakeHttpRequest<SearchabilitiesV2Response>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("RetrieveSearchabilitiesV2 response data is malformed");
+        }
+
+        /// <summary>
+        /// Gets a specific v2 searchability by name.
+        /// </summary>
+        /// <param name="name">Name of the searchability field.</param>
+        /// <param name="section">Section name. If null, the API defaults to "Products".</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>SearchabilityV2 object representing the searchability.</returns>
+        public async Task<SearchabilityV2> GetSearchabilityV2(string name, string section = null, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("name is required", nameof(name));
+            }
+
+            string url = CreateSearchabilitiesUrlV2(section, name);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            SearchabilityV2 result;
+            try
+            {
+                result = await MakeHttpRequest<SearchabilityV2>(Options, HttpMethod.Get, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("GetSearchabilityV2 response data is malformed");
+        }
+
+        /// <summary>
+        /// Create or update v2 searchabilities (batch operation).
+        /// </summary>
+        /// <param name="patchSearchabilitiesV2Request">Constructorio's v2 patch searchabilities request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Constructorio's v2 Searchabilities response object.</returns>
+        public async Task<SearchabilitiesV2Response> PatchSearchabilitiesV2(PatchSearchabilitiesV2Request patchSearchabilitiesV2Request, CancellationToken cancellationToken = default)
+        {
+            if (patchSearchabilitiesV2Request == null)
+            {
+                throw new ArgumentNullException(nameof(patchSearchabilitiesV2Request));
+            }
+
+            SearchabilitiesV2Response result;
+            Hashtable postbody = new Hashtable
+            {
+                { "searchabilities", patchSearchabilitiesV2Request.Searchabilities }
+            };
+
+            try
+            {
+                var url = CreateSearchabilitiesUrlV2(patchSearchabilitiesV2Request.Section, queryParams: patchSearchabilitiesV2Request.GetRequestParameters());
+                Dictionary<string, string> requestHeaders = patchSearchabilitiesV2Request.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                result = await MakeHttpRequest<SearchabilitiesV2Response>(Options, HttpMethodPatch, url, requestHeaders, postbody, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("PatchSearchabilitiesV2 response data is malformed");
+        }
+
+        /// <summary>
+        /// Partially updates a specific v2 searchability by name.
+        /// </summary>
+        /// <param name="searchability">SearchabilityV2 fields to be updated.</param>
+        /// <param name="section">Section name. If null, the API defaults to "Products".</param>
+        /// <param name="skipRebuild">Whether to skip index rebuild.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Updated SearchabilityV2 object.</returns>
+        public async Task<SearchabilityV2> PatchSearchabilityV2(SearchabilityV2 searchability, string section = null, bool? skipRebuild = null, CancellationToken cancellationToken = default)
+        {
+            if (searchability == null)
+            {
+                throw new ArgumentNullException(nameof(searchability));
+            }
+
+            if (string.IsNullOrEmpty(searchability.Name))
+            {
+                throw new ArgumentException("searchability.Name is required", nameof(searchability));
+            }
+
+            Hashtable queryParams = new Hashtable();
+            if (skipRebuild.HasValue)
+            {
+                queryParams.Add("skip_rebuild", skipRebuild.Value.ToString().ToLower());
+            }
+
+            string url = CreateSearchabilitiesUrlV2(section, searchability.Name, queryParams);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            // Build body without name — it's already in the URL path and the API rejects it as an extra field
+            var body = new Dictionary<string, object>();
+            if (searchability.FuzzySearchable.HasValue)
+            {
+                body["fuzzy_searchable"] = searchability.FuzzySearchable.Value;
+            }
+
+            if (searchability.ExactSearchable.HasValue)
+            {
+                body["exact_searchable"] = searchability.ExactSearchable.Value;
+            }
+
+            if (searchability.Displayable.HasValue)
+            {
+                body["displayable"] = searchability.Displayable.Value;
+            }
+
+            if (searchability.Hidden.HasValue)
+            {
+                body["hidden"] = searchability.Hidden.Value;
+            }
+
+            SearchabilityV2 result;
+            try
+            {
+                result = await MakeHttpRequest<SearchabilityV2>(Options, HttpMethodPatch, url, requestHeaders, body, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("PatchSearchabilityV2 response data is malformed");
+        }
+
+        /// <summary>
+        /// Delete v2 searchabilities (batch operation).
+        /// </summary>
+        /// <param name="deleteSearchabilitiesV2Request">Constructorio's v2 delete searchabilities request object.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Constructorio's v2 Searchabilities response object.</returns>
+        public async Task<SearchabilitiesV2Response> DeleteSearchabilitiesV2(DeleteSearchabilitiesV2Request deleteSearchabilitiesV2Request, CancellationToken cancellationToken = default)
+        {
+            if (deleteSearchabilitiesV2Request == null)
+            {
+                throw new ArgumentNullException(nameof(deleteSearchabilitiesV2Request));
+            }
+
+            SearchabilitiesV2Response result;
+
+            try
+            {
+                var url = CreateSearchabilitiesUrlV2(deleteSearchabilitiesV2Request.Section, queryParams: deleteSearchabilitiesV2Request.GetRequestParameters());
+                Dictionary<string, string> requestHeaders = deleteSearchabilitiesV2Request.GetRequestHeaders();
+                AddAuthHeaders(this.Options, requestHeaders);
+                result = await MakeHttpRequest<SearchabilitiesV2Response>(Options, HttpMethod.Delete, url, requestHeaders, deleteSearchabilitiesV2Request.GetRequestBody(), cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("DeleteSearchabilitiesV2 response data is malformed");
+        }
+
+        /// <summary>
+        /// Delete a specific v2 searchability by name.
+        /// </summary>
+        /// <param name="name">Name of the searchability field to delete.</param>
+        /// <param name="section">Section name. If null, the API defaults to "Products".</param>
+        /// <param name="skipRebuild">Whether to skip index rebuild.</param>
+        /// <param name="cancellationToken">The cancellation token to abandon the request.</param>
+        /// <returns>Deleted SearchabilityV2 object.</returns>
+        public async Task<SearchabilityV2> DeleteSearchabilityV2(string name, string section = null, bool? skipRebuild = null, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("name is required", nameof(name));
+            }
+
+            Hashtable queryParams = new Hashtable();
+            if (skipRebuild.HasValue)
+            {
+                queryParams.Add("skip_rebuild", skipRebuild.Value.ToString().ToLower());
+            }
+
+            string url = CreateSearchabilitiesUrlV2(section, name, queryParams);
+            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
+            AddAuthHeaders(this.Options, requestHeaders);
+
+            SearchabilityV2 result;
+            try
+            {
+                result = await MakeHttpRequest<SearchabilityV2>(Options, HttpMethod.Delete, url, requestHeaders, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ConstructorException(e);
+            }
+
+            return result ?? throw new ConstructorException("DeleteSearchabilityV2 response data is malformed");
+        }
+
+        #endregion
     }
 }
