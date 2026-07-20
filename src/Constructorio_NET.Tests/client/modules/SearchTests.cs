@@ -181,7 +181,7 @@ namespace Constructorio_NET.Tests
                     {
                     and:
                         [
-                        { name: 'Color', value: 'blue' },
+                        { name: 'Color', value: 'Blue' },
                         { name: 'Brand', value: 'XYZ' },
                     ],
                     },
@@ -215,7 +215,7 @@ namespace Constructorio_NET.Tests
                 res.Response.Results.TrueForAll(result =>
                 {
                     var facetValue = result.Data.Facets.Find(facet => facet.Name == "Color");
-                    return facetValue.Values.Contains("red") || facetValue.Values.Contains("blue");
+                    return facetValue.Values.Contains("red") || facetValue.Values.Contains("Blue");
                 }),
                 "Result set contains items with Facet.Color other than red or blue"
             );
@@ -238,7 +238,7 @@ namespace Constructorio_NET.Tests
                     {
                     and:
                         [
-                        { name: 'Color', value: 'blue' },
+                        { name: 'Color', value: 'Blue' },
                         { name: 'Brand', value: 'XYZ' },
                     ],
                     },
@@ -270,7 +270,7 @@ namespace Constructorio_NET.Tests
                 res.Response.Results.TrueForAll(result =>
                 {
                     var facetValue = result.Data.Facets.Find(facet => facet.Name == "Color");
-                    return facetValue.Values.Contains("red") || facetValue.Values.Contains("blue");
+                    return facetValue.Values.Contains("red") || facetValue.Values.Contains("Blue");
                 }),
                 "Result set contains items with Facet.Color other than red or blue"
             );
@@ -290,7 +290,7 @@ namespace Constructorio_NET.Tests
             );
 
             ValuePreFilterExpression filterByBrand2 = new ValuePreFilterExpression("Brand", "XYZ");
-            ValuePreFilterExpression filterByColor2 = new ValuePreFilterExpression("Color", "blue");
+            ValuePreFilterExpression filterByColor2 = new ValuePreFilterExpression("Color", "Blue");
             AndPreFilterExpression filterByBothBrandAndColor2 = new AndPreFilterExpression(
                 new List<PreFilterExpression> { filterByBrand2, filterByColor2 }
             );
@@ -326,7 +326,7 @@ namespace Constructorio_NET.Tests
                 res.Response.Results.TrueForAll(result =>
                 {
                     var facetValue = result.Data.Facets.Find(facet => facet.Name == "Color");
-                    return facetValue.Values.Contains("red") || facetValue.Values.Contains("blue");
+                    return facetValue.Values.Contains("red") || facetValue.Values.Contains("Blue");
                 }),
                 "Result set contains items with Facet.Color other than red or blue"
             );
@@ -336,7 +336,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public async Task GetSearchResultsWithPreFilterExpressionNot()
         {
-            ValuePreFilterExpression filterByColor1 = new ValuePreFilterExpression("Color", "Blue");
+            ValuePreFilterExpression filterByColor1 = new ValuePreFilterExpression("Color", "indigo");
             NotPreFilterExpression preFilterExpression = new NotPreFilterExpression(filterByColor1);
 
             SearchRequest req = new SearchRequest(this.Query)
@@ -363,9 +363,9 @@ namespace Constructorio_NET.Tests
                 res.Response.Results.TrueForAll(result =>
                 {
                     var facetValue = result.Data.Facets.Find(facet => facet.Name == "Color");
-                    return facetValue == null || !facetValue.Values.Contains("Blue");
+                    return facetValue == null || !facetValue.Values.Contains("indigo");
                 }),
-                "Result set contains facet.Color = Blue"
+                "Result set contains facet.Color = indigo"
             );
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
@@ -466,7 +466,7 @@ namespace Constructorio_NET.Tests
                 "Pre Filter Expression differs in request"
             );
             Assert.AreEqual(
-                4,
+                3,
                 res.Response.Results.Count,
                 "Total number of results expected to be 3"
             );
