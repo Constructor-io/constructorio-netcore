@@ -83,7 +83,6 @@ namespace Constructorio_NET.Tests
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
-            TestContext.WriteLine($"Browse qs param: {requestParameters[Constants.QS_PARAM]}");
             Assert.AreEqual(qsParam.ToString(Formatting.None), requestParameters[Constants.QS_PARAM]);
         }
 
