@@ -87,7 +87,7 @@ namespace Constructorio_NET.Models
         /// <summary>
         /// Gets or sets additional query parameters as arbitrary JSON.
         /// </summary>
-        public JToken QsParam { get; set; }
+        public JObject QsParam { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BrowseRequest"/> class.

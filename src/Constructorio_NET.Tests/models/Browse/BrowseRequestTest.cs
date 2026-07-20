@@ -71,7 +71,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public void GetRequestParametersWithQsParam()
         {
-            JToken qsParam = JObject.FromObject(new
+            JObject qsParam = JObject.FromObject(new
             {
                 section = this.Section,
                 sort_by = this.SortBy,
