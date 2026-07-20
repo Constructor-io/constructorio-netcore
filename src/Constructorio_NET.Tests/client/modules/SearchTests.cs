@@ -98,7 +98,7 @@ namespace Constructorio_NET.Tests
             {
                 {
                     "Color",
-                    new List<string>() { "green", "blue" }
+                    new List<string>() { "green", "Blue" }
                 }
             };
             SearchRequest req = new SearchRequest(this.Query)
@@ -127,6 +127,41 @@ namespace Constructorio_NET.Tests
             Assert.IsNotNull(res.Response.Facets[0].Min);
             Assert.IsNotNull(res.Response.Facets[0].Data, "data object expected to exist");
             Assert.IsNotNull(res.Response.Facets[0].Hidden, "hidden field expected to exist");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
+        public async Task GetSearchResultsWithQsParam()
+        {
+            JObject qsParam = new JObject
+            {
+                ["filters"] = new JObject
+                {
+                    ["Color"] = new JArray("green", "Blue")
+                }
+            };
+            SearchRequest req = new SearchRequest(this.Query)
+            {
+                UserInfo = this.UserInfo,
+                QsParam = qsParam
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            SearchResponse res = await constructorio.Search.GetSearchResults(req);
+            Assert.Greater(
+                res.Response.TotalNumResults,
+                0,
+                "total number of results expected to be greater than 0"
+            );
+            Assert.Greater(
+                res.Response.Results.Count,
+                0,
+                "length of results expected to be greater than 0"
+            );
+            Assert.Greater(
+                res.Response.Facets.Count,
+                0,
+                "length of facets expected to be greater than 0"
+            );
             Assert.IsNotNull(res.ResultId, "ResultId should exist");
         }
 

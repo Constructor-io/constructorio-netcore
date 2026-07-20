@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
@@ -64,6 +66,25 @@ namespace Constructorio_NET.Tests
             Assert.AreEqual(this.SortBy, requestParameters[Constants.SORT_BY]);
             Assert.AreEqual(this.SortOrder, requestParameters[Constants.SORT_ORDER]);
             Assert.AreEqual(this.TestCells, requestParameters[Constants.TEST_CELLS]);
+        }
+
+        [Test]
+        public void GetRequestParametersWithQsParam()
+        {
+            JToken qsParam = JObject.FromObject(new
+            {
+                section = this.Section,
+                sort_by = this.SortBy,
+                sort_order = this.SortOrder,
+            });
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                QsParam = qsParam,
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            TestContext.WriteLine($"Browse qs param: {requestParameters[Constants.QS_PARAM]}");
+            Assert.AreEqual(qsParam.ToString(Formatting.None), requestParameters[Constants.QS_PARAM]);
         }
 
         [Test]

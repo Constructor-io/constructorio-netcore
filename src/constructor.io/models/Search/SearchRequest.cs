@@ -80,6 +80,11 @@ namespace Constructorio_NET.Models
         public VariationsMap VariationsMap { get; set; }
 
         /// <summary>
+        /// Gets or sets additional query parameters as arbitrary JSON.
+        /// </summary>
+        public JToken QsParam { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="SearchRequest"/> class.
         /// </summary>
         /// <param name="query">Query to use for the request.</param>
@@ -177,6 +182,11 @@ namespace Constructorio_NET.Models
             {
                 string serializedJson = JsonConvert.SerializeObject(this.VariationsMap);
                 parameters.Add(Constants.VARIATIONS_MAP, serializedJson);
+            }
+
+            if (this.QsParam != null)
+            {
+                parameters.Add(Constants.QS_PARAM, this.QsParam.ToString(Formatting.None));
             }
 
             return parameters;
