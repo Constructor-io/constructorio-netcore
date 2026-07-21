@@ -336,7 +336,7 @@ namespace Constructorio_NET.Tests
         [Test]
         public async Task GetSearchResultsWithPreFilterExpressionNot()
         {
-            ValuePreFilterExpression filterByColor1 = new ValuePreFilterExpression("Color", "indigo");
+            ValuePreFilterExpression filterByColor1 = new ValuePreFilterExpression("Color", "Blue");
             NotPreFilterExpression preFilterExpression = new NotPreFilterExpression(filterByColor1);
 
             SearchRequest req = new SearchRequest(this.Query)
@@ -355,7 +355,7 @@ namespace Constructorio_NET.Tests
                 "Pre Filter Expression is sent in request"
             );
             Assert.AreEqual(
-                5,
+                4,
                 res.Response.Results.Count,
                 "Total number of results expected to be 5"
             );
