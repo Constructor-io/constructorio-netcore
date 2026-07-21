@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Constructorio_NET.Models;
 using Constructorio_NET.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace Constructorio_NET.Tests
@@ -121,6 +122,29 @@ namespace Constructorio_NET.Tests
             string expectedUrl = $@"https:\/\/ac.cnstrc.com\/search%20space\/{this.Query}\?key={this.ApiKey}&c={this.Version}&filters%5BColor%5D=green%20shirt&filters%5BColor%5D=blue&_dt=";
             bool regexMatched = Regex.Match(url, expectedUrl).Success;
             Assert.That(regexMatched, "url should be properly formed");
+        }
+
+        [Test]
+        public void MakeUrlSearchWithQsParam()
+        {
+            List<string> paths = new List<string> { "search", this.Query };
+            JObject qsParam = new JObject
+            {
+                ["filters"] = new JObject
+                {
+                    ["Color"] = new JArray("green", "blue")
+                }
+            };
+            Hashtable queryParams = new Hashtable()
+            {
+                { Constants.QS_PARAM, qsParam.ToString(Formatting.None) }
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+
+            string expectedQs = OurEscapeDataString(qsParam.ToString(Formatting.None));
+            Assert.That(url, Does.Contain($"&qs={expectedQs}"), "qs param should be serialized and URL-encoded");
+            Assert.That(url, Does.Contain("qs=%7B%22filters%22"), "qs param braces and quotes should be escaped, not passed raw");
         }
 
         [Test]

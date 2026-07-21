@@ -56,7 +56,8 @@ namespace Constructorio_NET.Tests
         {
             QuizRequest req = new QuizRequest(this.QuizId)
             {
-                Answers = this.Answers
+                Answers = this.Answers,
+                QuizSessionId = this.QuizSessionId
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             NextQuestionResponse res = await constructorio.Quizzes.GetNextQuestion(req);
@@ -90,7 +91,8 @@ namespace Constructorio_NET.Tests
         {
             QuizRequest req = new QuizRequest(this.QuizId)
             {
-                Answers = this.Answers
+                Answers = this.Answers,
+                QuizSessionId = this.QuizSessionId
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
             QuizResultsResponse res = await constructorio.Quizzes.GetResults(req);
