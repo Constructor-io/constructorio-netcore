@@ -123,6 +123,43 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetBrowseResultsWithQsParam()
+        {
+            JObject qsParam = new JObject
+            {
+                ["filters"] = new JObject
+                {
+                    ["Brand"] = new JArray("XYZ")
+                }
+            };
+            BrowseRequest req = new BrowseRequest(this.FilterName, this.FilterValue)
+            {
+                UserInfo = this.UserInfo,
+                QsParam = qsParam
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            BrowseResponse res = await constructorio.Browse.GetBrowseResults(req);
+            Assert.Greater(
+                res.Response.TotalNumResults,
+                0,
+                "total number of results expected to be greater than 0"
+            );
+            Assert.Greater(
+                res.Response.Results.Count,
+                0,
+                "length of results expected to be greater than 0"
+            );
+            Assert.Greater(
+                res.Response.Facets.Count,
+                0,
+                "length of facets expected to be greater than 0"
+            );
+            Assert.IsNotNull(res.Response.Facets[0].Data, "data object expected to exist");
+            Assert.IsNotNull(res.Response.Facets[0].Hidden, "hidden field expected to exist");
+            Assert.IsNotNull(res.ResultId, "ResultId should exist");
+        }
+
+        [Test]
         public async Task GetBrowseResultsWithPreFilterExpressionJson()
         {
             JObject preFilterExpressionJObject = JObject.Parse(
