@@ -8,6 +8,7 @@ var class_constructorio___n_e_t_1_1_models_1_1_search_request =
     [ "Offset", "class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a806b4dd275a252560f6fe41da422cd2e", null ],
     [ "Page", "class_constructorio___n_e_t_1_1_models_1_1_search_request.html#af7bbb2a12e42216d50f3bec5aeeae394", null ],
     [ "PreFilterExpression", "class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a0b31e1f8c6d7cd37a679ca25001c8208", null ],
+    [ "QsParam", "class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a516b8513cec7d485cad5242bc8308ca3", null ],
     [ "Query", "class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a84ca1a7c8d6b79b4eabac594f9ae5fc0", null ],
     [ "ResultsPerPage", "class_constructorio___n_e_t_1_1_models_1_1_search_request.html#ae91e2eafb349b0d7f96af47bb1030340", null ],
     [ "Section", "class_constructorio___n_e_t_1_1_models_1_1_search_request.html#a9c31a91f99dd0f38207d08bf88718658", null ],

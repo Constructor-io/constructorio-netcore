@@ -65,7 +65,7 @@ var NAVTREE =
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
-        [ "Properties", "functions_prop.html", null ]
+        [ "Properties", "functions_prop.html", "functions_prop" ]
       ] ]
     ] ]
   ] ]
@@ -74,10 +74,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html#a162290e768175ab72b44e7352f8d826d",
-"class_constructorio___n_e_t_1_1_models_1_1_result_group.html",
-"class_constructorio___n_e_t_1_1_modules_1_1_browse.html#a3fb9f9d6b290bc52d994e07f26743c59",
-"interface_constructorio___n_e_t_1_1_models_1_1_i_plp_request.html#a7b6b384ccca496b6cdb95a4802d93795"
+"class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html#a0c7d2118b78a55ccf77d619eefcb72e5",
+"class_constructorio___n_e_t_1_1_models_1_1_result_facet.html",
+"class_constructorio___n_e_t_1_1_modules_1_1_autocomplete.html#a3426c43760530d7f0daf85ba6b6fbbca",
+"functions_s.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
