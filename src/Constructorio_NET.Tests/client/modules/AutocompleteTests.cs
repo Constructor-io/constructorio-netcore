@@ -230,6 +230,92 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public async Task GetAutocompleteResultsShouldReturnResultWithPreFilterExpression()
+        {
+            ValuePreFilterExpression filterByGroupId = new ValuePreFilterExpression("group_id", "All");
+            AutocompleteRequest req = new AutocompleteRequest("item")
+            {
+                UserInfo = UserInfo,
+                PreFilterExpression = filterByGroupId,
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+            Assert.AreEqual(
+                JObject.Parse(filterByGroupId.GetExpression()),
+                reqPreFilterExpression,
+                "Pre Filter Expression is sent in request"
+            );
+        }
+
+        [Test]
+        public async Task GetAutocompleteResultsShouldReturnResultWithPreFilterExpressionPerSection()
+        {
+            ValuePreFilterExpression filterByGroupId = new ValuePreFilterExpression("group_id", "All");
+            AutocompleteRequest req = new AutocompleteRequest("item")
+            {
+                UserInfo = UserInfo,
+                PreFilterExpressionPerSection = new List<PreFilterExpressionPerSection>
+                {
+                    new PreFilterExpressionPerSection("Products", filterByGroupId),
+                },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+            JObject parsedPreFilterExpression = (JObject)reqPreFilterExpression;
+            Assert.NotNull(parsedPreFilterExpression, "Pre filter expression exists in response");
+            Assert.AreEqual(
+                JObject.Parse(filterByGroupId.GetExpression()),
+                parsedPreFilterExpression["Products"],
+                "Per-section pre filter expression is sent in request"
+            );
+        }
+
+        [Test]
+        public async Task GetAutocompleteResultsShouldReturnResultWithMultiplePreFilterExpressionsPerSection()
+        {
+            ValuePreFilterExpression filterByGroupId = new ValuePreFilterExpression("group_id", "All");
+            AndPreFilterExpression filterByPriceAndBrand = new AndPreFilterExpression(
+                new List<PreFilterExpression>
+                {
+                    new RangePreFilterExpression("price", new List<string> { "10", "100" }),
+                    new ValuePreFilterExpression("brand", "Nike"),
+                }
+            );
+            AutocompleteRequest req = new AutocompleteRequest("item")
+            {
+                UserInfo = UserInfo,
+                PreFilterExpressionPerSection = new List<PreFilterExpressionPerSection>
+                {
+                    new PreFilterExpressionPerSection("Products", filterByGroupId),
+                    new PreFilterExpressionPerSection("Search Suggestions", filterByPriceAndBrand),
+                },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+            AutocompleteResponse res = await constructorio.Autocomplete.GetAutocompleteResults(req);
+
+            Assert.NotNull(res.ResultId, "Result id exists");
+            res.Request.TryGetValue("pre_filter_expression", out object reqPreFilterExpression);
+            JObject parsedPreFilterExpression = (JObject)reqPreFilterExpression;
+            Assert.NotNull(parsedPreFilterExpression, "Pre filter expression exists in response");
+            Assert.AreEqual(
+                JObject.Parse(filterByGroupId.GetExpression()),
+                parsedPreFilterExpression["Products"],
+                "Value per-section pre filter expression is sent in request"
+            );
+            Assert.AreEqual(
+                JObject.Parse(filterByPriceAndBrand.GetExpression()),
+                parsedPreFilterExpression["Search Suggestions"],
+                "Composite per-section pre filter expression is sent in request"
+            );
+        }
+
+        [Test]
         public async Task GetAutocompleteResultsShouldReturnResultWithFiltersPerSection()
         {
             Dictionary<string, List<string>> filters = new Dictionary<string, List<string>>();

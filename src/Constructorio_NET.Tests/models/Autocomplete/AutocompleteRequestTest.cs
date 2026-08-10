@@ -63,6 +63,53 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetRequestParametersWithPreFilterExpression()
+        {
+            ValuePreFilterExpression filterByBrand = new ValuePreFilterExpression("Brand", "XYZ");
+            AutocompleteRequest req = new AutocompleteRequest(this.Query)
+            {
+                PreFilterExpression = filterByBrand,
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.IsNotNull(requestParameters[Constants.PRE_FILTER_EXPRESSION]);
+            Assert.IsTrue(requestParameters[Constants.PRE_FILTER_EXPRESSION].ToString().Contains("Brand"));
+            Assert.IsTrue(requestParameters[Constants.PRE_FILTER_EXPRESSION].ToString().Contains("XYZ"));
+        }
+
+        [Test]
+        public void GetRequestParametersWithPreFilterExpressionPerSection()
+        {
+            ValuePreFilterExpression filterProducts = new ValuePreFilterExpression("Brand", "XYZ");
+            ValuePreFilterExpression filterSuggestions = new ValuePreFilterExpression("group_id", "All");
+            AutocompleteRequest req = new AutocompleteRequest(this.Query)
+            {
+                PreFilterExpressionPerSection = new List<PreFilterExpressionPerSection>
+                {
+                    new PreFilterExpressionPerSection("Products", filterProducts),
+                    new PreFilterExpressionPerSection("Search Suggestions", filterSuggestions),
+                },
+            };
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            List<PreFilterExpressionPerSection> perSection = (List<PreFilterExpressionPerSection>)requestParameters[Constants.PRE_FILTER_EXPRESSION_PER_SECTION];
+            Assert.IsNotNull(perSection);
+            Assert.AreEqual(2, perSection.Count);
+            Assert.AreEqual("Products", perSection[0].Section);
+            Assert.AreEqual("Search Suggestions", perSection[1].Section);
+        }
+
+        [Test]
+        public void GetRequestParametersWithoutPreFilterExpression()
+        {
+            AutocompleteRequest req = new AutocompleteRequest(this.Query);
+
+            Hashtable requestParameters = req.GetRequestParameters();
+            Assert.IsFalse(requestParameters.ContainsKey(Constants.PRE_FILTER_EXPRESSION));
+            Assert.IsFalse(requestParameters.ContainsKey(Constants.PRE_FILTER_EXPRESSION_PER_SECTION));
+        }
+
+        [Test]
         public void GetRequestHeaders()
         {
             AutocompleteRequest req = new AutocompleteRequest(this.Query)

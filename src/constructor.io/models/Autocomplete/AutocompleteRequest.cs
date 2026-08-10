@@ -32,6 +32,17 @@ namespace Constructorio_NET.Models
         public Dictionary<string, Dictionary<string, List<string>>> FiltersPerSection { get; set; }
 
         /// <summary>
+        /// Gets or sets the filter expression used to scope results across all sections.
+        /// </summary>
+        public PreFilterExpression PreFilterExpression { get; set; }
+
+        /// <summary>
+        /// Gets or sets per-section filter expressions used to scope results for specific sections.
+        /// Serialized as pre_filter_expression[Section]={...}.
+        /// </summary>
+        public List<PreFilterExpressionPerSection> PreFilterExpressionPerSection { get; set; }
+
+        /// <summary>
         /// Gets or sets the format options used to refine result groups.
         /// </summary>
         public FmtOptions FmtOptions { get; set; }
@@ -103,6 +114,16 @@ namespace Constructorio_NET.Models
             if (this.FiltersPerSection != null)
             {
                 parameters.Add(Constants.FILTERS_PER_SECTION, this.FiltersPerSection);
+            }
+
+            if (this.PreFilterExpression != null)
+            {
+                parameters.Add(Constants.PRE_FILTER_EXPRESSION, this.PreFilterExpression.GetExpression());
+            }
+
+            if (this.PreFilterExpressionPerSection != null && this.PreFilterExpressionPerSection.Count > 0)
+            {
+                parameters.Add(Constants.PRE_FILTER_EXPRESSION_PER_SECTION, this.PreFilterExpressionPerSection);
             }
 
             if (this.TestCells != null)

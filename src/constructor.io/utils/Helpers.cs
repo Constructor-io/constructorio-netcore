@@ -162,6 +162,25 @@ namespace Constructorio_NET.Utils
                     }
                 }
 
+                if (queryParams.Contains(Constants.PRE_FILTER_EXPRESSION_PER_SECTION))
+                {
+                    List<PreFilterExpressionPerSection> preFilterExpressionPerSection = (List<PreFilterExpressionPerSection>)queryParams[Constants.PRE_FILTER_EXPRESSION_PER_SECTION];
+                    queryParams.Remove(Constants.PRE_FILTER_EXPRESSION_PER_SECTION);
+
+                    foreach (var sectionExpression in preFilterExpressionPerSection)
+                    {
+                        if (sectionExpression?.Section == null || sectionExpression.Expression == null)
+                        {
+                            continue;
+                        }
+
+                        url.Append("&" + Constants.PRE_FILTER_EXPRESSION + UrlEscapedStartSquareBracket)
+                            .Append(OurEscapeDataString(sectionExpression.Section))
+                            .Append(UrlEscapedEndSquareBracket + "=")
+                            .Append(OurEscapeDataString(sectionExpression.Expression.GetExpression()));
+                    }
+                }
+
                 // Add test cells to query string
                 if (queryParams.Contains(Constants.TEST_CELLS))
                 {

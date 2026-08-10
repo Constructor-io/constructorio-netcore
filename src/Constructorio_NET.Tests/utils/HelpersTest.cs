@@ -361,6 +361,28 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void MakeUrlAutocompleteWithPreFilterExpressionPerSection()
+        {
+            List<string> paths = new List<string> { "autocomplete", this.Query };
+            List<PreFilterExpressionPerSection> preFilterExpressionPerSection = new List<PreFilterExpressionPerSection>
+            {
+                new PreFilterExpressionPerSection("Products", new ValuePreFilterExpression("Brand", "XYZ")),
+                new PreFilterExpressionPerSection("Search Suggestions", new ValuePreFilterExpression("group_id", "All")),
+            };
+            Hashtable queryParams = new Hashtable()
+            {
+                { Constants.PRE_FILTER_EXPRESSION_PER_SECTION, preFilterExpressionPerSection },
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            bool hasProductsKey = Regex.Match(url, "&pre_filter_expression%5BProducts%5D=").Success;
+            bool hasSuggestionsKey = Regex.Match(url, "&pre_filter_expression%5BSearch%20Suggestions%5D=").Success;
+            bool hasBrandExpression = url.Contains(OurEscapeDataString("XYZ"));
+            bool hasGroupExpression = url.Contains(OurEscapeDataString("All"));
+            Assert.That(hasProductsKey && hasSuggestionsKey && hasBrandExpression && hasGroupExpression, "url should have bracketed per-section pre_filter_expression");
+        }
+
+        [Test]
         public async Task TestCreateRequest()
         {
             Hashtable requestBody = new Hashtable
