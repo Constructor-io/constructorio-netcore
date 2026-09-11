@@ -364,10 +364,12 @@ namespace Constructorio_NET.Tests
         public void MakeUrlAutocompleteWithPreFilterExpressionPerSection()
         {
             List<string> paths = new List<string> { "autocomplete", this.Query };
-            List<PreFilterExpressionPerSection> preFilterExpressionPerSection = new List<PreFilterExpressionPerSection>
+            ValuePreFilterExpression filterProducts = new ValuePreFilterExpression("Brand", "XYZ");
+            ValuePreFilterExpression filterSuggestions = new ValuePreFilterExpression("group_id", "All");
+            Dictionary<string, PreFilterExpression> preFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>
             {
-                new PreFilterExpressionPerSection("Products", new ValuePreFilterExpression("Brand", "XYZ")),
-                new PreFilterExpressionPerSection("Search Suggestions", new ValuePreFilterExpression("group_id", "All")),
+                { "Products", filterProducts },
+                { "Search Suggestions", filterSuggestions },
             };
             Hashtable queryParams = new Hashtable()
             {
@@ -375,11 +377,33 @@ namespace Constructorio_NET.Tests
             };
 
             string url = MakeUrl(this.Options, paths, queryParams);
-            bool hasProductsKey = Regex.Match(url, "&pre_filter_expression%5BProducts%5D=").Success;
-            bool hasSuggestionsKey = Regex.Match(url, "&pre_filter_expression%5BSearch%20Suggestions%5D=").Success;
-            bool hasBrandExpression = url.Contains(OurEscapeDataString("XYZ"));
-            bool hasGroupExpression = url.Contains(OurEscapeDataString("All"));
-            Assert.That(hasProductsKey && hasSuggestionsKey && hasBrandExpression && hasGroupExpression, "url should have bracketed per-section pre_filter_expression");
+            string productsParameter = "&pre_filter_expression%5BProducts%5D=" + OurEscapeDataString(filterProducts.GetExpression());
+            string suggestionsParameter = "&pre_filter_expression%5BSearch%20Suggestions%5D=" + OurEscapeDataString(filterSuggestions.GetExpression());
+            Assert.That(url, Does.Contain(productsParameter), "url should have the escaped Products expression");
+            Assert.That(url, Does.Contain(suggestionsParameter), "url should have the escaped Search Suggestions expression");
+            Assert.That(url, Does.Not.Contain("{"), "url should not contain unescaped json");
+            Assert.That(url, Does.Not.Contain("&pre_filter_expression="), "url should not have the non per-section form");
+        }
+
+        [Test]
+        public void MakeUrlAutocompleteWithReassignedSectionEmitsOnlyTheLastValue()
+        {
+            List<string> paths = new List<string> { "autocomplete", this.Query };
+            ValuePreFilterExpression firstAssignment = new ValuePreFilterExpression("Brand", "XYZ");
+            ValuePreFilterExpression secondAssignment = new ValuePreFilterExpression("group_id", "All");
+            Dictionary<string, PreFilterExpression> preFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>();
+            preFilterExpressionPerSection["Products"] = firstAssignment;
+            preFilterExpressionPerSection["Products"] = secondAssignment;
+            Hashtable queryParams = new Hashtable()
+            {
+                { Constants.PRE_FILTER_EXPRESSION_PER_SECTION, preFilterExpressionPerSection },
+            };
+
+            string url = MakeUrl(this.Options, paths, queryParams);
+            int productsParamCount = Regex.Matches(url, Regex.Escape("&pre_filter_expression%5BProducts%5D=")).Count;
+            Assert.That(productsParamCount, Is.EqualTo(1), "exactly one pre_filter_expression[Products] param must appear on the wire, however many times the section was assigned");
+            Assert.That(url, Does.Contain(OurEscapeDataString(secondAssignment.GetExpression())), "the wire value must be the last assignment");
+            Assert.That(url, Does.Not.Contain(OurEscapeDataString(firstAssignment.GetExpression())), "the overwritten first assignment must not leak onto the wire");
         }
 
         [Test]

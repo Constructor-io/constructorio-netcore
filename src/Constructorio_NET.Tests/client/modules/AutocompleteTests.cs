@@ -39,6 +39,45 @@ namespace Constructorio_NET.Tests
         }
 
         [Test]
+        public void GetAutocompleteResultsThrowsWhenPreFilterExpressionAndPerSectionBothSet()
+        {
+            AutocompleteRequest req = new AutocompleteRequest("item")
+            {
+                UserInfo = UserInfo,
+                PreFilterExpression = new ValuePreFilterExpression("Brand", "XYZ"),
+                PreFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>
+                {
+                    { "Products", new ValuePreFilterExpression("group_id", "All") },
+                },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            ArgumentException ex = Assert.ThrowsAsync<ArgumentException>(
+                () => constructorio.Autocomplete.GetAutocompleteResults(req)
+            );
+            Assert.That(ex.Message, Does.Contain("mutually exclusive"));
+        }
+
+        [Test]
+        public void GetAutocompleteResultsThrowsWhenPreFilterExpressionPerSectionKeyIsBlank()
+        {
+            AutocompleteRequest req = new AutocompleteRequest("item")
+            {
+                UserInfo = UserInfo,
+                PreFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>
+                {
+                    { "", new ValuePreFilterExpression("group_id", "All") },
+                },
+            };
+            ConstructorIO constructorio = new ConstructorIO(this.Config);
+
+            ArgumentException ex = Assert.ThrowsAsync<ArgumentException>(
+                () => constructorio.Autocomplete.GetAutocompleteResults(req)
+            );
+            Assert.That(ex.Message, Does.Contain("must not be null, empty, or whitespace"));
+        }
+
+        [Test]
         public async Task GetAutocompleteResults()
         {
             AutocompleteRequest req = new AutocompleteRequest("item") { UserInfo = UserInfo };
@@ -257,9 +296,9 @@ namespace Constructorio_NET.Tests
             AutocompleteRequest req = new AutocompleteRequest("item")
             {
                 UserInfo = UserInfo,
-                PreFilterExpressionPerSection = new List<PreFilterExpressionPerSection>
+                PreFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>
                 {
-                    new PreFilterExpressionPerSection("Products", filterByGroupId),
+                    { "Products", filterByGroupId },
                 },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);
@@ -290,10 +329,10 @@ namespace Constructorio_NET.Tests
             AutocompleteRequest req = new AutocompleteRequest("item")
             {
                 UserInfo = UserInfo,
-                PreFilterExpressionPerSection = new List<PreFilterExpressionPerSection>
+                PreFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>
                 {
-                    new PreFilterExpressionPerSection("Products", filterByGroupId),
-                    new PreFilterExpressionPerSection("Search Suggestions", filterByPriceAndBrand),
+                    { "Products", filterByGroupId },
+                    { "Search Suggestions", filterByPriceAndBrand },
                 },
             };
             ConstructorIO constructorio = new ConstructorIO(this.Config);

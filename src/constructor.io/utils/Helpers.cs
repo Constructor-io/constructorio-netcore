@@ -164,20 +164,20 @@ namespace Constructorio_NET.Utils
 
                 if (queryParams.Contains(Constants.PRE_FILTER_EXPRESSION_PER_SECTION))
                 {
-                    List<PreFilterExpressionPerSection> preFilterExpressionPerSection = (List<PreFilterExpressionPerSection>)queryParams[Constants.PRE_FILTER_EXPRESSION_PER_SECTION];
+                    Dictionary<string, PreFilterExpression> preFilterExpressionPerSection = (Dictionary<string, PreFilterExpression>)queryParams[Constants.PRE_FILTER_EXPRESSION_PER_SECTION];
                     queryParams.Remove(Constants.PRE_FILTER_EXPRESSION_PER_SECTION);
 
                     foreach (var sectionExpression in preFilterExpressionPerSection)
                     {
-                        if (sectionExpression?.Section == null || sectionExpression.Expression == null)
+                        if (sectionExpression.Value == null)
                         {
                             continue;
                         }
 
                         url.Append("&" + Constants.PRE_FILTER_EXPRESSION + UrlEscapedStartSquareBracket)
-                            .Append(OurEscapeDataString(sectionExpression.Section))
+                            .Append(OurEscapeDataString(sectionExpression.Key))
                             .Append(UrlEscapedEndSquareBracket + "=")
-                            .Append(OurEscapeDataString(sectionExpression.Expression.GetExpression()));
+                            .Append(OurEscapeDataString(sectionExpression.Value.GetExpression()));
                     }
                 }
 

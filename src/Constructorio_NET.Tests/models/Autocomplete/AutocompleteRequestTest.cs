@@ -84,19 +84,101 @@ namespace Constructorio_NET.Tests
             ValuePreFilterExpression filterSuggestions = new ValuePreFilterExpression("group_id", "All");
             AutocompleteRequest req = new AutocompleteRequest(this.Query)
             {
-                PreFilterExpressionPerSection = new List<PreFilterExpressionPerSection>
+                PreFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>
                 {
-                    new PreFilterExpressionPerSection("Products", filterProducts),
-                    new PreFilterExpressionPerSection("Search Suggestions", filterSuggestions),
+                    { "Products", filterProducts },
+                    { "Search Suggestions", filterSuggestions },
                 },
             };
 
             Hashtable requestParameters = req.GetRequestParameters();
-            List<PreFilterExpressionPerSection> perSection = (List<PreFilterExpressionPerSection>)requestParameters[Constants.PRE_FILTER_EXPRESSION_PER_SECTION];
+            Dictionary<string, PreFilterExpression> perSection = (Dictionary<string, PreFilterExpression>)requestParameters[Constants.PRE_FILTER_EXPRESSION_PER_SECTION];
             Assert.IsNotNull(perSection);
             Assert.AreEqual(2, perSection.Count);
-            Assert.AreEqual("Products", perSection[0].Section);
-            Assert.AreEqual("Search Suggestions", perSection[1].Section);
+            Assert.IsTrue(perSection.ContainsKey("Products"));
+            Assert.IsTrue(perSection.ContainsKey("Search Suggestions"));
+        }
+
+        [Test]
+        public void PreFilterExpressionPerSectionThrowsOnDuplicateKeyInInitializer()
+        {
+            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+            {
+                AutocompleteRequest req = new AutocompleteRequest(this.Query)
+                {
+                    PreFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>
+                    {
+                        { "Products", new ValuePreFilterExpression("Brand", "XYZ") },
+                        { "Products", new ValuePreFilterExpression("group_id", "All") },
+                    },
+                };
+            });
+            Assert.That(ex.Message, Does.Contain("same key has already been added"));
+        }
+
+        [Test]
+        public void GetRequestParametersThrowsWhenPreFilterExpressionAndPerSectionBothSet()
+        {
+            AutocompleteRequest req = new AutocompleteRequest(this.Query)
+            {
+                PreFilterExpression = new ValuePreFilterExpression("Brand", "XYZ"),
+                PreFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>
+                {
+                    { "Products", new ValuePreFilterExpression("group_id", "All") },
+                },
+            };
+
+            ArgumentException ex = Assert.Throws<ArgumentException>(() => req.GetRequestParameters());
+            Assert.That(ex.Message, Does.Contain("mutually exclusive"));
+        }
+
+        [Test]
+        public void GetRequestParametersDoesNotThrowWhenPerSectionIsEmpty()
+        {
+            ValuePreFilterExpression filterByBrand = new ValuePreFilterExpression("Brand", "XYZ");
+            AutocompleteRequest req = new AutocompleteRequest(this.Query)
+            {
+                PreFilterExpression = filterByBrand,
+                PreFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>(),
+            };
+
+            Hashtable requestParameters = null;
+            Assert.DoesNotThrow(() => requestParameters = req.GetRequestParameters());
+            Assert.IsNotNull(requestParameters[Constants.PRE_FILTER_EXPRESSION]);
+            Assert.IsFalse(requestParameters.ContainsKey(Constants.PRE_FILTER_EXPRESSION_PER_SECTION), "an empty per-section dictionary must not be added to the parameters at all");
+        }
+
+        [TestCase("")]
+        [TestCase("   ")]
+        public void GetRequestParametersThrowsWhenPreFilterExpressionPerSectionKeyIsBlank(string blankSection)
+        {
+            AutocompleteRequest req = new AutocompleteRequest(this.Query)
+            {
+                PreFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>
+                {
+                    { blankSection, new ValuePreFilterExpression("group_id", "All") },
+                },
+            };
+
+            ArgumentException ex = Assert.Throws<ArgumentException>(() => req.GetRequestParameters());
+            Assert.That(ex.Message, Does.Contain("must not be null, empty, or whitespace"));
+        }
+
+        [Test]
+        public void GetRequestParametersThrowsWhenOneOfSeveralSectionsIsBlank()
+        {
+            AutocompleteRequest req = new AutocompleteRequest(this.Query)
+            {
+                PreFilterExpressionPerSection = new Dictionary<string, PreFilterExpression>
+                {
+                    { "Products", new ValuePreFilterExpression("Brand", "XYZ") },
+                    { "   ", new ValuePreFilterExpression("group_id", "All") },
+                    { "Search Suggestions", new ValuePreFilterExpression("Brand", "XYZ") },
+                },
+            };
+
+            ArgumentException ex = Assert.Throws<ArgumentException>(() => req.GetRequestParameters());
+            Assert.That(ex.Message, Does.Contain("must not be null, empty, or whitespace"));
         }
 
         [Test]

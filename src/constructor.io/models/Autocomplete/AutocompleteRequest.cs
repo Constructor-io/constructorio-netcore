@@ -33,14 +33,17 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Gets or sets the filter expression used to scope results across all sections.
+        /// Mutually exclusive with <see cref="PreFilterExpressionPerSection"/>; setting both throws <see cref="ArgumentException"/>.
         /// </summary>
         public PreFilterExpression PreFilterExpression { get; set; }
 
         /// <summary>
         /// Gets or sets per-section filter expressions used to scope results for specific sections.
         /// Serialized as pre_filter_expression[Section]={...}.
+        /// Mutually exclusive with <see cref="PreFilterExpression"/>; setting both throws <see cref="ArgumentException"/>.
+        /// Section names must not be null, empty, or whitespace; a blank section name throws <see cref="ArgumentException"/>.
         /// </summary>
-        public List<PreFilterExpressionPerSection> PreFilterExpressionPerSection { get; set; }
+        public Dictionary<string, PreFilterExpression> PreFilterExpressionPerSection { get; set; }
 
         /// <summary>
         /// Gets or sets the format options used to refine result groups.
@@ -83,6 +86,23 @@ namespace Constructorio_NET.Models
         public Hashtable GetRequestParameters()
         {
             Hashtable parameters = new Hashtable();
+
+            if (this.PreFilterExpression != null && this.PreFilterExpressionPerSection != null && this.PreFilterExpressionPerSection.Count > 0)
+            {
+                throw new ArgumentException("PreFilterExpression and PreFilterExpressionPerSection are mutually exclusive; set only one.");
+            }
+
+            if (this.PreFilterExpressionPerSection != null)
+            {
+                foreach (string section in this.PreFilterExpressionPerSection.Keys)
+                {
+                    if (string.IsNullOrWhiteSpace(section))
+                    {
+                        throw new ArgumentException("PreFilterExpressionPerSection section names must not be null, empty, or whitespace.");
+                    }
+                }
+            }
+
             if (this.UserInfo != null)
             {
                 if (this.UserInfo.GetUserId() != null)
