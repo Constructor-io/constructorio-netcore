@@ -64,6 +64,8 @@ namespace Constructorio_NET.Modules
 
         /// <summary>
         /// Retrieve recommendation results for every pod on a page from API.
+        /// Beta: available to a small group of users and may change. Contact your Customer Success
+        /// Manager to request access.
         /// The response's top-level result id identifies the page request and is not a tracking id:
         /// send each pod's own result id with that pod's tracking events.
         /// </summary>
