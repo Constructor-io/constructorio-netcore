@@ -39,6 +39,7 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Gets or sets the pods, in the page's configured order.
+        /// An item appears in at most one pod on the page.
         /// </summary>
         [JsonProperty("pods")]
         public List<RecommendationPagePod> Pods { get; set; }

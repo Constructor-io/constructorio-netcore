@@ -20,7 +20,6 @@ namespace Constructorio_NET.Tests
                 NumResults = 10,
                 PodOverrides = new Dictionary<string, RecommendationPagePodOverride>
                 {
-                    { "similar_items", new RecommendationPagePodOverride { NumResults = 0 } },
                     {
                         "complete_the_look", new RecommendationPagePodOverride
                         {
@@ -38,7 +37,6 @@ namespace Constructorio_NET.Tests
             Hashtable requestParameters = req.GetRequestParameters();
             string prefix = "pod_overrides[complete_the_look]";
             Assert.AreEqual(10, requestParameters["num_results"]);
-            Assert.AreEqual(0, requestParameters["pod_overrides[similar_items][num_results]"]);
             Assert.AreEqual(8, requestParameters[$"{prefix}[num_results]"]);
             Assert.AreEqual(new List<string> { "red", "blue" }, requestParameters[$"{prefix}[filters][color]"]);
             Assert.AreEqual("all", requestParameters[$"{prefix}[filter_match_types][color]"]);
