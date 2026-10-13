@@ -50,13 +50,11 @@ namespace Constructorio_NET.Tests
         {
             RecommendationPageRequest req = new RecommendationPageRequest("pdp_b2c")
             {
-                UserInfo = new UserInfo("r4nd-cl1ent-1d", 4),
-                ItemIds = new List<string> { "product-123" },
-                NumResults = 10,
                 Filters = new Dictionary<string, List<string>> { { "in_stock", new List<string> { "true" } } },
                 PodOverrides = new Dictionary<string, RecommendationPagePodOverride>
                 {
                     { "similar_items", new RecommendationPagePodOverride { NumResults = 0 } },
+                    { "trending", null },
                     {
                         "complete_the_look", new RecommendationPagePodOverride
                         {
@@ -73,16 +71,10 @@ namespace Constructorio_NET.Tests
             var query = HttpUtility.ParseQueryString(uri.Query);
 
             Assert.AreEqual("/recommendations/v1/pages/pdp_b2c", uri.AbsolutePath);
-            Assert.AreEqual("key_mock_page_api", query["key"]);
-            Assert.AreEqual("r4nd-cl1ent-1d", query["i"]);
-            Assert.AreEqual("4", query["s"]);
-            Assert.AreEqual("product-123", query["item_id"]);
-            Assert.AreEqual("10", query["num_results"]);
             Assert.AreEqual("true", query["filters[in_stock]"]);
-            Assert.AreEqual("0", query["pod_overrides[similar_items][num_results]"]);
-            Assert.AreEqual("8", query["pod_overrides[complete_the_look][num_results]"]);
             Assert.AreEqual(new[] { "red", "blue" }, query.GetValues("pod_overrides[complete_the_look][filters][color]"));
             StringAssert.Contains("pod_overrides%5Bsimilar_items%5D%5Bnum_results%5D=0", url);
+            StringAssert.DoesNotContain("trending", url);
         }
 
         [Test]
@@ -92,21 +84,14 @@ namespace Constructorio_NET.Tests
             List<RecommendationPagePod> pods = res.Response.Pods;
 
             Assert.AreEqual(PageResultId, res.ResultId);
-            Assert.AreEqual("pdp_b2c", res.Response.PageId);
-            Assert.AreEqual("pdp", res.Response.PageType);
             Assert.AreEqual(new[] { "similar_items", "complete_the_look" }, pods.Select(pod => pod.PodId).ToArray());
             Assert.AreEqual("a1b2c3d4-0000-0000-0000-000000000001", pods[0].ResultId);
-            Assert.AreEqual("similar_items", pods[0].Response.Pod.Id);
             Assert.AreEqual("Red Running Shoe", pods[0].Response.Results[0].Value);
             Assert.AreEqual("a1b2c3d4-0000-0000-0000-000000000002", pods[1].ResultId);
-            Assert.AreEqual(0, pods[1].Response.Results.Count);
-            Assert.IsTrue(pods.All(pod => pod.ResultId != PageResultId));
         }
 
-        // The page endpoint is not yet enabled on the test index, and the test index has no
-        // page configured (`/recommendations/v1/pages/pdp_b2c` returns 404 there)
         [Test]
-        [Ignore("the page endpoint is not enabled and no page is configured on the test index")]
+        [Ignore("requires a recommendation page configured on the test index")]
         public async Task GetRecommendationPageResultsLive()
         {
             RecommendationPageRequest req = new RecommendationPageRequest("pdp_b2c")

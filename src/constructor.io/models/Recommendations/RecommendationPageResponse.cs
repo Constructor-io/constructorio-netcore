@@ -10,6 +10,9 @@ namespace Constructorio_NET.Models
     /// </summary>
     public class RecommendationPageResponse
     {
+        /// <summary>
+        /// Gets or sets the page request's result id. Not a tracking id: use each pod's <see cref="RecommendationPagePod.ResultId"/>.
+        /// </summary>
         [JsonProperty("result_id")]
         public string ResultId { get; set; }
 

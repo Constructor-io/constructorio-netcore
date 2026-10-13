@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Constructorio_NET.Utils;
 
 namespace Constructorio_NET.Models
 {
@@ -22,7 +21,7 @@ namespace Constructorio_NET.Models
         public List<string> ItemIds { get; set; }
 
         /// <summary>
-        /// Gets or sets variation ids.
+        /// Gets or sets variation ids. Requires <see cref="ItemIds"/>.
         /// </summary>
         public List<string> VariationIds { get; set; }
 
@@ -73,53 +72,7 @@ namespace Constructorio_NET.Models
         {
             Hashtable parameters = new Hashtable();
 
-            if (this.UserInfo != null)
-            {
-                if (this.UserInfo.GetUserId() != null)
-                {
-                    parameters.Add(Constants.USER_ID, this.UserInfo.GetUserId());
-                }
-
-                if (this.UserInfo.GetClientId() != null)
-                {
-                    parameters.Add(Constants.CLIENT_ID, this.UserInfo.GetClientId());
-                }
-
-                if (this.UserInfo.GetSessionId() != 0)
-                {
-                    parameters.Add(Constants.SESSION_ID, this.UserInfo.GetSessionId());
-                }
-
-                if (this.UserInfo.GetUserSegments() != null)
-                {
-                    parameters.Add(Constants.USER_SEGMENTS, this.UserInfo.GetUserSegments());
-                }
-            }
-
-            if (this.Section != null)
-            {
-                parameters.Add(Constants.SECTION, this.Section);
-            }
-
-            if (this.TestCells != null)
-            {
-                parameters.Add(Constants.TEST_CELLS, this.TestCells);
-            }
-
-            if (this.ItemIds != null && this.ItemIds.Count != 0)
-            {
-                parameters.Add("item_id", this.ItemIds);
-            }
-
-            if (this.VariationIds != null && this.VariationIds.Count != 0)
-            {
-                parameters.Add("variation_id", this.VariationIds);
-            }
-
-            if (this.Term != null)
-            {
-                parameters.Add("term", this.Term);
-            }
+            RecommendationsRequestParameters.AddSharedParameters(parameters, this.UserInfo, this.Section, this.TestCells, this.ItemIds, this.VariationIds, this.Term);
 
             this.AddOverridableParameters(parameters, string.Empty);
 
@@ -127,6 +80,11 @@ namespace Constructorio_NET.Models
             {
                 foreach (var podOverride in this.PodOverrides)
                 {
+                    if (podOverride.Value is RecommendationPageRequest)
+                    {
+                        throw new ArgumentException($"PodOverrides.{podOverride.Key} must be a RecommendationPagePodOverride; page-wide values can't be set per pod");
+                    }
+
                     podOverride.Value?.AddOverridableParameters(parameters, $"pod_overrides[{podOverride.Key}]");
                 }
             }
@@ -140,22 +98,7 @@ namespace Constructorio_NET.Models
         /// <returns>Dictionary of request headers.</returns>
         public Dictionary<string, string> GetRequestHeaders()
         {
-            Dictionary<string, string> requestHeaders = new Dictionary<string, string>();
-
-            if (this.UserInfo != null)
-            {
-                if (this.UserInfo.GetForwardedFor() != null)
-                {
-                    requestHeaders.Add(Constants.USER_IP, this.UserInfo.GetForwardedFor());
-                }
-
-                if (this.UserInfo.GetUserAgent() != null)
-                {
-                    requestHeaders.Add(Constants.USER_AGENT, this.UserInfo.GetUserAgent());
-                }
-            }
-
-            return requestHeaders;
+            return RecommendationsRequestParameters.GetRequestHeaders(this.UserInfo);
         }
     }
 }

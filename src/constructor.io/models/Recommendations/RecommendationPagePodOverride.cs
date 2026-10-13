@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Constructorio_NET.Utils;
 using Newtonsoft.Json;
 
 namespace Constructorio_NET.Models
@@ -37,6 +38,7 @@ namespace Constructorio_NET.Models
 
         /// <summary>
         /// Gets or sets format options to control result formatting.
+        /// On a pod override, replaces the page-wide format options as a whole, including <see cref="Models.FmtOptions.HiddenFields"/>.
         /// </summary>
         public FmtOptions FmtOptions { get; set; }
 
@@ -58,7 +60,7 @@ namespace Constructorio_NET.Models
             {
                 foreach (var filter in this.Filters)
                 {
-                    parameters.Add($"{BracketName(prefix, "filters")}[{filter.Key}]", filter.Value);
+                    parameters.Add($"{BracketName(prefix, Constants.FILTERS)}[{filter.Key}]", filter.Value);
                 }
             }
 
@@ -72,12 +74,12 @@ namespace Constructorio_NET.Models
 
             if (this.VariationsMap != null && this.VariationsMap.Values.Count > 0)
             {
-                parameters.Add(BracketName(prefix, "variations_map"), JsonConvert.SerializeObject(this.VariationsMap));
+                parameters.Add(BracketName(prefix, Constants.VARIATIONS_MAP), JsonConvert.SerializeObject(this.VariationsMap));
             }
 
             if (this.PreFilterExpression != null)
             {
-                parameters.Add(BracketName(prefix, "pre_filter_expression"), this.PreFilterExpression.GetExpression());
+                parameters.Add(BracketName(prefix, Constants.PRE_FILTER_EXPRESSION), this.PreFilterExpression.GetExpression());
             }
 
             if (this.FmtOptions != null)
