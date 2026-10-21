@@ -1,0 +1,78 @@
+name: 'Publish: Publish to NuGet'
+
+permissions:
+  contents: read
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        type: string
+        description: 'The version to publish, with or without a "v" prefix.'
+        required: true
+      ref:
+        type: string
+        description: 'Branch or ref to build the package from.'
+        required: false
+        default: ''
+
+  # This workflow is intended to be called from the primary publish workflow
+  # automatically. The manual trigger is maintained for partially failed workflows
+  # or edge cases that require this be run independently.
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: 'The version to publish, with or without a "v" prefix.'
+        required: true
+      ref:
+        type: string
+        description: 'Branch or ref to build the package from.'
+        required: false
+        default: ''
+
+jobs:
+  publish-to-nuget:
+    name: Publish to NuGet
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          # The package targets netstandard2.0; the test project targets net8.0.
+          dotnet-version: '8.0.x'
+
+      - name: Resolve version
+        id: version
+        run: |
+          set -euo pipefail
+
+          version=$(echo "${{ inputs.version }}" | tr -d 'v')
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build and pack
+        run: ./build.sh Release --clean --test
+
+      - name: Verify packed version matches
+        run: |
+          set -euo pipefail
+
+          expected="constructor.io.${{ steps.version.outputs.version }}.nupkg"
+
+          if [[ ! -f "artifacts/$expected" ]]; then
+            echo "::error::Expected artifacts/$expected. Found: $(ls artifacts 2>/dev/null || echo 'nothing')"
+            exit 1
+          fi
+
+          echo "Found artifacts/$expected"
+
+      - name: Publish to NuGet
+        run: |
+          set -euo pipefail
+
+          dotnet nuget push "artifacts/constructor.io.${{ steps.version.outputs.version }}.nupkg" \
+            --source 'https://api.nuget.org/v3/index.json' \
+            --api-key "${{ secrets.NUGET_API_KEY }}"

@@ -1,0 +1,88 @@
+name: Resolve next version
+
+description: 'Reads the current SDK version and resolves the next one for the given strategy.'
+
+inputs:
+  version-strategy:
+    description: 'patch, minor, major or explicit.'
+    required: true
+  version:
+    description: 'The exact version to release (no "v" prefix). Only used when version-strategy is "explicit".'
+    required: false
+    default: ''
+
+outputs:
+  current-version:
+    description: 'The version currently committed to the repo, without a "v" prefix.'
+    value: ${{ steps.resolve.outputs.current-version }}
+  next-version:
+    description: 'The resolved next version, without a "v" prefix.'
+    value: ${{ steps.resolve.outputs.next-version }}
+  next-tag:
+    description: 'The resolved next version, with a "v" prefix.'
+    value: ${{ steps.resolve.outputs.next-tag }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Resolve version
+      shell: bash
+      id: resolve
+      # Passed as env rather than interpolated into the script so the values
+      # are treated strictly as data.
+      env:
+        VERSION_STRATEGY: ${{ inputs.version-strategy }}
+        REQUESTED_VERSION: ${{ inputs.version }}
+      run: |
+        set -euo pipefail
+
+        # constructor.io.csproj holds the <Version> that ships to NuGet, so it is
+        # the source of truth for what is currently released.
+        current=$(sed -n 's|.*<Version>\(.*\)</Version>.*|\1|p' src/constructor.io/constructor.io.csproj | head -1)
+
+        if [[ ! "$current" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "::error::Could not read a semver <Version> from src/constructor.io/constructor.io.csproj (got '$current')"
+          exit 1
+        fi
+
+        IFS=. read -r major minor patch <<< "$current"
+
+        case "$VERSION_STRATEGY" in
+          major)
+            next="$((major + 1)).0.0"
+            ;;
+          minor)
+            next="${major}.$((minor + 1)).0"
+            ;;
+          patch)
+            next="${major}.${minor}.$((patch + 1))"
+            ;;
+          explicit)
+            next=$(echo "$REQUESTED_VERSION" | tr -d 'v')
+
+            if [[ ! "$next" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "::error::version-strategy is 'explicit' but 'version' is not a semver value (got '$REQUESTED_VERSION')"
+              exit 1
+            fi
+            ;;
+          *)
+            echo "::error::Unknown version-strategy '$VERSION_STRATEGY'"
+            exit 1
+            ;;
+        esac
+
+        if [[ "$next" == "$current" ]]; then
+          echo "::error::Next version ($next) matches the current version. Nothing to release."
+          exit 1
+        fi
+
+        if git rev-parse -q --verify "refs/tags/v${next}" >/dev/null; then
+          echo "::error::Tag v${next} already exists."
+          exit 1
+        fi
+
+        echo "Bumping $current -> $next"
+
+        echo "current-version=$current" >> "$GITHUB_OUTPUT"
+        echo "next-version=$next" >> "$GITHUB_OUTPUT"
+        echo "next-tag=v$next" >> "$GITHUB_OUTPUT"

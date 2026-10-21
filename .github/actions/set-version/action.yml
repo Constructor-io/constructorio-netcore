@@ -1,0 +1,75 @@
+name: Set version
+
+description: 'Writes a new version into every file that tracks the SDK version.'
+
+inputs:
+  version:
+    description: 'The new version, without a "v" prefix.'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Write version to all tracked files
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+      run: |
+        set -euo pipefail
+
+        version="$VERSION"
+
+        if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "::error::'version' is not a semver value (got '$version')"
+          exit 1
+        fi
+
+        # The client sends this to the API as the version identifier.
+        sed -i -E "s|(private readonly string Version = \")cionet-[0-9]+\.[0-9]+\.[0-9]+(\";)|\1cionet-${version}\2|" \
+          src/constructor.io/client/ConstructorIO.cs
+
+        # <Version> is what NuGet publishes; <ReleaseVersion> is kept in step with it.
+        sed -i -E "s|(<Version>)[0-9]+\.[0-9]+\.[0-9]+(</Version>)|\1${version}\2|" \
+          src/constructor.io/constructor.io.csproj
+        sed -i -E "s|(<ReleaseVersion>)[0-9]+\.[0-9]+\.[0-9]+(</ReleaseVersion>)|\1${version}\2|" \
+          src/constructor.io/constructor.io.csproj
+        sed -i -E "s|(<ReleaseVersion>)[0-9]+\.[0-9]+\.[0-9]+(</ReleaseVersion>)|\1${version}\2|" \
+          src/Constructorio_NET.Tests/Constructorio_NET.Tests.csproj
+
+        sed -i -E "s|(version = )[0-9]+\.[0-9]+\.[0-9]+|\1${version}|" \
+          src/Constructorio_Net.sln
+
+    - name: Verify no stale versions remain
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+      run: |
+        set -euo pipefail
+
+        version="$VERSION"
+
+        # Every one of these must now report the new version, otherwise a sed
+        # above silently matched nothing and we would ship a half-bumped release.
+        expected=(
+          "src/constructor.io/client/ConstructorIO.cs:cionet-${version}"
+          "src/constructor.io/constructor.io.csproj:<Version>${version}</Version>"
+          "src/constructor.io/constructor.io.csproj:<ReleaseVersion>${version}</ReleaseVersion>"
+          "src/Constructorio_NET.Tests/Constructorio_NET.Tests.csproj:<ReleaseVersion>${version}</ReleaseVersion>"
+          "src/Constructorio_Net.sln:version = ${version}"
+        )
+
+        failed=0
+
+        for entry in "${expected[@]}"; do
+          file="${entry%%:*}"
+          needle="${entry#*:}"
+
+          if grep -qF "$needle" "$file"; then
+            echo "  ok   $file -> $needle"
+          else
+            echo "::error file=$file::Expected to find '$needle' after the version bump"
+            failed=1
+          fi
+        done
+
+        exit "$failed"

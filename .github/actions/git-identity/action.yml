@@ -1,0 +1,75 @@
+name: Resolve git identity
+
+description: >
+  Resolves the identity of the person who triggered the run, so release commits
+  and tags are attributed to them rather than to an anonymous bot.
+
+inputs:
+  actor:
+    description: 'GitHub login to attribute the release to.'
+    required: false
+    default: ${{ github.triggering_actor }}
+  token:
+    description: 'Token used to look the actor up.'
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  actor-name:
+    description: 'Name to use for the triggering user, or the bot if unresolvable.'
+    value: ${{ steps.resolve.outputs.actor-name }}
+  actor-email:
+    description: 'No-reply email for the triggering user, or the bot if unresolvable.'
+    value: ${{ steps.resolve.outputs.actor-email }}
+  bot-name:
+    description: 'Name to record as the committer of automated commits.'
+    value: ${{ steps.resolve.outputs.bot-name }}
+  bot-email:
+    description: 'Email to record as the committer of automated commits.'
+    value: ${{ steps.resolve.outputs.bot-email }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Resolve identity
+      shell: bash
+      id: resolve
+      env:
+        ACTOR: ${{ inputs.actor }}
+        GH_TOKEN: ${{ inputs.token }}
+      run: |
+        set -euo pipefail
+
+        # 41898282 is the fixed id of the github-actions[bot] account.
+        bot_name='github-actions[bot]'
+        bot_email='41898282+github-actions[bot]@users.noreply.github.com'
+
+        actor_name="$bot_name"
+        actor_email="$bot_email"
+
+        # Attribution is a nicety, so anything unresolvable here falls back to the
+        # bot rather than failing the release. A run started by a schedule has no
+        # actor, and a login can belong to a deleted account or be a bot itself.
+        if [[ -z "$ACTOR" ]]; then
+          echo 'No triggering actor; attributing this release to the bot.'
+        else
+          # GitHub links a commit to an account through the numeric user id in the
+          # no-reply address, so the login alone is not enough.
+          actor_id=$(gh api "users/${ACTOR}" --jq '.id' 2>/dev/null || true)
+
+          # A failed call can still print an error body to stdout, so require a
+          # bare number rather than just a non-empty value.
+          if [[ ! "$actor_id" =~ ^[0-9]+$ ]]; then
+            echo "::warning::Could not resolve a user id for '${ACTOR}'; attributing this release to the bot."
+          else
+            actor_name="$ACTOR"
+            actor_email="${actor_id}+${ACTOR}@users.noreply.github.com"
+            echo "Attributing this release to ${ACTOR} (id ${actor_id})"
+          fi
+        fi
+
+        echo "actor-name=${actor_name}" >> "$GITHUB_OUTPUT"
+        echo "actor-email=${actor_email}" >> "$GITHUB_OUTPUT"
+
+        echo "bot-name=${bot_name}" >> "$GITHUB_OUTPUT"
+        echo "bot-email=${bot_email}" >> "$GITHUB_OUTPUT"
