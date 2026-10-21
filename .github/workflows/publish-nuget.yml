@@ -47,10 +47,21 @@ jobs:
 
       - name: Resolve version
         id: version
+        # Passed as env rather than interpolated into the script: this workflow
+        # can be dispatched directly, so the input has not been through the
+        # orchestrator's validation and must be treated strictly as data.
+        env:
+          REQUESTED_VERSION: ${{ inputs.version }}
         run: |
           set -euo pipefail
 
-          version=$(echo "${{ inputs.version }}" | tr -d 'v')
+          version="${REQUESTED_VERSION#v}"
+
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::'version' is not a semver value (got '$REQUESTED_VERSION')"
+            exit 1
+          fi
+
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: Build and pack

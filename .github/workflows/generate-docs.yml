@@ -9,7 +9,12 @@ on:
     inputs:
       ref:
         type: string
-        description: 'Branch or ref to generate the documentation from.'
+        description: 'Branch, tag or commit SHA to generate the documentation from.'
+        required: false
+        default: ''
+      target-branch:
+        type: string
+        description: 'Branch to push the docs commit to. Defaults to the branch this ran on.'
         required: false
         default: ''
       commit:
@@ -26,6 +31,9 @@ on:
       docs-changed:
         description: 'Whether regenerating the docs produced any change.'
         value: ${{ jobs.generate-docs.outputs.docs-changed }}
+      sha:
+        description: 'The docs commit, or the ref that was generated from when nothing changed.'
+        value: ${{ jobs.generate-docs.outputs.sha }}
 
   # This workflow is intended to be called from the primary publish workflow
   # automatically. The manual trigger is maintained for refreshing the docs on
@@ -56,6 +64,7 @@ jobs:
 
     outputs:
       docs-changed: ${{ steps.commit.outputs.docs-changed }}
+      sha: ${{ steps.commit.outputs.sha }}
 
     steps:
       - uses: actions/checkout@v4
@@ -118,7 +127,7 @@ jobs:
           GIT_COMMITTER_NAME: ${{ steps.identity.outputs.bot-name }}
           GIT_COMMITTER_EMAIL: ${{ steps.identity.outputs.bot-email }}
           COMMIT_MESSAGE: ${{ inputs.commit-message }}
-          TARGET_BRANCH: ${{ inputs.ref || github.ref_name }}
+          TARGET_BRANCH: ${{ inputs.target-branch || github.ref_name }}
         run: |
           set -euo pipefail
 
@@ -127,10 +136,15 @@ jobs:
           if git diff --cached --quiet; then
             echo 'Documentation is already up to date.'
             echo 'docs-changed=false' >> "$GITHUB_OUTPUT"
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           git commit -m "$COMMIT_MESSAGE"
-          git push origin "HEAD:$TARGET_BRANCH"
+
+          # --force-with-lease would reject a push built on a stale checkout,
+          # which is what we want: the caller tags this exact commit.
+          git push --force-with-lease origin "HEAD:$TARGET_BRANCH"
 
           echo 'docs-changed=true' >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"

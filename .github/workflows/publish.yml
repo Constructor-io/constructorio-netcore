@@ -85,6 +85,7 @@ jobs:
         run: ./build.sh Release --clean --test
 
       - name: Commit version bump
+        id: commit
         # The person who ran the workflow is the author; the bot is only the
         # committer, which is what actually performed the push.
         env:
@@ -98,11 +99,20 @@ jobs:
 
           git add src
           git commit -m 'Version Bump'
-          git push origin "HEAD:$TARGET_BRANCH"
+
+          # --force-with-lease rather than a plain push: if the branch moved
+          # after this job checked it out, the merged code was never built or
+          # validated here, so the release must stop rather than absorb it.
+          git push --force-with-lease origin "HEAD:$TARGET_BRANCH"
+
+          # Later jobs check out this exact commit instead of re-resolving the
+          # branch, so a merge landing mid-release cannot enter the tag.
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
     outputs:
       version: ${{ steps.next-version.outputs.next-version }}
       tag: ${{ steps.next-version.outputs.next-tag }}
+      sha: ${{ steps.commit.outputs.sha }}
 
   # The generated docs do not embed the version (PROJECT_NUMBER is unset, and
   # the version field is private), so this runs here only so that any doc
@@ -112,7 +122,10 @@ jobs:
     needs: bump_version
     uses: ./.github/workflows/generate-docs.yml
     with:
-      ref: ${{ github.ref_name }}
+      # Generate from the bump commit, not the branch tip, and push to the
+      # branch separately.
+      ref: ${{ needs.bump_version.outputs.sha }}
+      target-branch: ${{ github.ref_name }}
       commit: true
       commit-message: 'Update documentation for ${{ needs.bump_version.outputs.tag }}'
     secrets: inherit
@@ -124,7 +137,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          # Tag the exact revision this release validated — the docs commit if
+          # one was made, otherwise the version bump — rather than whatever the
+          # branch points at now.
+          ref: ${{ needs.generate_docs.outputs.sha || needs.bump_version.outputs.sha }}
           # An annotated tag is created here, so the commit being tagged and the
           # existing tags both need to be present locally.
           fetch-tags: true
