@@ -1,61 +1,46 @@
 name: 'Publish: Generate documentation'
 
-# We need these permissions to commit the regenerated docs back to the branch.
+# GitHub Pages is deployed from this workflow (Settings → Pages → Source:
+# GitHub Actions), not from a committed docs/ folder, because CI cannot push to
+# the protected main branch.
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 on:
   workflow_call:
     inputs:
       ref:
         type: string
-        description: 'Branch or ref to generate the documentation from.'
+        description: 'Branch or tag to generate the documentation from.'
         required: false
         default: ''
-      commit:
+      deploy:
         type: boolean
-        description: 'Commit the regenerated docs. When false, they are only uploaded as an artifact.'
+        description: 'Deploy the docs to GitHub Pages. When false, they are only uploaded as an artifact.'
         required: false
         default: true
-      commit-message:
-        type: string
-        description: 'Commit message to use when the docs change.'
-        required: false
-        default: 'Update documentation'
-    outputs:
-      docs-changed:
-        description: 'Whether regenerating the docs produced any change.'
-        value: ${{ jobs.generate-docs.outputs.docs-changed }}
 
   # This workflow is intended to be called from the primary publish workflow
   # automatically. The manual trigger is maintained for refreshing the docs on
   # their own, outside of a release.
   workflow_dispatch:
     inputs:
-      commit:
+      deploy:
         type: boolean
-        description: 'Commit the regenerated docs. When false, they are only uploaded as an artifact.'
+        description: 'Deploy the docs to GitHub Pages. When false, they are only uploaded as an artifact.'
         required: false
         default: true
-      commit-message:
-        type: string
-        description: 'Commit message to use when the docs change.'
-        required: false
-        default: 'Update documentation'
 
 env:
-  # Pinned, because the generator version is baked into every page footer and a
-  # different version reflows all of docs/. Keep this in step with the version
-  # the docs were last generated with.
+  # Pinned, because the generator version is baked into every page footer.
   DOXYGEN_VERSION: '1.15.0'
 
 jobs:
   generate-docs:
     name: Generate documentation
     runs-on: ubuntu-latest
-
-    outputs:
-      docs-changed: ${{ steps.commit.outputs.docs-changed }}
 
     steps:
       - uses: actions/checkout@v4
@@ -95,42 +80,23 @@ jobs:
 
           rm Doxyfile.ci
 
+      # Also serves as the inspectable artifact when not deploying.
       - name: Upload documentation artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: docs
           path: docs
 
-      - name: Resolve git identity
-        if: ${{ inputs.commit }}
-        uses: ./.github/actions/git-identity
-        id: identity
+  deploy-docs:
+    name: Deploy to GitHub Pages
+    needs: generate-docs
+    if: ${{ inputs.deploy }}
+    runs-on: ubuntu-latest
 
-      - name: Commit documentation
-        id: commit
-        if: ${{ inputs.commit }}
-        # The person who ran the workflow is the author; the bot is only the
-        # committer. Passed as env rather than interpolated into the script, so a
-        # message containing quotes cannot break or inject into the commands.
-        env:
-          GIT_AUTHOR_NAME: ${{ steps.identity.outputs.actor-name }}
-          GIT_AUTHOR_EMAIL: ${{ steps.identity.outputs.actor-email }}
-          GIT_COMMITTER_NAME: ${{ steps.identity.outputs.bot-name }}
-          GIT_COMMITTER_EMAIL: ${{ steps.identity.outputs.bot-email }}
-          COMMIT_MESSAGE: ${{ inputs.commit-message }}
-          TARGET_BRANCH: ${{ inputs.ref || github.ref_name }}
-        run: |
-          set -euo pipefail
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
 
-          git add docs
-
-          if git diff --cached --quiet; then
-            echo 'Documentation is already up to date.'
-            echo 'docs-changed=false' >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          git commit -m "$COMMIT_MESSAGE"
-          git push origin "HEAD:$TARGET_BRANCH"
-
-          echo 'docs-changed=true' >> "$GITHUB_OUTPUT"
+    steps:
+      - name: Deploy
+        id: deploy
+        uses: actions/deploy-pages@v4

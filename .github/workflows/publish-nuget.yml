@@ -64,6 +64,13 @@ jobs:
 
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
+      # The repo only carries a 0.0.0 placeholder, since CI cannot push a bump to
+      # the protected main branch. The real version is stamped in here instead.
+      - name: Set version
+        uses: ./.github/actions/set-version
+        with:
+          version: ${{ steps.version.outputs.version }}
+
       - name: Build and pack
         run: ./build.sh Release --clean --test
 
