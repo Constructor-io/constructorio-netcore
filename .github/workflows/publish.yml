@@ -1,6 +1,10 @@
 name: Publish
 
 # Run this from the Actions tab after merging a PR to main.
+#
+# Releases are recorded as tags only. main is protected and CI cannot push to
+# it, so nothing is committed back: the version is stamped in at build time by
+# publish-nuget, and the docs are deployed straight to GitHub Pages.
 
 permissions:
   contents: write
@@ -39,16 +43,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  bump_version:
-    name: Bump version
+  tag_release:
+    name: Tag release
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
-          # Tags are needed so the next-version action can detect a version that
-          # has already been released; the default checkout fetches none.
+          # The next-version action reads the latest release from the tags, and
+          # the default checkout fetches none.
           fetch-tags: true
           fetch-depth: 0
 
@@ -76,96 +80,61 @@ jobs:
           version-strategy: ${{ inputs.version-strategy }}
           version: ${{ inputs.version }}
 
-      - name: Set new version
-        uses: ./.github/actions/set-version
-        with:
-          version: ${{ steps.next-version.outputs.next-version }}
-
-      - name: Build and test at the new version
+      - name: Build and test
         run: ./build.sh Release --clean --test
 
-      - name: Commit version bump
-        # The person who ran the workflow is the author; the bot is only the
-        # committer, which is what actually performed the push.
+      - name: Create and push tag
+        # An annotated tag takes its tagger from the committer, so the triggering
+        # user goes in GIT_COMMITTER_* for the release to be attributed to them.
+        # The values are passed as env rather than interpolated, so a title
+        # containing quotes cannot break the commands.
         env:
-          GIT_AUTHOR_NAME: ${{ steps.identity.outputs.actor-name }}
-          GIT_AUTHOR_EMAIL: ${{ steps.identity.outputs.actor-email }}
-          GIT_COMMITTER_NAME: ${{ steps.identity.outputs.bot-name }}
-          GIT_COMMITTER_EMAIL: ${{ steps.identity.outputs.bot-email }}
-          TARGET_BRANCH: ${{ github.ref_name }}
+          GIT_COMMITTER_NAME: ${{ steps.identity.outputs.actor-name }}
+          GIT_COMMITTER_EMAIL: ${{ steps.identity.outputs.actor-email }}
+          TAG: ${{ steps.next-version.outputs.next-tag }}
+          TITLE: ${{ inputs.title }}
         run: |
           set -euo pipefail
 
-          git add src
-          git commit -m 'Version Bump'
-          git push origin "HEAD:$TARGET_BRANCH"
+          # Push just the new tag; tags are not covered by the branch protection.
+          git tag -a "$TAG" -m "$TITLE"
+          git push origin "$TAG"
 
     outputs:
       version: ${{ steps.next-version.outputs.next-version }}
       tag: ${{ steps.next-version.outputs.next-tag }}
 
-  # The generated docs do not embed the version (PROJECT_NUMBER is unset, and
-  # the version field is private), so this runs here only so that any doc
-  # changes from the merged code land before the tag is cut.
-  generate_docs:
-    name: Generate documentation
-    needs: bump_version
-    uses: ./.github/workflows/generate-docs.yml
-    with:
-      ref: ${{ github.ref_name }}
-      commit: true
-      commit-message: 'Update documentation for ${{ needs.bump_version.outputs.tag }}'
-    secrets: inherit
-
-  tag_release:
-    name: Tag release
-    needs: [bump_version, generate_docs]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref_name }}
-          # An annotated tag is created here, so the commit being tagged and the
-          # existing tags both need to be present locally.
-          fetch-tags: true
-          fetch-depth: 0
-
-      - name: Resolve git identity
-        uses: ./.github/actions/git-identity
-        id: identity
-
-      - name: Create and push tag
-        # An annotated tag takes its tagger from the committer, not the author,
-        # so the triggering user goes in GIT_COMMITTER_* here for the release to
-        # be attributed to them. The values are passed as env rather than
-        # interpolated, so a title containing quotes cannot break the commands.
-        env:
-          GIT_COMMITTER_NAME: ${{ steps.identity.outputs.actor-name }}
-          GIT_COMMITTER_EMAIL: ${{ steps.identity.outputs.actor-email }}
-          TAG: ${{ needs.bump_version.outputs.tag }}
-          TITLE: ${{ inputs.title }}
-        run: |
-          set -euo pipefail
-
-          # Tag the version bump and docs commits pushed by the jobs above.
-          git tag -a "$TAG" -m "$TITLE"
-          git push origin "$TAG"
-
   create_github_release:
     name: Create GitHub release
-    needs: [bump_version, tag_release]
+    needs: tag_release
     uses: ./.github/workflows/create-github-release.yml
     with:
-      version: ${{ needs.bump_version.outputs.tag }}
+      version: ${{ needs.tag_release.outputs.tag }}
       title: ${{ inputs.title }}
     secrets: inherit
 
   publish_to_nuget:
     name: Publish to NuGet
-    needs: [bump_version, create_github_release]
+    needs: [tag_release, create_github_release]
     if: ${{ inputs.publish-to-nuget }}
     uses: ./.github/workflows/publish-nuget.yml
     with:
-      version: ${{ needs.bump_version.outputs.version }}
-      ref: ${{ needs.bump_version.outputs.tag }}
+      version: ${{ needs.tag_release.outputs.version }}
+      ref: ${{ needs.tag_release.outputs.tag }}
+    secrets: inherit
+
+  # The generated docs do not embed the version (PROJECT_NUMBER is unset, and
+  # the version field is private), so this only needs the tagged code and does
+  # not hold up the package.
+  deploy_docs:
+    name: Deploy documentation
+    needs: tag_release
+    uses: ./.github/workflows/generate-docs.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    with:
+      ref: ${{ needs.tag_release.outputs.tag }}
+      deploy: true
     secrets: inherit

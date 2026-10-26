@@ -12,7 +12,7 @@ namespace Constructorio_NET
     /// </summary>
     public class ConstructorIO
     {
-        private readonly string Version = "cionet-4.4.0";
+        private readonly string Version = "cionet-0.0.0";
         public Autocomplete Autocomplete { get; }
         public Browse Browse { get; }
         public Catalog Catalog { get; }

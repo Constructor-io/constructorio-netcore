@@ -1,6 +1,6 @@
 name: Resolve next version
 
-description: 'Reads the current SDK version and resolves the next one for the given strategy.'
+description: 'Reads the latest released SDK version from the tags and resolves the next one for the given strategy.'
 
 inputs:
   version-strategy:
@@ -13,7 +13,7 @@ inputs:
 
 outputs:
   current-version:
-    description: 'The version currently committed to the repo, without a "v" prefix.'
+    description: 'The latest released version, from the highest vX.Y.Z tag, without a "v" prefix.'
     value: ${{ steps.resolve.outputs.current-version }}
   next-version:
     description: 'The resolved next version, without a "v" prefix.'
@@ -36,12 +36,14 @@ runs:
       run: |
         set -euo pipefail
 
-        # constructor.io.csproj holds the <Version> that ships to NuGet, so it is
-        # the source of truth for what is currently released.
-        current=$(sed -n 's|.*<Version>\(.*\)</Version>.*|\1|p' src/constructor.io/constructor.io.csproj | head -1)
+        # The version committed to the repo is a 0.0.0 placeholder; releases are
+        # only recorded as tags, so the highest semver tag is what is released.
+        # sed rather than head, so git is not cut off mid-write under pipefail.
+        latest_tag=$(git tag --list 'v*' --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sed -n 1p || true)
+        current="${latest_tag#v}"
 
         if [[ ! "$current" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-          echo "::error::Could not read a semver <Version> from src/constructor.io/constructor.io.csproj (got '$current')"
+          echo "::error::Could not find a vX.Y.Z release tag (got '$latest_tag'). Is the checkout fetching tags?"
           exit 1
         fi
 
