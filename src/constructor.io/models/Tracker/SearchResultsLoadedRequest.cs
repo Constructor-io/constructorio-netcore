@@ -137,14 +137,24 @@ namespace Constructorio_NET.Models
         /// Get request body.
         /// </summary>
         /// <returns>Dictionary of request body fields.</returns>
+        /// <exception cref="ArgumentException">Thrown when <see cref="Term"/> is null or empty.</exception>
         public Dictionary<string, object> GetRequestBody()
         {
+            if (string.IsNullOrEmpty(this.Term))
+            {
+                throw new ArgumentException("term is required");
+            }
+
             Dictionary<string, object> body = new Dictionary<string, object>
             {
                 { "search_term", this.Term },
                 { "result_count", this.ResultCount },
-                { "url", this.Url },
             };
+
+            if (this.Url != null)
+            {
+                body.Add("url", this.Url);
+            }
 
             if (this.ResultId != null)
             {

@@ -152,6 +152,29 @@ namespace Constructorio_NET.Tests
             Assert.Throws<ArgumentException>(() => new SearchResultsLoadedRequest(null, 10));
         }
 
+        [TestCase(null)]
+        [TestCase("")]
+        public void TrackSearchResultsLoadedWithTermClearedAfterConstructionShouldError(string term)
+        {
+            SearchResultsLoadedRequest req = new SearchResultsLoadedRequest(this.Term, 10) { UserInfo = this.UserInfo, Term = term };
+            var (constructorio, handler) = CreateClient(this.ApiKey);
+
+            Assert.ThrowsAsync<ArgumentException>(() => constructorio.Tracker.TrackSearchResultsLoaded(req));
+            Assert.IsNull(handler.Request, "no request should be sent");
+        }
+
+        [Test]
+        public async Task TrackSearchResultsLoadedShouldOmitNullUrl()
+        {
+            SearchResultsLoadedRequest req = new SearchResultsLoadedRequest(this.Term, 10) { UserInfo = this.UserInfo, Url = null };
+            var (constructorio, handler) = CreateClient(this.ApiKey);
+
+            await constructorio.Tracker.TrackSearchResultsLoaded(req);
+
+            JObject body = JObject.Parse(handler.Body);
+            Assert.IsFalse(body.ContainsKey("url"), "a null url must be omitted, not sent as null");
+        }
+
         [Test]
         public async Task TrackSearchResultsLoadedShouldBeAcceptedByApi()
         {
