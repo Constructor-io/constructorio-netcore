@@ -21,6 +21,7 @@ namespace Constructorio_NET
         public Tasks Tasks { get; }
         public Items Items { get; }
         public Quizzes Quizzes { get; }
+        public Tracker Tracker { get; }
 
         /// <summary>
         /// Static HttpClient for backwards compatibility when not using dependency injection.
@@ -73,6 +74,7 @@ namespace Constructorio_NET
             this.Tasks = new Tasks(options);
             this.Items = new Items(options);
             this.Quizzes = new Quizzes(options);
+            this.Tracker = new Tracker(options);
         }
     }
 }

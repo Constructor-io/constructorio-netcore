@@ -176,6 +176,40 @@ request.PreFilterExpression = preFilterExpression;
 SearchResponse response = await constructorio.Search.GetSearchResults(request);
 ```
 
+# Tracking Search Results Loaded
+
+To tell Constructor that a user saw a page of search results, create a `SearchResultsLoadedRequest` and send it with `constructorio.Tracker.TrackSearchResultsLoaded`. Pass the `ResultId` from the `SearchResponse`, so the event is tied to the search that produced the results. A `UserInfo` object with a client id and session id is required.
+
+```csharp
+// Get search results
+SearchResponse response = await constructorio.Search.GetSearchResults(searchRequest);
+
+// Create a SearchResultsLoadedRequest with the search term and the total number of results
+SearchResultsLoadedRequest request = new SearchResultsLoadedRequest("peanut butter", response.Response.TotalNumResults);
+
+// Tie the event to the search response
+request.ResultId = response.ResultId;
+
+// Add the items shown to the user (up to 100 are sent)
+request.Items = new List<TrackingItem>
+{
+    new TrackingItem("item-1"),
+    new TrackingItem("item-2", "variation-2"),
+};
+
+// Add in additional parameters (optional)
+request.ResultPage = 1;
+request.Section = "Products";
+request.Url = "https://www.example.com/search?q=peanut+butter";
+
+// Create a UserInfo object with the unique device identifier and session (required)
+UserInfo userInfo = new UserInfo("device-id-1123123", 5);
+request.UserInfo = userInfo;
+
+// Send the event
+bool success = await constructorio.Tracker.TrackSearchResultsLoaded(request);
+```
+
 # Retrieving Browse Results
 
 To retrieve browse results, you will need to create a `BrowseRequest`. When creating the `BrowseRequest` the filter name can be one of `collection_id`, `group_id`, or a facet name (i.e. Brand). In this request, you can also specify the number of results you want per page, the page you want, sorting instructions, and also filter the results by category or facets. If the results are for a specific user, you can also create a `UserInfo` object, which will allow you to retrieve personalized results.
