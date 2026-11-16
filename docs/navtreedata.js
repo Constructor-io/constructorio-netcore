@@ -45,8 +45,10 @@ var NAVTREE =
         [ "Building", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
         [ "Testing", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
         [ "For code coverage:", "md__r_e_a_d_m_e.html#autotoc_md18", null ],
-        [ "Publishing", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
-        [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md20", null ]
+        [ "Publishing", "md__r_e_a_d_m_e.html#autotoc_md19", [
+          [ "Publishing manually", "md__r_e_a_d_m_e.html#autotoc_md20", null ]
+        ] ],
+        [ "Documentation", "md__r_e_a_d_m_e.html#autotoc_md21", null ]
       ] ]
     ] ],
     [ "Namespaces", "namespaces.html", [
@@ -74,12 +76,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"class_constructorio___n_e_t_1_1_models_1_1_facet_v2.html#a0c7d2118b78a55ccf77d619eefcb72e5",
-"class_constructorio___n_e_t_1_1_models_1_1_result_facet.html",
-"class_constructorio___n_e_t_1_1_modules_1_1_autocomplete.html#a3426c43760530d7f0daf85ba6b6fbbca",
-"functions_s.html"
+"class_constructorio___n_e_t_1_1_models_1_1_facet_options_get_all_response.html",
+"class_constructorio___n_e_t_1_1_models_1_1_result.html",
+"class_constructorio___n_e_t_1_1_models_1_1_variations_response.html",
+"functions_prop_u.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronization';
-var SYNCOFFMSG = 'click to enable panel synchronization';
-var LISTOFALLMEMBERS = 'List of all members';
+const SYNCONMSG = 'click to disable panel synchronization';
+const SYNCOFFMSG = 'click to enable panel synchronization';
+const LISTOFALLMEMBERS = 'List of all members';

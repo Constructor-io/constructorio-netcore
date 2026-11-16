@@ -6,6 +6,8 @@ var class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request =
     [ "Filters", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#ad91fb75b9fdb08435e35d99a4b5f00cc", null ],
     [ "FiltersPerSection", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a2d4681bc9c53cd2c258c6843fa3499f4", null ],
     [ "FmtOptions", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a230ffaa914f3ea2346235f574d495b76", null ],
+    [ "PreFilterExpression", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#af4f0f8715ad9aab5b4187ee18fc1fd08", null ],
+    [ "PreFilterExpressionPerSection", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a52595864dfa8448aed6031b2d71f9caa", null ],
     [ "Query", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a9e23b6b584b9dd0e403ce20599f8cd93", null ],
     [ "ResultsPerSection", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#aa4c36b1f0b66d3184857abb2acbce705", null ],
     [ "TestCells", "class_constructorio___n_e_t_1_1_models_1_1_autocomplete_request.html#a8c443307db0e387ab02c197c97b9f251", null ],

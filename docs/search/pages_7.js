@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['publishing_0',['Publishing',['../md__r_e_a_d_m_e.html#autotoc_md19',1,'']]]
+  ['netcore_20client_0',['Constructor.io Netcore Client',['../md__r_e_a_d_m_e.html',1,'']]]
 ];
